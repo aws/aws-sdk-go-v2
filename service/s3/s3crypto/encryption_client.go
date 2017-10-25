@@ -5,8 +5,7 @@ import (
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
 )
@@ -41,9 +40,9 @@ type EncryptionClient struct {
 //	sess := session.New()
 //	handler := s3crypto.NewKMSKeyGenerator(kms.New(sess), cmkID)
 //	svc := s3crypto.New(sess, s3crypto.AESGCMContentCipherBuilder(handler))
-func NewEncryptionClient(prov client.ConfigProvider, builder ContentCipherBuilder, options ...func(*EncryptionClient)) *EncryptionClient {
+func NewEncryptionClient(cfg aws.Config, builder ContentCipherBuilder, options ...func(*EncryptionClient)) *EncryptionClient {
 	client := &EncryptionClient{
-		S3Client:             s3.New(prov),
+		S3Client:             s3.New(cfg),
 		ContentCipherBuilder: builder,
 		SaveStrategy:         HeaderV2SaveStrategy{},
 		MinFileSize:          DefaultMinFileSize,

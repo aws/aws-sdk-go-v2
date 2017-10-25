@@ -14,9 +14,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -51,37 +48,32 @@ func init() {
 // OutputService1ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type OutputService1ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the OutputService1ProtocolTest client with a session.
+// New creates a new instance of the OutputService1ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a OutputService1ProtocolTest client from just a session.
-//     svc := outputservice1protocoltest.New(mySession)
+//     // Create a OutputService1ProtocolTest client from just a config.
+//     svc := outputservice1protocoltest.New(myConfig)
 //
 //     // Create a OutputService1ProtocolTest client with additional configuration
-//     svc := outputservice1protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService1ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *OutputService1ProtocolTest {
-	c := p.ClientConfig("outputservice1protocoltest", cfgs...)
-	return newOutputService1ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := outputservice1protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewOutputService1ProtocolTest(config aws.Config) *OutputService1ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService1ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *OutputService1ProtocolTest {
 	svc := &OutputService1ProtocolTest{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice1protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -97,7 +89,7 @@ func newOutputService1ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a OutputService1ProtocolTest operation and runs any
 // custom request initialization.
-func (c *OutputService1ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *OutputService1ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -105,7 +97,7 @@ func (c *OutputService1ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService1TestCaseOperation1 = "OperationName"
 
-// OutputService1TestCaseOperation1Request generates a "aws/request.Request" representing the
+// OutputService1TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the OutputService1TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -127,8 +119,8 @@ const opOutputService1TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(input *OutputService1TestShapeOutputService1TestCaseOperation1Input) (req *request.Request, output *OutputService1TestShapeOutputService1TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(input *OutputService1TestShapeOutputService1TestCaseOperation1Input) (req *aws.Request, output *OutputService1TestShapeOutputService1TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:     opOutputService1TestCaseOperation1,
 		HTTPPath: "/",
 	}
@@ -164,7 +156,7 @@ func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1(input *Out
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1WithContext(ctx aws.Context, input *OutputService1TestShapeOutputService1TestCaseOperation1Input, opts ...request.Option) (*OutputService1TestShapeOutputService1TestCaseOperation1Output, error) {
+func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1WithContext(ctx aws.Context, input *OutputService1TestShapeOutputService1TestCaseOperation1Input, opts ...aws.Option) (*OutputService1TestShapeOutputService1TestCaseOperation1Output, error) {
 	req, out := c.OutputService1TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -250,37 +242,32 @@ func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) SetTrueB
 // OutputService2ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type OutputService2ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the OutputService2ProtocolTest client with a session.
+// New creates a new instance of the OutputService2ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a OutputService2ProtocolTest client from just a session.
-//     svc := outputservice2protocoltest.New(mySession)
+//     // Create a OutputService2ProtocolTest client from just a config.
+//     svc := outputservice2protocoltest.New(myConfig)
 //
 //     // Create a OutputService2ProtocolTest client with additional configuration
-//     svc := outputservice2protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService2ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *OutputService2ProtocolTest {
-	c := p.ClientConfig("outputservice2protocoltest", cfgs...)
-	return newOutputService2ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := outputservice2protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewOutputService2ProtocolTest(config aws.Config) *OutputService2ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService2ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *OutputService2ProtocolTest {
 	svc := &OutputService2ProtocolTest{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice2protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -296,7 +283,7 @@ func newOutputService2ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a OutputService2ProtocolTest operation and runs any
 // custom request initialization.
-func (c *OutputService2ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *OutputService2ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -304,7 +291,7 @@ func (c *OutputService2ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService2TestCaseOperation1 = "OperationName"
 
-// OutputService2TestCaseOperation1Request generates a "aws/request.Request" representing the
+// OutputService2TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the OutputService2TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -326,8 +313,8 @@ const opOutputService2TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1Request(input *OutputService2TestShapeOutputService2TestCaseOperation1Input) (req *request.Request, output *OutputService2TestShapeOutputService2TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1Request(input *OutputService2TestShapeOutputService2TestCaseOperation1Input) (req *aws.Request, output *OutputService2TestShapeOutputService2TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:     opOutputService2TestCaseOperation1,
 		HTTPPath: "/",
 	}
@@ -363,7 +350,7 @@ func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1(input *Out
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1WithContext(ctx aws.Context, input *OutputService2TestShapeOutputService2TestCaseOperation1Input, opts ...request.Option) (*OutputService2TestShapeOutputService2TestCaseOperation1Output, error) {
+func (c *OutputService2ProtocolTest) OutputService2TestCaseOperation1WithContext(ctx aws.Context, input *OutputService2TestShapeOutputService2TestCaseOperation1Input, opts ...aws.Option) (*OutputService2TestShapeOutputService2TestCaseOperation1Output, error) {
 	req, out := c.OutputService2TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -415,37 +402,32 @@ func (s *OutputService2TestShapeOutputService2TestCaseOperation1Output) SetStruc
 // OutputService3ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type OutputService3ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the OutputService3ProtocolTest client with a session.
+// New creates a new instance of the OutputService3ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a OutputService3ProtocolTest client from just a session.
-//     svc := outputservice3protocoltest.New(mySession)
+//     // Create a OutputService3ProtocolTest client from just a config.
+//     svc := outputservice3protocoltest.New(myConfig)
 //
 //     // Create a OutputService3ProtocolTest client with additional configuration
-//     svc := outputservice3protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService3ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *OutputService3ProtocolTest {
-	c := p.ClientConfig("outputservice3protocoltest", cfgs...)
-	return newOutputService3ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := outputservice3protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewOutputService3ProtocolTest(config aws.Config) *OutputService3ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService3ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *OutputService3ProtocolTest {
 	svc := &OutputService3ProtocolTest{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice3protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -461,7 +443,7 @@ func newOutputService3ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a OutputService3ProtocolTest operation and runs any
 // custom request initialization.
-func (c *OutputService3ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *OutputService3ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -469,7 +451,7 @@ func (c *OutputService3ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService3TestCaseOperation1 = "OperationName"
 
-// OutputService3TestCaseOperation1Request generates a "aws/request.Request" representing the
+// OutputService3TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the OutputService3TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -491,8 +473,8 @@ const opOutputService3TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1Request(input *OutputService3TestShapeOutputService3TestCaseOperation1Input) (req *request.Request, output *OutputService3TestShapeOutputService3TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1Request(input *OutputService3TestShapeOutputService3TestCaseOperation1Input) (req *aws.Request, output *OutputService3TestShapeOutputService3TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:     opOutputService3TestCaseOperation1,
 		HTTPPath: "/",
 	}
@@ -528,7 +510,7 @@ func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1(input *Out
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1WithContext(ctx aws.Context, input *OutputService3TestShapeOutputService3TestCaseOperation1Input, opts ...request.Option) (*OutputService3TestShapeOutputService3TestCaseOperation1Output, error) {
+func (c *OutputService3ProtocolTest) OutputService3TestCaseOperation1WithContext(ctx aws.Context, input *OutputService3TestShapeOutputService3TestCaseOperation1Input, opts ...aws.Option) (*OutputService3TestShapeOutputService3TestCaseOperation1Output, error) {
 	req, out := c.OutputService3TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -578,37 +560,32 @@ func (s *OutputService3TestShapeTimeContainer) SetFoo(v time.Time) *OutputServic
 // OutputService4ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type OutputService4ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the OutputService4ProtocolTest client with a session.
+// New creates a new instance of the OutputService4ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a OutputService4ProtocolTest client from just a session.
-//     svc := outputservice4protocoltest.New(mySession)
+//     // Create a OutputService4ProtocolTest client from just a config.
+//     svc := outputservice4protocoltest.New(myConfig)
 //
 //     // Create a OutputService4ProtocolTest client with additional configuration
-//     svc := outputservice4protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService4ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *OutputService4ProtocolTest {
-	c := p.ClientConfig("outputservice4protocoltest", cfgs...)
-	return newOutputService4ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := outputservice4protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewOutputService4ProtocolTest(config aws.Config) *OutputService4ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService4ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *OutputService4ProtocolTest {
 	svc := &OutputService4ProtocolTest{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice4protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -624,7 +601,7 @@ func newOutputService4ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a OutputService4ProtocolTest operation and runs any
 // custom request initialization.
-func (c *OutputService4ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *OutputService4ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -632,7 +609,7 @@ func (c *OutputService4ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService4TestCaseOperation1 = "OperationName"
 
-// OutputService4TestCaseOperation1Request generates a "aws/request.Request" representing the
+// OutputService4TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the OutputService4TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -654,8 +631,8 @@ const opOutputService4TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1Request(input *OutputService4TestShapeOutputService4TestCaseOperation1Input) (req *request.Request, output *OutputService4TestShapeOutputService4TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1Request(input *OutputService4TestShapeOutputService4TestCaseOperation1Input) (req *aws.Request, output *OutputService4TestShapeOutputService4TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:     opOutputService4TestCaseOperation1,
 		HTTPPath: "/",
 	}
@@ -691,7 +668,7 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1(input *Out
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1WithContext(ctx aws.Context, input *OutputService4TestShapeOutputService4TestCaseOperation1Input, opts ...request.Option) (*OutputService4TestShapeOutputService4TestCaseOperation2Output, error) {
+func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1WithContext(ctx aws.Context, input *OutputService4TestShapeOutputService4TestCaseOperation1Input, opts ...aws.Option) (*OutputService4TestShapeOutputService4TestCaseOperation2Output, error) {
 	req, out := c.OutputService4TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -700,7 +677,7 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation1WithContext
 
 const opOutputService4TestCaseOperation2 = "OperationName"
 
-// OutputService4TestCaseOperation2Request generates a "aws/request.Request" representing the
+// OutputService4TestCaseOperation2Request generates a "aws.Request" representing the
 // client's request for the OutputService4TestCaseOperation2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -722,8 +699,8 @@ const opOutputService4TestCaseOperation2 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2Request(input *OutputService4TestShapeOutputService4TestCaseOperation2Input) (req *request.Request, output *OutputService4TestShapeOutputService4TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2Request(input *OutputService4TestShapeOutputService4TestCaseOperation2Input) (req *aws.Request, output *OutputService4TestShapeOutputService4TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:     opOutputService4TestCaseOperation2,
 		HTTPPath: "/",
 	}
@@ -759,7 +736,7 @@ func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2(input *Out
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2WithContext(ctx aws.Context, input *OutputService4TestShapeOutputService4TestCaseOperation2Input, opts ...request.Option) (*OutputService4TestShapeOutputService4TestCaseOperation2Output, error) {
+func (c *OutputService4ProtocolTest) OutputService4TestCaseOperation2WithContext(ctx aws.Context, input *OutputService4TestShapeOutputService4TestCaseOperation2Input, opts ...aws.Option) (*OutputService4TestShapeOutputService4TestCaseOperation2Output, error) {
 	req, out := c.OutputService4TestCaseOperation2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -813,37 +790,32 @@ type OutputService4TestShapeStructType struct {
 // OutputService5ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type OutputService5ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the OutputService5ProtocolTest client with a session.
+// New creates a new instance of the OutputService5ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a OutputService5ProtocolTest client from just a session.
-//     svc := outputservice5protocoltest.New(mySession)
+//     // Create a OutputService5ProtocolTest client from just a config.
+//     svc := outputservice5protocoltest.New(myConfig)
 //
 //     // Create a OutputService5ProtocolTest client with additional configuration
-//     svc := outputservice5protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService5ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *OutputService5ProtocolTest {
-	c := p.ClientConfig("outputservice5protocoltest", cfgs...)
-	return newOutputService5ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := outputservice5protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewOutputService5ProtocolTest(config aws.Config) *OutputService5ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService5ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *OutputService5ProtocolTest {
 	svc := &OutputService5ProtocolTest{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice5protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -859,7 +831,7 @@ func newOutputService5ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a OutputService5ProtocolTest operation and runs any
 // custom request initialization.
-func (c *OutputService5ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *OutputService5ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -867,7 +839,7 @@ func (c *OutputService5ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService5TestCaseOperation1 = "OperationName"
 
-// OutputService5TestCaseOperation1Request generates a "aws/request.Request" representing the
+// OutputService5TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the OutputService5TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -889,8 +861,8 @@ const opOutputService5TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1Request(input *OutputService5TestShapeOutputService5TestCaseOperation1Input) (req *request.Request, output *OutputService5TestShapeOutputService5TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1Request(input *OutputService5TestShapeOutputService5TestCaseOperation1Input) (req *aws.Request, output *OutputService5TestShapeOutputService5TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:     opOutputService5TestCaseOperation1,
 		HTTPPath: "/",
 	}
@@ -926,7 +898,7 @@ func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1(input *Out
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1WithContext(ctx aws.Context, input *OutputService5TestShapeOutputService5TestCaseOperation1Input, opts ...request.Option) (*OutputService5TestShapeOutputService5TestCaseOperation1Output, error) {
+func (c *OutputService5ProtocolTest) OutputService5TestCaseOperation1WithContext(ctx aws.Context, input *OutputService5TestShapeOutputService5TestCaseOperation1Input, opts ...aws.Option) (*OutputService5TestShapeOutputService5TestCaseOperation1Output, error) {
 	req, out := c.OutputService5TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -956,37 +928,32 @@ func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) SetMapMe
 // OutputService6ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type OutputService6ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the OutputService6ProtocolTest client with a session.
+// New creates a new instance of the OutputService6ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a OutputService6ProtocolTest client from just a session.
-//     svc := outputservice6protocoltest.New(mySession)
+//     // Create a OutputService6ProtocolTest client from just a config.
+//     svc := outputservice6protocoltest.New(myConfig)
 //
 //     // Create a OutputService6ProtocolTest client with additional configuration
-//     svc := outputservice6protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService6ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *OutputService6ProtocolTest {
-	c := p.ClientConfig("outputservice6protocoltest", cfgs...)
-	return newOutputService6ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := outputservice6protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewOutputService6ProtocolTest(config aws.Config) *OutputService6ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService6ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *OutputService6ProtocolTest {
 	svc := &OutputService6ProtocolTest{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice6protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -1002,7 +969,7 @@ func newOutputService6ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a OutputService6ProtocolTest operation and runs any
 // custom request initialization.
-func (c *OutputService6ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *OutputService6ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -1010,7 +977,7 @@ func (c *OutputService6ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opOutputService6TestCaseOperation1 = "OperationName"
 
-// OutputService6TestCaseOperation1Request generates a "aws/request.Request" representing the
+// OutputService6TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the OutputService6TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1032,8 +999,8 @@ const opOutputService6TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1Request(input *OutputService6TestShapeOutputService6TestCaseOperation1Input) (req *request.Request, output *OutputService6TestShapeOutputService6TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1Request(input *OutputService6TestShapeOutputService6TestCaseOperation1Input) (req *aws.Request, output *OutputService6TestShapeOutputService6TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:     opOutputService6TestCaseOperation1,
 		HTTPPath: "/",
 	}
@@ -1069,7 +1036,7 @@ func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1(input *Out
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1WithContext(ctx aws.Context, input *OutputService6TestShapeOutputService6TestCaseOperation1Input, opts ...request.Option) (*OutputService6TestShapeOutputService6TestCaseOperation1Output, error) {
+func (c *OutputService6ProtocolTest) OutputService6TestCaseOperation1WithContext(ctx aws.Context, input *OutputService6TestShapeOutputService6TestCaseOperation1Input, opts ...aws.Option) (*OutputService6TestShapeOutputService6TestCaseOperation1Output, error) {
 	req, out := c.OutputService6TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1097,7 +1064,10 @@ func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) SetStrTy
 //
 
 func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
-	svc := NewOutputService1ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService1ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"Str\": \"myname\", \"Num\": 123, \"FalseBool\": false, \"TrueBool\": true, \"Float\": 1.2, \"Double\": 1.3, \"Long\": 200, \"Char\": \"a\"}"))
 	req, out := svc.OutputService1TestCaseOperation1Request(nil)
@@ -1144,7 +1114,10 @@ func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 }
 
 func TestOutputService2ProtocolTestBlobMembersCase1(t *testing.T) {
-	svc := NewOutputService2ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService2ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"BlobMember\": \"aGkh\", \"StructMember\": {\"foo\": \"dGhlcmUh\"}}"))
 	req, out := svc.OutputService2TestCaseOperation1Request(nil)
@@ -1173,7 +1146,10 @@ func TestOutputService2ProtocolTestBlobMembersCase1(t *testing.T) {
 }
 
 func TestOutputService3ProtocolTestTimestampMembersCase1(t *testing.T) {
-	svc := NewOutputService3ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService3ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"TimeMember\": 1398796238, \"StructMember\": {\"foo\": 1398796238}}"))
 	req, out := svc.OutputService3TestCaseOperation1Request(nil)
@@ -1202,7 +1178,10 @@ func TestOutputService3ProtocolTestTimestampMembersCase1(t *testing.T) {
 }
 
 func TestOutputService4ProtocolTestListsCase1(t *testing.T) {
-	svc := NewOutputService4ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService4ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"ListMember\": [\"a\", \"b\"]}"))
 	req, out := svc.OutputService4TestCaseOperation1Request(nil)
@@ -1231,7 +1210,10 @@ func TestOutputService4ProtocolTestListsCase1(t *testing.T) {
 }
 
 func TestOutputService4ProtocolTestListsCase2(t *testing.T) {
-	svc := NewOutputService4ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService4ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"ListMember\": [\"a\", null], \"ListMemberMap\": [{}, null, null, {}], \"ListMemberStruct\": [{}, null, null, {}]}"))
 	req, out := svc.OutputService4TestCaseOperation2Request(nil)
@@ -1272,7 +1254,10 @@ func TestOutputService4ProtocolTestListsCase2(t *testing.T) {
 }
 
 func TestOutputService5ProtocolTestMapsCase1(t *testing.T) {
-	svc := NewOutputService5ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService5ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"MapMember\": {\"a\": [1, 2], \"b\": [3, 4]}}"))
 	req, out := svc.OutputService5TestCaseOperation1Request(nil)
@@ -1307,7 +1292,10 @@ func TestOutputService5ProtocolTestMapsCase1(t *testing.T) {
 }
 
 func TestOutputService6ProtocolTestIgnoresExtraDataCase1(t *testing.T) {
-	svc := NewOutputService6ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService6ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"foo\": \"bar\"}"))
 	req, out := svc.OutputService6TestCaseOperation1Request(nil)

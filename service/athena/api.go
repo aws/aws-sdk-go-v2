@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opBatchGetNamedQuery = "BatchGetNamedQuery"
 
-// BatchGetNamedQueryRequest generates a "aws/request.Request" representing the
+// BatchGetNamedQueryRequest generates a "aws.Request" representing the
 // client's request for the BatchGetNamedQuery operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opBatchGetNamedQuery = "BatchGetNamedQuery"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetNamedQuery
-func (c *Athena) BatchGetNamedQueryRequest(input *BatchGetNamedQueryInput) (req *request.Request, output *BatchGetNamedQueryOutput) {
-	op := &request.Operation{
+func (c *Athena) BatchGetNamedQueryRequest(input *BatchGetNamedQueryInput) (req *aws.Request, output *BatchGetNamedQueryOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetNamedQuery,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -93,7 +92,7 @@ func (c *Athena) BatchGetNamedQuery(input *BatchGetNamedQueryInput) (*BatchGetNa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) BatchGetNamedQueryWithContext(ctx aws.Context, input *BatchGetNamedQueryInput, opts ...request.Option) (*BatchGetNamedQueryOutput, error) {
+func (c *Athena) BatchGetNamedQueryWithContext(ctx aws.Context, input *BatchGetNamedQueryInput, opts ...aws.Option) (*BatchGetNamedQueryOutput, error) {
 	req, out := c.BatchGetNamedQueryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -102,7 +101,7 @@ func (c *Athena) BatchGetNamedQueryWithContext(ctx aws.Context, input *BatchGetN
 
 const opBatchGetQueryExecution = "BatchGetQueryExecution"
 
-// BatchGetQueryExecutionRequest generates a "aws/request.Request" representing the
+// BatchGetQueryExecutionRequest generates a "aws.Request" representing the
 // client's request for the BatchGetQueryExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -126,8 +125,8 @@ const opBatchGetQueryExecution = "BatchGetQueryExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetQueryExecution
-func (c *Athena) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInput) (req *request.Request, output *BatchGetQueryExecutionOutput) {
-	op := &request.Operation{
+func (c *Athena) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInput) (req *aws.Request, output *BatchGetQueryExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetQueryExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -181,7 +180,7 @@ func (c *Athena) BatchGetQueryExecution(input *BatchGetQueryExecutionInput) (*Ba
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) BatchGetQueryExecutionWithContext(ctx aws.Context, input *BatchGetQueryExecutionInput, opts ...request.Option) (*BatchGetQueryExecutionOutput, error) {
+func (c *Athena) BatchGetQueryExecutionWithContext(ctx aws.Context, input *BatchGetQueryExecutionInput, opts ...aws.Option) (*BatchGetQueryExecutionOutput, error) {
 	req, out := c.BatchGetQueryExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -190,7 +189,7 @@ func (c *Athena) BatchGetQueryExecutionWithContext(ctx aws.Context, input *Batch
 
 const opCreateNamedQuery = "CreateNamedQuery"
 
-// CreateNamedQueryRequest generates a "aws/request.Request" representing the
+// CreateNamedQueryRequest generates a "aws.Request" representing the
 // client's request for the CreateNamedQuery operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -214,8 +213,8 @@ const opCreateNamedQuery = "CreateNamedQuery"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateNamedQuery
-func (c *Athena) CreateNamedQueryRequest(input *CreateNamedQueryInput) (req *request.Request, output *CreateNamedQueryOutput) {
-	op := &request.Operation{
+func (c *Athena) CreateNamedQueryRequest(input *CreateNamedQueryInput) (req *aws.Request, output *CreateNamedQueryOutput) {
+	op := &aws.Operation{
 		Name:       opCreateNamedQuery,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -269,7 +268,7 @@ func (c *Athena) CreateNamedQuery(input *CreateNamedQueryInput) (*CreateNamedQue
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) CreateNamedQueryWithContext(ctx aws.Context, input *CreateNamedQueryInput, opts ...request.Option) (*CreateNamedQueryOutput, error) {
+func (c *Athena) CreateNamedQueryWithContext(ctx aws.Context, input *CreateNamedQueryInput, opts ...aws.Option) (*CreateNamedQueryOutput, error) {
 	req, out := c.CreateNamedQueryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -278,7 +277,7 @@ func (c *Athena) CreateNamedQueryWithContext(ctx aws.Context, input *CreateNamed
 
 const opDeleteNamedQuery = "DeleteNamedQuery"
 
-// DeleteNamedQueryRequest generates a "aws/request.Request" representing the
+// DeleteNamedQueryRequest generates a "aws.Request" representing the
 // client's request for the DeleteNamedQuery operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -302,8 +301,8 @@ const opDeleteNamedQuery = "DeleteNamedQuery"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNamedQuery
-func (c *Athena) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) (req *request.Request, output *DeleteNamedQueryOutput) {
-	op := &request.Operation{
+func (c *Athena) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) (req *aws.Request, output *DeleteNamedQueryOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteNamedQuery,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -357,7 +356,7 @@ func (c *Athena) DeleteNamedQuery(input *DeleteNamedQueryInput) (*DeleteNamedQue
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) DeleteNamedQueryWithContext(ctx aws.Context, input *DeleteNamedQueryInput, opts ...request.Option) (*DeleteNamedQueryOutput, error) {
+func (c *Athena) DeleteNamedQueryWithContext(ctx aws.Context, input *DeleteNamedQueryInput, opts ...aws.Option) (*DeleteNamedQueryOutput, error) {
 	req, out := c.DeleteNamedQueryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -366,7 +365,7 @@ func (c *Athena) DeleteNamedQueryWithContext(ctx aws.Context, input *DeleteNamed
 
 const opGetNamedQuery = "GetNamedQuery"
 
-// GetNamedQueryRequest generates a "aws/request.Request" representing the
+// GetNamedQueryRequest generates a "aws.Request" representing the
 // client's request for the GetNamedQuery operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -390,8 +389,8 @@ const opGetNamedQuery = "GetNamedQuery"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNamedQuery
-func (c *Athena) GetNamedQueryRequest(input *GetNamedQueryInput) (req *request.Request, output *GetNamedQueryOutput) {
-	op := &request.Operation{
+func (c *Athena) GetNamedQueryRequest(input *GetNamedQueryInput) (req *aws.Request, output *GetNamedQueryOutput) {
+	op := &aws.Operation{
 		Name:       opGetNamedQuery,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -441,7 +440,7 @@ func (c *Athena) GetNamedQuery(input *GetNamedQueryInput) (*GetNamedQueryOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) GetNamedQueryWithContext(ctx aws.Context, input *GetNamedQueryInput, opts ...request.Option) (*GetNamedQueryOutput, error) {
+func (c *Athena) GetNamedQueryWithContext(ctx aws.Context, input *GetNamedQueryInput, opts ...aws.Option) (*GetNamedQueryOutput, error) {
 	req, out := c.GetNamedQueryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -450,7 +449,7 @@ func (c *Athena) GetNamedQueryWithContext(ctx aws.Context, input *GetNamedQueryI
 
 const opGetQueryExecution = "GetQueryExecution"
 
-// GetQueryExecutionRequest generates a "aws/request.Request" representing the
+// GetQueryExecutionRequest generates a "aws.Request" representing the
 // client's request for the GetQueryExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -474,8 +473,8 @@ const opGetQueryExecution = "GetQueryExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution
-func (c *Athena) GetQueryExecutionRequest(input *GetQueryExecutionInput) (req *request.Request, output *GetQueryExecutionOutput) {
-	op := &request.Operation{
+func (c *Athena) GetQueryExecutionRequest(input *GetQueryExecutionInput) (req *aws.Request, output *GetQueryExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opGetQueryExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -526,7 +525,7 @@ func (c *Athena) GetQueryExecution(input *GetQueryExecutionInput) (*GetQueryExec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) GetQueryExecutionWithContext(ctx aws.Context, input *GetQueryExecutionInput, opts ...request.Option) (*GetQueryExecutionOutput, error) {
+func (c *Athena) GetQueryExecutionWithContext(ctx aws.Context, input *GetQueryExecutionInput, opts ...aws.Option) (*GetQueryExecutionOutput, error) {
 	req, out := c.GetQueryExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -535,7 +534,7 @@ func (c *Athena) GetQueryExecutionWithContext(ctx aws.Context, input *GetQueryEx
 
 const opGetQueryResults = "GetQueryResults"
 
-// GetQueryResultsRequest generates a "aws/request.Request" representing the
+// GetQueryResultsRequest generates a "aws.Request" representing the
 // client's request for the GetQueryResults operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -559,12 +558,12 @@ const opGetQueryResults = "GetQueryResults"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResults
-func (c *Athena) GetQueryResultsRequest(input *GetQueryResultsInput) (req *request.Request, output *GetQueryResultsOutput) {
-	op := &request.Operation{
+func (c *Athena) GetQueryResultsRequest(input *GetQueryResultsInput) (req *aws.Request, output *GetQueryResultsOutput) {
+	op := &aws.Operation{
 		Name:       opGetQueryResults,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -618,7 +617,7 @@ func (c *Athena) GetQueryResults(input *GetQueryResultsInput) (*GetQueryResultsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) GetQueryResultsWithContext(ctx aws.Context, input *GetQueryResultsInput, opts ...request.Option) (*GetQueryResultsOutput, error) {
+func (c *Athena) GetQueryResultsWithContext(ctx aws.Context, input *GetQueryResultsInput, opts ...aws.Option) (*GetQueryResultsOutput, error) {
 	req, out := c.GetQueryResultsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -653,9 +652,9 @@ func (c *Athena) GetQueryResultsPages(input *GetQueryResultsInput, fn func(*GetQ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) GetQueryResultsPagesWithContext(ctx aws.Context, input *GetQueryResultsInput, fn func(*GetQueryResultsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Athena) GetQueryResultsPagesWithContext(ctx aws.Context, input *GetQueryResultsInput, fn func(*GetQueryResultsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetQueryResultsInput
 			if input != nil {
 				tmp := *input
@@ -677,7 +676,7 @@ func (c *Athena) GetQueryResultsPagesWithContext(ctx aws.Context, input *GetQuer
 
 const opListNamedQueries = "ListNamedQueries"
 
-// ListNamedQueriesRequest generates a "aws/request.Request" representing the
+// ListNamedQueriesRequest generates a "aws.Request" representing the
 // client's request for the ListNamedQueries operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -701,12 +700,12 @@ const opListNamedQueries = "ListNamedQueries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueries
-func (c *Athena) ListNamedQueriesRequest(input *ListNamedQueriesInput) (req *request.Request, output *ListNamedQueriesOutput) {
-	op := &request.Operation{
+func (c *Athena) ListNamedQueriesRequest(input *ListNamedQueriesInput) (req *aws.Request, output *ListNamedQueriesOutput) {
+	op := &aws.Operation{
 		Name:       opListNamedQueries,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -762,7 +761,7 @@ func (c *Athena) ListNamedQueries(input *ListNamedQueriesInput) (*ListNamedQueri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) ListNamedQueriesWithContext(ctx aws.Context, input *ListNamedQueriesInput, opts ...request.Option) (*ListNamedQueriesOutput, error) {
+func (c *Athena) ListNamedQueriesWithContext(ctx aws.Context, input *ListNamedQueriesInput, opts ...aws.Option) (*ListNamedQueriesOutput, error) {
 	req, out := c.ListNamedQueriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -797,9 +796,9 @@ func (c *Athena) ListNamedQueriesPages(input *ListNamedQueriesInput, fn func(*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) ListNamedQueriesPagesWithContext(ctx aws.Context, input *ListNamedQueriesInput, fn func(*ListNamedQueriesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Athena) ListNamedQueriesPagesWithContext(ctx aws.Context, input *ListNamedQueriesInput, fn func(*ListNamedQueriesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListNamedQueriesInput
 			if input != nil {
 				tmp := *input
@@ -821,7 +820,7 @@ func (c *Athena) ListNamedQueriesPagesWithContext(ctx aws.Context, input *ListNa
 
 const opListQueryExecutions = "ListQueryExecutions"
 
-// ListQueryExecutionsRequest generates a "aws/request.Request" representing the
+// ListQueryExecutionsRequest generates a "aws.Request" representing the
 // client's request for the ListQueryExecutions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -845,12 +844,12 @@ const opListQueryExecutions = "ListQueryExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListQueryExecutions
-func (c *Athena) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) (req *request.Request, output *ListQueryExecutionsOutput) {
-	op := &request.Operation{
+func (c *Athena) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) (req *aws.Request, output *ListQueryExecutionsOutput) {
+	op := &aws.Operation{
 		Name:       opListQueryExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -906,7 +905,7 @@ func (c *Athena) ListQueryExecutions(input *ListQueryExecutionsInput) (*ListQuer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) ListQueryExecutionsWithContext(ctx aws.Context, input *ListQueryExecutionsInput, opts ...request.Option) (*ListQueryExecutionsOutput, error) {
+func (c *Athena) ListQueryExecutionsWithContext(ctx aws.Context, input *ListQueryExecutionsInput, opts ...aws.Option) (*ListQueryExecutionsOutput, error) {
 	req, out := c.ListQueryExecutionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -941,9 +940,9 @@ func (c *Athena) ListQueryExecutionsPages(input *ListQueryExecutionsInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) ListQueryExecutionsPagesWithContext(ctx aws.Context, input *ListQueryExecutionsInput, fn func(*ListQueryExecutionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Athena) ListQueryExecutionsPagesWithContext(ctx aws.Context, input *ListQueryExecutionsInput, fn func(*ListQueryExecutionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListQueryExecutionsInput
 			if input != nil {
 				tmp := *input
@@ -965,7 +964,7 @@ func (c *Athena) ListQueryExecutionsPagesWithContext(ctx aws.Context, input *Lis
 
 const opStartQueryExecution = "StartQueryExecution"
 
-// StartQueryExecutionRequest generates a "aws/request.Request" representing the
+// StartQueryExecutionRequest generates a "aws.Request" representing the
 // client's request for the StartQueryExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -989,8 +988,8 @@ const opStartQueryExecution = "StartQueryExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecution
-func (c *Athena) StartQueryExecutionRequest(input *StartQueryExecutionInput) (req *request.Request, output *StartQueryExecutionOutput) {
-	op := &request.Operation{
+func (c *Athena) StartQueryExecutionRequest(input *StartQueryExecutionInput) (req *aws.Request, output *StartQueryExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opStartQueryExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1047,7 +1046,7 @@ func (c *Athena) StartQueryExecution(input *StartQueryExecutionInput) (*StartQue
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) StartQueryExecutionWithContext(ctx aws.Context, input *StartQueryExecutionInput, opts ...request.Option) (*StartQueryExecutionOutput, error) {
+func (c *Athena) StartQueryExecutionWithContext(ctx aws.Context, input *StartQueryExecutionInput, opts ...aws.Option) (*StartQueryExecutionOutput, error) {
 	req, out := c.StartQueryExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1056,7 +1055,7 @@ func (c *Athena) StartQueryExecutionWithContext(ctx aws.Context, input *StartQue
 
 const opStopQueryExecution = "StopQueryExecution"
 
-// StopQueryExecutionRequest generates a "aws/request.Request" representing the
+// StopQueryExecutionRequest generates a "aws.Request" representing the
 // client's request for the StopQueryExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1080,8 +1079,8 @@ const opStopQueryExecution = "StopQueryExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopQueryExecution
-func (c *Athena) StopQueryExecutionRequest(input *StopQueryExecutionInput) (req *request.Request, output *StopQueryExecutionOutput) {
-	op := &request.Operation{
+func (c *Athena) StopQueryExecutionRequest(input *StopQueryExecutionInput) (req *aws.Request, output *StopQueryExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opStopQueryExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1135,7 +1134,7 @@ func (c *Athena) StopQueryExecution(input *StopQueryExecutionInput) (*StopQueryE
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Athena) StopQueryExecutionWithContext(ctx aws.Context, input *StopQueryExecutionInput, opts ...request.Option) (*StopQueryExecutionOutput, error) {
+func (c *Athena) StopQueryExecutionWithContext(ctx aws.Context, input *StopQueryExecutionInput, opts ...aws.Option) (*StopQueryExecutionOutput, error) {
 	req, out := c.StopQueryExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1164,12 +1163,12 @@ func (s BatchGetNamedQueryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetNamedQueryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetNamedQueryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetNamedQueryInput"}
 	if s.NamedQueryIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("NamedQueryIds"))
+		invalidParams.Add(aws.NewErrParamRequired("NamedQueryIds"))
 	}
 	if s.NamedQueryIds != nil && len(s.NamedQueryIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NamedQueryIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NamedQueryIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1239,12 +1238,12 @@ func (s BatchGetQueryExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetQueryExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetQueryExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetQueryExecutionInput"}
 	if s.QueryExecutionIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueryExecutionIds"))
+		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionIds"))
 	}
 	if s.QueryExecutionIds != nil && len(s.QueryExecutionIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QueryExecutionIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QueryExecutionIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1449,30 +1448,30 @@ func (s CreateNamedQueryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNamedQueryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateNamedQueryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateNamedQueryInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 32))
 	}
 	if s.Database == nil {
-		invalidParams.Add(request.NewErrParamRequired("Database"))
+		invalidParams.Add(aws.NewErrParamRequired("Database"))
 	}
 	if s.Database != nil && len(*s.Database) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Database", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Database", 1))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.QueryString == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueryString"))
+		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
 	}
 	if s.QueryString != nil && len(*s.QueryString) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QueryString", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QueryString", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1582,9 +1581,9 @@ func (s DeleteNamedQueryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNamedQueryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteNamedQueryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteNamedQueryInput"}
 	if s.NamedQueryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("NamedQueryId"))
+		invalidParams.Add(aws.NewErrParamRequired("NamedQueryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1643,9 +1642,9 @@ func (s EncryptionConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EncryptionConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EncryptionConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "EncryptionConfiguration"}
 	if s.EncryptionOption == nil {
-		invalidParams.Add(request.NewErrParamRequired("EncryptionOption"))
+		invalidParams.Add(aws.NewErrParamRequired("EncryptionOption"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1688,9 +1687,9 @@ func (s GetNamedQueryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetNamedQueryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetNamedQueryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetNamedQueryInput"}
 	if s.NamedQueryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("NamedQueryId"))
+		invalidParams.Add(aws.NewErrParamRequired("NamedQueryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1751,9 +1750,9 @@ func (s GetQueryExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueryExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetQueryExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetQueryExecutionInput"}
 	if s.QueryExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueryExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1821,9 +1820,9 @@ func (s GetQueryResultsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueryResultsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetQueryResultsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetQueryResultsInput"}
 	if s.QueryExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueryExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2179,9 +2178,9 @@ func (s QueryExecutionContext) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QueryExecutionContext) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "QueryExecutionContext"}
+	invalidParams := aws.ErrInvalidParams{Context: "QueryExecutionContext"}
 	if s.Database != nil && len(*s.Database) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Database", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Database", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2316,13 +2315,13 @@ func (s ResultConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResultConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResultConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResultConfiguration"}
 	if s.OutputLocation == nil {
-		invalidParams.Add(request.NewErrParamRequired("OutputLocation"))
+		invalidParams.Add(aws.NewErrParamRequired("OutputLocation"))
 	}
 	if s.EncryptionConfiguration != nil {
 		if err := s.EncryptionConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("EncryptionConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EncryptionConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2472,27 +2471,27 @@ func (s StartQueryExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartQueryExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartQueryExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartQueryExecutionInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 32))
 	}
 	if s.QueryString == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueryString"))
+		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
 	}
 	if s.QueryString != nil && len(*s.QueryString) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QueryString", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QueryString", 1))
 	}
 	if s.ResultConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResultConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("ResultConfiguration"))
 	}
 	if s.QueryExecutionContext != nil {
 		if err := s.QueryExecutionContext.Validate(); err != nil {
-			invalidParams.AddNested("QueryExecutionContext", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("QueryExecutionContext", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ResultConfiguration != nil {
 		if err := s.ResultConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ResultConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ResultConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2572,9 +2571,9 @@ func (s StopQueryExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopQueryExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopQueryExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopQueryExecutionInput"}
 	if s.QueryExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueryExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionId"))
 	}
 
 	if invalidParams.Len() > 0 {

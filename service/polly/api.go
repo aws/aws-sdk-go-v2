@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opDeleteLexicon = "DeleteLexicon"
 
-// DeleteLexiconRequest generates a "aws/request.Request" representing the
+// DeleteLexiconRequest generates a "aws.Request" representing the
 // client's request for the DeleteLexicon operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opDeleteLexicon = "DeleteLexicon"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexicon
-func (c *Polly) DeleteLexiconRequest(input *DeleteLexiconInput) (req *request.Request, output *DeleteLexiconOutput) {
-	op := &request.Operation{
+func (c *Polly) DeleteLexiconRequest(input *DeleteLexiconInput) (req *aws.Request, output *DeleteLexiconOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLexicon,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/lexicons/{LexiconName}",
@@ -95,7 +94,7 @@ func (c *Polly) DeleteLexicon(input *DeleteLexiconInput) (*DeleteLexiconOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Polly) DeleteLexiconWithContext(ctx aws.Context, input *DeleteLexiconInput, opts ...request.Option) (*DeleteLexiconOutput, error) {
+func (c *Polly) DeleteLexiconWithContext(ctx aws.Context, input *DeleteLexiconInput, opts ...aws.Option) (*DeleteLexiconOutput, error) {
 	req, out := c.DeleteLexiconRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -104,7 +103,7 @@ func (c *Polly) DeleteLexiconWithContext(ctx aws.Context, input *DeleteLexiconIn
 
 const opDescribeVoices = "DescribeVoices"
 
-// DescribeVoicesRequest generates a "aws/request.Request" representing the
+// DescribeVoicesRequest generates a "aws.Request" representing the
 // client's request for the DescribeVoices operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -128,8 +127,8 @@ const opDescribeVoices = "DescribeVoices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoices
-func (c *Polly) DescribeVoicesRequest(input *DescribeVoicesInput) (req *request.Request, output *DescribeVoicesOutput) {
-	op := &request.Operation{
+func (c *Polly) DescribeVoicesRequest(input *DescribeVoicesInput) (req *aws.Request, output *DescribeVoicesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeVoices,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/voices",
@@ -194,7 +193,7 @@ func (c *Polly) DescribeVoices(input *DescribeVoicesInput) (*DescribeVoicesOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Polly) DescribeVoicesWithContext(ctx aws.Context, input *DescribeVoicesInput, opts ...request.Option) (*DescribeVoicesOutput, error) {
+func (c *Polly) DescribeVoicesWithContext(ctx aws.Context, input *DescribeVoicesInput, opts ...aws.Option) (*DescribeVoicesOutput, error) {
 	req, out := c.DescribeVoicesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -203,7 +202,7 @@ func (c *Polly) DescribeVoicesWithContext(ctx aws.Context, input *DescribeVoices
 
 const opGetLexicon = "GetLexicon"
 
-// GetLexiconRequest generates a "aws/request.Request" representing the
+// GetLexiconRequest generates a "aws.Request" representing the
 // client's request for the GetLexicon operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -227,8 +226,8 @@ const opGetLexicon = "GetLexicon"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetLexicon
-func (c *Polly) GetLexiconRequest(input *GetLexiconInput) (req *request.Request, output *GetLexiconOutput) {
-	op := &request.Operation{
+func (c *Polly) GetLexiconRequest(input *GetLexiconInput) (req *aws.Request, output *GetLexiconOutput) {
+	op := &aws.Operation{
 		Name:       opGetLexicon,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/lexicons/{LexiconName}",
@@ -282,7 +281,7 @@ func (c *Polly) GetLexicon(input *GetLexiconInput) (*GetLexiconOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Polly) GetLexiconWithContext(ctx aws.Context, input *GetLexiconInput, opts ...request.Option) (*GetLexiconOutput, error) {
+func (c *Polly) GetLexiconWithContext(ctx aws.Context, input *GetLexiconInput, opts ...aws.Option) (*GetLexiconOutput, error) {
 	req, out := c.GetLexiconRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -291,7 +290,7 @@ func (c *Polly) GetLexiconWithContext(ctx aws.Context, input *GetLexiconInput, o
 
 const opListLexicons = "ListLexicons"
 
-// ListLexiconsRequest generates a "aws/request.Request" representing the
+// ListLexiconsRequest generates a "aws.Request" representing the
 // client's request for the ListLexicons operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -315,8 +314,8 @@ const opListLexicons = "ListLexicons"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListLexicons
-func (c *Polly) ListLexiconsRequest(input *ListLexiconsInput) (req *request.Request, output *ListLexiconsOutput) {
-	op := &request.Operation{
+func (c *Polly) ListLexiconsRequest(input *ListLexiconsInput) (req *aws.Request, output *ListLexiconsOutput) {
+	op := &aws.Operation{
 		Name:       opListLexicons,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/lexicons",
@@ -366,7 +365,7 @@ func (c *Polly) ListLexicons(input *ListLexiconsInput) (*ListLexiconsOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Polly) ListLexiconsWithContext(ctx aws.Context, input *ListLexiconsInput, opts ...request.Option) (*ListLexiconsOutput, error) {
+func (c *Polly) ListLexiconsWithContext(ctx aws.Context, input *ListLexiconsInput, opts ...aws.Option) (*ListLexiconsOutput, error) {
 	req, out := c.ListLexiconsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -375,7 +374,7 @@ func (c *Polly) ListLexiconsWithContext(ctx aws.Context, input *ListLexiconsInpu
 
 const opPutLexicon = "PutLexicon"
 
-// PutLexiconRequest generates a "aws/request.Request" representing the
+// PutLexiconRequest generates a "aws.Request" representing the
 // client's request for the PutLexicon operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -399,8 +398,8 @@ const opPutLexicon = "PutLexicon"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexicon
-func (c *Polly) PutLexiconRequest(input *PutLexiconInput) (req *request.Request, output *PutLexiconOutput) {
-	op := &request.Operation{
+func (c *Polly) PutLexiconRequest(input *PutLexiconInput) (req *aws.Request, output *PutLexiconOutput) {
+	op := &aws.Operation{
 		Name:       opPutLexicon,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/lexicons/{LexiconName}",
@@ -471,7 +470,7 @@ func (c *Polly) PutLexicon(input *PutLexiconInput) (*PutLexiconOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Polly) PutLexiconWithContext(ctx aws.Context, input *PutLexiconInput, opts ...request.Option) (*PutLexiconOutput, error) {
+func (c *Polly) PutLexiconWithContext(ctx aws.Context, input *PutLexiconInput, opts ...aws.Option) (*PutLexiconOutput, error) {
 	req, out := c.PutLexiconRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -480,7 +479,7 @@ func (c *Polly) PutLexiconWithContext(ctx aws.Context, input *PutLexiconInput, o
 
 const opSynthesizeSpeech = "SynthesizeSpeech"
 
-// SynthesizeSpeechRequest generates a "aws/request.Request" representing the
+// SynthesizeSpeechRequest generates a "aws.Request" representing the
 // client's request for the SynthesizeSpeech operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -504,8 +503,8 @@ const opSynthesizeSpeech = "SynthesizeSpeech"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeech
-func (c *Polly) SynthesizeSpeechRequest(input *SynthesizeSpeechInput) (req *request.Request, output *SynthesizeSpeechOutput) {
-	op := &request.Operation{
+func (c *Polly) SynthesizeSpeechRequest(input *SynthesizeSpeechInput) (req *aws.Request, output *SynthesizeSpeechOutput) {
+	op := &aws.Operation{
 		Name:       opSynthesizeSpeech,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/speech",
@@ -581,7 +580,7 @@ func (c *Polly) SynthesizeSpeech(input *SynthesizeSpeechInput) (*SynthesizeSpeec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Polly) SynthesizeSpeechWithContext(ctx aws.Context, input *SynthesizeSpeechInput, opts ...request.Option) (*SynthesizeSpeechOutput, error) {
+func (c *Polly) SynthesizeSpeechWithContext(ctx aws.Context, input *SynthesizeSpeechInput, opts ...aws.Option) (*SynthesizeSpeechOutput, error) {
 	req, out := c.SynthesizeSpeechRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -610,9 +609,9 @@ func (s DeleteLexiconInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLexiconInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLexiconInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLexiconInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -734,9 +733,9 @@ func (s GetLexiconInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetLexiconInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetLexiconInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetLexiconInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1017,12 +1016,12 @@ func (s PutLexiconInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutLexiconInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutLexiconInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutLexiconInput"}
 	if s.Content == nil {
-		invalidParams.Add(request.NewErrParamRequired("Content"))
+		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1115,15 +1114,15 @@ func (s SynthesizeSpeechInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SynthesizeSpeechInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SynthesizeSpeechInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SynthesizeSpeechInput"}
 	if s.OutputFormat == nil {
-		invalidParams.Add(request.NewErrParamRequired("OutputFormat"))
+		invalidParams.Add(aws.NewErrParamRequired("OutputFormat"))
 	}
 	if s.Text == nil {
-		invalidParams.Add(request.NewErrParamRequired("Text"))
+		invalidParams.Add(aws.NewErrParamRequired("Text"))
 	}
 	if s.VoiceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VoiceId"))
+		invalidParams.Add(aws.NewErrParamRequired("VoiceId"))
 	}
 
 	if invalidParams.Len() > 0 {

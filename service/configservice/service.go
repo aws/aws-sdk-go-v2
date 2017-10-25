@@ -4,9 +4,6 @@ package configservice
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
@@ -18,14 +15,14 @@ import (
 // ConfigService methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type ConfigService struct {
-	*client.Client
+	*aws.Client
 }
 
 // Used for custom client initialization logic
-var initClient func(*client.Client)
+var initClient func(*aws.Client)
 
 // Used for custom request initialization logic
-var initRequest func(*request.Request)
+var initRequest func(*aws.Request)
 
 // Service information constants
 const (
@@ -33,36 +30,31 @@ const (
 	EndpointsID = ServiceName // Service ID for Regions and Endpoints metadata.
 )
 
-// New creates a new instance of the ConfigService client with a session.
+// New creates a new instance of the ConfigService client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a ConfigService client from just a session.
-//     svc := configservice.New(mySession)
+//     // Create a ConfigService client from just a config.
+//     svc := configservice.New(myConfig)
 //
 //     // Create a ConfigService client with additional configuration
-//     svc := configservice.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func New(p client.ConfigProvider, cfgs ...*aws.Config) *ConfigService {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := configservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func New(config aws.Config) *ConfigService {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *ConfigService {
 	svc := &ConfigService{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2014-11-12",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "StarlingDoveService",
 			},
-			handlers,
 		),
 	}
 
@@ -83,7 +75,7 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 
 // newRequest creates a new request for a ConfigService operation and runs any
 // custom request initialization.
-func (c *ConfigService) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *ConfigService) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	// Run custom request initialization if present

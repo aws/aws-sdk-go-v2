@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opAcceptMatch = "AcceptMatch"
 
-// AcceptMatchRequest generates a "aws/request.Request" representing the
+// AcceptMatchRequest generates a "aws.Request" representing the
 // client's request for the AcceptMatch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opAcceptMatch = "AcceptMatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AcceptMatch
-func (c *GameLift) AcceptMatchRequest(input *AcceptMatchInput) (req *request.Request, output *AcceptMatchOutput) {
-	op := &request.Operation{
+func (c *GameLift) AcceptMatchRequest(input *AcceptMatchInput) (req *aws.Request, output *AcceptMatchOutput) {
+	op := &aws.Operation{
 		Name:       opAcceptMatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -129,7 +128,7 @@ func (c *GameLift) AcceptMatch(input *AcceptMatchInput) (*AcceptMatchOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) AcceptMatchWithContext(ctx aws.Context, input *AcceptMatchInput, opts ...request.Option) (*AcceptMatchOutput, error) {
+func (c *GameLift) AcceptMatchWithContext(ctx aws.Context, input *AcceptMatchInput, opts ...aws.Option) (*AcceptMatchOutput, error) {
 	req, out := c.AcceptMatchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -138,7 +137,7 @@ func (c *GameLift) AcceptMatchWithContext(ctx aws.Context, input *AcceptMatchInp
 
 const opCreateAlias = "CreateAlias"
 
-// CreateAliasRequest generates a "aws/request.Request" representing the
+// CreateAliasRequest generates a "aws.Request" representing the
 // client's request for the CreateAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -162,8 +161,8 @@ const opCreateAlias = "CreateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateAlias
-func (c *GameLift) CreateAliasRequest(input *CreateAliasInput) (req *request.Request, output *CreateAliasOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request, output *CreateAliasOutput) {
+	op := &aws.Operation{
 		Name:       opCreateAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -258,7 +257,7 @@ func (c *GameLift) CreateAlias(input *CreateAliasInput) (*CreateAliasOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...request.Option) (*CreateAliasOutput, error) {
+func (c *GameLift) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...aws.Option) (*CreateAliasOutput, error) {
 	req, out := c.CreateAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -267,7 +266,7 @@ func (c *GameLift) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInp
 
 const opCreateBuild = "CreateBuild"
 
-// CreateBuildRequest generates a "aws/request.Request" representing the
+// CreateBuildRequest generates a "aws.Request" representing the
 // client's request for the CreateBuild operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -291,8 +290,8 @@ const opCreateBuild = "CreateBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuild
-func (c *GameLift) CreateBuildRequest(input *CreateBuildInput) (req *request.Request, output *CreateBuildOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreateBuildRequest(input *CreateBuildInput) (req *aws.Request, output *CreateBuildOutput) {
+	op := &aws.Operation{
 		Name:       opCreateBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -380,7 +379,7 @@ func (c *GameLift) CreateBuild(input *CreateBuildInput) (*CreateBuildOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreateBuildWithContext(ctx aws.Context, input *CreateBuildInput, opts ...request.Option) (*CreateBuildOutput, error) {
+func (c *GameLift) CreateBuildWithContext(ctx aws.Context, input *CreateBuildInput, opts ...aws.Option) (*CreateBuildOutput, error) {
 	req, out := c.CreateBuildRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -389,7 +388,7 @@ func (c *GameLift) CreateBuildWithContext(ctx aws.Context, input *CreateBuildInp
 
 const opCreateFleet = "CreateFleet"
 
-// CreateFleetRequest generates a "aws/request.Request" representing the
+// CreateFleetRequest generates a "aws.Request" representing the
 // client's request for the CreateFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -413,8 +412,8 @@ const opCreateFleet = "CreateFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet
-func (c *GameLift) CreateFleetRequest(input *CreateFleetInput) (req *request.Request, output *CreateFleetOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreateFleetRequest(input *CreateFleetInput) (req *aws.Request, output *CreateFleetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -574,7 +573,7 @@ func (c *GameLift) CreateFleet(input *CreateFleetInput) (*CreateFleetOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreateFleetWithContext(ctx aws.Context, input *CreateFleetInput, opts ...request.Option) (*CreateFleetOutput, error) {
+func (c *GameLift) CreateFleetWithContext(ctx aws.Context, input *CreateFleetInput, opts ...aws.Option) (*CreateFleetOutput, error) {
 	req, out := c.CreateFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -583,7 +582,7 @@ func (c *GameLift) CreateFleetWithContext(ctx aws.Context, input *CreateFleetInp
 
 const opCreateGameSession = "CreateGameSession"
 
-// CreateGameSessionRequest generates a "aws/request.Request" representing the
+// CreateGameSessionRequest generates a "aws.Request" representing the
 // client's request for the CreateGameSession operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -607,8 +606,8 @@ const opCreateGameSession = "CreateGameSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSession
-func (c *GameLift) CreateGameSessionRequest(input *CreateGameSessionInput) (req *request.Request, output *CreateGameSessionOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreateGameSessionRequest(input *CreateGameSessionInput) (req *aws.Request, output *CreateGameSessionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateGameSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -746,7 +745,7 @@ func (c *GameLift) CreateGameSession(input *CreateGameSessionInput) (*CreateGame
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreateGameSessionWithContext(ctx aws.Context, input *CreateGameSessionInput, opts ...request.Option) (*CreateGameSessionOutput, error) {
+func (c *GameLift) CreateGameSessionWithContext(ctx aws.Context, input *CreateGameSessionInput, opts ...aws.Option) (*CreateGameSessionOutput, error) {
 	req, out := c.CreateGameSessionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -755,7 +754,7 @@ func (c *GameLift) CreateGameSessionWithContext(ctx aws.Context, input *CreateGa
 
 const opCreateGameSessionQueue = "CreateGameSessionQueue"
 
-// CreateGameSessionQueueRequest generates a "aws/request.Request" representing the
+// CreateGameSessionQueueRequest generates a "aws.Request" representing the
 // client's request for the CreateGameSessionQueue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -779,8 +778,8 @@ const opCreateGameSessionQueue = "CreateGameSessionQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionQueue
-func (c *GameLift) CreateGameSessionQueueRequest(input *CreateGameSessionQueueInput) (req *request.Request, output *CreateGameSessionQueueOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreateGameSessionQueueRequest(input *CreateGameSessionQueueInput) (req *aws.Request, output *CreateGameSessionQueueOutput) {
+	op := &aws.Operation{
 		Name:       opCreateGameSessionQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -877,7 +876,7 @@ func (c *GameLift) CreateGameSessionQueue(input *CreateGameSessionQueueInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreateGameSessionQueueWithContext(ctx aws.Context, input *CreateGameSessionQueueInput, opts ...request.Option) (*CreateGameSessionQueueOutput, error) {
+func (c *GameLift) CreateGameSessionQueueWithContext(ctx aws.Context, input *CreateGameSessionQueueInput, opts ...aws.Option) (*CreateGameSessionQueueOutput, error) {
 	req, out := c.CreateGameSessionQueueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -886,7 +885,7 @@ func (c *GameLift) CreateGameSessionQueueWithContext(ctx aws.Context, input *Cre
 
 const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
 
-// CreateMatchmakingConfigurationRequest generates a "aws/request.Request" representing the
+// CreateMatchmakingConfigurationRequest generates a "aws.Request" representing the
 // client's request for the CreateMatchmakingConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -910,8 +909,8 @@ const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingConfiguration
-func (c *GameLift) CreateMatchmakingConfigurationRequest(input *CreateMatchmakingConfigurationInput) (req *request.Request, output *CreateMatchmakingConfigurationOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreateMatchmakingConfigurationRequest(input *CreateMatchmakingConfigurationInput) (req *aws.Request, output *CreateMatchmakingConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateMatchmakingConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1016,7 +1015,7 @@ func (c *GameLift) CreateMatchmakingConfiguration(input *CreateMatchmakingConfig
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreateMatchmakingConfigurationWithContext(ctx aws.Context, input *CreateMatchmakingConfigurationInput, opts ...request.Option) (*CreateMatchmakingConfigurationOutput, error) {
+func (c *GameLift) CreateMatchmakingConfigurationWithContext(ctx aws.Context, input *CreateMatchmakingConfigurationInput, opts ...aws.Option) (*CreateMatchmakingConfigurationOutput, error) {
 	req, out := c.CreateMatchmakingConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1025,7 +1024,7 @@ func (c *GameLift) CreateMatchmakingConfigurationWithContext(ctx aws.Context, in
 
 const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
 
-// CreateMatchmakingRuleSetRequest generates a "aws/request.Request" representing the
+// CreateMatchmakingRuleSetRequest generates a "aws.Request" representing the
 // client's request for the CreateMatchmakingRuleSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1049,8 +1048,8 @@ const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateMatchmakingRuleSet
-func (c *GameLift) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleSetInput) (req *request.Request, output *CreateMatchmakingRuleSetOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleSetInput) (req *aws.Request, output *CreateMatchmakingRuleSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateMatchmakingRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1140,7 +1139,7 @@ func (c *GameLift) CreateMatchmakingRuleSet(input *CreateMatchmakingRuleSetInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreateMatchmakingRuleSetWithContext(ctx aws.Context, input *CreateMatchmakingRuleSetInput, opts ...request.Option) (*CreateMatchmakingRuleSetOutput, error) {
+func (c *GameLift) CreateMatchmakingRuleSetWithContext(ctx aws.Context, input *CreateMatchmakingRuleSetInput, opts ...aws.Option) (*CreateMatchmakingRuleSetOutput, error) {
 	req, out := c.CreateMatchmakingRuleSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1149,7 +1148,7 @@ func (c *GameLift) CreateMatchmakingRuleSetWithContext(ctx aws.Context, input *C
 
 const opCreatePlayerSession = "CreatePlayerSession"
 
-// CreatePlayerSessionRequest generates a "aws/request.Request" representing the
+// CreatePlayerSessionRequest generates a "aws.Request" representing the
 // client's request for the CreatePlayerSession operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1173,8 +1172,8 @@ const opCreatePlayerSession = "CreatePlayerSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSession
-func (c *GameLift) CreatePlayerSessionRequest(input *CreatePlayerSessionInput) (req *request.Request, output *CreatePlayerSessionOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreatePlayerSessionRequest(input *CreatePlayerSessionInput) (req *aws.Request, output *CreatePlayerSessionOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePlayerSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1273,7 +1272,7 @@ func (c *GameLift) CreatePlayerSession(input *CreatePlayerSessionInput) (*Create
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreatePlayerSessionWithContext(ctx aws.Context, input *CreatePlayerSessionInput, opts ...request.Option) (*CreatePlayerSessionOutput, error) {
+func (c *GameLift) CreatePlayerSessionWithContext(ctx aws.Context, input *CreatePlayerSessionInput, opts ...aws.Option) (*CreatePlayerSessionOutput, error) {
 	req, out := c.CreatePlayerSessionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1282,7 +1281,7 @@ func (c *GameLift) CreatePlayerSessionWithContext(ctx aws.Context, input *Create
 
 const opCreatePlayerSessions = "CreatePlayerSessions"
 
-// CreatePlayerSessionsRequest generates a "aws/request.Request" representing the
+// CreatePlayerSessionsRequest generates a "aws.Request" representing the
 // client's request for the CreatePlayerSessions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1306,8 +1305,8 @@ const opCreatePlayerSessions = "CreatePlayerSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessions
-func (c *GameLift) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput) (req *request.Request, output *CreatePlayerSessionsOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput) (req *aws.Request, output *CreatePlayerSessionsOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePlayerSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1407,7 +1406,7 @@ func (c *GameLift) CreatePlayerSessions(input *CreatePlayerSessionsInput) (*Crea
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreatePlayerSessionsWithContext(ctx aws.Context, input *CreatePlayerSessionsInput, opts ...request.Option) (*CreatePlayerSessionsOutput, error) {
+func (c *GameLift) CreatePlayerSessionsWithContext(ctx aws.Context, input *CreatePlayerSessionsInput, opts ...aws.Option) (*CreatePlayerSessionsOutput, error) {
 	req, out := c.CreatePlayerSessionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1416,7 +1415,7 @@ func (c *GameLift) CreatePlayerSessionsWithContext(ctx aws.Context, input *Creat
 
 const opCreateVpcPeeringAuthorization = "CreateVpcPeeringAuthorization"
 
-// CreateVpcPeeringAuthorizationRequest generates a "aws/request.Request" representing the
+// CreateVpcPeeringAuthorizationRequest generates a "aws.Request" representing the
 // client's request for the CreateVpcPeeringAuthorization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1440,8 +1439,8 @@ const opCreateVpcPeeringAuthorization = "CreateVpcPeeringAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringAuthorization
-func (c *GameLift) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringAuthorizationInput) (req *request.Request, output *CreateVpcPeeringAuthorizationOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringAuthorizationInput) (req *aws.Request, output *CreateVpcPeeringAuthorizationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateVpcPeeringAuthorization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1540,7 +1539,7 @@ func (c *GameLift) CreateVpcPeeringAuthorization(input *CreateVpcPeeringAuthoriz
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreateVpcPeeringAuthorizationWithContext(ctx aws.Context, input *CreateVpcPeeringAuthorizationInput, opts ...request.Option) (*CreateVpcPeeringAuthorizationOutput, error) {
+func (c *GameLift) CreateVpcPeeringAuthorizationWithContext(ctx aws.Context, input *CreateVpcPeeringAuthorizationInput, opts ...aws.Option) (*CreateVpcPeeringAuthorizationOutput, error) {
 	req, out := c.CreateVpcPeeringAuthorizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1549,7 +1548,7 @@ func (c *GameLift) CreateVpcPeeringAuthorizationWithContext(ctx aws.Context, inp
 
 const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 
-// CreateVpcPeeringConnectionRequest generates a "aws/request.Request" representing the
+// CreateVpcPeeringConnectionRequest generates a "aws.Request" representing the
 // client's request for the CreateVpcPeeringConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1573,8 +1572,8 @@ const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateVpcPeeringConnection
-func (c *GameLift) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnectionInput) (req *request.Request, output *CreateVpcPeeringConnectionOutput) {
-	op := &request.Operation{
+func (c *GameLift) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnectionInput) (req *aws.Request, output *CreateVpcPeeringConnectionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateVpcPeeringConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1668,7 +1667,7 @@ func (c *GameLift) CreateVpcPeeringConnection(input *CreateVpcPeeringConnectionI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) CreateVpcPeeringConnectionWithContext(ctx aws.Context, input *CreateVpcPeeringConnectionInput, opts ...request.Option) (*CreateVpcPeeringConnectionOutput, error) {
+func (c *GameLift) CreateVpcPeeringConnectionWithContext(ctx aws.Context, input *CreateVpcPeeringConnectionInput, opts ...aws.Option) (*CreateVpcPeeringConnectionOutput, error) {
 	req, out := c.CreateVpcPeeringConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1677,7 +1676,7 @@ func (c *GameLift) CreateVpcPeeringConnectionWithContext(ctx aws.Context, input 
 
 const opDeleteAlias = "DeleteAlias"
 
-// DeleteAliasRequest generates a "aws/request.Request" representing the
+// DeleteAliasRequest generates a "aws.Request" representing the
 // client's request for the DeleteAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1701,8 +1700,8 @@ const opDeleteAlias = "DeleteAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteAlias
-func (c *GameLift) DeleteAliasRequest(input *DeleteAliasInput) (req *request.Request, output *DeleteAliasOutput) {
-	op := &request.Operation{
+func (c *GameLift) DeleteAliasRequest(input *DeleteAliasInput) (req *aws.Request, output *DeleteAliasOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1778,7 +1777,7 @@ func (c *GameLift) DeleteAlias(input *DeleteAliasInput) (*DeleteAliasOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, opts ...request.Option) (*DeleteAliasOutput, error) {
+func (c *GameLift) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, opts ...aws.Option) (*DeleteAliasOutput, error) {
 	req, out := c.DeleteAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1787,7 +1786,7 @@ func (c *GameLift) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInp
 
 const opDeleteBuild = "DeleteBuild"
 
-// DeleteBuildRequest generates a "aws/request.Request" representing the
+// DeleteBuildRequest generates a "aws.Request" representing the
 // client's request for the DeleteBuild operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1811,8 +1810,8 @@ const opDeleteBuild = "DeleteBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteBuild
-func (c *GameLift) DeleteBuildRequest(input *DeleteBuildInput) (req *request.Request, output *DeleteBuildOutput) {
-	op := &request.Operation{
+func (c *GameLift) DeleteBuildRequest(input *DeleteBuildInput) (req *aws.Request, output *DeleteBuildOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1889,7 +1888,7 @@ func (c *GameLift) DeleteBuild(input *DeleteBuildInput) (*DeleteBuildOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DeleteBuildWithContext(ctx aws.Context, input *DeleteBuildInput, opts ...request.Option) (*DeleteBuildOutput, error) {
+func (c *GameLift) DeleteBuildWithContext(ctx aws.Context, input *DeleteBuildInput, opts ...aws.Option) (*DeleteBuildOutput, error) {
 	req, out := c.DeleteBuildRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1898,7 +1897,7 @@ func (c *GameLift) DeleteBuildWithContext(ctx aws.Context, input *DeleteBuildInp
 
 const opDeleteFleet = "DeleteFleet"
 
-// DeleteFleetRequest generates a "aws/request.Request" representing the
+// DeleteFleetRequest generates a "aws.Request" representing the
 // client's request for the DeleteFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1922,8 +1921,8 @@ const opDeleteFleet = "DeleteFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleet
-func (c *GameLift) DeleteFleetRequest(input *DeleteFleetInput) (req *request.Request, output *DeleteFleetOutput) {
-	op := &request.Operation{
+func (c *GameLift) DeleteFleetRequest(input *DeleteFleetInput) (req *aws.Request, output *DeleteFleetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2036,7 +2035,7 @@ func (c *GameLift) DeleteFleet(input *DeleteFleetInput) (*DeleteFleetOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DeleteFleetWithContext(ctx aws.Context, input *DeleteFleetInput, opts ...request.Option) (*DeleteFleetOutput, error) {
+func (c *GameLift) DeleteFleetWithContext(ctx aws.Context, input *DeleteFleetInput, opts ...aws.Option) (*DeleteFleetOutput, error) {
 	req, out := c.DeleteFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2045,7 +2044,7 @@ func (c *GameLift) DeleteFleetWithContext(ctx aws.Context, input *DeleteFleetInp
 
 const opDeleteGameSessionQueue = "DeleteGameSessionQueue"
 
-// DeleteGameSessionQueueRequest generates a "aws/request.Request" representing the
+// DeleteGameSessionQueueRequest generates a "aws.Request" representing the
 // client's request for the DeleteGameSessionQueue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2069,8 +2068,8 @@ const opDeleteGameSessionQueue = "DeleteGameSessionQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteGameSessionQueue
-func (c *GameLift) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueInput) (req *request.Request, output *DeleteGameSessionQueueOutput) {
-	op := &request.Operation{
+func (c *GameLift) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueInput) (req *aws.Request, output *DeleteGameSessionQueueOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteGameSessionQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2140,7 +2139,7 @@ func (c *GameLift) DeleteGameSessionQueue(input *DeleteGameSessionQueueInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DeleteGameSessionQueueWithContext(ctx aws.Context, input *DeleteGameSessionQueueInput, opts ...request.Option) (*DeleteGameSessionQueueOutput, error) {
+func (c *GameLift) DeleteGameSessionQueueWithContext(ctx aws.Context, input *DeleteGameSessionQueueInput, opts ...aws.Option) (*DeleteGameSessionQueueOutput, error) {
 	req, out := c.DeleteGameSessionQueueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2149,7 +2148,7 @@ func (c *GameLift) DeleteGameSessionQueueWithContext(ctx aws.Context, input *Del
 
 const opDeleteMatchmakingConfiguration = "DeleteMatchmakingConfiguration"
 
-// DeleteMatchmakingConfigurationRequest generates a "aws/request.Request" representing the
+// DeleteMatchmakingConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DeleteMatchmakingConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2173,8 +2172,8 @@ const opDeleteMatchmakingConfiguration = "DeleteMatchmakingConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteMatchmakingConfiguration
-func (c *GameLift) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakingConfigurationInput) (req *request.Request, output *DeleteMatchmakingConfigurationOutput) {
-	op := &request.Operation{
+func (c *GameLift) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakingConfigurationInput) (req *aws.Request, output *DeleteMatchmakingConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteMatchmakingConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2250,7 +2249,7 @@ func (c *GameLift) DeleteMatchmakingConfiguration(input *DeleteMatchmakingConfig
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DeleteMatchmakingConfigurationWithContext(ctx aws.Context, input *DeleteMatchmakingConfigurationInput, opts ...request.Option) (*DeleteMatchmakingConfigurationOutput, error) {
+func (c *GameLift) DeleteMatchmakingConfigurationWithContext(ctx aws.Context, input *DeleteMatchmakingConfigurationInput, opts ...aws.Option) (*DeleteMatchmakingConfigurationOutput, error) {
 	req, out := c.DeleteMatchmakingConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2259,7 +2258,7 @@ func (c *GameLift) DeleteMatchmakingConfigurationWithContext(ctx aws.Context, in
 
 const opDeleteScalingPolicy = "DeleteScalingPolicy"
 
-// DeleteScalingPolicyRequest generates a "aws/request.Request" representing the
+// DeleteScalingPolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteScalingPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2283,8 +2282,8 @@ const opDeleteScalingPolicy = "DeleteScalingPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScalingPolicy
-func (c *GameLift) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) (req *request.Request, output *DeleteScalingPolicyOutput) {
-	op := &request.Operation{
+func (c *GameLift) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) (req *aws.Request, output *DeleteScalingPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteScalingPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2390,7 +2389,7 @@ func (c *GameLift) DeleteScalingPolicy(input *DeleteScalingPolicyInput) (*Delete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DeleteScalingPolicyWithContext(ctx aws.Context, input *DeleteScalingPolicyInput, opts ...request.Option) (*DeleteScalingPolicyOutput, error) {
+func (c *GameLift) DeleteScalingPolicyWithContext(ctx aws.Context, input *DeleteScalingPolicyInput, opts ...aws.Option) (*DeleteScalingPolicyOutput, error) {
 	req, out := c.DeleteScalingPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2399,7 +2398,7 @@ func (c *GameLift) DeleteScalingPolicyWithContext(ctx aws.Context, input *Delete
 
 const opDeleteVpcPeeringAuthorization = "DeleteVpcPeeringAuthorization"
 
-// DeleteVpcPeeringAuthorizationRequest generates a "aws/request.Request" representing the
+// DeleteVpcPeeringAuthorizationRequest generates a "aws.Request" representing the
 // client's request for the DeleteVpcPeeringAuthorization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2423,8 +2422,8 @@ const opDeleteVpcPeeringAuthorization = "DeleteVpcPeeringAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringAuthorization
-func (c *GameLift) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringAuthorizationInput) (req *request.Request, output *DeleteVpcPeeringAuthorizationOutput) {
-	op := &request.Operation{
+func (c *GameLift) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringAuthorizationInput) (req *aws.Request, output *DeleteVpcPeeringAuthorizationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteVpcPeeringAuthorization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2498,7 +2497,7 @@ func (c *GameLift) DeleteVpcPeeringAuthorization(input *DeleteVpcPeeringAuthoriz
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DeleteVpcPeeringAuthorizationWithContext(ctx aws.Context, input *DeleteVpcPeeringAuthorizationInput, opts ...request.Option) (*DeleteVpcPeeringAuthorizationOutput, error) {
+func (c *GameLift) DeleteVpcPeeringAuthorizationWithContext(ctx aws.Context, input *DeleteVpcPeeringAuthorizationInput, opts ...aws.Option) (*DeleteVpcPeeringAuthorizationOutput, error) {
 	req, out := c.DeleteVpcPeeringAuthorizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2507,7 +2506,7 @@ func (c *GameLift) DeleteVpcPeeringAuthorizationWithContext(ctx aws.Context, inp
 
 const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
 
-// DeleteVpcPeeringConnectionRequest generates a "aws/request.Request" representing the
+// DeleteVpcPeeringConnectionRequest generates a "aws.Request" representing the
 // client's request for the DeleteVpcPeeringConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2531,8 +2530,8 @@ const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteVpcPeeringConnection
-func (c *GameLift) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnectionInput) (req *request.Request, output *DeleteVpcPeeringConnectionOutput) {
-	op := &request.Operation{
+func (c *GameLift) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnectionInput) (req *aws.Request, output *DeleteVpcPeeringConnectionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteVpcPeeringConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2612,7 +2611,7 @@ func (c *GameLift) DeleteVpcPeeringConnection(input *DeleteVpcPeeringConnectionI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DeleteVpcPeeringConnectionWithContext(ctx aws.Context, input *DeleteVpcPeeringConnectionInput, opts ...request.Option) (*DeleteVpcPeeringConnectionOutput, error) {
+func (c *GameLift) DeleteVpcPeeringConnectionWithContext(ctx aws.Context, input *DeleteVpcPeeringConnectionInput, opts ...aws.Option) (*DeleteVpcPeeringConnectionOutput, error) {
 	req, out := c.DeleteVpcPeeringConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2621,7 +2620,7 @@ func (c *GameLift) DeleteVpcPeeringConnectionWithContext(ctx aws.Context, input 
 
 const opDescribeAlias = "DescribeAlias"
 
-// DescribeAliasRequest generates a "aws/request.Request" representing the
+// DescribeAliasRequest generates a "aws.Request" representing the
 // client's request for the DescribeAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2645,8 +2644,8 @@ const opDescribeAlias = "DescribeAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeAlias
-func (c *GameLift) DescribeAliasRequest(input *DescribeAliasInput) (req *request.Request, output *DescribeAliasOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeAliasRequest(input *DescribeAliasInput) (req *aws.Request, output *DescribeAliasOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2722,7 +2721,7 @@ func (c *GameLift) DescribeAlias(input *DescribeAliasInput) (*DescribeAliasOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeAliasWithContext(ctx aws.Context, input *DescribeAliasInput, opts ...request.Option) (*DescribeAliasOutput, error) {
+func (c *GameLift) DescribeAliasWithContext(ctx aws.Context, input *DescribeAliasInput, opts ...aws.Option) (*DescribeAliasOutput, error) {
 	req, out := c.DescribeAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2731,7 +2730,7 @@ func (c *GameLift) DescribeAliasWithContext(ctx aws.Context, input *DescribeAlia
 
 const opDescribeBuild = "DescribeBuild"
 
-// DescribeBuildRequest generates a "aws/request.Request" representing the
+// DescribeBuildRequest generates a "aws.Request" representing the
 // client's request for the DescribeBuild operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2755,8 +2754,8 @@ const opDescribeBuild = "DescribeBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeBuild
-func (c *GameLift) DescribeBuildRequest(input *DescribeBuildInput) (req *request.Request, output *DescribeBuildOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeBuildRequest(input *DescribeBuildInput) (req *aws.Request, output *DescribeBuildOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2827,7 +2826,7 @@ func (c *GameLift) DescribeBuild(input *DescribeBuildInput) (*DescribeBuildOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeBuildWithContext(ctx aws.Context, input *DescribeBuildInput, opts ...request.Option) (*DescribeBuildOutput, error) {
+func (c *GameLift) DescribeBuildWithContext(ctx aws.Context, input *DescribeBuildInput, opts ...aws.Option) (*DescribeBuildOutput, error) {
 	req, out := c.DescribeBuildRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2836,7 +2835,7 @@ func (c *GameLift) DescribeBuildWithContext(ctx aws.Context, input *DescribeBuil
 
 const opDescribeEC2InstanceLimits = "DescribeEC2InstanceLimits"
 
-// DescribeEC2InstanceLimitsRequest generates a "aws/request.Request" representing the
+// DescribeEC2InstanceLimitsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEC2InstanceLimits operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2860,8 +2859,8 @@ const opDescribeEC2InstanceLimits = "DescribeEC2InstanceLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimits
-func (c *GameLift) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLimitsInput) (req *request.Request, output *DescribeEC2InstanceLimitsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLimitsInput) (req *aws.Request, output *DescribeEC2InstanceLimitsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEC2InstanceLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2967,7 +2966,7 @@ func (c *GameLift) DescribeEC2InstanceLimits(input *DescribeEC2InstanceLimitsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeEC2InstanceLimitsWithContext(ctx aws.Context, input *DescribeEC2InstanceLimitsInput, opts ...request.Option) (*DescribeEC2InstanceLimitsOutput, error) {
+func (c *GameLift) DescribeEC2InstanceLimitsWithContext(ctx aws.Context, input *DescribeEC2InstanceLimitsInput, opts ...aws.Option) (*DescribeEC2InstanceLimitsOutput, error) {
 	req, out := c.DescribeEC2InstanceLimitsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2976,7 +2975,7 @@ func (c *GameLift) DescribeEC2InstanceLimitsWithContext(ctx aws.Context, input *
 
 const opDescribeFleetAttributes = "DescribeFleetAttributes"
 
-// DescribeFleetAttributesRequest generates a "aws/request.Request" representing the
+// DescribeFleetAttributesRequest generates a "aws.Request" representing the
 // client's request for the DescribeFleetAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3000,8 +2999,8 @@ const opDescribeFleetAttributes = "DescribeFleetAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes
-func (c *GameLift) DescribeFleetAttributesRequest(input *DescribeFleetAttributesInput) (req *request.Request, output *DescribeFleetAttributesOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeFleetAttributesRequest(input *DescribeFleetAttributesInput) (req *aws.Request, output *DescribeFleetAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeFleetAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3113,7 +3112,7 @@ func (c *GameLift) DescribeFleetAttributes(input *DescribeFleetAttributesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeFleetAttributesWithContext(ctx aws.Context, input *DescribeFleetAttributesInput, opts ...request.Option) (*DescribeFleetAttributesOutput, error) {
+func (c *GameLift) DescribeFleetAttributesWithContext(ctx aws.Context, input *DescribeFleetAttributesInput, opts ...aws.Option) (*DescribeFleetAttributesOutput, error) {
 	req, out := c.DescribeFleetAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3122,7 +3121,7 @@ func (c *GameLift) DescribeFleetAttributesWithContext(ctx aws.Context, input *De
 
 const opDescribeFleetCapacity = "DescribeFleetCapacity"
 
-// DescribeFleetCapacityRequest generates a "aws/request.Request" representing the
+// DescribeFleetCapacityRequest generates a "aws.Request" representing the
 // client's request for the DescribeFleetCapacity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3146,8 +3145,8 @@ const opDescribeFleetCapacity = "DescribeFleetCapacity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacity
-func (c *GameLift) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInput) (req *request.Request, output *DescribeFleetCapacityOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInput) (req *aws.Request, output *DescribeFleetCapacityOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeFleetCapacity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3260,7 +3259,7 @@ func (c *GameLift) DescribeFleetCapacity(input *DescribeFleetCapacityInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeFleetCapacityWithContext(ctx aws.Context, input *DescribeFleetCapacityInput, opts ...request.Option) (*DescribeFleetCapacityOutput, error) {
+func (c *GameLift) DescribeFleetCapacityWithContext(ctx aws.Context, input *DescribeFleetCapacityInput, opts ...aws.Option) (*DescribeFleetCapacityOutput, error) {
 	req, out := c.DescribeFleetCapacityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3269,7 +3268,7 @@ func (c *GameLift) DescribeFleetCapacityWithContext(ctx aws.Context, input *Desc
 
 const opDescribeFleetEvents = "DescribeFleetEvents"
 
-// DescribeFleetEventsRequest generates a "aws/request.Request" representing the
+// DescribeFleetEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeFleetEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3293,8 +3292,8 @@ const opDescribeFleetEvents = "DescribeFleetEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEvents
-func (c *GameLift) DescribeFleetEventsRequest(input *DescribeFleetEventsInput) (req *request.Request, output *DescribeFleetEventsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeFleetEventsRequest(input *DescribeFleetEventsInput) (req *aws.Request, output *DescribeFleetEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeFleetEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3399,7 +3398,7 @@ func (c *GameLift) DescribeFleetEvents(input *DescribeFleetEventsInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeFleetEventsWithContext(ctx aws.Context, input *DescribeFleetEventsInput, opts ...request.Option) (*DescribeFleetEventsOutput, error) {
+func (c *GameLift) DescribeFleetEventsWithContext(ctx aws.Context, input *DescribeFleetEventsInput, opts ...aws.Option) (*DescribeFleetEventsOutput, error) {
 	req, out := c.DescribeFleetEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3408,7 +3407,7 @@ func (c *GameLift) DescribeFleetEventsWithContext(ctx aws.Context, input *Descri
 
 const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
 
-// DescribeFleetPortSettingsRequest generates a "aws/request.Request" representing the
+// DescribeFleetPortSettingsRequest generates a "aws.Request" representing the
 // client's request for the DescribeFleetPortSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3432,8 +3431,8 @@ const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetPortSettings
-func (c *GameLift) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSettingsInput) (req *request.Request, output *DescribeFleetPortSettingsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSettingsInput) (req *aws.Request, output *DescribeFleetPortSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeFleetPortSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3540,7 +3539,7 @@ func (c *GameLift) DescribeFleetPortSettings(input *DescribeFleetPortSettingsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeFleetPortSettingsWithContext(ctx aws.Context, input *DescribeFleetPortSettingsInput, opts ...request.Option) (*DescribeFleetPortSettingsOutput, error) {
+func (c *GameLift) DescribeFleetPortSettingsWithContext(ctx aws.Context, input *DescribeFleetPortSettingsInput, opts ...aws.Option) (*DescribeFleetPortSettingsOutput, error) {
 	req, out := c.DescribeFleetPortSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3549,7 +3548,7 @@ func (c *GameLift) DescribeFleetPortSettingsWithContext(ctx aws.Context, input *
 
 const opDescribeFleetUtilization = "DescribeFleetUtilization"
 
-// DescribeFleetUtilizationRequest generates a "aws/request.Request" representing the
+// DescribeFleetUtilizationRequest generates a "aws.Request" representing the
 // client's request for the DescribeFleetUtilization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3573,8 +3572,8 @@ const opDescribeFleetUtilization = "DescribeFleetUtilization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetUtilization
-func (c *GameLift) DescribeFleetUtilizationRequest(input *DescribeFleetUtilizationInput) (req *request.Request, output *DescribeFleetUtilizationOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeFleetUtilizationRequest(input *DescribeFleetUtilizationInput) (req *aws.Request, output *DescribeFleetUtilizationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeFleetUtilization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3685,7 +3684,7 @@ func (c *GameLift) DescribeFleetUtilization(input *DescribeFleetUtilizationInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeFleetUtilizationWithContext(ctx aws.Context, input *DescribeFleetUtilizationInput, opts ...request.Option) (*DescribeFleetUtilizationOutput, error) {
+func (c *GameLift) DescribeFleetUtilizationWithContext(ctx aws.Context, input *DescribeFleetUtilizationInput, opts ...aws.Option) (*DescribeFleetUtilizationOutput, error) {
 	req, out := c.DescribeFleetUtilizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3694,7 +3693,7 @@ func (c *GameLift) DescribeFleetUtilizationWithContext(ctx aws.Context, input *D
 
 const opDescribeGameSessionDetails = "DescribeGameSessionDetails"
 
-// DescribeGameSessionDetailsRequest generates a "aws/request.Request" representing the
+// DescribeGameSessionDetailsRequest generates a "aws.Request" representing the
 // client's request for the DescribeGameSessionDetails operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3718,8 +3717,8 @@ const opDescribeGameSessionDetails = "DescribeGameSessionDetails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetails
-func (c *GameLift) DescribeGameSessionDetailsRequest(input *DescribeGameSessionDetailsInput) (req *request.Request, output *DescribeGameSessionDetailsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeGameSessionDetailsRequest(input *DescribeGameSessionDetailsInput) (req *aws.Request, output *DescribeGameSessionDetailsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeGameSessionDetails,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3816,7 +3815,7 @@ func (c *GameLift) DescribeGameSessionDetails(input *DescribeGameSessionDetailsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeGameSessionDetailsWithContext(ctx aws.Context, input *DescribeGameSessionDetailsInput, opts ...request.Option) (*DescribeGameSessionDetailsOutput, error) {
+func (c *GameLift) DescribeGameSessionDetailsWithContext(ctx aws.Context, input *DescribeGameSessionDetailsInput, opts ...aws.Option) (*DescribeGameSessionDetailsOutput, error) {
 	req, out := c.DescribeGameSessionDetailsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3825,7 +3824,7 @@ func (c *GameLift) DescribeGameSessionDetailsWithContext(ctx aws.Context, input 
 
 const opDescribeGameSessionPlacement = "DescribeGameSessionPlacement"
 
-// DescribeGameSessionPlacementRequest generates a "aws/request.Request" representing the
+// DescribeGameSessionPlacementRequest generates a "aws.Request" representing the
 // client's request for the DescribeGameSessionPlacement operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3849,8 +3848,8 @@ const opDescribeGameSessionPlacement = "DescribeGameSessionPlacement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionPlacement
-func (c *GameLift) DescribeGameSessionPlacementRequest(input *DescribeGameSessionPlacementInput) (req *request.Request, output *DescribeGameSessionPlacementOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeGameSessionPlacementRequest(input *DescribeGameSessionPlacementInput) (req *aws.Request, output *DescribeGameSessionPlacementOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeGameSessionPlacement,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3932,7 +3931,7 @@ func (c *GameLift) DescribeGameSessionPlacement(input *DescribeGameSessionPlacem
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeGameSessionPlacementWithContext(ctx aws.Context, input *DescribeGameSessionPlacementInput, opts ...request.Option) (*DescribeGameSessionPlacementOutput, error) {
+func (c *GameLift) DescribeGameSessionPlacementWithContext(ctx aws.Context, input *DescribeGameSessionPlacementInput, opts ...aws.Option) (*DescribeGameSessionPlacementOutput, error) {
 	req, out := c.DescribeGameSessionPlacementRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3941,7 +3940,7 @@ func (c *GameLift) DescribeGameSessionPlacementWithContext(ctx aws.Context, inpu
 
 const opDescribeGameSessionQueues = "DescribeGameSessionQueues"
 
-// DescribeGameSessionQueuesRequest generates a "aws/request.Request" representing the
+// DescribeGameSessionQueuesRequest generates a "aws.Request" representing the
 // client's request for the DescribeGameSessionQueues operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3965,8 +3964,8 @@ const opDescribeGameSessionQueues = "DescribeGameSessionQueues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionQueues
-func (c *GameLift) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQueuesInput) (req *request.Request, output *DescribeGameSessionQueuesOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQueuesInput) (req *aws.Request, output *DescribeGameSessionQueuesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeGameSessionQueues,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4038,7 +4037,7 @@ func (c *GameLift) DescribeGameSessionQueues(input *DescribeGameSessionQueuesInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeGameSessionQueuesWithContext(ctx aws.Context, input *DescribeGameSessionQueuesInput, opts ...request.Option) (*DescribeGameSessionQueuesOutput, error) {
+func (c *GameLift) DescribeGameSessionQueuesWithContext(ctx aws.Context, input *DescribeGameSessionQueuesInput, opts ...aws.Option) (*DescribeGameSessionQueuesOutput, error) {
 	req, out := c.DescribeGameSessionQueuesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4047,7 +4046,7 @@ func (c *GameLift) DescribeGameSessionQueuesWithContext(ctx aws.Context, input *
 
 const opDescribeGameSessions = "DescribeGameSessions"
 
-// DescribeGameSessionsRequest generates a "aws/request.Request" representing the
+// DescribeGameSessionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeGameSessions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4071,8 +4070,8 @@ const opDescribeGameSessions = "DescribeGameSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessions
-func (c *GameLift) DescribeGameSessionsRequest(input *DescribeGameSessionsInput) (req *request.Request, output *DescribeGameSessionsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeGameSessionsRequest(input *DescribeGameSessionsInput) (req *aws.Request, output *DescribeGameSessionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeGameSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4170,7 +4169,7 @@ func (c *GameLift) DescribeGameSessions(input *DescribeGameSessionsInput) (*Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeGameSessionsWithContext(ctx aws.Context, input *DescribeGameSessionsInput, opts ...request.Option) (*DescribeGameSessionsOutput, error) {
+func (c *GameLift) DescribeGameSessionsWithContext(ctx aws.Context, input *DescribeGameSessionsInput, opts ...aws.Option) (*DescribeGameSessionsOutput, error) {
 	req, out := c.DescribeGameSessionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4179,7 +4178,7 @@ func (c *GameLift) DescribeGameSessionsWithContext(ctx aws.Context, input *Descr
 
 const opDescribeInstances = "DescribeInstances"
 
-// DescribeInstancesRequest generates a "aws/request.Request" representing the
+// DescribeInstancesRequest generates a "aws.Request" representing the
 // client's request for the DescribeInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4203,8 +4202,8 @@ const opDescribeInstances = "DescribeInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeInstances
-func (c *GameLift) DescribeInstancesRequest(input *DescribeInstancesInput) (req *request.Request, output *DescribeInstancesOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeInstancesRequest(input *DescribeInstancesInput) (req *aws.Request, output *DescribeInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4269,7 +4268,7 @@ func (c *GameLift) DescribeInstances(input *DescribeInstancesInput) (*DescribeIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeInstancesWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...request.Option) (*DescribeInstancesOutput, error) {
+func (c *GameLift) DescribeInstancesWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.Option) (*DescribeInstancesOutput, error) {
 	req, out := c.DescribeInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4278,7 +4277,7 @@ func (c *GameLift) DescribeInstancesWithContext(ctx aws.Context, input *Describe
 
 const opDescribeMatchmaking = "DescribeMatchmaking"
 
-// DescribeMatchmakingRequest generates a "aws/request.Request" representing the
+// DescribeMatchmakingRequest generates a "aws.Request" representing the
 // client's request for the DescribeMatchmaking operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4302,8 +4301,8 @@ const opDescribeMatchmaking = "DescribeMatchmaking"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmaking
-func (c *GameLift) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) (req *request.Request, output *DescribeMatchmakingOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) (req *aws.Request, output *DescribeMatchmakingOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMatchmaking,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4379,7 +4378,7 @@ func (c *GameLift) DescribeMatchmaking(input *DescribeMatchmakingInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeMatchmakingWithContext(ctx aws.Context, input *DescribeMatchmakingInput, opts ...request.Option) (*DescribeMatchmakingOutput, error) {
+func (c *GameLift) DescribeMatchmakingWithContext(ctx aws.Context, input *DescribeMatchmakingInput, opts ...aws.Option) (*DescribeMatchmakingOutput, error) {
 	req, out := c.DescribeMatchmakingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4388,7 +4387,7 @@ func (c *GameLift) DescribeMatchmakingWithContext(ctx aws.Context, input *Descri
 
 const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
 
-// DescribeMatchmakingConfigurationsRequest generates a "aws/request.Request" representing the
+// DescribeMatchmakingConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeMatchmakingConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4412,8 +4411,8 @@ const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingConfigurations
-func (c *GameLift) DescribeMatchmakingConfigurationsRequest(input *DescribeMatchmakingConfigurationsInput) (req *request.Request, output *DescribeMatchmakingConfigurationsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeMatchmakingConfigurationsRequest(input *DescribeMatchmakingConfigurationsInput) (req *aws.Request, output *DescribeMatchmakingConfigurationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMatchmakingConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4490,7 +4489,7 @@ func (c *GameLift) DescribeMatchmakingConfigurations(input *DescribeMatchmakingC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeMatchmakingConfigurationsWithContext(ctx aws.Context, input *DescribeMatchmakingConfigurationsInput, opts ...request.Option) (*DescribeMatchmakingConfigurationsOutput, error) {
+func (c *GameLift) DescribeMatchmakingConfigurationsWithContext(ctx aws.Context, input *DescribeMatchmakingConfigurationsInput, opts ...aws.Option) (*DescribeMatchmakingConfigurationsOutput, error) {
 	req, out := c.DescribeMatchmakingConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4499,7 +4498,7 @@ func (c *GameLift) DescribeMatchmakingConfigurationsWithContext(ctx aws.Context,
 
 const opDescribeMatchmakingRuleSets = "DescribeMatchmakingRuleSets"
 
-// DescribeMatchmakingRuleSetsRequest generates a "aws/request.Request" representing the
+// DescribeMatchmakingRuleSetsRequest generates a "aws.Request" representing the
 // client's request for the DescribeMatchmakingRuleSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4523,8 +4522,8 @@ const opDescribeMatchmakingRuleSets = "DescribeMatchmakingRuleSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingRuleSets
-func (c *GameLift) DescribeMatchmakingRuleSetsRequest(input *DescribeMatchmakingRuleSetsInput) (req *request.Request, output *DescribeMatchmakingRuleSetsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeMatchmakingRuleSetsRequest(input *DescribeMatchmakingRuleSetsInput) (req *aws.Request, output *DescribeMatchmakingRuleSetsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMatchmakingRuleSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4602,7 +4601,7 @@ func (c *GameLift) DescribeMatchmakingRuleSets(input *DescribeMatchmakingRuleSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeMatchmakingRuleSetsWithContext(ctx aws.Context, input *DescribeMatchmakingRuleSetsInput, opts ...request.Option) (*DescribeMatchmakingRuleSetsOutput, error) {
+func (c *GameLift) DescribeMatchmakingRuleSetsWithContext(ctx aws.Context, input *DescribeMatchmakingRuleSetsInput, opts ...aws.Option) (*DescribeMatchmakingRuleSetsOutput, error) {
 	req, out := c.DescribeMatchmakingRuleSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4611,7 +4610,7 @@ func (c *GameLift) DescribeMatchmakingRuleSetsWithContext(ctx aws.Context, input
 
 const opDescribePlayerSessions = "DescribePlayerSessions"
 
-// DescribePlayerSessionsRequest generates a "aws/request.Request" representing the
+// DescribePlayerSessionsRequest generates a "aws.Request" representing the
 // client's request for the DescribePlayerSessions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4635,8 +4634,8 @@ const opDescribePlayerSessions = "DescribePlayerSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribePlayerSessions
-func (c *GameLift) DescribePlayerSessionsRequest(input *DescribePlayerSessionsInput) (req *request.Request, output *DescribePlayerSessionsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribePlayerSessionsRequest(input *DescribePlayerSessionsInput) (req *aws.Request, output *DescribePlayerSessionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePlayerSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4722,7 +4721,7 @@ func (c *GameLift) DescribePlayerSessions(input *DescribePlayerSessionsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribePlayerSessionsWithContext(ctx aws.Context, input *DescribePlayerSessionsInput, opts ...request.Option) (*DescribePlayerSessionsOutput, error) {
+func (c *GameLift) DescribePlayerSessionsWithContext(ctx aws.Context, input *DescribePlayerSessionsInput, opts ...aws.Option) (*DescribePlayerSessionsOutput, error) {
 	req, out := c.DescribePlayerSessionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4731,7 +4730,7 @@ func (c *GameLift) DescribePlayerSessionsWithContext(ctx aws.Context, input *Des
 
 const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
 
-// DescribeRuntimeConfigurationRequest generates a "aws/request.Request" representing the
+// DescribeRuntimeConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DescribeRuntimeConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4755,8 +4754,8 @@ const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeRuntimeConfiguration
-func (c *GameLift) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeConfigurationInput) (req *request.Request, output *DescribeRuntimeConfigurationOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeConfigurationInput) (req *aws.Request, output *DescribeRuntimeConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeRuntimeConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4860,7 +4859,7 @@ func (c *GameLift) DescribeRuntimeConfiguration(input *DescribeRuntimeConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeRuntimeConfigurationWithContext(ctx aws.Context, input *DescribeRuntimeConfigurationInput, opts ...request.Option) (*DescribeRuntimeConfigurationOutput, error) {
+func (c *GameLift) DescribeRuntimeConfigurationWithContext(ctx aws.Context, input *DescribeRuntimeConfigurationInput, opts ...aws.Option) (*DescribeRuntimeConfigurationOutput, error) {
 	req, out := c.DescribeRuntimeConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4869,7 +4868,7 @@ func (c *GameLift) DescribeRuntimeConfigurationWithContext(ctx aws.Context, inpu
 
 const opDescribeScalingPolicies = "DescribeScalingPolicies"
 
-// DescribeScalingPoliciesRequest generates a "aws/request.Request" representing the
+// DescribeScalingPoliciesRequest generates a "aws.Request" representing the
 // client's request for the DescribeScalingPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4893,8 +4892,8 @@ const opDescribeScalingPolicies = "DescribeScalingPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPolicies
-func (c *GameLift) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesInput) (req *request.Request, output *DescribeScalingPoliciesOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesInput) (req *aws.Request, output *DescribeScalingPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeScalingPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5001,7 +5000,7 @@ func (c *GameLift) DescribeScalingPolicies(input *DescribeScalingPoliciesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeScalingPoliciesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, opts ...request.Option) (*DescribeScalingPoliciesOutput, error) {
+func (c *GameLift) DescribeScalingPoliciesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, opts ...aws.Option) (*DescribeScalingPoliciesOutput, error) {
 	req, out := c.DescribeScalingPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5010,7 +5009,7 @@ func (c *GameLift) DescribeScalingPoliciesWithContext(ctx aws.Context, input *De
 
 const opDescribeVpcPeeringAuthorizations = "DescribeVpcPeeringAuthorizations"
 
-// DescribeVpcPeeringAuthorizationsRequest generates a "aws/request.Request" representing the
+// DescribeVpcPeeringAuthorizationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeVpcPeeringAuthorizations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5034,8 +5033,8 @@ const opDescribeVpcPeeringAuthorizations = "DescribeVpcPeeringAuthorizations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringAuthorizations
-func (c *GameLift) DescribeVpcPeeringAuthorizationsRequest(input *DescribeVpcPeeringAuthorizationsInput) (req *request.Request, output *DescribeVpcPeeringAuthorizationsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeVpcPeeringAuthorizationsRequest(input *DescribeVpcPeeringAuthorizationsInput) (req *aws.Request, output *DescribeVpcPeeringAuthorizationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeVpcPeeringAuthorizations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5105,7 +5104,7 @@ func (c *GameLift) DescribeVpcPeeringAuthorizations(input *DescribeVpcPeeringAut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeVpcPeeringAuthorizationsWithContext(ctx aws.Context, input *DescribeVpcPeeringAuthorizationsInput, opts ...request.Option) (*DescribeVpcPeeringAuthorizationsOutput, error) {
+func (c *GameLift) DescribeVpcPeeringAuthorizationsWithContext(ctx aws.Context, input *DescribeVpcPeeringAuthorizationsInput, opts ...aws.Option) (*DescribeVpcPeeringAuthorizationsOutput, error) {
 	req, out := c.DescribeVpcPeeringAuthorizationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5114,7 +5113,7 @@ func (c *GameLift) DescribeVpcPeeringAuthorizationsWithContext(ctx aws.Context, 
 
 const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
 
-// DescribeVpcPeeringConnectionsRequest generates a "aws/request.Request" representing the
+// DescribeVpcPeeringConnectionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeVpcPeeringConnections operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5138,8 +5137,8 @@ const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeVpcPeeringConnections
-func (c *GameLift) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringConnectionsInput) (req *request.Request, output *DescribeVpcPeeringConnectionsOutput) {
-	op := &request.Operation{
+func (c *GameLift) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringConnectionsInput) (req *aws.Request, output *DescribeVpcPeeringConnectionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeVpcPeeringConnections,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5218,7 +5217,7 @@ func (c *GameLift) DescribeVpcPeeringConnections(input *DescribeVpcPeeringConnec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) DescribeVpcPeeringConnectionsWithContext(ctx aws.Context, input *DescribeVpcPeeringConnectionsInput, opts ...request.Option) (*DescribeVpcPeeringConnectionsOutput, error) {
+func (c *GameLift) DescribeVpcPeeringConnectionsWithContext(ctx aws.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.Option) (*DescribeVpcPeeringConnectionsOutput, error) {
 	req, out := c.DescribeVpcPeeringConnectionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5227,7 +5226,7 @@ func (c *GameLift) DescribeVpcPeeringConnectionsWithContext(ctx aws.Context, inp
 
 const opGetGameSessionLogUrl = "GetGameSessionLogUrl"
 
-// GetGameSessionLogUrlRequest generates a "aws/request.Request" representing the
+// GetGameSessionLogUrlRequest generates a "aws.Request" representing the
 // client's request for the GetGameSessionLogUrl operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5251,8 +5250,8 @@ const opGetGameSessionLogUrl = "GetGameSessionLogUrl"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetGameSessionLogUrl
-func (c *GameLift) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput) (req *request.Request, output *GetGameSessionLogUrlOutput) {
-	op := &request.Operation{
+func (c *GameLift) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput) (req *aws.Request, output *GetGameSessionLogUrlOutput) {
+	op := &aws.Operation{
 		Name:       opGetGameSessionLogUrl,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5339,7 +5338,7 @@ func (c *GameLift) GetGameSessionLogUrl(input *GetGameSessionLogUrlInput) (*GetG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) GetGameSessionLogUrlWithContext(ctx aws.Context, input *GetGameSessionLogUrlInput, opts ...request.Option) (*GetGameSessionLogUrlOutput, error) {
+func (c *GameLift) GetGameSessionLogUrlWithContext(ctx aws.Context, input *GetGameSessionLogUrlInput, opts ...aws.Option) (*GetGameSessionLogUrlOutput, error) {
 	req, out := c.GetGameSessionLogUrlRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5348,7 +5347,7 @@ func (c *GameLift) GetGameSessionLogUrlWithContext(ctx aws.Context, input *GetGa
 
 const opGetInstanceAccess = "GetInstanceAccess"
 
-// GetInstanceAccessRequest generates a "aws/request.Request" representing the
+// GetInstanceAccessRequest generates a "aws.Request" representing the
 // client's request for the GetInstanceAccess operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5372,8 +5371,8 @@ const opGetInstanceAccess = "GetInstanceAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetInstanceAccess
-func (c *GameLift) GetInstanceAccessRequest(input *GetInstanceAccessInput) (req *request.Request, output *GetInstanceAccessOutput) {
-	op := &request.Operation{
+func (c *GameLift) GetInstanceAccessRequest(input *GetInstanceAccessInput) (req *aws.Request, output *GetInstanceAccessOutput) {
+	op := &aws.Operation{
 		Name:       opGetInstanceAccess,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5446,7 +5445,7 @@ func (c *GameLift) GetInstanceAccess(input *GetInstanceAccessInput) (*GetInstanc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) GetInstanceAccessWithContext(ctx aws.Context, input *GetInstanceAccessInput, opts ...request.Option) (*GetInstanceAccessOutput, error) {
+func (c *GameLift) GetInstanceAccessWithContext(ctx aws.Context, input *GetInstanceAccessInput, opts ...aws.Option) (*GetInstanceAccessOutput, error) {
 	req, out := c.GetInstanceAccessRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5455,7 +5454,7 @@ func (c *GameLift) GetInstanceAccessWithContext(ctx aws.Context, input *GetInsta
 
 const opListAliases = "ListAliases"
 
-// ListAliasesRequest generates a "aws/request.Request" representing the
+// ListAliasesRequest generates a "aws.Request" representing the
 // client's request for the ListAliases operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5479,8 +5478,8 @@ const opListAliases = "ListAliases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliases
-func (c *GameLift) ListAliasesRequest(input *ListAliasesInput) (req *request.Request, output *ListAliasesOutput) {
-	op := &request.Operation{
+func (c *GameLift) ListAliasesRequest(input *ListAliasesInput) (req *aws.Request, output *ListAliasesOutput) {
+	op := &aws.Operation{
 		Name:       opListAliases,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5552,7 +5551,7 @@ func (c *GameLift) ListAliases(input *ListAliasesInput) (*ListAliasesOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput, opts ...request.Option) (*ListAliasesOutput, error) {
+func (c *GameLift) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput, opts ...aws.Option) (*ListAliasesOutput, error) {
 	req, out := c.ListAliasesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5561,7 +5560,7 @@ func (c *GameLift) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInp
 
 const opListBuilds = "ListBuilds"
 
-// ListBuildsRequest generates a "aws/request.Request" representing the
+// ListBuildsRequest generates a "aws.Request" representing the
 // client's request for the ListBuilds operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5585,8 +5584,8 @@ const opListBuilds = "ListBuilds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListBuilds
-func (c *GameLift) ListBuildsRequest(input *ListBuildsInput) (req *request.Request, output *ListBuildsOutput) {
-	op := &request.Operation{
+func (c *GameLift) ListBuildsRequest(input *ListBuildsInput) (req *aws.Request, output *ListBuildsOutput) {
+	op := &aws.Operation{
 		Name:       opListBuilds,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5657,7 +5656,7 @@ func (c *GameLift) ListBuilds(input *ListBuildsInput) (*ListBuildsOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) ListBuildsWithContext(ctx aws.Context, input *ListBuildsInput, opts ...request.Option) (*ListBuildsOutput, error) {
+func (c *GameLift) ListBuildsWithContext(ctx aws.Context, input *ListBuildsInput, opts ...aws.Option) (*ListBuildsOutput, error) {
 	req, out := c.ListBuildsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5666,7 +5665,7 @@ func (c *GameLift) ListBuildsWithContext(ctx aws.Context, input *ListBuildsInput
 
 const opListFleets = "ListFleets"
 
-// ListFleetsRequest generates a "aws/request.Request" representing the
+// ListFleetsRequest generates a "aws.Request" representing the
 // client's request for the ListFleets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5690,8 +5689,8 @@ const opListFleets = "ListFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListFleets
-func (c *GameLift) ListFleetsRequest(input *ListFleetsInput) (req *request.Request, output *ListFleetsOutput) {
-	op := &request.Operation{
+func (c *GameLift) ListFleetsRequest(input *ListFleetsInput) (req *aws.Request, output *ListFleetsOutput) {
+	op := &aws.Operation{
 		Name:       opListFleets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5797,7 +5796,7 @@ func (c *GameLift) ListFleets(input *ListFleetsInput) (*ListFleetsOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) ListFleetsWithContext(ctx aws.Context, input *ListFleetsInput, opts ...request.Option) (*ListFleetsOutput, error) {
+func (c *GameLift) ListFleetsWithContext(ctx aws.Context, input *ListFleetsInput, opts ...aws.Option) (*ListFleetsOutput, error) {
 	req, out := c.ListFleetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5806,7 +5805,7 @@ func (c *GameLift) ListFleetsWithContext(ctx aws.Context, input *ListFleetsInput
 
 const opPutScalingPolicy = "PutScalingPolicy"
 
-// PutScalingPolicyRequest generates a "aws/request.Request" representing the
+// PutScalingPolicyRequest generates a "aws.Request" representing the
 // client's request for the PutScalingPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5830,8 +5829,8 @@ const opPutScalingPolicy = "PutScalingPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PutScalingPolicy
-func (c *GameLift) PutScalingPolicyRequest(input *PutScalingPolicyInput) (req *request.Request, output *PutScalingPolicyOutput) {
-	op := &request.Operation{
+func (c *GameLift) PutScalingPolicyRequest(input *PutScalingPolicyInput) (req *aws.Request, output *PutScalingPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opPutScalingPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5954,7 +5953,7 @@ func (c *GameLift) PutScalingPolicy(input *PutScalingPolicyInput) (*PutScalingPo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) PutScalingPolicyWithContext(ctx aws.Context, input *PutScalingPolicyInput, opts ...request.Option) (*PutScalingPolicyOutput, error) {
+func (c *GameLift) PutScalingPolicyWithContext(ctx aws.Context, input *PutScalingPolicyInput, opts ...aws.Option) (*PutScalingPolicyOutput, error) {
 	req, out := c.PutScalingPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5963,7 +5962,7 @@ func (c *GameLift) PutScalingPolicyWithContext(ctx aws.Context, input *PutScalin
 
 const opRequestUploadCredentials = "RequestUploadCredentials"
 
-// RequestUploadCredentialsRequest generates a "aws/request.Request" representing the
+// RequestUploadCredentialsRequest generates a "aws.Request" representing the
 // client's request for the RequestUploadCredentials operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5987,8 +5986,8 @@ const opRequestUploadCredentials = "RequestUploadCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentials
-func (c *GameLift) RequestUploadCredentialsRequest(input *RequestUploadCredentialsInput) (req *request.Request, output *RequestUploadCredentialsOutput) {
-	op := &request.Operation{
+func (c *GameLift) RequestUploadCredentialsRequest(input *RequestUploadCredentialsInput) (req *aws.Request, output *RequestUploadCredentialsOutput) {
+	op := &aws.Operation{
 		Name:       opRequestUploadCredentials,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6048,7 +6047,7 @@ func (c *GameLift) RequestUploadCredentials(input *RequestUploadCredentialsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) RequestUploadCredentialsWithContext(ctx aws.Context, input *RequestUploadCredentialsInput, opts ...request.Option) (*RequestUploadCredentialsOutput, error) {
+func (c *GameLift) RequestUploadCredentialsWithContext(ctx aws.Context, input *RequestUploadCredentialsInput, opts ...aws.Option) (*RequestUploadCredentialsOutput, error) {
 	req, out := c.RequestUploadCredentialsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6057,7 +6056,7 @@ func (c *GameLift) RequestUploadCredentialsWithContext(ctx aws.Context, input *R
 
 const opResolveAlias = "ResolveAlias"
 
-// ResolveAliasRequest generates a "aws/request.Request" representing the
+// ResolveAliasRequest generates a "aws.Request" representing the
 // client's request for the ResolveAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6081,8 +6080,8 @@ const opResolveAlias = "ResolveAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResolveAlias
-func (c *GameLift) ResolveAliasRequest(input *ResolveAliasInput) (req *request.Request, output *ResolveAliasOutput) {
-	op := &request.Operation{
+func (c *GameLift) ResolveAliasRequest(input *ResolveAliasInput) (req *aws.Request, output *ResolveAliasOutput) {
+	op := &aws.Operation{
 		Name:       opResolveAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6161,7 +6160,7 @@ func (c *GameLift) ResolveAlias(input *ResolveAliasInput) (*ResolveAliasOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) ResolveAliasWithContext(ctx aws.Context, input *ResolveAliasInput, opts ...request.Option) (*ResolveAliasOutput, error) {
+func (c *GameLift) ResolveAliasWithContext(ctx aws.Context, input *ResolveAliasInput, opts ...aws.Option) (*ResolveAliasOutput, error) {
 	req, out := c.ResolveAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6170,7 +6169,7 @@ func (c *GameLift) ResolveAliasWithContext(ctx aws.Context, input *ResolveAliasI
 
 const opSearchGameSessions = "SearchGameSessions"
 
-// SearchGameSessionsRequest generates a "aws/request.Request" representing the
+// SearchGameSessionsRequest generates a "aws.Request" representing the
 // client's request for the SearchGameSessions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6194,8 +6193,8 @@ const opSearchGameSessions = "SearchGameSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessions
-func (c *GameLift) SearchGameSessionsRequest(input *SearchGameSessionsInput) (req *request.Request, output *SearchGameSessionsOutput) {
-	op := &request.Operation{
+func (c *GameLift) SearchGameSessionsRequest(input *SearchGameSessionsInput) (req *aws.Request, output *SearchGameSessionsOutput) {
+	op := &aws.Operation{
 		Name:       opSearchGameSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6324,7 +6323,7 @@ func (c *GameLift) SearchGameSessions(input *SearchGameSessionsInput) (*SearchGa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) SearchGameSessionsWithContext(ctx aws.Context, input *SearchGameSessionsInput, opts ...request.Option) (*SearchGameSessionsOutput, error) {
+func (c *GameLift) SearchGameSessionsWithContext(ctx aws.Context, input *SearchGameSessionsInput, opts ...aws.Option) (*SearchGameSessionsOutput, error) {
 	req, out := c.SearchGameSessionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6333,7 +6332,7 @@ func (c *GameLift) SearchGameSessionsWithContext(ctx aws.Context, input *SearchG
 
 const opStartGameSessionPlacement = "StartGameSessionPlacement"
 
-// StartGameSessionPlacementRequest generates a "aws/request.Request" representing the
+// StartGameSessionPlacementRequest generates a "aws.Request" representing the
 // client's request for the StartGameSessionPlacement operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6357,8 +6356,8 @@ const opStartGameSessionPlacement = "StartGameSessionPlacement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacement
-func (c *GameLift) StartGameSessionPlacementRequest(input *StartGameSessionPlacementInput) (req *request.Request, output *StartGameSessionPlacementOutput) {
-	op := &request.Operation{
+func (c *GameLift) StartGameSessionPlacementRequest(input *StartGameSessionPlacementInput) (req *aws.Request, output *StartGameSessionPlacementOutput) {
+	op := &aws.Operation{
 		Name:       opStartGameSessionPlacement,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6478,7 +6477,7 @@ func (c *GameLift) StartGameSessionPlacement(input *StartGameSessionPlacementInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) StartGameSessionPlacementWithContext(ctx aws.Context, input *StartGameSessionPlacementInput, opts ...request.Option) (*StartGameSessionPlacementOutput, error) {
+func (c *GameLift) StartGameSessionPlacementWithContext(ctx aws.Context, input *StartGameSessionPlacementInput, opts ...aws.Option) (*StartGameSessionPlacementOutput, error) {
 	req, out := c.StartGameSessionPlacementRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6487,7 +6486,7 @@ func (c *GameLift) StartGameSessionPlacementWithContext(ctx aws.Context, input *
 
 const opStartMatchmaking = "StartMatchmaking"
 
-// StartMatchmakingRequest generates a "aws/request.Request" representing the
+// StartMatchmakingRequest generates a "aws.Request" representing the
 // client's request for the StartMatchmaking operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6511,8 +6510,8 @@ const opStartMatchmaking = "StartMatchmaking"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchmaking
-func (c *GameLift) StartMatchmakingRequest(input *StartMatchmakingInput) (req *request.Request, output *StartMatchmakingOutput) {
-	op := &request.Operation{
+func (c *GameLift) StartMatchmakingRequest(input *StartMatchmakingInput) (req *aws.Request, output *StartMatchmakingOutput) {
+	op := &aws.Operation{
 		Name:       opStartMatchmaking,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6640,7 +6639,7 @@ func (c *GameLift) StartMatchmaking(input *StartMatchmakingInput) (*StartMatchma
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) StartMatchmakingWithContext(ctx aws.Context, input *StartMatchmakingInput, opts ...request.Option) (*StartMatchmakingOutput, error) {
+func (c *GameLift) StartMatchmakingWithContext(ctx aws.Context, input *StartMatchmakingInput, opts ...aws.Option) (*StartMatchmakingOutput, error) {
 	req, out := c.StartMatchmakingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6649,7 +6648,7 @@ func (c *GameLift) StartMatchmakingWithContext(ctx aws.Context, input *StartMatc
 
 const opStopGameSessionPlacement = "StopGameSessionPlacement"
 
-// StopGameSessionPlacementRequest generates a "aws/request.Request" representing the
+// StopGameSessionPlacementRequest generates a "aws.Request" representing the
 // client's request for the StopGameSessionPlacement operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6673,8 +6672,8 @@ const opStopGameSessionPlacement = "StopGameSessionPlacement"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacement
-func (c *GameLift) StopGameSessionPlacementRequest(input *StopGameSessionPlacementInput) (req *request.Request, output *StopGameSessionPlacementOutput) {
-	op := &request.Operation{
+func (c *GameLift) StopGameSessionPlacementRequest(input *StopGameSessionPlacementInput) (req *aws.Request, output *StopGameSessionPlacementOutput) {
+	op := &aws.Operation{
 		Name:       opStopGameSessionPlacement,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6756,7 +6755,7 @@ func (c *GameLift) StopGameSessionPlacement(input *StopGameSessionPlacementInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) StopGameSessionPlacementWithContext(ctx aws.Context, input *StopGameSessionPlacementInput, opts ...request.Option) (*StopGameSessionPlacementOutput, error) {
+func (c *GameLift) StopGameSessionPlacementWithContext(ctx aws.Context, input *StopGameSessionPlacementInput, opts ...aws.Option) (*StopGameSessionPlacementOutput, error) {
 	req, out := c.StopGameSessionPlacementRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6765,7 +6764,7 @@ func (c *GameLift) StopGameSessionPlacementWithContext(ctx aws.Context, input *S
 
 const opStopMatchmaking = "StopMatchmaking"
 
-// StopMatchmakingRequest generates a "aws/request.Request" representing the
+// StopMatchmakingRequest generates a "aws.Request" representing the
 // client's request for the StopMatchmaking operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6789,8 +6788,8 @@ const opStopMatchmaking = "StopMatchmaking"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmaking
-func (c *GameLift) StopMatchmakingRequest(input *StopMatchmakingInput) (req *request.Request, output *StopMatchmakingOutput) {
-	op := &request.Operation{
+func (c *GameLift) StopMatchmakingRequest(input *StopMatchmakingInput) (req *aws.Request, output *StopMatchmakingOutput) {
+	op := &aws.Operation{
 		Name:       opStopMatchmaking,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6860,7 +6859,7 @@ func (c *GameLift) StopMatchmaking(input *StopMatchmakingInput) (*StopMatchmakin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) StopMatchmakingWithContext(ctx aws.Context, input *StopMatchmakingInput, opts ...request.Option) (*StopMatchmakingOutput, error) {
+func (c *GameLift) StopMatchmakingWithContext(ctx aws.Context, input *StopMatchmakingInput, opts ...aws.Option) (*StopMatchmakingOutput, error) {
 	req, out := c.StopMatchmakingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6869,7 +6868,7 @@ func (c *GameLift) StopMatchmakingWithContext(ctx aws.Context, input *StopMatchm
 
 const opUpdateAlias = "UpdateAlias"
 
-// UpdateAliasRequest generates a "aws/request.Request" representing the
+// UpdateAliasRequest generates a "aws.Request" representing the
 // client's request for the UpdateAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6893,8 +6892,8 @@ const opUpdateAlias = "UpdateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateAlias
-func (c *GameLift) UpdateAliasRequest(input *UpdateAliasInput) (req *request.Request, output *UpdateAliasOutput) {
-	op := &request.Operation{
+func (c *GameLift) UpdateAliasRequest(input *UpdateAliasInput) (req *aws.Request, output *UpdateAliasOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6969,7 +6968,7 @@ func (c *GameLift) UpdateAlias(input *UpdateAliasInput) (*UpdateAliasOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, opts ...request.Option) (*UpdateAliasOutput, error) {
+func (c *GameLift) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, opts ...aws.Option) (*UpdateAliasOutput, error) {
 	req, out := c.UpdateAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6978,7 +6977,7 @@ func (c *GameLift) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInp
 
 const opUpdateBuild = "UpdateBuild"
 
-// UpdateBuildRequest generates a "aws/request.Request" representing the
+// UpdateBuildRequest generates a "aws.Request" representing the
 // client's request for the UpdateBuild operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7002,8 +7001,8 @@ const opUpdateBuild = "UpdateBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuild
-func (c *GameLift) UpdateBuildRequest(input *UpdateBuildInput) (req *request.Request, output *UpdateBuildOutput) {
-	op := &request.Operation{
+func (c *GameLift) UpdateBuildRequest(input *UpdateBuildInput) (req *aws.Request, output *UpdateBuildOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7076,7 +7075,7 @@ func (c *GameLift) UpdateBuild(input *UpdateBuildInput) (*UpdateBuildOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) UpdateBuildWithContext(ctx aws.Context, input *UpdateBuildInput, opts ...request.Option) (*UpdateBuildOutput, error) {
+func (c *GameLift) UpdateBuildWithContext(ctx aws.Context, input *UpdateBuildInput, opts ...aws.Option) (*UpdateBuildOutput, error) {
 	req, out := c.UpdateBuildRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7085,7 +7084,7 @@ func (c *GameLift) UpdateBuildWithContext(ctx aws.Context, input *UpdateBuildInp
 
 const opUpdateFleetAttributes = "UpdateFleetAttributes"
 
-// UpdateFleetAttributesRequest generates a "aws/request.Request" representing the
+// UpdateFleetAttributesRequest generates a "aws.Request" representing the
 // client's request for the UpdateFleetAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7109,8 +7108,8 @@ const opUpdateFleetAttributes = "UpdateFleetAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetAttributes
-func (c *GameLift) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInput) (req *request.Request, output *UpdateFleetAttributesOutput) {
-	op := &request.Operation{
+func (c *GameLift) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInput) (req *aws.Request, output *UpdateFleetAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateFleetAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7228,7 +7227,7 @@ func (c *GameLift) UpdateFleetAttributes(input *UpdateFleetAttributesInput) (*Up
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) UpdateFleetAttributesWithContext(ctx aws.Context, input *UpdateFleetAttributesInput, opts ...request.Option) (*UpdateFleetAttributesOutput, error) {
+func (c *GameLift) UpdateFleetAttributesWithContext(ctx aws.Context, input *UpdateFleetAttributesInput, opts ...aws.Option) (*UpdateFleetAttributesOutput, error) {
 	req, out := c.UpdateFleetAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7237,7 +7236,7 @@ func (c *GameLift) UpdateFleetAttributesWithContext(ctx aws.Context, input *Upda
 
 const opUpdateFleetCapacity = "UpdateFleetCapacity"
 
-// UpdateFleetCapacityRequest generates a "aws/request.Request" representing the
+// UpdateFleetCapacityRequest generates a "aws.Request" representing the
 // client's request for the UpdateFleetCapacity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7261,8 +7260,8 @@ const opUpdateFleetCapacity = "UpdateFleetCapacity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetCapacity
-func (c *GameLift) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) (req *request.Request, output *UpdateFleetCapacityOutput) {
-	op := &request.Operation{
+func (c *GameLift) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) (req *aws.Request, output *UpdateFleetCapacityOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateFleetCapacity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7392,7 +7391,7 @@ func (c *GameLift) UpdateFleetCapacity(input *UpdateFleetCapacityInput) (*Update
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) UpdateFleetCapacityWithContext(ctx aws.Context, input *UpdateFleetCapacityInput, opts ...request.Option) (*UpdateFleetCapacityOutput, error) {
+func (c *GameLift) UpdateFleetCapacityWithContext(ctx aws.Context, input *UpdateFleetCapacityInput, opts ...aws.Option) (*UpdateFleetCapacityOutput, error) {
 	req, out := c.UpdateFleetCapacityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7401,7 +7400,7 @@ func (c *GameLift) UpdateFleetCapacityWithContext(ctx aws.Context, input *Update
 
 const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
 
-// UpdateFleetPortSettingsRequest generates a "aws/request.Request" representing the
+// UpdateFleetPortSettingsRequest generates a "aws.Request" representing the
 // client's request for the UpdateFleetPortSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7425,8 +7424,8 @@ const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetPortSettings
-func (c *GameLift) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettingsInput) (req *request.Request, output *UpdateFleetPortSettingsOutput) {
-	op := &request.Operation{
+func (c *GameLift) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettingsInput) (req *aws.Request, output *UpdateFleetPortSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateFleetPortSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7547,7 +7546,7 @@ func (c *GameLift) UpdateFleetPortSettings(input *UpdateFleetPortSettingsInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) UpdateFleetPortSettingsWithContext(ctx aws.Context, input *UpdateFleetPortSettingsInput, opts ...request.Option) (*UpdateFleetPortSettingsOutput, error) {
+func (c *GameLift) UpdateFleetPortSettingsWithContext(ctx aws.Context, input *UpdateFleetPortSettingsInput, opts ...aws.Option) (*UpdateFleetPortSettingsOutput, error) {
 	req, out := c.UpdateFleetPortSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7556,7 +7555,7 @@ func (c *GameLift) UpdateFleetPortSettingsWithContext(ctx aws.Context, input *Up
 
 const opUpdateGameSession = "UpdateGameSession"
 
-// UpdateGameSessionRequest generates a "aws/request.Request" representing the
+// UpdateGameSessionRequest generates a "aws.Request" representing the
 // client's request for the UpdateGameSession operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7580,8 +7579,8 @@ const opUpdateGameSession = "UpdateGameSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSession
-func (c *GameLift) UpdateGameSessionRequest(input *UpdateGameSessionInput) (req *request.Request, output *UpdateGameSessionOutput) {
-	op := &request.Operation{
+func (c *GameLift) UpdateGameSessionRequest(input *UpdateGameSessionInput) (req *aws.Request, output *UpdateGameSessionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateGameSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7677,7 +7676,7 @@ func (c *GameLift) UpdateGameSession(input *UpdateGameSessionInput) (*UpdateGame
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) UpdateGameSessionWithContext(ctx aws.Context, input *UpdateGameSessionInput, opts ...request.Option) (*UpdateGameSessionOutput, error) {
+func (c *GameLift) UpdateGameSessionWithContext(ctx aws.Context, input *UpdateGameSessionInput, opts ...aws.Option) (*UpdateGameSessionOutput, error) {
 	req, out := c.UpdateGameSessionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7686,7 +7685,7 @@ func (c *GameLift) UpdateGameSessionWithContext(ctx aws.Context, input *UpdateGa
 
 const opUpdateGameSessionQueue = "UpdateGameSessionQueue"
 
-// UpdateGameSessionQueueRequest generates a "aws/request.Request" representing the
+// UpdateGameSessionQueueRequest generates a "aws.Request" representing the
 // client's request for the UpdateGameSessionQueue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7710,8 +7709,8 @@ const opUpdateGameSessionQueue = "UpdateGameSessionQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueue
-func (c *GameLift) UpdateGameSessionQueueRequest(input *UpdateGameSessionQueueInput) (req *request.Request, output *UpdateGameSessionQueueOutput) {
-	op := &request.Operation{
+func (c *GameLift) UpdateGameSessionQueueRequest(input *UpdateGameSessionQueueInput) (req *aws.Request, output *UpdateGameSessionQueueOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateGameSessionQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7782,7 +7781,7 @@ func (c *GameLift) UpdateGameSessionQueue(input *UpdateGameSessionQueueInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) UpdateGameSessionQueueWithContext(ctx aws.Context, input *UpdateGameSessionQueueInput, opts ...request.Option) (*UpdateGameSessionQueueOutput, error) {
+func (c *GameLift) UpdateGameSessionQueueWithContext(ctx aws.Context, input *UpdateGameSessionQueueInput, opts ...aws.Option) (*UpdateGameSessionQueueOutput, error) {
 	req, out := c.UpdateGameSessionQueueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7791,7 +7790,7 @@ func (c *GameLift) UpdateGameSessionQueueWithContext(ctx aws.Context, input *Upd
 
 const opUpdateMatchmakingConfiguration = "UpdateMatchmakingConfiguration"
 
-// UpdateMatchmakingConfigurationRequest generates a "aws/request.Request" representing the
+// UpdateMatchmakingConfigurationRequest generates a "aws.Request" representing the
 // client's request for the UpdateMatchmakingConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7815,8 +7814,8 @@ const opUpdateMatchmakingConfiguration = "UpdateMatchmakingConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateMatchmakingConfiguration
-func (c *GameLift) UpdateMatchmakingConfigurationRequest(input *UpdateMatchmakingConfigurationInput) (req *request.Request, output *UpdateMatchmakingConfigurationOutput) {
-	op := &request.Operation{
+func (c *GameLift) UpdateMatchmakingConfigurationRequest(input *UpdateMatchmakingConfigurationInput) (req *aws.Request, output *UpdateMatchmakingConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateMatchmakingConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7891,7 +7890,7 @@ func (c *GameLift) UpdateMatchmakingConfiguration(input *UpdateMatchmakingConfig
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) UpdateMatchmakingConfigurationWithContext(ctx aws.Context, input *UpdateMatchmakingConfigurationInput, opts ...request.Option) (*UpdateMatchmakingConfigurationOutput, error) {
+func (c *GameLift) UpdateMatchmakingConfigurationWithContext(ctx aws.Context, input *UpdateMatchmakingConfigurationInput, opts ...aws.Option) (*UpdateMatchmakingConfigurationOutput, error) {
 	req, out := c.UpdateMatchmakingConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7900,7 +7899,7 @@ func (c *GameLift) UpdateMatchmakingConfigurationWithContext(ctx aws.Context, in
 
 const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
 
-// UpdateRuntimeConfigurationRequest generates a "aws/request.Request" representing the
+// UpdateRuntimeConfigurationRequest generates a "aws.Request" representing the
 // client's request for the UpdateRuntimeConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7924,8 +7923,8 @@ const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfiguration
-func (c *GameLift) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigurationInput) (req *request.Request, output *UpdateRuntimeConfigurationOutput) {
-	op := &request.Operation{
+func (c *GameLift) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigurationInput) (req *aws.Request, output *UpdateRuntimeConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRuntimeConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8047,7 +8046,7 @@ func (c *GameLift) UpdateRuntimeConfiguration(input *UpdateRuntimeConfigurationI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) UpdateRuntimeConfigurationWithContext(ctx aws.Context, input *UpdateRuntimeConfigurationInput, opts ...request.Option) (*UpdateRuntimeConfigurationOutput, error) {
+func (c *GameLift) UpdateRuntimeConfigurationWithContext(ctx aws.Context, input *UpdateRuntimeConfigurationInput, opts ...aws.Option) (*UpdateRuntimeConfigurationOutput, error) {
 	req, out := c.UpdateRuntimeConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8056,7 +8055,7 @@ func (c *GameLift) UpdateRuntimeConfigurationWithContext(ctx aws.Context, input 
 
 const opValidateMatchmakingRuleSet = "ValidateMatchmakingRuleSet"
 
-// ValidateMatchmakingRuleSetRequest generates a "aws/request.Request" representing the
+// ValidateMatchmakingRuleSetRequest generates a "aws.Request" representing the
 // client's request for the ValidateMatchmakingRuleSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8080,8 +8079,8 @@ const opValidateMatchmakingRuleSet = "ValidateMatchmakingRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ValidateMatchmakingRuleSet
-func (c *GameLift) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingRuleSetInput) (req *request.Request, output *ValidateMatchmakingRuleSetOutput) {
-	op := &request.Operation{
+func (c *GameLift) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingRuleSetInput) (req *aws.Request, output *ValidateMatchmakingRuleSetOutput) {
+	op := &aws.Operation{
 		Name:       opValidateMatchmakingRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8153,7 +8152,7 @@ func (c *GameLift) ValidateMatchmakingRuleSet(input *ValidateMatchmakingRuleSetI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *GameLift) ValidateMatchmakingRuleSetWithContext(ctx aws.Context, input *ValidateMatchmakingRuleSetInput, opts ...request.Option) (*ValidateMatchmakingRuleSetOutput, error) {
+func (c *GameLift) ValidateMatchmakingRuleSetWithContext(ctx aws.Context, input *ValidateMatchmakingRuleSetInput, opts ...aws.Option) (*ValidateMatchmakingRuleSetOutput, error) {
 	req, out := c.ValidateMatchmakingRuleSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8195,18 +8194,18 @@ func (s AcceptMatchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptMatchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AcceptMatchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AcceptMatchInput"}
 	if s.AcceptanceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("AcceptanceType"))
+		invalidParams.Add(aws.NewErrParamRequired("AcceptanceType"))
 	}
 	if s.PlayerIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlayerIds"))
+		invalidParams.Add(aws.NewErrParamRequired("PlayerIds"))
 	}
 	if s.TicketId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TicketId"))
+		invalidParams.Add(aws.NewErrParamRequired("TicketId"))
 	}
 	if s.TicketId != nil && len(*s.TicketId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TicketId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TicketId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8380,9 +8379,9 @@ func (s AttributeValue) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeValue) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttributeValue"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttributeValue"}
 	if s.S != nil && len(*s.S) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("S", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("S", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8602,18 +8601,18 @@ func (s CreateAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RoutingStrategy == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoutingStrategy"))
+		invalidParams.Add(aws.NewErrParamRequired("RoutingStrategy"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8705,16 +8704,16 @@ func (s CreateBuildInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBuildInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateBuildInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBuildInput"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 	if s.StorageLocation != nil {
 		if err := s.StorageLocation.Validate(); err != nil {
-			invalidParams.AddNested("StorageLocation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StorageLocation", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8905,33 +8904,33 @@ func (s CreateFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFleetInput"}
 	if s.BuildId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BuildId"))
+		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.EC2InstanceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("EC2InstanceType"))
+		invalidParams.Add(aws.NewErrParamRequired("EC2InstanceType"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.PeerVpcAwsAccountId != nil && len(*s.PeerVpcAwsAccountId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PeerVpcAwsAccountId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcAwsAccountId", 1))
 	}
 	if s.PeerVpcId != nil && len(*s.PeerVpcId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PeerVpcId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcId", 1))
 	}
 	if s.ServerLaunchParameters != nil && len(*s.ServerLaunchParameters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerLaunchParameters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerLaunchParameters", 1))
 	}
 	if s.ServerLaunchPath != nil && len(*s.ServerLaunchPath) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerLaunchPath", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerLaunchPath", 1))
 	}
 	if s.EC2InboundPermissions != nil {
 		for i, v := range s.EC2InboundPermissions {
@@ -8939,13 +8938,13 @@ func (s *CreateFleetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EC2InboundPermissions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EC2InboundPermissions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.RuntimeConfiguration != nil {
 		if err := s.RuntimeConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RuntimeConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RuntimeConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9135,24 +9134,24 @@ func (s CreateGameSessionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGameSessionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateGameSessionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGameSessionInput"}
 	if s.CreatorId != nil && len(*s.CreatorId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CreatorId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CreatorId", 1))
 	}
 	if s.GameSessionData != nil && len(*s.GameSessionData) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionData", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionData", 1))
 	}
 	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IdempotencyToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
 	if s.MaximumPlayerSessionCount == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaximumPlayerSessionCount"))
+		invalidParams.Add(aws.NewErrParamRequired("MaximumPlayerSessionCount"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
@@ -9160,7 +9159,7 @@ func (s *CreateGameSessionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9296,12 +9295,12 @@ func (s CreateGameSessionQueueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGameSessionQueueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateGameSessionQueueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGameSessionQueueInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Destinations != nil {
 		for i, v := range s.Destinations {
@@ -9309,7 +9308,7 @@ func (s *CreateGameSessionQueueInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Destinations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Destinations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9457,39 +9456,39 @@ func (s CreateMatchmakingConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMatchmakingConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateMatchmakingConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateMatchmakingConfigurationInput"}
 	if s.AcceptanceRequired == nil {
-		invalidParams.Add(request.NewErrParamRequired("AcceptanceRequired"))
+		invalidParams.Add(aws.NewErrParamRequired("AcceptanceRequired"))
 	}
 	if s.AcceptanceTimeoutSeconds != nil && *s.AcceptanceTimeoutSeconds < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("AcceptanceTimeoutSeconds", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("AcceptanceTimeoutSeconds", 1))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.GameSessionData != nil && len(*s.GameSessionData) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionData", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionData", 1))
 	}
 	if s.GameSessionQueueArns == nil {
-		invalidParams.Add(request.NewErrParamRequired("GameSessionQueueArns"))
+		invalidParams.Add(aws.NewErrParamRequired("GameSessionQueueArns"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RequestTimeoutSeconds == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequestTimeoutSeconds"))
+		invalidParams.Add(aws.NewErrParamRequired("RequestTimeoutSeconds"))
 	}
 	if s.RequestTimeoutSeconds != nil && *s.RequestTimeoutSeconds < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("RequestTimeoutSeconds", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("RequestTimeoutSeconds", 1))
 	}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 	if s.RuleSetName != nil && len(*s.RuleSetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleSetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleSetName", 1))
 	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
@@ -9497,7 +9496,7 @@ func (s *CreateMatchmakingConfigurationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9635,18 +9634,18 @@ func (s CreateMatchmakingRuleSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMatchmakingRuleSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateMatchmakingRuleSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateMatchmakingRuleSetInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RuleSetBody == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetBody"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetBody"))
 	}
 	if s.RuleSetBody != nil && len(*s.RuleSetBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleSetBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleSetBody", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9726,21 +9725,21 @@ func (s CreatePlayerSessionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlayerSessionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePlayerSessionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePlayerSessionInput"}
 	if s.GameSessionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GameSessionId"))
+		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
 	}
 	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
 	}
 	if s.PlayerData != nil && len(*s.PlayerData) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlayerData", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlayerData", 1))
 	}
 	if s.PlayerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlayerId"))
+		invalidParams.Add(aws.NewErrParamRequired("PlayerId"))
 	}
 	if s.PlayerId != nil && len(*s.PlayerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlayerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlayerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9826,18 +9825,18 @@ func (s CreatePlayerSessionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlayerSessionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePlayerSessionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePlayerSessionsInput"}
 	if s.GameSessionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GameSessionId"))
+		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
 	}
 	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
 	}
 	if s.PlayerIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlayerIds"))
+		invalidParams.Add(aws.NewErrParamRequired("PlayerIds"))
 	}
 	if s.PlayerIds != nil && len(s.PlayerIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlayerIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlayerIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9922,18 +9921,18 @@ func (s CreateVpcPeeringAuthorizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVpcPeeringAuthorizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateVpcPeeringAuthorizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcPeeringAuthorizationInput"}
 	if s.GameLiftAwsAccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GameLiftAwsAccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("GameLiftAwsAccountId"))
 	}
 	if s.GameLiftAwsAccountId != nil && len(*s.GameLiftAwsAccountId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameLiftAwsAccountId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameLiftAwsAccountId", 1))
 	}
 	if s.PeerVpcId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PeerVpcId"))
+		invalidParams.Add(aws.NewErrParamRequired("PeerVpcId"))
 	}
 	if s.PeerVpcId != nil && len(*s.PeerVpcId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PeerVpcId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10018,21 +10017,21 @@ func (s CreateVpcPeeringConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVpcPeeringConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateVpcPeeringConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcPeeringConnectionInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.PeerVpcAwsAccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PeerVpcAwsAccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("PeerVpcAwsAccountId"))
 	}
 	if s.PeerVpcAwsAccountId != nil && len(*s.PeerVpcAwsAccountId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PeerVpcAwsAccountId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcAwsAccountId", 1))
 	}
 	if s.PeerVpcId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PeerVpcId"))
+		invalidParams.Add(aws.NewErrParamRequired("PeerVpcId"))
 	}
 	if s.PeerVpcId != nil && len(*s.PeerVpcId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PeerVpcId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10097,9 +10096,9 @@ func (s DeleteAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAliasInput"}
 	if s.AliasId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AliasId"))
+		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10152,9 +10151,9 @@ func (s DeleteBuildInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBuildInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBuildInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBuildInput"}
 	if s.BuildId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BuildId"))
+		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10207,9 +10206,9 @@ func (s DeleteFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFleetInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10263,12 +10262,12 @@ func (s DeleteGameSessionQueueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGameSessionQueueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteGameSessionQueueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGameSessionQueueInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10321,12 +10320,12 @@ func (s DeleteMatchmakingConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMatchmakingConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMatchmakingConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMatchmakingConfigurationInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10385,15 +10384,15 @@ func (s DeleteScalingPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteScalingPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteScalingPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteScalingPolicyInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10462,18 +10461,18 @@ func (s DeleteVpcPeeringAuthorizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpcPeeringAuthorizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteVpcPeeringAuthorizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcPeeringAuthorizationInput"}
 	if s.GameLiftAwsAccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GameLiftAwsAccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("GameLiftAwsAccountId"))
 	}
 	if s.GameLiftAwsAccountId != nil && len(*s.GameLiftAwsAccountId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameLiftAwsAccountId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameLiftAwsAccountId", 1))
 	}
 	if s.PeerVpcId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PeerVpcId"))
+		invalidParams.Add(aws.NewErrParamRequired("PeerVpcId"))
 	}
 	if s.PeerVpcId != nil && len(*s.PeerVpcId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PeerVpcId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10539,15 +10538,15 @@ func (s DeleteVpcPeeringConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpcPeeringConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteVpcPeeringConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcPeeringConnectionInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.VpcPeeringConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VpcPeeringConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("VpcPeeringConnectionId"))
 	}
 	if s.VpcPeeringConnectionId != nil && len(*s.VpcPeeringConnectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VpcPeeringConnectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VpcPeeringConnectionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10606,9 +10605,9 @@ func (s DescribeAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAliasInput"}
 	if s.AliasId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AliasId"))
+		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10671,9 +10670,9 @@ func (s DescribeBuildInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBuildInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeBuildInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBuildInput"}
 	if s.BuildId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BuildId"))
+		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10802,15 +10801,15 @@ func (s DescribeFleetAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFleetAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeFleetAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetAttributesInput"}
 	if s.FleetIds != nil && len(s.FleetIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FleetIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FleetIds", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10907,15 +10906,15 @@ func (s DescribeFleetCapacityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFleetCapacityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeFleetCapacityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetCapacityInput"}
 	if s.FleetIds != nil && len(s.FleetIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FleetIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FleetIds", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11023,15 +11022,15 @@ func (s DescribeFleetEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFleetEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeFleetEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetEventsInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11129,9 +11128,9 @@ func (s DescribeFleetPortSettingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFleetPortSettingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeFleetPortSettingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetPortSettingsInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11204,15 +11203,15 @@ func (s DescribeFleetUtilizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFleetUtilizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeFleetUtilizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetUtilizationInput"}
 	if s.FleetIds != nil && len(s.FleetIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FleetIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FleetIds", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11319,18 +11318,18 @@ func (s DescribeGameSessionDetailsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeGameSessionDetailsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeGameSessionDetailsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeGameSessionDetailsInput"}
 	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StatusFilter != nil && len(*s.StatusFilter) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StatusFilter", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StatusFilter", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11435,12 +11434,12 @@ func (s DescribeGameSessionPlacementInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeGameSessionPlacementInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeGameSessionPlacementInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeGameSessionPlacementInput"}
 	if s.PlacementId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlacementId"))
+		invalidParams.Add(aws.NewErrParamRequired("PlacementId"))
 	}
 	if s.PlacementId != nil && len(*s.PlacementId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlacementId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlacementId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11511,12 +11510,12 @@ func (s DescribeGameSessionQueuesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeGameSessionQueuesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeGameSessionQueuesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeGameSessionQueuesInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11622,18 +11621,18 @@ func (s DescribeGameSessionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeGameSessionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeGameSessionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeGameSessionsInput"}
 	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StatusFilter != nil && len(*s.StatusFilter) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StatusFilter", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StatusFilter", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11751,15 +11750,15 @@ func (s DescribeInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancesInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11863,15 +11862,15 @@ func (s DescribeMatchmakingConfigurationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMatchmakingConfigurationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMatchmakingConfigurationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMatchmakingConfigurationsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.RuleSetName != nil && len(*s.RuleSetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleSetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleSetName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11964,9 +11963,9 @@ func (s DescribeMatchmakingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMatchmakingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMatchmakingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMatchmakingInput"}
 	if s.TicketIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("TicketIds"))
+		invalidParams.Add(aws.NewErrParamRequired("TicketIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12037,15 +12036,15 @@ func (s DescribeMatchmakingRuleSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMatchmakingRuleSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMatchmakingRuleSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMatchmakingRuleSetsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Names != nil && len(s.Names) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Names", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Names", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12164,21 +12163,21 @@ func (s DescribePlayerSessionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePlayerSessionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribePlayerSessionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribePlayerSessionsInput"}
 	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.PlayerId != nil && len(*s.PlayerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlayerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlayerId", 1))
 	}
 	if s.PlayerSessionStatusFilter != nil && len(*s.PlayerSessionStatusFilter) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlayerSessionStatusFilter", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlayerSessionStatusFilter", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12283,9 +12282,9 @@ func (s DescribeRuntimeConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRuntimeConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeRuntimeConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeRuntimeConfigurationInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12377,15 +12376,15 @@ func (s DescribeScalingPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeScalingPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeScalingPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingPoliciesInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12570,12 +12569,12 @@ func (s DesiredPlayerSession) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DesiredPlayerSession) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DesiredPlayerSession"}
+	invalidParams := aws.ErrInvalidParams{Context: "DesiredPlayerSession"}
 	if s.PlayerData != nil && len(*s.PlayerData) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlayerData", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlayerData", 1))
 	}
 	if s.PlayerId != nil && len(*s.PlayerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlayerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlayerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13418,12 +13417,12 @@ func (s GameProperty) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GameProperty) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GameProperty"}
+	invalidParams := aws.ErrInvalidParams{Context: "GameProperty"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14077,9 +14076,9 @@ func (s GameSessionQueueDestination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GameSessionQueueDestination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GameSessionQueueDestination"}
+	invalidParams := aws.ErrInvalidParams{Context: "GameSessionQueueDestination"}
 	if s.DestinationArn != nil && len(*s.DestinationArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14117,12 +14116,12 @@ func (s GetGameSessionLogUrlInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGameSessionLogUrlInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGameSessionLogUrlInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGameSessionLogUrlInput"}
 	if s.GameSessionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GameSessionId"))
+		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
 	}
 	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14194,12 +14193,12 @@ func (s GetInstanceAccessInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceAccessInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInstanceAccessInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceAccessInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14484,24 +14483,24 @@ func (s IpPermission) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IpPermission) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IpPermission"}
+	invalidParams := aws.ErrInvalidParams{Context: "IpPermission"}
 	if s.FromPort == nil {
-		invalidParams.Add(request.NewErrParamRequired("FromPort"))
+		invalidParams.Add(aws.NewErrParamRequired("FromPort"))
 	}
 	if s.FromPort != nil && *s.FromPort < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("FromPort", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("FromPort", 1))
 	}
 	if s.IpRange == nil {
-		invalidParams.Add(request.NewErrParamRequired("IpRange"))
+		invalidParams.Add(aws.NewErrParamRequired("IpRange"))
 	}
 	if s.Protocol == nil {
-		invalidParams.Add(request.NewErrParamRequired("Protocol"))
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
 	if s.ToPort == nil {
-		invalidParams.Add(request.NewErrParamRequired("ToPort"))
+		invalidParams.Add(aws.NewErrParamRequired("ToPort"))
 	}
 	if s.ToPort != nil && *s.ToPort < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("ToPort", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("ToPort", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14579,15 +14578,15 @@ func (s ListAliasesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAliasesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAliasesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAliasesInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14700,12 +14699,12 @@ func (s ListBuildsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBuildsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListBuildsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListBuildsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14800,12 +14799,12 @@ func (s ListFleetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListFleetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListFleetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListFleetsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15391,12 +15390,12 @@ func (s Player) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Player) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Player"}
+	invalidParams := aws.ErrInvalidParams{Context: "Player"}
 	if s.PlayerId != nil && len(*s.PlayerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlayerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlayerId", 1))
 	}
 	if s.Team != nil && len(*s.Team) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Team", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Team", 1))
 	}
 	if s.PlayerAttributes != nil {
 		for i, v := range s.PlayerAttributes {
@@ -15404,7 +15403,7 @@ func (s *Player) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PlayerAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PlayerAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15472,12 +15471,12 @@ func (s PlayerLatency) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PlayerLatency) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PlayerLatency"}
+	invalidParams := aws.ErrInvalidParams{Context: "PlayerLatency"}
 	if s.PlayerId != nil && len(*s.PlayerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlayerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlayerId", 1))
 	}
 	if s.RegionIdentifier != nil && len(*s.RegionIdentifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RegionIdentifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RegionIdentifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15798,36 +15797,36 @@ func (s PutScalingPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutScalingPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutScalingPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutScalingPolicyInput"}
 	if s.ComparisonOperator == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComparisonOperator"))
+		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
 	if s.EvaluationPeriods == nil {
-		invalidParams.Add(request.NewErrParamRequired("EvaluationPeriods"))
+		invalidParams.Add(aws.NewErrParamRequired("EvaluationPeriods"))
 	}
 	if s.EvaluationPeriods != nil && *s.EvaluationPeriods < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("EvaluationPeriods", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("EvaluationPeriods", 1))
 	}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ScalingAdjustment == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalingAdjustment"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustment"))
 	}
 	if s.ScalingAdjustmentType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalingAdjustmentType"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustmentType"))
 	}
 	if s.Threshold == nil {
-		invalidParams.Add(request.NewErrParamRequired("Threshold"))
+		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15933,9 +15932,9 @@ func (s RequestUploadCredentialsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestUploadCredentialsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RequestUploadCredentialsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RequestUploadCredentialsInput"}
 	if s.BuildId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BuildId"))
+		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16009,9 +16008,9 @@ func (s ResolveAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResolveAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResolveAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResolveAliasInput"}
 	if s.AliasId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AliasId"))
+		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16288,15 +16287,15 @@ func (s RuntimeConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RuntimeConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RuntimeConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "RuntimeConfiguration"}
 	if s.GameSessionActivationTimeoutSeconds != nil && *s.GameSessionActivationTimeoutSeconds < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("GameSessionActivationTimeoutSeconds", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("GameSessionActivationTimeoutSeconds", 1))
 	}
 	if s.MaxConcurrentGameSessionActivations != nil && *s.MaxConcurrentGameSessionActivations < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxConcurrentGameSessionActivations", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxConcurrentGameSessionActivations", 1))
 	}
 	if s.ServerProcesses != nil && len(s.ServerProcesses) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerProcesses", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerProcesses", 1))
 	}
 	if s.ServerProcesses != nil {
 		for i, v := range s.ServerProcesses {
@@ -16304,7 +16303,7 @@ func (s *RuntimeConfiguration) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ServerProcesses", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ServerProcesses", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -16364,15 +16363,15 @@ func (s S3Location) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Location) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3Location"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3Location"}
 	if s.Bucket != nil && len(*s.Bucket) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Bucket", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Bucket", 1))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16684,18 +16683,18 @@ func (s SearchGameSessionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SearchGameSessionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SearchGameSessionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SearchGameSessionsInput"}
 	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterExpression", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FilterExpression", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.SortExpression != nil && len(*s.SortExpression) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SortExpression", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SortExpression", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16818,21 +16817,21 @@ func (s ServerProcess) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ServerProcess) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ServerProcess"}
+	invalidParams := aws.ErrInvalidParams{Context: "ServerProcess"}
 	if s.ConcurrentExecutions == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConcurrentExecutions"))
+		invalidParams.Add(aws.NewErrParamRequired("ConcurrentExecutions"))
 	}
 	if s.ConcurrentExecutions != nil && *s.ConcurrentExecutions < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("ConcurrentExecutions", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("ConcurrentExecutions", 1))
 	}
 	if s.LaunchPath == nil {
-		invalidParams.Add(request.NewErrParamRequired("LaunchPath"))
+		invalidParams.Add(aws.NewErrParamRequired("LaunchPath"))
 	}
 	if s.LaunchPath != nil && len(*s.LaunchPath) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LaunchPath", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LaunchPath", 1))
 	}
 	if s.Parameters != nil && len(*s.Parameters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Parameters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Parameters", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16920,27 +16919,27 @@ func (s StartGameSessionPlacementInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartGameSessionPlacementInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartGameSessionPlacementInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartGameSessionPlacementInput"}
 	if s.GameSessionData != nil && len(*s.GameSessionData) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionData", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionData", 1))
 	}
 	if s.GameSessionName != nil && len(*s.GameSessionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionName", 1))
 	}
 	if s.GameSessionQueueName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GameSessionQueueName"))
+		invalidParams.Add(aws.NewErrParamRequired("GameSessionQueueName"))
 	}
 	if s.GameSessionQueueName != nil && len(*s.GameSessionQueueName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionQueueName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionQueueName", 1))
 	}
 	if s.MaximumPlayerSessionCount == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaximumPlayerSessionCount"))
+		invalidParams.Add(aws.NewErrParamRequired("MaximumPlayerSessionCount"))
 	}
 	if s.PlacementId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlacementId"))
+		invalidParams.Add(aws.NewErrParamRequired("PlacementId"))
 	}
 	if s.PlacementId != nil && len(*s.PlacementId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlacementId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlacementId", 1))
 	}
 	if s.DesiredPlayerSessions != nil {
 		for i, v := range s.DesiredPlayerSessions {
@@ -16948,7 +16947,7 @@ func (s *StartGameSessionPlacementInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DesiredPlayerSessions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DesiredPlayerSessions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -16958,7 +16957,7 @@ func (s *StartGameSessionPlacementInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -16968,7 +16967,7 @@ func (s *StartGameSessionPlacementInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PlayerLatencies", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PlayerLatencies", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17090,18 +17089,18 @@ func (s StartMatchmakingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartMatchmakingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartMatchmakingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartMatchmakingInput"}
 	if s.ConfigurationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationName"))
 	}
 	if s.ConfigurationName != nil && len(*s.ConfigurationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigurationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationName", 1))
 	}
 	if s.Players == nil {
-		invalidParams.Add(request.NewErrParamRequired("Players"))
+		invalidParams.Add(aws.NewErrParamRequired("Players"))
 	}
 	if s.TicketId != nil && len(*s.TicketId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TicketId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TicketId", 1))
 	}
 	if s.Players != nil {
 		for i, v := range s.Players {
@@ -17109,7 +17108,7 @@ func (s *StartMatchmakingInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Players", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Players", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17188,12 +17187,12 @@ func (s StopGameSessionPlacementInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopGameSessionPlacementInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopGameSessionPlacementInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopGameSessionPlacementInput"}
 	if s.PlacementId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlacementId"))
+		invalidParams.Add(aws.NewErrParamRequired("PlacementId"))
 	}
 	if s.PlacementId != nil && len(*s.PlacementId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PlacementId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PlacementId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17257,12 +17256,12 @@ func (s StopMatchmakingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopMatchmakingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopMatchmakingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopMatchmakingInput"}
 	if s.TicketId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TicketId"))
+		invalidParams.Add(aws.NewErrParamRequired("TicketId"))
 	}
 	if s.TicketId != nil && len(*s.TicketId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TicketId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TicketId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17325,15 +17324,15 @@ func (s UpdateAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAliasInput"}
 	if s.AliasId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AliasId"))
+		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17422,15 +17421,15 @@ func (s UpdateBuildInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBuildInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateBuildInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateBuildInput"}
 	if s.BuildId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BuildId"))
+		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17534,15 +17533,15 @@ func (s UpdateFleetAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFleetAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateFleetAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFleetAttributesInput"}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17646,9 +17645,9 @@ func (s UpdateFleetCapacityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFleetCapacityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateFleetCapacityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFleetCapacityInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17735,9 +17734,9 @@ func (s UpdateFleetPortSettingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFleetPortSettingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateFleetPortSettingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFleetPortSettingsInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.InboundPermissionAuthorizations != nil {
 		for i, v := range s.InboundPermissionAuthorizations {
@@ -17745,7 +17744,7 @@ func (s *UpdateFleetPortSettingsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InboundPermissionAuthorizations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InboundPermissionAuthorizations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17755,7 +17754,7 @@ func (s *UpdateFleetPortSettingsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InboundPermissionRevocations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InboundPermissionRevocations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17852,15 +17851,15 @@ func (s UpdateGameSessionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGameSessionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGameSessionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGameSessionInput"}
 	if s.GameSessionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GameSessionId"))
+		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
 	}
 	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17970,12 +17969,12 @@ func (s UpdateGameSessionQueueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGameSessionQueueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGameSessionQueueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGameSessionQueueInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Destinations != nil {
 		for i, v := range s.Destinations {
@@ -17983,7 +17982,7 @@ func (s *UpdateGameSessionQueueInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Destinations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Destinations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18124,27 +18123,27 @@ func (s UpdateMatchmakingConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMatchmakingConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateMatchmakingConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMatchmakingConfigurationInput"}
 	if s.AcceptanceTimeoutSeconds != nil && *s.AcceptanceTimeoutSeconds < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("AcceptanceTimeoutSeconds", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("AcceptanceTimeoutSeconds", 1))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.GameSessionData != nil && len(*s.GameSessionData) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GameSessionData", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GameSessionData", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RequestTimeoutSeconds != nil && *s.RequestTimeoutSeconds < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("RequestTimeoutSeconds", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("RequestTimeoutSeconds", 1))
 	}
 	if s.RuleSetName != nil && len(*s.RuleSetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleSetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleSetName", 1))
 	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
@@ -18152,7 +18151,7 @@ func (s *UpdateMatchmakingConfigurationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GameProperties", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18293,16 +18292,16 @@ func (s UpdateRuntimeConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRuntimeConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateRuntimeConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRuntimeConfigurationInput"}
 	if s.FleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
 	if s.RuntimeConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuntimeConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("RuntimeConfiguration"))
 	}
 	if s.RuntimeConfiguration != nil {
 		if err := s.RuntimeConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RuntimeConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RuntimeConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -18373,12 +18372,12 @@ func (s ValidateMatchmakingRuleSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ValidateMatchmakingRuleSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ValidateMatchmakingRuleSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ValidateMatchmakingRuleSetInput"}
 	if s.RuleSetBody == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetBody"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetBody"))
 	}
 	if s.RuleSetBody != nil && len(*s.RuleSetBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleSetBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleSetBody", 1))
 	}
 
 	if invalidParams.Len() > 0 {

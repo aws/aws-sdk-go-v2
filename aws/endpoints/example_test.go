@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 )
@@ -39,25 +39,24 @@ func ExampleResolverFunc() {
 		return endpoints.DefaultResolver().EndpointFor(service, region, optFns...)
 	}
 
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region:           aws.String("us-west-2"),
-		EndpointResolver: endpoints.ResolverFunc(myCustomResolver),
-	}))
+	cfg := defaults.Config()
+	cfg.Region = aws.String(endpoints.UsWest2RegionID)
+	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 
-	// Create the S3 service client with the shared session. This will
+	// Create the S3 service client with the shared config. This will
 	// automatically use the S3 custom endpoint configured in the custom
 	// endpoint resolver wrapping the default endpoint resolver.
-	s3Svc := s3.New(sess)
+	s3Svc := s3.New(cfg)
 	// Operation calls will be made to the custom endpoint.
 	s3Svc.GetObject(&s3.GetObjectInput{
 		Bucket: aws.String("myBucket"),
 		Key:    aws.String("myObjectKey"),
 	})
 
-	// Create the SQS service client with the shared session. This will
+	// Create the SQS service client with the shared cfg. This will
 	// fallback to the default endpoint resolver because the customization
 	// passes any non S3 service endpoint resolve to the default resolver.
-	sqsSvc := sqs.New(sess)
+	sqsSvc := sqs.New(cfg)
 	// Operation calls will be made to the default endpoint for SQS for the
 	// region configured.
 	sqsSvc.ReceiveMessage(&sqs.ReceiveMessageInput{

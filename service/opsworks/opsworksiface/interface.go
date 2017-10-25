@@ -10,7 +10,6 @@ package opsworksiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := opsworks.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := opsworks.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,317 +64,317 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type OpsWorksAPI interface {
 	AssignInstance(*opsworks.AssignInstanceInput) (*opsworks.AssignInstanceOutput, error)
-	AssignInstanceWithContext(aws.Context, *opsworks.AssignInstanceInput, ...request.Option) (*opsworks.AssignInstanceOutput, error)
-	AssignInstanceRequest(*opsworks.AssignInstanceInput) (*request.Request, *opsworks.AssignInstanceOutput)
+	AssignInstanceWithContext(aws.Context, *opsworks.AssignInstanceInput, ...aws.Option) (*opsworks.AssignInstanceOutput, error)
+	AssignInstanceRequest(*opsworks.AssignInstanceInput) (*aws.Request, *opsworks.AssignInstanceOutput)
 
 	AssignVolume(*opsworks.AssignVolumeInput) (*opsworks.AssignVolumeOutput, error)
-	AssignVolumeWithContext(aws.Context, *opsworks.AssignVolumeInput, ...request.Option) (*opsworks.AssignVolumeOutput, error)
-	AssignVolumeRequest(*opsworks.AssignVolumeInput) (*request.Request, *opsworks.AssignVolumeOutput)
+	AssignVolumeWithContext(aws.Context, *opsworks.AssignVolumeInput, ...aws.Option) (*opsworks.AssignVolumeOutput, error)
+	AssignVolumeRequest(*opsworks.AssignVolumeInput) (*aws.Request, *opsworks.AssignVolumeOutput)
 
 	AssociateElasticIp(*opsworks.AssociateElasticIpInput) (*opsworks.AssociateElasticIpOutput, error)
-	AssociateElasticIpWithContext(aws.Context, *opsworks.AssociateElasticIpInput, ...request.Option) (*opsworks.AssociateElasticIpOutput, error)
-	AssociateElasticIpRequest(*opsworks.AssociateElasticIpInput) (*request.Request, *opsworks.AssociateElasticIpOutput)
+	AssociateElasticIpWithContext(aws.Context, *opsworks.AssociateElasticIpInput, ...aws.Option) (*opsworks.AssociateElasticIpOutput, error)
+	AssociateElasticIpRequest(*opsworks.AssociateElasticIpInput) (*aws.Request, *opsworks.AssociateElasticIpOutput)
 
 	AttachElasticLoadBalancer(*opsworks.AttachElasticLoadBalancerInput) (*opsworks.AttachElasticLoadBalancerOutput, error)
-	AttachElasticLoadBalancerWithContext(aws.Context, *opsworks.AttachElasticLoadBalancerInput, ...request.Option) (*opsworks.AttachElasticLoadBalancerOutput, error)
-	AttachElasticLoadBalancerRequest(*opsworks.AttachElasticLoadBalancerInput) (*request.Request, *opsworks.AttachElasticLoadBalancerOutput)
+	AttachElasticLoadBalancerWithContext(aws.Context, *opsworks.AttachElasticLoadBalancerInput, ...aws.Option) (*opsworks.AttachElasticLoadBalancerOutput, error)
+	AttachElasticLoadBalancerRequest(*opsworks.AttachElasticLoadBalancerInput) (*aws.Request, *opsworks.AttachElasticLoadBalancerOutput)
 
 	CloneStack(*opsworks.CloneStackInput) (*opsworks.CloneStackOutput, error)
-	CloneStackWithContext(aws.Context, *opsworks.CloneStackInput, ...request.Option) (*opsworks.CloneStackOutput, error)
-	CloneStackRequest(*opsworks.CloneStackInput) (*request.Request, *opsworks.CloneStackOutput)
+	CloneStackWithContext(aws.Context, *opsworks.CloneStackInput, ...aws.Option) (*opsworks.CloneStackOutput, error)
+	CloneStackRequest(*opsworks.CloneStackInput) (*aws.Request, *opsworks.CloneStackOutput)
 
 	CreateApp(*opsworks.CreateAppInput) (*opsworks.CreateAppOutput, error)
-	CreateAppWithContext(aws.Context, *opsworks.CreateAppInput, ...request.Option) (*opsworks.CreateAppOutput, error)
-	CreateAppRequest(*opsworks.CreateAppInput) (*request.Request, *opsworks.CreateAppOutput)
+	CreateAppWithContext(aws.Context, *opsworks.CreateAppInput, ...aws.Option) (*opsworks.CreateAppOutput, error)
+	CreateAppRequest(*opsworks.CreateAppInput) (*aws.Request, *opsworks.CreateAppOutput)
 
 	CreateDeployment(*opsworks.CreateDeploymentInput) (*opsworks.CreateDeploymentOutput, error)
-	CreateDeploymentWithContext(aws.Context, *opsworks.CreateDeploymentInput, ...request.Option) (*opsworks.CreateDeploymentOutput, error)
-	CreateDeploymentRequest(*opsworks.CreateDeploymentInput) (*request.Request, *opsworks.CreateDeploymentOutput)
+	CreateDeploymentWithContext(aws.Context, *opsworks.CreateDeploymentInput, ...aws.Option) (*opsworks.CreateDeploymentOutput, error)
+	CreateDeploymentRequest(*opsworks.CreateDeploymentInput) (*aws.Request, *opsworks.CreateDeploymentOutput)
 
 	CreateInstance(*opsworks.CreateInstanceInput) (*opsworks.CreateInstanceOutput, error)
-	CreateInstanceWithContext(aws.Context, *opsworks.CreateInstanceInput, ...request.Option) (*opsworks.CreateInstanceOutput, error)
-	CreateInstanceRequest(*opsworks.CreateInstanceInput) (*request.Request, *opsworks.CreateInstanceOutput)
+	CreateInstanceWithContext(aws.Context, *opsworks.CreateInstanceInput, ...aws.Option) (*opsworks.CreateInstanceOutput, error)
+	CreateInstanceRequest(*opsworks.CreateInstanceInput) (*aws.Request, *opsworks.CreateInstanceOutput)
 
 	CreateLayer(*opsworks.CreateLayerInput) (*opsworks.CreateLayerOutput, error)
-	CreateLayerWithContext(aws.Context, *opsworks.CreateLayerInput, ...request.Option) (*opsworks.CreateLayerOutput, error)
-	CreateLayerRequest(*opsworks.CreateLayerInput) (*request.Request, *opsworks.CreateLayerOutput)
+	CreateLayerWithContext(aws.Context, *opsworks.CreateLayerInput, ...aws.Option) (*opsworks.CreateLayerOutput, error)
+	CreateLayerRequest(*opsworks.CreateLayerInput) (*aws.Request, *opsworks.CreateLayerOutput)
 
 	CreateStack(*opsworks.CreateStackInput) (*opsworks.CreateStackOutput, error)
-	CreateStackWithContext(aws.Context, *opsworks.CreateStackInput, ...request.Option) (*opsworks.CreateStackOutput, error)
-	CreateStackRequest(*opsworks.CreateStackInput) (*request.Request, *opsworks.CreateStackOutput)
+	CreateStackWithContext(aws.Context, *opsworks.CreateStackInput, ...aws.Option) (*opsworks.CreateStackOutput, error)
+	CreateStackRequest(*opsworks.CreateStackInput) (*aws.Request, *opsworks.CreateStackOutput)
 
 	CreateUserProfile(*opsworks.CreateUserProfileInput) (*opsworks.CreateUserProfileOutput, error)
-	CreateUserProfileWithContext(aws.Context, *opsworks.CreateUserProfileInput, ...request.Option) (*opsworks.CreateUserProfileOutput, error)
-	CreateUserProfileRequest(*opsworks.CreateUserProfileInput) (*request.Request, *opsworks.CreateUserProfileOutput)
+	CreateUserProfileWithContext(aws.Context, *opsworks.CreateUserProfileInput, ...aws.Option) (*opsworks.CreateUserProfileOutput, error)
+	CreateUserProfileRequest(*opsworks.CreateUserProfileInput) (*aws.Request, *opsworks.CreateUserProfileOutput)
 
 	DeleteApp(*opsworks.DeleteAppInput) (*opsworks.DeleteAppOutput, error)
-	DeleteAppWithContext(aws.Context, *opsworks.DeleteAppInput, ...request.Option) (*opsworks.DeleteAppOutput, error)
-	DeleteAppRequest(*opsworks.DeleteAppInput) (*request.Request, *opsworks.DeleteAppOutput)
+	DeleteAppWithContext(aws.Context, *opsworks.DeleteAppInput, ...aws.Option) (*opsworks.DeleteAppOutput, error)
+	DeleteAppRequest(*opsworks.DeleteAppInput) (*aws.Request, *opsworks.DeleteAppOutput)
 
 	DeleteInstance(*opsworks.DeleteInstanceInput) (*opsworks.DeleteInstanceOutput, error)
-	DeleteInstanceWithContext(aws.Context, *opsworks.DeleteInstanceInput, ...request.Option) (*opsworks.DeleteInstanceOutput, error)
-	DeleteInstanceRequest(*opsworks.DeleteInstanceInput) (*request.Request, *opsworks.DeleteInstanceOutput)
+	DeleteInstanceWithContext(aws.Context, *opsworks.DeleteInstanceInput, ...aws.Option) (*opsworks.DeleteInstanceOutput, error)
+	DeleteInstanceRequest(*opsworks.DeleteInstanceInput) (*aws.Request, *opsworks.DeleteInstanceOutput)
 
 	DeleteLayer(*opsworks.DeleteLayerInput) (*opsworks.DeleteLayerOutput, error)
-	DeleteLayerWithContext(aws.Context, *opsworks.DeleteLayerInput, ...request.Option) (*opsworks.DeleteLayerOutput, error)
-	DeleteLayerRequest(*opsworks.DeleteLayerInput) (*request.Request, *opsworks.DeleteLayerOutput)
+	DeleteLayerWithContext(aws.Context, *opsworks.DeleteLayerInput, ...aws.Option) (*opsworks.DeleteLayerOutput, error)
+	DeleteLayerRequest(*opsworks.DeleteLayerInput) (*aws.Request, *opsworks.DeleteLayerOutput)
 
 	DeleteStack(*opsworks.DeleteStackInput) (*opsworks.DeleteStackOutput, error)
-	DeleteStackWithContext(aws.Context, *opsworks.DeleteStackInput, ...request.Option) (*opsworks.DeleteStackOutput, error)
-	DeleteStackRequest(*opsworks.DeleteStackInput) (*request.Request, *opsworks.DeleteStackOutput)
+	DeleteStackWithContext(aws.Context, *opsworks.DeleteStackInput, ...aws.Option) (*opsworks.DeleteStackOutput, error)
+	DeleteStackRequest(*opsworks.DeleteStackInput) (*aws.Request, *opsworks.DeleteStackOutput)
 
 	DeleteUserProfile(*opsworks.DeleteUserProfileInput) (*opsworks.DeleteUserProfileOutput, error)
-	DeleteUserProfileWithContext(aws.Context, *opsworks.DeleteUserProfileInput, ...request.Option) (*opsworks.DeleteUserProfileOutput, error)
-	DeleteUserProfileRequest(*opsworks.DeleteUserProfileInput) (*request.Request, *opsworks.DeleteUserProfileOutput)
+	DeleteUserProfileWithContext(aws.Context, *opsworks.DeleteUserProfileInput, ...aws.Option) (*opsworks.DeleteUserProfileOutput, error)
+	DeleteUserProfileRequest(*opsworks.DeleteUserProfileInput) (*aws.Request, *opsworks.DeleteUserProfileOutput)
 
 	DeregisterEcsCluster(*opsworks.DeregisterEcsClusterInput) (*opsworks.DeregisterEcsClusterOutput, error)
-	DeregisterEcsClusterWithContext(aws.Context, *opsworks.DeregisterEcsClusterInput, ...request.Option) (*opsworks.DeregisterEcsClusterOutput, error)
-	DeregisterEcsClusterRequest(*opsworks.DeregisterEcsClusterInput) (*request.Request, *opsworks.DeregisterEcsClusterOutput)
+	DeregisterEcsClusterWithContext(aws.Context, *opsworks.DeregisterEcsClusterInput, ...aws.Option) (*opsworks.DeregisterEcsClusterOutput, error)
+	DeregisterEcsClusterRequest(*opsworks.DeregisterEcsClusterInput) (*aws.Request, *opsworks.DeregisterEcsClusterOutput)
 
 	DeregisterElasticIp(*opsworks.DeregisterElasticIpInput) (*opsworks.DeregisterElasticIpOutput, error)
-	DeregisterElasticIpWithContext(aws.Context, *opsworks.DeregisterElasticIpInput, ...request.Option) (*opsworks.DeregisterElasticIpOutput, error)
-	DeregisterElasticIpRequest(*opsworks.DeregisterElasticIpInput) (*request.Request, *opsworks.DeregisterElasticIpOutput)
+	DeregisterElasticIpWithContext(aws.Context, *opsworks.DeregisterElasticIpInput, ...aws.Option) (*opsworks.DeregisterElasticIpOutput, error)
+	DeregisterElasticIpRequest(*opsworks.DeregisterElasticIpInput) (*aws.Request, *opsworks.DeregisterElasticIpOutput)
 
 	DeregisterInstance(*opsworks.DeregisterInstanceInput) (*opsworks.DeregisterInstanceOutput, error)
-	DeregisterInstanceWithContext(aws.Context, *opsworks.DeregisterInstanceInput, ...request.Option) (*opsworks.DeregisterInstanceOutput, error)
-	DeregisterInstanceRequest(*opsworks.DeregisterInstanceInput) (*request.Request, *opsworks.DeregisterInstanceOutput)
+	DeregisterInstanceWithContext(aws.Context, *opsworks.DeregisterInstanceInput, ...aws.Option) (*opsworks.DeregisterInstanceOutput, error)
+	DeregisterInstanceRequest(*opsworks.DeregisterInstanceInput) (*aws.Request, *opsworks.DeregisterInstanceOutput)
 
 	DeregisterRdsDbInstance(*opsworks.DeregisterRdsDbInstanceInput) (*opsworks.DeregisterRdsDbInstanceOutput, error)
-	DeregisterRdsDbInstanceWithContext(aws.Context, *opsworks.DeregisterRdsDbInstanceInput, ...request.Option) (*opsworks.DeregisterRdsDbInstanceOutput, error)
-	DeregisterRdsDbInstanceRequest(*opsworks.DeregisterRdsDbInstanceInput) (*request.Request, *opsworks.DeregisterRdsDbInstanceOutput)
+	DeregisterRdsDbInstanceWithContext(aws.Context, *opsworks.DeregisterRdsDbInstanceInput, ...aws.Option) (*opsworks.DeregisterRdsDbInstanceOutput, error)
+	DeregisterRdsDbInstanceRequest(*opsworks.DeregisterRdsDbInstanceInput) (*aws.Request, *opsworks.DeregisterRdsDbInstanceOutput)
 
 	DeregisterVolume(*opsworks.DeregisterVolumeInput) (*opsworks.DeregisterVolumeOutput, error)
-	DeregisterVolumeWithContext(aws.Context, *opsworks.DeregisterVolumeInput, ...request.Option) (*opsworks.DeregisterVolumeOutput, error)
-	DeregisterVolumeRequest(*opsworks.DeregisterVolumeInput) (*request.Request, *opsworks.DeregisterVolumeOutput)
+	DeregisterVolumeWithContext(aws.Context, *opsworks.DeregisterVolumeInput, ...aws.Option) (*opsworks.DeregisterVolumeOutput, error)
+	DeregisterVolumeRequest(*opsworks.DeregisterVolumeInput) (*aws.Request, *opsworks.DeregisterVolumeOutput)
 
 	DescribeAgentVersions(*opsworks.DescribeAgentVersionsInput) (*opsworks.DescribeAgentVersionsOutput, error)
-	DescribeAgentVersionsWithContext(aws.Context, *opsworks.DescribeAgentVersionsInput, ...request.Option) (*opsworks.DescribeAgentVersionsOutput, error)
-	DescribeAgentVersionsRequest(*opsworks.DescribeAgentVersionsInput) (*request.Request, *opsworks.DescribeAgentVersionsOutput)
+	DescribeAgentVersionsWithContext(aws.Context, *opsworks.DescribeAgentVersionsInput, ...aws.Option) (*opsworks.DescribeAgentVersionsOutput, error)
+	DescribeAgentVersionsRequest(*opsworks.DescribeAgentVersionsInput) (*aws.Request, *opsworks.DescribeAgentVersionsOutput)
 
 	DescribeApps(*opsworks.DescribeAppsInput) (*opsworks.DescribeAppsOutput, error)
-	DescribeAppsWithContext(aws.Context, *opsworks.DescribeAppsInput, ...request.Option) (*opsworks.DescribeAppsOutput, error)
-	DescribeAppsRequest(*opsworks.DescribeAppsInput) (*request.Request, *opsworks.DescribeAppsOutput)
+	DescribeAppsWithContext(aws.Context, *opsworks.DescribeAppsInput, ...aws.Option) (*opsworks.DescribeAppsOutput, error)
+	DescribeAppsRequest(*opsworks.DescribeAppsInput) (*aws.Request, *opsworks.DescribeAppsOutput)
 
 	DescribeCommands(*opsworks.DescribeCommandsInput) (*opsworks.DescribeCommandsOutput, error)
-	DescribeCommandsWithContext(aws.Context, *opsworks.DescribeCommandsInput, ...request.Option) (*opsworks.DescribeCommandsOutput, error)
-	DescribeCommandsRequest(*opsworks.DescribeCommandsInput) (*request.Request, *opsworks.DescribeCommandsOutput)
+	DescribeCommandsWithContext(aws.Context, *opsworks.DescribeCommandsInput, ...aws.Option) (*opsworks.DescribeCommandsOutput, error)
+	DescribeCommandsRequest(*opsworks.DescribeCommandsInput) (*aws.Request, *opsworks.DescribeCommandsOutput)
 
 	DescribeDeployments(*opsworks.DescribeDeploymentsInput) (*opsworks.DescribeDeploymentsOutput, error)
-	DescribeDeploymentsWithContext(aws.Context, *opsworks.DescribeDeploymentsInput, ...request.Option) (*opsworks.DescribeDeploymentsOutput, error)
-	DescribeDeploymentsRequest(*opsworks.DescribeDeploymentsInput) (*request.Request, *opsworks.DescribeDeploymentsOutput)
+	DescribeDeploymentsWithContext(aws.Context, *opsworks.DescribeDeploymentsInput, ...aws.Option) (*opsworks.DescribeDeploymentsOutput, error)
+	DescribeDeploymentsRequest(*opsworks.DescribeDeploymentsInput) (*aws.Request, *opsworks.DescribeDeploymentsOutput)
 
 	DescribeEcsClusters(*opsworks.DescribeEcsClustersInput) (*opsworks.DescribeEcsClustersOutput, error)
-	DescribeEcsClustersWithContext(aws.Context, *opsworks.DescribeEcsClustersInput, ...request.Option) (*opsworks.DescribeEcsClustersOutput, error)
-	DescribeEcsClustersRequest(*opsworks.DescribeEcsClustersInput) (*request.Request, *opsworks.DescribeEcsClustersOutput)
+	DescribeEcsClustersWithContext(aws.Context, *opsworks.DescribeEcsClustersInput, ...aws.Option) (*opsworks.DescribeEcsClustersOutput, error)
+	DescribeEcsClustersRequest(*opsworks.DescribeEcsClustersInput) (*aws.Request, *opsworks.DescribeEcsClustersOutput)
 
 	DescribeEcsClustersPages(*opsworks.DescribeEcsClustersInput, func(*opsworks.DescribeEcsClustersOutput, bool) bool) error
-	DescribeEcsClustersPagesWithContext(aws.Context, *opsworks.DescribeEcsClustersInput, func(*opsworks.DescribeEcsClustersOutput, bool) bool, ...request.Option) error
+	DescribeEcsClustersPagesWithContext(aws.Context, *opsworks.DescribeEcsClustersInput, func(*opsworks.DescribeEcsClustersOutput, bool) bool, ...aws.Option) error
 
 	DescribeElasticIps(*opsworks.DescribeElasticIpsInput) (*opsworks.DescribeElasticIpsOutput, error)
-	DescribeElasticIpsWithContext(aws.Context, *opsworks.DescribeElasticIpsInput, ...request.Option) (*opsworks.DescribeElasticIpsOutput, error)
-	DescribeElasticIpsRequest(*opsworks.DescribeElasticIpsInput) (*request.Request, *opsworks.DescribeElasticIpsOutput)
+	DescribeElasticIpsWithContext(aws.Context, *opsworks.DescribeElasticIpsInput, ...aws.Option) (*opsworks.DescribeElasticIpsOutput, error)
+	DescribeElasticIpsRequest(*opsworks.DescribeElasticIpsInput) (*aws.Request, *opsworks.DescribeElasticIpsOutput)
 
 	DescribeElasticLoadBalancers(*opsworks.DescribeElasticLoadBalancersInput) (*opsworks.DescribeElasticLoadBalancersOutput, error)
-	DescribeElasticLoadBalancersWithContext(aws.Context, *opsworks.DescribeElasticLoadBalancersInput, ...request.Option) (*opsworks.DescribeElasticLoadBalancersOutput, error)
-	DescribeElasticLoadBalancersRequest(*opsworks.DescribeElasticLoadBalancersInput) (*request.Request, *opsworks.DescribeElasticLoadBalancersOutput)
+	DescribeElasticLoadBalancersWithContext(aws.Context, *opsworks.DescribeElasticLoadBalancersInput, ...aws.Option) (*opsworks.DescribeElasticLoadBalancersOutput, error)
+	DescribeElasticLoadBalancersRequest(*opsworks.DescribeElasticLoadBalancersInput) (*aws.Request, *opsworks.DescribeElasticLoadBalancersOutput)
 
 	DescribeInstances(*opsworks.DescribeInstancesInput) (*opsworks.DescribeInstancesOutput, error)
-	DescribeInstancesWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...request.Option) (*opsworks.DescribeInstancesOutput, error)
-	DescribeInstancesRequest(*opsworks.DescribeInstancesInput) (*request.Request, *opsworks.DescribeInstancesOutput)
+	DescribeInstancesWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.Option) (*opsworks.DescribeInstancesOutput, error)
+	DescribeInstancesRequest(*opsworks.DescribeInstancesInput) (*aws.Request, *opsworks.DescribeInstancesOutput)
 
 	DescribeLayers(*opsworks.DescribeLayersInput) (*opsworks.DescribeLayersOutput, error)
-	DescribeLayersWithContext(aws.Context, *opsworks.DescribeLayersInput, ...request.Option) (*opsworks.DescribeLayersOutput, error)
-	DescribeLayersRequest(*opsworks.DescribeLayersInput) (*request.Request, *opsworks.DescribeLayersOutput)
+	DescribeLayersWithContext(aws.Context, *opsworks.DescribeLayersInput, ...aws.Option) (*opsworks.DescribeLayersOutput, error)
+	DescribeLayersRequest(*opsworks.DescribeLayersInput) (*aws.Request, *opsworks.DescribeLayersOutput)
 
 	DescribeLoadBasedAutoScaling(*opsworks.DescribeLoadBasedAutoScalingInput) (*opsworks.DescribeLoadBasedAutoScalingOutput, error)
-	DescribeLoadBasedAutoScalingWithContext(aws.Context, *opsworks.DescribeLoadBasedAutoScalingInput, ...request.Option) (*opsworks.DescribeLoadBasedAutoScalingOutput, error)
-	DescribeLoadBasedAutoScalingRequest(*opsworks.DescribeLoadBasedAutoScalingInput) (*request.Request, *opsworks.DescribeLoadBasedAutoScalingOutput)
+	DescribeLoadBasedAutoScalingWithContext(aws.Context, *opsworks.DescribeLoadBasedAutoScalingInput, ...aws.Option) (*opsworks.DescribeLoadBasedAutoScalingOutput, error)
+	DescribeLoadBasedAutoScalingRequest(*opsworks.DescribeLoadBasedAutoScalingInput) (*aws.Request, *opsworks.DescribeLoadBasedAutoScalingOutput)
 
 	DescribeMyUserProfile(*opsworks.DescribeMyUserProfileInput) (*opsworks.DescribeMyUserProfileOutput, error)
-	DescribeMyUserProfileWithContext(aws.Context, *opsworks.DescribeMyUserProfileInput, ...request.Option) (*opsworks.DescribeMyUserProfileOutput, error)
-	DescribeMyUserProfileRequest(*opsworks.DescribeMyUserProfileInput) (*request.Request, *opsworks.DescribeMyUserProfileOutput)
+	DescribeMyUserProfileWithContext(aws.Context, *opsworks.DescribeMyUserProfileInput, ...aws.Option) (*opsworks.DescribeMyUserProfileOutput, error)
+	DescribeMyUserProfileRequest(*opsworks.DescribeMyUserProfileInput) (*aws.Request, *opsworks.DescribeMyUserProfileOutput)
 
 	DescribePermissions(*opsworks.DescribePermissionsInput) (*opsworks.DescribePermissionsOutput, error)
-	DescribePermissionsWithContext(aws.Context, *opsworks.DescribePermissionsInput, ...request.Option) (*opsworks.DescribePermissionsOutput, error)
-	DescribePermissionsRequest(*opsworks.DescribePermissionsInput) (*request.Request, *opsworks.DescribePermissionsOutput)
+	DescribePermissionsWithContext(aws.Context, *opsworks.DescribePermissionsInput, ...aws.Option) (*opsworks.DescribePermissionsOutput, error)
+	DescribePermissionsRequest(*opsworks.DescribePermissionsInput) (*aws.Request, *opsworks.DescribePermissionsOutput)
 
 	DescribeRaidArrays(*opsworks.DescribeRaidArraysInput) (*opsworks.DescribeRaidArraysOutput, error)
-	DescribeRaidArraysWithContext(aws.Context, *opsworks.DescribeRaidArraysInput, ...request.Option) (*opsworks.DescribeRaidArraysOutput, error)
-	DescribeRaidArraysRequest(*opsworks.DescribeRaidArraysInput) (*request.Request, *opsworks.DescribeRaidArraysOutput)
+	DescribeRaidArraysWithContext(aws.Context, *opsworks.DescribeRaidArraysInput, ...aws.Option) (*opsworks.DescribeRaidArraysOutput, error)
+	DescribeRaidArraysRequest(*opsworks.DescribeRaidArraysInput) (*aws.Request, *opsworks.DescribeRaidArraysOutput)
 
 	DescribeRdsDbInstances(*opsworks.DescribeRdsDbInstancesInput) (*opsworks.DescribeRdsDbInstancesOutput, error)
-	DescribeRdsDbInstancesWithContext(aws.Context, *opsworks.DescribeRdsDbInstancesInput, ...request.Option) (*opsworks.DescribeRdsDbInstancesOutput, error)
-	DescribeRdsDbInstancesRequest(*opsworks.DescribeRdsDbInstancesInput) (*request.Request, *opsworks.DescribeRdsDbInstancesOutput)
+	DescribeRdsDbInstancesWithContext(aws.Context, *opsworks.DescribeRdsDbInstancesInput, ...aws.Option) (*opsworks.DescribeRdsDbInstancesOutput, error)
+	DescribeRdsDbInstancesRequest(*opsworks.DescribeRdsDbInstancesInput) (*aws.Request, *opsworks.DescribeRdsDbInstancesOutput)
 
 	DescribeServiceErrors(*opsworks.DescribeServiceErrorsInput) (*opsworks.DescribeServiceErrorsOutput, error)
-	DescribeServiceErrorsWithContext(aws.Context, *opsworks.DescribeServiceErrorsInput, ...request.Option) (*opsworks.DescribeServiceErrorsOutput, error)
-	DescribeServiceErrorsRequest(*opsworks.DescribeServiceErrorsInput) (*request.Request, *opsworks.DescribeServiceErrorsOutput)
+	DescribeServiceErrorsWithContext(aws.Context, *opsworks.DescribeServiceErrorsInput, ...aws.Option) (*opsworks.DescribeServiceErrorsOutput, error)
+	DescribeServiceErrorsRequest(*opsworks.DescribeServiceErrorsInput) (*aws.Request, *opsworks.DescribeServiceErrorsOutput)
 
 	DescribeStackProvisioningParameters(*opsworks.DescribeStackProvisioningParametersInput) (*opsworks.DescribeStackProvisioningParametersOutput, error)
-	DescribeStackProvisioningParametersWithContext(aws.Context, *opsworks.DescribeStackProvisioningParametersInput, ...request.Option) (*opsworks.DescribeStackProvisioningParametersOutput, error)
-	DescribeStackProvisioningParametersRequest(*opsworks.DescribeStackProvisioningParametersInput) (*request.Request, *opsworks.DescribeStackProvisioningParametersOutput)
+	DescribeStackProvisioningParametersWithContext(aws.Context, *opsworks.DescribeStackProvisioningParametersInput, ...aws.Option) (*opsworks.DescribeStackProvisioningParametersOutput, error)
+	DescribeStackProvisioningParametersRequest(*opsworks.DescribeStackProvisioningParametersInput) (*aws.Request, *opsworks.DescribeStackProvisioningParametersOutput)
 
 	DescribeStackSummary(*opsworks.DescribeStackSummaryInput) (*opsworks.DescribeStackSummaryOutput, error)
-	DescribeStackSummaryWithContext(aws.Context, *opsworks.DescribeStackSummaryInput, ...request.Option) (*opsworks.DescribeStackSummaryOutput, error)
-	DescribeStackSummaryRequest(*opsworks.DescribeStackSummaryInput) (*request.Request, *opsworks.DescribeStackSummaryOutput)
+	DescribeStackSummaryWithContext(aws.Context, *opsworks.DescribeStackSummaryInput, ...aws.Option) (*opsworks.DescribeStackSummaryOutput, error)
+	DescribeStackSummaryRequest(*opsworks.DescribeStackSummaryInput) (*aws.Request, *opsworks.DescribeStackSummaryOutput)
 
 	DescribeStacks(*opsworks.DescribeStacksInput) (*opsworks.DescribeStacksOutput, error)
-	DescribeStacksWithContext(aws.Context, *opsworks.DescribeStacksInput, ...request.Option) (*opsworks.DescribeStacksOutput, error)
-	DescribeStacksRequest(*opsworks.DescribeStacksInput) (*request.Request, *opsworks.DescribeStacksOutput)
+	DescribeStacksWithContext(aws.Context, *opsworks.DescribeStacksInput, ...aws.Option) (*opsworks.DescribeStacksOutput, error)
+	DescribeStacksRequest(*opsworks.DescribeStacksInput) (*aws.Request, *opsworks.DescribeStacksOutput)
 
 	DescribeTimeBasedAutoScaling(*opsworks.DescribeTimeBasedAutoScalingInput) (*opsworks.DescribeTimeBasedAutoScalingOutput, error)
-	DescribeTimeBasedAutoScalingWithContext(aws.Context, *opsworks.DescribeTimeBasedAutoScalingInput, ...request.Option) (*opsworks.DescribeTimeBasedAutoScalingOutput, error)
-	DescribeTimeBasedAutoScalingRequest(*opsworks.DescribeTimeBasedAutoScalingInput) (*request.Request, *opsworks.DescribeTimeBasedAutoScalingOutput)
+	DescribeTimeBasedAutoScalingWithContext(aws.Context, *opsworks.DescribeTimeBasedAutoScalingInput, ...aws.Option) (*opsworks.DescribeTimeBasedAutoScalingOutput, error)
+	DescribeTimeBasedAutoScalingRequest(*opsworks.DescribeTimeBasedAutoScalingInput) (*aws.Request, *opsworks.DescribeTimeBasedAutoScalingOutput)
 
 	DescribeUserProfiles(*opsworks.DescribeUserProfilesInput) (*opsworks.DescribeUserProfilesOutput, error)
-	DescribeUserProfilesWithContext(aws.Context, *opsworks.DescribeUserProfilesInput, ...request.Option) (*opsworks.DescribeUserProfilesOutput, error)
-	DescribeUserProfilesRequest(*opsworks.DescribeUserProfilesInput) (*request.Request, *opsworks.DescribeUserProfilesOutput)
+	DescribeUserProfilesWithContext(aws.Context, *opsworks.DescribeUserProfilesInput, ...aws.Option) (*opsworks.DescribeUserProfilesOutput, error)
+	DescribeUserProfilesRequest(*opsworks.DescribeUserProfilesInput) (*aws.Request, *opsworks.DescribeUserProfilesOutput)
 
 	DescribeVolumes(*opsworks.DescribeVolumesInput) (*opsworks.DescribeVolumesOutput, error)
-	DescribeVolumesWithContext(aws.Context, *opsworks.DescribeVolumesInput, ...request.Option) (*opsworks.DescribeVolumesOutput, error)
-	DescribeVolumesRequest(*opsworks.DescribeVolumesInput) (*request.Request, *opsworks.DescribeVolumesOutput)
+	DescribeVolumesWithContext(aws.Context, *opsworks.DescribeVolumesInput, ...aws.Option) (*opsworks.DescribeVolumesOutput, error)
+	DescribeVolumesRequest(*opsworks.DescribeVolumesInput) (*aws.Request, *opsworks.DescribeVolumesOutput)
 
 	DetachElasticLoadBalancer(*opsworks.DetachElasticLoadBalancerInput) (*opsworks.DetachElasticLoadBalancerOutput, error)
-	DetachElasticLoadBalancerWithContext(aws.Context, *opsworks.DetachElasticLoadBalancerInput, ...request.Option) (*opsworks.DetachElasticLoadBalancerOutput, error)
-	DetachElasticLoadBalancerRequest(*opsworks.DetachElasticLoadBalancerInput) (*request.Request, *opsworks.DetachElasticLoadBalancerOutput)
+	DetachElasticLoadBalancerWithContext(aws.Context, *opsworks.DetachElasticLoadBalancerInput, ...aws.Option) (*opsworks.DetachElasticLoadBalancerOutput, error)
+	DetachElasticLoadBalancerRequest(*opsworks.DetachElasticLoadBalancerInput) (*aws.Request, *opsworks.DetachElasticLoadBalancerOutput)
 
 	DisassociateElasticIp(*opsworks.DisassociateElasticIpInput) (*opsworks.DisassociateElasticIpOutput, error)
-	DisassociateElasticIpWithContext(aws.Context, *opsworks.DisassociateElasticIpInput, ...request.Option) (*opsworks.DisassociateElasticIpOutput, error)
-	DisassociateElasticIpRequest(*opsworks.DisassociateElasticIpInput) (*request.Request, *opsworks.DisassociateElasticIpOutput)
+	DisassociateElasticIpWithContext(aws.Context, *opsworks.DisassociateElasticIpInput, ...aws.Option) (*opsworks.DisassociateElasticIpOutput, error)
+	DisassociateElasticIpRequest(*opsworks.DisassociateElasticIpInput) (*aws.Request, *opsworks.DisassociateElasticIpOutput)
 
 	GetHostnameSuggestion(*opsworks.GetHostnameSuggestionInput) (*opsworks.GetHostnameSuggestionOutput, error)
-	GetHostnameSuggestionWithContext(aws.Context, *opsworks.GetHostnameSuggestionInput, ...request.Option) (*opsworks.GetHostnameSuggestionOutput, error)
-	GetHostnameSuggestionRequest(*opsworks.GetHostnameSuggestionInput) (*request.Request, *opsworks.GetHostnameSuggestionOutput)
+	GetHostnameSuggestionWithContext(aws.Context, *opsworks.GetHostnameSuggestionInput, ...aws.Option) (*opsworks.GetHostnameSuggestionOutput, error)
+	GetHostnameSuggestionRequest(*opsworks.GetHostnameSuggestionInput) (*aws.Request, *opsworks.GetHostnameSuggestionOutput)
 
 	GrantAccess(*opsworks.GrantAccessInput) (*opsworks.GrantAccessOutput, error)
-	GrantAccessWithContext(aws.Context, *opsworks.GrantAccessInput, ...request.Option) (*opsworks.GrantAccessOutput, error)
-	GrantAccessRequest(*opsworks.GrantAccessInput) (*request.Request, *opsworks.GrantAccessOutput)
+	GrantAccessWithContext(aws.Context, *opsworks.GrantAccessInput, ...aws.Option) (*opsworks.GrantAccessOutput, error)
+	GrantAccessRequest(*opsworks.GrantAccessInput) (*aws.Request, *opsworks.GrantAccessOutput)
 
 	ListTags(*opsworks.ListTagsInput) (*opsworks.ListTagsOutput, error)
-	ListTagsWithContext(aws.Context, *opsworks.ListTagsInput, ...request.Option) (*opsworks.ListTagsOutput, error)
-	ListTagsRequest(*opsworks.ListTagsInput) (*request.Request, *opsworks.ListTagsOutput)
+	ListTagsWithContext(aws.Context, *opsworks.ListTagsInput, ...aws.Option) (*opsworks.ListTagsOutput, error)
+	ListTagsRequest(*opsworks.ListTagsInput) (*aws.Request, *opsworks.ListTagsOutput)
 
 	RebootInstance(*opsworks.RebootInstanceInput) (*opsworks.RebootInstanceOutput, error)
-	RebootInstanceWithContext(aws.Context, *opsworks.RebootInstanceInput, ...request.Option) (*opsworks.RebootInstanceOutput, error)
-	RebootInstanceRequest(*opsworks.RebootInstanceInput) (*request.Request, *opsworks.RebootInstanceOutput)
+	RebootInstanceWithContext(aws.Context, *opsworks.RebootInstanceInput, ...aws.Option) (*opsworks.RebootInstanceOutput, error)
+	RebootInstanceRequest(*opsworks.RebootInstanceInput) (*aws.Request, *opsworks.RebootInstanceOutput)
 
 	RegisterEcsCluster(*opsworks.RegisterEcsClusterInput) (*opsworks.RegisterEcsClusterOutput, error)
-	RegisterEcsClusterWithContext(aws.Context, *opsworks.RegisterEcsClusterInput, ...request.Option) (*opsworks.RegisterEcsClusterOutput, error)
-	RegisterEcsClusterRequest(*opsworks.RegisterEcsClusterInput) (*request.Request, *opsworks.RegisterEcsClusterOutput)
+	RegisterEcsClusterWithContext(aws.Context, *opsworks.RegisterEcsClusterInput, ...aws.Option) (*opsworks.RegisterEcsClusterOutput, error)
+	RegisterEcsClusterRequest(*opsworks.RegisterEcsClusterInput) (*aws.Request, *opsworks.RegisterEcsClusterOutput)
 
 	RegisterElasticIp(*opsworks.RegisterElasticIpInput) (*opsworks.RegisterElasticIpOutput, error)
-	RegisterElasticIpWithContext(aws.Context, *opsworks.RegisterElasticIpInput, ...request.Option) (*opsworks.RegisterElasticIpOutput, error)
-	RegisterElasticIpRequest(*opsworks.RegisterElasticIpInput) (*request.Request, *opsworks.RegisterElasticIpOutput)
+	RegisterElasticIpWithContext(aws.Context, *opsworks.RegisterElasticIpInput, ...aws.Option) (*opsworks.RegisterElasticIpOutput, error)
+	RegisterElasticIpRequest(*opsworks.RegisterElasticIpInput) (*aws.Request, *opsworks.RegisterElasticIpOutput)
 
 	RegisterInstance(*opsworks.RegisterInstanceInput) (*opsworks.RegisterInstanceOutput, error)
-	RegisterInstanceWithContext(aws.Context, *opsworks.RegisterInstanceInput, ...request.Option) (*opsworks.RegisterInstanceOutput, error)
-	RegisterInstanceRequest(*opsworks.RegisterInstanceInput) (*request.Request, *opsworks.RegisterInstanceOutput)
+	RegisterInstanceWithContext(aws.Context, *opsworks.RegisterInstanceInput, ...aws.Option) (*opsworks.RegisterInstanceOutput, error)
+	RegisterInstanceRequest(*opsworks.RegisterInstanceInput) (*aws.Request, *opsworks.RegisterInstanceOutput)
 
 	RegisterRdsDbInstance(*opsworks.RegisterRdsDbInstanceInput) (*opsworks.RegisterRdsDbInstanceOutput, error)
-	RegisterRdsDbInstanceWithContext(aws.Context, *opsworks.RegisterRdsDbInstanceInput, ...request.Option) (*opsworks.RegisterRdsDbInstanceOutput, error)
-	RegisterRdsDbInstanceRequest(*opsworks.RegisterRdsDbInstanceInput) (*request.Request, *opsworks.RegisterRdsDbInstanceOutput)
+	RegisterRdsDbInstanceWithContext(aws.Context, *opsworks.RegisterRdsDbInstanceInput, ...aws.Option) (*opsworks.RegisterRdsDbInstanceOutput, error)
+	RegisterRdsDbInstanceRequest(*opsworks.RegisterRdsDbInstanceInput) (*aws.Request, *opsworks.RegisterRdsDbInstanceOutput)
 
 	RegisterVolume(*opsworks.RegisterVolumeInput) (*opsworks.RegisterVolumeOutput, error)
-	RegisterVolumeWithContext(aws.Context, *opsworks.RegisterVolumeInput, ...request.Option) (*opsworks.RegisterVolumeOutput, error)
-	RegisterVolumeRequest(*opsworks.RegisterVolumeInput) (*request.Request, *opsworks.RegisterVolumeOutput)
+	RegisterVolumeWithContext(aws.Context, *opsworks.RegisterVolumeInput, ...aws.Option) (*opsworks.RegisterVolumeOutput, error)
+	RegisterVolumeRequest(*opsworks.RegisterVolumeInput) (*aws.Request, *opsworks.RegisterVolumeOutput)
 
 	SetLoadBasedAutoScaling(*opsworks.SetLoadBasedAutoScalingInput) (*opsworks.SetLoadBasedAutoScalingOutput, error)
-	SetLoadBasedAutoScalingWithContext(aws.Context, *opsworks.SetLoadBasedAutoScalingInput, ...request.Option) (*opsworks.SetLoadBasedAutoScalingOutput, error)
-	SetLoadBasedAutoScalingRequest(*opsworks.SetLoadBasedAutoScalingInput) (*request.Request, *opsworks.SetLoadBasedAutoScalingOutput)
+	SetLoadBasedAutoScalingWithContext(aws.Context, *opsworks.SetLoadBasedAutoScalingInput, ...aws.Option) (*opsworks.SetLoadBasedAutoScalingOutput, error)
+	SetLoadBasedAutoScalingRequest(*opsworks.SetLoadBasedAutoScalingInput) (*aws.Request, *opsworks.SetLoadBasedAutoScalingOutput)
 
 	SetPermission(*opsworks.SetPermissionInput) (*opsworks.SetPermissionOutput, error)
-	SetPermissionWithContext(aws.Context, *opsworks.SetPermissionInput, ...request.Option) (*opsworks.SetPermissionOutput, error)
-	SetPermissionRequest(*opsworks.SetPermissionInput) (*request.Request, *opsworks.SetPermissionOutput)
+	SetPermissionWithContext(aws.Context, *opsworks.SetPermissionInput, ...aws.Option) (*opsworks.SetPermissionOutput, error)
+	SetPermissionRequest(*opsworks.SetPermissionInput) (*aws.Request, *opsworks.SetPermissionOutput)
 
 	SetTimeBasedAutoScaling(*opsworks.SetTimeBasedAutoScalingInput) (*opsworks.SetTimeBasedAutoScalingOutput, error)
-	SetTimeBasedAutoScalingWithContext(aws.Context, *opsworks.SetTimeBasedAutoScalingInput, ...request.Option) (*opsworks.SetTimeBasedAutoScalingOutput, error)
-	SetTimeBasedAutoScalingRequest(*opsworks.SetTimeBasedAutoScalingInput) (*request.Request, *opsworks.SetTimeBasedAutoScalingOutput)
+	SetTimeBasedAutoScalingWithContext(aws.Context, *opsworks.SetTimeBasedAutoScalingInput, ...aws.Option) (*opsworks.SetTimeBasedAutoScalingOutput, error)
+	SetTimeBasedAutoScalingRequest(*opsworks.SetTimeBasedAutoScalingInput) (*aws.Request, *opsworks.SetTimeBasedAutoScalingOutput)
 
 	StartInstance(*opsworks.StartInstanceInput) (*opsworks.StartInstanceOutput, error)
-	StartInstanceWithContext(aws.Context, *opsworks.StartInstanceInput, ...request.Option) (*opsworks.StartInstanceOutput, error)
-	StartInstanceRequest(*opsworks.StartInstanceInput) (*request.Request, *opsworks.StartInstanceOutput)
+	StartInstanceWithContext(aws.Context, *opsworks.StartInstanceInput, ...aws.Option) (*opsworks.StartInstanceOutput, error)
+	StartInstanceRequest(*opsworks.StartInstanceInput) (*aws.Request, *opsworks.StartInstanceOutput)
 
 	StartStack(*opsworks.StartStackInput) (*opsworks.StartStackOutput, error)
-	StartStackWithContext(aws.Context, *opsworks.StartStackInput, ...request.Option) (*opsworks.StartStackOutput, error)
-	StartStackRequest(*opsworks.StartStackInput) (*request.Request, *opsworks.StartStackOutput)
+	StartStackWithContext(aws.Context, *opsworks.StartStackInput, ...aws.Option) (*opsworks.StartStackOutput, error)
+	StartStackRequest(*opsworks.StartStackInput) (*aws.Request, *opsworks.StartStackOutput)
 
 	StopInstance(*opsworks.StopInstanceInput) (*opsworks.StopInstanceOutput, error)
-	StopInstanceWithContext(aws.Context, *opsworks.StopInstanceInput, ...request.Option) (*opsworks.StopInstanceOutput, error)
-	StopInstanceRequest(*opsworks.StopInstanceInput) (*request.Request, *opsworks.StopInstanceOutput)
+	StopInstanceWithContext(aws.Context, *opsworks.StopInstanceInput, ...aws.Option) (*opsworks.StopInstanceOutput, error)
+	StopInstanceRequest(*opsworks.StopInstanceInput) (*aws.Request, *opsworks.StopInstanceOutput)
 
 	StopStack(*opsworks.StopStackInput) (*opsworks.StopStackOutput, error)
-	StopStackWithContext(aws.Context, *opsworks.StopStackInput, ...request.Option) (*opsworks.StopStackOutput, error)
-	StopStackRequest(*opsworks.StopStackInput) (*request.Request, *opsworks.StopStackOutput)
+	StopStackWithContext(aws.Context, *opsworks.StopStackInput, ...aws.Option) (*opsworks.StopStackOutput, error)
+	StopStackRequest(*opsworks.StopStackInput) (*aws.Request, *opsworks.StopStackOutput)
 
 	TagResource(*opsworks.TagResourceInput) (*opsworks.TagResourceOutput, error)
-	TagResourceWithContext(aws.Context, *opsworks.TagResourceInput, ...request.Option) (*opsworks.TagResourceOutput, error)
-	TagResourceRequest(*opsworks.TagResourceInput) (*request.Request, *opsworks.TagResourceOutput)
+	TagResourceWithContext(aws.Context, *opsworks.TagResourceInput, ...aws.Option) (*opsworks.TagResourceOutput, error)
+	TagResourceRequest(*opsworks.TagResourceInput) (*aws.Request, *opsworks.TagResourceOutput)
 
 	UnassignInstance(*opsworks.UnassignInstanceInput) (*opsworks.UnassignInstanceOutput, error)
-	UnassignInstanceWithContext(aws.Context, *opsworks.UnassignInstanceInput, ...request.Option) (*opsworks.UnassignInstanceOutput, error)
-	UnassignInstanceRequest(*opsworks.UnassignInstanceInput) (*request.Request, *opsworks.UnassignInstanceOutput)
+	UnassignInstanceWithContext(aws.Context, *opsworks.UnassignInstanceInput, ...aws.Option) (*opsworks.UnassignInstanceOutput, error)
+	UnassignInstanceRequest(*opsworks.UnassignInstanceInput) (*aws.Request, *opsworks.UnassignInstanceOutput)
 
 	UnassignVolume(*opsworks.UnassignVolumeInput) (*opsworks.UnassignVolumeOutput, error)
-	UnassignVolumeWithContext(aws.Context, *opsworks.UnassignVolumeInput, ...request.Option) (*opsworks.UnassignVolumeOutput, error)
-	UnassignVolumeRequest(*opsworks.UnassignVolumeInput) (*request.Request, *opsworks.UnassignVolumeOutput)
+	UnassignVolumeWithContext(aws.Context, *opsworks.UnassignVolumeInput, ...aws.Option) (*opsworks.UnassignVolumeOutput, error)
+	UnassignVolumeRequest(*opsworks.UnassignVolumeInput) (*aws.Request, *opsworks.UnassignVolumeOutput)
 
 	UntagResource(*opsworks.UntagResourceInput) (*opsworks.UntagResourceOutput, error)
-	UntagResourceWithContext(aws.Context, *opsworks.UntagResourceInput, ...request.Option) (*opsworks.UntagResourceOutput, error)
-	UntagResourceRequest(*opsworks.UntagResourceInput) (*request.Request, *opsworks.UntagResourceOutput)
+	UntagResourceWithContext(aws.Context, *opsworks.UntagResourceInput, ...aws.Option) (*opsworks.UntagResourceOutput, error)
+	UntagResourceRequest(*opsworks.UntagResourceInput) (*aws.Request, *opsworks.UntagResourceOutput)
 
 	UpdateApp(*opsworks.UpdateAppInput) (*opsworks.UpdateAppOutput, error)
-	UpdateAppWithContext(aws.Context, *opsworks.UpdateAppInput, ...request.Option) (*opsworks.UpdateAppOutput, error)
-	UpdateAppRequest(*opsworks.UpdateAppInput) (*request.Request, *opsworks.UpdateAppOutput)
+	UpdateAppWithContext(aws.Context, *opsworks.UpdateAppInput, ...aws.Option) (*opsworks.UpdateAppOutput, error)
+	UpdateAppRequest(*opsworks.UpdateAppInput) (*aws.Request, *opsworks.UpdateAppOutput)
 
 	UpdateElasticIp(*opsworks.UpdateElasticIpInput) (*opsworks.UpdateElasticIpOutput, error)
-	UpdateElasticIpWithContext(aws.Context, *opsworks.UpdateElasticIpInput, ...request.Option) (*opsworks.UpdateElasticIpOutput, error)
-	UpdateElasticIpRequest(*opsworks.UpdateElasticIpInput) (*request.Request, *opsworks.UpdateElasticIpOutput)
+	UpdateElasticIpWithContext(aws.Context, *opsworks.UpdateElasticIpInput, ...aws.Option) (*opsworks.UpdateElasticIpOutput, error)
+	UpdateElasticIpRequest(*opsworks.UpdateElasticIpInput) (*aws.Request, *opsworks.UpdateElasticIpOutput)
 
 	UpdateInstance(*opsworks.UpdateInstanceInput) (*opsworks.UpdateInstanceOutput, error)
-	UpdateInstanceWithContext(aws.Context, *opsworks.UpdateInstanceInput, ...request.Option) (*opsworks.UpdateInstanceOutput, error)
-	UpdateInstanceRequest(*opsworks.UpdateInstanceInput) (*request.Request, *opsworks.UpdateInstanceOutput)
+	UpdateInstanceWithContext(aws.Context, *opsworks.UpdateInstanceInput, ...aws.Option) (*opsworks.UpdateInstanceOutput, error)
+	UpdateInstanceRequest(*opsworks.UpdateInstanceInput) (*aws.Request, *opsworks.UpdateInstanceOutput)
 
 	UpdateLayer(*opsworks.UpdateLayerInput) (*opsworks.UpdateLayerOutput, error)
-	UpdateLayerWithContext(aws.Context, *opsworks.UpdateLayerInput, ...request.Option) (*opsworks.UpdateLayerOutput, error)
-	UpdateLayerRequest(*opsworks.UpdateLayerInput) (*request.Request, *opsworks.UpdateLayerOutput)
+	UpdateLayerWithContext(aws.Context, *opsworks.UpdateLayerInput, ...aws.Option) (*opsworks.UpdateLayerOutput, error)
+	UpdateLayerRequest(*opsworks.UpdateLayerInput) (*aws.Request, *opsworks.UpdateLayerOutput)
 
 	UpdateMyUserProfile(*opsworks.UpdateMyUserProfileInput) (*opsworks.UpdateMyUserProfileOutput, error)
-	UpdateMyUserProfileWithContext(aws.Context, *opsworks.UpdateMyUserProfileInput, ...request.Option) (*opsworks.UpdateMyUserProfileOutput, error)
-	UpdateMyUserProfileRequest(*opsworks.UpdateMyUserProfileInput) (*request.Request, *opsworks.UpdateMyUserProfileOutput)
+	UpdateMyUserProfileWithContext(aws.Context, *opsworks.UpdateMyUserProfileInput, ...aws.Option) (*opsworks.UpdateMyUserProfileOutput, error)
+	UpdateMyUserProfileRequest(*opsworks.UpdateMyUserProfileInput) (*aws.Request, *opsworks.UpdateMyUserProfileOutput)
 
 	UpdateRdsDbInstance(*opsworks.UpdateRdsDbInstanceInput) (*opsworks.UpdateRdsDbInstanceOutput, error)
-	UpdateRdsDbInstanceWithContext(aws.Context, *opsworks.UpdateRdsDbInstanceInput, ...request.Option) (*opsworks.UpdateRdsDbInstanceOutput, error)
-	UpdateRdsDbInstanceRequest(*opsworks.UpdateRdsDbInstanceInput) (*request.Request, *opsworks.UpdateRdsDbInstanceOutput)
+	UpdateRdsDbInstanceWithContext(aws.Context, *opsworks.UpdateRdsDbInstanceInput, ...aws.Option) (*opsworks.UpdateRdsDbInstanceOutput, error)
+	UpdateRdsDbInstanceRequest(*opsworks.UpdateRdsDbInstanceInput) (*aws.Request, *opsworks.UpdateRdsDbInstanceOutput)
 
 	UpdateStack(*opsworks.UpdateStackInput) (*opsworks.UpdateStackOutput, error)
-	UpdateStackWithContext(aws.Context, *opsworks.UpdateStackInput, ...request.Option) (*opsworks.UpdateStackOutput, error)
-	UpdateStackRequest(*opsworks.UpdateStackInput) (*request.Request, *opsworks.UpdateStackOutput)
+	UpdateStackWithContext(aws.Context, *opsworks.UpdateStackInput, ...aws.Option) (*opsworks.UpdateStackOutput, error)
+	UpdateStackRequest(*opsworks.UpdateStackInput) (*aws.Request, *opsworks.UpdateStackOutput)
 
 	UpdateUserProfile(*opsworks.UpdateUserProfileInput) (*opsworks.UpdateUserProfileOutput, error)
-	UpdateUserProfileWithContext(aws.Context, *opsworks.UpdateUserProfileInput, ...request.Option) (*opsworks.UpdateUserProfileOutput, error)
-	UpdateUserProfileRequest(*opsworks.UpdateUserProfileInput) (*request.Request, *opsworks.UpdateUserProfileOutput)
+	UpdateUserProfileWithContext(aws.Context, *opsworks.UpdateUserProfileInput, ...aws.Option) (*opsworks.UpdateUserProfileOutput, error)
+	UpdateUserProfileRequest(*opsworks.UpdateUserProfileInput) (*aws.Request, *opsworks.UpdateUserProfileOutput)
 
 	UpdateVolume(*opsworks.UpdateVolumeInput) (*opsworks.UpdateVolumeOutput, error)
-	UpdateVolumeWithContext(aws.Context, *opsworks.UpdateVolumeInput, ...request.Option) (*opsworks.UpdateVolumeOutput, error)
-	UpdateVolumeRequest(*opsworks.UpdateVolumeInput) (*request.Request, *opsworks.UpdateVolumeOutput)
+	UpdateVolumeWithContext(aws.Context, *opsworks.UpdateVolumeInput, ...aws.Option) (*opsworks.UpdateVolumeOutput, error)
+	UpdateVolumeRequest(*opsworks.UpdateVolumeInput) (*aws.Request, *opsworks.UpdateVolumeOutput)
 
 	WaitUntilAppExists(*opsworks.DescribeAppsInput) error
-	WaitUntilAppExistsWithContext(aws.Context, *opsworks.DescribeAppsInput, ...request.WaiterOption) error
+	WaitUntilAppExistsWithContext(aws.Context, *opsworks.DescribeAppsInput, ...aws.WaiterOption) error
 
 	WaitUntilDeploymentSuccessful(*opsworks.DescribeDeploymentsInput) error
-	WaitUntilDeploymentSuccessfulWithContext(aws.Context, *opsworks.DescribeDeploymentsInput, ...request.WaiterOption) error
+	WaitUntilDeploymentSuccessfulWithContext(aws.Context, *opsworks.DescribeDeploymentsInput, ...aws.WaiterOption) error
 
 	WaitUntilInstanceOnline(*opsworks.DescribeInstancesInput) error
-	WaitUntilInstanceOnlineWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...request.WaiterOption) error
+	WaitUntilInstanceOnlineWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
 
 	WaitUntilInstanceRegistered(*opsworks.DescribeInstancesInput) error
-	WaitUntilInstanceRegisteredWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...request.WaiterOption) error
+	WaitUntilInstanceRegisteredWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
 
 	WaitUntilInstanceStopped(*opsworks.DescribeInstancesInput) error
-	WaitUntilInstanceStoppedWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...request.WaiterOption) error
+	WaitUntilInstanceStoppedWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
 
 	WaitUntilInstanceTerminated(*opsworks.DescribeInstancesInput) error
-	WaitUntilInstanceTerminatedWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...request.WaiterOption) error
+	WaitUntilInstanceTerminatedWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
 }
 
 var _ OpsWorksAPI = (*opsworks.OpsWorks)(nil)

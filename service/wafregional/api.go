@@ -4,14 +4,13 @@ package wafregional
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
 const opAssociateWebACL = "AssociateWebACL"
 
-// AssociateWebACLRequest generates a "aws/request.Request" representing the
+// AssociateWebACLRequest generates a "aws.Request" representing the
 // client's request for the AssociateWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -35,8 +34,8 @@ const opAssociateWebACL = "AssociateWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/AssociateWebACL
-func (c *WAFRegional) AssociateWebACLRequest(input *AssociateWebACLInput) (req *request.Request, output *AssociateWebACLOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) AssociateWebACLRequest(input *AssociateWebACLInput) (req *aws.Request, output *AssociateWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -122,7 +121,7 @@ func (c *WAFRegional) AssociateWebACL(input *AssociateWebACLInput) (*AssociateWe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) AssociateWebACLWithContext(ctx aws.Context, input *AssociateWebACLInput, opts ...request.Option) (*AssociateWebACLOutput, error) {
+func (c *WAFRegional) AssociateWebACLWithContext(ctx aws.Context, input *AssociateWebACLInput, opts ...aws.Option) (*AssociateWebACLOutput, error) {
 	req, out := c.AssociateWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -131,7 +130,7 @@ func (c *WAFRegional) AssociateWebACLWithContext(ctx aws.Context, input *Associa
 
 const opCreateByteMatchSet = "CreateByteMatchSet"
 
-// CreateByteMatchSetRequest generates a "aws/request.Request" representing the
+// CreateByteMatchSetRequest generates a "aws.Request" representing the
 // client's request for the CreateByteMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -155,8 +154,8 @@ const opCreateByteMatchSet = "CreateByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateByteMatchSet
-func (c *WAFRegional) CreateByteMatchSetRequest(input *waf.CreateByteMatchSetInput) (req *request.Request, output *waf.CreateByteMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) CreateByteMatchSetRequest(input *waf.CreateByteMatchSetInput) (req *aws.Request, output *waf.CreateByteMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateByteMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -269,7 +268,7 @@ func (c *WAFRegional) CreateByteMatchSet(input *waf.CreateByteMatchSetInput) (*w
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) CreateByteMatchSetWithContext(ctx aws.Context, input *waf.CreateByteMatchSetInput, opts ...request.Option) (*waf.CreateByteMatchSetOutput, error) {
+func (c *WAFRegional) CreateByteMatchSetWithContext(ctx aws.Context, input *waf.CreateByteMatchSetInput, opts ...aws.Option) (*waf.CreateByteMatchSetOutput, error) {
 	req, out := c.CreateByteMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -278,7 +277,7 @@ func (c *WAFRegional) CreateByteMatchSetWithContext(ctx aws.Context, input *waf.
 
 const opCreateIPSet = "CreateIPSet"
 
-// CreateIPSetRequest generates a "aws/request.Request" representing the
+// CreateIPSetRequest generates a "aws.Request" representing the
 // client's request for the CreateIPSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -302,8 +301,8 @@ const opCreateIPSet = "CreateIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateIPSet
-func (c *WAFRegional) CreateIPSetRequest(input *waf.CreateIPSetInput) (req *request.Request, output *waf.CreateIPSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) CreateIPSetRequest(input *waf.CreateIPSetInput) (req *aws.Request, output *waf.CreateIPSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateIPSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -416,7 +415,7 @@ func (c *WAFRegional) CreateIPSet(input *waf.CreateIPSetInput) (*waf.CreateIPSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) CreateIPSetWithContext(ctx aws.Context, input *waf.CreateIPSetInput, opts ...request.Option) (*waf.CreateIPSetOutput, error) {
+func (c *WAFRegional) CreateIPSetWithContext(ctx aws.Context, input *waf.CreateIPSetInput, opts ...aws.Option) (*waf.CreateIPSetOutput, error) {
 	req, out := c.CreateIPSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -425,7 +424,7 @@ func (c *WAFRegional) CreateIPSetWithContext(ctx aws.Context, input *waf.CreateI
 
 const opCreateRateBasedRule = "CreateRateBasedRule"
 
-// CreateRateBasedRuleRequest generates a "aws/request.Request" representing the
+// CreateRateBasedRuleRequest generates a "aws.Request" representing the
 // client's request for the CreateRateBasedRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -449,8 +448,8 @@ const opCreateRateBasedRule = "CreateRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRateBasedRule
-func (c *WAFRegional) CreateRateBasedRuleRequest(input *waf.CreateRateBasedRuleInput) (req *request.Request, output *waf.CreateRateBasedRuleOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) CreateRateBasedRuleRequest(input *waf.CreateRateBasedRuleInput) (req *aws.Request, output *waf.CreateRateBasedRuleOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRateBasedRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -598,7 +597,7 @@ func (c *WAFRegional) CreateRateBasedRule(input *waf.CreateRateBasedRuleInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) CreateRateBasedRuleWithContext(ctx aws.Context, input *waf.CreateRateBasedRuleInput, opts ...request.Option) (*waf.CreateRateBasedRuleOutput, error) {
+func (c *WAFRegional) CreateRateBasedRuleWithContext(ctx aws.Context, input *waf.CreateRateBasedRuleInput, opts ...aws.Option) (*waf.CreateRateBasedRuleOutput, error) {
 	req, out := c.CreateRateBasedRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -607,7 +606,7 @@ func (c *WAFRegional) CreateRateBasedRuleWithContext(ctx aws.Context, input *waf
 
 const opCreateRule = "CreateRule"
 
-// CreateRuleRequest generates a "aws/request.Request" representing the
+// CreateRuleRequest generates a "aws.Request" representing the
 // client's request for the CreateRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -631,8 +630,8 @@ const opCreateRule = "CreateRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRule
-func (c *WAFRegional) CreateRuleRequest(input *waf.CreateRuleInput) (req *request.Request, output *waf.CreateRuleOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) CreateRuleRequest(input *waf.CreateRuleInput) (req *aws.Request, output *waf.CreateRuleOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -755,7 +754,7 @@ func (c *WAFRegional) CreateRule(input *waf.CreateRuleInput) (*waf.CreateRuleOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) CreateRuleWithContext(ctx aws.Context, input *waf.CreateRuleInput, opts ...request.Option) (*waf.CreateRuleOutput, error) {
+func (c *WAFRegional) CreateRuleWithContext(ctx aws.Context, input *waf.CreateRuleInput, opts ...aws.Option) (*waf.CreateRuleOutput, error) {
 	req, out := c.CreateRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -764,7 +763,7 @@ func (c *WAFRegional) CreateRuleWithContext(ctx aws.Context, input *waf.CreateRu
 
 const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
 
-// CreateSizeConstraintSetRequest generates a "aws/request.Request" representing the
+// CreateSizeConstraintSetRequest generates a "aws.Request" representing the
 // client's request for the CreateSizeConstraintSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -788,8 +787,8 @@ const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSizeConstraintSet
-func (c *WAFRegional) CreateSizeConstraintSetRequest(input *waf.CreateSizeConstraintSetInput) (req *request.Request, output *waf.CreateSizeConstraintSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) CreateSizeConstraintSetRequest(input *waf.CreateSizeConstraintSetInput) (req *aws.Request, output *waf.CreateSizeConstraintSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSizeConstraintSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -903,7 +902,7 @@ func (c *WAFRegional) CreateSizeConstraintSet(input *waf.CreateSizeConstraintSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) CreateSizeConstraintSetWithContext(ctx aws.Context, input *waf.CreateSizeConstraintSetInput, opts ...request.Option) (*waf.CreateSizeConstraintSetOutput, error) {
+func (c *WAFRegional) CreateSizeConstraintSetWithContext(ctx aws.Context, input *waf.CreateSizeConstraintSetInput, opts ...aws.Option) (*waf.CreateSizeConstraintSetOutput, error) {
 	req, out := c.CreateSizeConstraintSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -912,7 +911,7 @@ func (c *WAFRegional) CreateSizeConstraintSetWithContext(ctx aws.Context, input 
 
 const opCreateSqlInjectionMatchSet = "CreateSqlInjectionMatchSet"
 
-// CreateSqlInjectionMatchSetRequest generates a "aws/request.Request" representing the
+// CreateSqlInjectionMatchSetRequest generates a "aws.Request" representing the
 // client's request for the CreateSqlInjectionMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -936,8 +935,8 @@ const opCreateSqlInjectionMatchSet = "CreateSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSqlInjectionMatchSet
-func (c *WAFRegional) CreateSqlInjectionMatchSetRequest(input *waf.CreateSqlInjectionMatchSetInput) (req *request.Request, output *waf.CreateSqlInjectionMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) CreateSqlInjectionMatchSetRequest(input *waf.CreateSqlInjectionMatchSetInput) (req *aws.Request, output *waf.CreateSqlInjectionMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSqlInjectionMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1047,7 +1046,7 @@ func (c *WAFRegional) CreateSqlInjectionMatchSet(input *waf.CreateSqlInjectionMa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) CreateSqlInjectionMatchSetWithContext(ctx aws.Context, input *waf.CreateSqlInjectionMatchSetInput, opts ...request.Option) (*waf.CreateSqlInjectionMatchSetOutput, error) {
+func (c *WAFRegional) CreateSqlInjectionMatchSetWithContext(ctx aws.Context, input *waf.CreateSqlInjectionMatchSetInput, opts ...aws.Option) (*waf.CreateSqlInjectionMatchSetOutput, error) {
 	req, out := c.CreateSqlInjectionMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1056,7 +1055,7 @@ func (c *WAFRegional) CreateSqlInjectionMatchSetWithContext(ctx aws.Context, inp
 
 const opCreateWebACL = "CreateWebACL"
 
-// CreateWebACLRequest generates a "aws/request.Request" representing the
+// CreateWebACLRequest generates a "aws.Request" representing the
 // client's request for the CreateWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1080,8 +1079,8 @@ const opCreateWebACL = "CreateWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateWebACL
-func (c *WAFRegional) CreateWebACLRequest(input *waf.CreateWebACLInput) (req *request.Request, output *waf.CreateWebACLOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) CreateWebACLRequest(input *waf.CreateWebACLInput) (req *aws.Request, output *waf.CreateWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opCreateWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1203,7 +1202,7 @@ func (c *WAFRegional) CreateWebACL(input *waf.CreateWebACLInput) (*waf.CreateWeb
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) CreateWebACLWithContext(ctx aws.Context, input *waf.CreateWebACLInput, opts ...request.Option) (*waf.CreateWebACLOutput, error) {
+func (c *WAFRegional) CreateWebACLWithContext(ctx aws.Context, input *waf.CreateWebACLInput, opts ...aws.Option) (*waf.CreateWebACLOutput, error) {
 	req, out := c.CreateWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1212,7 +1211,7 @@ func (c *WAFRegional) CreateWebACLWithContext(ctx aws.Context, input *waf.Create
 
 const opCreateXssMatchSet = "CreateXssMatchSet"
 
-// CreateXssMatchSetRequest generates a "aws/request.Request" representing the
+// CreateXssMatchSetRequest generates a "aws.Request" representing the
 // client's request for the CreateXssMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1236,8 +1235,8 @@ const opCreateXssMatchSet = "CreateXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateXssMatchSet
-func (c *WAFRegional) CreateXssMatchSetRequest(input *waf.CreateXssMatchSetInput) (req *request.Request, output *waf.CreateXssMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) CreateXssMatchSetRequest(input *waf.CreateXssMatchSetInput) (req *aws.Request, output *waf.CreateXssMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateXssMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1348,7 +1347,7 @@ func (c *WAFRegional) CreateXssMatchSet(input *waf.CreateXssMatchSetInput) (*waf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) CreateXssMatchSetWithContext(ctx aws.Context, input *waf.CreateXssMatchSetInput, opts ...request.Option) (*waf.CreateXssMatchSetOutput, error) {
+func (c *WAFRegional) CreateXssMatchSetWithContext(ctx aws.Context, input *waf.CreateXssMatchSetInput, opts ...aws.Option) (*waf.CreateXssMatchSetOutput, error) {
 	req, out := c.CreateXssMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1357,7 +1356,7 @@ func (c *WAFRegional) CreateXssMatchSetWithContext(ctx aws.Context, input *waf.C
 
 const opDeleteByteMatchSet = "DeleteByteMatchSet"
 
-// DeleteByteMatchSetRequest generates a "aws/request.Request" representing the
+// DeleteByteMatchSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteByteMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1381,8 +1380,8 @@ const opDeleteByteMatchSet = "DeleteByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteByteMatchSet
-func (c *WAFRegional) DeleteByteMatchSetRequest(input *waf.DeleteByteMatchSetInput) (req *request.Request, output *waf.DeleteByteMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) DeleteByteMatchSetRequest(input *waf.DeleteByteMatchSetInput) (req *aws.Request, output *waf.DeleteByteMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteByteMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1475,7 +1474,7 @@ func (c *WAFRegional) DeleteByteMatchSet(input *waf.DeleteByteMatchSetInput) (*w
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) DeleteByteMatchSetWithContext(ctx aws.Context, input *waf.DeleteByteMatchSetInput, opts ...request.Option) (*waf.DeleteByteMatchSetOutput, error) {
+func (c *WAFRegional) DeleteByteMatchSetWithContext(ctx aws.Context, input *waf.DeleteByteMatchSetInput, opts ...aws.Option) (*waf.DeleteByteMatchSetOutput, error) {
 	req, out := c.DeleteByteMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1484,7 +1483,7 @@ func (c *WAFRegional) DeleteByteMatchSetWithContext(ctx aws.Context, input *waf.
 
 const opDeleteIPSet = "DeleteIPSet"
 
-// DeleteIPSetRequest generates a "aws/request.Request" representing the
+// DeleteIPSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteIPSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1508,8 +1507,8 @@ const opDeleteIPSet = "DeleteIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteIPSet
-func (c *WAFRegional) DeleteIPSetRequest(input *waf.DeleteIPSetInput) (req *request.Request, output *waf.DeleteIPSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) DeleteIPSetRequest(input *waf.DeleteIPSetInput) (req *aws.Request, output *waf.DeleteIPSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIPSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1601,7 +1600,7 @@ func (c *WAFRegional) DeleteIPSet(input *waf.DeleteIPSetInput) (*waf.DeleteIPSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) DeleteIPSetWithContext(ctx aws.Context, input *waf.DeleteIPSetInput, opts ...request.Option) (*waf.DeleteIPSetOutput, error) {
+func (c *WAFRegional) DeleteIPSetWithContext(ctx aws.Context, input *waf.DeleteIPSetInput, opts ...aws.Option) (*waf.DeleteIPSetOutput, error) {
 	req, out := c.DeleteIPSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1610,7 +1609,7 @@ func (c *WAFRegional) DeleteIPSetWithContext(ctx aws.Context, input *waf.DeleteI
 
 const opDeleteRateBasedRule = "DeleteRateBasedRule"
 
-// DeleteRateBasedRuleRequest generates a "aws/request.Request" representing the
+// DeleteRateBasedRuleRequest generates a "aws.Request" representing the
 // client's request for the DeleteRateBasedRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1634,8 +1633,8 @@ const opDeleteRateBasedRule = "DeleteRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRateBasedRule
-func (c *WAFRegional) DeleteRateBasedRuleRequest(input *waf.DeleteRateBasedRuleInput) (req *request.Request, output *waf.DeleteRateBasedRuleOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) DeleteRateBasedRuleRequest(input *waf.DeleteRateBasedRuleInput) (req *aws.Request, output *waf.DeleteRateBasedRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRateBasedRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1729,7 +1728,7 @@ func (c *WAFRegional) DeleteRateBasedRule(input *waf.DeleteRateBasedRuleInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) DeleteRateBasedRuleWithContext(ctx aws.Context, input *waf.DeleteRateBasedRuleInput, opts ...request.Option) (*waf.DeleteRateBasedRuleOutput, error) {
+func (c *WAFRegional) DeleteRateBasedRuleWithContext(ctx aws.Context, input *waf.DeleteRateBasedRuleInput, opts ...aws.Option) (*waf.DeleteRateBasedRuleOutput, error) {
 	req, out := c.DeleteRateBasedRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1738,7 +1737,7 @@ func (c *WAFRegional) DeleteRateBasedRuleWithContext(ctx aws.Context, input *waf
 
 const opDeleteRule = "DeleteRule"
 
-// DeleteRuleRequest generates a "aws/request.Request" representing the
+// DeleteRuleRequest generates a "aws.Request" representing the
 // client's request for the DeleteRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1762,8 +1761,8 @@ const opDeleteRule = "DeleteRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRule
-func (c *WAFRegional) DeleteRuleRequest(input *waf.DeleteRuleInput) (req *request.Request, output *waf.DeleteRuleOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) DeleteRuleRequest(input *waf.DeleteRuleInput) (req *aws.Request, output *waf.DeleteRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1855,7 +1854,7 @@ func (c *WAFRegional) DeleteRule(input *waf.DeleteRuleInput) (*waf.DeleteRuleOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) DeleteRuleWithContext(ctx aws.Context, input *waf.DeleteRuleInput, opts ...request.Option) (*waf.DeleteRuleOutput, error) {
+func (c *WAFRegional) DeleteRuleWithContext(ctx aws.Context, input *waf.DeleteRuleInput, opts ...aws.Option) (*waf.DeleteRuleOutput, error) {
 	req, out := c.DeleteRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1864,7 +1863,7 @@ func (c *WAFRegional) DeleteRuleWithContext(ctx aws.Context, input *waf.DeleteRu
 
 const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
 
-// DeleteSizeConstraintSetRequest generates a "aws/request.Request" representing the
+// DeleteSizeConstraintSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteSizeConstraintSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1888,8 +1887,8 @@ const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSizeConstraintSet
-func (c *WAFRegional) DeleteSizeConstraintSetRequest(input *waf.DeleteSizeConstraintSetInput) (req *request.Request, output *waf.DeleteSizeConstraintSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) DeleteSizeConstraintSetRequest(input *waf.DeleteSizeConstraintSetInput) (req *aws.Request, output *waf.DeleteSizeConstraintSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSizeConstraintSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1982,7 +1981,7 @@ func (c *WAFRegional) DeleteSizeConstraintSet(input *waf.DeleteSizeConstraintSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) DeleteSizeConstraintSetWithContext(ctx aws.Context, input *waf.DeleteSizeConstraintSetInput, opts ...request.Option) (*waf.DeleteSizeConstraintSetOutput, error) {
+func (c *WAFRegional) DeleteSizeConstraintSetWithContext(ctx aws.Context, input *waf.DeleteSizeConstraintSetInput, opts ...aws.Option) (*waf.DeleteSizeConstraintSetOutput, error) {
 	req, out := c.DeleteSizeConstraintSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1991,7 +1990,7 @@ func (c *WAFRegional) DeleteSizeConstraintSetWithContext(ctx aws.Context, input 
 
 const opDeleteSqlInjectionMatchSet = "DeleteSqlInjectionMatchSet"
 
-// DeleteSqlInjectionMatchSetRequest generates a "aws/request.Request" representing the
+// DeleteSqlInjectionMatchSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteSqlInjectionMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2015,8 +2014,8 @@ const opDeleteSqlInjectionMatchSet = "DeleteSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSqlInjectionMatchSet
-func (c *WAFRegional) DeleteSqlInjectionMatchSetRequest(input *waf.DeleteSqlInjectionMatchSetInput) (req *request.Request, output *waf.DeleteSqlInjectionMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) DeleteSqlInjectionMatchSetRequest(input *waf.DeleteSqlInjectionMatchSetInput) (req *aws.Request, output *waf.DeleteSqlInjectionMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSqlInjectionMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2110,7 +2109,7 @@ func (c *WAFRegional) DeleteSqlInjectionMatchSet(input *waf.DeleteSqlInjectionMa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) DeleteSqlInjectionMatchSetWithContext(ctx aws.Context, input *waf.DeleteSqlInjectionMatchSetInput, opts ...request.Option) (*waf.DeleteSqlInjectionMatchSetOutput, error) {
+func (c *WAFRegional) DeleteSqlInjectionMatchSetWithContext(ctx aws.Context, input *waf.DeleteSqlInjectionMatchSetInput, opts ...aws.Option) (*waf.DeleteSqlInjectionMatchSetOutput, error) {
 	req, out := c.DeleteSqlInjectionMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2119,7 +2118,7 @@ func (c *WAFRegional) DeleteSqlInjectionMatchSetWithContext(ctx aws.Context, inp
 
 const opDeleteWebACL = "DeleteWebACL"
 
-// DeleteWebACLRequest generates a "aws/request.Request" representing the
+// DeleteWebACLRequest generates a "aws.Request" representing the
 // client's request for the DeleteWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2143,8 +2142,8 @@ const opDeleteWebACL = "DeleteWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteWebACL
-func (c *WAFRegional) DeleteWebACLRequest(input *waf.DeleteWebACLInput) (req *request.Request, output *waf.DeleteWebACLOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) DeleteWebACLRequest(input *waf.DeleteWebACLInput) (req *aws.Request, output *waf.DeleteWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2233,7 +2232,7 @@ func (c *WAFRegional) DeleteWebACL(input *waf.DeleteWebACLInput) (*waf.DeleteWeb
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) DeleteWebACLWithContext(ctx aws.Context, input *waf.DeleteWebACLInput, opts ...request.Option) (*waf.DeleteWebACLOutput, error) {
+func (c *WAFRegional) DeleteWebACLWithContext(ctx aws.Context, input *waf.DeleteWebACLInput, opts ...aws.Option) (*waf.DeleteWebACLOutput, error) {
 	req, out := c.DeleteWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2242,7 +2241,7 @@ func (c *WAFRegional) DeleteWebACLWithContext(ctx aws.Context, input *waf.Delete
 
 const opDeleteXssMatchSet = "DeleteXssMatchSet"
 
-// DeleteXssMatchSetRequest generates a "aws/request.Request" representing the
+// DeleteXssMatchSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteXssMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2266,8 +2265,8 @@ const opDeleteXssMatchSet = "DeleteXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteXssMatchSet
-func (c *WAFRegional) DeleteXssMatchSetRequest(input *waf.DeleteXssMatchSetInput) (req *request.Request, output *waf.DeleteXssMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) DeleteXssMatchSetRequest(input *waf.DeleteXssMatchSetInput) (req *aws.Request, output *waf.DeleteXssMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteXssMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2360,7 +2359,7 @@ func (c *WAFRegional) DeleteXssMatchSet(input *waf.DeleteXssMatchSetInput) (*waf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) DeleteXssMatchSetWithContext(ctx aws.Context, input *waf.DeleteXssMatchSetInput, opts ...request.Option) (*waf.DeleteXssMatchSetOutput, error) {
+func (c *WAFRegional) DeleteXssMatchSetWithContext(ctx aws.Context, input *waf.DeleteXssMatchSetInput, opts ...aws.Option) (*waf.DeleteXssMatchSetOutput, error) {
 	req, out := c.DeleteXssMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2369,7 +2368,7 @@ func (c *WAFRegional) DeleteXssMatchSetWithContext(ctx aws.Context, input *waf.D
 
 const opDisassociateWebACL = "DisassociateWebACL"
 
-// DisassociateWebACLRequest generates a "aws/request.Request" representing the
+// DisassociateWebACLRequest generates a "aws.Request" representing the
 // client's request for the DisassociateWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2393,8 +2392,8 @@ const opDisassociateWebACL = "DisassociateWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DisassociateWebACL
-func (c *WAFRegional) DisassociateWebACLRequest(input *DisassociateWebACLInput) (req *request.Request, output *DisassociateWebACLOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) DisassociateWebACLRequest(input *DisassociateWebACLInput) (req *aws.Request, output *DisassociateWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2476,7 +2475,7 @@ func (c *WAFRegional) DisassociateWebACL(input *DisassociateWebACLInput) (*Disas
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) DisassociateWebACLWithContext(ctx aws.Context, input *DisassociateWebACLInput, opts ...request.Option) (*DisassociateWebACLOutput, error) {
+func (c *WAFRegional) DisassociateWebACLWithContext(ctx aws.Context, input *DisassociateWebACLInput, opts ...aws.Option) (*DisassociateWebACLOutput, error) {
 	req, out := c.DisassociateWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2485,7 +2484,7 @@ func (c *WAFRegional) DisassociateWebACLWithContext(ctx aws.Context, input *Disa
 
 const opGetByteMatchSet = "GetByteMatchSet"
 
-// GetByteMatchSetRequest generates a "aws/request.Request" representing the
+// GetByteMatchSetRequest generates a "aws.Request" representing the
 // client's request for the GetByteMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2509,8 +2508,8 @@ const opGetByteMatchSet = "GetByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetByteMatchSet
-func (c *WAFRegional) GetByteMatchSetRequest(input *waf.GetByteMatchSetInput) (req *request.Request, output *waf.GetByteMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetByteMatchSetRequest(input *waf.GetByteMatchSetInput) (req *aws.Request, output *waf.GetByteMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetByteMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2563,7 +2562,7 @@ func (c *WAFRegional) GetByteMatchSet(input *waf.GetByteMatchSetInput) (*waf.Get
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetByteMatchSetWithContext(ctx aws.Context, input *waf.GetByteMatchSetInput, opts ...request.Option) (*waf.GetByteMatchSetOutput, error) {
+func (c *WAFRegional) GetByteMatchSetWithContext(ctx aws.Context, input *waf.GetByteMatchSetInput, opts ...aws.Option) (*waf.GetByteMatchSetOutput, error) {
 	req, out := c.GetByteMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2572,7 +2571,7 @@ func (c *WAFRegional) GetByteMatchSetWithContext(ctx aws.Context, input *waf.Get
 
 const opGetChangeToken = "GetChangeToken"
 
-// GetChangeTokenRequest generates a "aws/request.Request" representing the
+// GetChangeTokenRequest generates a "aws.Request" representing the
 // client's request for the GetChangeToken operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2596,8 +2595,8 @@ const opGetChangeToken = "GetChangeToken"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeToken
-func (c *WAFRegional) GetChangeTokenRequest(input *waf.GetChangeTokenInput) (req *request.Request, output *waf.GetChangeTokenOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetChangeTokenRequest(input *waf.GetChangeTokenInput) (req *aws.Request, output *waf.GetChangeTokenOutput) {
+	op := &aws.Operation{
 		Name:       opGetChangeToken,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2657,7 +2656,7 @@ func (c *WAFRegional) GetChangeToken(input *waf.GetChangeTokenInput) (*waf.GetCh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetChangeTokenWithContext(ctx aws.Context, input *waf.GetChangeTokenInput, opts ...request.Option) (*waf.GetChangeTokenOutput, error) {
+func (c *WAFRegional) GetChangeTokenWithContext(ctx aws.Context, input *waf.GetChangeTokenInput, opts ...aws.Option) (*waf.GetChangeTokenOutput, error) {
 	req, out := c.GetChangeTokenRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2666,7 +2665,7 @@ func (c *WAFRegional) GetChangeTokenWithContext(ctx aws.Context, input *waf.GetC
 
 const opGetChangeTokenStatus = "GetChangeTokenStatus"
 
-// GetChangeTokenStatusRequest generates a "aws/request.Request" representing the
+// GetChangeTokenStatusRequest generates a "aws.Request" representing the
 // client's request for the GetChangeTokenStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2690,8 +2689,8 @@ const opGetChangeTokenStatus = "GetChangeTokenStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenStatus
-func (c *WAFRegional) GetChangeTokenStatusRequest(input *waf.GetChangeTokenStatusInput) (req *request.Request, output *waf.GetChangeTokenStatusOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetChangeTokenStatusRequest(input *waf.GetChangeTokenStatusInput) (req *aws.Request, output *waf.GetChangeTokenStatusOutput) {
+	op := &aws.Operation{
 		Name:       opGetChangeTokenStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2750,7 +2749,7 @@ func (c *WAFRegional) GetChangeTokenStatus(input *waf.GetChangeTokenStatusInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetChangeTokenStatusWithContext(ctx aws.Context, input *waf.GetChangeTokenStatusInput, opts ...request.Option) (*waf.GetChangeTokenStatusOutput, error) {
+func (c *WAFRegional) GetChangeTokenStatusWithContext(ctx aws.Context, input *waf.GetChangeTokenStatusInput, opts ...aws.Option) (*waf.GetChangeTokenStatusOutput, error) {
 	req, out := c.GetChangeTokenStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2759,7 +2758,7 @@ func (c *WAFRegional) GetChangeTokenStatusWithContext(ctx aws.Context, input *wa
 
 const opGetIPSet = "GetIPSet"
 
-// GetIPSetRequest generates a "aws/request.Request" representing the
+// GetIPSetRequest generates a "aws.Request" representing the
 // client's request for the GetIPSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2783,8 +2782,8 @@ const opGetIPSet = "GetIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetIPSet
-func (c *WAFRegional) GetIPSetRequest(input *waf.GetIPSetInput) (req *request.Request, output *waf.GetIPSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetIPSetRequest(input *waf.GetIPSetInput) (req *aws.Request, output *waf.GetIPSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetIPSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2837,7 +2836,7 @@ func (c *WAFRegional) GetIPSet(input *waf.GetIPSetInput) (*waf.GetIPSetOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetIPSetWithContext(ctx aws.Context, input *waf.GetIPSetInput, opts ...request.Option) (*waf.GetIPSetOutput, error) {
+func (c *WAFRegional) GetIPSetWithContext(ctx aws.Context, input *waf.GetIPSetInput, opts ...aws.Option) (*waf.GetIPSetOutput, error) {
 	req, out := c.GetIPSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2846,7 +2845,7 @@ func (c *WAFRegional) GetIPSetWithContext(ctx aws.Context, input *waf.GetIPSetIn
 
 const opGetRateBasedRule = "GetRateBasedRule"
 
-// GetRateBasedRuleRequest generates a "aws/request.Request" representing the
+// GetRateBasedRuleRequest generates a "aws.Request" representing the
 // client's request for the GetRateBasedRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2870,8 +2869,8 @@ const opGetRateBasedRule = "GetRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRule
-func (c *WAFRegional) GetRateBasedRuleRequest(input *waf.GetRateBasedRuleInput) (req *request.Request, output *waf.GetRateBasedRuleOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetRateBasedRuleRequest(input *waf.GetRateBasedRuleInput) (req *aws.Request, output *waf.GetRateBasedRuleOutput) {
+	op := &aws.Operation{
 		Name:       opGetRateBasedRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2925,7 +2924,7 @@ func (c *WAFRegional) GetRateBasedRule(input *waf.GetRateBasedRuleInput) (*waf.G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetRateBasedRuleWithContext(ctx aws.Context, input *waf.GetRateBasedRuleInput, opts ...request.Option) (*waf.GetRateBasedRuleOutput, error) {
+func (c *WAFRegional) GetRateBasedRuleWithContext(ctx aws.Context, input *waf.GetRateBasedRuleInput, opts ...aws.Option) (*waf.GetRateBasedRuleOutput, error) {
 	req, out := c.GetRateBasedRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2934,7 +2933,7 @@ func (c *WAFRegional) GetRateBasedRuleWithContext(ctx aws.Context, input *waf.Ge
 
 const opGetRateBasedRuleManagedKeys = "GetRateBasedRuleManagedKeys"
 
-// GetRateBasedRuleManagedKeysRequest generates a "aws/request.Request" representing the
+// GetRateBasedRuleManagedKeysRequest generates a "aws.Request" representing the
 // client's request for the GetRateBasedRuleManagedKeys operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2958,8 +2957,8 @@ const opGetRateBasedRuleManagedKeys = "GetRateBasedRuleManagedKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRateBasedRuleManagedKeys
-func (c *WAFRegional) GetRateBasedRuleManagedKeysRequest(input *waf.GetRateBasedRuleManagedKeysInput) (req *request.Request, output *waf.GetRateBasedRuleManagedKeysOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetRateBasedRuleManagedKeysRequest(input *waf.GetRateBasedRuleManagedKeysInput) (req *aws.Request, output *waf.GetRateBasedRuleManagedKeysOutput) {
+	op := &aws.Operation{
 		Name:       opGetRateBasedRuleManagedKeys,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3044,7 +3043,7 @@ func (c *WAFRegional) GetRateBasedRuleManagedKeys(input *waf.GetRateBasedRuleMan
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetRateBasedRuleManagedKeysWithContext(ctx aws.Context, input *waf.GetRateBasedRuleManagedKeysInput, opts ...request.Option) (*waf.GetRateBasedRuleManagedKeysOutput, error) {
+func (c *WAFRegional) GetRateBasedRuleManagedKeysWithContext(ctx aws.Context, input *waf.GetRateBasedRuleManagedKeysInput, opts ...aws.Option) (*waf.GetRateBasedRuleManagedKeysOutput, error) {
 	req, out := c.GetRateBasedRuleManagedKeysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3053,7 +3052,7 @@ func (c *WAFRegional) GetRateBasedRuleManagedKeysWithContext(ctx aws.Context, in
 
 const opGetRule = "GetRule"
 
-// GetRuleRequest generates a "aws/request.Request" representing the
+// GetRuleRequest generates a "aws.Request" representing the
 // client's request for the GetRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3077,8 +3076,8 @@ const opGetRule = "GetRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRule
-func (c *WAFRegional) GetRuleRequest(input *waf.GetRuleInput) (req *request.Request, output *waf.GetRuleOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetRuleRequest(input *waf.GetRuleInput) (req *aws.Request, output *waf.GetRuleOutput) {
+	op := &aws.Operation{
 		Name:       opGetRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3132,7 +3131,7 @@ func (c *WAFRegional) GetRule(input *waf.GetRuleInput) (*waf.GetRuleOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetRuleWithContext(ctx aws.Context, input *waf.GetRuleInput, opts ...request.Option) (*waf.GetRuleOutput, error) {
+func (c *WAFRegional) GetRuleWithContext(ctx aws.Context, input *waf.GetRuleInput, opts ...aws.Option) (*waf.GetRuleOutput, error) {
 	req, out := c.GetRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3141,7 +3140,7 @@ func (c *WAFRegional) GetRuleWithContext(ctx aws.Context, input *waf.GetRuleInpu
 
 const opGetSampledRequests = "GetSampledRequests"
 
-// GetSampledRequestsRequest generates a "aws/request.Request" representing the
+// GetSampledRequestsRequest generates a "aws.Request" representing the
 // client's request for the GetSampledRequests operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3165,8 +3164,8 @@ const opGetSampledRequests = "GetSampledRequests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSampledRequests
-func (c *WAFRegional) GetSampledRequestsRequest(input *waf.GetSampledRequestsInput) (req *request.Request, output *waf.GetSampledRequestsOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetSampledRequestsRequest(input *waf.GetSampledRequestsInput) (req *aws.Request, output *waf.GetSampledRequestsOutput) {
+	op := &aws.Operation{
 		Name:       opGetSampledRequests,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3225,7 +3224,7 @@ func (c *WAFRegional) GetSampledRequests(input *waf.GetSampledRequestsInput) (*w
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetSampledRequestsWithContext(ctx aws.Context, input *waf.GetSampledRequestsInput, opts ...request.Option) (*waf.GetSampledRequestsOutput, error) {
+func (c *WAFRegional) GetSampledRequestsWithContext(ctx aws.Context, input *waf.GetSampledRequestsInput, opts ...aws.Option) (*waf.GetSampledRequestsOutput, error) {
 	req, out := c.GetSampledRequestsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3234,7 +3233,7 @@ func (c *WAFRegional) GetSampledRequestsWithContext(ctx aws.Context, input *waf.
 
 const opGetSizeConstraintSet = "GetSizeConstraintSet"
 
-// GetSizeConstraintSetRequest generates a "aws/request.Request" representing the
+// GetSizeConstraintSetRequest generates a "aws.Request" representing the
 // client's request for the GetSizeConstraintSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3258,8 +3257,8 @@ const opGetSizeConstraintSet = "GetSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSizeConstraintSet
-func (c *WAFRegional) GetSizeConstraintSetRequest(input *waf.GetSizeConstraintSetInput) (req *request.Request, output *waf.GetSizeConstraintSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetSizeConstraintSetRequest(input *waf.GetSizeConstraintSetInput) (req *aws.Request, output *waf.GetSizeConstraintSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetSizeConstraintSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3312,7 +3311,7 @@ func (c *WAFRegional) GetSizeConstraintSet(input *waf.GetSizeConstraintSetInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetSizeConstraintSetWithContext(ctx aws.Context, input *waf.GetSizeConstraintSetInput, opts ...request.Option) (*waf.GetSizeConstraintSetOutput, error) {
+func (c *WAFRegional) GetSizeConstraintSetWithContext(ctx aws.Context, input *waf.GetSizeConstraintSetInput, opts ...aws.Option) (*waf.GetSizeConstraintSetOutput, error) {
 	req, out := c.GetSizeConstraintSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3321,7 +3320,7 @@ func (c *WAFRegional) GetSizeConstraintSetWithContext(ctx aws.Context, input *wa
 
 const opGetSqlInjectionMatchSet = "GetSqlInjectionMatchSet"
 
-// GetSqlInjectionMatchSetRequest generates a "aws/request.Request" representing the
+// GetSqlInjectionMatchSetRequest generates a "aws.Request" representing the
 // client's request for the GetSqlInjectionMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3345,8 +3344,8 @@ const opGetSqlInjectionMatchSet = "GetSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSqlInjectionMatchSet
-func (c *WAFRegional) GetSqlInjectionMatchSetRequest(input *waf.GetSqlInjectionMatchSetInput) (req *request.Request, output *waf.GetSqlInjectionMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetSqlInjectionMatchSetRequest(input *waf.GetSqlInjectionMatchSetInput) (req *aws.Request, output *waf.GetSqlInjectionMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetSqlInjectionMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3399,7 +3398,7 @@ func (c *WAFRegional) GetSqlInjectionMatchSet(input *waf.GetSqlInjectionMatchSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetSqlInjectionMatchSetWithContext(ctx aws.Context, input *waf.GetSqlInjectionMatchSetInput, opts ...request.Option) (*waf.GetSqlInjectionMatchSetOutput, error) {
+func (c *WAFRegional) GetSqlInjectionMatchSetWithContext(ctx aws.Context, input *waf.GetSqlInjectionMatchSetInput, opts ...aws.Option) (*waf.GetSqlInjectionMatchSetOutput, error) {
 	req, out := c.GetSqlInjectionMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3408,7 +3407,7 @@ func (c *WAFRegional) GetSqlInjectionMatchSetWithContext(ctx aws.Context, input 
 
 const opGetWebACL = "GetWebACL"
 
-// GetWebACLRequest generates a "aws/request.Request" representing the
+// GetWebACLRequest generates a "aws.Request" representing the
 // client's request for the GetWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3432,8 +3431,8 @@ const opGetWebACL = "GetWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACL
-func (c *WAFRegional) GetWebACLRequest(input *waf.GetWebACLInput) (req *request.Request, output *waf.GetWebACLOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetWebACLRequest(input *waf.GetWebACLInput) (req *aws.Request, output *waf.GetWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opGetWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3486,7 +3485,7 @@ func (c *WAFRegional) GetWebACL(input *waf.GetWebACLInput) (*waf.GetWebACLOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetWebACLWithContext(ctx aws.Context, input *waf.GetWebACLInput, opts ...request.Option) (*waf.GetWebACLOutput, error) {
+func (c *WAFRegional) GetWebACLWithContext(ctx aws.Context, input *waf.GetWebACLInput, opts ...aws.Option) (*waf.GetWebACLOutput, error) {
 	req, out := c.GetWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3495,7 +3494,7 @@ func (c *WAFRegional) GetWebACLWithContext(ctx aws.Context, input *waf.GetWebACL
 
 const opGetWebACLForResource = "GetWebACLForResource"
 
-// GetWebACLForResourceRequest generates a "aws/request.Request" representing the
+// GetWebACLForResourceRequest generates a "aws.Request" representing the
 // client's request for the GetWebACLForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3519,8 +3518,8 @@ const opGetWebACLForResource = "GetWebACLForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLForResource
-func (c *WAFRegional) GetWebACLForResourceRequest(input *GetWebACLForResourceInput) (req *request.Request, output *GetWebACLForResourceOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetWebACLForResourceRequest(input *GetWebACLForResourceInput) (req *aws.Request, output *GetWebACLForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opGetWebACLForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3606,7 +3605,7 @@ func (c *WAFRegional) GetWebACLForResource(input *GetWebACLForResourceInput) (*G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetWebACLForResourceWithContext(ctx aws.Context, input *GetWebACLForResourceInput, opts ...request.Option) (*GetWebACLForResourceOutput, error) {
+func (c *WAFRegional) GetWebACLForResourceWithContext(ctx aws.Context, input *GetWebACLForResourceInput, opts ...aws.Option) (*GetWebACLForResourceOutput, error) {
 	req, out := c.GetWebACLForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3615,7 +3614,7 @@ func (c *WAFRegional) GetWebACLForResourceWithContext(ctx aws.Context, input *Ge
 
 const opGetXssMatchSet = "GetXssMatchSet"
 
-// GetXssMatchSetRequest generates a "aws/request.Request" representing the
+// GetXssMatchSetRequest generates a "aws.Request" representing the
 // client's request for the GetXssMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3639,8 +3638,8 @@ const opGetXssMatchSet = "GetXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetXssMatchSet
-func (c *WAFRegional) GetXssMatchSetRequest(input *waf.GetXssMatchSetInput) (req *request.Request, output *waf.GetXssMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) GetXssMatchSetRequest(input *waf.GetXssMatchSetInput) (req *aws.Request, output *waf.GetXssMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetXssMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3693,7 +3692,7 @@ func (c *WAFRegional) GetXssMatchSet(input *waf.GetXssMatchSetInput) (*waf.GetXs
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) GetXssMatchSetWithContext(ctx aws.Context, input *waf.GetXssMatchSetInput, opts ...request.Option) (*waf.GetXssMatchSetOutput, error) {
+func (c *WAFRegional) GetXssMatchSetWithContext(ctx aws.Context, input *waf.GetXssMatchSetInput, opts ...aws.Option) (*waf.GetXssMatchSetOutput, error) {
 	req, out := c.GetXssMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3702,7 +3701,7 @@ func (c *WAFRegional) GetXssMatchSetWithContext(ctx aws.Context, input *waf.GetX
 
 const opListByteMatchSets = "ListByteMatchSets"
 
-// ListByteMatchSetsRequest generates a "aws/request.Request" representing the
+// ListByteMatchSetsRequest generates a "aws.Request" representing the
 // client's request for the ListByteMatchSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3726,8 +3725,8 @@ const opListByteMatchSets = "ListByteMatchSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListByteMatchSets
-func (c *WAFRegional) ListByteMatchSetsRequest(input *waf.ListByteMatchSetsInput) (req *request.Request, output *waf.ListByteMatchSetsOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) ListByteMatchSetsRequest(input *waf.ListByteMatchSetsInput) (req *aws.Request, output *waf.ListByteMatchSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListByteMatchSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3777,7 +3776,7 @@ func (c *WAFRegional) ListByteMatchSets(input *waf.ListByteMatchSetsInput) (*waf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) ListByteMatchSetsWithContext(ctx aws.Context, input *waf.ListByteMatchSetsInput, opts ...request.Option) (*waf.ListByteMatchSetsOutput, error) {
+func (c *WAFRegional) ListByteMatchSetsWithContext(ctx aws.Context, input *waf.ListByteMatchSetsInput, opts ...aws.Option) (*waf.ListByteMatchSetsOutput, error) {
 	req, out := c.ListByteMatchSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3786,7 +3785,7 @@ func (c *WAFRegional) ListByteMatchSetsWithContext(ctx aws.Context, input *waf.L
 
 const opListIPSets = "ListIPSets"
 
-// ListIPSetsRequest generates a "aws/request.Request" representing the
+// ListIPSetsRequest generates a "aws.Request" representing the
 // client's request for the ListIPSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3810,8 +3809,8 @@ const opListIPSets = "ListIPSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListIPSets
-func (c *WAFRegional) ListIPSetsRequest(input *waf.ListIPSetsInput) (req *request.Request, output *waf.ListIPSetsOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) ListIPSetsRequest(input *waf.ListIPSetsInput) (req *aws.Request, output *waf.ListIPSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListIPSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3861,7 +3860,7 @@ func (c *WAFRegional) ListIPSets(input *waf.ListIPSetsInput) (*waf.ListIPSetsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) ListIPSetsWithContext(ctx aws.Context, input *waf.ListIPSetsInput, opts ...request.Option) (*waf.ListIPSetsOutput, error) {
+func (c *WAFRegional) ListIPSetsWithContext(ctx aws.Context, input *waf.ListIPSetsInput, opts ...aws.Option) (*waf.ListIPSetsOutput, error) {
 	req, out := c.ListIPSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3870,7 +3869,7 @@ func (c *WAFRegional) ListIPSetsWithContext(ctx aws.Context, input *waf.ListIPSe
 
 const opListRateBasedRules = "ListRateBasedRules"
 
-// ListRateBasedRulesRequest generates a "aws/request.Request" representing the
+// ListRateBasedRulesRequest generates a "aws.Request" representing the
 // client's request for the ListRateBasedRules operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3894,8 +3893,8 @@ const opListRateBasedRules = "ListRateBasedRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRateBasedRules
-func (c *WAFRegional) ListRateBasedRulesRequest(input *waf.ListRateBasedRulesInput) (req *request.Request, output *waf.ListRateBasedRulesOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) ListRateBasedRulesRequest(input *waf.ListRateBasedRulesInput) (req *aws.Request, output *waf.ListRateBasedRulesOutput) {
+	op := &aws.Operation{
 		Name:       opListRateBasedRules,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3945,7 +3944,7 @@ func (c *WAFRegional) ListRateBasedRules(input *waf.ListRateBasedRulesInput) (*w
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) ListRateBasedRulesWithContext(ctx aws.Context, input *waf.ListRateBasedRulesInput, opts ...request.Option) (*waf.ListRateBasedRulesOutput, error) {
+func (c *WAFRegional) ListRateBasedRulesWithContext(ctx aws.Context, input *waf.ListRateBasedRulesInput, opts ...aws.Option) (*waf.ListRateBasedRulesOutput, error) {
 	req, out := c.ListRateBasedRulesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3954,7 +3953,7 @@ func (c *WAFRegional) ListRateBasedRulesWithContext(ctx aws.Context, input *waf.
 
 const opListResourcesForWebACL = "ListResourcesForWebACL"
 
-// ListResourcesForWebACLRequest generates a "aws/request.Request" representing the
+// ListResourcesForWebACLRequest generates a "aws.Request" representing the
 // client's request for the ListResourcesForWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3978,8 +3977,8 @@ const opListResourcesForWebACL = "ListResourcesForWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListResourcesForWebACL
-func (c *WAFRegional) ListResourcesForWebACLRequest(input *ListResourcesForWebACLInput) (req *request.Request, output *ListResourcesForWebACLOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) ListResourcesForWebACLRequest(input *ListResourcesForWebACLInput) (req *aws.Request, output *ListResourcesForWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opListResourcesForWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4032,7 +4031,7 @@ func (c *WAFRegional) ListResourcesForWebACL(input *ListResourcesForWebACLInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) ListResourcesForWebACLWithContext(ctx aws.Context, input *ListResourcesForWebACLInput, opts ...request.Option) (*ListResourcesForWebACLOutput, error) {
+func (c *WAFRegional) ListResourcesForWebACLWithContext(ctx aws.Context, input *ListResourcesForWebACLInput, opts ...aws.Option) (*ListResourcesForWebACLOutput, error) {
 	req, out := c.ListResourcesForWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4041,7 +4040,7 @@ func (c *WAFRegional) ListResourcesForWebACLWithContext(ctx aws.Context, input *
 
 const opListRules = "ListRules"
 
-// ListRulesRequest generates a "aws/request.Request" representing the
+// ListRulesRequest generates a "aws.Request" representing the
 // client's request for the ListRules operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4065,8 +4064,8 @@ const opListRules = "ListRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRules
-func (c *WAFRegional) ListRulesRequest(input *waf.ListRulesInput) (req *request.Request, output *waf.ListRulesOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) ListRulesRequest(input *waf.ListRulesInput) (req *aws.Request, output *waf.ListRulesOutput) {
+	op := &aws.Operation{
 		Name:       opListRules,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4116,7 +4115,7 @@ func (c *WAFRegional) ListRules(input *waf.ListRulesInput) (*waf.ListRulesOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) ListRulesWithContext(ctx aws.Context, input *waf.ListRulesInput, opts ...request.Option) (*waf.ListRulesOutput, error) {
+func (c *WAFRegional) ListRulesWithContext(ctx aws.Context, input *waf.ListRulesInput, opts ...aws.Option) (*waf.ListRulesOutput, error) {
 	req, out := c.ListRulesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4125,7 +4124,7 @@ func (c *WAFRegional) ListRulesWithContext(ctx aws.Context, input *waf.ListRules
 
 const opListSizeConstraintSets = "ListSizeConstraintSets"
 
-// ListSizeConstraintSetsRequest generates a "aws/request.Request" representing the
+// ListSizeConstraintSetsRequest generates a "aws.Request" representing the
 // client's request for the ListSizeConstraintSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4149,8 +4148,8 @@ const opListSizeConstraintSets = "ListSizeConstraintSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSizeConstraintSets
-func (c *WAFRegional) ListSizeConstraintSetsRequest(input *waf.ListSizeConstraintSetsInput) (req *request.Request, output *waf.ListSizeConstraintSetsOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) ListSizeConstraintSetsRequest(input *waf.ListSizeConstraintSetsInput) (req *aws.Request, output *waf.ListSizeConstraintSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListSizeConstraintSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4200,7 +4199,7 @@ func (c *WAFRegional) ListSizeConstraintSets(input *waf.ListSizeConstraintSetsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) ListSizeConstraintSetsWithContext(ctx aws.Context, input *waf.ListSizeConstraintSetsInput, opts ...request.Option) (*waf.ListSizeConstraintSetsOutput, error) {
+func (c *WAFRegional) ListSizeConstraintSetsWithContext(ctx aws.Context, input *waf.ListSizeConstraintSetsInput, opts ...aws.Option) (*waf.ListSizeConstraintSetsOutput, error) {
 	req, out := c.ListSizeConstraintSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4209,7 +4208,7 @@ func (c *WAFRegional) ListSizeConstraintSetsWithContext(ctx aws.Context, input *
 
 const opListSqlInjectionMatchSets = "ListSqlInjectionMatchSets"
 
-// ListSqlInjectionMatchSetsRequest generates a "aws/request.Request" representing the
+// ListSqlInjectionMatchSetsRequest generates a "aws.Request" representing the
 // client's request for the ListSqlInjectionMatchSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4233,8 +4232,8 @@ const opListSqlInjectionMatchSets = "ListSqlInjectionMatchSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSqlInjectionMatchSets
-func (c *WAFRegional) ListSqlInjectionMatchSetsRequest(input *waf.ListSqlInjectionMatchSetsInput) (req *request.Request, output *waf.ListSqlInjectionMatchSetsOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) ListSqlInjectionMatchSetsRequest(input *waf.ListSqlInjectionMatchSetsInput) (req *aws.Request, output *waf.ListSqlInjectionMatchSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListSqlInjectionMatchSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4284,7 +4283,7 @@ func (c *WAFRegional) ListSqlInjectionMatchSets(input *waf.ListSqlInjectionMatch
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) ListSqlInjectionMatchSetsWithContext(ctx aws.Context, input *waf.ListSqlInjectionMatchSetsInput, opts ...request.Option) (*waf.ListSqlInjectionMatchSetsOutput, error) {
+func (c *WAFRegional) ListSqlInjectionMatchSetsWithContext(ctx aws.Context, input *waf.ListSqlInjectionMatchSetsInput, opts ...aws.Option) (*waf.ListSqlInjectionMatchSetsOutput, error) {
 	req, out := c.ListSqlInjectionMatchSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4293,7 +4292,7 @@ func (c *WAFRegional) ListSqlInjectionMatchSetsWithContext(ctx aws.Context, inpu
 
 const opListWebACLs = "ListWebACLs"
 
-// ListWebACLsRequest generates a "aws/request.Request" representing the
+// ListWebACLsRequest generates a "aws.Request" representing the
 // client's request for the ListWebACLs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4317,8 +4316,8 @@ const opListWebACLs = "ListWebACLs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListWebACLs
-func (c *WAFRegional) ListWebACLsRequest(input *waf.ListWebACLsInput) (req *request.Request, output *waf.ListWebACLsOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) ListWebACLsRequest(input *waf.ListWebACLsInput) (req *aws.Request, output *waf.ListWebACLsOutput) {
+	op := &aws.Operation{
 		Name:       opListWebACLs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4368,7 +4367,7 @@ func (c *WAFRegional) ListWebACLs(input *waf.ListWebACLsInput) (*waf.ListWebACLs
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) ListWebACLsWithContext(ctx aws.Context, input *waf.ListWebACLsInput, opts ...request.Option) (*waf.ListWebACLsOutput, error) {
+func (c *WAFRegional) ListWebACLsWithContext(ctx aws.Context, input *waf.ListWebACLsInput, opts ...aws.Option) (*waf.ListWebACLsOutput, error) {
 	req, out := c.ListWebACLsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4377,7 +4376,7 @@ func (c *WAFRegional) ListWebACLsWithContext(ctx aws.Context, input *waf.ListWeb
 
 const opListXssMatchSets = "ListXssMatchSets"
 
-// ListXssMatchSetsRequest generates a "aws/request.Request" representing the
+// ListXssMatchSetsRequest generates a "aws.Request" representing the
 // client's request for the ListXssMatchSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4401,8 +4400,8 @@ const opListXssMatchSets = "ListXssMatchSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListXssMatchSets
-func (c *WAFRegional) ListXssMatchSetsRequest(input *waf.ListXssMatchSetsInput) (req *request.Request, output *waf.ListXssMatchSetsOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) ListXssMatchSetsRequest(input *waf.ListXssMatchSetsInput) (req *aws.Request, output *waf.ListXssMatchSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListXssMatchSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4452,7 +4451,7 @@ func (c *WAFRegional) ListXssMatchSets(input *waf.ListXssMatchSetsInput) (*waf.L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) ListXssMatchSetsWithContext(ctx aws.Context, input *waf.ListXssMatchSetsInput, opts ...request.Option) (*waf.ListXssMatchSetsOutput, error) {
+func (c *WAFRegional) ListXssMatchSetsWithContext(ctx aws.Context, input *waf.ListXssMatchSetsInput, opts ...aws.Option) (*waf.ListXssMatchSetsOutput, error) {
 	req, out := c.ListXssMatchSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4461,7 +4460,7 @@ func (c *WAFRegional) ListXssMatchSetsWithContext(ctx aws.Context, input *waf.Li
 
 const opUpdateByteMatchSet = "UpdateByteMatchSet"
 
-// UpdateByteMatchSetRequest generates a "aws/request.Request" representing the
+// UpdateByteMatchSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateByteMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4485,8 +4484,8 @@ const opUpdateByteMatchSet = "UpdateByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateByteMatchSet
-func (c *WAFRegional) UpdateByteMatchSetRequest(input *waf.UpdateByteMatchSetInput) (req *request.Request, output *waf.UpdateByteMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) UpdateByteMatchSetRequest(input *waf.UpdateByteMatchSetInput) (req *aws.Request, output *waf.UpdateByteMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateByteMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4651,7 +4650,7 @@ func (c *WAFRegional) UpdateByteMatchSet(input *waf.UpdateByteMatchSetInput) (*w
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) UpdateByteMatchSetWithContext(ctx aws.Context, input *waf.UpdateByteMatchSetInput, opts ...request.Option) (*waf.UpdateByteMatchSetOutput, error) {
+func (c *WAFRegional) UpdateByteMatchSetWithContext(ctx aws.Context, input *waf.UpdateByteMatchSetInput, opts ...aws.Option) (*waf.UpdateByteMatchSetOutput, error) {
 	req, out := c.UpdateByteMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4660,7 +4659,7 @@ func (c *WAFRegional) UpdateByteMatchSetWithContext(ctx aws.Context, input *waf.
 
 const opUpdateIPSet = "UpdateIPSet"
 
-// UpdateIPSetRequest generates a "aws/request.Request" representing the
+// UpdateIPSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateIPSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4684,8 +4683,8 @@ const opUpdateIPSet = "UpdateIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateIPSet
-func (c *WAFRegional) UpdateIPSetRequest(input *waf.UpdateIPSetInput) (req *request.Request, output *waf.UpdateIPSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) UpdateIPSetRequest(input *waf.UpdateIPSetInput) (req *aws.Request, output *waf.UpdateIPSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateIPSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4870,7 +4869,7 @@ func (c *WAFRegional) UpdateIPSet(input *waf.UpdateIPSetInput) (*waf.UpdateIPSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) UpdateIPSetWithContext(ctx aws.Context, input *waf.UpdateIPSetInput, opts ...request.Option) (*waf.UpdateIPSetOutput, error) {
+func (c *WAFRegional) UpdateIPSetWithContext(ctx aws.Context, input *waf.UpdateIPSetInput, opts ...aws.Option) (*waf.UpdateIPSetOutput, error) {
 	req, out := c.UpdateIPSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4879,7 +4878,7 @@ func (c *WAFRegional) UpdateIPSetWithContext(ctx aws.Context, input *waf.UpdateI
 
 const opUpdateRateBasedRule = "UpdateRateBasedRule"
 
-// UpdateRateBasedRuleRequest generates a "aws/request.Request" representing the
+// UpdateRateBasedRuleRequest generates a "aws.Request" representing the
 // client's request for the UpdateRateBasedRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4903,8 +4902,8 @@ const opUpdateRateBasedRule = "UpdateRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRateBasedRule
-func (c *WAFRegional) UpdateRateBasedRuleRequest(input *waf.UpdateRateBasedRuleInput) (req *request.Request, output *waf.UpdateRateBasedRuleOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) UpdateRateBasedRuleRequest(input *waf.UpdateRateBasedRuleInput) (req *aws.Request, output *waf.UpdateRateBasedRuleOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRateBasedRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5078,7 +5077,7 @@ func (c *WAFRegional) UpdateRateBasedRule(input *waf.UpdateRateBasedRuleInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) UpdateRateBasedRuleWithContext(ctx aws.Context, input *waf.UpdateRateBasedRuleInput, opts ...request.Option) (*waf.UpdateRateBasedRuleOutput, error) {
+func (c *WAFRegional) UpdateRateBasedRuleWithContext(ctx aws.Context, input *waf.UpdateRateBasedRuleInput, opts ...aws.Option) (*waf.UpdateRateBasedRuleOutput, error) {
 	req, out := c.UpdateRateBasedRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5087,7 +5086,7 @@ func (c *WAFRegional) UpdateRateBasedRuleWithContext(ctx aws.Context, input *waf
 
 const opUpdateRule = "UpdateRule"
 
-// UpdateRuleRequest generates a "aws/request.Request" representing the
+// UpdateRuleRequest generates a "aws.Request" representing the
 // client's request for the UpdateRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5111,8 +5110,8 @@ const opUpdateRule = "UpdateRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRule
-func (c *WAFRegional) UpdateRuleRequest(input *waf.UpdateRuleInput) (req *request.Request, output *waf.UpdateRuleOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) UpdateRuleRequest(input *waf.UpdateRuleInput) (req *aws.Request, output *waf.UpdateRuleOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5281,7 +5280,7 @@ func (c *WAFRegional) UpdateRule(input *waf.UpdateRuleInput) (*waf.UpdateRuleOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) UpdateRuleWithContext(ctx aws.Context, input *waf.UpdateRuleInput, opts ...request.Option) (*waf.UpdateRuleOutput, error) {
+func (c *WAFRegional) UpdateRuleWithContext(ctx aws.Context, input *waf.UpdateRuleInput, opts ...aws.Option) (*waf.UpdateRuleOutput, error) {
 	req, out := c.UpdateRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5290,7 +5289,7 @@ func (c *WAFRegional) UpdateRuleWithContext(ctx aws.Context, input *waf.UpdateRu
 
 const opUpdateSizeConstraintSet = "UpdateSizeConstraintSet"
 
-// UpdateSizeConstraintSetRequest generates a "aws/request.Request" representing the
+// UpdateSizeConstraintSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateSizeConstraintSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5314,8 +5313,8 @@ const opUpdateSizeConstraintSet = "UpdateSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSizeConstraintSet
-func (c *WAFRegional) UpdateSizeConstraintSetRequest(input *waf.UpdateSizeConstraintSetInput) (req *request.Request, output *waf.UpdateSizeConstraintSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) UpdateSizeConstraintSetRequest(input *waf.UpdateSizeConstraintSetInput) (req *aws.Request, output *waf.UpdateSizeConstraintSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSizeConstraintSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5490,7 +5489,7 @@ func (c *WAFRegional) UpdateSizeConstraintSet(input *waf.UpdateSizeConstraintSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) UpdateSizeConstraintSetWithContext(ctx aws.Context, input *waf.UpdateSizeConstraintSetInput, opts ...request.Option) (*waf.UpdateSizeConstraintSetOutput, error) {
+func (c *WAFRegional) UpdateSizeConstraintSetWithContext(ctx aws.Context, input *waf.UpdateSizeConstraintSetInput, opts ...aws.Option) (*waf.UpdateSizeConstraintSetOutput, error) {
 	req, out := c.UpdateSizeConstraintSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5499,7 +5498,7 @@ func (c *WAFRegional) UpdateSizeConstraintSetWithContext(ctx aws.Context, input 
 
 const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
 
-// UpdateSqlInjectionMatchSetRequest generates a "aws/request.Request" representing the
+// UpdateSqlInjectionMatchSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateSqlInjectionMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5523,8 +5522,8 @@ const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSqlInjectionMatchSet
-func (c *WAFRegional) UpdateSqlInjectionMatchSetRequest(input *waf.UpdateSqlInjectionMatchSetInput) (req *request.Request, output *waf.UpdateSqlInjectionMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) UpdateSqlInjectionMatchSetRequest(input *waf.UpdateSqlInjectionMatchSetInput) (req *aws.Request, output *waf.UpdateSqlInjectionMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSqlInjectionMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5684,7 +5683,7 @@ func (c *WAFRegional) UpdateSqlInjectionMatchSet(input *waf.UpdateSqlInjectionMa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) UpdateSqlInjectionMatchSetWithContext(ctx aws.Context, input *waf.UpdateSqlInjectionMatchSetInput, opts ...request.Option) (*waf.UpdateSqlInjectionMatchSetOutput, error) {
+func (c *WAFRegional) UpdateSqlInjectionMatchSetWithContext(ctx aws.Context, input *waf.UpdateSqlInjectionMatchSetInput, opts ...aws.Option) (*waf.UpdateSqlInjectionMatchSetOutput, error) {
 	req, out := c.UpdateSqlInjectionMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5693,7 +5692,7 @@ func (c *WAFRegional) UpdateSqlInjectionMatchSetWithContext(ctx aws.Context, inp
 
 const opUpdateWebACL = "UpdateWebACL"
 
-// UpdateWebACLRequest generates a "aws/request.Request" representing the
+// UpdateWebACLRequest generates a "aws.Request" representing the
 // client's request for the UpdateWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5717,8 +5716,8 @@ const opUpdateWebACL = "UpdateWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateWebACL
-func (c *WAFRegional) UpdateWebACLRequest(input *waf.UpdateWebACLInput) (req *request.Request, output *waf.UpdateWebACLOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) UpdateWebACLRequest(input *waf.UpdateWebACLInput) (req *aws.Request, output *waf.UpdateWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5902,7 +5901,7 @@ func (c *WAFRegional) UpdateWebACL(input *waf.UpdateWebACLInput) (*waf.UpdateWeb
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) UpdateWebACLWithContext(ctx aws.Context, input *waf.UpdateWebACLInput, opts ...request.Option) (*waf.UpdateWebACLOutput, error) {
+func (c *WAFRegional) UpdateWebACLWithContext(ctx aws.Context, input *waf.UpdateWebACLInput, opts ...aws.Option) (*waf.UpdateWebACLOutput, error) {
 	req, out := c.UpdateWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5911,7 +5910,7 @@ func (c *WAFRegional) UpdateWebACLWithContext(ctx aws.Context, input *waf.Update
 
 const opUpdateXssMatchSet = "UpdateXssMatchSet"
 
-// UpdateXssMatchSetRequest generates a "aws/request.Request" representing the
+// UpdateXssMatchSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateXssMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5935,8 +5934,8 @@ const opUpdateXssMatchSet = "UpdateXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateXssMatchSet
-func (c *WAFRegional) UpdateXssMatchSetRequest(input *waf.UpdateXssMatchSetInput) (req *request.Request, output *waf.UpdateXssMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAFRegional) UpdateXssMatchSetRequest(input *waf.UpdateXssMatchSetInput) (req *aws.Request, output *waf.UpdateXssMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateXssMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6096,7 +6095,7 @@ func (c *WAFRegional) UpdateXssMatchSet(input *waf.UpdateXssMatchSetInput) (*waf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAFRegional) UpdateXssMatchSetWithContext(ctx aws.Context, input *waf.UpdateXssMatchSetInput, opts ...request.Option) (*waf.UpdateXssMatchSetOutput, error) {
+func (c *WAFRegional) UpdateXssMatchSetWithContext(ctx aws.Context, input *waf.UpdateXssMatchSetInput, opts ...aws.Option) (*waf.UpdateXssMatchSetOutput, error) {
 	req, out := c.UpdateXssMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6130,18 +6129,18 @@ func (s AssociateWebACLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateWebACLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateWebACLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateWebACLInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 	if s.WebACLId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WebACLId"))
+		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
 	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WebACLId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6200,12 +6199,12 @@ func (s DisassociateWebACLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateWebACLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateWebACLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateWebACLInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6257,12 +6256,12 @@ func (s GetWebACLForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetWebACLForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetWebACLForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetWebACLForResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6325,12 +6324,12 @@ func (s ListResourcesForWebACLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourcesForWebACLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListResourcesForWebACLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesForWebACLInput"}
 	if s.WebACLId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WebACLId"))
+		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
 	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WebACLId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
 	}
 
 	if invalidParams.Len() > 0 {

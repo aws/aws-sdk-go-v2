@@ -6,13 +6,12 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws/request.Request" representing the
+// AddTagsToResourceRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opAddTagsToResource = "AddTagsToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResource
-func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *AddTagsToResourceOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -90,7 +89,7 @@ func (c *CloudHSM) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...request.Option) (*AddTagsToResourceOutput, error) {
+func (c *CloudHSM) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
 	req, out := c.AddTagsToResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -99,7 +98,7 @@ func (c *CloudHSM) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsT
 
 const opCreateHapg = "CreateHapg"
 
-// CreateHapgRequest generates a "aws/request.Request" representing the
+// CreateHapgRequest generates a "aws.Request" representing the
 // client's request for the CreateHapg operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -123,8 +122,8 @@ const opCreateHapg = "CreateHapg"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapg
-func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) (req *request.Request, output *CreateHapgOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) (req *aws.Request, output *CreateHapgOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHapg,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -176,7 +175,7 @@ func (c *CloudHSM) CreateHapg(input *CreateHapgInput) (*CreateHapgOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) CreateHapgWithContext(ctx aws.Context, input *CreateHapgInput, opts ...request.Option) (*CreateHapgOutput, error) {
+func (c *CloudHSM) CreateHapgWithContext(ctx aws.Context, input *CreateHapgInput, opts ...aws.Option) (*CreateHapgOutput, error) {
 	req, out := c.CreateHapgRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -185,7 +184,7 @@ func (c *CloudHSM) CreateHapgWithContext(ctx aws.Context, input *CreateHapgInput
 
 const opCreateHsm = "CreateHsm"
 
-// CreateHsmRequest generates a "aws/request.Request" representing the
+// CreateHsmRequest generates a "aws.Request" representing the
 // client's request for the CreateHsm operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -209,8 +208,8 @@ const opCreateHsm = "CreateHsm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsm
-func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) (req *request.Request, output *CreateHsmOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) (req *aws.Request, output *CreateHsmOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHsm,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -271,7 +270,7 @@ func (c *CloudHSM) CreateHsm(input *CreateHsmInput) (*CreateHsmOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) CreateHsmWithContext(ctx aws.Context, input *CreateHsmInput, opts ...request.Option) (*CreateHsmOutput, error) {
+func (c *CloudHSM) CreateHsmWithContext(ctx aws.Context, input *CreateHsmInput, opts ...aws.Option) (*CreateHsmOutput, error) {
 	req, out := c.CreateHsmRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -280,7 +279,7 @@ func (c *CloudHSM) CreateHsmWithContext(ctx aws.Context, input *CreateHsmInput, 
 
 const opCreateLunaClient = "CreateLunaClient"
 
-// CreateLunaClientRequest generates a "aws/request.Request" representing the
+// CreateLunaClientRequest generates a "aws.Request" representing the
 // client's request for the CreateLunaClient operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -304,8 +303,8 @@ const opCreateLunaClient = "CreateLunaClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClient
-func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) (req *request.Request, output *CreateLunaClientOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) (req *aws.Request, output *CreateLunaClientOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLunaClient,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -356,7 +355,7 @@ func (c *CloudHSM) CreateLunaClient(input *CreateLunaClientInput) (*CreateLunaCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) CreateLunaClientWithContext(ctx aws.Context, input *CreateLunaClientInput, opts ...request.Option) (*CreateLunaClientOutput, error) {
+func (c *CloudHSM) CreateLunaClientWithContext(ctx aws.Context, input *CreateLunaClientInput, opts ...aws.Option) (*CreateLunaClientOutput, error) {
 	req, out := c.CreateLunaClientRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -365,7 +364,7 @@ func (c *CloudHSM) CreateLunaClientWithContext(ctx aws.Context, input *CreateLun
 
 const opDeleteHapg = "DeleteHapg"
 
-// DeleteHapgRequest generates a "aws/request.Request" representing the
+// DeleteHapgRequest generates a "aws.Request" representing the
 // client's request for the DeleteHapg operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -389,8 +388,8 @@ const opDeleteHapg = "DeleteHapg"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapg
-func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) (req *request.Request, output *DeleteHapgOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) (req *aws.Request, output *DeleteHapgOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteHapg,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -441,7 +440,7 @@ func (c *CloudHSM) DeleteHapg(input *DeleteHapgInput) (*DeleteHapgOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) DeleteHapgWithContext(ctx aws.Context, input *DeleteHapgInput, opts ...request.Option) (*DeleteHapgOutput, error) {
+func (c *CloudHSM) DeleteHapgWithContext(ctx aws.Context, input *DeleteHapgInput, opts ...aws.Option) (*DeleteHapgOutput, error) {
 	req, out := c.DeleteHapgRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -450,7 +449,7 @@ func (c *CloudHSM) DeleteHapgWithContext(ctx aws.Context, input *DeleteHapgInput
 
 const opDeleteHsm = "DeleteHsm"
 
-// DeleteHsmRequest generates a "aws/request.Request" representing the
+// DeleteHsmRequest generates a "aws.Request" representing the
 // client's request for the DeleteHsm operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -474,8 +473,8 @@ const opDeleteHsm = "DeleteHsm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsm
-func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) (req *request.Request, output *DeleteHsmOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) (req *aws.Request, output *DeleteHsmOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteHsm,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -527,7 +526,7 @@ func (c *CloudHSM) DeleteHsm(input *DeleteHsmInput) (*DeleteHsmOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) DeleteHsmWithContext(ctx aws.Context, input *DeleteHsmInput, opts ...request.Option) (*DeleteHsmOutput, error) {
+func (c *CloudHSM) DeleteHsmWithContext(ctx aws.Context, input *DeleteHsmInput, opts ...aws.Option) (*DeleteHsmOutput, error) {
 	req, out := c.DeleteHsmRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -536,7 +535,7 @@ func (c *CloudHSM) DeleteHsmWithContext(ctx aws.Context, input *DeleteHsmInput, 
 
 const opDeleteLunaClient = "DeleteLunaClient"
 
-// DeleteLunaClientRequest generates a "aws/request.Request" representing the
+// DeleteLunaClientRequest generates a "aws.Request" representing the
 // client's request for the DeleteLunaClient operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -560,8 +559,8 @@ const opDeleteLunaClient = "DeleteLunaClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClient
-func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) (req *request.Request, output *DeleteLunaClientOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) (req *aws.Request, output *DeleteLunaClientOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLunaClient,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -612,7 +611,7 @@ func (c *CloudHSM) DeleteLunaClient(input *DeleteLunaClientInput) (*DeleteLunaCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) DeleteLunaClientWithContext(ctx aws.Context, input *DeleteLunaClientInput, opts ...request.Option) (*DeleteLunaClientOutput, error) {
+func (c *CloudHSM) DeleteLunaClientWithContext(ctx aws.Context, input *DeleteLunaClientInput, opts ...aws.Option) (*DeleteLunaClientOutput, error) {
 	req, out := c.DeleteLunaClientRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -621,7 +620,7 @@ func (c *CloudHSM) DeleteLunaClientWithContext(ctx aws.Context, input *DeleteLun
 
 const opDescribeHapg = "DescribeHapg"
 
-// DescribeHapgRequest generates a "aws/request.Request" representing the
+// DescribeHapgRequest generates a "aws.Request" representing the
 // client's request for the DescribeHapg operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -645,8 +644,8 @@ const opDescribeHapg = "DescribeHapg"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapg
-func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) (req *request.Request, output *DescribeHapgOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) (req *aws.Request, output *DescribeHapgOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeHapg,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -697,7 +696,7 @@ func (c *CloudHSM) DescribeHapg(input *DescribeHapgInput) (*DescribeHapgOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) DescribeHapgWithContext(ctx aws.Context, input *DescribeHapgInput, opts ...request.Option) (*DescribeHapgOutput, error) {
+func (c *CloudHSM) DescribeHapgWithContext(ctx aws.Context, input *DescribeHapgInput, opts ...aws.Option) (*DescribeHapgOutput, error) {
 	req, out := c.DescribeHapgRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -706,7 +705,7 @@ func (c *CloudHSM) DescribeHapgWithContext(ctx aws.Context, input *DescribeHapgI
 
 const opDescribeHsm = "DescribeHsm"
 
-// DescribeHsmRequest generates a "aws/request.Request" representing the
+// DescribeHsmRequest generates a "aws.Request" representing the
 // client's request for the DescribeHsm operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -730,8 +729,8 @@ const opDescribeHsm = "DescribeHsm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsm
-func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) (req *request.Request, output *DescribeHsmOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) (req *aws.Request, output *DescribeHsmOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeHsm,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -783,7 +782,7 @@ func (c *CloudHSM) DescribeHsm(input *DescribeHsmInput) (*DescribeHsmOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) DescribeHsmWithContext(ctx aws.Context, input *DescribeHsmInput, opts ...request.Option) (*DescribeHsmOutput, error) {
+func (c *CloudHSM) DescribeHsmWithContext(ctx aws.Context, input *DescribeHsmInput, opts ...aws.Option) (*DescribeHsmOutput, error) {
 	req, out := c.DescribeHsmRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -792,7 +791,7 @@ func (c *CloudHSM) DescribeHsmWithContext(ctx aws.Context, input *DescribeHsmInp
 
 const opDescribeLunaClient = "DescribeLunaClient"
 
-// DescribeLunaClientRequest generates a "aws/request.Request" representing the
+// DescribeLunaClientRequest generates a "aws.Request" representing the
 // client's request for the DescribeLunaClient operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -816,8 +815,8 @@ const opDescribeLunaClient = "DescribeLunaClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClient
-func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) (req *request.Request, output *DescribeLunaClientOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) (req *aws.Request, output *DescribeLunaClientOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLunaClient,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -868,7 +867,7 @@ func (c *CloudHSM) DescribeLunaClient(input *DescribeLunaClientInput) (*Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) DescribeLunaClientWithContext(ctx aws.Context, input *DescribeLunaClientInput, opts ...request.Option) (*DescribeLunaClientOutput, error) {
+func (c *CloudHSM) DescribeLunaClientWithContext(ctx aws.Context, input *DescribeLunaClientInput, opts ...aws.Option) (*DescribeLunaClientOutput, error) {
 	req, out := c.DescribeLunaClientRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -877,7 +876,7 @@ func (c *CloudHSM) DescribeLunaClientWithContext(ctx aws.Context, input *Describ
 
 const opGetConfig = "GetConfig"
 
-// GetConfigRequest generates a "aws/request.Request" representing the
+// GetConfigRequest generates a "aws.Request" representing the
 // client's request for the GetConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -901,8 +900,8 @@ const opGetConfig = "GetConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfig
-func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) (req *request.Request, output *GetConfigOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) (req *aws.Request, output *GetConfigOutput) {
+	op := &aws.Operation{
 		Name:       opGetConfig,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -954,7 +953,7 @@ func (c *CloudHSM) GetConfig(input *GetConfigInput) (*GetConfigOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) GetConfigWithContext(ctx aws.Context, input *GetConfigInput, opts ...request.Option) (*GetConfigOutput, error) {
+func (c *CloudHSM) GetConfigWithContext(ctx aws.Context, input *GetConfigInput, opts ...aws.Option) (*GetConfigOutput, error) {
 	req, out := c.GetConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -963,7 +962,7 @@ func (c *CloudHSM) GetConfigWithContext(ctx aws.Context, input *GetConfigInput, 
 
 const opListAvailableZones = "ListAvailableZones"
 
-// ListAvailableZonesRequest generates a "aws/request.Request" representing the
+// ListAvailableZonesRequest generates a "aws.Request" representing the
 // client's request for the ListAvailableZones operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -987,8 +986,8 @@ const opListAvailableZones = "ListAvailableZones"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZones
-func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) (req *request.Request, output *ListAvailableZonesOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) (req *aws.Request, output *ListAvailableZonesOutput) {
+	op := &aws.Operation{
 		Name:       opListAvailableZones,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1039,7 +1038,7 @@ func (c *CloudHSM) ListAvailableZones(input *ListAvailableZonesInput) (*ListAvai
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) ListAvailableZonesWithContext(ctx aws.Context, input *ListAvailableZonesInput, opts ...request.Option) (*ListAvailableZonesOutput, error) {
+func (c *CloudHSM) ListAvailableZonesWithContext(ctx aws.Context, input *ListAvailableZonesInput, opts ...aws.Option) (*ListAvailableZonesOutput, error) {
 	req, out := c.ListAvailableZonesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1048,7 +1047,7 @@ func (c *CloudHSM) ListAvailableZonesWithContext(ctx aws.Context, input *ListAva
 
 const opListHapgs = "ListHapgs"
 
-// ListHapgsRequest generates a "aws/request.Request" representing the
+// ListHapgsRequest generates a "aws.Request" representing the
 // client's request for the ListHapgs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1072,8 +1071,8 @@ const opListHapgs = "ListHapgs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgs
-func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) (req *request.Request, output *ListHapgsOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) (req *aws.Request, output *ListHapgsOutput) {
+	op := &aws.Operation{
 		Name:       opListHapgs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1129,7 +1128,7 @@ func (c *CloudHSM) ListHapgs(input *ListHapgsInput) (*ListHapgsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) ListHapgsWithContext(ctx aws.Context, input *ListHapgsInput, opts ...request.Option) (*ListHapgsOutput, error) {
+func (c *CloudHSM) ListHapgsWithContext(ctx aws.Context, input *ListHapgsInput, opts ...aws.Option) (*ListHapgsOutput, error) {
 	req, out := c.ListHapgsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1138,7 +1137,7 @@ func (c *CloudHSM) ListHapgsWithContext(ctx aws.Context, input *ListHapgsInput, 
 
 const opListHsms = "ListHsms"
 
-// ListHsmsRequest generates a "aws/request.Request" representing the
+// ListHsmsRequest generates a "aws.Request" representing the
 // client's request for the ListHsms operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1162,8 +1161,8 @@ const opListHsms = "ListHsms"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsms
-func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) (req *request.Request, output *ListHsmsOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) (req *aws.Request, output *ListHsmsOutput) {
+	op := &aws.Operation{
 		Name:       opListHsms,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1220,7 +1219,7 @@ func (c *CloudHSM) ListHsms(input *ListHsmsInput) (*ListHsmsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) ListHsmsWithContext(ctx aws.Context, input *ListHsmsInput, opts ...request.Option) (*ListHsmsOutput, error) {
+func (c *CloudHSM) ListHsmsWithContext(ctx aws.Context, input *ListHsmsInput, opts ...aws.Option) (*ListHsmsOutput, error) {
 	req, out := c.ListHsmsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1229,7 +1228,7 @@ func (c *CloudHSM) ListHsmsWithContext(ctx aws.Context, input *ListHsmsInput, op
 
 const opListLunaClients = "ListLunaClients"
 
-// ListLunaClientsRequest generates a "aws/request.Request" representing the
+// ListLunaClientsRequest generates a "aws.Request" representing the
 // client's request for the ListLunaClients operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1253,8 +1252,8 @@ const opListLunaClients = "ListLunaClients"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClients
-func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) (req *request.Request, output *ListLunaClientsOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) (req *aws.Request, output *ListLunaClientsOutput) {
+	op := &aws.Operation{
 		Name:       opListLunaClients,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1310,7 +1309,7 @@ func (c *CloudHSM) ListLunaClients(input *ListLunaClientsInput) (*ListLunaClient
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) ListLunaClientsWithContext(ctx aws.Context, input *ListLunaClientsInput, opts ...request.Option) (*ListLunaClientsOutput, error) {
+func (c *CloudHSM) ListLunaClientsWithContext(ctx aws.Context, input *ListLunaClientsInput, opts ...aws.Option) (*ListLunaClientsOutput, error) {
 	req, out := c.ListLunaClientsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1319,7 +1318,7 @@ func (c *CloudHSM) ListLunaClientsWithContext(ctx aws.Context, input *ListLunaCl
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1343,8 +1342,8 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResource
-func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1395,7 +1394,7 @@ func (c *CloudHSM) ListTagsForResource(input *ListTagsForResourceInput) (*ListTa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+func (c *CloudHSM) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1404,7 +1403,7 @@ func (c *CloudHSM) ListTagsForResourceWithContext(ctx aws.Context, input *ListTa
 
 const opModifyHapg = "ModifyHapg"
 
-// ModifyHapgRequest generates a "aws/request.Request" representing the
+// ModifyHapgRequest generates a "aws.Request" representing the
 // client's request for the ModifyHapg operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1428,8 +1427,8 @@ const opModifyHapg = "ModifyHapg"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapg
-func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) (req *request.Request, output *ModifyHapgOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) (req *aws.Request, output *ModifyHapgOutput) {
+	op := &aws.Operation{
 		Name:       opModifyHapg,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1480,7 +1479,7 @@ func (c *CloudHSM) ModifyHapg(input *ModifyHapgInput) (*ModifyHapgOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) ModifyHapgWithContext(ctx aws.Context, input *ModifyHapgInput, opts ...request.Option) (*ModifyHapgOutput, error) {
+func (c *CloudHSM) ModifyHapgWithContext(ctx aws.Context, input *ModifyHapgInput, opts ...aws.Option) (*ModifyHapgOutput, error) {
 	req, out := c.ModifyHapgRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1489,7 +1488,7 @@ func (c *CloudHSM) ModifyHapgWithContext(ctx aws.Context, input *ModifyHapgInput
 
 const opModifyHsm = "ModifyHsm"
 
-// ModifyHsmRequest generates a "aws/request.Request" representing the
+// ModifyHsmRequest generates a "aws.Request" representing the
 // client's request for the ModifyHsm operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1513,8 +1512,8 @@ const opModifyHsm = "ModifyHsm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsm
-func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) (req *request.Request, output *ModifyHsmOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) (req *aws.Request, output *ModifyHsmOutput) {
+	op := &aws.Operation{
 		Name:       opModifyHsm,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1571,7 +1570,7 @@ func (c *CloudHSM) ModifyHsm(input *ModifyHsmInput) (*ModifyHsmOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) ModifyHsmWithContext(ctx aws.Context, input *ModifyHsmInput, opts ...request.Option) (*ModifyHsmOutput, error) {
+func (c *CloudHSM) ModifyHsmWithContext(ctx aws.Context, input *ModifyHsmInput, opts ...aws.Option) (*ModifyHsmOutput, error) {
 	req, out := c.ModifyHsmRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1580,7 +1579,7 @@ func (c *CloudHSM) ModifyHsmWithContext(ctx aws.Context, input *ModifyHsmInput, 
 
 const opModifyLunaClient = "ModifyLunaClient"
 
-// ModifyLunaClientRequest generates a "aws/request.Request" representing the
+// ModifyLunaClientRequest generates a "aws.Request" representing the
 // client's request for the ModifyLunaClient operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1604,8 +1603,8 @@ const opModifyLunaClient = "ModifyLunaClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClient
-func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) (req *request.Request, output *ModifyLunaClientOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) (req *aws.Request, output *ModifyLunaClientOutput) {
+	op := &aws.Operation{
 		Name:       opModifyLunaClient,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1653,7 +1652,7 @@ func (c *CloudHSM) ModifyLunaClient(input *ModifyLunaClientInput) (*ModifyLunaCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) ModifyLunaClientWithContext(ctx aws.Context, input *ModifyLunaClientInput, opts ...request.Option) (*ModifyLunaClientOutput, error) {
+func (c *CloudHSM) ModifyLunaClientWithContext(ctx aws.Context, input *ModifyLunaClientInput, opts ...aws.Option) (*ModifyLunaClientOutput, error) {
 	req, out := c.ModifyLunaClientRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1662,7 +1661,7 @@ func (c *CloudHSM) ModifyLunaClientWithContext(ctx aws.Context, input *ModifyLun
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1686,8 +1685,8 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResource
-func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *RemoveTagsFromResourceOutput) {
-	op := &request.Operation{
+func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1741,7 +1740,7 @@ func (c *CloudHSM) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSM) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...request.Option) (*RemoveTagsFromResourceOutput, error) {
+func (c *CloudHSM) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
 	req, out := c.RemoveTagsFromResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1775,12 +1774,12 @@ func (s AddTagsToResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.TagList == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagList"))
+		invalidParams.Add(aws.NewErrParamRequired("TagList"))
 	}
 	if s.TagList != nil {
 		for i, v := range s.TagList {
@@ -1788,7 +1787,7 @@ func (s *AddTagsToResourceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1860,9 +1859,9 @@ func (s CreateHapgInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHapgInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHapgInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHapgInput"}
 	if s.Label == nil {
-		invalidParams.Add(request.NewErrParamRequired("Label"))
+		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1962,18 +1961,18 @@ func (s CreateHsmInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHsmInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHsmInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHsmInput"}
 	if s.IamRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("IamRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("IamRoleArn"))
 	}
 	if s.SshKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("SshKey"))
+		invalidParams.Add(aws.NewErrParamRequired("SshKey"))
 	}
 	if s.SubnetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
 	if s.SubscriptionType == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionType"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2082,12 +2081,12 @@ func (s CreateLunaClientInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLunaClientInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLunaClientInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLunaClientInput"}
 	if s.Certificate == nil {
-		invalidParams.Add(request.NewErrParamRequired("Certificate"))
+		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
 	}
 	if s.Certificate != nil && len(*s.Certificate) < 600 {
-		invalidParams.Add(request.NewErrParamMinLen("Certificate", 600))
+		invalidParams.Add(aws.NewErrParamMinLen("Certificate", 600))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2156,9 +2155,9 @@ func (s DeleteHapgInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHapgInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteHapgInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteHapgInput"}
 	if s.HapgArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("HapgArn"))
+		invalidParams.Add(aws.NewErrParamRequired("HapgArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2223,9 +2222,9 @@ func (s DeleteHsmInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHsmInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteHsmInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmInput"}
 	if s.HsmArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmArn"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2289,9 +2288,9 @@ func (s DeleteLunaClientInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLunaClientInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLunaClientInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLunaClientInput"}
 	if s.ClientArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2355,9 +2354,9 @@ func (s DescribeHapgInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeHapgInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeHapgInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeHapgInput"}
 	if s.HapgArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("HapgArn"))
+		invalidParams.Add(aws.NewErrParamRequired("HapgArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2841,15 +2840,15 @@ func (s GetConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetConfigInput"}
 	if s.ClientArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientArn"))
 	}
 	if s.ClientVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientVersion"))
 	}
 	if s.HapgList == nil {
-		invalidParams.Add(request.NewErrParamRequired("HapgList"))
+		invalidParams.Add(aws.NewErrParamRequired("HapgList"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3162,9 +3161,9 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3234,9 +3233,9 @@ func (s ModifyHapgInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyHapgInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyHapgInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyHapgInput"}
 	if s.HapgArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("HapgArn"))
+		invalidParams.Add(aws.NewErrParamRequired("HapgArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3331,9 +3330,9 @@ func (s ModifyHsmInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyHsmInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyHsmInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyHsmInput"}
 	if s.HsmArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmArn"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3430,15 +3429,15 @@ func (s ModifyLunaClientInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyLunaClientInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyLunaClientInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyLunaClientInput"}
 	if s.Certificate == nil {
-		invalidParams.Add(request.NewErrParamRequired("Certificate"))
+		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
 	}
 	if s.Certificate != nil && len(*s.Certificate) < 600 {
-		invalidParams.Add(request.NewErrParamMinLen("Certificate", 600))
+		invalidParams.Add(aws.NewErrParamMinLen("Certificate", 600))
 	}
 	if s.ClientArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3513,12 +3512,12 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.TagKeyList == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeyList"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeyList"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3594,15 +3593,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {

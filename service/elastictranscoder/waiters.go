@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilJobComplete uses the Amazon Elastic Transcoder API operation
@@ -25,30 +24,30 @@ func (c *ElasticTranscoder) WaitUntilJobComplete(input *ReadJobInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) WaitUntilJobCompleteWithContext(ctx aws.Context, input *ReadJobInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ElasticTranscoder) WaitUntilJobCompleteWithContext(ctx aws.Context, input *ReadJobInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilJobComplete",
 		MaxAttempts: 120,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Job.Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Job.Status",
 				Expected: "Complete",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Job.Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Job.Status",
 				Expected: "Canceled",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Job.Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Job.Status",
 				Expected: "Error",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *ReadJobInput
 			if input != nil {
 				tmp := *input

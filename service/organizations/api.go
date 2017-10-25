@@ -6,15 +6,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opAcceptHandshake = "AcceptHandshake"
 
-// AcceptHandshakeRequest generates a "aws/request.Request" representing the
+// AcceptHandshakeRequest generates a "aws.Request" representing the
 // client's request for the AcceptHandshake operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -38,8 +37,8 @@ const opAcceptHandshake = "AcceptHandshake"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshake
-func (c *Organizations) AcceptHandshakeRequest(input *AcceptHandshakeInput) (req *request.Request, output *AcceptHandshakeOutput) {
-	op := &request.Operation{
+func (c *Organizations) AcceptHandshakeRequest(input *AcceptHandshakeInput) (req *aws.Request, output *AcceptHandshakeOutput) {
+	op := &aws.Operation{
 		Name:       opAcceptHandshake,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -228,7 +227,7 @@ func (c *Organizations) AcceptHandshake(input *AcceptHandshakeInput) (*AcceptHan
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) AcceptHandshakeWithContext(ctx aws.Context, input *AcceptHandshakeInput, opts ...request.Option) (*AcceptHandshakeOutput, error) {
+func (c *Organizations) AcceptHandshakeWithContext(ctx aws.Context, input *AcceptHandshakeInput, opts ...aws.Option) (*AcceptHandshakeOutput, error) {
 	req, out := c.AcceptHandshakeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -237,7 +236,7 @@ func (c *Organizations) AcceptHandshakeWithContext(ctx aws.Context, input *Accep
 
 const opAttachPolicy = "AttachPolicy"
 
-// AttachPolicyRequest generates a "aws/request.Request" representing the
+// AttachPolicyRequest generates a "aws.Request" representing the
 // client's request for the AttachPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -261,8 +260,8 @@ const opAttachPolicy = "AttachPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AttachPolicy
-func (c *Organizations) AttachPolicyRequest(input *AttachPolicyInput) (req *request.Request, output *AttachPolicyOutput) {
-	op := &request.Operation{
+func (c *Organizations) AttachPolicyRequest(input *AttachPolicyInput) (req *aws.Request, output *AttachPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opAttachPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -518,7 +517,7 @@ func (c *Organizations) AttachPolicy(input *AttachPolicyInput) (*AttachPolicyOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) AttachPolicyWithContext(ctx aws.Context, input *AttachPolicyInput, opts ...request.Option) (*AttachPolicyOutput, error) {
+func (c *Organizations) AttachPolicyWithContext(ctx aws.Context, input *AttachPolicyInput, opts ...aws.Option) (*AttachPolicyOutput, error) {
 	req, out := c.AttachPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -527,7 +526,7 @@ func (c *Organizations) AttachPolicyWithContext(ctx aws.Context, input *AttachPo
 
 const opCancelHandshake = "CancelHandshake"
 
-// CancelHandshakeRequest generates a "aws/request.Request" representing the
+// CancelHandshakeRequest generates a "aws.Request" representing the
 // client's request for the CancelHandshake operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -551,8 +550,8 @@ const opCancelHandshake = "CancelHandshake"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshake
-func (c *Organizations) CancelHandshakeRequest(input *CancelHandshakeInput) (req *request.Request, output *CancelHandshakeOutput) {
-	op := &request.Operation{
+func (c *Organizations) CancelHandshakeRequest(input *CancelHandshakeInput) (req *aws.Request, output *CancelHandshakeOutput) {
+	op := &aws.Operation{
 		Name:       opCancelHandshake,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -686,7 +685,7 @@ func (c *Organizations) CancelHandshake(input *CancelHandshakeInput) (*CancelHan
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) CancelHandshakeWithContext(ctx aws.Context, input *CancelHandshakeInput, opts ...request.Option) (*CancelHandshakeOutput, error) {
+func (c *Organizations) CancelHandshakeWithContext(ctx aws.Context, input *CancelHandshakeInput, opts ...aws.Option) (*CancelHandshakeOutput, error) {
 	req, out := c.CancelHandshakeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -695,7 +694,7 @@ func (c *Organizations) CancelHandshakeWithContext(ctx aws.Context, input *Cance
 
 const opCreateAccount = "CreateAccount"
 
-// CreateAccountRequest generates a "aws/request.Request" representing the
+// CreateAccountRequest generates a "aws.Request" representing the
 // client's request for the CreateAccount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -719,8 +718,8 @@ const opCreateAccount = "CreateAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount
-func (c *Organizations) CreateAccountRequest(input *CreateAccountInput) (req *request.Request, output *CreateAccountOutput) {
-	op := &request.Operation{
+func (c *Organizations) CreateAccountRequest(input *CreateAccountInput) (req *aws.Request, output *CreateAccountOutput) {
+	op := &aws.Operation{
 		Name:       opCreateAccount,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -961,7 +960,7 @@ func (c *Organizations) CreateAccount(input *CreateAccountInput) (*CreateAccount
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) CreateAccountWithContext(ctx aws.Context, input *CreateAccountInput, opts ...request.Option) (*CreateAccountOutput, error) {
+func (c *Organizations) CreateAccountWithContext(ctx aws.Context, input *CreateAccountInput, opts ...aws.Option) (*CreateAccountOutput, error) {
 	req, out := c.CreateAccountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -970,7 +969,7 @@ func (c *Organizations) CreateAccountWithContext(ctx aws.Context, input *CreateA
 
 const opCreateOrganization = "CreateOrganization"
 
-// CreateOrganizationRequest generates a "aws/request.Request" representing the
+// CreateOrganizationRequest generates a "aws.Request" representing the
 // client's request for the CreateOrganization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -994,8 +993,8 @@ const opCreateOrganization = "CreateOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization
-func (c *Organizations) CreateOrganizationRequest(input *CreateOrganizationInput) (req *request.Request, output *CreateOrganizationOutput) {
-	op := &request.Operation{
+func (c *Organizations) CreateOrganizationRequest(input *CreateOrganizationInput) (req *aws.Request, output *CreateOrganizationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateOrganization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1208,7 +1207,7 @@ func (c *Organizations) CreateOrganization(input *CreateOrganizationInput) (*Cre
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) CreateOrganizationWithContext(ctx aws.Context, input *CreateOrganizationInput, opts ...request.Option) (*CreateOrganizationOutput, error) {
+func (c *Organizations) CreateOrganizationWithContext(ctx aws.Context, input *CreateOrganizationInput, opts ...aws.Option) (*CreateOrganizationOutput, error) {
 	req, out := c.CreateOrganizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1217,7 +1216,7 @@ func (c *Organizations) CreateOrganizationWithContext(ctx aws.Context, input *Cr
 
 const opCreateOrganizationalUnit = "CreateOrganizationalUnit"
 
-// CreateOrganizationalUnitRequest generates a "aws/request.Request" representing the
+// CreateOrganizationalUnitRequest generates a "aws.Request" representing the
 // client's request for the CreateOrganizationalUnit operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1241,8 +1240,8 @@ const opCreateOrganizationalUnit = "CreateOrganizationalUnit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationalUnit
-func (c *Organizations) CreateOrganizationalUnitRequest(input *CreateOrganizationalUnitInput) (req *request.Request, output *CreateOrganizationalUnitOutput) {
-	op := &request.Operation{
+func (c *Organizations) CreateOrganizationalUnitRequest(input *CreateOrganizationalUnitInput) (req *aws.Request, output *CreateOrganizationalUnitOutput) {
+	op := &aws.Operation{
 		Name:       opCreateOrganizationalUnit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1458,7 +1457,7 @@ func (c *Organizations) CreateOrganizationalUnit(input *CreateOrganizationalUnit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) CreateOrganizationalUnitWithContext(ctx aws.Context, input *CreateOrganizationalUnitInput, opts ...request.Option) (*CreateOrganizationalUnitOutput, error) {
+func (c *Organizations) CreateOrganizationalUnitWithContext(ctx aws.Context, input *CreateOrganizationalUnitInput, opts ...aws.Option) (*CreateOrganizationalUnitOutput, error) {
 	req, out := c.CreateOrganizationalUnitRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1467,7 +1466,7 @@ func (c *Organizations) CreateOrganizationalUnitWithContext(ctx aws.Context, inp
 
 const opCreatePolicy = "CreatePolicy"
 
-// CreatePolicyRequest generates a "aws/request.Request" representing the
+// CreatePolicyRequest generates a "aws.Request" representing the
 // client's request for the CreatePolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1491,8 +1490,8 @@ const opCreatePolicy = "CreatePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicy
-func (c *Organizations) CreatePolicyRequest(input *CreatePolicyInput) (req *request.Request, output *CreatePolicyOutput) {
-	op := &request.Operation{
+func (c *Organizations) CreatePolicyRequest(input *CreatePolicyInput) (req *aws.Request, output *CreatePolicyOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1714,7 +1713,7 @@ func (c *Organizations) CreatePolicy(input *CreatePolicyInput) (*CreatePolicyOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) CreatePolicyWithContext(ctx aws.Context, input *CreatePolicyInput, opts ...request.Option) (*CreatePolicyOutput, error) {
+func (c *Organizations) CreatePolicyWithContext(ctx aws.Context, input *CreatePolicyInput, opts ...aws.Option) (*CreatePolicyOutput, error) {
 	req, out := c.CreatePolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1723,7 +1722,7 @@ func (c *Organizations) CreatePolicyWithContext(ctx aws.Context, input *CreatePo
 
 const opDeclineHandshake = "DeclineHandshake"
 
-// DeclineHandshakeRequest generates a "aws/request.Request" representing the
+// DeclineHandshakeRequest generates a "aws.Request" representing the
 // client's request for the DeclineHandshake operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1747,8 +1746,8 @@ const opDeclineHandshake = "DeclineHandshake"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshake
-func (c *Organizations) DeclineHandshakeRequest(input *DeclineHandshakeInput) (req *request.Request, output *DeclineHandshakeOutput) {
-	op := &request.Operation{
+func (c *Organizations) DeclineHandshakeRequest(input *DeclineHandshakeInput) (req *aws.Request, output *DeclineHandshakeOutput) {
+	op := &aws.Operation{
 		Name:       opDeclineHandshake,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1883,7 +1882,7 @@ func (c *Organizations) DeclineHandshake(input *DeclineHandshakeInput) (*Decline
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DeclineHandshakeWithContext(ctx aws.Context, input *DeclineHandshakeInput, opts ...request.Option) (*DeclineHandshakeOutput, error) {
+func (c *Organizations) DeclineHandshakeWithContext(ctx aws.Context, input *DeclineHandshakeInput, opts ...aws.Option) (*DeclineHandshakeOutput, error) {
 	req, out := c.DeclineHandshakeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1892,7 +1891,7 @@ func (c *Organizations) DeclineHandshakeWithContext(ctx aws.Context, input *Decl
 
 const opDeleteOrganization = "DeleteOrganization"
 
-// DeleteOrganizationRequest generates a "aws/request.Request" representing the
+// DeleteOrganizationRequest generates a "aws.Request" representing the
 // client's request for the DeleteOrganization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1916,8 +1915,8 @@ const opDeleteOrganization = "DeleteOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganization
-func (c *Organizations) DeleteOrganizationRequest(input *DeleteOrganizationInput) (req *request.Request, output *DeleteOrganizationOutput) {
-	op := &request.Operation{
+func (c *Organizations) DeleteOrganizationRequest(input *DeleteOrganizationInput) (req *aws.Request, output *DeleteOrganizationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteOrganization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2044,7 +2043,7 @@ func (c *Organizations) DeleteOrganization(input *DeleteOrganizationInput) (*Del
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DeleteOrganizationWithContext(ctx aws.Context, input *DeleteOrganizationInput, opts ...request.Option) (*DeleteOrganizationOutput, error) {
+func (c *Organizations) DeleteOrganizationWithContext(ctx aws.Context, input *DeleteOrganizationInput, opts ...aws.Option) (*DeleteOrganizationOutput, error) {
 	req, out := c.DeleteOrganizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2053,7 +2052,7 @@ func (c *Organizations) DeleteOrganizationWithContext(ctx aws.Context, input *De
 
 const opDeleteOrganizationalUnit = "DeleteOrganizationalUnit"
 
-// DeleteOrganizationalUnitRequest generates a "aws/request.Request" representing the
+// DeleteOrganizationalUnitRequest generates a "aws.Request" representing the
 // client's request for the DeleteOrganizationalUnit operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2077,8 +2076,8 @@ const opDeleteOrganizationalUnit = "DeleteOrganizationalUnit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnit
-func (c *Organizations) DeleteOrganizationalUnitRequest(input *DeleteOrganizationalUnitInput) (req *request.Request, output *DeleteOrganizationalUnitOutput) {
-	op := &request.Operation{
+func (c *Organizations) DeleteOrganizationalUnitRequest(input *DeleteOrganizationalUnitInput) (req *aws.Request, output *DeleteOrganizationalUnitOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteOrganizationalUnit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2210,7 +2209,7 @@ func (c *Organizations) DeleteOrganizationalUnit(input *DeleteOrganizationalUnit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DeleteOrganizationalUnitWithContext(ctx aws.Context, input *DeleteOrganizationalUnitInput, opts ...request.Option) (*DeleteOrganizationalUnitOutput, error) {
+func (c *Organizations) DeleteOrganizationalUnitWithContext(ctx aws.Context, input *DeleteOrganizationalUnitInput, opts ...aws.Option) (*DeleteOrganizationalUnitOutput, error) {
 	req, out := c.DeleteOrganizationalUnitRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2219,7 +2218,7 @@ func (c *Organizations) DeleteOrganizationalUnitWithContext(ctx aws.Context, inp
 
 const opDeletePolicy = "DeletePolicy"
 
-// DeletePolicyRequest generates a "aws/request.Request" representing the
+// DeletePolicyRequest generates a "aws.Request" representing the
 // client's request for the DeletePolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2243,8 +2242,8 @@ const opDeletePolicy = "DeletePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicy
-func (c *Organizations) DeletePolicyRequest(input *DeletePolicyInput) (req *request.Request, output *DeletePolicyOutput) {
-	op := &request.Operation{
+func (c *Organizations) DeletePolicyRequest(input *DeletePolicyInput) (req *aws.Request, output *DeletePolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2374,7 +2373,7 @@ func (c *Organizations) DeletePolicy(input *DeletePolicyInput) (*DeletePolicyOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DeletePolicyWithContext(ctx aws.Context, input *DeletePolicyInput, opts ...request.Option) (*DeletePolicyOutput, error) {
+func (c *Organizations) DeletePolicyWithContext(ctx aws.Context, input *DeletePolicyInput, opts ...aws.Option) (*DeletePolicyOutput, error) {
 	req, out := c.DeletePolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2383,7 +2382,7 @@ func (c *Organizations) DeletePolicyWithContext(ctx aws.Context, input *DeletePo
 
 const opDescribeAccount = "DescribeAccount"
 
-// DescribeAccountRequest generates a "aws/request.Request" representing the
+// DescribeAccountRequest generates a "aws.Request" representing the
 // client's request for the DescribeAccount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2407,8 +2406,8 @@ const opDescribeAccount = "DescribeAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccount
-func (c *Organizations) DescribeAccountRequest(input *DescribeAccountInput) (req *request.Request, output *DescribeAccountOutput) {
-	op := &request.Operation{
+func (c *Organizations) DescribeAccountRequest(input *DescribeAccountInput) (req *aws.Request, output *DescribeAccountOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAccount,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2529,7 +2528,7 @@ func (c *Organizations) DescribeAccount(input *DescribeAccountInput) (*DescribeA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DescribeAccountWithContext(ctx aws.Context, input *DescribeAccountInput, opts ...request.Option) (*DescribeAccountOutput, error) {
+func (c *Organizations) DescribeAccountWithContext(ctx aws.Context, input *DescribeAccountInput, opts ...aws.Option) (*DescribeAccountOutput, error) {
 	req, out := c.DescribeAccountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2538,7 +2537,7 @@ func (c *Organizations) DescribeAccountWithContext(ctx aws.Context, input *Descr
 
 const opDescribeCreateAccountStatus = "DescribeCreateAccountStatus"
 
-// DescribeCreateAccountStatusRequest generates a "aws/request.Request" representing the
+// DescribeCreateAccountStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeCreateAccountStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2562,8 +2561,8 @@ const opDescribeCreateAccountStatus = "DescribeCreateAccountStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus
-func (c *Organizations) DescribeCreateAccountStatusRequest(input *DescribeCreateAccountStatusInput) (req *request.Request, output *DescribeCreateAccountStatusOutput) {
-	op := &request.Operation{
+func (c *Organizations) DescribeCreateAccountStatusRequest(input *DescribeCreateAccountStatusInput) (req *aws.Request, output *DescribeCreateAccountStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCreateAccountStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2683,7 +2682,7 @@ func (c *Organizations) DescribeCreateAccountStatus(input *DescribeCreateAccount
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DescribeCreateAccountStatusWithContext(ctx aws.Context, input *DescribeCreateAccountStatusInput, opts ...request.Option) (*DescribeCreateAccountStatusOutput, error) {
+func (c *Organizations) DescribeCreateAccountStatusWithContext(ctx aws.Context, input *DescribeCreateAccountStatusInput, opts ...aws.Option) (*DescribeCreateAccountStatusOutput, error) {
 	req, out := c.DescribeCreateAccountStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2692,7 +2691,7 @@ func (c *Organizations) DescribeCreateAccountStatusWithContext(ctx aws.Context, 
 
 const opDescribeHandshake = "DescribeHandshake"
 
-// DescribeHandshakeRequest generates a "aws/request.Request" representing the
+// DescribeHandshakeRequest generates a "aws.Request" representing the
 // client's request for the DescribeHandshake operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2716,8 +2715,8 @@ const opDescribeHandshake = "DescribeHandshake"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshake
-func (c *Organizations) DescribeHandshakeRequest(input *DescribeHandshakeInput) (req *request.Request, output *DescribeHandshakeOutput) {
-	op := &request.Operation{
+func (c *Organizations) DescribeHandshakeRequest(input *DescribeHandshakeInput) (req *aws.Request, output *DescribeHandshakeOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeHandshake,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2842,7 +2841,7 @@ func (c *Organizations) DescribeHandshake(input *DescribeHandshakeInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DescribeHandshakeWithContext(ctx aws.Context, input *DescribeHandshakeInput, opts ...request.Option) (*DescribeHandshakeOutput, error) {
+func (c *Organizations) DescribeHandshakeWithContext(ctx aws.Context, input *DescribeHandshakeInput, opts ...aws.Option) (*DescribeHandshakeOutput, error) {
 	req, out := c.DescribeHandshakeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2851,7 +2850,7 @@ func (c *Organizations) DescribeHandshakeWithContext(ctx aws.Context, input *Des
 
 const opDescribeOrganization = "DescribeOrganization"
 
-// DescribeOrganizationRequest generates a "aws/request.Request" representing the
+// DescribeOrganizationRequest generates a "aws.Request" representing the
 // client's request for the DescribeOrganization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2875,8 +2874,8 @@ const opDescribeOrganization = "DescribeOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization
-func (c *Organizations) DescribeOrganizationRequest(input *DescribeOrganizationInput) (req *request.Request, output *DescribeOrganizationOutput) {
-	op := &request.Operation{
+func (c *Organizations) DescribeOrganizationRequest(input *DescribeOrganizationInput) (req *aws.Request, output *DescribeOrganizationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeOrganization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2944,7 +2943,7 @@ func (c *Organizations) DescribeOrganization(input *DescribeOrganizationInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DescribeOrganizationWithContext(ctx aws.Context, input *DescribeOrganizationInput, opts ...request.Option) (*DescribeOrganizationOutput, error) {
+func (c *Organizations) DescribeOrganizationWithContext(ctx aws.Context, input *DescribeOrganizationInput, opts ...aws.Option) (*DescribeOrganizationOutput, error) {
 	req, out := c.DescribeOrganizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2953,7 +2952,7 @@ func (c *Organizations) DescribeOrganizationWithContext(ctx aws.Context, input *
 
 const opDescribeOrganizationalUnit = "DescribeOrganizationalUnit"
 
-// DescribeOrganizationalUnitRequest generates a "aws/request.Request" representing the
+// DescribeOrganizationalUnitRequest generates a "aws.Request" representing the
 // client's request for the DescribeOrganizationalUnit operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2977,8 +2976,8 @@ const opDescribeOrganizationalUnit = "DescribeOrganizationalUnit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnit
-func (c *Organizations) DescribeOrganizationalUnitRequest(input *DescribeOrganizationalUnitInput) (req *request.Request, output *DescribeOrganizationalUnitOutput) {
-	op := &request.Operation{
+func (c *Organizations) DescribeOrganizationalUnitRequest(input *DescribeOrganizationalUnitInput) (req *aws.Request, output *DescribeOrganizationalUnitOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeOrganizationalUnit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3098,7 +3097,7 @@ func (c *Organizations) DescribeOrganizationalUnit(input *DescribeOrganizational
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DescribeOrganizationalUnitWithContext(ctx aws.Context, input *DescribeOrganizationalUnitInput, opts ...request.Option) (*DescribeOrganizationalUnitOutput, error) {
+func (c *Organizations) DescribeOrganizationalUnitWithContext(ctx aws.Context, input *DescribeOrganizationalUnitInput, opts ...aws.Option) (*DescribeOrganizationalUnitOutput, error) {
 	req, out := c.DescribeOrganizationalUnitRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3107,7 +3106,7 @@ func (c *Organizations) DescribeOrganizationalUnitWithContext(ctx aws.Context, i
 
 const opDescribePolicy = "DescribePolicy"
 
-// DescribePolicyRequest generates a "aws/request.Request" representing the
+// DescribePolicyRequest generates a "aws.Request" representing the
 // client's request for the DescribePolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3131,8 +3130,8 @@ const opDescribePolicy = "DescribePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicy
-func (c *Organizations) DescribePolicyRequest(input *DescribePolicyInput) (req *request.Request, output *DescribePolicyOutput) {
-	op := &request.Operation{
+func (c *Organizations) DescribePolicyRequest(input *DescribePolicyInput) (req *aws.Request, output *DescribePolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3251,7 +3250,7 @@ func (c *Organizations) DescribePolicy(input *DescribePolicyInput) (*DescribePol
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DescribePolicyWithContext(ctx aws.Context, input *DescribePolicyInput, opts ...request.Option) (*DescribePolicyOutput, error) {
+func (c *Organizations) DescribePolicyWithContext(ctx aws.Context, input *DescribePolicyInput, opts ...aws.Option) (*DescribePolicyOutput, error) {
 	req, out := c.DescribePolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3260,7 +3259,7 @@ func (c *Organizations) DescribePolicyWithContext(ctx aws.Context, input *Descri
 
 const opDetachPolicy = "DetachPolicy"
 
-// DetachPolicyRequest generates a "aws/request.Request" representing the
+// DetachPolicyRequest generates a "aws.Request" representing the
 // client's request for the DetachPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3284,8 +3283,8 @@ const opDetachPolicy = "DetachPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DetachPolicy
-func (c *Organizations) DetachPolicyRequest(input *DetachPolicyInput) (req *request.Request, output *DetachPolicyOutput) {
-	op := &request.Operation{
+func (c *Organizations) DetachPolicyRequest(input *DetachPolicyInput) (req *aws.Request, output *DetachPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDetachPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3510,7 +3509,7 @@ func (c *Organizations) DetachPolicy(input *DetachPolicyInput) (*DetachPolicyOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DetachPolicyWithContext(ctx aws.Context, input *DetachPolicyInput, opts ...request.Option) (*DetachPolicyOutput, error) {
+func (c *Organizations) DetachPolicyWithContext(ctx aws.Context, input *DetachPolicyInput, opts ...aws.Option) (*DetachPolicyOutput, error) {
 	req, out := c.DetachPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3519,7 +3518,7 @@ func (c *Organizations) DetachPolicyWithContext(ctx aws.Context, input *DetachPo
 
 const opDisablePolicyType = "DisablePolicyType"
 
-// DisablePolicyTypeRequest generates a "aws/request.Request" representing the
+// DisablePolicyTypeRequest generates a "aws.Request" representing the
 // client's request for the DisablePolicyType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3543,8 +3542,8 @@ const opDisablePolicyType = "DisablePolicyType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType
-func (c *Organizations) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) (req *request.Request, output *DisablePolicyTypeOutput) {
-	op := &request.Operation{
+func (c *Organizations) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) (req *aws.Request, output *DisablePolicyTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDisablePolicyType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3760,7 +3759,7 @@ func (c *Organizations) DisablePolicyType(input *DisablePolicyTypeInput) (*Disab
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) DisablePolicyTypeWithContext(ctx aws.Context, input *DisablePolicyTypeInput, opts ...request.Option) (*DisablePolicyTypeOutput, error) {
+func (c *Organizations) DisablePolicyTypeWithContext(ctx aws.Context, input *DisablePolicyTypeInput, opts ...aws.Option) (*DisablePolicyTypeOutput, error) {
 	req, out := c.DisablePolicyTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3769,7 +3768,7 @@ func (c *Organizations) DisablePolicyTypeWithContext(ctx aws.Context, input *Dis
 
 const opEnableAllFeatures = "EnableAllFeatures"
 
-// EnableAllFeaturesRequest generates a "aws/request.Request" representing the
+// EnableAllFeaturesRequest generates a "aws.Request" representing the
 // client's request for the EnableAllFeatures operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3793,8 +3792,8 @@ const opEnableAllFeatures = "EnableAllFeatures"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeatures
-func (c *Organizations) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) (req *request.Request, output *EnableAllFeaturesOutput) {
-	op := &request.Operation{
+func (c *Organizations) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) (req *aws.Request, output *EnableAllFeaturesOutput) {
+	op := &aws.Operation{
 		Name:       opEnableAllFeatures,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3977,7 +3976,7 @@ func (c *Organizations) EnableAllFeatures(input *EnableAllFeaturesInput) (*Enabl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) EnableAllFeaturesWithContext(ctx aws.Context, input *EnableAllFeaturesInput, opts ...request.Option) (*EnableAllFeaturesOutput, error) {
+func (c *Organizations) EnableAllFeaturesWithContext(ctx aws.Context, input *EnableAllFeaturesInput, opts ...aws.Option) (*EnableAllFeaturesOutput, error) {
 	req, out := c.EnableAllFeaturesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3986,7 +3985,7 @@ func (c *Organizations) EnableAllFeaturesWithContext(ctx aws.Context, input *Ena
 
 const opEnablePolicyType = "EnablePolicyType"
 
-// EnablePolicyTypeRequest generates a "aws/request.Request" representing the
+// EnablePolicyTypeRequest generates a "aws.Request" representing the
 // client's request for the EnablePolicyType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4010,8 +4009,8 @@ const opEnablePolicyType = "EnablePolicyType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType
-func (c *Organizations) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) (req *request.Request, output *EnablePolicyTypeOutput) {
-	op := &request.Operation{
+func (c *Organizations) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) (req *aws.Request, output *EnablePolicyTypeOutput) {
+	op := &aws.Operation{
 		Name:       opEnablePolicyType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4228,7 +4227,7 @@ func (c *Organizations) EnablePolicyType(input *EnablePolicyTypeInput) (*EnableP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) EnablePolicyTypeWithContext(ctx aws.Context, input *EnablePolicyTypeInput, opts ...request.Option) (*EnablePolicyTypeOutput, error) {
+func (c *Organizations) EnablePolicyTypeWithContext(ctx aws.Context, input *EnablePolicyTypeInput, opts ...aws.Option) (*EnablePolicyTypeOutput, error) {
 	req, out := c.EnablePolicyTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4237,7 +4236,7 @@ func (c *Organizations) EnablePolicyTypeWithContext(ctx aws.Context, input *Enab
 
 const opInviteAccountToOrganization = "InviteAccountToOrganization"
 
-// InviteAccountToOrganizationRequest generates a "aws/request.Request" representing the
+// InviteAccountToOrganizationRequest generates a "aws.Request" representing the
 // client's request for the InviteAccountToOrganization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4261,8 +4260,8 @@ const opInviteAccountToOrganization = "InviteAccountToOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganization
-func (c *Organizations) InviteAccountToOrganizationRequest(input *InviteAccountToOrganizationInput) (req *request.Request, output *InviteAccountToOrganizationOutput) {
-	op := &request.Operation{
+func (c *Organizations) InviteAccountToOrganizationRequest(input *InviteAccountToOrganizationInput) (req *aws.Request, output *InviteAccountToOrganizationOutput) {
+	op := &aws.Operation{
 		Name:       opInviteAccountToOrganization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4446,7 +4445,7 @@ func (c *Organizations) InviteAccountToOrganization(input *InviteAccountToOrgani
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) InviteAccountToOrganizationWithContext(ctx aws.Context, input *InviteAccountToOrganizationInput, opts ...request.Option) (*InviteAccountToOrganizationOutput, error) {
+func (c *Organizations) InviteAccountToOrganizationWithContext(ctx aws.Context, input *InviteAccountToOrganizationInput, opts ...aws.Option) (*InviteAccountToOrganizationOutput, error) {
 	req, out := c.InviteAccountToOrganizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4455,7 +4454,7 @@ func (c *Organizations) InviteAccountToOrganizationWithContext(ctx aws.Context, 
 
 const opLeaveOrganization = "LeaveOrganization"
 
-// LeaveOrganizationRequest generates a "aws/request.Request" representing the
+// LeaveOrganizationRequest generates a "aws.Request" representing the
 // client's request for the LeaveOrganization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4479,8 +4478,8 @@ const opLeaveOrganization = "LeaveOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/LeaveOrganization
-func (c *Organizations) LeaveOrganizationRequest(input *LeaveOrganizationInput) (req *request.Request, output *LeaveOrganizationOutput) {
-	op := &request.Operation{
+func (c *Organizations) LeaveOrganizationRequest(input *LeaveOrganizationInput) (req *aws.Request, output *LeaveOrganizationOutput) {
+	op := &aws.Operation{
 		Name:       opLeaveOrganization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4720,7 +4719,7 @@ func (c *Organizations) LeaveOrganization(input *LeaveOrganizationInput) (*Leave
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) LeaveOrganizationWithContext(ctx aws.Context, input *LeaveOrganizationInput, opts ...request.Option) (*LeaveOrganizationOutput, error) {
+func (c *Organizations) LeaveOrganizationWithContext(ctx aws.Context, input *LeaveOrganizationInput, opts ...aws.Option) (*LeaveOrganizationOutput, error) {
 	req, out := c.LeaveOrganizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4729,7 +4728,7 @@ func (c *Organizations) LeaveOrganizationWithContext(ctx aws.Context, input *Lea
 
 const opListAccounts = "ListAccounts"
 
-// ListAccountsRequest generates a "aws/request.Request" representing the
+// ListAccountsRequest generates a "aws.Request" representing the
 // client's request for the ListAccounts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4753,12 +4752,12 @@ const opListAccounts = "ListAccounts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccounts
-func (c *Organizations) ListAccountsRequest(input *ListAccountsInput) (req *request.Request, output *ListAccountsOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListAccountsRequest(input *ListAccountsInput) (req *aws.Request, output *ListAccountsOutput) {
+	op := &aws.Operation{
 		Name:       opListAccounts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4877,7 +4876,7 @@ func (c *Organizations) ListAccounts(input *ListAccountsInput) (*ListAccountsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListAccountsWithContext(ctx aws.Context, input *ListAccountsInput, opts ...request.Option) (*ListAccountsOutput, error) {
+func (c *Organizations) ListAccountsWithContext(ctx aws.Context, input *ListAccountsInput, opts ...aws.Option) (*ListAccountsOutput, error) {
 	req, out := c.ListAccountsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4912,9 +4911,9 @@ func (c *Organizations) ListAccountsPages(input *ListAccountsInput, fn func(*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListAccountsPagesWithContext(ctx aws.Context, input *ListAccountsInput, fn func(*ListAccountsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListAccountsPagesWithContext(ctx aws.Context, input *ListAccountsInput, fn func(*ListAccountsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAccountsInput
 			if input != nil {
 				tmp := *input
@@ -4936,7 +4935,7 @@ func (c *Organizations) ListAccountsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListAccountsForParent = "ListAccountsForParent"
 
-// ListAccountsForParentRequest generates a "aws/request.Request" representing the
+// ListAccountsForParentRequest generates a "aws.Request" representing the
 // client's request for the ListAccountsForParent operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4960,12 +4959,12 @@ const opListAccountsForParent = "ListAccountsForParent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParent
-func (c *Organizations) ListAccountsForParentRequest(input *ListAccountsForParentInput) (req *request.Request, output *ListAccountsForParentOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListAccountsForParentRequest(input *ListAccountsForParentInput) (req *aws.Request, output *ListAccountsForParentOutput) {
+	op := &aws.Operation{
 		Name:       opListAccountsForParent,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5090,7 +5089,7 @@ func (c *Organizations) ListAccountsForParent(input *ListAccountsForParentInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListAccountsForParentWithContext(ctx aws.Context, input *ListAccountsForParentInput, opts ...request.Option) (*ListAccountsForParentOutput, error) {
+func (c *Organizations) ListAccountsForParentWithContext(ctx aws.Context, input *ListAccountsForParentInput, opts ...aws.Option) (*ListAccountsForParentOutput, error) {
 	req, out := c.ListAccountsForParentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5125,9 +5124,9 @@ func (c *Organizations) ListAccountsForParentPages(input *ListAccountsForParentI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListAccountsForParentPagesWithContext(ctx aws.Context, input *ListAccountsForParentInput, fn func(*ListAccountsForParentOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListAccountsForParentPagesWithContext(ctx aws.Context, input *ListAccountsForParentInput, fn func(*ListAccountsForParentOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAccountsForParentInput
 			if input != nil {
 				tmp := *input
@@ -5149,7 +5148,7 @@ func (c *Organizations) ListAccountsForParentPagesWithContext(ctx aws.Context, i
 
 const opListChildren = "ListChildren"
 
-// ListChildrenRequest generates a "aws/request.Request" representing the
+// ListChildrenRequest generates a "aws.Request" representing the
 // client's request for the ListChildren operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5173,12 +5172,12 @@ const opListChildren = "ListChildren"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildren
-func (c *Organizations) ListChildrenRequest(input *ListChildrenInput) (req *request.Request, output *ListChildrenOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListChildrenRequest(input *ListChildrenInput) (req *aws.Request, output *ListChildrenOutput) {
+	op := &aws.Operation{
 		Name:       opListChildren,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5300,7 +5299,7 @@ func (c *Organizations) ListChildren(input *ListChildrenInput) (*ListChildrenOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListChildrenWithContext(ctx aws.Context, input *ListChildrenInput, opts ...request.Option) (*ListChildrenOutput, error) {
+func (c *Organizations) ListChildrenWithContext(ctx aws.Context, input *ListChildrenInput, opts ...aws.Option) (*ListChildrenOutput, error) {
 	req, out := c.ListChildrenRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5335,9 +5334,9 @@ func (c *Organizations) ListChildrenPages(input *ListChildrenInput, fn func(*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListChildrenPagesWithContext(ctx aws.Context, input *ListChildrenInput, fn func(*ListChildrenOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListChildrenPagesWithContext(ctx aws.Context, input *ListChildrenInput, fn func(*ListChildrenOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListChildrenInput
 			if input != nil {
 				tmp := *input
@@ -5359,7 +5358,7 @@ func (c *Organizations) ListChildrenPagesWithContext(ctx aws.Context, input *Lis
 
 const opListCreateAccountStatus = "ListCreateAccountStatus"
 
-// ListCreateAccountStatusRequest generates a "aws/request.Request" representing the
+// ListCreateAccountStatusRequest generates a "aws.Request" representing the
 // client's request for the ListCreateAccountStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5383,12 +5382,12 @@ const opListCreateAccountStatus = "ListCreateAccountStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus
-func (c *Organizations) ListCreateAccountStatusRequest(input *ListCreateAccountStatusInput) (req *request.Request, output *ListCreateAccountStatusOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListCreateAccountStatusRequest(input *ListCreateAccountStatusInput) (req *aws.Request, output *ListCreateAccountStatusOutput) {
+	op := &aws.Operation{
 		Name:       opListCreateAccountStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5507,7 +5506,7 @@ func (c *Organizations) ListCreateAccountStatus(input *ListCreateAccountStatusIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListCreateAccountStatusWithContext(ctx aws.Context, input *ListCreateAccountStatusInput, opts ...request.Option) (*ListCreateAccountStatusOutput, error) {
+func (c *Organizations) ListCreateAccountStatusWithContext(ctx aws.Context, input *ListCreateAccountStatusInput, opts ...aws.Option) (*ListCreateAccountStatusOutput, error) {
 	req, out := c.ListCreateAccountStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5542,9 +5541,9 @@ func (c *Organizations) ListCreateAccountStatusPages(input *ListCreateAccountSta
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListCreateAccountStatusPagesWithContext(ctx aws.Context, input *ListCreateAccountStatusInput, fn func(*ListCreateAccountStatusOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListCreateAccountStatusPagesWithContext(ctx aws.Context, input *ListCreateAccountStatusInput, fn func(*ListCreateAccountStatusOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListCreateAccountStatusInput
 			if input != nil {
 				tmp := *input
@@ -5566,7 +5565,7 @@ func (c *Organizations) ListCreateAccountStatusPagesWithContext(ctx aws.Context,
 
 const opListHandshakesForAccount = "ListHandshakesForAccount"
 
-// ListHandshakesForAccountRequest generates a "aws/request.Request" representing the
+// ListHandshakesForAccountRequest generates a "aws.Request" representing the
 // client's request for the ListHandshakesForAccount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5590,12 +5589,12 @@ const opListHandshakesForAccount = "ListHandshakesForAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccount
-func (c *Organizations) ListHandshakesForAccountRequest(input *ListHandshakesForAccountInput) (req *request.Request, output *ListHandshakesForAccountOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListHandshakesForAccountRequest(input *ListHandshakesForAccountInput) (req *aws.Request, output *ListHandshakesForAccountOutput) {
+	op := &aws.Operation{
 		Name:       opListHandshakesForAccount,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5718,7 +5717,7 @@ func (c *Organizations) ListHandshakesForAccount(input *ListHandshakesForAccount
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListHandshakesForAccountWithContext(ctx aws.Context, input *ListHandshakesForAccountInput, opts ...request.Option) (*ListHandshakesForAccountOutput, error) {
+func (c *Organizations) ListHandshakesForAccountWithContext(ctx aws.Context, input *ListHandshakesForAccountInput, opts ...aws.Option) (*ListHandshakesForAccountOutput, error) {
 	req, out := c.ListHandshakesForAccountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5753,9 +5752,9 @@ func (c *Organizations) ListHandshakesForAccountPages(input *ListHandshakesForAc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListHandshakesForAccountPagesWithContext(ctx aws.Context, input *ListHandshakesForAccountInput, fn func(*ListHandshakesForAccountOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListHandshakesForAccountPagesWithContext(ctx aws.Context, input *ListHandshakesForAccountInput, fn func(*ListHandshakesForAccountOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListHandshakesForAccountInput
 			if input != nil {
 				tmp := *input
@@ -5777,7 +5776,7 @@ func (c *Organizations) ListHandshakesForAccountPagesWithContext(ctx aws.Context
 
 const opListHandshakesForOrganization = "ListHandshakesForOrganization"
 
-// ListHandshakesForOrganizationRequest generates a "aws/request.Request" representing the
+// ListHandshakesForOrganizationRequest generates a "aws.Request" representing the
 // client's request for the ListHandshakesForOrganization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5801,12 +5800,12 @@ const opListHandshakesForOrganization = "ListHandshakesForOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganization
-func (c *Organizations) ListHandshakesForOrganizationRequest(input *ListHandshakesForOrganizationInput) (req *request.Request, output *ListHandshakesForOrganizationOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListHandshakesForOrganizationRequest(input *ListHandshakesForOrganizationInput) (req *aws.Request, output *ListHandshakesForOrganizationOutput) {
+	op := &aws.Operation{
 		Name:       opListHandshakesForOrganization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5935,7 +5934,7 @@ func (c *Organizations) ListHandshakesForOrganization(input *ListHandshakesForOr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListHandshakesForOrganizationWithContext(ctx aws.Context, input *ListHandshakesForOrganizationInput, opts ...request.Option) (*ListHandshakesForOrganizationOutput, error) {
+func (c *Organizations) ListHandshakesForOrganizationWithContext(ctx aws.Context, input *ListHandshakesForOrganizationInput, opts ...aws.Option) (*ListHandshakesForOrganizationOutput, error) {
 	req, out := c.ListHandshakesForOrganizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5970,9 +5969,9 @@ func (c *Organizations) ListHandshakesForOrganizationPages(input *ListHandshakes
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListHandshakesForOrganizationPagesWithContext(ctx aws.Context, input *ListHandshakesForOrganizationInput, fn func(*ListHandshakesForOrganizationOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListHandshakesForOrganizationPagesWithContext(ctx aws.Context, input *ListHandshakesForOrganizationInput, fn func(*ListHandshakesForOrganizationOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListHandshakesForOrganizationInput
 			if input != nil {
 				tmp := *input
@@ -5994,7 +5993,7 @@ func (c *Organizations) ListHandshakesForOrganizationPagesWithContext(ctx aws.Co
 
 const opListOrganizationalUnitsForParent = "ListOrganizationalUnitsForParent"
 
-// ListOrganizationalUnitsForParentRequest generates a "aws/request.Request" representing the
+// ListOrganizationalUnitsForParentRequest generates a "aws.Request" representing the
 // client's request for the ListOrganizationalUnitsForParent operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6018,12 +6017,12 @@ const opListOrganizationalUnitsForParent = "ListOrganizationalUnitsForParent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParent
-func (c *Organizations) ListOrganizationalUnitsForParentRequest(input *ListOrganizationalUnitsForParentInput) (req *request.Request, output *ListOrganizationalUnitsForParentOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListOrganizationalUnitsForParentRequest(input *ListOrganizationalUnitsForParentInput) (req *aws.Request, output *ListOrganizationalUnitsForParentOutput) {
+	op := &aws.Operation{
 		Name:       opListOrganizationalUnitsForParent,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6145,7 +6144,7 @@ func (c *Organizations) ListOrganizationalUnitsForParent(input *ListOrganization
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListOrganizationalUnitsForParentWithContext(ctx aws.Context, input *ListOrganizationalUnitsForParentInput, opts ...request.Option) (*ListOrganizationalUnitsForParentOutput, error) {
+func (c *Organizations) ListOrganizationalUnitsForParentWithContext(ctx aws.Context, input *ListOrganizationalUnitsForParentInput, opts ...aws.Option) (*ListOrganizationalUnitsForParentOutput, error) {
 	req, out := c.ListOrganizationalUnitsForParentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6180,9 +6179,9 @@ func (c *Organizations) ListOrganizationalUnitsForParentPages(input *ListOrganiz
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListOrganizationalUnitsForParentPagesWithContext(ctx aws.Context, input *ListOrganizationalUnitsForParentInput, fn func(*ListOrganizationalUnitsForParentOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListOrganizationalUnitsForParentPagesWithContext(ctx aws.Context, input *ListOrganizationalUnitsForParentInput, fn func(*ListOrganizationalUnitsForParentOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOrganizationalUnitsForParentInput
 			if input != nil {
 				tmp := *input
@@ -6204,7 +6203,7 @@ func (c *Organizations) ListOrganizationalUnitsForParentPagesWithContext(ctx aws
 
 const opListParents = "ListParents"
 
-// ListParentsRequest generates a "aws/request.Request" representing the
+// ListParentsRequest generates a "aws.Request" representing the
 // client's request for the ListParents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6228,12 +6227,12 @@ const opListParents = "ListParents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParents
-func (c *Organizations) ListParentsRequest(input *ListParentsInput) (req *request.Request, output *ListParentsOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListParentsRequest(input *ListParentsInput) (req *aws.Request, output *ListParentsOutput) {
+	op := &aws.Operation{
 		Name:       opListParents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6359,7 +6358,7 @@ func (c *Organizations) ListParents(input *ListParentsInput) (*ListParentsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListParentsWithContext(ctx aws.Context, input *ListParentsInput, opts ...request.Option) (*ListParentsOutput, error) {
+func (c *Organizations) ListParentsWithContext(ctx aws.Context, input *ListParentsInput, opts ...aws.Option) (*ListParentsOutput, error) {
 	req, out := c.ListParentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6394,9 +6393,9 @@ func (c *Organizations) ListParentsPages(input *ListParentsInput, fn func(*ListP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListParentsPagesWithContext(ctx aws.Context, input *ListParentsInput, fn func(*ListParentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListParentsPagesWithContext(ctx aws.Context, input *ListParentsInput, fn func(*ListParentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListParentsInput
 			if input != nil {
 				tmp := *input
@@ -6418,7 +6417,7 @@ func (c *Organizations) ListParentsPagesWithContext(ctx aws.Context, input *List
 
 const opListPolicies = "ListPolicies"
 
-// ListPoliciesRequest generates a "aws/request.Request" representing the
+// ListPoliciesRequest generates a "aws.Request" representing the
 // client's request for the ListPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6442,12 +6441,12 @@ const opListPolicies = "ListPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPolicies
-func (c *Organizations) ListPoliciesRequest(input *ListPoliciesInput) (req *request.Request, output *ListPoliciesOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListPoliciesRequest(input *ListPoliciesInput) (req *aws.Request, output *ListPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opListPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6565,7 +6564,7 @@ func (c *Organizations) ListPolicies(input *ListPoliciesInput) (*ListPoliciesOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListPoliciesWithContext(ctx aws.Context, input *ListPoliciesInput, opts ...request.Option) (*ListPoliciesOutput, error) {
+func (c *Organizations) ListPoliciesWithContext(ctx aws.Context, input *ListPoliciesInput, opts ...aws.Option) (*ListPoliciesOutput, error) {
 	req, out := c.ListPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6600,9 +6599,9 @@ func (c *Organizations) ListPoliciesPages(input *ListPoliciesInput, fn func(*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListPoliciesPagesWithContext(ctx aws.Context, input *ListPoliciesInput, fn func(*ListPoliciesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListPoliciesPagesWithContext(ctx aws.Context, input *ListPoliciesInput, fn func(*ListPoliciesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPoliciesInput
 			if input != nil {
 				tmp := *input
@@ -6624,7 +6623,7 @@ func (c *Organizations) ListPoliciesPagesWithContext(ctx aws.Context, input *Lis
 
 const opListPoliciesForTarget = "ListPoliciesForTarget"
 
-// ListPoliciesForTargetRequest generates a "aws/request.Request" representing the
+// ListPoliciesForTargetRequest generates a "aws.Request" representing the
 // client's request for the ListPoliciesForTarget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6648,12 +6647,12 @@ const opListPoliciesForTarget = "ListPoliciesForTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTarget
-func (c *Organizations) ListPoliciesForTargetRequest(input *ListPoliciesForTargetInput) (req *request.Request, output *ListPoliciesForTargetOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListPoliciesForTargetRequest(input *ListPoliciesForTargetInput) (req *aws.Request, output *ListPoliciesForTargetOutput) {
+	op := &aws.Operation{
 		Name:       opListPoliciesForTarget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6776,7 +6775,7 @@ func (c *Organizations) ListPoliciesForTarget(input *ListPoliciesForTargetInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListPoliciesForTargetWithContext(ctx aws.Context, input *ListPoliciesForTargetInput, opts ...request.Option) (*ListPoliciesForTargetOutput, error) {
+func (c *Organizations) ListPoliciesForTargetWithContext(ctx aws.Context, input *ListPoliciesForTargetInput, opts ...aws.Option) (*ListPoliciesForTargetOutput, error) {
 	req, out := c.ListPoliciesForTargetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6811,9 +6810,9 @@ func (c *Organizations) ListPoliciesForTargetPages(input *ListPoliciesForTargetI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListPoliciesForTargetPagesWithContext(ctx aws.Context, input *ListPoliciesForTargetInput, fn func(*ListPoliciesForTargetOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListPoliciesForTargetPagesWithContext(ctx aws.Context, input *ListPoliciesForTargetInput, fn func(*ListPoliciesForTargetOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPoliciesForTargetInput
 			if input != nil {
 				tmp := *input
@@ -6835,7 +6834,7 @@ func (c *Organizations) ListPoliciesForTargetPagesWithContext(ctx aws.Context, i
 
 const opListRoots = "ListRoots"
 
-// ListRootsRequest generates a "aws/request.Request" representing the
+// ListRootsRequest generates a "aws.Request" representing the
 // client's request for the ListRoots operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6859,12 +6858,12 @@ const opListRoots = "ListRoots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRoots
-func (c *Organizations) ListRootsRequest(input *ListRootsInput) (req *request.Request, output *ListRootsOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListRootsRequest(input *ListRootsInput) (req *aws.Request, output *ListRootsOutput) {
+	op := &aws.Operation{
 		Name:       opListRoots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6982,7 +6981,7 @@ func (c *Organizations) ListRoots(input *ListRootsInput) (*ListRootsOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListRootsWithContext(ctx aws.Context, input *ListRootsInput, opts ...request.Option) (*ListRootsOutput, error) {
+func (c *Organizations) ListRootsWithContext(ctx aws.Context, input *ListRootsInput, opts ...aws.Option) (*ListRootsOutput, error) {
 	req, out := c.ListRootsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7017,9 +7016,9 @@ func (c *Organizations) ListRootsPages(input *ListRootsInput, fn func(*ListRoots
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListRootsPagesWithContext(ctx aws.Context, input *ListRootsInput, fn func(*ListRootsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListRootsPagesWithContext(ctx aws.Context, input *ListRootsInput, fn func(*ListRootsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListRootsInput
 			if input != nil {
 				tmp := *input
@@ -7041,7 +7040,7 @@ func (c *Organizations) ListRootsPagesWithContext(ctx aws.Context, input *ListRo
 
 const opListTargetsForPolicy = "ListTargetsForPolicy"
 
-// ListTargetsForPolicyRequest generates a "aws/request.Request" representing the
+// ListTargetsForPolicyRequest generates a "aws.Request" representing the
 // client's request for the ListTargetsForPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7065,12 +7064,12 @@ const opListTargetsForPolicy = "ListTargetsForPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicy
-func (c *Organizations) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) (req *request.Request, output *ListTargetsForPolicyOutput) {
-	op := &request.Operation{
+func (c *Organizations) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) (req *aws.Request, output *ListTargetsForPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opListTargetsForPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -7191,7 +7190,7 @@ func (c *Organizations) ListTargetsForPolicy(input *ListTargetsForPolicyInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListTargetsForPolicyWithContext(ctx aws.Context, input *ListTargetsForPolicyInput, opts ...request.Option) (*ListTargetsForPolicyOutput, error) {
+func (c *Organizations) ListTargetsForPolicyWithContext(ctx aws.Context, input *ListTargetsForPolicyInput, opts ...aws.Option) (*ListTargetsForPolicyOutput, error) {
 	req, out := c.ListTargetsForPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7226,9 +7225,9 @@ func (c *Organizations) ListTargetsForPolicyPages(input *ListTargetsForPolicyInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) ListTargetsForPolicyPagesWithContext(ctx aws.Context, input *ListTargetsForPolicyInput, fn func(*ListTargetsForPolicyOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Organizations) ListTargetsForPolicyPagesWithContext(ctx aws.Context, input *ListTargetsForPolicyInput, fn func(*ListTargetsForPolicyOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTargetsForPolicyInput
 			if input != nil {
 				tmp := *input
@@ -7250,7 +7249,7 @@ func (c *Organizations) ListTargetsForPolicyPagesWithContext(ctx aws.Context, in
 
 const opMoveAccount = "MoveAccount"
 
-// MoveAccountRequest generates a "aws/request.Request" representing the
+// MoveAccountRequest generates a "aws.Request" representing the
 // client's request for the MoveAccount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7274,8 +7273,8 @@ const opMoveAccount = "MoveAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccount
-func (c *Organizations) MoveAccountRequest(input *MoveAccountInput) (req *request.Request, output *MoveAccountOutput) {
-	op := &request.Operation{
+func (c *Organizations) MoveAccountRequest(input *MoveAccountInput) (req *aws.Request, output *MoveAccountOutput) {
+	op := &aws.Operation{
 		Name:       opMoveAccount,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7413,7 +7412,7 @@ func (c *Organizations) MoveAccount(input *MoveAccountInput) (*MoveAccountOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) MoveAccountWithContext(ctx aws.Context, input *MoveAccountInput, opts ...request.Option) (*MoveAccountOutput, error) {
+func (c *Organizations) MoveAccountWithContext(ctx aws.Context, input *MoveAccountInput, opts ...aws.Option) (*MoveAccountOutput, error) {
 	req, out := c.MoveAccountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7422,7 +7421,7 @@ func (c *Organizations) MoveAccountWithContext(ctx aws.Context, input *MoveAccou
 
 const opRemoveAccountFromOrganization = "RemoveAccountFromOrganization"
 
-// RemoveAccountFromOrganizationRequest generates a "aws/request.Request" representing the
+// RemoveAccountFromOrganizationRequest generates a "aws.Request" representing the
 // client's request for the RemoveAccountFromOrganization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7446,8 +7445,8 @@ const opRemoveAccountFromOrganization = "RemoveAccountFromOrganization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RemoveAccountFromOrganization
-func (c *Organizations) RemoveAccountFromOrganizationRequest(input *RemoveAccountFromOrganizationInput) (req *request.Request, output *RemoveAccountFromOrganizationOutput) {
-	op := &request.Operation{
+func (c *Organizations) RemoveAccountFromOrganizationRequest(input *RemoveAccountFromOrganizationInput) (req *aws.Request, output *RemoveAccountFromOrganizationOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveAccountFromOrganization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7688,7 +7687,7 @@ func (c *Organizations) RemoveAccountFromOrganization(input *RemoveAccountFromOr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) RemoveAccountFromOrganizationWithContext(ctx aws.Context, input *RemoveAccountFromOrganizationInput, opts ...request.Option) (*RemoveAccountFromOrganizationOutput, error) {
+func (c *Organizations) RemoveAccountFromOrganizationWithContext(ctx aws.Context, input *RemoveAccountFromOrganizationInput, opts ...aws.Option) (*RemoveAccountFromOrganizationOutput, error) {
 	req, out := c.RemoveAccountFromOrganizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7697,7 +7696,7 @@ func (c *Organizations) RemoveAccountFromOrganizationWithContext(ctx aws.Context
 
 const opUpdateOrganizationalUnit = "UpdateOrganizationalUnit"
 
-// UpdateOrganizationalUnitRequest generates a "aws/request.Request" representing the
+// UpdateOrganizationalUnitRequest generates a "aws.Request" representing the
 // client's request for the UpdateOrganizationalUnit operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7721,8 +7720,8 @@ const opUpdateOrganizationalUnit = "UpdateOrganizationalUnit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnit
-func (c *Organizations) UpdateOrganizationalUnitRequest(input *UpdateOrganizationalUnitInput) (req *request.Request, output *UpdateOrganizationalUnitOutput) {
-	op := &request.Operation{
+func (c *Organizations) UpdateOrganizationalUnitRequest(input *UpdateOrganizationalUnitInput) (req *aws.Request, output *UpdateOrganizationalUnitOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateOrganizationalUnit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7851,7 +7850,7 @@ func (c *Organizations) UpdateOrganizationalUnit(input *UpdateOrganizationalUnit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) UpdateOrganizationalUnitWithContext(ctx aws.Context, input *UpdateOrganizationalUnitInput, opts ...request.Option) (*UpdateOrganizationalUnitOutput, error) {
+func (c *Organizations) UpdateOrganizationalUnitWithContext(ctx aws.Context, input *UpdateOrganizationalUnitInput, opts ...aws.Option) (*UpdateOrganizationalUnitOutput, error) {
 	req, out := c.UpdateOrganizationalUnitRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7860,7 +7859,7 @@ func (c *Organizations) UpdateOrganizationalUnitWithContext(ctx aws.Context, inp
 
 const opUpdatePolicy = "UpdatePolicy"
 
-// UpdatePolicyRequest generates a "aws/request.Request" representing the
+// UpdatePolicyRequest generates a "aws.Request" representing the
 // client's request for the UpdatePolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7884,8 +7883,8 @@ const opUpdatePolicy = "UpdatePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicy
-func (c *Organizations) UpdatePolicyRequest(input *UpdatePolicyInput) (req *request.Request, output *UpdatePolicyOutput) {
-	op := &request.Operation{
+func (c *Organizations) UpdatePolicyRequest(input *UpdatePolicyInput) (req *aws.Request, output *UpdatePolicyOutput) {
+	op := &aws.Operation{
 		Name:       opUpdatePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8101,7 +8100,7 @@ func (c *Organizations) UpdatePolicy(input *UpdatePolicyInput) (*UpdatePolicyOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Organizations) UpdatePolicyWithContext(ctx aws.Context, input *UpdatePolicyInput, opts ...request.Option) (*UpdatePolicyOutput, error) {
+func (c *Organizations) UpdatePolicyWithContext(ctx aws.Context, input *UpdatePolicyInput, opts ...aws.Option) (*UpdatePolicyOutput, error) {
 	req, out := c.UpdatePolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8133,9 +8132,9 @@ func (s AcceptHandshakeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptHandshakeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AcceptHandshakeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AcceptHandshakeInput"}
 	if s.HandshakeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HandshakeId"))
+		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8313,12 +8312,12 @@ func (s AttachPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachPolicyInput"}
 	if s.PolicyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyId"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
 	if s.TargetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetId"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8380,9 +8379,9 @@ func (s CancelHandshakeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelHandshakeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelHandshakeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelHandshakeInput"}
 	if s.HandshakeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HandshakeId"))
+		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8530,18 +8529,18 @@ func (s CreateAccountInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAccountInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAccountInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAccountInput"}
 	if s.AccountName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountName"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountName"))
 	}
 	if s.AccountName != nil && len(*s.AccountName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountName", 1))
 	}
 	if s.Email == nil {
-		invalidParams.Add(request.NewErrParamRequired("Email"))
+		invalidParams.Add(aws.NewErrParamRequired("Email"))
 	}
 	if s.Email != nil && len(*s.Email) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("Email", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("Email", 6))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8805,15 +8804,15 @@ func (s CreateOrganizationalUnitInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateOrganizationalUnitInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateOrganizationalUnitInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateOrganizationalUnitInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ParentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentId"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8908,24 +8907,24 @@ func (s CreatePolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyInput"}
 	if s.Content == nil {
-		invalidParams.Add(request.NewErrParamRequired("Content"))
+		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
 	if s.Content != nil && len(*s.Content) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Content", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9008,9 +9007,9 @@ func (s DeclineHandshakeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeclineHandshakeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeclineHandshakeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeclineHandshakeInput"}
 	if s.HandshakeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HandshakeId"))
+		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9108,9 +9107,9 @@ func (s DeleteOrganizationalUnitInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteOrganizationalUnitInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteOrganizationalUnitInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteOrganizationalUnitInput"}
 	if s.OrganizationalUnitId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrganizationalUnitId"))
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9166,9 +9165,9 @@ func (s DeletePolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyInput"}
 	if s.PolicyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyId"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9224,9 +9223,9 @@ func (s DescribeAccountInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAccountInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAccountInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAccountInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9293,9 +9292,9 @@ func (s DescribeCreateAccountStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCreateAccountStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCreateAccountStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCreateAccountStatusInput"}
 	if s.CreateAccountRequestId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CreateAccountRequestId"))
+		invalidParams.Add(aws.NewErrParamRequired("CreateAccountRequestId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9361,9 +9360,9 @@ func (s DescribeHandshakeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeHandshakeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeHandshakeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeHandshakeInput"}
 	if s.HandshakeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HandshakeId"))
+		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9469,9 +9468,9 @@ func (s DescribeOrganizationalUnitInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeOrganizationalUnitInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeOrganizationalUnitInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeOrganizationalUnitInput"}
 	if s.OrganizationalUnitId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrganizationalUnitId"))
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9536,9 +9535,9 @@ func (s DescribePolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribePolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribePolicyInput"}
 	if s.PolicyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyId"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9623,12 +9622,12 @@ func (s DetachPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachPolicyInput"}
 	if s.PolicyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyId"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
 	if s.TargetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetId"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9695,12 +9694,12 @@ func (s DisablePolicyTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisablePolicyTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisablePolicyTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisablePolicyTypeInput"}
 	if s.PolicyType == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyType"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyType"))
 	}
 	if s.RootId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RootId"))
+		invalidParams.Add(aws.NewErrParamRequired("RootId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9816,12 +9815,12 @@ func (s EnablePolicyTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnablePolicyTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnablePolicyTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnablePolicyTypeInput"}
 	if s.PolicyType == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyType"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyType"))
 	}
 	if s.RootId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RootId"))
+		invalidParams.Add(aws.NewErrParamRequired("RootId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10068,15 +10067,15 @@ func (s HandshakeParty) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HandshakeParty) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "HandshakeParty"}
+	invalidParams := aws.ErrInvalidParams{Context: "HandshakeParty"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10198,13 +10197,13 @@ func (s InviteAccountToOrganizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InviteAccountToOrganizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InviteAccountToOrganizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InviteAccountToOrganizationInput"}
 	if s.Target == nil {
-		invalidParams.Add(request.NewErrParamRequired("Target"))
+		invalidParams.Add(aws.NewErrParamRequired("Target"))
 	}
 	if s.Target != nil {
 		if err := s.Target.Validate(); err != nil {
-			invalidParams.AddNested("Target", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Target", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10321,12 +10320,12 @@ func (s ListAccountsForParentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAccountsForParentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAccountsForParentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAccountsForParentInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ParentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentId"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10424,9 +10423,9 @@ func (s ListAccountsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAccountsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAccountsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAccountsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10540,15 +10539,15 @@ func (s ListChildrenInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListChildrenInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListChildrenInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListChildrenInput"}
 	if s.ChildType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChildType"))
+		invalidParams.Add(aws.NewErrParamRequired("ChildType"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ParentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentId"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10656,9 +10655,9 @@ func (s ListCreateAccountStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCreateAccountStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListCreateAccountStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListCreateAccountStatusInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10766,9 +10765,9 @@ func (s ListHandshakesForAccountInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListHandshakesForAccountInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListHandshakesForAccountInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListHandshakesForAccountInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10875,9 +10874,9 @@ func (s ListHandshakesForOrganizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListHandshakesForOrganizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListHandshakesForOrganizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListHandshakesForOrganizationInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10993,12 +10992,12 @@ func (s ListOrganizationalUnitsForParentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListOrganizationalUnitsForParentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListOrganizationalUnitsForParentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListOrganizationalUnitsForParentInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ParentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentId"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11112,12 +11111,12 @@ func (s ListParentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListParentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListParentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListParentsInput"}
 	if s.ChildId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChildId"))
+		invalidParams.Add(aws.NewErrParamRequired("ChildId"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11239,15 +11238,15 @@ func (s ListPoliciesForTargetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPoliciesForTargetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPoliciesForTargetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPoliciesForTargetInput"}
 	if s.Filter == nil {
-		invalidParams.Add(request.NewErrParamRequired("Filter"))
+		invalidParams.Add(aws.NewErrParamRequired("Filter"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.TargetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetId"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11356,12 +11355,12 @@ func (s ListPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPoliciesInput"}
 	if s.Filter == nil {
-		invalidParams.Add(request.NewErrParamRequired("Filter"))
+		invalidParams.Add(aws.NewErrParamRequired("Filter"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11461,9 +11460,9 @@ func (s ListRootsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRootsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListRootsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListRootsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11563,12 +11562,12 @@ func (s ListTargetsForPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTargetsForPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTargetsForPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTargetsForPolicyInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.PolicyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyId"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11692,15 +11691,15 @@ func (s MoveAccountInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MoveAccountInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MoveAccountInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "MoveAccountInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.DestinationParentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationParentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationParentId"))
 	}
 	if s.SourceParentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceParentId"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceParentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12208,9 +12207,9 @@ func (s RemoveAccountFromOrganizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveAccountFromOrganizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveAccountFromOrganizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveAccountFromOrganizationInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12343,12 +12342,12 @@ func (s UpdateOrganizationalUnitInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateOrganizationalUnitInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateOrganizationalUnitInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateOrganizationalUnitInput"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.OrganizationalUnitId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrganizationalUnitId"))
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12435,15 +12434,15 @@ func (s UpdatePolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdatePolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePolicyInput"}
 	if s.Content != nil && len(*s.Content) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Content", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.PolicyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyId"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -6,13 +6,12 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCancelJob = "CancelJob"
 
-// CancelJobRequest generates a "aws/request.Request" representing the
+// CancelJobRequest generates a "aws.Request" representing the
 // client's request for the CancelJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -34,8 +33,8 @@ const opCancelJob = "CancelJob"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) CancelJobRequest(input *CancelJobInput) (req *request.Request, output *CancelJobOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) CancelJobRequest(input *CancelJobInput) (req *aws.Request, output *CancelJobOutput) {
+	op := &aws.Operation{
 		Name:       opCancelJob,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2012-09-25/jobs/{Id}",
@@ -101,7 +100,7 @@ func (c *ElasticTranscoder) CancelJob(input *CancelJobInput) (*CancelJobOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opts ...request.Option) (*CancelJobOutput, error) {
+func (c *ElasticTranscoder) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opts ...aws.Option) (*CancelJobOutput, error) {
 	req, out := c.CancelJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -110,7 +109,7 @@ func (c *ElasticTranscoder) CancelJobWithContext(ctx aws.Context, input *CancelJ
 
 const opCreateJob = "CreateJob"
 
-// CreateJobRequest generates a "aws/request.Request" representing the
+// CreateJobRequest generates a "aws.Request" representing the
 // client's request for the CreateJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -132,8 +131,8 @@ const opCreateJob = "CreateJob"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) CreateJobRequest(input *CreateJobInput) (req *request.Request, output *CreateJobResponse) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) CreateJobRequest(input *CreateJobInput) (req *aws.Request, output *CreateJobResponse) {
+	op := &aws.Operation{
 		Name:       opCreateJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2012-09-25/jobs",
@@ -201,7 +200,7 @@ func (c *ElasticTranscoder) CreateJob(input *CreateJobInput) (*CreateJobResponse
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts ...request.Option) (*CreateJobResponse, error) {
+func (c *ElasticTranscoder) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts ...aws.Option) (*CreateJobResponse, error) {
 	req, out := c.CreateJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -210,7 +209,7 @@ func (c *ElasticTranscoder) CreateJobWithContext(ctx aws.Context, input *CreateJ
 
 const opCreatePipeline = "CreatePipeline"
 
-// CreatePipelineRequest generates a "aws/request.Request" representing the
+// CreatePipelineRequest generates a "aws.Request" representing the
 // client's request for the CreatePipeline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -232,8 +231,8 @@ const opCreatePipeline = "CreatePipeline"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) CreatePipelineRequest(input *CreatePipelineInput) (req *request.Request, output *CreatePipelineOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) CreatePipelineRequest(input *CreatePipelineInput) (req *aws.Request, output *CreatePipelineOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePipeline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2012-09-25/pipelines",
@@ -295,7 +294,7 @@ func (c *ElasticTranscoder) CreatePipeline(input *CreatePipelineInput) (*CreateP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) CreatePipelineWithContext(ctx aws.Context, input *CreatePipelineInput, opts ...request.Option) (*CreatePipelineOutput, error) {
+func (c *ElasticTranscoder) CreatePipelineWithContext(ctx aws.Context, input *CreatePipelineInput, opts ...aws.Option) (*CreatePipelineOutput, error) {
 	req, out := c.CreatePipelineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -304,7 +303,7 @@ func (c *ElasticTranscoder) CreatePipelineWithContext(ctx aws.Context, input *Cr
 
 const opCreatePreset = "CreatePreset"
 
-// CreatePresetRequest generates a "aws/request.Request" representing the
+// CreatePresetRequest generates a "aws.Request" representing the
 // client's request for the CreatePreset operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -326,8 +325,8 @@ const opCreatePreset = "CreatePreset"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) CreatePresetRequest(input *CreatePresetInput) (req *request.Request, output *CreatePresetOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) CreatePresetRequest(input *CreatePresetInput) (req *aws.Request, output *CreatePresetOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePreset,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2012-09-25/presets",
@@ -398,7 +397,7 @@ func (c *ElasticTranscoder) CreatePreset(input *CreatePresetInput) (*CreatePrese
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) CreatePresetWithContext(ctx aws.Context, input *CreatePresetInput, opts ...request.Option) (*CreatePresetOutput, error) {
+func (c *ElasticTranscoder) CreatePresetWithContext(ctx aws.Context, input *CreatePresetInput, opts ...aws.Option) (*CreatePresetOutput, error) {
 	req, out := c.CreatePresetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -407,7 +406,7 @@ func (c *ElasticTranscoder) CreatePresetWithContext(ctx aws.Context, input *Crea
 
 const opDeletePipeline = "DeletePipeline"
 
-// DeletePipelineRequest generates a "aws/request.Request" representing the
+// DeletePipelineRequest generates a "aws.Request" representing the
 // client's request for the DeletePipeline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -429,8 +428,8 @@ const opDeletePipeline = "DeletePipeline"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) DeletePipelineRequest(input *DeletePipelineInput) (req *request.Request, output *DeletePipelineOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) DeletePipelineRequest(input *DeletePipelineInput) (req *aws.Request, output *DeletePipelineOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePipeline,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2012-09-25/pipelines/{Id}",
@@ -496,7 +495,7 @@ func (c *ElasticTranscoder) DeletePipeline(input *DeletePipelineInput) (*DeleteP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) DeletePipelineWithContext(ctx aws.Context, input *DeletePipelineInput, opts ...request.Option) (*DeletePipelineOutput, error) {
+func (c *ElasticTranscoder) DeletePipelineWithContext(ctx aws.Context, input *DeletePipelineInput, opts ...aws.Option) (*DeletePipelineOutput, error) {
 	req, out := c.DeletePipelineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -505,7 +504,7 @@ func (c *ElasticTranscoder) DeletePipelineWithContext(ctx aws.Context, input *De
 
 const opDeletePreset = "DeletePreset"
 
-// DeletePresetRequest generates a "aws/request.Request" representing the
+// DeletePresetRequest generates a "aws.Request" representing the
 // client's request for the DeletePreset operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -527,8 +526,8 @@ const opDeletePreset = "DeletePreset"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) DeletePresetRequest(input *DeletePresetInput) (req *request.Request, output *DeletePresetOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) DeletePresetRequest(input *DeletePresetInput) (req *aws.Request, output *DeletePresetOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePreset,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2012-09-25/presets/{Id}",
@@ -588,7 +587,7 @@ func (c *ElasticTranscoder) DeletePreset(input *DeletePresetInput) (*DeletePrese
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) DeletePresetWithContext(ctx aws.Context, input *DeletePresetInput, opts ...request.Option) (*DeletePresetOutput, error) {
+func (c *ElasticTranscoder) DeletePresetWithContext(ctx aws.Context, input *DeletePresetInput, opts ...aws.Option) (*DeletePresetOutput, error) {
 	req, out := c.DeletePresetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -597,7 +596,7 @@ func (c *ElasticTranscoder) DeletePresetWithContext(ctx aws.Context, input *Dele
 
 const opListJobsByPipeline = "ListJobsByPipeline"
 
-// ListJobsByPipelineRequest generates a "aws/request.Request" representing the
+// ListJobsByPipelineRequest generates a "aws.Request" representing the
 // client's request for the ListJobsByPipeline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -619,12 +618,12 @@ const opListJobsByPipeline = "ListJobsByPipeline"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineInput) (req *request.Request, output *ListJobsByPipelineOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineInput) (req *aws.Request, output *ListJobsByPipelineOutput) {
+	op := &aws.Operation{
 		Name:       opListJobsByPipeline,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2012-09-25/jobsByPipeline/{PipelineId}",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "",
@@ -688,7 +687,7 @@ func (c *ElasticTranscoder) ListJobsByPipeline(input *ListJobsByPipelineInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ListJobsByPipelineWithContext(ctx aws.Context, input *ListJobsByPipelineInput, opts ...request.Option) (*ListJobsByPipelineOutput, error) {
+func (c *ElasticTranscoder) ListJobsByPipelineWithContext(ctx aws.Context, input *ListJobsByPipelineInput, opts ...aws.Option) (*ListJobsByPipelineOutput, error) {
 	req, out := c.ListJobsByPipelineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -723,9 +722,9 @@ func (c *ElasticTranscoder) ListJobsByPipelinePages(input *ListJobsByPipelineInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ListJobsByPipelinePagesWithContext(ctx aws.Context, input *ListJobsByPipelineInput, fn func(*ListJobsByPipelineOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElasticTranscoder) ListJobsByPipelinePagesWithContext(ctx aws.Context, input *ListJobsByPipelineInput, fn func(*ListJobsByPipelineOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListJobsByPipelineInput
 			if input != nil {
 				tmp := *input
@@ -747,7 +746,7 @@ func (c *ElasticTranscoder) ListJobsByPipelinePagesWithContext(ctx aws.Context, 
 
 const opListJobsByStatus = "ListJobsByStatus"
 
-// ListJobsByStatusRequest generates a "aws/request.Request" representing the
+// ListJobsByStatusRequest generates a "aws.Request" representing the
 // client's request for the ListJobsByStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -769,12 +768,12 @@ const opListJobsByStatus = "ListJobsByStatus"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput) (req *request.Request, output *ListJobsByStatusOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput) (req *aws.Request, output *ListJobsByStatusOutput) {
+	op := &aws.Operation{
 		Name:       opListJobsByStatus,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2012-09-25/jobsByStatus/{Status}",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "",
@@ -836,7 +835,7 @@ func (c *ElasticTranscoder) ListJobsByStatus(input *ListJobsByStatusInput) (*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ListJobsByStatusWithContext(ctx aws.Context, input *ListJobsByStatusInput, opts ...request.Option) (*ListJobsByStatusOutput, error) {
+func (c *ElasticTranscoder) ListJobsByStatusWithContext(ctx aws.Context, input *ListJobsByStatusInput, opts ...aws.Option) (*ListJobsByStatusOutput, error) {
 	req, out := c.ListJobsByStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -871,9 +870,9 @@ func (c *ElasticTranscoder) ListJobsByStatusPages(input *ListJobsByStatusInput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ListJobsByStatusPagesWithContext(ctx aws.Context, input *ListJobsByStatusInput, fn func(*ListJobsByStatusOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElasticTranscoder) ListJobsByStatusPagesWithContext(ctx aws.Context, input *ListJobsByStatusInput, fn func(*ListJobsByStatusOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListJobsByStatusInput
 			if input != nil {
 				tmp := *input
@@ -895,7 +894,7 @@ func (c *ElasticTranscoder) ListJobsByStatusPagesWithContext(ctx aws.Context, in
 
 const opListPipelines = "ListPipelines"
 
-// ListPipelinesRequest generates a "aws/request.Request" representing the
+// ListPipelinesRequest generates a "aws.Request" representing the
 // client's request for the ListPipelines operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -917,12 +916,12 @@ const opListPipelines = "ListPipelines"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) (req *request.Request, output *ListPipelinesOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) (req *aws.Request, output *ListPipelinesOutput) {
+	op := &aws.Operation{
 		Name:       opListPipelines,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2012-09-25/pipelines",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "",
@@ -978,7 +977,7 @@ func (c *ElasticTranscoder) ListPipelines(input *ListPipelinesInput) (*ListPipel
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ListPipelinesWithContext(ctx aws.Context, input *ListPipelinesInput, opts ...request.Option) (*ListPipelinesOutput, error) {
+func (c *ElasticTranscoder) ListPipelinesWithContext(ctx aws.Context, input *ListPipelinesInput, opts ...aws.Option) (*ListPipelinesOutput, error) {
 	req, out := c.ListPipelinesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1013,9 +1012,9 @@ func (c *ElasticTranscoder) ListPipelinesPages(input *ListPipelinesInput, fn fun
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ListPipelinesPagesWithContext(ctx aws.Context, input *ListPipelinesInput, fn func(*ListPipelinesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElasticTranscoder) ListPipelinesPagesWithContext(ctx aws.Context, input *ListPipelinesInput, fn func(*ListPipelinesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPipelinesInput
 			if input != nil {
 				tmp := *input
@@ -1037,7 +1036,7 @@ func (c *ElasticTranscoder) ListPipelinesPagesWithContext(ctx aws.Context, input
 
 const opListPresets = "ListPresets"
 
-// ListPresetsRequest generates a "aws/request.Request" representing the
+// ListPresetsRequest generates a "aws.Request" representing the
 // client's request for the ListPresets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1059,12 +1058,12 @@ const opListPresets = "ListPresets"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) (req *request.Request, output *ListPresetsOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) (req *aws.Request, output *ListPresetsOutput) {
+	op := &aws.Operation{
 		Name:       opListPresets,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2012-09-25/presets",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "",
@@ -1120,7 +1119,7 @@ func (c *ElasticTranscoder) ListPresets(input *ListPresetsInput) (*ListPresetsOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ListPresetsWithContext(ctx aws.Context, input *ListPresetsInput, opts ...request.Option) (*ListPresetsOutput, error) {
+func (c *ElasticTranscoder) ListPresetsWithContext(ctx aws.Context, input *ListPresetsInput, opts ...aws.Option) (*ListPresetsOutput, error) {
 	req, out := c.ListPresetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1155,9 +1154,9 @@ func (c *ElasticTranscoder) ListPresetsPages(input *ListPresetsInput, fn func(*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ListPresetsPagesWithContext(ctx aws.Context, input *ListPresetsInput, fn func(*ListPresetsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElasticTranscoder) ListPresetsPagesWithContext(ctx aws.Context, input *ListPresetsInput, fn func(*ListPresetsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPresetsInput
 			if input != nil {
 				tmp := *input
@@ -1179,7 +1178,7 @@ func (c *ElasticTranscoder) ListPresetsPagesWithContext(ctx aws.Context, input *
 
 const opReadJob = "ReadJob"
 
-// ReadJobRequest generates a "aws/request.Request" representing the
+// ReadJobRequest generates a "aws.Request" representing the
 // client's request for the ReadJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1201,8 +1200,8 @@ const opReadJob = "ReadJob"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ReadJobRequest(input *ReadJobInput) (req *request.Request, output *ReadJobOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) ReadJobRequest(input *ReadJobInput) (req *aws.Request, output *ReadJobOutput) {
+	op := &aws.Operation{
 		Name:       opReadJob,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2012-09-25/jobs/{Id}",
@@ -1260,7 +1259,7 @@ func (c *ElasticTranscoder) ReadJob(input *ReadJobInput) (*ReadJobOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ReadJobWithContext(ctx aws.Context, input *ReadJobInput, opts ...request.Option) (*ReadJobOutput, error) {
+func (c *ElasticTranscoder) ReadJobWithContext(ctx aws.Context, input *ReadJobInput, opts ...aws.Option) (*ReadJobOutput, error) {
 	req, out := c.ReadJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1269,7 +1268,7 @@ func (c *ElasticTranscoder) ReadJobWithContext(ctx aws.Context, input *ReadJobIn
 
 const opReadPipeline = "ReadPipeline"
 
-// ReadPipelineRequest generates a "aws/request.Request" representing the
+// ReadPipelineRequest generates a "aws.Request" representing the
 // client's request for the ReadPipeline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1291,8 +1290,8 @@ const opReadPipeline = "ReadPipeline"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ReadPipelineRequest(input *ReadPipelineInput) (req *request.Request, output *ReadPipelineOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) ReadPipelineRequest(input *ReadPipelineInput) (req *aws.Request, output *ReadPipelineOutput) {
+	op := &aws.Operation{
 		Name:       opReadPipeline,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2012-09-25/pipelines/{Id}",
@@ -1350,7 +1349,7 @@ func (c *ElasticTranscoder) ReadPipeline(input *ReadPipelineInput) (*ReadPipelin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ReadPipelineWithContext(ctx aws.Context, input *ReadPipelineInput, opts ...request.Option) (*ReadPipelineOutput, error) {
+func (c *ElasticTranscoder) ReadPipelineWithContext(ctx aws.Context, input *ReadPipelineInput, opts ...aws.Option) (*ReadPipelineOutput, error) {
 	req, out := c.ReadPipelineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1359,7 +1358,7 @@ func (c *ElasticTranscoder) ReadPipelineWithContext(ctx aws.Context, input *Read
 
 const opReadPreset = "ReadPreset"
 
-// ReadPresetRequest generates a "aws/request.Request" representing the
+// ReadPresetRequest generates a "aws.Request" representing the
 // client's request for the ReadPreset operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1381,8 +1380,8 @@ const opReadPreset = "ReadPreset"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) ReadPresetRequest(input *ReadPresetInput) (req *request.Request, output *ReadPresetOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) ReadPresetRequest(input *ReadPresetInput) (req *aws.Request, output *ReadPresetOutput) {
+	op := &aws.Operation{
 		Name:       opReadPreset,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2012-09-25/presets/{Id}",
@@ -1440,7 +1439,7 @@ func (c *ElasticTranscoder) ReadPreset(input *ReadPresetInput) (*ReadPresetOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) ReadPresetWithContext(ctx aws.Context, input *ReadPresetInput, opts ...request.Option) (*ReadPresetOutput, error) {
+func (c *ElasticTranscoder) ReadPresetWithContext(ctx aws.Context, input *ReadPresetInput, opts ...aws.Option) (*ReadPresetOutput, error) {
 	req, out := c.ReadPresetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1449,7 +1448,7 @@ func (c *ElasticTranscoder) ReadPresetWithContext(ctx aws.Context, input *ReadPr
 
 const opTestRole = "TestRole"
 
-// TestRoleRequest generates a "aws/request.Request" representing the
+// TestRoleRequest generates a "aws.Request" representing the
 // client's request for the TestRole operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1471,11 +1470,11 @@ const opTestRole = "TestRole"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) (req *request.Request, output *TestRoleOutput) {
+func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) (req *aws.Request, output *TestRoleOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, TestRole, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opTestRole,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2012-09-25/roleTests",
@@ -1539,7 +1538,7 @@ func (c *ElasticTranscoder) TestRole(input *TestRoleInput) (*TestRoleOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) TestRoleWithContext(ctx aws.Context, input *TestRoleInput, opts ...request.Option) (*TestRoleOutput, error) {
+func (c *ElasticTranscoder) TestRoleWithContext(ctx aws.Context, input *TestRoleInput, opts ...aws.Option) (*TestRoleOutput, error) {
 	req, out := c.TestRoleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1548,7 +1547,7 @@ func (c *ElasticTranscoder) TestRoleWithContext(ctx aws.Context, input *TestRole
 
 const opUpdatePipeline = "UpdatePipeline"
 
-// UpdatePipelineRequest generates a "aws/request.Request" representing the
+// UpdatePipelineRequest generates a "aws.Request" representing the
 // client's request for the UpdatePipeline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1570,8 +1569,8 @@ const opUpdatePipeline = "UpdatePipeline"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) UpdatePipelineRequest(input *UpdatePipelineInput) (req *request.Request, output *UpdatePipelineOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) UpdatePipelineRequest(input *UpdatePipelineInput) (req *aws.Request, output *UpdatePipelineOutput) {
+	op := &aws.Operation{
 		Name:       opUpdatePipeline,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2012-09-25/pipelines/{Id}",
@@ -1638,7 +1637,7 @@ func (c *ElasticTranscoder) UpdatePipeline(input *UpdatePipelineInput) (*UpdateP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) UpdatePipelineWithContext(ctx aws.Context, input *UpdatePipelineInput, opts ...request.Option) (*UpdatePipelineOutput, error) {
+func (c *ElasticTranscoder) UpdatePipelineWithContext(ctx aws.Context, input *UpdatePipelineInput, opts ...aws.Option) (*UpdatePipelineOutput, error) {
 	req, out := c.UpdatePipelineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1647,7 +1646,7 @@ func (c *ElasticTranscoder) UpdatePipelineWithContext(ctx aws.Context, input *Up
 
 const opUpdatePipelineNotifications = "UpdatePipelineNotifications"
 
-// UpdatePipelineNotificationsRequest generates a "aws/request.Request" representing the
+// UpdatePipelineNotificationsRequest generates a "aws.Request" representing the
 // client's request for the UpdatePipelineNotifications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1669,8 +1668,8 @@ const opUpdatePipelineNotifications = "UpdatePipelineNotifications"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) UpdatePipelineNotificationsRequest(input *UpdatePipelineNotificationsInput) (req *request.Request, output *UpdatePipelineNotificationsOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) UpdatePipelineNotificationsRequest(input *UpdatePipelineNotificationsInput) (req *aws.Request, output *UpdatePipelineNotificationsOutput) {
+	op := &aws.Operation{
 		Name:       opUpdatePipelineNotifications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2012-09-25/pipelines/{Id}/notifications",
@@ -1736,7 +1735,7 @@ func (c *ElasticTranscoder) UpdatePipelineNotifications(input *UpdatePipelineNot
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) UpdatePipelineNotificationsWithContext(ctx aws.Context, input *UpdatePipelineNotificationsInput, opts ...request.Option) (*UpdatePipelineNotificationsOutput, error) {
+func (c *ElasticTranscoder) UpdatePipelineNotificationsWithContext(ctx aws.Context, input *UpdatePipelineNotificationsInput, opts ...aws.Option) (*UpdatePipelineNotificationsOutput, error) {
 	req, out := c.UpdatePipelineNotificationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1745,7 +1744,7 @@ func (c *ElasticTranscoder) UpdatePipelineNotificationsWithContext(ctx aws.Conte
 
 const opUpdatePipelineStatus = "UpdatePipelineStatus"
 
-// UpdatePipelineStatusRequest generates a "aws/request.Request" representing the
+// UpdatePipelineStatusRequest generates a "aws.Request" representing the
 // client's request for the UpdatePipelineStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1767,8 +1766,8 @@ const opUpdatePipelineStatus = "UpdatePipelineStatus"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticTranscoder) UpdatePipelineStatusRequest(input *UpdatePipelineStatusInput) (req *request.Request, output *UpdatePipelineStatusOutput) {
-	op := &request.Operation{
+func (c *ElasticTranscoder) UpdatePipelineStatusRequest(input *UpdatePipelineStatusInput) (req *aws.Request, output *UpdatePipelineStatusOutput) {
+	op := &aws.Operation{
 		Name:       opUpdatePipelineStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2012-09-25/pipelines/{Id}/status",
@@ -1837,7 +1836,7 @@ func (c *ElasticTranscoder) UpdatePipelineStatus(input *UpdatePipelineStatusInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) UpdatePipelineStatusWithContext(ctx aws.Context, input *UpdatePipelineStatusInput, opts ...request.Option) (*UpdatePipelineStatusOutput, error) {
+func (c *ElasticTranscoder) UpdatePipelineStatusWithContext(ctx aws.Context, input *UpdatePipelineStatusInput, opts ...aws.Option) (*UpdatePipelineStatusOutput, error) {
 	req, out := c.UpdatePipelineStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1933,9 +1932,9 @@ func (s Artwork) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Artwork) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Artwork"}
+	invalidParams := aws.ErrInvalidParams{Context: "Artwork"}
 	if s.InputKey != nil && len(*s.InputKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InputKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InputKey", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2314,9 +2313,9 @@ func (s CancelJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelJobInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2482,15 +2481,15 @@ func (s CaptionSource) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CaptionSource) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CaptionSource"}
+	invalidParams := aws.ErrInvalidParams{Context: "CaptionSource"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Label != nil && len(*s.Label) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Label", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Label", 1))
 	}
 	if s.Language != nil && len(*s.Language) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Language", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Language", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2575,14 +2574,14 @@ func (s Captions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Captions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Captions"}
+	invalidParams := aws.ErrInvalidParams{Context: "Captions"}
 	if s.CaptionSources != nil {
 		for i, v := range s.CaptionSources {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CaptionSources", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CaptionSources", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2697,16 +2696,16 @@ func (s CreateJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateJobInput"}
 	if s.OutputKeyPrefix != nil && len(*s.OutputKeyPrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OutputKeyPrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OutputKeyPrefix", 1))
 	}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.Input != nil {
 		if err := s.Input.Validate(); err != nil {
-			invalidParams.AddNested("Input", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Input", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Inputs != nil {
@@ -2715,13 +2714,13 @@ func (s *CreateJobInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Inputs", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Inputs", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.Output != nil {
 		if err := s.Output.Validate(); err != nil {
-			invalidParams.AddNested("Output", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Output", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Outputs != nil {
@@ -2730,7 +2729,7 @@ func (s *CreateJobInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Outputs", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Outputs", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2740,7 +2739,7 @@ func (s *CreateJobInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Playlists", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Playlists", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2957,18 +2956,18 @@ func (s CreateJobOutput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateJobOutput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateJobOutput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateJobOutput"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.AlbumArt != nil {
 		if err := s.AlbumArt.Validate(); err != nil {
-			invalidParams.AddNested("AlbumArt", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AlbumArt", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Captions != nil {
 		if err := s.Captions.Validate(); err != nil {
-			invalidParams.AddNested("Captions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Captions", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Watermarks != nil {
@@ -2977,7 +2976,7 @@ func (s *CreateJobOutput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Watermarks", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Watermarks", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3133,13 +3132,13 @@ func (s CreateJobPlaylist) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateJobPlaylist) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateJobPlaylist"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateJobPlaylist"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.PlayReadyDrm != nil {
 		if err := s.PlayReadyDrm.Validate(); err != nil {
-			invalidParams.AddNested("PlayReadyDrm", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("PlayReadyDrm", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3433,27 +3432,27 @@ func (s CreatePipelineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePipelineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePipelineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePipelineInput"}
 	if s.InputBucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputBucket"))
+		invalidParams.Add(aws.NewErrParamRequired("InputBucket"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Role == nil {
-		invalidParams.Add(request.NewErrParamRequired("Role"))
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
 	if s.ContentConfig != nil {
 		if err := s.ContentConfig.Validate(); err != nil {
-			invalidParams.AddNested("ContentConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ContentConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ThumbnailConfig != nil {
 		if err := s.ThumbnailConfig.Validate(); err != nil {
-			invalidParams.AddNested("ThumbnailConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ThumbnailConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3593,19 +3592,19 @@ func (s CreatePresetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePresetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePresetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePresetInput"}
 	if s.Container == nil {
-		invalidParams.Add(request.NewErrParamRequired("Container"))
+		invalidParams.Add(aws.NewErrParamRequired("Container"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Video != nil {
 		if err := s.Video.Validate(); err != nil {
-			invalidParams.AddNested("Video", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Video", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3710,9 +3709,9 @@ func (s DeletePipelineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePipelineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePipelineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePipelineInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3764,9 +3763,9 @@ func (s DeletePresetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePresetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePresetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePresetInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4099,14 +4098,14 @@ func (s InputCaptions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputCaptions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputCaptions"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputCaptions"}
 	if s.CaptionSources != nil {
 		for i, v := range s.CaptionSources {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CaptionSources", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CaptionSources", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4332,14 +4331,14 @@ func (s JobAlbumArt) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *JobAlbumArt) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "JobAlbumArt"}
+	invalidParams := aws.ErrInvalidParams{Context: "JobAlbumArt"}
 	if s.Artwork != nil {
 		for i, v := range s.Artwork {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Artwork", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Artwork", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4488,13 +4487,13 @@ func (s JobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *JobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "JobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "JobInput"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.InputCaptions != nil {
 		if err := s.InputCaptions.Validate(); err != nil {
-			invalidParams.AddNested("InputCaptions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputCaptions", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4956,12 +4955,12 @@ func (s JobWatermark) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *JobWatermark) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "JobWatermark"}
+	invalidParams := aws.ErrInvalidParams{Context: "JobWatermark"}
 	if s.InputKey != nil && len(*s.InputKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InputKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InputKey", 1))
 	}
 	if s.PresetWatermarkId != nil && len(*s.PresetWatermarkId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PresetWatermarkId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PresetWatermarkId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5018,9 +5017,9 @@ func (s ListJobsByPipelineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsByPipelineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListJobsByPipelineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListJobsByPipelineInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5114,9 +5113,9 @@ func (s ListJobsByStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsByStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListJobsByStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListJobsByStatusInput"}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5432,9 +5431,9 @@ func (s Permission) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Permission) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Permission"}
+	invalidParams := aws.ErrInvalidParams{Context: "Permission"}
 	if s.Grantee != nil && len(*s.Grantee) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Grantee", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Grantee", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5754,14 +5753,14 @@ func (s PipelineOutputConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PipelineOutputConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PipelineOutputConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "PipelineOutputConfig"}
 	if s.Permissions != nil {
 		for i, v := range s.Permissions {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Permissions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Permissions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5854,9 +5853,9 @@ func (s PlayReadyDrm) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PlayReadyDrm) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PlayReadyDrm"}
+	invalidParams := aws.ErrInvalidParams{Context: "PlayReadyDrm"}
 	if s.LicenseAcquisitionUrl != nil && len(*s.LicenseAcquisitionUrl) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LicenseAcquisitionUrl", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LicenseAcquisitionUrl", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6314,9 +6313,9 @@ func (s PresetWatermark) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PresetWatermark) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PresetWatermark"}
+	invalidParams := aws.ErrInvalidParams{Context: "PresetWatermark"}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6407,9 +6406,9 @@ func (s ReadJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReadJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReadJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReadJobInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6470,9 +6469,9 @@ func (s ReadPipelineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReadPipelineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReadPipelineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReadPipelineInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6547,9 +6546,9 @@ func (s ReadPresetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReadPresetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReadPresetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReadPresetInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6629,18 +6628,18 @@ func (s TestRoleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestRoleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TestRoleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TestRoleInput"}
 	if s.InputBucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputBucket"))
+		invalidParams.Add(aws.NewErrParamRequired("InputBucket"))
 	}
 	if s.OutputBucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("OutputBucket"))
+		invalidParams.Add(aws.NewErrParamRequired("OutputBucket"))
 	}
 	if s.Role == nil {
-		invalidParams.Add(request.NewErrParamRequired("Role"))
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
 	if s.Topics == nil {
-		invalidParams.Add(request.NewErrParamRequired("Topics"))
+		invalidParams.Add(aws.NewErrParamRequired("Topics"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7132,21 +7131,21 @@ func (s UpdatePipelineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePipelineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdatePipelineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ContentConfig != nil {
 		if err := s.ContentConfig.Validate(); err != nil {
-			invalidParams.AddNested("ContentConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ContentConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ThumbnailConfig != nil {
 		if err := s.ThumbnailConfig.Validate(); err != nil {
-			invalidParams.AddNested("ThumbnailConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ThumbnailConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7253,12 +7252,12 @@ func (s UpdatePipelineNotificationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePipelineNotificationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdatePipelineNotificationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineNotificationsInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Notifications == nil {
-		invalidParams.Add(request.NewErrParamRequired("Notifications"))
+		invalidParams.Add(aws.NewErrParamRequired("Notifications"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7374,12 +7373,12 @@ func (s UpdatePipelineStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePipelineStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdatePipelineStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineStatusInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7854,14 +7853,14 @@ func (s VideoParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VideoParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VideoParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "VideoParameters"}
 	if s.Watermarks != nil {
 		for i, v := range s.Watermarks {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Watermarks", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Watermarks", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

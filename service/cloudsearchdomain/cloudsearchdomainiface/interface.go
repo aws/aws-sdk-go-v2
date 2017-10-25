@@ -10,7 +10,6 @@ package cloudsearchdomainiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := cloudsearchdomain.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := cloudsearchdomain.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,16 +64,16 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CloudSearchDomainAPI interface {
 	Search(*cloudsearchdomain.SearchInput) (*cloudsearchdomain.SearchOutput, error)
-	SearchWithContext(aws.Context, *cloudsearchdomain.SearchInput, ...request.Option) (*cloudsearchdomain.SearchOutput, error)
-	SearchRequest(*cloudsearchdomain.SearchInput) (*request.Request, *cloudsearchdomain.SearchOutput)
+	SearchWithContext(aws.Context, *cloudsearchdomain.SearchInput, ...aws.Option) (*cloudsearchdomain.SearchOutput, error)
+	SearchRequest(*cloudsearchdomain.SearchInput) (*aws.Request, *cloudsearchdomain.SearchOutput)
 
 	Suggest(*cloudsearchdomain.SuggestInput) (*cloudsearchdomain.SuggestOutput, error)
-	SuggestWithContext(aws.Context, *cloudsearchdomain.SuggestInput, ...request.Option) (*cloudsearchdomain.SuggestOutput, error)
-	SuggestRequest(*cloudsearchdomain.SuggestInput) (*request.Request, *cloudsearchdomain.SuggestOutput)
+	SuggestWithContext(aws.Context, *cloudsearchdomain.SuggestInput, ...aws.Option) (*cloudsearchdomain.SuggestOutput, error)
+	SuggestRequest(*cloudsearchdomain.SuggestInput) (*aws.Request, *cloudsearchdomain.SuggestOutput)
 
 	UploadDocuments(*cloudsearchdomain.UploadDocumentsInput) (*cloudsearchdomain.UploadDocumentsOutput, error)
-	UploadDocumentsWithContext(aws.Context, *cloudsearchdomain.UploadDocumentsInput, ...request.Option) (*cloudsearchdomain.UploadDocumentsOutput, error)
-	UploadDocumentsRequest(*cloudsearchdomain.UploadDocumentsInput) (*request.Request, *cloudsearchdomain.UploadDocumentsOutput)
+	UploadDocumentsWithContext(aws.Context, *cloudsearchdomain.UploadDocumentsInput, ...aws.Option) (*cloudsearchdomain.UploadDocumentsOutput, error)
+	UploadDocumentsRequest(*cloudsearchdomain.UploadDocumentsInput) (*aws.Request, *cloudsearchdomain.UploadDocumentsOutput)
 }
 
 var _ CloudSearchDomainAPI = (*cloudsearchdomain.CloudSearchDomain)(nil)

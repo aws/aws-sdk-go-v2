@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opActivateGateway = "ActivateGateway"
 
-// ActivateGatewayRequest generates a "aws/request.Request" representing the
+// ActivateGatewayRequest generates a "aws.Request" representing the
 // client's request for the ActivateGateway operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opActivateGateway = "ActivateGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ActivateGateway
-func (c *StorageGateway) ActivateGatewayRequest(input *ActivateGatewayInput) (req *request.Request, output *ActivateGatewayOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ActivateGatewayRequest(input *ActivateGatewayInput) (req *aws.Request, output *ActivateGatewayOutput) {
+	op := &aws.Operation{
 		Name:       opActivateGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -96,7 +95,7 @@ func (c *StorageGateway) ActivateGateway(input *ActivateGatewayInput) (*Activate
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ActivateGatewayWithContext(ctx aws.Context, input *ActivateGatewayInput, opts ...request.Option) (*ActivateGatewayOutput, error) {
+func (c *StorageGateway) ActivateGatewayWithContext(ctx aws.Context, input *ActivateGatewayInput, opts ...aws.Option) (*ActivateGatewayOutput, error) {
 	req, out := c.ActivateGatewayRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -105,7 +104,7 @@ func (c *StorageGateway) ActivateGatewayWithContext(ctx aws.Context, input *Acti
 
 const opAddCache = "AddCache"
 
-// AddCacheRequest generates a "aws/request.Request" representing the
+// AddCacheRequest generates a "aws.Request" representing the
 // client's request for the AddCache operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -129,8 +128,8 @@ const opAddCache = "AddCache"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCache
-func (c *StorageGateway) AddCacheRequest(input *AddCacheInput) (req *request.Request, output *AddCacheOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) AddCacheRequest(input *AddCacheInput) (req *aws.Request, output *AddCacheOutput) {
+	op := &aws.Operation{
 		Name:       opAddCache,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -186,7 +185,7 @@ func (c *StorageGateway) AddCache(input *AddCacheInput) (*AddCacheOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) AddCacheWithContext(ctx aws.Context, input *AddCacheInput, opts ...request.Option) (*AddCacheOutput, error) {
+func (c *StorageGateway) AddCacheWithContext(ctx aws.Context, input *AddCacheInput, opts ...aws.Option) (*AddCacheOutput, error) {
 	req, out := c.AddCacheRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -195,7 +194,7 @@ func (c *StorageGateway) AddCacheWithContext(ctx aws.Context, input *AddCacheInp
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws/request.Request" representing the
+// AddTagsToResourceRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -219,8 +218,8 @@ const opAddTagsToResource = "AddTagsToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddTagsToResource
-func (c *StorageGateway) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *AddTagsToResourceOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -283,7 +282,7 @@ func (c *StorageGateway) AddTagsToResource(input *AddTagsToResourceInput) (*AddT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...request.Option) (*AddTagsToResourceOutput, error) {
+func (c *StorageGateway) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
 	req, out := c.AddTagsToResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -292,7 +291,7 @@ func (c *StorageGateway) AddTagsToResourceWithContext(ctx aws.Context, input *Ad
 
 const opAddUploadBuffer = "AddUploadBuffer"
 
-// AddUploadBufferRequest generates a "aws/request.Request" representing the
+// AddUploadBufferRequest generates a "aws.Request" representing the
 // client's request for the AddUploadBuffer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -316,8 +315,8 @@ const opAddUploadBuffer = "AddUploadBuffer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBuffer
-func (c *StorageGateway) AddUploadBufferRequest(input *AddUploadBufferInput) (req *request.Request, output *AddUploadBufferOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) AddUploadBufferRequest(input *AddUploadBufferInput) (req *aws.Request, output *AddUploadBufferOutput) {
+	op := &aws.Operation{
 		Name:       opAddUploadBuffer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -373,7 +372,7 @@ func (c *StorageGateway) AddUploadBuffer(input *AddUploadBufferInput) (*AddUploa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) AddUploadBufferWithContext(ctx aws.Context, input *AddUploadBufferInput, opts ...request.Option) (*AddUploadBufferOutput, error) {
+func (c *StorageGateway) AddUploadBufferWithContext(ctx aws.Context, input *AddUploadBufferInput, opts ...aws.Option) (*AddUploadBufferOutput, error) {
 	req, out := c.AddUploadBufferRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -382,7 +381,7 @@ func (c *StorageGateway) AddUploadBufferWithContext(ctx aws.Context, input *AddU
 
 const opAddWorkingStorage = "AddWorkingStorage"
 
-// AddWorkingStorageRequest generates a "aws/request.Request" representing the
+// AddWorkingStorageRequest generates a "aws.Request" representing the
 // client's request for the AddWorkingStorage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -406,8 +405,8 @@ const opAddWorkingStorage = "AddWorkingStorage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddWorkingStorage
-func (c *StorageGateway) AddWorkingStorageRequest(input *AddWorkingStorageInput) (req *request.Request, output *AddWorkingStorageOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) AddWorkingStorageRequest(input *AddWorkingStorageInput) (req *aws.Request, output *AddWorkingStorageOutput) {
+	op := &aws.Operation{
 		Name:       opAddWorkingStorage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -467,7 +466,7 @@ func (c *StorageGateway) AddWorkingStorage(input *AddWorkingStorageInput) (*AddW
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) AddWorkingStorageWithContext(ctx aws.Context, input *AddWorkingStorageInput, opts ...request.Option) (*AddWorkingStorageOutput, error) {
+func (c *StorageGateway) AddWorkingStorageWithContext(ctx aws.Context, input *AddWorkingStorageInput, opts ...aws.Option) (*AddWorkingStorageOutput, error) {
 	req, out := c.AddWorkingStorageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -476,7 +475,7 @@ func (c *StorageGateway) AddWorkingStorageWithContext(ctx aws.Context, input *Ad
 
 const opCancelArchival = "CancelArchival"
 
-// CancelArchivalRequest generates a "aws/request.Request" representing the
+// CancelArchivalRequest generates a "aws.Request" representing the
 // client's request for the CancelArchival operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -500,8 +499,8 @@ const opCancelArchival = "CancelArchival"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelArchival
-func (c *StorageGateway) CancelArchivalRequest(input *CancelArchivalInput) (req *request.Request, output *CancelArchivalOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) CancelArchivalRequest(input *CancelArchivalInput) (req *aws.Request, output *CancelArchivalOutput) {
+	op := &aws.Operation{
 		Name:       opCancelArchival,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -553,7 +552,7 @@ func (c *StorageGateway) CancelArchival(input *CancelArchivalInput) (*CancelArch
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) CancelArchivalWithContext(ctx aws.Context, input *CancelArchivalInput, opts ...request.Option) (*CancelArchivalOutput, error) {
+func (c *StorageGateway) CancelArchivalWithContext(ctx aws.Context, input *CancelArchivalInput, opts ...aws.Option) (*CancelArchivalOutput, error) {
 	req, out := c.CancelArchivalRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -562,7 +561,7 @@ func (c *StorageGateway) CancelArchivalWithContext(ctx aws.Context, input *Cance
 
 const opCancelRetrieval = "CancelRetrieval"
 
-// CancelRetrievalRequest generates a "aws/request.Request" representing the
+// CancelRetrievalRequest generates a "aws.Request" representing the
 // client's request for the CancelRetrieval operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -586,8 +585,8 @@ const opCancelRetrieval = "CancelRetrieval"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelRetrieval
-func (c *StorageGateway) CancelRetrievalRequest(input *CancelRetrievalInput) (req *request.Request, output *CancelRetrievalOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) CancelRetrievalRequest(input *CancelRetrievalInput) (req *aws.Request, output *CancelRetrievalOutput) {
+	op := &aws.Operation{
 		Name:       opCancelRetrieval,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -639,7 +638,7 @@ func (c *StorageGateway) CancelRetrieval(input *CancelRetrievalInput) (*CancelRe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) CancelRetrievalWithContext(ctx aws.Context, input *CancelRetrievalInput, opts ...request.Option) (*CancelRetrievalOutput, error) {
+func (c *StorageGateway) CancelRetrievalWithContext(ctx aws.Context, input *CancelRetrievalInput, opts ...aws.Option) (*CancelRetrievalOutput, error) {
 	req, out := c.CancelRetrievalRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -648,7 +647,7 @@ func (c *StorageGateway) CancelRetrievalWithContext(ctx aws.Context, input *Canc
 
 const opCreateCachediSCSIVolume = "CreateCachediSCSIVolume"
 
-// CreateCachediSCSIVolumeRequest generates a "aws/request.Request" representing the
+// CreateCachediSCSIVolumeRequest generates a "aws.Request" representing the
 // client's request for the CreateCachediSCSIVolume operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -672,8 +671,8 @@ const opCreateCachediSCSIVolume = "CreateCachediSCSIVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolume
-func (c *StorageGateway) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSIVolumeInput) (req *request.Request, output *CreateCachediSCSIVolumeOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSIVolumeInput) (req *aws.Request, output *CreateCachediSCSIVolumeOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCachediSCSIVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -739,7 +738,7 @@ func (c *StorageGateway) CreateCachediSCSIVolume(input *CreateCachediSCSIVolumeI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) CreateCachediSCSIVolumeWithContext(ctx aws.Context, input *CreateCachediSCSIVolumeInput, opts ...request.Option) (*CreateCachediSCSIVolumeOutput, error) {
+func (c *StorageGateway) CreateCachediSCSIVolumeWithContext(ctx aws.Context, input *CreateCachediSCSIVolumeInput, opts ...aws.Option) (*CreateCachediSCSIVolumeOutput, error) {
 	req, out := c.CreateCachediSCSIVolumeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -748,7 +747,7 @@ func (c *StorageGateway) CreateCachediSCSIVolumeWithContext(ctx aws.Context, inp
 
 const opCreateNFSFileShare = "CreateNFSFileShare"
 
-// CreateNFSFileShareRequest generates a "aws/request.Request" representing the
+// CreateNFSFileShareRequest generates a "aws.Request" representing the
 // client's request for the CreateNFSFileShare operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -772,8 +771,8 @@ const opCreateNFSFileShare = "CreateNFSFileShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShare
-func (c *StorageGateway) CreateNFSFileShareRequest(input *CreateNFSFileShareInput) (req *request.Request, output *CreateNFSFileShareOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) CreateNFSFileShareRequest(input *CreateNFSFileShareInput) (req *aws.Request, output *CreateNFSFileShareOutput) {
+	op := &aws.Operation{
 		Name:       opCreateNFSFileShare,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -835,7 +834,7 @@ func (c *StorageGateway) CreateNFSFileShare(input *CreateNFSFileShareInput) (*Cr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) CreateNFSFileShareWithContext(ctx aws.Context, input *CreateNFSFileShareInput, opts ...request.Option) (*CreateNFSFileShareOutput, error) {
+func (c *StorageGateway) CreateNFSFileShareWithContext(ctx aws.Context, input *CreateNFSFileShareInput, opts ...aws.Option) (*CreateNFSFileShareOutput, error) {
 	req, out := c.CreateNFSFileShareRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -844,7 +843,7 @@ func (c *StorageGateway) CreateNFSFileShareWithContext(ctx aws.Context, input *C
 
 const opCreateSnapshot = "CreateSnapshot"
 
-// CreateSnapshotRequest generates a "aws/request.Request" representing the
+// CreateSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CreateSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -868,8 +867,8 @@ const opCreateSnapshot = "CreateSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshot
-func (c *StorageGateway) CreateSnapshotRequest(input *CreateSnapshotInput) (req *request.Request, output *CreateSnapshotOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) CreateSnapshotRequest(input *CreateSnapshotInput) (req *aws.Request, output *CreateSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -946,7 +945,7 @@ func (c *StorageGateway) CreateSnapshot(input *CreateSnapshotInput) (*CreateSnap
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) CreateSnapshotWithContext(ctx aws.Context, input *CreateSnapshotInput, opts ...request.Option) (*CreateSnapshotOutput, error) {
+func (c *StorageGateway) CreateSnapshotWithContext(ctx aws.Context, input *CreateSnapshotInput, opts ...aws.Option) (*CreateSnapshotOutput, error) {
 	req, out := c.CreateSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -955,7 +954,7 @@ func (c *StorageGateway) CreateSnapshotWithContext(ctx aws.Context, input *Creat
 
 const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecoveryPoint"
 
-// CreateSnapshotFromVolumeRecoveryPointRequest generates a "aws/request.Request" representing the
+// CreateSnapshotFromVolumeRecoveryPointRequest generates a "aws.Request" representing the
 // client's request for the CreateSnapshotFromVolumeRecoveryPoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -979,8 +978,8 @@ const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecover
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPoint
-func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnapshotFromVolumeRecoveryPointInput) (req *request.Request, output *CreateSnapshotFromVolumeRecoveryPointOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnapshotFromVolumeRecoveryPointInput) (req *aws.Request, output *CreateSnapshotFromVolumeRecoveryPointOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSnapshotFromVolumeRecoveryPoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1050,7 +1049,7 @@ func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPoint(input *CreateSnap
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointWithContext(ctx aws.Context, input *CreateSnapshotFromVolumeRecoveryPointInput, opts ...request.Option) (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
+func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointWithContext(ctx aws.Context, input *CreateSnapshotFromVolumeRecoveryPointInput, opts ...aws.Option) (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
 	req, out := c.CreateSnapshotFromVolumeRecoveryPointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1059,7 +1058,7 @@ func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointWithContext(ctx aw
 
 const opCreateStorediSCSIVolume = "CreateStorediSCSIVolume"
 
-// CreateStorediSCSIVolumeRequest generates a "aws/request.Request" representing the
+// CreateStorediSCSIVolumeRequest generates a "aws.Request" representing the
 // client's request for the CreateStorediSCSIVolume operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1083,8 +1082,8 @@ const opCreateStorediSCSIVolume = "CreateStorediSCSIVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolume
-func (c *StorageGateway) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSIVolumeInput) (req *request.Request, output *CreateStorediSCSIVolumeOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSIVolumeInput) (req *aws.Request, output *CreateStorediSCSIVolumeOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStorediSCSIVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1146,7 +1145,7 @@ func (c *StorageGateway) CreateStorediSCSIVolume(input *CreateStorediSCSIVolumeI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) CreateStorediSCSIVolumeWithContext(ctx aws.Context, input *CreateStorediSCSIVolumeInput, opts ...request.Option) (*CreateStorediSCSIVolumeOutput, error) {
+func (c *StorageGateway) CreateStorediSCSIVolumeWithContext(ctx aws.Context, input *CreateStorediSCSIVolumeInput, opts ...aws.Option) (*CreateStorediSCSIVolumeOutput, error) {
 	req, out := c.CreateStorediSCSIVolumeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1155,7 +1154,7 @@ func (c *StorageGateway) CreateStorediSCSIVolumeWithContext(ctx aws.Context, inp
 
 const opCreateTapeWithBarcode = "CreateTapeWithBarcode"
 
-// CreateTapeWithBarcodeRequest generates a "aws/request.Request" representing the
+// CreateTapeWithBarcodeRequest generates a "aws.Request" representing the
 // client's request for the CreateTapeWithBarcode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1179,8 +1178,8 @@ const opCreateTapeWithBarcode = "CreateTapeWithBarcode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcode
-func (c *StorageGateway) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarcodeInput) (req *request.Request, output *CreateTapeWithBarcodeOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarcodeInput) (req *aws.Request, output *CreateTapeWithBarcodeOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTapeWithBarcode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1236,7 +1235,7 @@ func (c *StorageGateway) CreateTapeWithBarcode(input *CreateTapeWithBarcodeInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) CreateTapeWithBarcodeWithContext(ctx aws.Context, input *CreateTapeWithBarcodeInput, opts ...request.Option) (*CreateTapeWithBarcodeOutput, error) {
+func (c *StorageGateway) CreateTapeWithBarcodeWithContext(ctx aws.Context, input *CreateTapeWithBarcodeInput, opts ...aws.Option) (*CreateTapeWithBarcodeOutput, error) {
 	req, out := c.CreateTapeWithBarcodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1245,7 +1244,7 @@ func (c *StorageGateway) CreateTapeWithBarcodeWithContext(ctx aws.Context, input
 
 const opCreateTapes = "CreateTapes"
 
-// CreateTapesRequest generates a "aws/request.Request" representing the
+// CreateTapesRequest generates a "aws.Request" representing the
 // client's request for the CreateTapes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1269,8 +1268,8 @@ const opCreateTapes = "CreateTapes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapes
-func (c *StorageGateway) CreateTapesRequest(input *CreateTapesInput) (req *request.Request, output *CreateTapesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) CreateTapesRequest(input *CreateTapesInput) (req *aws.Request, output *CreateTapesOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTapes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1325,7 +1324,7 @@ func (c *StorageGateway) CreateTapes(input *CreateTapesInput) (*CreateTapesOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) CreateTapesWithContext(ctx aws.Context, input *CreateTapesInput, opts ...request.Option) (*CreateTapesOutput, error) {
+func (c *StorageGateway) CreateTapesWithContext(ctx aws.Context, input *CreateTapesInput, opts ...aws.Option) (*CreateTapesOutput, error) {
 	req, out := c.CreateTapesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1334,7 +1333,7 @@ func (c *StorageGateway) CreateTapesWithContext(ctx aws.Context, input *CreateTa
 
 const opDeleteBandwidthRateLimit = "DeleteBandwidthRateLimit"
 
-// DeleteBandwidthRateLimitRequest generates a "aws/request.Request" representing the
+// DeleteBandwidthRateLimitRequest generates a "aws.Request" representing the
 // client's request for the DeleteBandwidthRateLimit operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1358,8 +1357,8 @@ const opDeleteBandwidthRateLimit = "DeleteBandwidthRateLimit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimit
-func (c *StorageGateway) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimitInput) (req *request.Request, output *DeleteBandwidthRateLimitOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimitInput) (req *aws.Request, output *DeleteBandwidthRateLimitOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBandwidthRateLimit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1413,7 +1412,7 @@ func (c *StorageGateway) DeleteBandwidthRateLimit(input *DeleteBandwidthRateLimi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DeleteBandwidthRateLimitWithContext(ctx aws.Context, input *DeleteBandwidthRateLimitInput, opts ...request.Option) (*DeleteBandwidthRateLimitOutput, error) {
+func (c *StorageGateway) DeleteBandwidthRateLimitWithContext(ctx aws.Context, input *DeleteBandwidthRateLimitInput, opts ...aws.Option) (*DeleteBandwidthRateLimitOutput, error) {
 	req, out := c.DeleteBandwidthRateLimitRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1422,7 +1421,7 @@ func (c *StorageGateway) DeleteBandwidthRateLimitWithContext(ctx aws.Context, in
 
 const opDeleteChapCredentials = "DeleteChapCredentials"
 
-// DeleteChapCredentialsRequest generates a "aws/request.Request" representing the
+// DeleteChapCredentialsRequest generates a "aws.Request" representing the
 // client's request for the DeleteChapCredentials operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1446,8 +1445,8 @@ const opDeleteChapCredentials = "DeleteChapCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentials
-func (c *StorageGateway) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput) (req *request.Request, output *DeleteChapCredentialsOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput) (req *aws.Request, output *DeleteChapCredentialsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteChapCredentials,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1498,7 +1497,7 @@ func (c *StorageGateway) DeleteChapCredentials(input *DeleteChapCredentialsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DeleteChapCredentialsWithContext(ctx aws.Context, input *DeleteChapCredentialsInput, opts ...request.Option) (*DeleteChapCredentialsOutput, error) {
+func (c *StorageGateway) DeleteChapCredentialsWithContext(ctx aws.Context, input *DeleteChapCredentialsInput, opts ...aws.Option) (*DeleteChapCredentialsOutput, error) {
 	req, out := c.DeleteChapCredentialsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1507,7 +1506,7 @@ func (c *StorageGateway) DeleteChapCredentialsWithContext(ctx aws.Context, input
 
 const opDeleteFileShare = "DeleteFileShare"
 
-// DeleteFileShareRequest generates a "aws/request.Request" representing the
+// DeleteFileShareRequest generates a "aws.Request" representing the
 // client's request for the DeleteFileShare operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1531,8 +1530,8 @@ const opDeleteFileShare = "DeleteFileShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShare
-func (c *StorageGateway) DeleteFileShareRequest(input *DeleteFileShareInput) (req *request.Request, output *DeleteFileShareOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DeleteFileShareRequest(input *DeleteFileShareInput) (req *aws.Request, output *DeleteFileShareOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFileShare,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1583,7 +1582,7 @@ func (c *StorageGateway) DeleteFileShare(input *DeleteFileShareInput) (*DeleteFi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DeleteFileShareWithContext(ctx aws.Context, input *DeleteFileShareInput, opts ...request.Option) (*DeleteFileShareOutput, error) {
+func (c *StorageGateway) DeleteFileShareWithContext(ctx aws.Context, input *DeleteFileShareInput, opts ...aws.Option) (*DeleteFileShareOutput, error) {
 	req, out := c.DeleteFileShareRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1592,7 +1591,7 @@ func (c *StorageGateway) DeleteFileShareWithContext(ctx aws.Context, input *Dele
 
 const opDeleteGateway = "DeleteGateway"
 
-// DeleteGatewayRequest generates a "aws/request.Request" representing the
+// DeleteGatewayRequest generates a "aws.Request" representing the
 // client's request for the DeleteGateway operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1616,8 +1615,8 @@ const opDeleteGateway = "DeleteGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGateway
-func (c *StorageGateway) DeleteGatewayRequest(input *DeleteGatewayInput) (req *request.Request, output *DeleteGatewayOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DeleteGatewayRequest(input *DeleteGatewayInput) (req *aws.Request, output *DeleteGatewayOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1682,7 +1681,7 @@ func (c *StorageGateway) DeleteGateway(input *DeleteGatewayInput) (*DeleteGatewa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DeleteGatewayWithContext(ctx aws.Context, input *DeleteGatewayInput, opts ...request.Option) (*DeleteGatewayOutput, error) {
+func (c *StorageGateway) DeleteGatewayWithContext(ctx aws.Context, input *DeleteGatewayInput, opts ...aws.Option) (*DeleteGatewayOutput, error) {
 	req, out := c.DeleteGatewayRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1691,7 +1690,7 @@ func (c *StorageGateway) DeleteGatewayWithContext(ctx aws.Context, input *Delete
 
 const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
 
-// DeleteSnapshotScheduleRequest generates a "aws/request.Request" representing the
+// DeleteSnapshotScheduleRequest generates a "aws.Request" representing the
 // client's request for the DeleteSnapshotSchedule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1715,8 +1714,8 @@ const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotSchedule
-func (c *StorageGateway) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInput) (req *request.Request, output *DeleteSnapshotScheduleOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInput) (req *aws.Request, output *DeleteSnapshotScheduleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSnapshotSchedule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1775,7 +1774,7 @@ func (c *StorageGateway) DeleteSnapshotSchedule(input *DeleteSnapshotScheduleInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DeleteSnapshotScheduleWithContext(ctx aws.Context, input *DeleteSnapshotScheduleInput, opts ...request.Option) (*DeleteSnapshotScheduleOutput, error) {
+func (c *StorageGateway) DeleteSnapshotScheduleWithContext(ctx aws.Context, input *DeleteSnapshotScheduleInput, opts ...aws.Option) (*DeleteSnapshotScheduleOutput, error) {
 	req, out := c.DeleteSnapshotScheduleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1784,7 +1783,7 @@ func (c *StorageGateway) DeleteSnapshotScheduleWithContext(ctx aws.Context, inpu
 
 const opDeleteTape = "DeleteTape"
 
-// DeleteTapeRequest generates a "aws/request.Request" representing the
+// DeleteTapeRequest generates a "aws.Request" representing the
 // client's request for the DeleteTape operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1808,8 +1807,8 @@ const opDeleteTape = "DeleteTape"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTape
-func (c *StorageGateway) DeleteTapeRequest(input *DeleteTapeInput) (req *request.Request, output *DeleteTapeOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DeleteTapeRequest(input *DeleteTapeInput) (req *aws.Request, output *DeleteTapeOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTape,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1860,7 +1859,7 @@ func (c *StorageGateway) DeleteTape(input *DeleteTapeInput) (*DeleteTapeOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DeleteTapeWithContext(ctx aws.Context, input *DeleteTapeInput, opts ...request.Option) (*DeleteTapeOutput, error) {
+func (c *StorageGateway) DeleteTapeWithContext(ctx aws.Context, input *DeleteTapeInput, opts ...aws.Option) (*DeleteTapeOutput, error) {
 	req, out := c.DeleteTapeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1869,7 +1868,7 @@ func (c *StorageGateway) DeleteTapeWithContext(ctx aws.Context, input *DeleteTap
 
 const opDeleteTapeArchive = "DeleteTapeArchive"
 
-// DeleteTapeArchiveRequest generates a "aws/request.Request" representing the
+// DeleteTapeArchiveRequest generates a "aws.Request" representing the
 // client's request for the DeleteTapeArchive operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1893,8 +1892,8 @@ const opDeleteTapeArchive = "DeleteTapeArchive"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchive
-func (c *StorageGateway) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput) (req *request.Request, output *DeleteTapeArchiveOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput) (req *aws.Request, output *DeleteTapeArchiveOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTapeArchive,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1945,7 +1944,7 @@ func (c *StorageGateway) DeleteTapeArchive(input *DeleteTapeArchiveInput) (*Dele
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DeleteTapeArchiveWithContext(ctx aws.Context, input *DeleteTapeArchiveInput, opts ...request.Option) (*DeleteTapeArchiveOutput, error) {
+func (c *StorageGateway) DeleteTapeArchiveWithContext(ctx aws.Context, input *DeleteTapeArchiveInput, opts ...aws.Option) (*DeleteTapeArchiveOutput, error) {
 	req, out := c.DeleteTapeArchiveRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1954,7 +1953,7 @@ func (c *StorageGateway) DeleteTapeArchiveWithContext(ctx aws.Context, input *De
 
 const opDeleteVolume = "DeleteVolume"
 
-// DeleteVolumeRequest generates a "aws/request.Request" representing the
+// DeleteVolumeRequest generates a "aws.Request" representing the
 // client's request for the DeleteVolume operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1978,8 +1977,8 @@ const opDeleteVolume = "DeleteVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolume
-func (c *StorageGateway) DeleteVolumeRequest(input *DeleteVolumeInput) (req *request.Request, output *DeleteVolumeOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DeleteVolumeRequest(input *DeleteVolumeInput) (req *aws.Request, output *DeleteVolumeOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2044,7 +2043,7 @@ func (c *StorageGateway) DeleteVolume(input *DeleteVolumeInput) (*DeleteVolumeOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DeleteVolumeWithContext(ctx aws.Context, input *DeleteVolumeInput, opts ...request.Option) (*DeleteVolumeOutput, error) {
+func (c *StorageGateway) DeleteVolumeWithContext(ctx aws.Context, input *DeleteVolumeInput, opts ...aws.Option) (*DeleteVolumeOutput, error) {
 	req, out := c.DeleteVolumeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2053,7 +2052,7 @@ func (c *StorageGateway) DeleteVolumeWithContext(ctx aws.Context, input *DeleteV
 
 const opDescribeBandwidthRateLimit = "DescribeBandwidthRateLimit"
 
-// DescribeBandwidthRateLimitRequest generates a "aws/request.Request" representing the
+// DescribeBandwidthRateLimitRequest generates a "aws.Request" representing the
 // client's request for the DescribeBandwidthRateLimit operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2077,8 +2076,8 @@ const opDescribeBandwidthRateLimit = "DescribeBandwidthRateLimit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimit
-func (c *StorageGateway) DescribeBandwidthRateLimitRequest(input *DescribeBandwidthRateLimitInput) (req *request.Request, output *DescribeBandwidthRateLimitOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeBandwidthRateLimitRequest(input *DescribeBandwidthRateLimitInput) (req *aws.Request, output *DescribeBandwidthRateLimitOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeBandwidthRateLimit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2134,7 +2133,7 @@ func (c *StorageGateway) DescribeBandwidthRateLimit(input *DescribeBandwidthRate
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeBandwidthRateLimitWithContext(ctx aws.Context, input *DescribeBandwidthRateLimitInput, opts ...request.Option) (*DescribeBandwidthRateLimitOutput, error) {
+func (c *StorageGateway) DescribeBandwidthRateLimitWithContext(ctx aws.Context, input *DescribeBandwidthRateLimitInput, opts ...aws.Option) (*DescribeBandwidthRateLimitOutput, error) {
 	req, out := c.DescribeBandwidthRateLimitRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2143,7 +2142,7 @@ func (c *StorageGateway) DescribeBandwidthRateLimitWithContext(ctx aws.Context, 
 
 const opDescribeCache = "DescribeCache"
 
-// DescribeCacheRequest generates a "aws/request.Request" representing the
+// DescribeCacheRequest generates a "aws.Request" representing the
 // client's request for the DescribeCache operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2167,8 +2166,8 @@ const opDescribeCache = "DescribeCache"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCache
-func (c *StorageGateway) DescribeCacheRequest(input *DescribeCacheInput) (req *request.Request, output *DescribeCacheOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeCacheRequest(input *DescribeCacheInput) (req *aws.Request, output *DescribeCacheOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCache,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2222,7 +2221,7 @@ func (c *StorageGateway) DescribeCache(input *DescribeCacheInput) (*DescribeCach
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeCacheWithContext(ctx aws.Context, input *DescribeCacheInput, opts ...request.Option) (*DescribeCacheOutput, error) {
+func (c *StorageGateway) DescribeCacheWithContext(ctx aws.Context, input *DescribeCacheInput, opts ...aws.Option) (*DescribeCacheOutput, error) {
 	req, out := c.DescribeCacheRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2231,7 +2230,7 @@ func (c *StorageGateway) DescribeCacheWithContext(ctx aws.Context, input *Descri
 
 const opDescribeCachediSCSIVolumes = "DescribeCachediSCSIVolumes"
 
-// DescribeCachediSCSIVolumesRequest generates a "aws/request.Request" representing the
+// DescribeCachediSCSIVolumesRequest generates a "aws.Request" representing the
 // client's request for the DescribeCachediSCSIVolumes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2255,8 +2254,8 @@ const opDescribeCachediSCSIVolumes = "DescribeCachediSCSIVolumes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumes
-func (c *StorageGateway) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVolumesInput) (req *request.Request, output *DescribeCachediSCSIVolumesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVolumesInput) (req *aws.Request, output *DescribeCachediSCSIVolumesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCachediSCSIVolumes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2311,7 +2310,7 @@ func (c *StorageGateway) DescribeCachediSCSIVolumes(input *DescribeCachediSCSIVo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeCachediSCSIVolumesWithContext(ctx aws.Context, input *DescribeCachediSCSIVolumesInput, opts ...request.Option) (*DescribeCachediSCSIVolumesOutput, error) {
+func (c *StorageGateway) DescribeCachediSCSIVolumesWithContext(ctx aws.Context, input *DescribeCachediSCSIVolumesInput, opts ...aws.Option) (*DescribeCachediSCSIVolumesOutput, error) {
 	req, out := c.DescribeCachediSCSIVolumesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2320,7 +2319,7 @@ func (c *StorageGateway) DescribeCachediSCSIVolumesWithContext(ctx aws.Context, 
 
 const opDescribeChapCredentials = "DescribeChapCredentials"
 
-// DescribeChapCredentialsRequest generates a "aws/request.Request" representing the
+// DescribeChapCredentialsRequest generates a "aws.Request" representing the
 // client's request for the DescribeChapCredentials operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2344,8 +2343,8 @@ const opDescribeChapCredentials = "DescribeChapCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeChapCredentials
-func (c *StorageGateway) DescribeChapCredentialsRequest(input *DescribeChapCredentialsInput) (req *request.Request, output *DescribeChapCredentialsOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeChapCredentialsRequest(input *DescribeChapCredentialsInput) (req *aws.Request, output *DescribeChapCredentialsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeChapCredentials,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2396,7 +2395,7 @@ func (c *StorageGateway) DescribeChapCredentials(input *DescribeChapCredentialsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeChapCredentialsWithContext(ctx aws.Context, input *DescribeChapCredentialsInput, opts ...request.Option) (*DescribeChapCredentialsOutput, error) {
+func (c *StorageGateway) DescribeChapCredentialsWithContext(ctx aws.Context, input *DescribeChapCredentialsInput, opts ...aws.Option) (*DescribeChapCredentialsOutput, error) {
 	req, out := c.DescribeChapCredentialsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2405,7 +2404,7 @@ func (c *StorageGateway) DescribeChapCredentialsWithContext(ctx aws.Context, inp
 
 const opDescribeGatewayInformation = "DescribeGatewayInformation"
 
-// DescribeGatewayInformationRequest generates a "aws/request.Request" representing the
+// DescribeGatewayInformationRequest generates a "aws.Request" representing the
 // client's request for the DescribeGatewayInformation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2429,8 +2428,8 @@ const opDescribeGatewayInformation = "DescribeGatewayInformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation
-func (c *StorageGateway) DescribeGatewayInformationRequest(input *DescribeGatewayInformationInput) (req *request.Request, output *DescribeGatewayInformationOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeGatewayInformationRequest(input *DescribeGatewayInformationInput) (req *aws.Request, output *DescribeGatewayInformationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeGatewayInformation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2483,7 +2482,7 @@ func (c *StorageGateway) DescribeGatewayInformation(input *DescribeGatewayInform
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeGatewayInformationWithContext(ctx aws.Context, input *DescribeGatewayInformationInput, opts ...request.Option) (*DescribeGatewayInformationOutput, error) {
+func (c *StorageGateway) DescribeGatewayInformationWithContext(ctx aws.Context, input *DescribeGatewayInformationInput, opts ...aws.Option) (*DescribeGatewayInformationOutput, error) {
 	req, out := c.DescribeGatewayInformationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2492,7 +2491,7 @@ func (c *StorageGateway) DescribeGatewayInformationWithContext(ctx aws.Context, 
 
 const opDescribeMaintenanceStartTime = "DescribeMaintenanceStartTime"
 
-// DescribeMaintenanceStartTimeRequest generates a "aws/request.Request" representing the
+// DescribeMaintenanceStartTimeRequest generates a "aws.Request" representing the
 // client's request for the DescribeMaintenanceStartTime operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2516,8 +2515,8 @@ const opDescribeMaintenanceStartTime = "DescribeMaintenanceStartTime"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTime
-func (c *StorageGateway) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceStartTimeInput) (req *request.Request, output *DescribeMaintenanceStartTimeOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceStartTimeInput) (req *aws.Request, output *DescribeMaintenanceStartTimeOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMaintenanceStartTime,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2568,7 +2567,7 @@ func (c *StorageGateway) DescribeMaintenanceStartTime(input *DescribeMaintenance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeMaintenanceStartTimeWithContext(ctx aws.Context, input *DescribeMaintenanceStartTimeInput, opts ...request.Option) (*DescribeMaintenanceStartTimeOutput, error) {
+func (c *StorageGateway) DescribeMaintenanceStartTimeWithContext(ctx aws.Context, input *DescribeMaintenanceStartTimeInput, opts ...aws.Option) (*DescribeMaintenanceStartTimeOutput, error) {
 	req, out := c.DescribeMaintenanceStartTimeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2577,7 +2576,7 @@ func (c *StorageGateway) DescribeMaintenanceStartTimeWithContext(ctx aws.Context
 
 const opDescribeNFSFileShares = "DescribeNFSFileShares"
 
-// DescribeNFSFileSharesRequest generates a "aws/request.Request" representing the
+// DescribeNFSFileSharesRequest generates a "aws.Request" representing the
 // client's request for the DescribeNFSFileShares operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2601,8 +2600,8 @@ const opDescribeNFSFileShares = "DescribeNFSFileShares"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares
-func (c *StorageGateway) DescribeNFSFileSharesRequest(input *DescribeNFSFileSharesInput) (req *request.Request, output *DescribeNFSFileSharesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeNFSFileSharesRequest(input *DescribeNFSFileSharesInput) (req *aws.Request, output *DescribeNFSFileSharesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeNFSFileShares,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2653,7 +2652,7 @@ func (c *StorageGateway) DescribeNFSFileShares(input *DescribeNFSFileSharesInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeNFSFileSharesWithContext(ctx aws.Context, input *DescribeNFSFileSharesInput, opts ...request.Option) (*DescribeNFSFileSharesOutput, error) {
+func (c *StorageGateway) DescribeNFSFileSharesWithContext(ctx aws.Context, input *DescribeNFSFileSharesInput, opts ...aws.Option) (*DescribeNFSFileSharesOutput, error) {
 	req, out := c.DescribeNFSFileSharesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2662,7 +2661,7 @@ func (c *StorageGateway) DescribeNFSFileSharesWithContext(ctx aws.Context, input
 
 const opDescribeSnapshotSchedule = "DescribeSnapshotSchedule"
 
-// DescribeSnapshotScheduleRequest generates a "aws/request.Request" representing the
+// DescribeSnapshotScheduleRequest generates a "aws.Request" representing the
 // client's request for the DescribeSnapshotSchedule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2686,8 +2685,8 @@ const opDescribeSnapshotSchedule = "DescribeSnapshotSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotSchedule
-func (c *StorageGateway) DescribeSnapshotScheduleRequest(input *DescribeSnapshotScheduleInput) (req *request.Request, output *DescribeSnapshotScheduleOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeSnapshotScheduleRequest(input *DescribeSnapshotScheduleInput) (req *aws.Request, output *DescribeSnapshotScheduleOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSnapshotSchedule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2740,7 +2739,7 @@ func (c *StorageGateway) DescribeSnapshotSchedule(input *DescribeSnapshotSchedul
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeSnapshotScheduleWithContext(ctx aws.Context, input *DescribeSnapshotScheduleInput, opts ...request.Option) (*DescribeSnapshotScheduleOutput, error) {
+func (c *StorageGateway) DescribeSnapshotScheduleWithContext(ctx aws.Context, input *DescribeSnapshotScheduleInput, opts ...aws.Option) (*DescribeSnapshotScheduleOutput, error) {
 	req, out := c.DescribeSnapshotScheduleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2749,7 +2748,7 @@ func (c *StorageGateway) DescribeSnapshotScheduleWithContext(ctx aws.Context, in
 
 const opDescribeStorediSCSIVolumes = "DescribeStorediSCSIVolumes"
 
-// DescribeStorediSCSIVolumesRequest generates a "aws/request.Request" representing the
+// DescribeStorediSCSIVolumesRequest generates a "aws.Request" representing the
 // client's request for the DescribeStorediSCSIVolumes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2773,8 +2772,8 @@ const opDescribeStorediSCSIVolumes = "DescribeStorediSCSIVolumes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumes
-func (c *StorageGateway) DescribeStorediSCSIVolumesRequest(input *DescribeStorediSCSIVolumesInput) (req *request.Request, output *DescribeStorediSCSIVolumesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeStorediSCSIVolumesRequest(input *DescribeStorediSCSIVolumesInput) (req *aws.Request, output *DescribeStorediSCSIVolumesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStorediSCSIVolumes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2827,7 +2826,7 @@ func (c *StorageGateway) DescribeStorediSCSIVolumes(input *DescribeStorediSCSIVo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeStorediSCSIVolumesWithContext(ctx aws.Context, input *DescribeStorediSCSIVolumesInput, opts ...request.Option) (*DescribeStorediSCSIVolumesOutput, error) {
+func (c *StorageGateway) DescribeStorediSCSIVolumesWithContext(ctx aws.Context, input *DescribeStorediSCSIVolumesInput, opts ...aws.Option) (*DescribeStorediSCSIVolumesOutput, error) {
 	req, out := c.DescribeStorediSCSIVolumesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2836,7 +2835,7 @@ func (c *StorageGateway) DescribeStorediSCSIVolumesWithContext(ctx aws.Context, 
 
 const opDescribeTapeArchives = "DescribeTapeArchives"
 
-// DescribeTapeArchivesRequest generates a "aws/request.Request" representing the
+// DescribeTapeArchivesRequest generates a "aws.Request" representing the
 // client's request for the DescribeTapeArchives operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2860,12 +2859,12 @@ const opDescribeTapeArchives = "DescribeTapeArchives"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchives
-func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) (req *request.Request, output *DescribeTapeArchivesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) (req *aws.Request, output *DescribeTapeArchivesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTapeArchives,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -2921,7 +2920,7 @@ func (c *StorageGateway) DescribeTapeArchives(input *DescribeTapeArchivesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeTapeArchivesWithContext(ctx aws.Context, input *DescribeTapeArchivesInput, opts ...request.Option) (*DescribeTapeArchivesOutput, error) {
+func (c *StorageGateway) DescribeTapeArchivesWithContext(ctx aws.Context, input *DescribeTapeArchivesInput, opts ...aws.Option) (*DescribeTapeArchivesOutput, error) {
 	req, out := c.DescribeTapeArchivesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2956,9 +2955,9 @@ func (c *StorageGateway) DescribeTapeArchivesPages(input *DescribeTapeArchivesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeTapeArchivesPagesWithContext(ctx aws.Context, input *DescribeTapeArchivesInput, fn func(*DescribeTapeArchivesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *StorageGateway) DescribeTapeArchivesPagesWithContext(ctx aws.Context, input *DescribeTapeArchivesInput, fn func(*DescribeTapeArchivesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeTapeArchivesInput
 			if input != nil {
 				tmp := *input
@@ -2980,7 +2979,7 @@ func (c *StorageGateway) DescribeTapeArchivesPagesWithContext(ctx aws.Context, i
 
 const opDescribeTapeRecoveryPoints = "DescribeTapeRecoveryPoints"
 
-// DescribeTapeRecoveryPointsRequest generates a "aws/request.Request" representing the
+// DescribeTapeRecoveryPointsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTapeRecoveryPoints operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3004,12 +3003,12 @@ const opDescribeTapeRecoveryPoints = "DescribeTapeRecoveryPoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeRecoveryPoints
-func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRecoveryPointsInput) (req *request.Request, output *DescribeTapeRecoveryPointsOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRecoveryPointsInput) (req *aws.Request, output *DescribeTapeRecoveryPointsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTapeRecoveryPoints,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -3067,7 +3066,7 @@ func (c *StorageGateway) DescribeTapeRecoveryPoints(input *DescribeTapeRecoveryP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeTapeRecoveryPointsWithContext(ctx aws.Context, input *DescribeTapeRecoveryPointsInput, opts ...request.Option) (*DescribeTapeRecoveryPointsOutput, error) {
+func (c *StorageGateway) DescribeTapeRecoveryPointsWithContext(ctx aws.Context, input *DescribeTapeRecoveryPointsInput, opts ...aws.Option) (*DescribeTapeRecoveryPointsOutput, error) {
 	req, out := c.DescribeTapeRecoveryPointsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3102,9 +3101,9 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsPages(input *DescribeTapeReco
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeTapeRecoveryPointsPagesWithContext(ctx aws.Context, input *DescribeTapeRecoveryPointsInput, fn func(*DescribeTapeRecoveryPointsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *StorageGateway) DescribeTapeRecoveryPointsPagesWithContext(ctx aws.Context, input *DescribeTapeRecoveryPointsInput, fn func(*DescribeTapeRecoveryPointsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeTapeRecoveryPointsInput
 			if input != nil {
 				tmp := *input
@@ -3126,7 +3125,7 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsPagesWithContext(ctx aws.Cont
 
 const opDescribeTapes = "DescribeTapes"
 
-// DescribeTapesRequest generates a "aws/request.Request" representing the
+// DescribeTapesRequest generates a "aws.Request" representing the
 // client's request for the DescribeTapes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3150,12 +3149,12 @@ const opDescribeTapes = "DescribeTapes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapes
-func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) (req *request.Request, output *DescribeTapesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) (req *aws.Request, output *DescribeTapesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTapes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -3210,7 +3209,7 @@ func (c *StorageGateway) DescribeTapes(input *DescribeTapesInput) (*DescribeTape
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeTapesWithContext(ctx aws.Context, input *DescribeTapesInput, opts ...request.Option) (*DescribeTapesOutput, error) {
+func (c *StorageGateway) DescribeTapesWithContext(ctx aws.Context, input *DescribeTapesInput, opts ...aws.Option) (*DescribeTapesOutput, error) {
 	req, out := c.DescribeTapesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3245,9 +3244,9 @@ func (c *StorageGateway) DescribeTapesPages(input *DescribeTapesInput, fn func(*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeTapesPagesWithContext(ctx aws.Context, input *DescribeTapesInput, fn func(*DescribeTapesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *StorageGateway) DescribeTapesPagesWithContext(ctx aws.Context, input *DescribeTapesInput, fn func(*DescribeTapesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeTapesInput
 			if input != nil {
 				tmp := *input
@@ -3269,7 +3268,7 @@ func (c *StorageGateway) DescribeTapesPagesWithContext(ctx aws.Context, input *D
 
 const opDescribeUploadBuffer = "DescribeUploadBuffer"
 
-// DescribeUploadBufferRequest generates a "aws/request.Request" representing the
+// DescribeUploadBufferRequest generates a "aws.Request" representing the
 // client's request for the DescribeUploadBuffer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3293,8 +3292,8 @@ const opDescribeUploadBuffer = "DescribeUploadBuffer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBuffer
-func (c *StorageGateway) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) (req *request.Request, output *DescribeUploadBufferOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) (req *aws.Request, output *DescribeUploadBufferOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeUploadBuffer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3348,7 +3347,7 @@ func (c *StorageGateway) DescribeUploadBuffer(input *DescribeUploadBufferInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeUploadBufferWithContext(ctx aws.Context, input *DescribeUploadBufferInput, opts ...request.Option) (*DescribeUploadBufferOutput, error) {
+func (c *StorageGateway) DescribeUploadBufferWithContext(ctx aws.Context, input *DescribeUploadBufferInput, opts ...aws.Option) (*DescribeUploadBufferOutput, error) {
 	req, out := c.DescribeUploadBufferRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3357,7 +3356,7 @@ func (c *StorageGateway) DescribeUploadBufferWithContext(ctx aws.Context, input 
 
 const opDescribeVTLDevices = "DescribeVTLDevices"
 
-// DescribeVTLDevicesRequest generates a "aws/request.Request" representing the
+// DescribeVTLDevicesRequest generates a "aws.Request" representing the
 // client's request for the DescribeVTLDevices operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3381,12 +3380,12 @@ const opDescribeVTLDevices = "DescribeVTLDevices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeVTLDevices
-func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) (req *request.Request, output *DescribeVTLDevicesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) (req *aws.Request, output *DescribeVTLDevicesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeVTLDevices,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -3441,7 +3440,7 @@ func (c *StorageGateway) DescribeVTLDevices(input *DescribeVTLDevicesInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeVTLDevicesWithContext(ctx aws.Context, input *DescribeVTLDevicesInput, opts ...request.Option) (*DescribeVTLDevicesOutput, error) {
+func (c *StorageGateway) DescribeVTLDevicesWithContext(ctx aws.Context, input *DescribeVTLDevicesInput, opts ...aws.Option) (*DescribeVTLDevicesOutput, error) {
 	req, out := c.DescribeVTLDevicesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3476,9 +3475,9 @@ func (c *StorageGateway) DescribeVTLDevicesPages(input *DescribeVTLDevicesInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeVTLDevicesPagesWithContext(ctx aws.Context, input *DescribeVTLDevicesInput, fn func(*DescribeVTLDevicesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *StorageGateway) DescribeVTLDevicesPagesWithContext(ctx aws.Context, input *DescribeVTLDevicesInput, fn func(*DescribeVTLDevicesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeVTLDevicesInput
 			if input != nil {
 				tmp := *input
@@ -3500,7 +3499,7 @@ func (c *StorageGateway) DescribeVTLDevicesPagesWithContext(ctx aws.Context, inp
 
 const opDescribeWorkingStorage = "DescribeWorkingStorage"
 
-// DescribeWorkingStorageRequest generates a "aws/request.Request" representing the
+// DescribeWorkingStorageRequest generates a "aws.Request" representing the
 // client's request for the DescribeWorkingStorage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3524,8 +3523,8 @@ const opDescribeWorkingStorage = "DescribeWorkingStorage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeWorkingStorage
-func (c *StorageGateway) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInput) (req *request.Request, output *DescribeWorkingStorageOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInput) (req *aws.Request, output *DescribeWorkingStorageOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeWorkingStorage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3584,7 +3583,7 @@ func (c *StorageGateway) DescribeWorkingStorage(input *DescribeWorkingStorageInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DescribeWorkingStorageWithContext(ctx aws.Context, input *DescribeWorkingStorageInput, opts ...request.Option) (*DescribeWorkingStorageOutput, error) {
+func (c *StorageGateway) DescribeWorkingStorageWithContext(ctx aws.Context, input *DescribeWorkingStorageInput, opts ...aws.Option) (*DescribeWorkingStorageOutput, error) {
 	req, out := c.DescribeWorkingStorageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3593,7 +3592,7 @@ func (c *StorageGateway) DescribeWorkingStorageWithContext(ctx aws.Context, inpu
 
 const opDisableGateway = "DisableGateway"
 
-// DisableGatewayRequest generates a "aws/request.Request" representing the
+// DisableGatewayRequest generates a "aws.Request" representing the
 // client's request for the DisableGateway operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3617,8 +3616,8 @@ const opDisableGateway = "DisableGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisableGateway
-func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) (req *request.Request, output *DisableGatewayOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) (req *aws.Request, output *DisableGatewayOutput) {
+	op := &aws.Operation{
 		Name:       opDisableGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3675,7 +3674,7 @@ func (c *StorageGateway) DisableGateway(input *DisableGatewayInput) (*DisableGat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) DisableGatewayWithContext(ctx aws.Context, input *DisableGatewayInput, opts ...request.Option) (*DisableGatewayOutput, error) {
+func (c *StorageGateway) DisableGatewayWithContext(ctx aws.Context, input *DisableGatewayInput, opts ...aws.Option) (*DisableGatewayOutput, error) {
 	req, out := c.DisableGatewayRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3684,7 +3683,7 @@ func (c *StorageGateway) DisableGatewayWithContext(ctx aws.Context, input *Disab
 
 const opListFileShares = "ListFileShares"
 
-// ListFileSharesRequest generates a "aws/request.Request" representing the
+// ListFileSharesRequest generates a "aws.Request" representing the
 // client's request for the ListFileShares operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3708,8 +3707,8 @@ const opListFileShares = "ListFileShares"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileShares
-func (c *StorageGateway) ListFileSharesRequest(input *ListFileSharesInput) (req *request.Request, output *ListFileSharesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ListFileSharesRequest(input *ListFileSharesInput) (req *aws.Request, output *ListFileSharesOutput) {
+	op := &aws.Operation{
 		Name:       opListFileShares,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3761,7 +3760,7 @@ func (c *StorageGateway) ListFileShares(input *ListFileSharesInput) (*ListFileSh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListFileSharesWithContext(ctx aws.Context, input *ListFileSharesInput, opts ...request.Option) (*ListFileSharesOutput, error) {
+func (c *StorageGateway) ListFileSharesWithContext(ctx aws.Context, input *ListFileSharesInput, opts ...aws.Option) (*ListFileSharesOutput, error) {
 	req, out := c.ListFileSharesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3770,7 +3769,7 @@ func (c *StorageGateway) ListFileSharesWithContext(ctx aws.Context, input *ListF
 
 const opListGateways = "ListGateways"
 
-// ListGatewaysRequest generates a "aws/request.Request" representing the
+// ListGatewaysRequest generates a "aws.Request" representing the
 // client's request for the ListGateways operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3794,12 +3793,12 @@ const opListGateways = "ListGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGateways
-func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) (req *request.Request, output *ListGatewaysOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) (req *aws.Request, output *ListGatewaysOutput) {
+	op := &aws.Operation{
 		Name:       opListGateways,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -3861,7 +3860,7 @@ func (c *StorageGateway) ListGateways(input *ListGatewaysInput) (*ListGatewaysOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListGatewaysWithContext(ctx aws.Context, input *ListGatewaysInput, opts ...request.Option) (*ListGatewaysOutput, error) {
+func (c *StorageGateway) ListGatewaysWithContext(ctx aws.Context, input *ListGatewaysInput, opts ...aws.Option) (*ListGatewaysOutput, error) {
 	req, out := c.ListGatewaysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3896,9 +3895,9 @@ func (c *StorageGateway) ListGatewaysPages(input *ListGatewaysInput, fn func(*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListGatewaysPagesWithContext(ctx aws.Context, input *ListGatewaysInput, fn func(*ListGatewaysOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *StorageGateway) ListGatewaysPagesWithContext(ctx aws.Context, input *ListGatewaysInput, fn func(*ListGatewaysOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListGatewaysInput
 			if input != nil {
 				tmp := *input
@@ -3920,7 +3919,7 @@ func (c *StorageGateway) ListGatewaysPagesWithContext(ctx aws.Context, input *Li
 
 const opListLocalDisks = "ListLocalDisks"
 
-// ListLocalDisksRequest generates a "aws/request.Request" representing the
+// ListLocalDisksRequest generates a "aws.Request" representing the
 // client's request for the ListLocalDisks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3944,8 +3943,8 @@ const opListLocalDisks = "ListLocalDisks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisks
-func (c *StorageGateway) ListLocalDisksRequest(input *ListLocalDisksInput) (req *request.Request, output *ListLocalDisksOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ListLocalDisksRequest(input *ListLocalDisksInput) (req *aws.Request, output *ListLocalDisksOutput) {
+	op := &aws.Operation{
 		Name:       opListLocalDisks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4004,7 +4003,7 @@ func (c *StorageGateway) ListLocalDisks(input *ListLocalDisksInput) (*ListLocalD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListLocalDisksWithContext(ctx aws.Context, input *ListLocalDisksInput, opts ...request.Option) (*ListLocalDisksOutput, error) {
+func (c *StorageGateway) ListLocalDisksWithContext(ctx aws.Context, input *ListLocalDisksInput, opts ...aws.Option) (*ListLocalDisksOutput, error) {
 	req, out := c.ListLocalDisksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4013,7 +4012,7 @@ func (c *StorageGateway) ListLocalDisksWithContext(ctx aws.Context, input *ListL
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4037,8 +4036,8 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTagsForResource
-func (c *StorageGateway) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4089,7 +4088,7 @@ func (c *StorageGateway) ListTagsForResource(input *ListTagsForResourceInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+func (c *StorageGateway) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4098,7 +4097,7 @@ func (c *StorageGateway) ListTagsForResourceWithContext(ctx aws.Context, input *
 
 const opListTapes = "ListTapes"
 
-// ListTapesRequest generates a "aws/request.Request" representing the
+// ListTapesRequest generates a "aws.Request" representing the
 // client's request for the ListTapes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4122,8 +4121,8 @@ const opListTapes = "ListTapes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapes
-func (c *StorageGateway) ListTapesRequest(input *ListTapesInput) (req *request.Request, output *ListTapesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ListTapesRequest(input *ListTapesInput) (req *aws.Request, output *ListTapesOutput) {
+	op := &aws.Operation{
 		Name:       opListTapes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4183,7 +4182,7 @@ func (c *StorageGateway) ListTapes(input *ListTapesInput) (*ListTapesOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListTapesWithContext(ctx aws.Context, input *ListTapesInput, opts ...request.Option) (*ListTapesOutput, error) {
+func (c *StorageGateway) ListTapesWithContext(ctx aws.Context, input *ListTapesInput, opts ...aws.Option) (*ListTapesOutput, error) {
 	req, out := c.ListTapesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4192,7 +4191,7 @@ func (c *StorageGateway) ListTapesWithContext(ctx aws.Context, input *ListTapesI
 
 const opListVolumeInitiators = "ListVolumeInitiators"
 
-// ListVolumeInitiatorsRequest generates a "aws/request.Request" representing the
+// ListVolumeInitiatorsRequest generates a "aws.Request" representing the
 // client's request for the ListVolumeInitiators operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4216,8 +4215,8 @@ const opListVolumeInitiators = "ListVolumeInitiators"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiators
-func (c *StorageGateway) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) (req *request.Request, output *ListVolumeInitiatorsOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) (req *aws.Request, output *ListVolumeInitiatorsOutput) {
+	op := &aws.Operation{
 		Name:       opListVolumeInitiators,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4269,7 +4268,7 @@ func (c *StorageGateway) ListVolumeInitiators(input *ListVolumeInitiatorsInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListVolumeInitiatorsWithContext(ctx aws.Context, input *ListVolumeInitiatorsInput, opts ...request.Option) (*ListVolumeInitiatorsOutput, error) {
+func (c *StorageGateway) ListVolumeInitiatorsWithContext(ctx aws.Context, input *ListVolumeInitiatorsInput, opts ...aws.Option) (*ListVolumeInitiatorsOutput, error) {
 	req, out := c.ListVolumeInitiatorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4278,7 +4277,7 @@ func (c *StorageGateway) ListVolumeInitiatorsWithContext(ctx aws.Context, input 
 
 const opListVolumeRecoveryPoints = "ListVolumeRecoveryPoints"
 
-// ListVolumeRecoveryPointsRequest generates a "aws/request.Request" representing the
+// ListVolumeRecoveryPointsRequest generates a "aws.Request" representing the
 // client's request for the ListVolumeRecoveryPoints operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4302,8 +4301,8 @@ const opListVolumeRecoveryPoints = "ListVolumeRecoveryPoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPoints
-func (c *StorageGateway) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPointsInput) (req *request.Request, output *ListVolumeRecoveryPointsOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPointsInput) (req *aws.Request, output *ListVolumeRecoveryPointsOutput) {
+	op := &aws.Operation{
 		Name:       opListVolumeRecoveryPoints,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4360,7 +4359,7 @@ func (c *StorageGateway) ListVolumeRecoveryPoints(input *ListVolumeRecoveryPoint
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListVolumeRecoveryPointsWithContext(ctx aws.Context, input *ListVolumeRecoveryPointsInput, opts ...request.Option) (*ListVolumeRecoveryPointsOutput, error) {
+func (c *StorageGateway) ListVolumeRecoveryPointsWithContext(ctx aws.Context, input *ListVolumeRecoveryPointsInput, opts ...aws.Option) (*ListVolumeRecoveryPointsOutput, error) {
 	req, out := c.ListVolumeRecoveryPointsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4369,7 +4368,7 @@ func (c *StorageGateway) ListVolumeRecoveryPointsWithContext(ctx aws.Context, in
 
 const opListVolumes = "ListVolumes"
 
-// ListVolumesRequest generates a "aws/request.Request" representing the
+// ListVolumesRequest generates a "aws.Request" representing the
 // client's request for the ListVolumes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4393,12 +4392,12 @@ const opListVolumes = "ListVolumes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumes
-func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) (req *request.Request, output *ListVolumesOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) (req *aws.Request, output *ListVolumesOutput) {
+	op := &aws.Operation{
 		Name:       opListVolumes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -4461,7 +4460,7 @@ func (c *StorageGateway) ListVolumes(input *ListVolumesInput) (*ListVolumesOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListVolumesWithContext(ctx aws.Context, input *ListVolumesInput, opts ...request.Option) (*ListVolumesOutput, error) {
+func (c *StorageGateway) ListVolumesWithContext(ctx aws.Context, input *ListVolumesInput, opts ...aws.Option) (*ListVolumesOutput, error) {
 	req, out := c.ListVolumesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4496,9 +4495,9 @@ func (c *StorageGateway) ListVolumesPages(input *ListVolumesInput, fn func(*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ListVolumesPagesWithContext(ctx aws.Context, input *ListVolumesInput, fn func(*ListVolumesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *StorageGateway) ListVolumesPagesWithContext(ctx aws.Context, input *ListVolumesInput, fn func(*ListVolumesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListVolumesInput
 			if input != nil {
 				tmp := *input
@@ -4520,7 +4519,7 @@ func (c *StorageGateway) ListVolumesPagesWithContext(ctx aws.Context, input *Lis
 
 const opRefreshCache = "RefreshCache"
 
-// RefreshCacheRequest generates a "aws/request.Request" representing the
+// RefreshCacheRequest generates a "aws.Request" representing the
 // client's request for the RefreshCache operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4544,8 +4543,8 @@ const opRefreshCache = "RefreshCache"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCache
-func (c *StorageGateway) RefreshCacheRequest(input *RefreshCacheInput) (req *request.Request, output *RefreshCacheOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) RefreshCacheRequest(input *RefreshCacheInput) (req *aws.Request, output *RefreshCacheOutput) {
+	op := &aws.Operation{
 		Name:       opRefreshCache,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4597,7 +4596,7 @@ func (c *StorageGateway) RefreshCache(input *RefreshCacheInput) (*RefreshCacheOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) RefreshCacheWithContext(ctx aws.Context, input *RefreshCacheInput, opts ...request.Option) (*RefreshCacheOutput, error) {
+func (c *StorageGateway) RefreshCacheWithContext(ctx aws.Context, input *RefreshCacheInput, opts ...aws.Option) (*RefreshCacheOutput, error) {
 	req, out := c.RefreshCacheRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4606,7 +4605,7 @@ func (c *StorageGateway) RefreshCacheWithContext(ctx aws.Context, input *Refresh
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4630,8 +4629,8 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RemoveTagsFromResource
-func (c *StorageGateway) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *RemoveTagsFromResourceOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4682,7 +4681,7 @@ func (c *StorageGateway) RemoveTagsFromResource(input *RemoveTagsFromResourceInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...request.Option) (*RemoveTagsFromResourceOutput, error) {
+func (c *StorageGateway) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
 	req, out := c.RemoveTagsFromResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4691,7 +4690,7 @@ func (c *StorageGateway) RemoveTagsFromResourceWithContext(ctx aws.Context, inpu
 
 const opResetCache = "ResetCache"
 
-// ResetCacheRequest generates a "aws/request.Request" representing the
+// ResetCacheRequest generates a "aws.Request" representing the
 // client's request for the ResetCache operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4715,8 +4714,8 @@ const opResetCache = "ResetCache"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCache
-func (c *StorageGateway) ResetCacheRequest(input *ResetCacheInput) (req *request.Request, output *ResetCacheOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ResetCacheRequest(input *ResetCacheInput) (req *aws.Request, output *ResetCacheOutput) {
+	op := &aws.Operation{
 		Name:       opResetCache,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4778,7 +4777,7 @@ func (c *StorageGateway) ResetCache(input *ResetCacheInput) (*ResetCacheOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ResetCacheWithContext(ctx aws.Context, input *ResetCacheInput, opts ...request.Option) (*ResetCacheOutput, error) {
+func (c *StorageGateway) ResetCacheWithContext(ctx aws.Context, input *ResetCacheInput, opts ...aws.Option) (*ResetCacheOutput, error) {
 	req, out := c.ResetCacheRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4787,7 +4786,7 @@ func (c *StorageGateway) ResetCacheWithContext(ctx aws.Context, input *ResetCach
 
 const opRetrieveTapeArchive = "RetrieveTapeArchive"
 
-// RetrieveTapeArchiveRequest generates a "aws/request.Request" representing the
+// RetrieveTapeArchiveRequest generates a "aws.Request" representing the
 // client's request for the RetrieveTapeArchive operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4811,8 +4810,8 @@ const opRetrieveTapeArchive = "RetrieveTapeArchive"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeArchive
-func (c *StorageGateway) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveInput) (req *request.Request, output *RetrieveTapeArchiveOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveInput) (req *aws.Request, output *RetrieveTapeArchiveOutput) {
+	op := &aws.Operation{
 		Name:       opRetrieveTapeArchive,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4871,7 +4870,7 @@ func (c *StorageGateway) RetrieveTapeArchive(input *RetrieveTapeArchiveInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) RetrieveTapeArchiveWithContext(ctx aws.Context, input *RetrieveTapeArchiveInput, opts ...request.Option) (*RetrieveTapeArchiveOutput, error) {
+func (c *StorageGateway) RetrieveTapeArchiveWithContext(ctx aws.Context, input *RetrieveTapeArchiveInput, opts ...aws.Option) (*RetrieveTapeArchiveOutput, error) {
 	req, out := c.RetrieveTapeArchiveRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4880,7 +4879,7 @@ func (c *StorageGateway) RetrieveTapeArchiveWithContext(ctx aws.Context, input *
 
 const opRetrieveTapeRecoveryPoint = "RetrieveTapeRecoveryPoint"
 
-// RetrieveTapeRecoveryPointRequest generates a "aws/request.Request" representing the
+// RetrieveTapeRecoveryPointRequest generates a "aws.Request" representing the
 // client's request for the RetrieveTapeRecoveryPoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4904,8 +4903,8 @@ const opRetrieveTapeRecoveryPoint = "RetrieveTapeRecoveryPoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPoint
-func (c *StorageGateway) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPointInput) (req *request.Request, output *RetrieveTapeRecoveryPointOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPointInput) (req *aws.Request, output *RetrieveTapeRecoveryPointOutput) {
+	op := &aws.Operation{
 		Name:       opRetrieveTapeRecoveryPoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4964,7 +4963,7 @@ func (c *StorageGateway) RetrieveTapeRecoveryPoint(input *RetrieveTapeRecoveryPo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) RetrieveTapeRecoveryPointWithContext(ctx aws.Context, input *RetrieveTapeRecoveryPointInput, opts ...request.Option) (*RetrieveTapeRecoveryPointOutput, error) {
+func (c *StorageGateway) RetrieveTapeRecoveryPointWithContext(ctx aws.Context, input *RetrieveTapeRecoveryPointInput, opts ...aws.Option) (*RetrieveTapeRecoveryPointOutput, error) {
 	req, out := c.RetrieveTapeRecoveryPointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4973,7 +4972,7 @@ func (c *StorageGateway) RetrieveTapeRecoveryPointWithContext(ctx aws.Context, i
 
 const opSetLocalConsolePassword = "SetLocalConsolePassword"
 
-// SetLocalConsolePasswordRequest generates a "aws/request.Request" representing the
+// SetLocalConsolePasswordRequest generates a "aws.Request" representing the
 // client's request for the SetLocalConsolePassword operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4997,8 +4996,8 @@ const opSetLocalConsolePassword = "SetLocalConsolePassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePassword
-func (c *StorageGateway) SetLocalConsolePasswordRequest(input *SetLocalConsolePasswordInput) (req *request.Request, output *SetLocalConsolePasswordOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) SetLocalConsolePasswordRequest(input *SetLocalConsolePasswordInput) (req *aws.Request, output *SetLocalConsolePasswordOutput) {
+	op := &aws.Operation{
 		Name:       opSetLocalConsolePassword,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5051,7 +5050,7 @@ func (c *StorageGateway) SetLocalConsolePassword(input *SetLocalConsolePasswordI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) SetLocalConsolePasswordWithContext(ctx aws.Context, input *SetLocalConsolePasswordInput, opts ...request.Option) (*SetLocalConsolePasswordOutput, error) {
+func (c *StorageGateway) SetLocalConsolePasswordWithContext(ctx aws.Context, input *SetLocalConsolePasswordInput, opts ...aws.Option) (*SetLocalConsolePasswordOutput, error) {
 	req, out := c.SetLocalConsolePasswordRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5060,7 +5059,7 @@ func (c *StorageGateway) SetLocalConsolePasswordWithContext(ctx aws.Context, inp
 
 const opShutdownGateway = "ShutdownGateway"
 
-// ShutdownGatewayRequest generates a "aws/request.Request" representing the
+// ShutdownGatewayRequest generates a "aws.Request" representing the
 // client's request for the ShutdownGateway operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5084,8 +5083,8 @@ const opShutdownGateway = "ShutdownGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGateway
-func (c *StorageGateway) ShutdownGatewayRequest(input *ShutdownGatewayInput) (req *request.Request, output *ShutdownGatewayOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) ShutdownGatewayRequest(input *ShutdownGatewayInput) (req *aws.Request, output *ShutdownGatewayOutput) {
+	op := &aws.Operation{
 		Name:       opShutdownGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5155,7 +5154,7 @@ func (c *StorageGateway) ShutdownGateway(input *ShutdownGatewayInput) (*Shutdown
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) ShutdownGatewayWithContext(ctx aws.Context, input *ShutdownGatewayInput, opts ...request.Option) (*ShutdownGatewayOutput, error) {
+func (c *StorageGateway) ShutdownGatewayWithContext(ctx aws.Context, input *ShutdownGatewayInput, opts ...aws.Option) (*ShutdownGatewayOutput, error) {
 	req, out := c.ShutdownGatewayRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5164,7 +5163,7 @@ func (c *StorageGateway) ShutdownGatewayWithContext(ctx aws.Context, input *Shut
 
 const opStartGateway = "StartGateway"
 
-// StartGatewayRequest generates a "aws/request.Request" representing the
+// StartGatewayRequest generates a "aws.Request" representing the
 // client's request for the StartGateway operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5188,8 +5187,8 @@ const opStartGateway = "StartGateway"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGateway
-func (c *StorageGateway) StartGatewayRequest(input *StartGatewayInput) (req *request.Request, output *StartGatewayOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) StartGatewayRequest(input *StartGatewayInput) (req *aws.Request, output *StartGatewayOutput) {
+	op := &aws.Operation{
 		Name:       opStartGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5250,7 +5249,7 @@ func (c *StorageGateway) StartGateway(input *StartGatewayInput) (*StartGatewayOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) StartGatewayWithContext(ctx aws.Context, input *StartGatewayInput, opts ...request.Option) (*StartGatewayOutput, error) {
+func (c *StorageGateway) StartGatewayWithContext(ctx aws.Context, input *StartGatewayInput, opts ...aws.Option) (*StartGatewayOutput, error) {
 	req, out := c.StartGatewayRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5259,7 +5258,7 @@ func (c *StorageGateway) StartGatewayWithContext(ctx aws.Context, input *StartGa
 
 const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
 
-// UpdateBandwidthRateLimitRequest generates a "aws/request.Request" representing the
+// UpdateBandwidthRateLimitRequest generates a "aws.Request" representing the
 // client's request for the UpdateBandwidthRateLimit operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5283,8 +5282,8 @@ const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimit
-func (c *StorageGateway) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimitInput) (req *request.Request, output *UpdateBandwidthRateLimitOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimitInput) (req *aws.Request, output *UpdateBandwidthRateLimitOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateBandwidthRateLimit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5343,7 +5342,7 @@ func (c *StorageGateway) UpdateBandwidthRateLimit(input *UpdateBandwidthRateLimi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) UpdateBandwidthRateLimitWithContext(ctx aws.Context, input *UpdateBandwidthRateLimitInput, opts ...request.Option) (*UpdateBandwidthRateLimitOutput, error) {
+func (c *StorageGateway) UpdateBandwidthRateLimitWithContext(ctx aws.Context, input *UpdateBandwidthRateLimitInput, opts ...aws.Option) (*UpdateBandwidthRateLimitOutput, error) {
 	req, out := c.UpdateBandwidthRateLimitRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5352,7 +5351,7 @@ func (c *StorageGateway) UpdateBandwidthRateLimitWithContext(ctx aws.Context, in
 
 const opUpdateChapCredentials = "UpdateChapCredentials"
 
-// UpdateChapCredentialsRequest generates a "aws/request.Request" representing the
+// UpdateChapCredentialsRequest generates a "aws.Request" representing the
 // client's request for the UpdateChapCredentials operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5376,8 +5375,8 @@ const opUpdateChapCredentials = "UpdateChapCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateChapCredentials
-func (c *StorageGateway) UpdateChapCredentialsRequest(input *UpdateChapCredentialsInput) (req *request.Request, output *UpdateChapCredentialsOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) UpdateChapCredentialsRequest(input *UpdateChapCredentialsInput) (req *aws.Request, output *UpdateChapCredentialsOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateChapCredentials,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5432,7 +5431,7 @@ func (c *StorageGateway) UpdateChapCredentials(input *UpdateChapCredentialsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) UpdateChapCredentialsWithContext(ctx aws.Context, input *UpdateChapCredentialsInput, opts ...request.Option) (*UpdateChapCredentialsOutput, error) {
+func (c *StorageGateway) UpdateChapCredentialsWithContext(ctx aws.Context, input *UpdateChapCredentialsInput, opts ...aws.Option) (*UpdateChapCredentialsOutput, error) {
 	req, out := c.UpdateChapCredentialsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5441,7 +5440,7 @@ func (c *StorageGateway) UpdateChapCredentialsWithContext(ctx aws.Context, input
 
 const opUpdateGatewayInformation = "UpdateGatewayInformation"
 
-// UpdateGatewayInformationRequest generates a "aws/request.Request" representing the
+// UpdateGatewayInformationRequest generates a "aws.Request" representing the
 // client's request for the UpdateGatewayInformation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5465,8 +5464,8 @@ const opUpdateGatewayInformation = "UpdateGatewayInformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformation
-func (c *StorageGateway) UpdateGatewayInformationRequest(input *UpdateGatewayInformationInput) (req *request.Request, output *UpdateGatewayInformationOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) UpdateGatewayInformationRequest(input *UpdateGatewayInformationInput) (req *aws.Request, output *UpdateGatewayInformationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateGatewayInformation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5522,7 +5521,7 @@ func (c *StorageGateway) UpdateGatewayInformation(input *UpdateGatewayInformatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) UpdateGatewayInformationWithContext(ctx aws.Context, input *UpdateGatewayInformationInput, opts ...request.Option) (*UpdateGatewayInformationOutput, error) {
+func (c *StorageGateway) UpdateGatewayInformationWithContext(ctx aws.Context, input *UpdateGatewayInformationInput, opts ...aws.Option) (*UpdateGatewayInformationOutput, error) {
 	req, out := c.UpdateGatewayInformationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5531,7 +5530,7 @@ func (c *StorageGateway) UpdateGatewayInformationWithContext(ctx aws.Context, in
 
 const opUpdateGatewaySoftwareNow = "UpdateGatewaySoftwareNow"
 
-// UpdateGatewaySoftwareNowRequest generates a "aws/request.Request" representing the
+// UpdateGatewaySoftwareNowRequest generates a "aws.Request" representing the
 // client's request for the UpdateGatewaySoftwareNow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5555,8 +5554,8 @@ const opUpdateGatewaySoftwareNow = "UpdateGatewaySoftwareNow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNow
-func (c *StorageGateway) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySoftwareNowInput) (req *request.Request, output *UpdateGatewaySoftwareNowOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySoftwareNowInput) (req *aws.Request, output *UpdateGatewaySoftwareNowOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateGatewaySoftwareNow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5620,7 +5619,7 @@ func (c *StorageGateway) UpdateGatewaySoftwareNow(input *UpdateGatewaySoftwareNo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) UpdateGatewaySoftwareNowWithContext(ctx aws.Context, input *UpdateGatewaySoftwareNowInput, opts ...request.Option) (*UpdateGatewaySoftwareNowOutput, error) {
+func (c *StorageGateway) UpdateGatewaySoftwareNowWithContext(ctx aws.Context, input *UpdateGatewaySoftwareNowInput, opts ...aws.Option) (*UpdateGatewaySoftwareNowOutput, error) {
 	req, out := c.UpdateGatewaySoftwareNowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5629,7 +5628,7 @@ func (c *StorageGateway) UpdateGatewaySoftwareNowWithContext(ctx aws.Context, in
 
 const opUpdateMaintenanceStartTime = "UpdateMaintenanceStartTime"
 
-// UpdateMaintenanceStartTimeRequest generates a "aws/request.Request" representing the
+// UpdateMaintenanceStartTimeRequest generates a "aws.Request" representing the
 // client's request for the UpdateMaintenanceStartTime operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5653,8 +5652,8 @@ const opUpdateMaintenanceStartTime = "UpdateMaintenanceStartTime"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTime
-func (c *StorageGateway) UpdateMaintenanceStartTimeRequest(input *UpdateMaintenanceStartTimeInput) (req *request.Request, output *UpdateMaintenanceStartTimeOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) UpdateMaintenanceStartTimeRequest(input *UpdateMaintenanceStartTimeInput) (req *aws.Request, output *UpdateMaintenanceStartTimeOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateMaintenanceStartTime,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5706,7 +5705,7 @@ func (c *StorageGateway) UpdateMaintenanceStartTime(input *UpdateMaintenanceStar
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) UpdateMaintenanceStartTimeWithContext(ctx aws.Context, input *UpdateMaintenanceStartTimeInput, opts ...request.Option) (*UpdateMaintenanceStartTimeOutput, error) {
+func (c *StorageGateway) UpdateMaintenanceStartTimeWithContext(ctx aws.Context, input *UpdateMaintenanceStartTimeInput, opts ...aws.Option) (*UpdateMaintenanceStartTimeOutput, error) {
 	req, out := c.UpdateMaintenanceStartTimeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5715,7 +5714,7 @@ func (c *StorageGateway) UpdateMaintenanceStartTimeWithContext(ctx aws.Context, 
 
 const opUpdateNFSFileShare = "UpdateNFSFileShare"
 
-// UpdateNFSFileShareRequest generates a "aws/request.Request" representing the
+// UpdateNFSFileShareRequest generates a "aws.Request" representing the
 // client's request for the UpdateNFSFileShare operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5739,8 +5738,8 @@ const opUpdateNFSFileShare = "UpdateNFSFileShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShare
-func (c *StorageGateway) UpdateNFSFileShareRequest(input *UpdateNFSFileShareInput) (req *request.Request, output *UpdateNFSFileShareOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) UpdateNFSFileShareRequest(input *UpdateNFSFileShareInput) (req *aws.Request, output *UpdateNFSFileShareOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateNFSFileShare,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5809,7 +5808,7 @@ func (c *StorageGateway) UpdateNFSFileShare(input *UpdateNFSFileShareInput) (*Up
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) UpdateNFSFileShareWithContext(ctx aws.Context, input *UpdateNFSFileShareInput, opts ...request.Option) (*UpdateNFSFileShareOutput, error) {
+func (c *StorageGateway) UpdateNFSFileShareWithContext(ctx aws.Context, input *UpdateNFSFileShareInput, opts ...aws.Option) (*UpdateNFSFileShareOutput, error) {
 	req, out := c.UpdateNFSFileShareRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5818,7 +5817,7 @@ func (c *StorageGateway) UpdateNFSFileShareWithContext(ctx aws.Context, input *U
 
 const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
 
-// UpdateSnapshotScheduleRequest generates a "aws/request.Request" representing the
+// UpdateSnapshotScheduleRequest generates a "aws.Request" representing the
 // client's request for the UpdateSnapshotSchedule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5842,8 +5841,8 @@ const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotSchedule
-func (c *StorageGateway) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInput) (req *request.Request, output *UpdateSnapshotScheduleOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInput) (req *aws.Request, output *UpdateSnapshotScheduleOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSnapshotSchedule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5902,7 +5901,7 @@ func (c *StorageGateway) UpdateSnapshotSchedule(input *UpdateSnapshotScheduleInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) UpdateSnapshotScheduleWithContext(ctx aws.Context, input *UpdateSnapshotScheduleInput, opts ...request.Option) (*UpdateSnapshotScheduleOutput, error) {
+func (c *StorageGateway) UpdateSnapshotScheduleWithContext(ctx aws.Context, input *UpdateSnapshotScheduleInput, opts ...aws.Option) (*UpdateSnapshotScheduleOutput, error) {
 	req, out := c.UpdateSnapshotScheduleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5911,7 +5910,7 @@ func (c *StorageGateway) UpdateSnapshotScheduleWithContext(ctx aws.Context, inpu
 
 const opUpdateVTLDeviceType = "UpdateVTLDeviceType"
 
-// UpdateVTLDeviceTypeRequest generates a "aws/request.Request" representing the
+// UpdateVTLDeviceTypeRequest generates a "aws.Request" representing the
 // client's request for the UpdateVTLDeviceType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5935,8 +5934,8 @@ const opUpdateVTLDeviceType = "UpdateVTLDeviceType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceType
-func (c *StorageGateway) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) (req *request.Request, output *UpdateVTLDeviceTypeOutput) {
-	op := &request.Operation{
+func (c *StorageGateway) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) (req *aws.Request, output *UpdateVTLDeviceTypeOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateVTLDeviceType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5990,7 +5989,7 @@ func (c *StorageGateway) UpdateVTLDeviceType(input *UpdateVTLDeviceTypeInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *StorageGateway) UpdateVTLDeviceTypeWithContext(ctx aws.Context, input *UpdateVTLDeviceTypeInput, opts ...request.Option) (*UpdateVTLDeviceTypeOutput, error) {
+func (c *StorageGateway) UpdateVTLDeviceTypeWithContext(ctx aws.Context, input *UpdateVTLDeviceTypeInput, opts ...aws.Option) (*UpdateVTLDeviceTypeOutput, error) {
 	req, out := c.UpdateVTLDeviceTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6086,39 +6085,39 @@ func (s ActivateGatewayInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActivateGatewayInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ActivateGatewayInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ActivateGatewayInput"}
 	if s.ActivationKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivationKey"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivationKey"))
 	}
 	if s.ActivationKey != nil && len(*s.ActivationKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ActivationKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ActivationKey", 1))
 	}
 	if s.GatewayName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayName"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayName"))
 	}
 	if s.GatewayName != nil && len(*s.GatewayName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayName", 2))
 	}
 	if s.GatewayRegion == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayRegion"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayRegion"))
 	}
 	if s.GatewayRegion != nil && len(*s.GatewayRegion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayRegion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayRegion", 1))
 	}
 	if s.GatewayTimezone == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayTimezone"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayTimezone"))
 	}
 	if s.GatewayTimezone != nil && len(*s.GatewayTimezone) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayTimezone", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayTimezone", 3))
 	}
 	if s.GatewayType != nil && len(*s.GatewayType) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayType", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayType", 2))
 	}
 	if s.MediumChangerType != nil && len(*s.MediumChangerType) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("MediumChangerType", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("MediumChangerType", 2))
 	}
 	if s.TapeDriveType != nil && len(*s.TapeDriveType) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("TapeDriveType", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("TapeDriveType", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6228,15 +6227,15 @@ func (s AddCacheInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddCacheInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddCacheInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddCacheInput"}
 	if s.DiskIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("DiskIds"))
+		invalidParams.Add(aws.NewErrParamRequired("DiskIds"))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6314,15 +6313,15 @@ func (s AddTagsToResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
 	if s.ResourceARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 50))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -6330,7 +6329,7 @@ func (s *AddTagsToResourceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6404,15 +6403,15 @@ func (s AddUploadBufferInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddUploadBufferInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddUploadBufferInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddUploadBufferInput"}
 	if s.DiskIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("DiskIds"))
+		invalidParams.Add(aws.NewErrParamRequired("DiskIds"))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6491,15 +6490,15 @@ func (s AddWorkingStorageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddWorkingStorageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddWorkingStorageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddWorkingStorageInput"}
 	if s.DiskIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("DiskIds"))
+		invalidParams.Add(aws.NewErrParamRequired("DiskIds"))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6679,18 +6678,18 @@ func (s CancelArchivalInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelArchivalInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelArchivalInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelArchivalInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.TapeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
 	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("TapeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6767,18 +6766,18 @@ func (s CancelRetrievalInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelRetrievalInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelRetrievalInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelRetrievalInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.TapeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
 	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("TapeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6926,33 +6925,33 @@ func (s CreateCachediSCSIVolumeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCachediSCSIVolumeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCachediSCSIVolumeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCachediSCSIVolumeInput"}
 	if s.ClientToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 5 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientToken", 5))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 5))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("NetworkInterfaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
 	if s.SourceVolumeARN != nil && len(*s.SourceVolumeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceVolumeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceVolumeARN", 50))
 	}
 	if s.TargetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetName"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetName"))
 	}
 	if s.TargetName != nil && len(*s.TargetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetName", 1))
 	}
 	if s.VolumeSizeInBytes == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeSizeInBytes"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeSizeInBytes"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7108,46 +7107,46 @@ func (s CreateNFSFileShareInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNFSFileShareInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateNFSFileShareInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateNFSFileShareInput"}
 	if s.ClientList != nil && len(s.ClientList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientList", 1))
 	}
 	if s.ClientToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 5 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientToken", 5))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 5))
 	}
 	if s.DefaultStorageClass != nil && len(*s.DefaultStorageClass) < 5 {
-		invalidParams.Add(request.NewErrParamMinLen("DefaultStorageClass", 5))
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultStorageClass", 5))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.KMSKey != nil && len(*s.KMSKey) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("KMSKey", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 20))
 	}
 	if s.LocationARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("LocationARN"))
+		invalidParams.Add(aws.NewErrParamRequired("LocationARN"))
 	}
 	if s.LocationARN != nil && len(*s.LocationARN) < 16 {
-		invalidParams.Add(request.NewErrParamMinLen("LocationARN", 16))
+		invalidParams.Add(aws.NewErrParamMinLen("LocationARN", 16))
 	}
 	if s.Role == nil {
-		invalidParams.Add(request.NewErrParamRequired("Role"))
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
 	if s.Role != nil && len(*s.Role) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("Role", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("Role", 20))
 	}
 	if s.Squash != nil && len(*s.Squash) < 5 {
-		invalidParams.Add(request.NewErrParamMinLen("Squash", 5))
+		invalidParams.Add(aws.NewErrParamMinLen("Squash", 5))
 	}
 	if s.NFSFileShareDefaults != nil {
 		if err := s.NFSFileShareDefaults.Validate(); err != nil {
-			invalidParams.AddNested("NFSFileShareDefaults", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NFSFileShareDefaults", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7271,18 +7270,18 @@ func (s CreateSnapshotFromVolumeRecoveryPointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotFromVolumeRecoveryPointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSnapshotFromVolumeRecoveryPointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotFromVolumeRecoveryPointInput"}
 	if s.SnapshotDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotDescription"))
 	}
 	if s.SnapshotDescription != nil && len(*s.SnapshotDescription) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SnapshotDescription", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SnapshotDescription", 1))
 	}
 	if s.VolumeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
 	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("VolumeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7377,18 +7376,18 @@ func (s CreateSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
 	if s.SnapshotDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotDescription"))
 	}
 	if s.SnapshotDescription != nil && len(*s.SnapshotDescription) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SnapshotDescription", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SnapshotDescription", 1))
 	}
 	if s.VolumeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
 	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("VolumeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7518,30 +7517,30 @@ func (s CreateStorediSCSIVolumeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStorediSCSIVolumeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStorediSCSIVolumeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStorediSCSIVolumeInput"}
 	if s.DiskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DiskId"))
+		invalidParams.Add(aws.NewErrParamRequired("DiskId"))
 	}
 	if s.DiskId != nil && len(*s.DiskId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DiskId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DiskId", 1))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.NetworkInterfaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("NetworkInterfaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
 	if s.PreserveExistingData == nil {
-		invalidParams.Add(request.NewErrParamRequired("PreserveExistingData"))
+		invalidParams.Add(aws.NewErrParamRequired("PreserveExistingData"))
 	}
 	if s.TargetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetName"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetName"))
 	}
 	if s.TargetName != nil && len(*s.TargetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7670,21 +7669,21 @@ func (s CreateTapeWithBarcodeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTapeWithBarcodeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTapeWithBarcodeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTapeWithBarcodeInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.TapeBarcode == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeBarcode"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeBarcode"))
 	}
 	if s.TapeBarcode != nil && len(*s.TapeBarcode) < 7 {
-		invalidParams.Add(request.NewErrParamMinLen("TapeBarcode", 7))
+		invalidParams.Add(aws.NewErrParamMinLen("TapeBarcode", 7))
 	}
 	if s.TapeSizeInBytes == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeSizeInBytes"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeSizeInBytes"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7791,33 +7790,33 @@ func (s CreateTapesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTapesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTapesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTapesInput"}
 	if s.ClientToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 5 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientToken", 5))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 5))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.NumTapesToCreate == nil {
-		invalidParams.Add(request.NewErrParamRequired("NumTapesToCreate"))
+		invalidParams.Add(aws.NewErrParamRequired("NumTapesToCreate"))
 	}
 	if s.NumTapesToCreate != nil && *s.NumTapesToCreate < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("NumTapesToCreate", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("NumTapesToCreate", 1))
 	}
 	if s.TapeBarcodePrefix == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeBarcodePrefix"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeBarcodePrefix"))
 	}
 	if s.TapeBarcodePrefix != nil && len(*s.TapeBarcodePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TapeBarcodePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TapeBarcodePrefix", 1))
 	}
 	if s.TapeSizeInBytes == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeSizeInBytes"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeSizeInBytes"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7916,18 +7915,18 @@ func (s DeleteBandwidthRateLimitInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBandwidthRateLimitInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBandwidthRateLimitInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBandwidthRateLimitInput"}
 	if s.BandwidthType == nil {
-		invalidParams.Add(request.NewErrParamRequired("BandwidthType"))
+		invalidParams.Add(aws.NewErrParamRequired("BandwidthType"))
 	}
 	if s.BandwidthType != nil && len(*s.BandwidthType) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("BandwidthType", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("BandwidthType", 3))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8008,18 +8007,18 @@ func (s DeleteChapCredentialsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteChapCredentialsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteChapCredentialsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteChapCredentialsInput"}
 	if s.InitiatorName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InitiatorName"))
+		invalidParams.Add(aws.NewErrParamRequired("InitiatorName"))
 	}
 	if s.InitiatorName != nil && len(*s.InitiatorName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InitiatorName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InitiatorName", 1))
 	}
 	if s.TargetARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetARN"))
 	}
 	if s.TargetARN != nil && len(*s.TargetARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8103,12 +8102,12 @@ func (s DeleteFileShareInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFileShareInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFileShareInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFileShareInput"}
 	if s.FileShareARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileShareARN"))
+		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
 	}
 	if s.FileShareARN != nil && len(*s.FileShareARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("FileShareARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("FileShareARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8178,12 +8177,12 @@ func (s DeleteGatewayInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGatewayInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteGatewayInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGatewayInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8244,12 +8243,12 @@ func (s DeleteSnapshotScheduleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSnapshotScheduleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSnapshotScheduleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotScheduleInput"}
 	if s.VolumeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
 	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("VolumeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8311,12 +8310,12 @@ func (s DeleteTapeArchiveInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTapeArchiveInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTapeArchiveInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTapeArchiveInput"}
 	if s.TapeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
 	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("TapeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8387,18 +8386,18 @@ func (s DeleteTapeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTapeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTapeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTapeInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.TapeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
 	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("TapeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8468,12 +8467,12 @@ func (s DeleteVolumeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVolumeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteVolumeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVolumeInput"}
 	if s.VolumeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
 	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("VolumeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8538,12 +8537,12 @@ func (s DescribeBandwidthRateLimitInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBandwidthRateLimitInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeBandwidthRateLimitInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBandwidthRateLimitInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8627,12 +8626,12 @@ func (s DescribeCacheInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCacheInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCacheInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCacheInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8740,9 +8739,9 @@ func (s DescribeCachediSCSIVolumesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCachediSCSIVolumesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCachediSCSIVolumesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCachediSCSIVolumesInput"}
 	if s.VolumeARNs == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeARNs"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeARNs"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8808,12 +8807,12 @@ func (s DescribeChapCredentialsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeChapCredentialsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeChapCredentialsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeChapCredentialsInput"}
 	if s.TargetARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetARN"))
 	}
 	if s.TargetARN != nil && len(*s.TargetARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8891,12 +8890,12 @@ func (s DescribeGatewayInformationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeGatewayInformationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeGatewayInformationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeGatewayInformationInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9040,12 +9039,12 @@ func (s DescribeMaintenanceStartTimeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMaintenanceStartTimeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMaintenanceStartTimeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceStartTimeInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9159,12 +9158,12 @@ func (s DescribeNFSFileSharesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeNFSFileSharesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeNFSFileSharesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeNFSFileSharesInput"}
 	if s.FileShareARNList == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileShareARNList"))
+		invalidParams.Add(aws.NewErrParamRequired("FileShareARNList"))
 	}
 	if s.FileShareARNList != nil && len(s.FileShareARNList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FileShareARNList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FileShareARNList", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9229,12 +9228,12 @@ func (s DescribeSnapshotScheduleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSnapshotScheduleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeSnapshotScheduleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSnapshotScheduleInput"}
 	if s.VolumeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
 	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("VolumeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9329,9 +9328,9 @@ func (s DescribeStorediSCSIVolumesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStorediSCSIVolumesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStorediSCSIVolumesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStorediSCSIVolumesInput"}
 	if s.VolumeARNs == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeARNs"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeARNs"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9399,12 +9398,12 @@ func (s DescribeTapeArchivesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTapeArchivesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTapeArchivesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTapeArchivesInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9504,18 +9503,18 @@ func (s DescribeTapeRecoveryPointsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTapeRecoveryPointsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTapeRecoveryPointsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTapeRecoveryPointsInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9633,18 +9632,18 @@ func (s DescribeTapesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTapesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTapesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTapesInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9738,12 +9737,12 @@ func (s DescribeUploadBufferInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUploadBufferInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeUploadBufferInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUploadBufferInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9847,18 +9846,18 @@ func (s DescribeVTLDevicesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeVTLDevicesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeVTLDevicesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeVTLDevicesInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9963,12 +9962,12 @@ func (s DescribeWorkingStorageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkingStorageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkingStorageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkingStorageInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10118,12 +10117,12 @@ func (s DisableGatewayInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableGatewayInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableGatewayInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableGatewayInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10422,15 +10421,15 @@ func (s ListFileSharesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListFileSharesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListFileSharesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListFileSharesInput"}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10532,12 +10531,12 @@ func (s ListGatewaysInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGatewaysInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListGatewaysInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListGatewaysInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10613,12 +10612,12 @@ func (s ListLocalDisksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListLocalDisksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListLocalDisksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListLocalDisksInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10698,18 +10697,18 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 	if s.ResourceARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10817,12 +10816,12 @@ func (s ListTapesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTapesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTapesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTapesInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10916,12 +10915,12 @@ func (s ListVolumeInitiatorsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVolumeInitiatorsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListVolumeInitiatorsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListVolumeInitiatorsInput"}
 	if s.VolumeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
 	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("VolumeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10985,12 +10984,12 @@ func (s ListVolumeRecoveryPointsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVolumeRecoveryPointsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListVolumeRecoveryPointsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListVolumeRecoveryPointsInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11073,15 +11072,15 @@ func (s ListVolumesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVolumesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListVolumesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListVolumesInput"}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11188,12 +11187,12 @@ func (s NFSFileShareDefaults) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NFSFileShareDefaults) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NFSFileShareDefaults"}
+	invalidParams := aws.ErrInvalidParams{Context: "NFSFileShareDefaults"}
 	if s.DirectoryMode != nil && len(*s.DirectoryMode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DirectoryMode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DirectoryMode", 1))
 	}
 	if s.FileMode != nil && len(*s.FileMode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FileMode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FileMode", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11456,12 +11455,12 @@ func (s RefreshCacheInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RefreshCacheInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RefreshCacheInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RefreshCacheInput"}
 	if s.FileShareARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileShareARN"))
+		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
 	}
 	if s.FileShareARN != nil && len(*s.FileShareARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("FileShareARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("FileShareARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11530,15 +11529,15 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
 	if s.ResourceARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 50))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11608,12 +11607,12 @@ func (s ResetCacheInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetCacheInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResetCacheInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResetCacheInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11687,18 +11686,18 @@ func (s RetrieveTapeArchiveInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetrieveTapeArchiveInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RetrieveTapeArchiveInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RetrieveTapeArchiveInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.TapeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
 	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("TapeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11774,18 +11773,18 @@ func (s RetrieveTapeRecoveryPointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetrieveTapeRecoveryPointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RetrieveTapeRecoveryPointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RetrieveTapeRecoveryPointInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.TapeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TapeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
 	if s.TapeARN != nil && len(*s.TapeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("TapeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("TapeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11861,18 +11860,18 @@ func (s SetLocalConsolePasswordInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLocalConsolePasswordInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetLocalConsolePasswordInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetLocalConsolePasswordInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.LocalConsolePassword == nil {
-		invalidParams.Add(request.NewErrParamRequired("LocalConsolePassword"))
+		invalidParams.Add(aws.NewErrParamRequired("LocalConsolePassword"))
 	}
 	if s.LocalConsolePassword != nil && len(*s.LocalConsolePassword) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("LocalConsolePassword", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("LocalConsolePassword", 6))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11942,12 +11941,12 @@ func (s ShutdownGatewayInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ShutdownGatewayInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ShutdownGatewayInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ShutdownGatewayInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12012,12 +12011,12 @@ func (s StartGatewayInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartGatewayInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartGatewayInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartGatewayInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12205,15 +12204,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12574,18 +12573,18 @@ func (s UpdateBandwidthRateLimitInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBandwidthRateLimitInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateBandwidthRateLimitInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateBandwidthRateLimitInput"}
 	if s.AverageDownloadRateLimitInBitsPerSec != nil && *s.AverageDownloadRateLimitInBitsPerSec < 102400 {
-		invalidParams.Add(request.NewErrParamMinValue("AverageDownloadRateLimitInBitsPerSec", 102400))
+		invalidParams.Add(aws.NewErrParamMinValue("AverageDownloadRateLimitInBitsPerSec", 102400))
 	}
 	if s.AverageUploadRateLimitInBitsPerSec != nil && *s.AverageUploadRateLimitInBitsPerSec < 51200 {
-		invalidParams.Add(request.NewErrParamMinValue("AverageUploadRateLimitInBitsPerSec", 51200))
+		invalidParams.Add(aws.NewErrParamMinValue("AverageUploadRateLimitInBitsPerSec", 51200))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12692,27 +12691,27 @@ func (s UpdateChapCredentialsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateChapCredentialsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateChapCredentialsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateChapCredentialsInput"}
 	if s.InitiatorName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InitiatorName"))
+		invalidParams.Add(aws.NewErrParamRequired("InitiatorName"))
 	}
 	if s.InitiatorName != nil && len(*s.InitiatorName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InitiatorName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InitiatorName", 1))
 	}
 	if s.SecretToAuthenticateInitiator == nil {
-		invalidParams.Add(request.NewErrParamRequired("SecretToAuthenticateInitiator"))
+		invalidParams.Add(aws.NewErrParamRequired("SecretToAuthenticateInitiator"))
 	}
 	if s.SecretToAuthenticateInitiator != nil && len(*s.SecretToAuthenticateInitiator) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SecretToAuthenticateInitiator", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SecretToAuthenticateInitiator", 1))
 	}
 	if s.SecretToAuthenticateTarget != nil && len(*s.SecretToAuthenticateTarget) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SecretToAuthenticateTarget", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SecretToAuthenticateTarget", 1))
 	}
 	if s.TargetARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetARN"))
 	}
 	if s.TargetARN != nil && len(*s.TargetARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12809,18 +12808,18 @@ func (s UpdateGatewayInformationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGatewayInformationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGatewayInformationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewayInformationInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.GatewayName != nil && len(*s.GatewayName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayName", 2))
 	}
 	if s.GatewayTimezone != nil && len(*s.GatewayTimezone) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayTimezone", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayTimezone", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12905,12 +12904,12 @@ func (s UpdateGatewaySoftwareNowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGatewaySoftwareNowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGatewaySoftwareNowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewaySoftwareNowInput"}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13001,21 +13000,21 @@ func (s UpdateMaintenanceStartTimeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMaintenanceStartTimeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateMaintenanceStartTimeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMaintenanceStartTimeInput"}
 	if s.DayOfWeek == nil {
-		invalidParams.Add(request.NewErrParamRequired("DayOfWeek"))
+		invalidParams.Add(aws.NewErrParamRequired("DayOfWeek"))
 	}
 	if s.GatewayARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("GatewayARN"))
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("GatewayARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
 	if s.HourOfDay == nil {
-		invalidParams.Add(request.NewErrParamRequired("HourOfDay"))
+		invalidParams.Add(aws.NewErrParamRequired("HourOfDay"))
 	}
 	if s.MinuteOfHour == nil {
-		invalidParams.Add(request.NewErrParamRequired("MinuteOfHour"))
+		invalidParams.Add(aws.NewErrParamRequired("MinuteOfHour"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13131,28 +13130,28 @@ func (s UpdateNFSFileShareInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNFSFileShareInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateNFSFileShareInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateNFSFileShareInput"}
 	if s.ClientList != nil && len(s.ClientList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientList", 1))
 	}
 	if s.DefaultStorageClass != nil && len(*s.DefaultStorageClass) < 5 {
-		invalidParams.Add(request.NewErrParamMinLen("DefaultStorageClass", 5))
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultStorageClass", 5))
 	}
 	if s.FileShareARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileShareARN"))
+		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
 	}
 	if s.FileShareARN != nil && len(*s.FileShareARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("FileShareARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("FileShareARN", 50))
 	}
 	if s.KMSKey != nil && len(*s.KMSKey) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("KMSKey", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 20))
 	}
 	if s.Squash != nil && len(*s.Squash) < 5 {
-		invalidParams.Add(request.NewErrParamMinLen("Squash", 5))
+		invalidParams.Add(aws.NewErrParamMinLen("Squash", 5))
 	}
 	if s.NFSFileShareDefaults != nil {
 		if err := s.NFSFileShareDefaults.Validate(); err != nil {
-			invalidParams.AddNested("NFSFileShareDefaults", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NFSFileShareDefaults", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -13282,24 +13281,24 @@ func (s UpdateSnapshotScheduleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSnapshotScheduleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateSnapshotScheduleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSnapshotScheduleInput"}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.RecurrenceInHours == nil {
-		invalidParams.Add(request.NewErrParamRequired("RecurrenceInHours"))
+		invalidParams.Add(aws.NewErrParamRequired("RecurrenceInHours"))
 	}
 	if s.RecurrenceInHours != nil && *s.RecurrenceInHours < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("RecurrenceInHours", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("RecurrenceInHours", 1))
 	}
 	if s.StartAt == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartAt"))
+		invalidParams.Add(aws.NewErrParamRequired("StartAt"))
 	}
 	if s.VolumeARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeARN"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
 	if s.VolumeARN != nil && len(*s.VolumeARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("VolumeARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("VolumeARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13385,18 +13384,18 @@ func (s UpdateVTLDeviceTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateVTLDeviceTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateVTLDeviceTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateVTLDeviceTypeInput"}
 	if s.DeviceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceType"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceType"))
 	}
 	if s.DeviceType != nil && len(*s.DeviceType) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceType", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceType", 2))
 	}
 	if s.VTLDeviceARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("VTLDeviceARN"))
+		invalidParams.Add(aws.NewErrParamRequired("VTLDeviceARN"))
 	}
 	if s.VTLDeviceARN != nil && len(*s.VTLDeviceARN) < 50 {
-		invalidParams.Add(request.NewErrParamMinLen("VTLDeviceARN", 50))
+		invalidParams.Add(aws.NewErrParamMinLen("VTLDeviceARN", 50))
 	}
 
 	if invalidParams.Len() > 0 {

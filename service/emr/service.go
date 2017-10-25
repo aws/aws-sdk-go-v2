@@ -4,9 +4,6 @@ package emr
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
@@ -18,14 +15,14 @@ import (
 // EMR methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type EMR struct {
-	*client.Client
+	*aws.Client
 }
 
 // Used for custom client initialization logic
-var initClient func(*client.Client)
+var initClient func(*aws.Client)
 
 // Used for custom request initialization logic
-var initRequest func(*request.Request)
+var initRequest func(*aws.Request)
 
 // Service information constants
 const (
@@ -33,36 +30,31 @@ const (
 	EndpointsID = ServiceName        // Service ID for Regions and Endpoints metadata.
 )
 
-// New creates a new instance of the EMR client with a session.
+// New creates a new instance of the EMR client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a EMR client from just a session.
-//     svc := emr.New(mySession)
+//     // Create a EMR client from just a config.
+//     svc := emr.New(myConfig)
 //
 //     // Create a EMR client with additional configuration
-//     svc := emr.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func New(p client.ConfigProvider, cfgs ...*aws.Config) *EMR {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := emr.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func New(config aws.Config) *EMR {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *EMR {
 	svc := &EMR{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2009-03-31",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "ElasticMapReduce",
 			},
-			handlers,
 		),
 	}
 
@@ -83,7 +75,7 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 
 // newRequest creates a new request for a EMR operation and runs any
 // custom request initialization.
-func (c *EMR) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *EMR) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	// Run custom request initialization if present

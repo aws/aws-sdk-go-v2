@@ -10,7 +10,6 @@ package shieldiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/shield"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := shield.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := shield.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,40 +64,40 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type ShieldAPI interface {
 	CreateProtection(*shield.CreateProtectionInput) (*shield.CreateProtectionOutput, error)
-	CreateProtectionWithContext(aws.Context, *shield.CreateProtectionInput, ...request.Option) (*shield.CreateProtectionOutput, error)
-	CreateProtectionRequest(*shield.CreateProtectionInput) (*request.Request, *shield.CreateProtectionOutput)
+	CreateProtectionWithContext(aws.Context, *shield.CreateProtectionInput, ...aws.Option) (*shield.CreateProtectionOutput, error)
+	CreateProtectionRequest(*shield.CreateProtectionInput) (*aws.Request, *shield.CreateProtectionOutput)
 
 	CreateSubscription(*shield.CreateSubscriptionInput) (*shield.CreateSubscriptionOutput, error)
-	CreateSubscriptionWithContext(aws.Context, *shield.CreateSubscriptionInput, ...request.Option) (*shield.CreateSubscriptionOutput, error)
-	CreateSubscriptionRequest(*shield.CreateSubscriptionInput) (*request.Request, *shield.CreateSubscriptionOutput)
+	CreateSubscriptionWithContext(aws.Context, *shield.CreateSubscriptionInput, ...aws.Option) (*shield.CreateSubscriptionOutput, error)
+	CreateSubscriptionRequest(*shield.CreateSubscriptionInput) (*aws.Request, *shield.CreateSubscriptionOutput)
 
 	DeleteProtection(*shield.DeleteProtectionInput) (*shield.DeleteProtectionOutput, error)
-	DeleteProtectionWithContext(aws.Context, *shield.DeleteProtectionInput, ...request.Option) (*shield.DeleteProtectionOutput, error)
-	DeleteProtectionRequest(*shield.DeleteProtectionInput) (*request.Request, *shield.DeleteProtectionOutput)
+	DeleteProtectionWithContext(aws.Context, *shield.DeleteProtectionInput, ...aws.Option) (*shield.DeleteProtectionOutput, error)
+	DeleteProtectionRequest(*shield.DeleteProtectionInput) (*aws.Request, *shield.DeleteProtectionOutput)
 
 	DeleteSubscription(*shield.DeleteSubscriptionInput) (*shield.DeleteSubscriptionOutput, error)
-	DeleteSubscriptionWithContext(aws.Context, *shield.DeleteSubscriptionInput, ...request.Option) (*shield.DeleteSubscriptionOutput, error)
-	DeleteSubscriptionRequest(*shield.DeleteSubscriptionInput) (*request.Request, *shield.DeleteSubscriptionOutput)
+	DeleteSubscriptionWithContext(aws.Context, *shield.DeleteSubscriptionInput, ...aws.Option) (*shield.DeleteSubscriptionOutput, error)
+	DeleteSubscriptionRequest(*shield.DeleteSubscriptionInput) (*aws.Request, *shield.DeleteSubscriptionOutput)
 
 	DescribeAttack(*shield.DescribeAttackInput) (*shield.DescribeAttackOutput, error)
-	DescribeAttackWithContext(aws.Context, *shield.DescribeAttackInput, ...request.Option) (*shield.DescribeAttackOutput, error)
-	DescribeAttackRequest(*shield.DescribeAttackInput) (*request.Request, *shield.DescribeAttackOutput)
+	DescribeAttackWithContext(aws.Context, *shield.DescribeAttackInput, ...aws.Option) (*shield.DescribeAttackOutput, error)
+	DescribeAttackRequest(*shield.DescribeAttackInput) (*aws.Request, *shield.DescribeAttackOutput)
 
 	DescribeProtection(*shield.DescribeProtectionInput) (*shield.DescribeProtectionOutput, error)
-	DescribeProtectionWithContext(aws.Context, *shield.DescribeProtectionInput, ...request.Option) (*shield.DescribeProtectionOutput, error)
-	DescribeProtectionRequest(*shield.DescribeProtectionInput) (*request.Request, *shield.DescribeProtectionOutput)
+	DescribeProtectionWithContext(aws.Context, *shield.DescribeProtectionInput, ...aws.Option) (*shield.DescribeProtectionOutput, error)
+	DescribeProtectionRequest(*shield.DescribeProtectionInput) (*aws.Request, *shield.DescribeProtectionOutput)
 
 	DescribeSubscription(*shield.DescribeSubscriptionInput) (*shield.DescribeSubscriptionOutput, error)
-	DescribeSubscriptionWithContext(aws.Context, *shield.DescribeSubscriptionInput, ...request.Option) (*shield.DescribeSubscriptionOutput, error)
-	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) (*request.Request, *shield.DescribeSubscriptionOutput)
+	DescribeSubscriptionWithContext(aws.Context, *shield.DescribeSubscriptionInput, ...aws.Option) (*shield.DescribeSubscriptionOutput, error)
+	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) (*aws.Request, *shield.DescribeSubscriptionOutput)
 
 	ListAttacks(*shield.ListAttacksInput) (*shield.ListAttacksOutput, error)
-	ListAttacksWithContext(aws.Context, *shield.ListAttacksInput, ...request.Option) (*shield.ListAttacksOutput, error)
-	ListAttacksRequest(*shield.ListAttacksInput) (*request.Request, *shield.ListAttacksOutput)
+	ListAttacksWithContext(aws.Context, *shield.ListAttacksInput, ...aws.Option) (*shield.ListAttacksOutput, error)
+	ListAttacksRequest(*shield.ListAttacksInput) (*aws.Request, *shield.ListAttacksOutput)
 
 	ListProtections(*shield.ListProtectionsInput) (*shield.ListProtectionsOutput, error)
-	ListProtectionsWithContext(aws.Context, *shield.ListProtectionsInput, ...request.Option) (*shield.ListProtectionsOutput, error)
-	ListProtectionsRequest(*shield.ListProtectionsInput) (*request.Request, *shield.ListProtectionsOutput)
+	ListProtectionsWithContext(aws.Context, *shield.ListProtectionsInput, ...aws.Option) (*shield.ListProtectionsOutput, error)
+	ListProtectionsRequest(*shield.ListProtectionsInput) (*aws.Request, *shield.ListProtectionsOutput)
 }
 
 var _ ShieldAPI = (*shield.Shield)(nil)

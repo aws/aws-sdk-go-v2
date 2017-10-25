@@ -6,15 +6,14 @@ import (
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opAbortMultipartUpload = "AbortMultipartUpload"
 
-// AbortMultipartUploadRequest generates a "aws/request.Request" representing the
+// AbortMultipartUploadRequest generates a "aws.Request" representing the
 // client's request for the AbortMultipartUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opAbortMultipartUpload = "AbortMultipartUpload"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) (req *request.Request, output *AbortMultipartUploadOutput) {
-	op := &request.Operation{
+func (c *Glacier) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) (req *aws.Request, output *AbortMultipartUploadOutput) {
+	op := &aws.Operation{
 		Name:       opAbortMultipartUpload,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
@@ -112,7 +111,7 @@ func (c *Glacier) AbortMultipartUpload(input *AbortMultipartUploadInput) (*Abort
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) AbortMultipartUploadWithContext(ctx aws.Context, input *AbortMultipartUploadInput, opts ...request.Option) (*AbortMultipartUploadOutput, error) {
+func (c *Glacier) AbortMultipartUploadWithContext(ctx aws.Context, input *AbortMultipartUploadInput, opts ...aws.Option) (*AbortMultipartUploadOutput, error) {
 	req, out := c.AbortMultipartUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -121,7 +120,7 @@ func (c *Glacier) AbortMultipartUploadWithContext(ctx aws.Context, input *AbortM
 
 const opAbortVaultLock = "AbortVaultLock"
 
-// AbortVaultLockRequest generates a "aws/request.Request" representing the
+// AbortVaultLockRequest generates a "aws.Request" representing the
 // client's request for the AbortVaultLock operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -143,8 +142,8 @@ const opAbortVaultLock = "AbortVaultLock"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) AbortVaultLockRequest(input *AbortVaultLockInput) (req *request.Request, output *AbortVaultLockOutput) {
-	op := &request.Operation{
+func (c *Glacier) AbortVaultLockRequest(input *AbortVaultLockInput) (req *aws.Request, output *AbortVaultLockOutput) {
+	op := &aws.Operation{
 		Name:       opAbortVaultLock,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy",
@@ -215,7 +214,7 @@ func (c *Glacier) AbortVaultLock(input *AbortVaultLockInput) (*AbortVaultLockOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) AbortVaultLockWithContext(ctx aws.Context, input *AbortVaultLockInput, opts ...request.Option) (*AbortVaultLockOutput, error) {
+func (c *Glacier) AbortVaultLockWithContext(ctx aws.Context, input *AbortVaultLockInput, opts ...aws.Option) (*AbortVaultLockOutput, error) {
 	req, out := c.AbortVaultLockRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -224,7 +223,7 @@ func (c *Glacier) AbortVaultLockWithContext(ctx aws.Context, input *AbortVaultLo
 
 const opAddTagsToVault = "AddTagsToVault"
 
-// AddTagsToVaultRequest generates a "aws/request.Request" representing the
+// AddTagsToVaultRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToVault operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -246,8 +245,8 @@ const opAddTagsToVault = "AddTagsToVault"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) AddTagsToVaultRequest(input *AddTagsToVaultInput) (req *request.Request, output *AddTagsToVaultOutput) {
-	op := &request.Operation{
+func (c *Glacier) AddTagsToVaultRequest(input *AddTagsToVaultInput) (req *aws.Request, output *AddTagsToVaultOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToVault,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/tags?operation=add",
@@ -311,7 +310,7 @@ func (c *Glacier) AddTagsToVault(input *AddTagsToVaultInput) (*AddTagsToVaultOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) AddTagsToVaultWithContext(ctx aws.Context, input *AddTagsToVaultInput, opts ...request.Option) (*AddTagsToVaultOutput, error) {
+func (c *Glacier) AddTagsToVaultWithContext(ctx aws.Context, input *AddTagsToVaultInput, opts ...aws.Option) (*AddTagsToVaultOutput, error) {
 	req, out := c.AddTagsToVaultRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -320,7 +319,7 @@ func (c *Glacier) AddTagsToVaultWithContext(ctx aws.Context, input *AddTagsToVau
 
 const opCompleteMultipartUpload = "CompleteMultipartUpload"
 
-// CompleteMultipartUploadRequest generates a "aws/request.Request" representing the
+// CompleteMultipartUploadRequest generates a "aws.Request" representing the
 // client's request for the CompleteMultipartUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -342,8 +341,8 @@ const opCompleteMultipartUpload = "CompleteMultipartUpload"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput) (req *request.Request, output *ArchiveCreationOutput) {
-	op := &request.Operation{
+func (c *Glacier) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput) (req *aws.Request, output *ArchiveCreationOutput) {
+	op := &aws.Operation{
 		Name:       opCompleteMultipartUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
@@ -440,7 +439,7 @@ func (c *Glacier) CompleteMultipartUpload(input *CompleteMultipartUploadInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) CompleteMultipartUploadWithContext(ctx aws.Context, input *CompleteMultipartUploadInput, opts ...request.Option) (*ArchiveCreationOutput, error) {
+func (c *Glacier) CompleteMultipartUploadWithContext(ctx aws.Context, input *CompleteMultipartUploadInput, opts ...aws.Option) (*ArchiveCreationOutput, error) {
 	req, out := c.CompleteMultipartUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -449,7 +448,7 @@ func (c *Glacier) CompleteMultipartUploadWithContext(ctx aws.Context, input *Com
 
 const opCompleteVaultLock = "CompleteVaultLock"
 
-// CompleteVaultLockRequest generates a "aws/request.Request" representing the
+// CompleteVaultLockRequest generates a "aws.Request" representing the
 // client's request for the CompleteVaultLock operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -471,8 +470,8 @@ const opCompleteVaultLock = "CompleteVaultLock"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) CompleteVaultLockRequest(input *CompleteVaultLockInput) (req *request.Request, output *CompleteVaultLockOutput) {
-	op := &request.Operation{
+func (c *Glacier) CompleteVaultLockRequest(input *CompleteVaultLockInput) (req *aws.Request, output *CompleteVaultLockOutput) {
+	op := &aws.Operation{
 		Name:       opCompleteVaultLock,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy/{lockId}",
@@ -542,7 +541,7 @@ func (c *Glacier) CompleteVaultLock(input *CompleteVaultLockInput) (*CompleteVau
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) CompleteVaultLockWithContext(ctx aws.Context, input *CompleteVaultLockInput, opts ...request.Option) (*CompleteVaultLockOutput, error) {
+func (c *Glacier) CompleteVaultLockWithContext(ctx aws.Context, input *CompleteVaultLockInput, opts ...aws.Option) (*CompleteVaultLockOutput, error) {
 	req, out := c.CompleteVaultLockRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -551,7 +550,7 @@ func (c *Glacier) CompleteVaultLockWithContext(ctx aws.Context, input *CompleteV
 
 const opCreateVault = "CreateVault"
 
-// CreateVaultRequest generates a "aws/request.Request" representing the
+// CreateVaultRequest generates a "aws.Request" representing the
 // client's request for the CreateVault operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -573,8 +572,8 @@ const opCreateVault = "CreateVault"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) CreateVaultRequest(input *CreateVaultInput) (req *request.Request, output *CreateVaultOutput) {
-	op := &request.Operation{
+func (c *Glacier) CreateVaultRequest(input *CreateVaultInput) (req *aws.Request, output *CreateVaultOutput) {
+	op := &aws.Operation{
 		Name:       opCreateVault,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}",
@@ -650,7 +649,7 @@ func (c *Glacier) CreateVault(input *CreateVaultInput) (*CreateVaultOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) CreateVaultWithContext(ctx aws.Context, input *CreateVaultInput, opts ...request.Option) (*CreateVaultOutput, error) {
+func (c *Glacier) CreateVaultWithContext(ctx aws.Context, input *CreateVaultInput, opts ...aws.Option) (*CreateVaultOutput, error) {
 	req, out := c.CreateVaultRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -659,7 +658,7 @@ func (c *Glacier) CreateVaultWithContext(ctx aws.Context, input *CreateVaultInpu
 
 const opDeleteArchive = "DeleteArchive"
 
-// DeleteArchiveRequest generates a "aws/request.Request" representing the
+// DeleteArchiveRequest generates a "aws.Request" representing the
 // client's request for the DeleteArchive operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -681,8 +680,8 @@ const opDeleteArchive = "DeleteArchive"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) DeleteArchiveRequest(input *DeleteArchiveInput) (req *request.Request, output *DeleteArchiveOutput) {
-	op := &request.Operation{
+func (c *Glacier) DeleteArchiveRequest(input *DeleteArchiveInput) (req *aws.Request, output *DeleteArchiveOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteArchive,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/archives/{archiveId}",
@@ -762,7 +761,7 @@ func (c *Glacier) DeleteArchive(input *DeleteArchiveInput) (*DeleteArchiveOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) DeleteArchiveWithContext(ctx aws.Context, input *DeleteArchiveInput, opts ...request.Option) (*DeleteArchiveOutput, error) {
+func (c *Glacier) DeleteArchiveWithContext(ctx aws.Context, input *DeleteArchiveInput, opts ...aws.Option) (*DeleteArchiveOutput, error) {
 	req, out := c.DeleteArchiveRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -771,7 +770,7 @@ func (c *Glacier) DeleteArchiveWithContext(ctx aws.Context, input *DeleteArchive
 
 const opDeleteVault = "DeleteVault"
 
-// DeleteVaultRequest generates a "aws/request.Request" representing the
+// DeleteVaultRequest generates a "aws.Request" representing the
 // client's request for the DeleteVault operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -793,8 +792,8 @@ const opDeleteVault = "DeleteVault"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) DeleteVaultRequest(input *DeleteVaultInput) (req *request.Request, output *DeleteVaultOutput) {
-	op := &request.Operation{
+func (c *Glacier) DeleteVaultRequest(input *DeleteVaultInput) (req *aws.Request, output *DeleteVaultOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteVault,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}",
@@ -872,7 +871,7 @@ func (c *Glacier) DeleteVault(input *DeleteVaultInput) (*DeleteVaultOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) DeleteVaultWithContext(ctx aws.Context, input *DeleteVaultInput, opts ...request.Option) (*DeleteVaultOutput, error) {
+func (c *Glacier) DeleteVaultWithContext(ctx aws.Context, input *DeleteVaultInput, opts ...aws.Option) (*DeleteVaultOutput, error) {
 	req, out := c.DeleteVaultRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -881,7 +880,7 @@ func (c *Glacier) DeleteVaultWithContext(ctx aws.Context, input *DeleteVaultInpu
 
 const opDeleteVaultAccessPolicy = "DeleteVaultAccessPolicy"
 
-// DeleteVaultAccessPolicyRequest generates a "aws/request.Request" representing the
+// DeleteVaultAccessPolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteVaultAccessPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -903,8 +902,8 @@ const opDeleteVaultAccessPolicy = "DeleteVaultAccessPolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyInput) (req *request.Request, output *DeleteVaultAccessPolicyOutput) {
-	op := &request.Operation{
+func (c *Glacier) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyInput) (req *aws.Request, output *DeleteVaultAccessPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteVaultAccessPolicy,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/access-policy",
@@ -969,7 +968,7 @@ func (c *Glacier) DeleteVaultAccessPolicy(input *DeleteVaultAccessPolicyInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) DeleteVaultAccessPolicyWithContext(ctx aws.Context, input *DeleteVaultAccessPolicyInput, opts ...request.Option) (*DeleteVaultAccessPolicyOutput, error) {
+func (c *Glacier) DeleteVaultAccessPolicyWithContext(ctx aws.Context, input *DeleteVaultAccessPolicyInput, opts ...aws.Option) (*DeleteVaultAccessPolicyOutput, error) {
 	req, out := c.DeleteVaultAccessPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -978,7 +977,7 @@ func (c *Glacier) DeleteVaultAccessPolicyWithContext(ctx aws.Context, input *Del
 
 const opDeleteVaultNotifications = "DeleteVaultNotifications"
 
-// DeleteVaultNotificationsRequest generates a "aws/request.Request" representing the
+// DeleteVaultNotificationsRequest generates a "aws.Request" representing the
 // client's request for the DeleteVaultNotifications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1000,8 +999,8 @@ const opDeleteVaultNotifications = "DeleteVaultNotifications"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) DeleteVaultNotificationsRequest(input *DeleteVaultNotificationsInput) (req *request.Request, output *DeleteVaultNotificationsOutput) {
-	op := &request.Operation{
+func (c *Glacier) DeleteVaultNotificationsRequest(input *DeleteVaultNotificationsInput) (req *aws.Request, output *DeleteVaultNotificationsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteVaultNotifications,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/notification-configuration",
@@ -1071,7 +1070,7 @@ func (c *Glacier) DeleteVaultNotifications(input *DeleteVaultNotificationsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) DeleteVaultNotificationsWithContext(ctx aws.Context, input *DeleteVaultNotificationsInput, opts ...request.Option) (*DeleteVaultNotificationsOutput, error) {
+func (c *Glacier) DeleteVaultNotificationsWithContext(ctx aws.Context, input *DeleteVaultNotificationsInput, opts ...aws.Option) (*DeleteVaultNotificationsOutput, error) {
 	req, out := c.DeleteVaultNotificationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1080,7 +1079,7 @@ func (c *Glacier) DeleteVaultNotificationsWithContext(ctx aws.Context, input *De
 
 const opDescribeJob = "DescribeJob"
 
-// DescribeJobRequest generates a "aws/request.Request" representing the
+// DescribeJobRequest generates a "aws.Request" representing the
 // client's request for the DescribeJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1102,8 +1101,8 @@ const opDescribeJob = "DescribeJob"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) DescribeJobRequest(input *DescribeJobInput) (req *request.Request, output *JobDescription) {
-	op := &request.Operation{
+func (c *Glacier) DescribeJobRequest(input *DescribeJobInput) (req *aws.Request, output *JobDescription) {
+	op := &aws.Operation{
 		Name:       opDescribeJob,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs/{jobId}",
@@ -1178,7 +1177,7 @@ func (c *Glacier) DescribeJob(input *DescribeJobInput) (*JobDescription, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) DescribeJobWithContext(ctx aws.Context, input *DescribeJobInput, opts ...request.Option) (*JobDescription, error) {
+func (c *Glacier) DescribeJobWithContext(ctx aws.Context, input *DescribeJobInput, opts ...aws.Option) (*JobDescription, error) {
 	req, out := c.DescribeJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1187,7 +1186,7 @@ func (c *Glacier) DescribeJobWithContext(ctx aws.Context, input *DescribeJobInpu
 
 const opDescribeVault = "DescribeVault"
 
-// DescribeVaultRequest generates a "aws/request.Request" representing the
+// DescribeVaultRequest generates a "aws.Request" representing the
 // client's request for the DescribeVault operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1209,8 +1208,8 @@ const opDescribeVault = "DescribeVault"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) DescribeVaultRequest(input *DescribeVaultInput) (req *request.Request, output *DescribeVaultOutput) {
-	op := &request.Operation{
+func (c *Glacier) DescribeVaultRequest(input *DescribeVaultInput) (req *aws.Request, output *DescribeVaultOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeVault,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}",
@@ -1283,7 +1282,7 @@ func (c *Glacier) DescribeVault(input *DescribeVaultInput) (*DescribeVaultOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) DescribeVaultWithContext(ctx aws.Context, input *DescribeVaultInput, opts ...request.Option) (*DescribeVaultOutput, error) {
+func (c *Glacier) DescribeVaultWithContext(ctx aws.Context, input *DescribeVaultInput, opts ...aws.Option) (*DescribeVaultOutput, error) {
 	req, out := c.DescribeVaultRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1292,7 +1291,7 @@ func (c *Glacier) DescribeVaultWithContext(ctx aws.Context, input *DescribeVault
 
 const opGetDataRetrievalPolicy = "GetDataRetrievalPolicy"
 
-// GetDataRetrievalPolicyRequest generates a "aws/request.Request" representing the
+// GetDataRetrievalPolicyRequest generates a "aws.Request" representing the
 // client's request for the GetDataRetrievalPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1314,8 +1313,8 @@ const opGetDataRetrievalPolicy = "GetDataRetrievalPolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInput) (req *request.Request, output *GetDataRetrievalPolicyOutput) {
-	op := &request.Operation{
+func (c *Glacier) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInput) (req *aws.Request, output *GetDataRetrievalPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opGetDataRetrievalPolicy,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/policies/data-retrieval",
@@ -1367,7 +1366,7 @@ func (c *Glacier) GetDataRetrievalPolicy(input *GetDataRetrievalPolicyInput) (*G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) GetDataRetrievalPolicyWithContext(ctx aws.Context, input *GetDataRetrievalPolicyInput, opts ...request.Option) (*GetDataRetrievalPolicyOutput, error) {
+func (c *Glacier) GetDataRetrievalPolicyWithContext(ctx aws.Context, input *GetDataRetrievalPolicyInput, opts ...aws.Option) (*GetDataRetrievalPolicyOutput, error) {
 	req, out := c.GetDataRetrievalPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1376,7 +1375,7 @@ func (c *Glacier) GetDataRetrievalPolicyWithContext(ctx aws.Context, input *GetD
 
 const opGetJobOutput = "GetJobOutput"
 
-// GetJobOutputRequest generates a "aws/request.Request" representing the
+// GetJobOutputRequest generates a "aws.Request" representing the
 // client's request for the GetJobOutput operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1398,8 +1397,8 @@ const opGetJobOutput = "GetJobOutput"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) GetJobOutputRequest(input *GetJobOutputInput) (req *request.Request, output *GetJobOutputOutput) {
-	op := &request.Operation{
+func (c *Glacier) GetJobOutputRequest(input *GetJobOutputInput) (req *aws.Request, output *GetJobOutputOutput) {
+	op := &aws.Operation{
 		Name:       opGetJobOutput,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs/{jobId}/output",
@@ -1496,7 +1495,7 @@ func (c *Glacier) GetJobOutput(input *GetJobOutputInput) (*GetJobOutputOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) GetJobOutputWithContext(ctx aws.Context, input *GetJobOutputInput, opts ...request.Option) (*GetJobOutputOutput, error) {
+func (c *Glacier) GetJobOutputWithContext(ctx aws.Context, input *GetJobOutputInput, opts ...aws.Option) (*GetJobOutputOutput, error) {
 	req, out := c.GetJobOutputRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1505,7 +1504,7 @@ func (c *Glacier) GetJobOutputWithContext(ctx aws.Context, input *GetJobOutputIn
 
 const opGetVaultAccessPolicy = "GetVaultAccessPolicy"
 
-// GetVaultAccessPolicyRequest generates a "aws/request.Request" representing the
+// GetVaultAccessPolicyRequest generates a "aws.Request" representing the
 // client's request for the GetVaultAccessPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1527,8 +1526,8 @@ const opGetVaultAccessPolicy = "GetVaultAccessPolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) GetVaultAccessPolicyRequest(input *GetVaultAccessPolicyInput) (req *request.Request, output *GetVaultAccessPolicyOutput) {
-	op := &request.Operation{
+func (c *Glacier) GetVaultAccessPolicyRequest(input *GetVaultAccessPolicyInput) (req *aws.Request, output *GetVaultAccessPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opGetVaultAccessPolicy,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/access-policy",
@@ -1587,7 +1586,7 @@ func (c *Glacier) GetVaultAccessPolicy(input *GetVaultAccessPolicyInput) (*GetVa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) GetVaultAccessPolicyWithContext(ctx aws.Context, input *GetVaultAccessPolicyInput, opts ...request.Option) (*GetVaultAccessPolicyOutput, error) {
+func (c *Glacier) GetVaultAccessPolicyWithContext(ctx aws.Context, input *GetVaultAccessPolicyInput, opts ...aws.Option) (*GetVaultAccessPolicyOutput, error) {
 	req, out := c.GetVaultAccessPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1596,7 +1595,7 @@ func (c *Glacier) GetVaultAccessPolicyWithContext(ctx aws.Context, input *GetVau
 
 const opGetVaultLock = "GetVaultLock"
 
-// GetVaultLockRequest generates a "aws/request.Request" representing the
+// GetVaultLockRequest generates a "aws.Request" representing the
 // client's request for the GetVaultLock operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1618,8 +1617,8 @@ const opGetVaultLock = "GetVaultLock"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) GetVaultLockRequest(input *GetVaultLockInput) (req *request.Request, output *GetVaultLockOutput) {
-	op := &request.Operation{
+func (c *Glacier) GetVaultLockRequest(input *GetVaultLockInput) (req *aws.Request, output *GetVaultLockOutput) {
+	op := &aws.Operation{
 		Name:       opGetVaultLock,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy",
@@ -1692,7 +1691,7 @@ func (c *Glacier) GetVaultLock(input *GetVaultLockInput) (*GetVaultLockOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) GetVaultLockWithContext(ctx aws.Context, input *GetVaultLockInput, opts ...request.Option) (*GetVaultLockOutput, error) {
+func (c *Glacier) GetVaultLockWithContext(ctx aws.Context, input *GetVaultLockInput, opts ...aws.Option) (*GetVaultLockOutput, error) {
 	req, out := c.GetVaultLockRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1701,7 +1700,7 @@ func (c *Glacier) GetVaultLockWithContext(ctx aws.Context, input *GetVaultLockIn
 
 const opGetVaultNotifications = "GetVaultNotifications"
 
-// GetVaultNotificationsRequest generates a "aws/request.Request" representing the
+// GetVaultNotificationsRequest generates a "aws.Request" representing the
 // client's request for the GetVaultNotifications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1723,8 +1722,8 @@ const opGetVaultNotifications = "GetVaultNotifications"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) GetVaultNotificationsRequest(input *GetVaultNotificationsInput) (req *request.Request, output *GetVaultNotificationsOutput) {
-	op := &request.Operation{
+func (c *Glacier) GetVaultNotificationsRequest(input *GetVaultNotificationsInput) (req *aws.Request, output *GetVaultNotificationsOutput) {
+	op := &aws.Operation{
 		Name:       opGetVaultNotifications,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/notification-configuration",
@@ -1796,7 +1795,7 @@ func (c *Glacier) GetVaultNotifications(input *GetVaultNotificationsInput) (*Get
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) GetVaultNotificationsWithContext(ctx aws.Context, input *GetVaultNotificationsInput, opts ...request.Option) (*GetVaultNotificationsOutput, error) {
+func (c *Glacier) GetVaultNotificationsWithContext(ctx aws.Context, input *GetVaultNotificationsInput, opts ...aws.Option) (*GetVaultNotificationsOutput, error) {
 	req, out := c.GetVaultNotificationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1805,7 +1804,7 @@ func (c *Glacier) GetVaultNotificationsWithContext(ctx aws.Context, input *GetVa
 
 const opInitiateJob = "InitiateJob"
 
-// InitiateJobRequest generates a "aws/request.Request" representing the
+// InitiateJobRequest generates a "aws.Request" representing the
 // client's request for the InitiateJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1827,8 +1826,8 @@ const opInitiateJob = "InitiateJob"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) InitiateJobRequest(input *InitiateJobInput) (req *request.Request, output *InitiateJobOutput) {
-	op := &request.Operation{
+func (c *Glacier) InitiateJobRequest(input *InitiateJobInput) (req *aws.Request, output *InitiateJobOutput) {
+	op := &aws.Operation{
 		Name:       opInitiateJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs",
@@ -2026,7 +2025,7 @@ func (c *Glacier) InitiateJob(input *InitiateJobInput) (*InitiateJobOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) InitiateJobWithContext(ctx aws.Context, input *InitiateJobInput, opts ...request.Option) (*InitiateJobOutput, error) {
+func (c *Glacier) InitiateJobWithContext(ctx aws.Context, input *InitiateJobInput, opts ...aws.Option) (*InitiateJobOutput, error) {
 	req, out := c.InitiateJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2035,7 +2034,7 @@ func (c *Glacier) InitiateJobWithContext(ctx aws.Context, input *InitiateJobInpu
 
 const opInitiateMultipartUpload = "InitiateMultipartUpload"
 
-// InitiateMultipartUploadRequest generates a "aws/request.Request" representing the
+// InitiateMultipartUploadRequest generates a "aws.Request" representing the
 // client's request for the InitiateMultipartUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2057,8 +2056,8 @@ const opInitiateMultipartUpload = "InitiateMultipartUpload"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) InitiateMultipartUploadRequest(input *InitiateMultipartUploadInput) (req *request.Request, output *InitiateMultipartUploadOutput) {
-	op := &request.Operation{
+func (c *Glacier) InitiateMultipartUploadRequest(input *InitiateMultipartUploadInput) (req *aws.Request, output *InitiateMultipartUploadOutput) {
+	op := &aws.Operation{
 		Name:       opInitiateMultipartUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads",
@@ -2146,7 +2145,7 @@ func (c *Glacier) InitiateMultipartUpload(input *InitiateMultipartUploadInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) InitiateMultipartUploadWithContext(ctx aws.Context, input *InitiateMultipartUploadInput, opts ...request.Option) (*InitiateMultipartUploadOutput, error) {
+func (c *Glacier) InitiateMultipartUploadWithContext(ctx aws.Context, input *InitiateMultipartUploadInput, opts ...aws.Option) (*InitiateMultipartUploadOutput, error) {
 	req, out := c.InitiateMultipartUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2155,7 +2154,7 @@ func (c *Glacier) InitiateMultipartUploadWithContext(ctx aws.Context, input *Ini
 
 const opInitiateVaultLock = "InitiateVaultLock"
 
-// InitiateVaultLockRequest generates a "aws/request.Request" representing the
+// InitiateVaultLockRequest generates a "aws.Request" representing the
 // client's request for the InitiateVaultLock operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2177,8 +2176,8 @@ const opInitiateVaultLock = "InitiateVaultLock"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) InitiateVaultLockRequest(input *InitiateVaultLockInput) (req *request.Request, output *InitiateVaultLockOutput) {
-	op := &request.Operation{
+func (c *Glacier) InitiateVaultLockRequest(input *InitiateVaultLockInput) (req *aws.Request, output *InitiateVaultLockOutput) {
+	op := &aws.Operation{
 		Name:       opInitiateVaultLock,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy",
@@ -2260,7 +2259,7 @@ func (c *Glacier) InitiateVaultLock(input *InitiateVaultLockInput) (*InitiateVau
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) InitiateVaultLockWithContext(ctx aws.Context, input *InitiateVaultLockInput, opts ...request.Option) (*InitiateVaultLockOutput, error) {
+func (c *Glacier) InitiateVaultLockWithContext(ctx aws.Context, input *InitiateVaultLockInput, opts ...aws.Option) (*InitiateVaultLockOutput, error) {
 	req, out := c.InitiateVaultLockRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2269,7 +2268,7 @@ func (c *Glacier) InitiateVaultLockWithContext(ctx aws.Context, input *InitiateV
 
 const opListJobs = "ListJobs"
 
-// ListJobsRequest generates a "aws/request.Request" representing the
+// ListJobsRequest generates a "aws.Request" representing the
 // client's request for the ListJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2291,12 +2290,12 @@ const opListJobs = "ListJobs"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) ListJobsRequest(input *ListJobsInput) (req *request.Request, output *ListJobsOutput) {
-	op := &request.Operation{
+func (c *Glacier) ListJobsRequest(input *ListJobsInput) (req *aws.Request, output *ListJobsOutput) {
+	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "limit",
@@ -2391,7 +2390,7 @@ func (c *Glacier) ListJobs(input *ListJobsInput) (*ListJobsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...request.Option) (*ListJobsOutput, error) {
+func (c *Glacier) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...aws.Option) (*ListJobsOutput, error) {
 	req, out := c.ListJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2426,9 +2425,9 @@ func (c *Glacier) ListJobsPages(input *ListJobsInput, fn func(*ListJobsOutput, b
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput, fn func(*ListJobsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glacier) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput, fn func(*ListJobsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListJobsInput
 			if input != nil {
 				tmp := *input
@@ -2450,7 +2449,7 @@ func (c *Glacier) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput
 
 const opListMultipartUploads = "ListMultipartUploads"
 
-// ListMultipartUploadsRequest generates a "aws/request.Request" representing the
+// ListMultipartUploadsRequest generates a "aws.Request" representing the
 // client's request for the ListMultipartUploads operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2472,12 +2471,12 @@ const opListMultipartUploads = "ListMultipartUploads"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) (req *request.Request, output *ListMultipartUploadsOutput) {
-	op := &request.Operation{
+func (c *Glacier) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) (req *aws.Request, output *ListMultipartUploadsOutput) {
+	op := &aws.Operation{
 		Name:       opListMultipartUploads,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "limit",
@@ -2562,7 +2561,7 @@ func (c *Glacier) ListMultipartUploads(input *ListMultipartUploadsInput) (*ListM
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListMultipartUploadsWithContext(ctx aws.Context, input *ListMultipartUploadsInput, opts ...request.Option) (*ListMultipartUploadsOutput, error) {
+func (c *Glacier) ListMultipartUploadsWithContext(ctx aws.Context, input *ListMultipartUploadsInput, opts ...aws.Option) (*ListMultipartUploadsOutput, error) {
 	req, out := c.ListMultipartUploadsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2597,9 +2596,9 @@ func (c *Glacier) ListMultipartUploadsPages(input *ListMultipartUploadsInput, fn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glacier) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListMultipartUploadsInput
 			if input != nil {
 				tmp := *input
@@ -2621,7 +2620,7 @@ func (c *Glacier) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *L
 
 const opListParts = "ListParts"
 
-// ListPartsRequest generates a "aws/request.Request" representing the
+// ListPartsRequest generates a "aws.Request" representing the
 // client's request for the ListParts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2643,12 +2642,12 @@ const opListParts = "ListParts"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) ListPartsRequest(input *ListPartsInput) (req *request.Request, output *ListPartsOutput) {
-	op := &request.Operation{
+func (c *Glacier) ListPartsRequest(input *ListPartsInput) (req *aws.Request, output *ListPartsOutput) {
+	op := &aws.Operation{
 		Name:       opListParts,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "limit",
@@ -2727,7 +2726,7 @@ func (c *Glacier) ListParts(input *ListPartsInput) (*ListPartsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListPartsWithContext(ctx aws.Context, input *ListPartsInput, opts ...request.Option) (*ListPartsOutput, error) {
+func (c *Glacier) ListPartsWithContext(ctx aws.Context, input *ListPartsInput, opts ...aws.Option) (*ListPartsOutput, error) {
 	req, out := c.ListPartsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2762,9 +2761,9 @@ func (c *Glacier) ListPartsPages(input *ListPartsInput, fn func(*ListPartsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, fn func(*ListPartsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glacier) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, fn func(*ListPartsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPartsInput
 			if input != nil {
 				tmp := *input
@@ -2786,7 +2785,7 @@ func (c *Glacier) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInp
 
 const opListProvisionedCapacity = "ListProvisionedCapacity"
 
-// ListProvisionedCapacityRequest generates a "aws/request.Request" representing the
+// ListProvisionedCapacityRequest generates a "aws.Request" representing the
 // client's request for the ListProvisionedCapacity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2808,8 +2807,8 @@ const opListProvisionedCapacity = "ListProvisionedCapacity"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) ListProvisionedCapacityRequest(input *ListProvisionedCapacityInput) (req *request.Request, output *ListProvisionedCapacityOutput) {
-	op := &request.Operation{
+func (c *Glacier) ListProvisionedCapacityRequest(input *ListProvisionedCapacityInput) (req *aws.Request, output *ListProvisionedCapacityOutput) {
+	op := &aws.Operation{
 		Name:       opListProvisionedCapacity,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/provisioned-capacity",
@@ -2859,7 +2858,7 @@ func (c *Glacier) ListProvisionedCapacity(input *ListProvisionedCapacityInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListProvisionedCapacityWithContext(ctx aws.Context, input *ListProvisionedCapacityInput, opts ...request.Option) (*ListProvisionedCapacityOutput, error) {
+func (c *Glacier) ListProvisionedCapacityWithContext(ctx aws.Context, input *ListProvisionedCapacityInput, opts ...aws.Option) (*ListProvisionedCapacityOutput, error) {
 	req, out := c.ListProvisionedCapacityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2868,7 +2867,7 @@ func (c *Glacier) ListProvisionedCapacityWithContext(ctx aws.Context, input *Lis
 
 const opListTagsForVault = "ListTagsForVault"
 
-// ListTagsForVaultRequest generates a "aws/request.Request" representing the
+// ListTagsForVaultRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForVault operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2890,8 +2889,8 @@ const opListTagsForVault = "ListTagsForVault"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) ListTagsForVaultRequest(input *ListTagsForVaultInput) (req *request.Request, output *ListTagsForVaultOutput) {
-	op := &request.Operation{
+func (c *Glacier) ListTagsForVaultRequest(input *ListTagsForVaultInput) (req *aws.Request, output *ListTagsForVaultOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForVault,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/tags",
@@ -2947,7 +2946,7 @@ func (c *Glacier) ListTagsForVault(input *ListTagsForVaultInput) (*ListTagsForVa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListTagsForVaultWithContext(ctx aws.Context, input *ListTagsForVaultInput, opts ...request.Option) (*ListTagsForVaultOutput, error) {
+func (c *Glacier) ListTagsForVaultWithContext(ctx aws.Context, input *ListTagsForVaultInput, opts ...aws.Option) (*ListTagsForVaultOutput, error) {
 	req, out := c.ListTagsForVaultRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2956,7 +2955,7 @@ func (c *Glacier) ListTagsForVaultWithContext(ctx aws.Context, input *ListTagsFo
 
 const opListVaults = "ListVaults"
 
-// ListVaultsRequest generates a "aws/request.Request" representing the
+// ListVaultsRequest generates a "aws.Request" representing the
 // client's request for the ListVaults operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2978,12 +2977,12 @@ const opListVaults = "ListVaults"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) ListVaultsRequest(input *ListVaultsInput) (req *request.Request, output *ListVaultsOutput) {
-	op := &request.Operation{
+func (c *Glacier) ListVaultsRequest(input *ListVaultsInput) (req *aws.Request, output *ListVaultsOutput) {
+	op := &aws.Operation{
 		Name:       opListVaults,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{accountId}/vaults",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "limit",
@@ -3059,7 +3058,7 @@ func (c *Glacier) ListVaults(input *ListVaultsInput) (*ListVaultsOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListVaultsWithContext(ctx aws.Context, input *ListVaultsInput, opts ...request.Option) (*ListVaultsOutput, error) {
+func (c *Glacier) ListVaultsWithContext(ctx aws.Context, input *ListVaultsInput, opts ...aws.Option) (*ListVaultsOutput, error) {
 	req, out := c.ListVaultsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3094,9 +3093,9 @@ func (c *Glacier) ListVaultsPages(input *ListVaultsInput, fn func(*ListVaultsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) ListVaultsPagesWithContext(ctx aws.Context, input *ListVaultsInput, fn func(*ListVaultsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glacier) ListVaultsPagesWithContext(ctx aws.Context, input *ListVaultsInput, fn func(*ListVaultsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListVaultsInput
 			if input != nil {
 				tmp := *input
@@ -3118,7 +3117,7 @@ func (c *Glacier) ListVaultsPagesWithContext(ctx aws.Context, input *ListVaultsI
 
 const opPurchaseProvisionedCapacity = "PurchaseProvisionedCapacity"
 
-// PurchaseProvisionedCapacityRequest generates a "aws/request.Request" representing the
+// PurchaseProvisionedCapacityRequest generates a "aws.Request" representing the
 // client's request for the PurchaseProvisionedCapacity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3140,8 +3139,8 @@ const opPurchaseProvisionedCapacity = "PurchaseProvisionedCapacity"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedCapacityInput) (req *request.Request, output *PurchaseProvisionedCapacityOutput) {
-	op := &request.Operation{
+func (c *Glacier) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedCapacityInput) (req *aws.Request, output *PurchaseProvisionedCapacityOutput) {
+	op := &aws.Operation{
 		Name:       opPurchaseProvisionedCapacity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{accountId}/provisioned-capacity",
@@ -3194,7 +3193,7 @@ func (c *Glacier) PurchaseProvisionedCapacity(input *PurchaseProvisionedCapacity
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) PurchaseProvisionedCapacityWithContext(ctx aws.Context, input *PurchaseProvisionedCapacityInput, opts ...request.Option) (*PurchaseProvisionedCapacityOutput, error) {
+func (c *Glacier) PurchaseProvisionedCapacityWithContext(ctx aws.Context, input *PurchaseProvisionedCapacityInput, opts ...aws.Option) (*PurchaseProvisionedCapacityOutput, error) {
 	req, out := c.PurchaseProvisionedCapacityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3203,7 +3202,7 @@ func (c *Glacier) PurchaseProvisionedCapacityWithContext(ctx aws.Context, input 
 
 const opRemoveTagsFromVault = "RemoveTagsFromVault"
 
-// RemoveTagsFromVaultRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromVaultRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromVault operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3225,8 +3224,8 @@ const opRemoveTagsFromVault = "RemoveTagsFromVault"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) (req *request.Request, output *RemoveTagsFromVaultOutput) {
-	op := &request.Operation{
+func (c *Glacier) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) (req *aws.Request, output *RemoveTagsFromVaultOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromVault,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/tags?operation=remove",
@@ -3286,7 +3285,7 @@ func (c *Glacier) RemoveTagsFromVault(input *RemoveTagsFromVaultInput) (*RemoveT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) RemoveTagsFromVaultWithContext(ctx aws.Context, input *RemoveTagsFromVaultInput, opts ...request.Option) (*RemoveTagsFromVaultOutput, error) {
+func (c *Glacier) RemoveTagsFromVaultWithContext(ctx aws.Context, input *RemoveTagsFromVaultInput, opts ...aws.Option) (*RemoveTagsFromVaultOutput, error) {
 	req, out := c.RemoveTagsFromVaultRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3295,7 +3294,7 @@ func (c *Glacier) RemoveTagsFromVaultWithContext(ctx aws.Context, input *RemoveT
 
 const opSetDataRetrievalPolicy = "SetDataRetrievalPolicy"
 
-// SetDataRetrievalPolicyRequest generates a "aws/request.Request" representing the
+// SetDataRetrievalPolicyRequest generates a "aws.Request" representing the
 // client's request for the SetDataRetrievalPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3317,8 +3316,8 @@ const opSetDataRetrievalPolicy = "SetDataRetrievalPolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) SetDataRetrievalPolicyRequest(input *SetDataRetrievalPolicyInput) (req *request.Request, output *SetDataRetrievalPolicyOutput) {
-	op := &request.Operation{
+func (c *Glacier) SetDataRetrievalPolicyRequest(input *SetDataRetrievalPolicyInput) (req *aws.Request, output *SetDataRetrievalPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opSetDataRetrievalPolicy,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{accountId}/policies/data-retrieval",
@@ -3376,7 +3375,7 @@ func (c *Glacier) SetDataRetrievalPolicy(input *SetDataRetrievalPolicyInput) (*S
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) SetDataRetrievalPolicyWithContext(ctx aws.Context, input *SetDataRetrievalPolicyInput, opts ...request.Option) (*SetDataRetrievalPolicyOutput, error) {
+func (c *Glacier) SetDataRetrievalPolicyWithContext(ctx aws.Context, input *SetDataRetrievalPolicyInput, opts ...aws.Option) (*SetDataRetrievalPolicyOutput, error) {
 	req, out := c.SetDataRetrievalPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3385,7 +3384,7 @@ func (c *Glacier) SetDataRetrievalPolicyWithContext(ctx aws.Context, input *SetD
 
 const opSetVaultAccessPolicy = "SetVaultAccessPolicy"
 
-// SetVaultAccessPolicyRequest generates a "aws/request.Request" representing the
+// SetVaultAccessPolicyRequest generates a "aws.Request" representing the
 // client's request for the SetVaultAccessPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3407,8 +3406,8 @@ const opSetVaultAccessPolicy = "SetVaultAccessPolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) (req *request.Request, output *SetVaultAccessPolicyOutput) {
-	op := &request.Operation{
+func (c *Glacier) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) (req *aws.Request, output *SetVaultAccessPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opSetVaultAccessPolicy,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/access-policy",
@@ -3470,7 +3469,7 @@ func (c *Glacier) SetVaultAccessPolicy(input *SetVaultAccessPolicyInput) (*SetVa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) SetVaultAccessPolicyWithContext(ctx aws.Context, input *SetVaultAccessPolicyInput, opts ...request.Option) (*SetVaultAccessPolicyOutput, error) {
+func (c *Glacier) SetVaultAccessPolicyWithContext(ctx aws.Context, input *SetVaultAccessPolicyInput, opts ...aws.Option) (*SetVaultAccessPolicyOutput, error) {
 	req, out := c.SetVaultAccessPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3479,7 +3478,7 @@ func (c *Glacier) SetVaultAccessPolicyWithContext(ctx aws.Context, input *SetVau
 
 const opSetVaultNotifications = "SetVaultNotifications"
 
-// SetVaultNotificationsRequest generates a "aws/request.Request" representing the
+// SetVaultNotificationsRequest generates a "aws.Request" representing the
 // client's request for the SetVaultNotifications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3501,8 +3500,8 @@ const opSetVaultNotifications = "SetVaultNotifications"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) SetVaultNotificationsRequest(input *SetVaultNotificationsInput) (req *request.Request, output *SetVaultNotificationsOutput) {
-	op := &request.Operation{
+func (c *Glacier) SetVaultNotificationsRequest(input *SetVaultNotificationsInput) (req *aws.Request, output *SetVaultNotificationsOutput) {
+	op := &aws.Operation{
 		Name:       opSetVaultNotifications,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/notification-configuration",
@@ -3589,7 +3588,7 @@ func (c *Glacier) SetVaultNotifications(input *SetVaultNotificationsInput) (*Set
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) SetVaultNotificationsWithContext(ctx aws.Context, input *SetVaultNotificationsInput, opts ...request.Option) (*SetVaultNotificationsOutput, error) {
+func (c *Glacier) SetVaultNotificationsWithContext(ctx aws.Context, input *SetVaultNotificationsInput, opts ...aws.Option) (*SetVaultNotificationsOutput, error) {
 	req, out := c.SetVaultNotificationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3598,7 +3597,7 @@ func (c *Glacier) SetVaultNotificationsWithContext(ctx aws.Context, input *SetVa
 
 const opUploadArchive = "UploadArchive"
 
-// UploadArchiveRequest generates a "aws/request.Request" representing the
+// UploadArchiveRequest generates a "aws.Request" representing the
 // client's request for the UploadArchive operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3620,8 +3619,8 @@ const opUploadArchive = "UploadArchive"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) UploadArchiveRequest(input *UploadArchiveInput) (req *request.Request, output *ArchiveCreationOutput) {
-	op := &request.Operation{
+func (c *Glacier) UploadArchiveRequest(input *UploadArchiveInput) (req *aws.Request, output *ArchiveCreationOutput) {
+	op := &aws.Operation{
 		Name:       opUploadArchive,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/archives",
@@ -3714,7 +3713,7 @@ func (c *Glacier) UploadArchive(input *UploadArchiveInput) (*ArchiveCreationOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) UploadArchiveWithContext(ctx aws.Context, input *UploadArchiveInput, opts ...request.Option) (*ArchiveCreationOutput, error) {
+func (c *Glacier) UploadArchiveWithContext(ctx aws.Context, input *UploadArchiveInput, opts ...aws.Option) (*ArchiveCreationOutput, error) {
 	req, out := c.UploadArchiveRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3723,7 +3722,7 @@ func (c *Glacier) UploadArchiveWithContext(ctx aws.Context, input *UploadArchive
 
 const opUploadMultipartPart = "UploadMultipartPart"
 
-// UploadMultipartPartRequest generates a "aws/request.Request" representing the
+// UploadMultipartPartRequest generates a "aws.Request" representing the
 // client's request for the UploadMultipartPart operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3745,8 +3744,8 @@ const opUploadMultipartPart = "UploadMultipartPart"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) UploadMultipartPartRequest(input *UploadMultipartPartInput) (req *request.Request, output *UploadMultipartPartOutput) {
-	op := &request.Operation{
+func (c *Glacier) UploadMultipartPartRequest(input *UploadMultipartPartInput) (req *aws.Request, output *UploadMultipartPartOutput) {
+	op := &aws.Operation{
 		Name:       opUploadMultipartPart,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
@@ -3849,7 +3848,7 @@ func (c *Glacier) UploadMultipartPart(input *UploadMultipartPartInput) (*UploadM
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) UploadMultipartPartWithContext(ctx aws.Context, input *UploadMultipartPartInput, opts ...request.Option) (*UploadMultipartPartOutput, error) {
+func (c *Glacier) UploadMultipartPartWithContext(ctx aws.Context, input *UploadMultipartPartInput, opts ...aws.Option) (*UploadMultipartPartOutput, error) {
 	req, out := c.UploadMultipartPartRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3896,15 +3895,15 @@ func (s AbortMultipartUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AbortMultipartUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AbortMultipartUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AbortMultipartUploadInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3977,12 +3976,12 @@ func (s AbortVaultLockInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AbortVaultLockInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AbortVaultLockInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AbortVaultLockInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4052,12 +4051,12 @@ func (s AddTagsToVaultInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToVaultInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToVaultInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToVaultInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4193,15 +4192,15 @@ func (s CompleteMultipartUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompleteMultipartUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CompleteMultipartUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CompleteMultipartUploadInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4277,15 +4276,15 @@ func (s CompleteVaultLockInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompleteVaultLockInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CompleteVaultLockInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CompleteVaultLockInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.LockId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LockId"))
+		invalidParams.Add(aws.NewErrParamRequired("LockId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4358,12 +4357,12 @@ func (s CreateVaultInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVaultInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateVaultInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateVaultInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4508,15 +4507,15 @@ func (s DeleteArchiveInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteArchiveInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteArchiveInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteArchiveInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.ArchiveId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ArchiveId"))
+		invalidParams.Add(aws.NewErrParamRequired("ArchiveId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4588,12 +4587,12 @@ func (s DeleteVaultAccessPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVaultAccessPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteVaultAccessPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVaultAccessPolicyInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4659,12 +4658,12 @@ func (s DeleteVaultInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVaultInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteVaultInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVaultInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4717,12 +4716,12 @@ func (s DeleteVaultNotificationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVaultNotificationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteVaultNotificationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVaultNotificationsInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4807,15 +4806,15 @@ func (s DescribeJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeJobInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4873,12 +4872,12 @@ func (s DescribeVaultInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeVaultInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeVaultInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeVaultInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5002,9 +5001,9 @@ func (s GetDataRetrievalPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDataRetrievalPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDataRetrievalPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDataRetrievalPolicyInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5110,15 +5109,15 @@ func (s GetJobOutputInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobOutputInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetJobOutputInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetJobOutputInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5282,12 +5281,12 @@ func (s GetVaultAccessPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetVaultAccessPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetVaultAccessPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetVaultAccessPolicyInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5363,12 +5362,12 @@ func (s GetVaultLockInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetVaultLockInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetVaultLockInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetVaultLockInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5474,12 +5473,12 @@ func (s GetVaultNotificationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetVaultNotificationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetVaultNotificationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetVaultNotificationsInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5558,12 +5557,12 @@ func (s InitiateJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InitiateJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InitiateJobInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5666,12 +5665,12 @@ func (s InitiateMultipartUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateMultipartUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InitiateMultipartUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InitiateMultipartUploadInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5773,12 +5772,12 @@ func (s InitiateVaultLockInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateVaultLockInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InitiateVaultLockInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InitiateVaultLockInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6322,12 +6321,12 @@ func (s ListJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6451,12 +6450,12 @@ func (s ListMultipartUploadsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListMultipartUploadsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListMultipartUploadsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListMultipartUploadsInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6573,15 +6572,15 @@ func (s ListPartsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPartsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPartsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPartsInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6729,9 +6728,9 @@ func (s ListProvisionedCapacityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListProvisionedCapacityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListProvisionedCapacityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListProvisionedCapacityInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6800,12 +6799,12 @@ func (s ListTagsForVaultInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForVaultInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForVaultInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForVaultInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6887,9 +6886,9 @@ func (s ListVaultsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVaultsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListVaultsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListVaultsInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7053,9 +7052,9 @@ func (s PurchaseProvisionedCapacityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseProvisionedCapacityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PurchaseProvisionedCapacityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PurchaseProvisionedCapacityInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7127,12 +7126,12 @@ func (s RemoveTagsFromVaultInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromVaultInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromVaultInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromVaultInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7203,9 +7202,9 @@ func (s SetDataRetrievalPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetDataRetrievalPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetDataRetrievalPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetDataRetrievalPolicyInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7274,12 +7273,12 @@ func (s SetVaultAccessPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetVaultAccessPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetVaultAccessPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetVaultAccessPolicyInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7355,12 +7354,12 @@ func (s SetVaultNotificationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetVaultNotificationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetVaultNotificationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetVaultNotificationsInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7441,12 +7440,12 @@ func (s UploadArchiveInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadArchiveInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UploadArchiveInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UploadArchiveInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7596,15 +7595,15 @@ func (s UploadMultipartPartInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadMultipartPartInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UploadMultipartPartInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UploadMultipartPartInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -83,7 +83,7 @@ func decodeV3Endpoints(modelDef modelDefinition, opts DecodeModelOptions) (Resol
 		p := &ps[i]
 		custAddEC2Metadata(p)
 		custAddS3DualStack(p)
-		custRmIotDataService(p)
+		custSetUnresolveServices(p)
 	}
 
 	return ps, nil
@@ -118,8 +118,18 @@ func custAddEC2Metadata(p *partition) {
 	}
 }
 
-func custRmIotDataService(p *partition) {
-	delete(p.Services, "data.iot")
+func custSetUnresolveServices(p *partition) {
+	var ids = map[string]struct{}{
+		"data.iot":          {},
+		"cloudsearchdomain": {},
+	}
+	for id := range ids {
+		p.Services[id] = service{
+			Defaults: endpoint{
+				Unresolveable: boxedTrue,
+			},
+		}
+	}
 }
 
 type decodeModelError struct {

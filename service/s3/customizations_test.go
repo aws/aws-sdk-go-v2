@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
@@ -32,7 +32,7 @@ func assertMD5(t *testing.T, req *request.Request) {
 }
 
 func TestMD5InPutBucketCors(t *testing.T) {
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config())
 	req, _ := svc.PutBucketCorsRequest(&s3.PutBucketCorsInput{
 		Bucket: aws.String("bucketname"),
 		CORSConfiguration: &s3.CORSConfiguration{
@@ -48,7 +48,7 @@ func TestMD5InPutBucketCors(t *testing.T) {
 }
 
 func TestMD5InPutBucketLifecycle(t *testing.T) {
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config())
 	req, _ := svc.PutBucketLifecycleRequest(&s3.PutBucketLifecycleInput{
 		Bucket: aws.String("bucketname"),
 		LifecycleConfiguration: &s3.LifecycleConfiguration{
@@ -65,7 +65,7 @@ func TestMD5InPutBucketLifecycle(t *testing.T) {
 }
 
 func TestMD5InPutBucketPolicy(t *testing.T) {
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config())
 	req, _ := svc.PutBucketPolicyRequest(&s3.PutBucketPolicyInput{
 		Bucket: aws.String("bucketname"),
 		Policy: aws.String("{}"),
@@ -74,7 +74,7 @@ func TestMD5InPutBucketPolicy(t *testing.T) {
 }
 
 func TestMD5InPutBucketTagging(t *testing.T) {
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config())
 	req, _ := svc.PutBucketTaggingRequest(&s3.PutBucketTaggingInput{
 		Bucket: aws.String("bucketname"),
 		Tagging: &s3.Tagging{
@@ -87,7 +87,7 @@ func TestMD5InPutBucketTagging(t *testing.T) {
 }
 
 func TestMD5InDeleteObjects(t *testing.T) {
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config())
 	req, _ := svc.DeleteObjectsRequest(&s3.DeleteObjectsInput{
 		Bucket: aws.String("bucketname"),
 		Delete: &s3.Delete{
@@ -100,7 +100,7 @@ func TestMD5InDeleteObjects(t *testing.T) {
 }
 
 func TestMD5InPutBucketLifecycleConfiguration(t *testing.T) {
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config())
 	req, _ := svc.PutBucketLifecycleConfigurationRequest(&s3.PutBucketLifecycleConfigurationInput{
 		Bucket: aws.String("bucketname"),
 		LifecycleConfiguration: &s3.BucketLifecycleConfiguration{
@@ -124,10 +124,12 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 			t.Errorf("expected %s, but received %s", e, a)
 		}
 	}))
-	svc := s3.New(unit.Session, &aws.Config{
-		Endpoint:   aws.String(server.URL),
-		DisableSSL: aws.Bool(true),
-	})
+
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+	cfg.DisableSSL = aws.Bool(true)
+
+	svc := s3.New(cfg)
 
 	_, err := svc.PutObject(&s3.PutObjectInput{
 		Bucket: aws.String("my_bucket"),
@@ -149,10 +151,11 @@ func TestGetObjectMetadataWithUnicode(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set(metaKeyPrefix+utf8KeySuffix, utf8Value)
 	}))
-	svc := s3.New(unit.Session, &aws.Config{
-		Endpoint:   aws.String(server.URL),
-		DisableSSL: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+	cfg.DisableSSL = aws.Bool(true)
+
+	svc := s3.New(cfg)
 
 	resp, err := svc.GetObject(&s3.GetObjectInput{
 		Bucket: aws.String("my_bucket"),

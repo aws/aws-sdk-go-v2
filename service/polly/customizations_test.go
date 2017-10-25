@@ -6,11 +6,15 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 func TestRestGETStrategy(t *testing.T) {
-	svc := New(unit.Session, &aws.Config{Region: aws.String("us-west-2")})
+	cfg := unit.Config()
+	cfg.Region = aws.String("us-west-2")
+
+	svc := New(cfg)
 	r, _ := svc.SynthesizeSpeechRequest(nil)
 
 	if err := restGETPresignStrategy(r); err != nil {
@@ -25,7 +29,11 @@ func TestRestGETStrategy(t *testing.T) {
 }
 
 func TestPresign(t *testing.T) {
-	svc := New(unit.Session, &aws.Config{Region: aws.String("us-west-2")})
+	cfg := unit.Config()
+	cfg.Region = aws.String("us-west-2")
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	svc := New(cfg)
 	r, _ := svc.SynthesizeSpeechRequest(&SynthesizeSpeechInput{
 		Text:         aws.String("Moo"),
 		OutputFormat: aws.String("mp3"),

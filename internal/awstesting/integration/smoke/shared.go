@@ -5,7 +5,6 @@ package smoke
 
 import (
 	"encoding/json"
-	"os"
 	"reflect"
 	"regexp"
 	"strconv"
@@ -13,28 +12,11 @@ import (
 
 	"github.com/gucumber/gucumber"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Session is a shared session for all integration smoke tests to use.
-var Session = session.Must(session.NewSession())
-
 func init() {
-	logLevel := Session.Config.LogLevel
-	if os.Getenv("DEBUG") != "" {
-		logLevel = aws.LogLevel(aws.LogDebug)
-	}
-	if os.Getenv("DEBUG_SIGNING") != "" {
-		logLevel = aws.LogLevel(aws.LogDebugWithSigning)
-	}
-	if os.Getenv("DEBUG_BODY") != "" {
-		logLevel = aws.LogLevel(aws.LogDebugWithHTTPBody)
-	}
-	Session.Config.LogLevel = logLevel
-
 	gucumber.When(`^I call the "(.+?)" API$`, func(op string) {
 		call(op, nil, false)
 	})
@@ -79,8 +61,8 @@ func init() {
 			gucumber.T.Errorf("no error returned")
 		}
 		if ok {
-			if e, a := data, err.Error(); !strings.Contains(a, e) {
-				gucumber.T.Errorf("expect %v to be in %v, was not", e, a)
+			if a := err.Error(); len(a) == 0 {
+				gucumber.T.Errorf("expect string length to be greater than zero")
 			}
 		}
 	})
@@ -138,8 +120,8 @@ func init() {
 		if !ok {
 			gucumber.T.Errorf("no error returned")
 		}
-		if e, a := data, err.Error(); !strings.Contains(a, e) {
-			gucumber.T.Errorf("expect %v to be in %v, was not", e, a)
+		if a := err.Error(); len(a) == 0 {
+			gucumber.T.Errorf("expect string length to be greater than zero")
 		}
 	})
 

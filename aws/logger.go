@@ -95,6 +95,8 @@ func (f LoggerFunc) Log(args ...interface{}) {
 
 // NewDefaultLogger returns a Logger which will write log messages to stdout, and
 // use same formatting runes as the stdlib log.Logger
+//
+// TODO remove, moved to default pkg
 func NewDefaultLogger() Logger {
 	return &defaultLogger{
 		logger: log.New(os.Stdout, "", log.LstdFlags),

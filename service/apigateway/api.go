@@ -6,15 +6,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opCreateApiKey = "CreateApiKey"
 
-// CreateApiKeyRequest generates a "aws/request.Request" representing the
+// CreateApiKeyRequest generates a "aws.Request" representing the
 // client's request for the CreateApiKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opCreateApiKey = "CreateApiKey"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateApiKeyRequest(input *CreateApiKeyInput) (req *request.Request, output *ApiKey) {
-	op := &request.Operation{
+func (c *APIGateway) CreateApiKeyRequest(input *CreateApiKeyInput) (req *aws.Request, output *ApiKey) {
+	op := &aws.Operation{
 		Name:       opCreateApiKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/apikeys",
@@ -101,7 +100,7 @@ func (c *APIGateway) CreateApiKey(input *CreateApiKeyInput) (*ApiKey, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateApiKeyWithContext(ctx aws.Context, input *CreateApiKeyInput, opts ...request.Option) (*ApiKey, error) {
+func (c *APIGateway) CreateApiKeyWithContext(ctx aws.Context, input *CreateApiKeyInput, opts ...aws.Option) (*ApiKey, error) {
 	req, out := c.CreateApiKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -110,7 +109,7 @@ func (c *APIGateway) CreateApiKeyWithContext(ctx aws.Context, input *CreateApiKe
 
 const opCreateAuthorizer = "CreateAuthorizer"
 
-// CreateAuthorizerRequest generates a "aws/request.Request" representing the
+// CreateAuthorizerRequest generates a "aws.Request" representing the
 // client's request for the CreateAuthorizer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -132,8 +131,8 @@ const opCreateAuthorizer = "CreateAuthorizer"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateAuthorizerRequest(input *CreateAuthorizerInput) (req *request.Request, output *Authorizer) {
-	op := &request.Operation{
+func (c *APIGateway) CreateAuthorizerRequest(input *CreateAuthorizerInput) (req *aws.Request, output *Authorizer) {
+	op := &aws.Operation{
 		Name:       opCreateAuthorizer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/authorizers",
@@ -193,7 +192,7 @@ func (c *APIGateway) CreateAuthorizer(input *CreateAuthorizerInput) (*Authorizer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateAuthorizerWithContext(ctx aws.Context, input *CreateAuthorizerInput, opts ...request.Option) (*Authorizer, error) {
+func (c *APIGateway) CreateAuthorizerWithContext(ctx aws.Context, input *CreateAuthorizerInput, opts ...aws.Option) (*Authorizer, error) {
 	req, out := c.CreateAuthorizerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -202,7 +201,7 @@ func (c *APIGateway) CreateAuthorizerWithContext(ctx aws.Context, input *CreateA
 
 const opCreateBasePathMapping = "CreateBasePathMapping"
 
-// CreateBasePathMappingRequest generates a "aws/request.Request" representing the
+// CreateBasePathMappingRequest generates a "aws.Request" representing the
 // client's request for the CreateBasePathMapping operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -224,8 +223,8 @@ const opCreateBasePathMapping = "CreateBasePathMapping"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateBasePathMappingRequest(input *CreateBasePathMappingInput) (req *request.Request, output *BasePathMapping) {
-	op := &request.Operation{
+func (c *APIGateway) CreateBasePathMappingRequest(input *CreateBasePathMappingInput) (req *aws.Request, output *BasePathMapping) {
+	op := &aws.Operation{
 		Name:       opCreateBasePathMapping,
 		HTTPMethod: "POST",
 		HTTPPath:   "/domainnames/{domain_name}/basepathmappings",
@@ -284,7 +283,7 @@ func (c *APIGateway) CreateBasePathMapping(input *CreateBasePathMappingInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateBasePathMappingWithContext(ctx aws.Context, input *CreateBasePathMappingInput, opts ...request.Option) (*BasePathMapping, error) {
+func (c *APIGateway) CreateBasePathMappingWithContext(ctx aws.Context, input *CreateBasePathMappingInput, opts ...aws.Option) (*BasePathMapping, error) {
 	req, out := c.CreateBasePathMappingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -293,7 +292,7 @@ func (c *APIGateway) CreateBasePathMappingWithContext(ctx aws.Context, input *Cr
 
 const opCreateDeployment = "CreateDeployment"
 
-// CreateDeploymentRequest generates a "aws/request.Request" representing the
+// CreateDeploymentRequest generates a "aws.Request" representing the
 // client's request for the CreateDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -315,8 +314,8 @@ const opCreateDeployment = "CreateDeployment"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateDeploymentRequest(input *CreateDeploymentInput) (req *request.Request, output *Deployment) {
-	op := &request.Operation{
+func (c *APIGateway) CreateDeploymentRequest(input *CreateDeploymentInput) (req *aws.Request, output *Deployment) {
+	op := &aws.Operation{
 		Name:       opCreateDeployment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/deployments",
@@ -383,7 +382,7 @@ func (c *APIGateway) CreateDeployment(input *CreateDeploymentInput) (*Deployment
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...request.Option) (*Deployment, error) {
+func (c *APIGateway) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...aws.Option) (*Deployment, error) {
 	req, out := c.CreateDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -392,7 +391,7 @@ func (c *APIGateway) CreateDeploymentWithContext(ctx aws.Context, input *CreateD
 
 const opCreateDocumentationPart = "CreateDocumentationPart"
 
-// CreateDocumentationPartRequest generates a "aws/request.Request" representing the
+// CreateDocumentationPartRequest generates a "aws.Request" representing the
 // client's request for the CreateDocumentationPart operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -414,8 +413,8 @@ const opCreateDocumentationPart = "CreateDocumentationPart"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateDocumentationPartRequest(input *CreateDocumentationPartInput) (req *request.Request, output *DocumentationPart) {
-	op := &request.Operation{
+func (c *APIGateway) CreateDocumentationPartRequest(input *CreateDocumentationPartInput) (req *aws.Request, output *DocumentationPart) {
+	op := &aws.Operation{
 		Name:       opCreateDocumentationPart,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/parts",
@@ -475,7 +474,7 @@ func (c *APIGateway) CreateDocumentationPart(input *CreateDocumentationPartInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateDocumentationPartWithContext(ctx aws.Context, input *CreateDocumentationPartInput, opts ...request.Option) (*DocumentationPart, error) {
+func (c *APIGateway) CreateDocumentationPartWithContext(ctx aws.Context, input *CreateDocumentationPartInput, opts ...aws.Option) (*DocumentationPart, error) {
 	req, out := c.CreateDocumentationPartRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -484,7 +483,7 @@ func (c *APIGateway) CreateDocumentationPartWithContext(ctx aws.Context, input *
 
 const opCreateDocumentationVersion = "CreateDocumentationVersion"
 
-// CreateDocumentationVersionRequest generates a "aws/request.Request" representing the
+// CreateDocumentationVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateDocumentationVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -506,8 +505,8 @@ const opCreateDocumentationVersion = "CreateDocumentationVersion"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateDocumentationVersionRequest(input *CreateDocumentationVersionInput) (req *request.Request, output *DocumentationVersion) {
-	op := &request.Operation{
+func (c *APIGateway) CreateDocumentationVersionRequest(input *CreateDocumentationVersionInput) (req *aws.Request, output *DocumentationVersion) {
+	op := &aws.Operation{
 		Name:       opCreateDocumentationVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/versions",
@@ -567,7 +566,7 @@ func (c *APIGateway) CreateDocumentationVersion(input *CreateDocumentationVersio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateDocumentationVersionWithContext(ctx aws.Context, input *CreateDocumentationVersionInput, opts ...request.Option) (*DocumentationVersion, error) {
+func (c *APIGateway) CreateDocumentationVersionWithContext(ctx aws.Context, input *CreateDocumentationVersionInput, opts ...aws.Option) (*DocumentationVersion, error) {
 	req, out := c.CreateDocumentationVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -576,7 +575,7 @@ func (c *APIGateway) CreateDocumentationVersionWithContext(ctx aws.Context, inpu
 
 const opCreateDomainName = "CreateDomainName"
 
-// CreateDomainNameRequest generates a "aws/request.Request" representing the
+// CreateDomainNameRequest generates a "aws.Request" representing the
 // client's request for the CreateDomainName operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -598,8 +597,8 @@ const opCreateDomainName = "CreateDomainName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateDomainNameRequest(input *CreateDomainNameInput) (req *request.Request, output *DomainName) {
-	op := &request.Operation{
+func (c *APIGateway) CreateDomainNameRequest(input *CreateDomainNameInput) (req *aws.Request, output *DomainName) {
+	op := &aws.Operation{
 		Name:       opCreateDomainName,
 		HTTPMethod: "POST",
 		HTTPPath:   "/domainnames",
@@ -655,7 +654,7 @@ func (c *APIGateway) CreateDomainName(input *CreateDomainNameInput) (*DomainName
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateDomainNameWithContext(ctx aws.Context, input *CreateDomainNameInput, opts ...request.Option) (*DomainName, error) {
+func (c *APIGateway) CreateDomainNameWithContext(ctx aws.Context, input *CreateDomainNameInput, opts ...aws.Option) (*DomainName, error) {
 	req, out := c.CreateDomainNameRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -664,7 +663,7 @@ func (c *APIGateway) CreateDomainNameWithContext(ctx aws.Context, input *CreateD
 
 const opCreateModel = "CreateModel"
 
-// CreateModelRequest generates a "aws/request.Request" representing the
+// CreateModelRequest generates a "aws.Request" representing the
 // client's request for the CreateModel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -686,8 +685,8 @@ const opCreateModel = "CreateModel"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateModelRequest(input *CreateModelInput) (req *request.Request, output *Model) {
-	op := &request.Operation{
+func (c *APIGateway) CreateModelRequest(input *CreateModelInput) (req *aws.Request, output *Model) {
+	op := &aws.Operation{
 		Name:       opCreateModel,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/models",
@@ -749,7 +748,7 @@ func (c *APIGateway) CreateModel(input *CreateModelInput) (*Model, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateModelWithContext(ctx aws.Context, input *CreateModelInput, opts ...request.Option) (*Model, error) {
+func (c *APIGateway) CreateModelWithContext(ctx aws.Context, input *CreateModelInput, opts ...aws.Option) (*Model, error) {
 	req, out := c.CreateModelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -758,7 +757,7 @@ func (c *APIGateway) CreateModelWithContext(ctx aws.Context, input *CreateModelI
 
 const opCreateRequestValidator = "CreateRequestValidator"
 
-// CreateRequestValidatorRequest generates a "aws/request.Request" representing the
+// CreateRequestValidatorRequest generates a "aws.Request" representing the
 // client's request for the CreateRequestValidator operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -780,8 +779,8 @@ const opCreateRequestValidator = "CreateRequestValidator"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateRequestValidatorRequest(input *CreateRequestValidatorInput) (req *request.Request, output *UpdateRequestValidatorOutput) {
-	op := &request.Operation{
+func (c *APIGateway) CreateRequestValidatorRequest(input *CreateRequestValidatorInput) (req *aws.Request, output *UpdateRequestValidatorOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRequestValidator,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/requestvalidators",
@@ -839,7 +838,7 @@ func (c *APIGateway) CreateRequestValidator(input *CreateRequestValidatorInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateRequestValidatorWithContext(ctx aws.Context, input *CreateRequestValidatorInput, opts ...request.Option) (*UpdateRequestValidatorOutput, error) {
+func (c *APIGateway) CreateRequestValidatorWithContext(ctx aws.Context, input *CreateRequestValidatorInput, opts ...aws.Option) (*UpdateRequestValidatorOutput, error) {
 	req, out := c.CreateRequestValidatorRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -848,7 +847,7 @@ func (c *APIGateway) CreateRequestValidatorWithContext(ctx aws.Context, input *C
 
 const opCreateResource = "CreateResource"
 
-// CreateResourceRequest generates a "aws/request.Request" representing the
+// CreateResourceRequest generates a "aws.Request" representing the
 // client's request for the CreateResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -870,8 +869,8 @@ const opCreateResource = "CreateResource"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateResourceRequest(input *CreateResourceInput) (req *request.Request, output *Resource) {
-	op := &request.Operation{
+func (c *APIGateway) CreateResourceRequest(input *CreateResourceInput) (req *aws.Request, output *Resource) {
+	op := &aws.Operation{
 		Name:       opCreateResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{parent_id}",
@@ -933,7 +932,7 @@ func (c *APIGateway) CreateResource(input *CreateResourceInput) (*Resource, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateResourceWithContext(ctx aws.Context, input *CreateResourceInput, opts ...request.Option) (*Resource, error) {
+func (c *APIGateway) CreateResourceWithContext(ctx aws.Context, input *CreateResourceInput, opts ...aws.Option) (*Resource, error) {
 	req, out := c.CreateResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -942,7 +941,7 @@ func (c *APIGateway) CreateResourceWithContext(ctx aws.Context, input *CreateRes
 
 const opCreateRestApi = "CreateRestApi"
 
-// CreateRestApiRequest generates a "aws/request.Request" representing the
+// CreateRestApiRequest generates a "aws.Request" representing the
 // client's request for the CreateRestApi operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -964,8 +963,8 @@ const opCreateRestApi = "CreateRestApi"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateRestApiRequest(input *CreateRestApiInput) (req *request.Request, output *RestApi) {
-	op := &request.Operation{
+func (c *APIGateway) CreateRestApiRequest(input *CreateRestApiInput) (req *aws.Request, output *RestApi) {
+	op := &aws.Operation{
 		Name:       opCreateRestApi,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis",
@@ -1020,7 +1019,7 @@ func (c *APIGateway) CreateRestApi(input *CreateRestApiInput) (*RestApi, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateRestApiWithContext(ctx aws.Context, input *CreateRestApiInput, opts ...request.Option) (*RestApi, error) {
+func (c *APIGateway) CreateRestApiWithContext(ctx aws.Context, input *CreateRestApiInput, opts ...aws.Option) (*RestApi, error) {
 	req, out := c.CreateRestApiRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1029,7 +1028,7 @@ func (c *APIGateway) CreateRestApiWithContext(ctx aws.Context, input *CreateRest
 
 const opCreateStage = "CreateStage"
 
-// CreateStageRequest generates a "aws/request.Request" representing the
+// CreateStageRequest generates a "aws.Request" representing the
 // client's request for the CreateStage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1051,8 +1050,8 @@ const opCreateStage = "CreateStage"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateStageRequest(input *CreateStageInput) (req *request.Request, output *Stage) {
-	op := &request.Operation{
+func (c *APIGateway) CreateStageRequest(input *CreateStageInput) (req *aws.Request, output *Stage) {
+	op := &aws.Operation{
 		Name:       opCreateStage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/stages",
@@ -1115,7 +1114,7 @@ func (c *APIGateway) CreateStage(input *CreateStageInput) (*Stage, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateStageWithContext(ctx aws.Context, input *CreateStageInput, opts ...request.Option) (*Stage, error) {
+func (c *APIGateway) CreateStageWithContext(ctx aws.Context, input *CreateStageInput, opts ...aws.Option) (*Stage, error) {
 	req, out := c.CreateStageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1124,7 +1123,7 @@ func (c *APIGateway) CreateStageWithContext(ctx aws.Context, input *CreateStageI
 
 const opCreateUsagePlan = "CreateUsagePlan"
 
-// CreateUsagePlanRequest generates a "aws/request.Request" representing the
+// CreateUsagePlanRequest generates a "aws.Request" representing the
 // client's request for the CreateUsagePlan operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1146,8 +1145,8 @@ const opCreateUsagePlan = "CreateUsagePlan"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateUsagePlanRequest(input *CreateUsagePlanInput) (req *request.Request, output *UsagePlan) {
-	op := &request.Operation{
+func (c *APIGateway) CreateUsagePlanRequest(input *CreateUsagePlanInput) (req *aws.Request, output *UsagePlan) {
+	op := &aws.Operation{
 		Name:       opCreateUsagePlan,
 		HTTPMethod: "POST",
 		HTTPPath:   "/usageplans",
@@ -1210,7 +1209,7 @@ func (c *APIGateway) CreateUsagePlan(input *CreateUsagePlanInput) (*UsagePlan, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateUsagePlanWithContext(ctx aws.Context, input *CreateUsagePlanInput, opts ...request.Option) (*UsagePlan, error) {
+func (c *APIGateway) CreateUsagePlanWithContext(ctx aws.Context, input *CreateUsagePlanInput, opts ...aws.Option) (*UsagePlan, error) {
 	req, out := c.CreateUsagePlanRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1219,7 +1218,7 @@ func (c *APIGateway) CreateUsagePlanWithContext(ctx aws.Context, input *CreateUs
 
 const opCreateUsagePlanKey = "CreateUsagePlanKey"
 
-// CreateUsagePlanKeyRequest generates a "aws/request.Request" representing the
+// CreateUsagePlanKeyRequest generates a "aws.Request" representing the
 // client's request for the CreateUsagePlanKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1241,8 +1240,8 @@ const opCreateUsagePlanKey = "CreateUsagePlanKey"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) CreateUsagePlanKeyRequest(input *CreateUsagePlanKeyInput) (req *request.Request, output *UsagePlanKey) {
-	op := &request.Operation{
+func (c *APIGateway) CreateUsagePlanKeyRequest(input *CreateUsagePlanKeyInput) (req *aws.Request, output *UsagePlanKey) {
+	op := &aws.Operation{
 		Name:       opCreateUsagePlanKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/usageplans/{usageplanId}/keys",
@@ -1301,7 +1300,7 @@ func (c *APIGateway) CreateUsagePlanKey(input *CreateUsagePlanKeyInput) (*UsageP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) CreateUsagePlanKeyWithContext(ctx aws.Context, input *CreateUsagePlanKeyInput, opts ...request.Option) (*UsagePlanKey, error) {
+func (c *APIGateway) CreateUsagePlanKeyWithContext(ctx aws.Context, input *CreateUsagePlanKeyInput, opts ...aws.Option) (*UsagePlanKey, error) {
 	req, out := c.CreateUsagePlanKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1310,7 +1309,7 @@ func (c *APIGateway) CreateUsagePlanKeyWithContext(ctx aws.Context, input *Creat
 
 const opDeleteApiKey = "DeleteApiKey"
 
-// DeleteApiKeyRequest generates a "aws/request.Request" representing the
+// DeleteApiKeyRequest generates a "aws.Request" representing the
 // client's request for the DeleteApiKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1332,8 +1331,8 @@ const opDeleteApiKey = "DeleteApiKey"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteApiKeyRequest(input *DeleteApiKeyInput) (req *request.Request, output *DeleteApiKeyOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteApiKeyRequest(input *DeleteApiKeyInput) (req *aws.Request, output *DeleteApiKeyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApiKey,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/apikeys/{api_Key}",
@@ -1386,7 +1385,7 @@ func (c *APIGateway) DeleteApiKey(input *DeleteApiKeyInput) (*DeleteApiKeyOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteApiKeyWithContext(ctx aws.Context, input *DeleteApiKeyInput, opts ...request.Option) (*DeleteApiKeyOutput, error) {
+func (c *APIGateway) DeleteApiKeyWithContext(ctx aws.Context, input *DeleteApiKeyInput, opts ...aws.Option) (*DeleteApiKeyOutput, error) {
 	req, out := c.DeleteApiKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1395,7 +1394,7 @@ func (c *APIGateway) DeleteApiKeyWithContext(ctx aws.Context, input *DeleteApiKe
 
 const opDeleteAuthorizer = "DeleteAuthorizer"
 
-// DeleteAuthorizerRequest generates a "aws/request.Request" representing the
+// DeleteAuthorizerRequest generates a "aws.Request" representing the
 // client's request for the DeleteAuthorizer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1417,8 +1416,8 @@ const opDeleteAuthorizer = "DeleteAuthorizer"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) (req *request.Request, output *DeleteAuthorizerOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) (req *aws.Request, output *DeleteAuthorizerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAuthorizer,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/authorizers/{authorizer_id}",
@@ -1481,7 +1480,7 @@ func (c *APIGateway) DeleteAuthorizer(input *DeleteAuthorizerInput) (*DeleteAuth
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteAuthorizerWithContext(ctx aws.Context, input *DeleteAuthorizerInput, opts ...request.Option) (*DeleteAuthorizerOutput, error) {
+func (c *APIGateway) DeleteAuthorizerWithContext(ctx aws.Context, input *DeleteAuthorizerInput, opts ...aws.Option) (*DeleteAuthorizerOutput, error) {
 	req, out := c.DeleteAuthorizerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1490,7 +1489,7 @@ func (c *APIGateway) DeleteAuthorizerWithContext(ctx aws.Context, input *DeleteA
 
 const opDeleteBasePathMapping = "DeleteBasePathMapping"
 
-// DeleteBasePathMappingRequest generates a "aws/request.Request" representing the
+// DeleteBasePathMappingRequest generates a "aws.Request" representing the
 // client's request for the DeleteBasePathMapping operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1512,8 +1511,8 @@ const opDeleteBasePathMapping = "DeleteBasePathMapping"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteBasePathMappingRequest(input *DeleteBasePathMappingInput) (req *request.Request, output *DeleteBasePathMappingOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteBasePathMappingRequest(input *DeleteBasePathMappingInput) (req *aws.Request, output *DeleteBasePathMappingOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBasePathMapping,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/domainnames/{domain_name}/basepathmappings/{base_path}",
@@ -1574,7 +1573,7 @@ func (c *APIGateway) DeleteBasePathMapping(input *DeleteBasePathMappingInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteBasePathMappingWithContext(ctx aws.Context, input *DeleteBasePathMappingInput, opts ...request.Option) (*DeleteBasePathMappingOutput, error) {
+func (c *APIGateway) DeleteBasePathMappingWithContext(ctx aws.Context, input *DeleteBasePathMappingInput, opts ...aws.Option) (*DeleteBasePathMappingOutput, error) {
 	req, out := c.DeleteBasePathMappingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1583,7 +1582,7 @@ func (c *APIGateway) DeleteBasePathMappingWithContext(ctx aws.Context, input *De
 
 const opDeleteClientCertificate = "DeleteClientCertificate"
 
-// DeleteClientCertificateRequest generates a "aws/request.Request" representing the
+// DeleteClientCertificateRequest generates a "aws.Request" representing the
 // client's request for the DeleteClientCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1605,8 +1604,8 @@ const opDeleteClientCertificate = "DeleteClientCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteClientCertificateRequest(input *DeleteClientCertificateInput) (req *request.Request, output *DeleteClientCertificateOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteClientCertificateRequest(input *DeleteClientCertificateInput) (req *aws.Request, output *DeleteClientCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteClientCertificate,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/clientcertificates/{clientcertificate_id}",
@@ -1663,7 +1662,7 @@ func (c *APIGateway) DeleteClientCertificate(input *DeleteClientCertificateInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteClientCertificateWithContext(ctx aws.Context, input *DeleteClientCertificateInput, opts ...request.Option) (*DeleteClientCertificateOutput, error) {
+func (c *APIGateway) DeleteClientCertificateWithContext(ctx aws.Context, input *DeleteClientCertificateInput, opts ...aws.Option) (*DeleteClientCertificateOutput, error) {
 	req, out := c.DeleteClientCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1672,7 +1671,7 @@ func (c *APIGateway) DeleteClientCertificateWithContext(ctx aws.Context, input *
 
 const opDeleteDeployment = "DeleteDeployment"
 
-// DeleteDeploymentRequest generates a "aws/request.Request" representing the
+// DeleteDeploymentRequest generates a "aws.Request" representing the
 // client's request for the DeleteDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1694,8 +1693,8 @@ const opDeleteDeployment = "DeleteDeployment"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteDeploymentRequest(input *DeleteDeploymentInput) (req *request.Request, output *DeleteDeploymentOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteDeploymentRequest(input *DeleteDeploymentInput) (req *aws.Request, output *DeleteDeploymentOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDeployment,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/deployments/{deployment_id}",
@@ -1753,7 +1752,7 @@ func (c *APIGateway) DeleteDeployment(input *DeleteDeploymentInput) (*DeleteDepl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteDeploymentWithContext(ctx aws.Context, input *DeleteDeploymentInput, opts ...request.Option) (*DeleteDeploymentOutput, error) {
+func (c *APIGateway) DeleteDeploymentWithContext(ctx aws.Context, input *DeleteDeploymentInput, opts ...aws.Option) (*DeleteDeploymentOutput, error) {
 	req, out := c.DeleteDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1762,7 +1761,7 @@ func (c *APIGateway) DeleteDeploymentWithContext(ctx aws.Context, input *DeleteD
 
 const opDeleteDocumentationPart = "DeleteDocumentationPart"
 
-// DeleteDocumentationPartRequest generates a "aws/request.Request" representing the
+// DeleteDocumentationPartRequest generates a "aws.Request" representing the
 // client's request for the DeleteDocumentationPart operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1784,8 +1783,8 @@ const opDeleteDocumentationPart = "DeleteDocumentationPart"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteDocumentationPartRequest(input *DeleteDocumentationPartInput) (req *request.Request, output *DeleteDocumentationPartOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteDocumentationPartRequest(input *DeleteDocumentationPartInput) (req *aws.Request, output *DeleteDocumentationPartOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDocumentationPart,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/parts/{part_id}",
@@ -1844,7 +1843,7 @@ func (c *APIGateway) DeleteDocumentationPart(input *DeleteDocumentationPartInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteDocumentationPartWithContext(ctx aws.Context, input *DeleteDocumentationPartInput, opts ...request.Option) (*DeleteDocumentationPartOutput, error) {
+func (c *APIGateway) DeleteDocumentationPartWithContext(ctx aws.Context, input *DeleteDocumentationPartInput, opts ...aws.Option) (*DeleteDocumentationPartOutput, error) {
 	req, out := c.DeleteDocumentationPartRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1853,7 +1852,7 @@ func (c *APIGateway) DeleteDocumentationPartWithContext(ctx aws.Context, input *
 
 const opDeleteDocumentationVersion = "DeleteDocumentationVersion"
 
-// DeleteDocumentationVersionRequest generates a "aws/request.Request" representing the
+// DeleteDocumentationVersionRequest generates a "aws.Request" representing the
 // client's request for the DeleteDocumentationVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1875,8 +1874,8 @@ const opDeleteDocumentationVersion = "DeleteDocumentationVersion"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteDocumentationVersionRequest(input *DeleteDocumentationVersionInput) (req *request.Request, output *DeleteDocumentationVersionOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteDocumentationVersionRequest(input *DeleteDocumentationVersionInput) (req *aws.Request, output *DeleteDocumentationVersionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDocumentationVersion,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/versions/{doc_version}",
@@ -1935,7 +1934,7 @@ func (c *APIGateway) DeleteDocumentationVersion(input *DeleteDocumentationVersio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteDocumentationVersionWithContext(ctx aws.Context, input *DeleteDocumentationVersionInput, opts ...request.Option) (*DeleteDocumentationVersionOutput, error) {
+func (c *APIGateway) DeleteDocumentationVersionWithContext(ctx aws.Context, input *DeleteDocumentationVersionInput, opts ...aws.Option) (*DeleteDocumentationVersionOutput, error) {
 	req, out := c.DeleteDocumentationVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1944,7 +1943,7 @@ func (c *APIGateway) DeleteDocumentationVersionWithContext(ctx aws.Context, inpu
 
 const opDeleteDomainName = "DeleteDomainName"
 
-// DeleteDomainNameRequest generates a "aws/request.Request" representing the
+// DeleteDomainNameRequest generates a "aws.Request" representing the
 // client's request for the DeleteDomainName operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1966,8 +1965,8 @@ const opDeleteDomainName = "DeleteDomainName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteDomainNameRequest(input *DeleteDomainNameInput) (req *request.Request, output *DeleteDomainNameOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteDomainNameRequest(input *DeleteDomainNameInput) (req *aws.Request, output *DeleteDomainNameOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDomainName,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/domainnames/{domain_name}",
@@ -2020,7 +2019,7 @@ func (c *APIGateway) DeleteDomainName(input *DeleteDomainNameInput) (*DeleteDoma
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteDomainNameWithContext(ctx aws.Context, input *DeleteDomainNameInput, opts ...request.Option) (*DeleteDomainNameOutput, error) {
+func (c *APIGateway) DeleteDomainNameWithContext(ctx aws.Context, input *DeleteDomainNameInput, opts ...aws.Option) (*DeleteDomainNameOutput, error) {
 	req, out := c.DeleteDomainNameRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2029,7 +2028,7 @@ func (c *APIGateway) DeleteDomainNameWithContext(ctx aws.Context, input *DeleteD
 
 const opDeleteGatewayResponse = "DeleteGatewayResponse"
 
-// DeleteGatewayResponseRequest generates a "aws/request.Request" representing the
+// DeleteGatewayResponseRequest generates a "aws.Request" representing the
 // client's request for the DeleteGatewayResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2051,8 +2050,8 @@ const opDeleteGatewayResponse = "DeleteGatewayResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteGatewayResponseRequest(input *DeleteGatewayResponseInput) (req *request.Request, output *DeleteGatewayResponseOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteGatewayResponseRequest(input *DeleteGatewayResponseInput) (req *aws.Request, output *DeleteGatewayResponseOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteGatewayResponse,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/gatewayresponses/{response_type}",
@@ -2114,7 +2113,7 @@ func (c *APIGateway) DeleteGatewayResponse(input *DeleteGatewayResponseInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteGatewayResponseWithContext(ctx aws.Context, input *DeleteGatewayResponseInput, opts ...request.Option) (*DeleteGatewayResponseOutput, error) {
+func (c *APIGateway) DeleteGatewayResponseWithContext(ctx aws.Context, input *DeleteGatewayResponseInput, opts ...aws.Option) (*DeleteGatewayResponseOutput, error) {
 	req, out := c.DeleteGatewayResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2123,7 +2122,7 @@ func (c *APIGateway) DeleteGatewayResponseWithContext(ctx aws.Context, input *De
 
 const opDeleteIntegration = "DeleteIntegration"
 
-// DeleteIntegrationRequest generates a "aws/request.Request" representing the
+// DeleteIntegrationRequest generates a "aws.Request" representing the
 // client's request for the DeleteIntegration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2145,8 +2144,8 @@ const opDeleteIntegration = "DeleteIntegration"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteIntegrationRequest(input *DeleteIntegrationInput) (req *request.Request, output *DeleteIntegrationOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteIntegrationRequest(input *DeleteIntegrationInput) (req *aws.Request, output *DeleteIntegrationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIntegration,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration",
@@ -2203,7 +2202,7 @@ func (c *APIGateway) DeleteIntegration(input *DeleteIntegrationInput) (*DeleteIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteIntegrationWithContext(ctx aws.Context, input *DeleteIntegrationInput, opts ...request.Option) (*DeleteIntegrationOutput, error) {
+func (c *APIGateway) DeleteIntegrationWithContext(ctx aws.Context, input *DeleteIntegrationInput, opts ...aws.Option) (*DeleteIntegrationOutput, error) {
 	req, out := c.DeleteIntegrationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2212,7 +2211,7 @@ func (c *APIGateway) DeleteIntegrationWithContext(ctx aws.Context, input *Delete
 
 const opDeleteIntegrationResponse = "DeleteIntegrationResponse"
 
-// DeleteIntegrationResponseRequest generates a "aws/request.Request" representing the
+// DeleteIntegrationResponseRequest generates a "aws.Request" representing the
 // client's request for the DeleteIntegrationResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2234,8 +2233,8 @@ const opDeleteIntegrationResponse = "DeleteIntegrationResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteIntegrationResponseRequest(input *DeleteIntegrationResponseInput) (req *request.Request, output *DeleteIntegrationResponseOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteIntegrationResponseRequest(input *DeleteIntegrationResponseInput) (req *aws.Request, output *DeleteIntegrationResponseOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIntegrationResponse,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}",
@@ -2296,7 +2295,7 @@ func (c *APIGateway) DeleteIntegrationResponse(input *DeleteIntegrationResponseI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteIntegrationResponseWithContext(ctx aws.Context, input *DeleteIntegrationResponseInput, opts ...request.Option) (*DeleteIntegrationResponseOutput, error) {
+func (c *APIGateway) DeleteIntegrationResponseWithContext(ctx aws.Context, input *DeleteIntegrationResponseInput, opts ...aws.Option) (*DeleteIntegrationResponseOutput, error) {
 	req, out := c.DeleteIntegrationResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2305,7 +2304,7 @@ func (c *APIGateway) DeleteIntegrationResponseWithContext(ctx aws.Context, input
 
 const opDeleteMethod = "DeleteMethod"
 
-// DeleteMethodRequest generates a "aws/request.Request" representing the
+// DeleteMethodRequest generates a "aws.Request" representing the
 // client's request for the DeleteMethod operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2327,8 +2326,8 @@ const opDeleteMethod = "DeleteMethod"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteMethodRequest(input *DeleteMethodInput) (req *request.Request, output *DeleteMethodOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteMethodRequest(input *DeleteMethodInput) (req *aws.Request, output *DeleteMethodOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteMethod,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}",
@@ -2385,7 +2384,7 @@ func (c *APIGateway) DeleteMethod(input *DeleteMethodInput) (*DeleteMethodOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteMethodWithContext(ctx aws.Context, input *DeleteMethodInput, opts ...request.Option) (*DeleteMethodOutput, error) {
+func (c *APIGateway) DeleteMethodWithContext(ctx aws.Context, input *DeleteMethodInput, opts ...aws.Option) (*DeleteMethodOutput, error) {
 	req, out := c.DeleteMethodRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2394,7 +2393,7 @@ func (c *APIGateway) DeleteMethodWithContext(ctx aws.Context, input *DeleteMetho
 
 const opDeleteMethodResponse = "DeleteMethodResponse"
 
-// DeleteMethodResponseRequest generates a "aws/request.Request" representing the
+// DeleteMethodResponseRequest generates a "aws.Request" representing the
 // client's request for the DeleteMethodResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2416,8 +2415,8 @@ const opDeleteMethodResponse = "DeleteMethodResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteMethodResponseRequest(input *DeleteMethodResponseInput) (req *request.Request, output *DeleteMethodResponseOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteMethodResponseRequest(input *DeleteMethodResponseInput) (req *aws.Request, output *DeleteMethodResponseOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteMethodResponse,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}",
@@ -2478,7 +2477,7 @@ func (c *APIGateway) DeleteMethodResponse(input *DeleteMethodResponseInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteMethodResponseWithContext(ctx aws.Context, input *DeleteMethodResponseInput, opts ...request.Option) (*DeleteMethodResponseOutput, error) {
+func (c *APIGateway) DeleteMethodResponseWithContext(ctx aws.Context, input *DeleteMethodResponseInput, opts ...aws.Option) (*DeleteMethodResponseOutput, error) {
 	req, out := c.DeleteMethodResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2487,7 +2486,7 @@ func (c *APIGateway) DeleteMethodResponseWithContext(ctx aws.Context, input *Del
 
 const opDeleteModel = "DeleteModel"
 
-// DeleteModelRequest generates a "aws/request.Request" representing the
+// DeleteModelRequest generates a "aws.Request" representing the
 // client's request for the DeleteModel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2509,8 +2508,8 @@ const opDeleteModel = "DeleteModel"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteModelRequest(input *DeleteModelInput) (req *request.Request, output *DeleteModelOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteModelRequest(input *DeleteModelInput) (req *aws.Request, output *DeleteModelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteModel,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/models/{model_name}",
@@ -2571,7 +2570,7 @@ func (c *APIGateway) DeleteModel(input *DeleteModelInput) (*DeleteModelOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteModelWithContext(ctx aws.Context, input *DeleteModelInput, opts ...request.Option) (*DeleteModelOutput, error) {
+func (c *APIGateway) DeleteModelWithContext(ctx aws.Context, input *DeleteModelInput, opts ...aws.Option) (*DeleteModelOutput, error) {
 	req, out := c.DeleteModelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2580,7 +2579,7 @@ func (c *APIGateway) DeleteModelWithContext(ctx aws.Context, input *DeleteModelI
 
 const opDeleteRequestValidator = "DeleteRequestValidator"
 
-// DeleteRequestValidatorRequest generates a "aws/request.Request" representing the
+// DeleteRequestValidatorRequest generates a "aws.Request" representing the
 // client's request for the DeleteRequestValidator operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2602,8 +2601,8 @@ const opDeleteRequestValidator = "DeleteRequestValidator"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteRequestValidatorRequest(input *DeleteRequestValidatorInput) (req *request.Request, output *DeleteRequestValidatorOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteRequestValidatorRequest(input *DeleteRequestValidatorInput) (req *aws.Request, output *DeleteRequestValidatorOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRequestValidator,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}",
@@ -2664,7 +2663,7 @@ func (c *APIGateway) DeleteRequestValidator(input *DeleteRequestValidatorInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteRequestValidatorWithContext(ctx aws.Context, input *DeleteRequestValidatorInput, opts ...request.Option) (*DeleteRequestValidatorOutput, error) {
+func (c *APIGateway) DeleteRequestValidatorWithContext(ctx aws.Context, input *DeleteRequestValidatorInput, opts ...aws.Option) (*DeleteRequestValidatorOutput, error) {
 	req, out := c.DeleteRequestValidatorRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2673,7 +2672,7 @@ func (c *APIGateway) DeleteRequestValidatorWithContext(ctx aws.Context, input *D
 
 const opDeleteResource = "DeleteResource"
 
-// DeleteResourceRequest generates a "aws/request.Request" representing the
+// DeleteResourceRequest generates a "aws.Request" representing the
 // client's request for the DeleteResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2695,8 +2694,8 @@ const opDeleteResource = "DeleteResource"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteResourceRequest(input *DeleteResourceInput) (req *request.Request, output *DeleteResourceOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteResourceRequest(input *DeleteResourceInput) (req *aws.Request, output *DeleteResourceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteResource,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}",
@@ -2757,7 +2756,7 @@ func (c *APIGateway) DeleteResource(input *DeleteResourceInput) (*DeleteResource
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteResourceWithContext(ctx aws.Context, input *DeleteResourceInput, opts ...request.Option) (*DeleteResourceOutput, error) {
+func (c *APIGateway) DeleteResourceWithContext(ctx aws.Context, input *DeleteResourceInput, opts ...aws.Option) (*DeleteResourceOutput, error) {
 	req, out := c.DeleteResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2766,7 +2765,7 @@ func (c *APIGateway) DeleteResourceWithContext(ctx aws.Context, input *DeleteRes
 
 const opDeleteRestApi = "DeleteRestApi"
 
-// DeleteRestApiRequest generates a "aws/request.Request" representing the
+// DeleteRestApiRequest generates a "aws.Request" representing the
 // client's request for the DeleteRestApi operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2788,8 +2787,8 @@ const opDeleteRestApi = "DeleteRestApi"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteRestApiRequest(input *DeleteRestApiInput) (req *request.Request, output *DeleteRestApiOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteRestApiRequest(input *DeleteRestApiInput) (req *aws.Request, output *DeleteRestApiOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRestApi,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}",
@@ -2846,7 +2845,7 @@ func (c *APIGateway) DeleteRestApi(input *DeleteRestApiInput) (*DeleteRestApiOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteRestApiWithContext(ctx aws.Context, input *DeleteRestApiInput, opts ...request.Option) (*DeleteRestApiOutput, error) {
+func (c *APIGateway) DeleteRestApiWithContext(ctx aws.Context, input *DeleteRestApiInput, opts ...aws.Option) (*DeleteRestApiOutput, error) {
 	req, out := c.DeleteRestApiRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2855,7 +2854,7 @@ func (c *APIGateway) DeleteRestApiWithContext(ctx aws.Context, input *DeleteRest
 
 const opDeleteStage = "DeleteStage"
 
-// DeleteStageRequest generates a "aws/request.Request" representing the
+// DeleteStageRequest generates a "aws.Request" representing the
 // client's request for the DeleteStage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2877,8 +2876,8 @@ const opDeleteStage = "DeleteStage"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteStageRequest(input *DeleteStageInput) (req *request.Request, output *DeleteStageOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteStageRequest(input *DeleteStageInput) (req *aws.Request, output *DeleteStageOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteStage,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/stages/{stage_name}",
@@ -2935,7 +2934,7 @@ func (c *APIGateway) DeleteStage(input *DeleteStageInput) (*DeleteStageOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteStageWithContext(ctx aws.Context, input *DeleteStageInput, opts ...request.Option) (*DeleteStageOutput, error) {
+func (c *APIGateway) DeleteStageWithContext(ctx aws.Context, input *DeleteStageInput, opts ...aws.Option) (*DeleteStageOutput, error) {
 	req, out := c.DeleteStageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2944,7 +2943,7 @@ func (c *APIGateway) DeleteStageWithContext(ctx aws.Context, input *DeleteStageI
 
 const opDeleteUsagePlan = "DeleteUsagePlan"
 
-// DeleteUsagePlanRequest generates a "aws/request.Request" representing the
+// DeleteUsagePlanRequest generates a "aws.Request" representing the
 // client's request for the DeleteUsagePlan operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2966,8 +2965,8 @@ const opDeleteUsagePlan = "DeleteUsagePlan"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteUsagePlanRequest(input *DeleteUsagePlanInput) (req *request.Request, output *DeleteUsagePlanOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteUsagePlanRequest(input *DeleteUsagePlanInput) (req *aws.Request, output *DeleteUsagePlanOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUsagePlan,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/usageplans/{usageplanId}",
@@ -3024,7 +3023,7 @@ func (c *APIGateway) DeleteUsagePlan(input *DeleteUsagePlanInput) (*DeleteUsageP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteUsagePlanWithContext(ctx aws.Context, input *DeleteUsagePlanInput, opts ...request.Option) (*DeleteUsagePlanOutput, error) {
+func (c *APIGateway) DeleteUsagePlanWithContext(ctx aws.Context, input *DeleteUsagePlanInput, opts ...aws.Option) (*DeleteUsagePlanOutput, error) {
 	req, out := c.DeleteUsagePlanRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3033,7 +3032,7 @@ func (c *APIGateway) DeleteUsagePlanWithContext(ctx aws.Context, input *DeleteUs
 
 const opDeleteUsagePlanKey = "DeleteUsagePlanKey"
 
-// DeleteUsagePlanKeyRequest generates a "aws/request.Request" representing the
+// DeleteUsagePlanKeyRequest generates a "aws.Request" representing the
 // client's request for the DeleteUsagePlanKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3055,8 +3054,8 @@ const opDeleteUsagePlanKey = "DeleteUsagePlanKey"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) DeleteUsagePlanKeyRequest(input *DeleteUsagePlanKeyInput) (req *request.Request, output *DeleteUsagePlanKeyOutput) {
-	op := &request.Operation{
+func (c *APIGateway) DeleteUsagePlanKeyRequest(input *DeleteUsagePlanKeyInput) (req *aws.Request, output *DeleteUsagePlanKeyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUsagePlanKey,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/usageplans/{usageplanId}/keys/{keyId}",
@@ -3118,7 +3117,7 @@ func (c *APIGateway) DeleteUsagePlanKey(input *DeleteUsagePlanKeyInput) (*Delete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) DeleteUsagePlanKeyWithContext(ctx aws.Context, input *DeleteUsagePlanKeyInput, opts ...request.Option) (*DeleteUsagePlanKeyOutput, error) {
+func (c *APIGateway) DeleteUsagePlanKeyWithContext(ctx aws.Context, input *DeleteUsagePlanKeyInput, opts ...aws.Option) (*DeleteUsagePlanKeyOutput, error) {
 	req, out := c.DeleteUsagePlanKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3127,7 +3126,7 @@ func (c *APIGateway) DeleteUsagePlanKeyWithContext(ctx aws.Context, input *Delet
 
 const opFlushStageAuthorizersCache = "FlushStageAuthorizersCache"
 
-// FlushStageAuthorizersCacheRequest generates a "aws/request.Request" representing the
+// FlushStageAuthorizersCacheRequest generates a "aws.Request" representing the
 // client's request for the FlushStageAuthorizersCache operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3149,8 +3148,8 @@ const opFlushStageAuthorizersCache = "FlushStageAuthorizersCache"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) FlushStageAuthorizersCacheRequest(input *FlushStageAuthorizersCacheInput) (req *request.Request, output *FlushStageAuthorizersCacheOutput) {
-	op := &request.Operation{
+func (c *APIGateway) FlushStageAuthorizersCacheRequest(input *FlushStageAuthorizersCacheInput) (req *aws.Request, output *FlushStageAuthorizersCacheOutput) {
+	op := &aws.Operation{
 		Name:       opFlushStageAuthorizersCache,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/stages/{stage_name}/cache/authorizers",
@@ -3207,7 +3206,7 @@ func (c *APIGateway) FlushStageAuthorizersCache(input *FlushStageAuthorizersCach
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) FlushStageAuthorizersCacheWithContext(ctx aws.Context, input *FlushStageAuthorizersCacheInput, opts ...request.Option) (*FlushStageAuthorizersCacheOutput, error) {
+func (c *APIGateway) FlushStageAuthorizersCacheWithContext(ctx aws.Context, input *FlushStageAuthorizersCacheInput, opts ...aws.Option) (*FlushStageAuthorizersCacheOutput, error) {
 	req, out := c.FlushStageAuthorizersCacheRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3216,7 +3215,7 @@ func (c *APIGateway) FlushStageAuthorizersCacheWithContext(ctx aws.Context, inpu
 
 const opFlushStageCache = "FlushStageCache"
 
-// FlushStageCacheRequest generates a "aws/request.Request" representing the
+// FlushStageCacheRequest generates a "aws.Request" representing the
 // client's request for the FlushStageCache operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3238,8 +3237,8 @@ const opFlushStageCache = "FlushStageCache"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) FlushStageCacheRequest(input *FlushStageCacheInput) (req *request.Request, output *FlushStageCacheOutput) {
-	op := &request.Operation{
+func (c *APIGateway) FlushStageCacheRequest(input *FlushStageCacheInput) (req *aws.Request, output *FlushStageCacheOutput) {
+	op := &aws.Operation{
 		Name:       opFlushStageCache,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/restapis/{restapi_id}/stages/{stage_name}/cache/data",
@@ -3296,7 +3295,7 @@ func (c *APIGateway) FlushStageCache(input *FlushStageCacheInput) (*FlushStageCa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) FlushStageCacheWithContext(ctx aws.Context, input *FlushStageCacheInput, opts ...request.Option) (*FlushStageCacheOutput, error) {
+func (c *APIGateway) FlushStageCacheWithContext(ctx aws.Context, input *FlushStageCacheInput, opts ...aws.Option) (*FlushStageCacheOutput, error) {
 	req, out := c.FlushStageCacheRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3305,7 +3304,7 @@ func (c *APIGateway) FlushStageCacheWithContext(ctx aws.Context, input *FlushSta
 
 const opGenerateClientCertificate = "GenerateClientCertificate"
 
-// GenerateClientCertificateRequest generates a "aws/request.Request" representing the
+// GenerateClientCertificateRequest generates a "aws.Request" representing the
 // client's request for the GenerateClientCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3327,8 +3326,8 @@ const opGenerateClientCertificate = "GenerateClientCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GenerateClientCertificateRequest(input *GenerateClientCertificateInput) (req *request.Request, output *ClientCertificate) {
-	op := &request.Operation{
+func (c *APIGateway) GenerateClientCertificateRequest(input *GenerateClientCertificateInput) (req *aws.Request, output *ClientCertificate) {
+	op := &aws.Operation{
 		Name:       opGenerateClientCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/clientcertificates",
@@ -3379,7 +3378,7 @@ func (c *APIGateway) GenerateClientCertificate(input *GenerateClientCertificateI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GenerateClientCertificateWithContext(ctx aws.Context, input *GenerateClientCertificateInput, opts ...request.Option) (*ClientCertificate, error) {
+func (c *APIGateway) GenerateClientCertificateWithContext(ctx aws.Context, input *GenerateClientCertificateInput, opts ...aws.Option) (*ClientCertificate, error) {
 	req, out := c.GenerateClientCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3388,7 +3387,7 @@ func (c *APIGateway) GenerateClientCertificateWithContext(ctx aws.Context, input
 
 const opGetAccount = "GetAccount"
 
-// GetAccountRequest generates a "aws/request.Request" representing the
+// GetAccountRequest generates a "aws.Request" representing the
 // client's request for the GetAccount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3410,8 +3409,8 @@ const opGetAccount = "GetAccount"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetAccountRequest(input *GetAccountInput) (req *request.Request, output *Account) {
-	op := &request.Operation{
+func (c *APIGateway) GetAccountRequest(input *GetAccountInput) (req *aws.Request, output *Account) {
+	op := &aws.Operation{
 		Name:       opGetAccount,
 		HTTPMethod: "GET",
 		HTTPPath:   "/account",
@@ -3462,7 +3461,7 @@ func (c *APIGateway) GetAccount(input *GetAccountInput) (*Account, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetAccountWithContext(ctx aws.Context, input *GetAccountInput, opts ...request.Option) (*Account, error) {
+func (c *APIGateway) GetAccountWithContext(ctx aws.Context, input *GetAccountInput, opts ...aws.Option) (*Account, error) {
 	req, out := c.GetAccountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3471,7 +3470,7 @@ func (c *APIGateway) GetAccountWithContext(ctx aws.Context, input *GetAccountInp
 
 const opGetApiKey = "GetApiKey"
 
-// GetApiKeyRequest generates a "aws/request.Request" representing the
+// GetApiKeyRequest generates a "aws.Request" representing the
 // client's request for the GetApiKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3493,8 +3492,8 @@ const opGetApiKey = "GetApiKey"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetApiKeyRequest(input *GetApiKeyInput) (req *request.Request, output *ApiKey) {
-	op := &request.Operation{
+func (c *APIGateway) GetApiKeyRequest(input *GetApiKeyInput) (req *aws.Request, output *ApiKey) {
+	op := &aws.Operation{
 		Name:       opGetApiKey,
 		HTTPMethod: "GET",
 		HTTPPath:   "/apikeys/{api_Key}",
@@ -3545,7 +3544,7 @@ func (c *APIGateway) GetApiKey(input *GetApiKeyInput) (*ApiKey, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetApiKeyWithContext(ctx aws.Context, input *GetApiKeyInput, opts ...request.Option) (*ApiKey, error) {
+func (c *APIGateway) GetApiKeyWithContext(ctx aws.Context, input *GetApiKeyInput, opts ...aws.Option) (*ApiKey, error) {
 	req, out := c.GetApiKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3554,7 +3553,7 @@ func (c *APIGateway) GetApiKeyWithContext(ctx aws.Context, input *GetApiKeyInput
 
 const opGetApiKeys = "GetApiKeys"
 
-// GetApiKeysRequest generates a "aws/request.Request" representing the
+// GetApiKeysRequest generates a "aws.Request" representing the
 // client's request for the GetApiKeys operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3576,12 +3575,12 @@ const opGetApiKeys = "GetApiKeys"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetApiKeysRequest(input *GetApiKeysInput) (req *request.Request, output *GetApiKeysOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetApiKeysRequest(input *GetApiKeysInput) (req *aws.Request, output *GetApiKeysOutput) {
+	op := &aws.Operation{
 		Name:       opGetApiKeys,
 		HTTPMethod: "GET",
 		HTTPPath:   "/apikeys",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -3635,7 +3634,7 @@ func (c *APIGateway) GetApiKeys(input *GetApiKeysInput) (*GetApiKeysOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetApiKeysWithContext(ctx aws.Context, input *GetApiKeysInput, opts ...request.Option) (*GetApiKeysOutput, error) {
+func (c *APIGateway) GetApiKeysWithContext(ctx aws.Context, input *GetApiKeysInput, opts ...aws.Option) (*GetApiKeysOutput, error) {
 	req, out := c.GetApiKeysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3670,9 +3669,9 @@ func (c *APIGateway) GetApiKeysPages(input *GetApiKeysInput, fn func(*GetApiKeys
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetApiKeysPagesWithContext(ctx aws.Context, input *GetApiKeysInput, fn func(*GetApiKeysOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetApiKeysPagesWithContext(ctx aws.Context, input *GetApiKeysInput, fn func(*GetApiKeysOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetApiKeysInput
 			if input != nil {
 				tmp := *input
@@ -3694,7 +3693,7 @@ func (c *APIGateway) GetApiKeysPagesWithContext(ctx aws.Context, input *GetApiKe
 
 const opGetAuthorizer = "GetAuthorizer"
 
-// GetAuthorizerRequest generates a "aws/request.Request" representing the
+// GetAuthorizerRequest generates a "aws.Request" representing the
 // client's request for the GetAuthorizer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3716,8 +3715,8 @@ const opGetAuthorizer = "GetAuthorizer"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetAuthorizerRequest(input *GetAuthorizerInput) (req *request.Request, output *Authorizer) {
-	op := &request.Operation{
+func (c *APIGateway) GetAuthorizerRequest(input *GetAuthorizerInput) (req *aws.Request, output *Authorizer) {
+	op := &aws.Operation{
 		Name:       opGetAuthorizer,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/authorizers/{authorizer_id}",
@@ -3770,7 +3769,7 @@ func (c *APIGateway) GetAuthorizer(input *GetAuthorizerInput) (*Authorizer, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetAuthorizerWithContext(ctx aws.Context, input *GetAuthorizerInput, opts ...request.Option) (*Authorizer, error) {
+func (c *APIGateway) GetAuthorizerWithContext(ctx aws.Context, input *GetAuthorizerInput, opts ...aws.Option) (*Authorizer, error) {
 	req, out := c.GetAuthorizerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3779,7 +3778,7 @@ func (c *APIGateway) GetAuthorizerWithContext(ctx aws.Context, input *GetAuthori
 
 const opGetAuthorizers = "GetAuthorizers"
 
-// GetAuthorizersRequest generates a "aws/request.Request" representing the
+// GetAuthorizersRequest generates a "aws.Request" representing the
 // client's request for the GetAuthorizers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3801,8 +3800,8 @@ const opGetAuthorizers = "GetAuthorizers"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetAuthorizersRequest(input *GetAuthorizersInput) (req *request.Request, output *GetAuthorizersOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetAuthorizersRequest(input *GetAuthorizersInput) (req *aws.Request, output *GetAuthorizersOutput) {
+	op := &aws.Operation{
 		Name:       opGetAuthorizers,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/authorizers",
@@ -3859,7 +3858,7 @@ func (c *APIGateway) GetAuthorizers(input *GetAuthorizersInput) (*GetAuthorizers
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetAuthorizersWithContext(ctx aws.Context, input *GetAuthorizersInput, opts ...request.Option) (*GetAuthorizersOutput, error) {
+func (c *APIGateway) GetAuthorizersWithContext(ctx aws.Context, input *GetAuthorizersInput, opts ...aws.Option) (*GetAuthorizersOutput, error) {
 	req, out := c.GetAuthorizersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3868,7 +3867,7 @@ func (c *APIGateway) GetAuthorizersWithContext(ctx aws.Context, input *GetAuthor
 
 const opGetBasePathMapping = "GetBasePathMapping"
 
-// GetBasePathMappingRequest generates a "aws/request.Request" representing the
+// GetBasePathMappingRequest generates a "aws.Request" representing the
 // client's request for the GetBasePathMapping operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3890,8 +3889,8 @@ const opGetBasePathMapping = "GetBasePathMapping"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetBasePathMappingRequest(input *GetBasePathMappingInput) (req *request.Request, output *BasePathMapping) {
-	op := &request.Operation{
+func (c *APIGateway) GetBasePathMappingRequest(input *GetBasePathMappingInput) (req *aws.Request, output *BasePathMapping) {
+	op := &aws.Operation{
 		Name:       opGetBasePathMapping,
 		HTTPMethod: "GET",
 		HTTPPath:   "/domainnames/{domain_name}/basepathmappings/{base_path}",
@@ -3942,7 +3941,7 @@ func (c *APIGateway) GetBasePathMapping(input *GetBasePathMappingInput) (*BasePa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetBasePathMappingWithContext(ctx aws.Context, input *GetBasePathMappingInput, opts ...request.Option) (*BasePathMapping, error) {
+func (c *APIGateway) GetBasePathMappingWithContext(ctx aws.Context, input *GetBasePathMappingInput, opts ...aws.Option) (*BasePathMapping, error) {
 	req, out := c.GetBasePathMappingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3951,7 +3950,7 @@ func (c *APIGateway) GetBasePathMappingWithContext(ctx aws.Context, input *GetBa
 
 const opGetBasePathMappings = "GetBasePathMappings"
 
-// GetBasePathMappingsRequest generates a "aws/request.Request" representing the
+// GetBasePathMappingsRequest generates a "aws.Request" representing the
 // client's request for the GetBasePathMappings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3973,12 +3972,12 @@ const opGetBasePathMappings = "GetBasePathMappings"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetBasePathMappingsRequest(input *GetBasePathMappingsInput) (req *request.Request, output *GetBasePathMappingsOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetBasePathMappingsRequest(input *GetBasePathMappingsInput) (req *aws.Request, output *GetBasePathMappingsOutput) {
+	op := &aws.Operation{
 		Name:       opGetBasePathMappings,
 		HTTPMethod: "GET",
 		HTTPPath:   "/domainnames/{domain_name}/basepathmappings",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -4031,7 +4030,7 @@ func (c *APIGateway) GetBasePathMappings(input *GetBasePathMappingsInput) (*GetB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetBasePathMappingsWithContext(ctx aws.Context, input *GetBasePathMappingsInput, opts ...request.Option) (*GetBasePathMappingsOutput, error) {
+func (c *APIGateway) GetBasePathMappingsWithContext(ctx aws.Context, input *GetBasePathMappingsInput, opts ...aws.Option) (*GetBasePathMappingsOutput, error) {
 	req, out := c.GetBasePathMappingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4066,9 +4065,9 @@ func (c *APIGateway) GetBasePathMappingsPages(input *GetBasePathMappingsInput, f
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetBasePathMappingsPagesWithContext(ctx aws.Context, input *GetBasePathMappingsInput, fn func(*GetBasePathMappingsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetBasePathMappingsPagesWithContext(ctx aws.Context, input *GetBasePathMappingsInput, fn func(*GetBasePathMappingsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBasePathMappingsInput
 			if input != nil {
 				tmp := *input
@@ -4090,7 +4089,7 @@ func (c *APIGateway) GetBasePathMappingsPagesWithContext(ctx aws.Context, input 
 
 const opGetClientCertificate = "GetClientCertificate"
 
-// GetClientCertificateRequest generates a "aws/request.Request" representing the
+// GetClientCertificateRequest generates a "aws.Request" representing the
 // client's request for the GetClientCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4112,8 +4111,8 @@ const opGetClientCertificate = "GetClientCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetClientCertificateRequest(input *GetClientCertificateInput) (req *request.Request, output *ClientCertificate) {
-	op := &request.Operation{
+func (c *APIGateway) GetClientCertificateRequest(input *GetClientCertificateInput) (req *aws.Request, output *ClientCertificate) {
+	op := &aws.Operation{
 		Name:       opGetClientCertificate,
 		HTTPMethod: "GET",
 		HTTPPath:   "/clientcertificates/{clientcertificate_id}",
@@ -4164,7 +4163,7 @@ func (c *APIGateway) GetClientCertificate(input *GetClientCertificateInput) (*Cl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetClientCertificateWithContext(ctx aws.Context, input *GetClientCertificateInput, opts ...request.Option) (*ClientCertificate, error) {
+func (c *APIGateway) GetClientCertificateWithContext(ctx aws.Context, input *GetClientCertificateInput, opts ...aws.Option) (*ClientCertificate, error) {
 	req, out := c.GetClientCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4173,7 +4172,7 @@ func (c *APIGateway) GetClientCertificateWithContext(ctx aws.Context, input *Get
 
 const opGetClientCertificates = "GetClientCertificates"
 
-// GetClientCertificatesRequest generates a "aws/request.Request" representing the
+// GetClientCertificatesRequest generates a "aws.Request" representing the
 // client's request for the GetClientCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4195,12 +4194,12 @@ const opGetClientCertificates = "GetClientCertificates"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetClientCertificatesRequest(input *GetClientCertificatesInput) (req *request.Request, output *GetClientCertificatesOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetClientCertificatesRequest(input *GetClientCertificatesInput) (req *aws.Request, output *GetClientCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opGetClientCertificates,
 		HTTPMethod: "GET",
 		HTTPPath:   "/clientcertificates",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -4254,7 +4253,7 @@ func (c *APIGateway) GetClientCertificates(input *GetClientCertificatesInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetClientCertificatesWithContext(ctx aws.Context, input *GetClientCertificatesInput, opts ...request.Option) (*GetClientCertificatesOutput, error) {
+func (c *APIGateway) GetClientCertificatesWithContext(ctx aws.Context, input *GetClientCertificatesInput, opts ...aws.Option) (*GetClientCertificatesOutput, error) {
 	req, out := c.GetClientCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4289,9 +4288,9 @@ func (c *APIGateway) GetClientCertificatesPages(input *GetClientCertificatesInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetClientCertificatesPagesWithContext(ctx aws.Context, input *GetClientCertificatesInput, fn func(*GetClientCertificatesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetClientCertificatesPagesWithContext(ctx aws.Context, input *GetClientCertificatesInput, fn func(*GetClientCertificatesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetClientCertificatesInput
 			if input != nil {
 				tmp := *input
@@ -4313,7 +4312,7 @@ func (c *APIGateway) GetClientCertificatesPagesWithContext(ctx aws.Context, inpu
 
 const opGetDeployment = "GetDeployment"
 
-// GetDeploymentRequest generates a "aws/request.Request" representing the
+// GetDeploymentRequest generates a "aws.Request" representing the
 // client's request for the GetDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4335,8 +4334,8 @@ const opGetDeployment = "GetDeployment"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetDeploymentRequest(input *GetDeploymentInput) (req *request.Request, output *Deployment) {
-	op := &request.Operation{
+func (c *APIGateway) GetDeploymentRequest(input *GetDeploymentInput) (req *aws.Request, output *Deployment) {
+	op := &aws.Operation{
 		Name:       opGetDeployment,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/deployments/{deployment_id}",
@@ -4391,7 +4390,7 @@ func (c *APIGateway) GetDeployment(input *GetDeploymentInput) (*Deployment, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDeploymentWithContext(ctx aws.Context, input *GetDeploymentInput, opts ...request.Option) (*Deployment, error) {
+func (c *APIGateway) GetDeploymentWithContext(ctx aws.Context, input *GetDeploymentInput, opts ...aws.Option) (*Deployment, error) {
 	req, out := c.GetDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4400,7 +4399,7 @@ func (c *APIGateway) GetDeploymentWithContext(ctx aws.Context, input *GetDeploym
 
 const opGetDeployments = "GetDeployments"
 
-// GetDeploymentsRequest generates a "aws/request.Request" representing the
+// GetDeploymentsRequest generates a "aws.Request" representing the
 // client's request for the GetDeployments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4422,12 +4421,12 @@ const opGetDeployments = "GetDeployments"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetDeploymentsRequest(input *GetDeploymentsInput) (req *request.Request, output *GetDeploymentsOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetDeploymentsRequest(input *GetDeploymentsInput) (req *aws.Request, output *GetDeploymentsOutput) {
+	op := &aws.Operation{
 		Name:       opGetDeployments,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/deployments",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -4485,7 +4484,7 @@ func (c *APIGateway) GetDeployments(input *GetDeploymentsInput) (*GetDeployments
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDeploymentsWithContext(ctx aws.Context, input *GetDeploymentsInput, opts ...request.Option) (*GetDeploymentsOutput, error) {
+func (c *APIGateway) GetDeploymentsWithContext(ctx aws.Context, input *GetDeploymentsInput, opts ...aws.Option) (*GetDeploymentsOutput, error) {
 	req, out := c.GetDeploymentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4520,9 +4519,9 @@ func (c *APIGateway) GetDeploymentsPages(input *GetDeploymentsInput, fn func(*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDeploymentsPagesWithContext(ctx aws.Context, input *GetDeploymentsInput, fn func(*GetDeploymentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetDeploymentsPagesWithContext(ctx aws.Context, input *GetDeploymentsInput, fn func(*GetDeploymentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetDeploymentsInput
 			if input != nil {
 				tmp := *input
@@ -4544,7 +4543,7 @@ func (c *APIGateway) GetDeploymentsPagesWithContext(ctx aws.Context, input *GetD
 
 const opGetDocumentationPart = "GetDocumentationPart"
 
-// GetDocumentationPartRequest generates a "aws/request.Request" representing the
+// GetDocumentationPartRequest generates a "aws.Request" representing the
 // client's request for the GetDocumentationPart operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4566,8 +4565,8 @@ const opGetDocumentationPart = "GetDocumentationPart"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetDocumentationPartRequest(input *GetDocumentationPartInput) (req *request.Request, output *DocumentationPart) {
-	op := &request.Operation{
+func (c *APIGateway) GetDocumentationPartRequest(input *GetDocumentationPartInput) (req *aws.Request, output *DocumentationPart) {
+	op := &aws.Operation{
 		Name:       opGetDocumentationPart,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/parts/{part_id}",
@@ -4616,7 +4615,7 @@ func (c *APIGateway) GetDocumentationPart(input *GetDocumentationPartInput) (*Do
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDocumentationPartWithContext(ctx aws.Context, input *GetDocumentationPartInput, opts ...request.Option) (*DocumentationPart, error) {
+func (c *APIGateway) GetDocumentationPartWithContext(ctx aws.Context, input *GetDocumentationPartInput, opts ...aws.Option) (*DocumentationPart, error) {
 	req, out := c.GetDocumentationPartRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4625,7 +4624,7 @@ func (c *APIGateway) GetDocumentationPartWithContext(ctx aws.Context, input *Get
 
 const opGetDocumentationParts = "GetDocumentationParts"
 
-// GetDocumentationPartsRequest generates a "aws/request.Request" representing the
+// GetDocumentationPartsRequest generates a "aws.Request" representing the
 // client's request for the GetDocumentationParts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4647,8 +4646,8 @@ const opGetDocumentationParts = "GetDocumentationParts"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetDocumentationPartsRequest(input *GetDocumentationPartsInput) (req *request.Request, output *GetDocumentationPartsOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetDocumentationPartsRequest(input *GetDocumentationPartsInput) (req *aws.Request, output *GetDocumentationPartsOutput) {
+	op := &aws.Operation{
 		Name:       opGetDocumentationParts,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/parts",
@@ -4701,7 +4700,7 @@ func (c *APIGateway) GetDocumentationParts(input *GetDocumentationPartsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDocumentationPartsWithContext(ctx aws.Context, input *GetDocumentationPartsInput, opts ...request.Option) (*GetDocumentationPartsOutput, error) {
+func (c *APIGateway) GetDocumentationPartsWithContext(ctx aws.Context, input *GetDocumentationPartsInput, opts ...aws.Option) (*GetDocumentationPartsOutput, error) {
 	req, out := c.GetDocumentationPartsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4710,7 +4709,7 @@ func (c *APIGateway) GetDocumentationPartsWithContext(ctx aws.Context, input *Ge
 
 const opGetDocumentationVersion = "GetDocumentationVersion"
 
-// GetDocumentationVersionRequest generates a "aws/request.Request" representing the
+// GetDocumentationVersionRequest generates a "aws.Request" representing the
 // client's request for the GetDocumentationVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4732,8 +4731,8 @@ const opGetDocumentationVersion = "GetDocumentationVersion"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetDocumentationVersionRequest(input *GetDocumentationVersionInput) (req *request.Request, output *DocumentationVersion) {
-	op := &request.Operation{
+func (c *APIGateway) GetDocumentationVersionRequest(input *GetDocumentationVersionInput) (req *aws.Request, output *DocumentationVersion) {
+	op := &aws.Operation{
 		Name:       opGetDocumentationVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/versions/{doc_version}",
@@ -4782,7 +4781,7 @@ func (c *APIGateway) GetDocumentationVersion(input *GetDocumentationVersionInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDocumentationVersionWithContext(ctx aws.Context, input *GetDocumentationVersionInput, opts ...request.Option) (*DocumentationVersion, error) {
+func (c *APIGateway) GetDocumentationVersionWithContext(ctx aws.Context, input *GetDocumentationVersionInput, opts ...aws.Option) (*DocumentationVersion, error) {
 	req, out := c.GetDocumentationVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4791,7 +4790,7 @@ func (c *APIGateway) GetDocumentationVersionWithContext(ctx aws.Context, input *
 
 const opGetDocumentationVersions = "GetDocumentationVersions"
 
-// GetDocumentationVersionsRequest generates a "aws/request.Request" representing the
+// GetDocumentationVersionsRequest generates a "aws.Request" representing the
 // client's request for the GetDocumentationVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4813,8 +4812,8 @@ const opGetDocumentationVersions = "GetDocumentationVersions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetDocumentationVersionsRequest(input *GetDocumentationVersionsInput) (req *request.Request, output *GetDocumentationVersionsOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetDocumentationVersionsRequest(input *GetDocumentationVersionsInput) (req *aws.Request, output *GetDocumentationVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetDocumentationVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/versions",
@@ -4867,7 +4866,7 @@ func (c *APIGateway) GetDocumentationVersions(input *GetDocumentationVersionsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDocumentationVersionsWithContext(ctx aws.Context, input *GetDocumentationVersionsInput, opts ...request.Option) (*GetDocumentationVersionsOutput, error) {
+func (c *APIGateway) GetDocumentationVersionsWithContext(ctx aws.Context, input *GetDocumentationVersionsInput, opts ...aws.Option) (*GetDocumentationVersionsOutput, error) {
 	req, out := c.GetDocumentationVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4876,7 +4875,7 @@ func (c *APIGateway) GetDocumentationVersionsWithContext(ctx aws.Context, input 
 
 const opGetDomainName = "GetDomainName"
 
-// GetDomainNameRequest generates a "aws/request.Request" representing the
+// GetDomainNameRequest generates a "aws.Request" representing the
 // client's request for the GetDomainName operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4898,8 +4897,8 @@ const opGetDomainName = "GetDomainName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetDomainNameRequest(input *GetDomainNameInput) (req *request.Request, output *DomainName) {
-	op := &request.Operation{
+func (c *APIGateway) GetDomainNameRequest(input *GetDomainNameInput) (req *aws.Request, output *DomainName) {
+	op := &aws.Operation{
 		Name:       opGetDomainName,
 		HTTPMethod: "GET",
 		HTTPPath:   "/domainnames/{domain_name}",
@@ -4955,7 +4954,7 @@ func (c *APIGateway) GetDomainName(input *GetDomainNameInput) (*DomainName, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDomainNameWithContext(ctx aws.Context, input *GetDomainNameInput, opts ...request.Option) (*DomainName, error) {
+func (c *APIGateway) GetDomainNameWithContext(ctx aws.Context, input *GetDomainNameInput, opts ...aws.Option) (*DomainName, error) {
 	req, out := c.GetDomainNameRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4964,7 +4963,7 @@ func (c *APIGateway) GetDomainNameWithContext(ctx aws.Context, input *GetDomainN
 
 const opGetDomainNames = "GetDomainNames"
 
-// GetDomainNamesRequest generates a "aws/request.Request" representing the
+// GetDomainNamesRequest generates a "aws.Request" representing the
 // client's request for the GetDomainNames operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4986,12 +4985,12 @@ const opGetDomainNames = "GetDomainNames"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetDomainNamesRequest(input *GetDomainNamesInput) (req *request.Request, output *GetDomainNamesOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetDomainNamesRequest(input *GetDomainNamesInput) (req *aws.Request, output *GetDomainNamesOutput) {
+	op := &aws.Operation{
 		Name:       opGetDomainNames,
 		HTTPMethod: "GET",
 		HTTPPath:   "/domainnames",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -5045,7 +5044,7 @@ func (c *APIGateway) GetDomainNames(input *GetDomainNamesInput) (*GetDomainNames
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDomainNamesWithContext(ctx aws.Context, input *GetDomainNamesInput, opts ...request.Option) (*GetDomainNamesOutput, error) {
+func (c *APIGateway) GetDomainNamesWithContext(ctx aws.Context, input *GetDomainNamesInput, opts ...aws.Option) (*GetDomainNamesOutput, error) {
 	req, out := c.GetDomainNamesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5080,9 +5079,9 @@ func (c *APIGateway) GetDomainNamesPages(input *GetDomainNamesInput, fn func(*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetDomainNamesPagesWithContext(ctx aws.Context, input *GetDomainNamesInput, fn func(*GetDomainNamesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetDomainNamesPagesWithContext(ctx aws.Context, input *GetDomainNamesInput, fn func(*GetDomainNamesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetDomainNamesInput
 			if input != nil {
 				tmp := *input
@@ -5104,7 +5103,7 @@ func (c *APIGateway) GetDomainNamesPagesWithContext(ctx aws.Context, input *GetD
 
 const opGetExport = "GetExport"
 
-// GetExportRequest generates a "aws/request.Request" representing the
+// GetExportRequest generates a "aws.Request" representing the
 // client's request for the GetExport operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5126,8 +5125,8 @@ const opGetExport = "GetExport"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetExportRequest(input *GetExportInput) (req *request.Request, output *GetExportOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetExportRequest(input *GetExportInput) (req *aws.Request, output *GetExportOutput) {
+	op := &aws.Operation{
 		Name:       opGetExport,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/stages/{stage_name}/exports/{export_type}",
@@ -5186,7 +5185,7 @@ func (c *APIGateway) GetExport(input *GetExportInput) (*GetExportOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetExportWithContext(ctx aws.Context, input *GetExportInput, opts ...request.Option) (*GetExportOutput, error) {
+func (c *APIGateway) GetExportWithContext(ctx aws.Context, input *GetExportInput, opts ...aws.Option) (*GetExportOutput, error) {
 	req, out := c.GetExportRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5195,7 +5194,7 @@ func (c *APIGateway) GetExportWithContext(ctx aws.Context, input *GetExportInput
 
 const opGetGatewayResponse = "GetGatewayResponse"
 
-// GetGatewayResponseRequest generates a "aws/request.Request" representing the
+// GetGatewayResponseRequest generates a "aws.Request" representing the
 // client's request for the GetGatewayResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5217,8 +5216,8 @@ const opGetGatewayResponse = "GetGatewayResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetGatewayResponseRequest(input *GetGatewayResponseInput) (req *request.Request, output *UpdateGatewayResponseOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetGatewayResponseRequest(input *GetGatewayResponseInput) (req *aws.Request, output *UpdateGatewayResponseOutput) {
+	op := &aws.Operation{
 		Name:       opGetGatewayResponse,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/gatewayresponses/{response_type}",
@@ -5269,7 +5268,7 @@ func (c *APIGateway) GetGatewayResponse(input *GetGatewayResponseInput) (*Update
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetGatewayResponseWithContext(ctx aws.Context, input *GetGatewayResponseInput, opts ...request.Option) (*UpdateGatewayResponseOutput, error) {
+func (c *APIGateway) GetGatewayResponseWithContext(ctx aws.Context, input *GetGatewayResponseInput, opts ...aws.Option) (*UpdateGatewayResponseOutput, error) {
 	req, out := c.GetGatewayResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5278,7 +5277,7 @@ func (c *APIGateway) GetGatewayResponseWithContext(ctx aws.Context, input *GetGa
 
 const opGetGatewayResponses = "GetGatewayResponses"
 
-// GetGatewayResponsesRequest generates a "aws/request.Request" representing the
+// GetGatewayResponsesRequest generates a "aws.Request" representing the
 // client's request for the GetGatewayResponses operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5300,8 +5299,8 @@ const opGetGatewayResponses = "GetGatewayResponses"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetGatewayResponsesRequest(input *GetGatewayResponsesInput) (req *request.Request, output *GetGatewayResponsesOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetGatewayResponsesRequest(input *GetGatewayResponsesInput) (req *aws.Request, output *GetGatewayResponsesOutput) {
+	op := &aws.Operation{
 		Name:       opGetGatewayResponses,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/gatewayresponses",
@@ -5359,7 +5358,7 @@ func (c *APIGateway) GetGatewayResponses(input *GetGatewayResponsesInput) (*GetG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetGatewayResponsesWithContext(ctx aws.Context, input *GetGatewayResponsesInput, opts ...request.Option) (*GetGatewayResponsesOutput, error) {
+func (c *APIGateway) GetGatewayResponsesWithContext(ctx aws.Context, input *GetGatewayResponsesInput, opts ...aws.Option) (*GetGatewayResponsesOutput, error) {
 	req, out := c.GetGatewayResponsesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5368,7 +5367,7 @@ func (c *APIGateway) GetGatewayResponsesWithContext(ctx aws.Context, input *GetG
 
 const opGetIntegration = "GetIntegration"
 
-// GetIntegrationRequest generates a "aws/request.Request" representing the
+// GetIntegrationRequest generates a "aws.Request" representing the
 // client's request for the GetIntegration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5390,8 +5389,8 @@ const opGetIntegration = "GetIntegration"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetIntegrationRequest(input *GetIntegrationInput) (req *request.Request, output *Integration) {
-	op := &request.Operation{
+func (c *APIGateway) GetIntegrationRequest(input *GetIntegrationInput) (req *aws.Request, output *Integration) {
+	op := &aws.Operation{
 		Name:       opGetIntegration,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration",
@@ -5442,7 +5441,7 @@ func (c *APIGateway) GetIntegration(input *GetIntegrationInput) (*Integration, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetIntegrationWithContext(ctx aws.Context, input *GetIntegrationInput, opts ...request.Option) (*Integration, error) {
+func (c *APIGateway) GetIntegrationWithContext(ctx aws.Context, input *GetIntegrationInput, opts ...aws.Option) (*Integration, error) {
 	req, out := c.GetIntegrationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5451,7 +5450,7 @@ func (c *APIGateway) GetIntegrationWithContext(ctx aws.Context, input *GetIntegr
 
 const opGetIntegrationResponse = "GetIntegrationResponse"
 
-// GetIntegrationResponseRequest generates a "aws/request.Request" representing the
+// GetIntegrationResponseRequest generates a "aws.Request" representing the
 // client's request for the GetIntegrationResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5473,8 +5472,8 @@ const opGetIntegrationResponse = "GetIntegrationResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetIntegrationResponseRequest(input *GetIntegrationResponseInput) (req *request.Request, output *IntegrationResponse) {
-	op := &request.Operation{
+func (c *APIGateway) GetIntegrationResponseRequest(input *GetIntegrationResponseInput) (req *aws.Request, output *IntegrationResponse) {
+	op := &aws.Operation{
 		Name:       opGetIntegrationResponse,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}",
@@ -5525,7 +5524,7 @@ func (c *APIGateway) GetIntegrationResponse(input *GetIntegrationResponseInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetIntegrationResponseWithContext(ctx aws.Context, input *GetIntegrationResponseInput, opts ...request.Option) (*IntegrationResponse, error) {
+func (c *APIGateway) GetIntegrationResponseWithContext(ctx aws.Context, input *GetIntegrationResponseInput, opts ...aws.Option) (*IntegrationResponse, error) {
 	req, out := c.GetIntegrationResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5534,7 +5533,7 @@ func (c *APIGateway) GetIntegrationResponseWithContext(ctx aws.Context, input *G
 
 const opGetMethod = "GetMethod"
 
-// GetMethodRequest generates a "aws/request.Request" representing the
+// GetMethodRequest generates a "aws.Request" representing the
 // client's request for the GetMethod operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5556,8 +5555,8 @@ const opGetMethod = "GetMethod"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetMethodRequest(input *GetMethodInput) (req *request.Request, output *Method) {
-	op := &request.Operation{
+func (c *APIGateway) GetMethodRequest(input *GetMethodInput) (req *aws.Request, output *Method) {
+	op := &aws.Operation{
 		Name:       opGetMethod,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}",
@@ -5608,7 +5607,7 @@ func (c *APIGateway) GetMethod(input *GetMethodInput) (*Method, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetMethodWithContext(ctx aws.Context, input *GetMethodInput, opts ...request.Option) (*Method, error) {
+func (c *APIGateway) GetMethodWithContext(ctx aws.Context, input *GetMethodInput, opts ...aws.Option) (*Method, error) {
 	req, out := c.GetMethodRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5617,7 +5616,7 @@ func (c *APIGateway) GetMethodWithContext(ctx aws.Context, input *GetMethodInput
 
 const opGetMethodResponse = "GetMethodResponse"
 
-// GetMethodResponseRequest generates a "aws/request.Request" representing the
+// GetMethodResponseRequest generates a "aws.Request" representing the
 // client's request for the GetMethodResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5639,8 +5638,8 @@ const opGetMethodResponse = "GetMethodResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetMethodResponseRequest(input *GetMethodResponseInput) (req *request.Request, output *MethodResponse) {
-	op := &request.Operation{
+func (c *APIGateway) GetMethodResponseRequest(input *GetMethodResponseInput) (req *aws.Request, output *MethodResponse) {
+	op := &aws.Operation{
 		Name:       opGetMethodResponse,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}",
@@ -5691,7 +5690,7 @@ func (c *APIGateway) GetMethodResponse(input *GetMethodResponseInput) (*MethodRe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetMethodResponseWithContext(ctx aws.Context, input *GetMethodResponseInput, opts ...request.Option) (*MethodResponse, error) {
+func (c *APIGateway) GetMethodResponseWithContext(ctx aws.Context, input *GetMethodResponseInput, opts ...aws.Option) (*MethodResponse, error) {
 	req, out := c.GetMethodResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5700,7 +5699,7 @@ func (c *APIGateway) GetMethodResponseWithContext(ctx aws.Context, input *GetMet
 
 const opGetModel = "GetModel"
 
-// GetModelRequest generates a "aws/request.Request" representing the
+// GetModelRequest generates a "aws.Request" representing the
 // client's request for the GetModel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5722,8 +5721,8 @@ const opGetModel = "GetModel"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetModelRequest(input *GetModelInput) (req *request.Request, output *Model) {
-	op := &request.Operation{
+func (c *APIGateway) GetModelRequest(input *GetModelInput) (req *aws.Request, output *Model) {
+	op := &aws.Operation{
 		Name:       opGetModel,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/models/{model_name}",
@@ -5774,7 +5773,7 @@ func (c *APIGateway) GetModel(input *GetModelInput) (*Model, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetModelWithContext(ctx aws.Context, input *GetModelInput, opts ...request.Option) (*Model, error) {
+func (c *APIGateway) GetModelWithContext(ctx aws.Context, input *GetModelInput, opts ...aws.Option) (*Model, error) {
 	req, out := c.GetModelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5783,7 +5782,7 @@ func (c *APIGateway) GetModelWithContext(ctx aws.Context, input *GetModelInput, 
 
 const opGetModelTemplate = "GetModelTemplate"
 
-// GetModelTemplateRequest generates a "aws/request.Request" representing the
+// GetModelTemplateRequest generates a "aws.Request" representing the
 // client's request for the GetModelTemplate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5805,8 +5804,8 @@ const opGetModelTemplate = "GetModelTemplate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetModelTemplateRequest(input *GetModelTemplateInput) (req *request.Request, output *GetModelTemplateOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetModelTemplateRequest(input *GetModelTemplateInput) (req *aws.Request, output *GetModelTemplateOutput) {
+	op := &aws.Operation{
 		Name:       opGetModelTemplate,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/models/{model_name}/default_template",
@@ -5862,7 +5861,7 @@ func (c *APIGateway) GetModelTemplate(input *GetModelTemplateInput) (*GetModelTe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetModelTemplateWithContext(ctx aws.Context, input *GetModelTemplateInput, opts ...request.Option) (*GetModelTemplateOutput, error) {
+func (c *APIGateway) GetModelTemplateWithContext(ctx aws.Context, input *GetModelTemplateInput, opts ...aws.Option) (*GetModelTemplateOutput, error) {
 	req, out := c.GetModelTemplateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5871,7 +5870,7 @@ func (c *APIGateway) GetModelTemplateWithContext(ctx aws.Context, input *GetMode
 
 const opGetModels = "GetModels"
 
-// GetModelsRequest generates a "aws/request.Request" representing the
+// GetModelsRequest generates a "aws.Request" representing the
 // client's request for the GetModels operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5893,12 +5892,12 @@ const opGetModels = "GetModels"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetModelsRequest(input *GetModelsInput) (req *request.Request, output *GetModelsOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetModelsRequest(input *GetModelsInput) (req *aws.Request, output *GetModelsOutput) {
+	op := &aws.Operation{
 		Name:       opGetModels,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/models",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -5955,7 +5954,7 @@ func (c *APIGateway) GetModels(input *GetModelsInput) (*GetModelsOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetModelsWithContext(ctx aws.Context, input *GetModelsInput, opts ...request.Option) (*GetModelsOutput, error) {
+func (c *APIGateway) GetModelsWithContext(ctx aws.Context, input *GetModelsInput, opts ...aws.Option) (*GetModelsOutput, error) {
 	req, out := c.GetModelsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5990,9 +5989,9 @@ func (c *APIGateway) GetModelsPages(input *GetModelsInput, fn func(*GetModelsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetModelsPagesWithContext(ctx aws.Context, input *GetModelsInput, fn func(*GetModelsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetModelsPagesWithContext(ctx aws.Context, input *GetModelsInput, fn func(*GetModelsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetModelsInput
 			if input != nil {
 				tmp := *input
@@ -6014,7 +6013,7 @@ func (c *APIGateway) GetModelsPagesWithContext(ctx aws.Context, input *GetModels
 
 const opGetRequestValidator = "GetRequestValidator"
 
-// GetRequestValidatorRequest generates a "aws/request.Request" representing the
+// GetRequestValidatorRequest generates a "aws.Request" representing the
 // client's request for the GetRequestValidator operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6036,8 +6035,8 @@ const opGetRequestValidator = "GetRequestValidator"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetRequestValidatorRequest(input *GetRequestValidatorInput) (req *request.Request, output *UpdateRequestValidatorOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetRequestValidatorRequest(input *GetRequestValidatorInput) (req *aws.Request, output *UpdateRequestValidatorOutput) {
+	op := &aws.Operation{
 		Name:       opGetRequestValidator,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}",
@@ -6088,7 +6087,7 @@ func (c *APIGateway) GetRequestValidator(input *GetRequestValidatorInput) (*Upda
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetRequestValidatorWithContext(ctx aws.Context, input *GetRequestValidatorInput, opts ...request.Option) (*UpdateRequestValidatorOutput, error) {
+func (c *APIGateway) GetRequestValidatorWithContext(ctx aws.Context, input *GetRequestValidatorInput, opts ...aws.Option) (*UpdateRequestValidatorOutput, error) {
 	req, out := c.GetRequestValidatorRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6097,7 +6096,7 @@ func (c *APIGateway) GetRequestValidatorWithContext(ctx aws.Context, input *GetR
 
 const opGetRequestValidators = "GetRequestValidators"
 
-// GetRequestValidatorsRequest generates a "aws/request.Request" representing the
+// GetRequestValidatorsRequest generates a "aws.Request" representing the
 // client's request for the GetRequestValidators operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6119,8 +6118,8 @@ const opGetRequestValidators = "GetRequestValidators"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetRequestValidatorsRequest(input *GetRequestValidatorsInput) (req *request.Request, output *GetRequestValidatorsOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetRequestValidatorsRequest(input *GetRequestValidatorsInput) (req *aws.Request, output *GetRequestValidatorsOutput) {
+	op := &aws.Operation{
 		Name:       opGetRequestValidators,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/requestvalidators",
@@ -6175,7 +6174,7 @@ func (c *APIGateway) GetRequestValidators(input *GetRequestValidatorsInput) (*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetRequestValidatorsWithContext(ctx aws.Context, input *GetRequestValidatorsInput, opts ...request.Option) (*GetRequestValidatorsOutput, error) {
+func (c *APIGateway) GetRequestValidatorsWithContext(ctx aws.Context, input *GetRequestValidatorsInput, opts ...aws.Option) (*GetRequestValidatorsOutput, error) {
 	req, out := c.GetRequestValidatorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6184,7 +6183,7 @@ func (c *APIGateway) GetRequestValidatorsWithContext(ctx aws.Context, input *Get
 
 const opGetResource = "GetResource"
 
-// GetResourceRequest generates a "aws/request.Request" representing the
+// GetResourceRequest generates a "aws.Request" representing the
 // client's request for the GetResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6206,8 +6205,8 @@ const opGetResource = "GetResource"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetResourceRequest(input *GetResourceInput) (req *request.Request, output *Resource) {
-	op := &request.Operation{
+func (c *APIGateway) GetResourceRequest(input *GetResourceInput) (req *aws.Request, output *Resource) {
+	op := &aws.Operation{
 		Name:       opGetResource,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}",
@@ -6258,7 +6257,7 @@ func (c *APIGateway) GetResource(input *GetResourceInput) (*Resource, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetResourceWithContext(ctx aws.Context, input *GetResourceInput, opts ...request.Option) (*Resource, error) {
+func (c *APIGateway) GetResourceWithContext(ctx aws.Context, input *GetResourceInput, opts ...aws.Option) (*Resource, error) {
 	req, out := c.GetResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6267,7 +6266,7 @@ func (c *APIGateway) GetResourceWithContext(ctx aws.Context, input *GetResourceI
 
 const opGetResources = "GetResources"
 
-// GetResourcesRequest generates a "aws/request.Request" representing the
+// GetResourcesRequest generates a "aws.Request" representing the
 // client's request for the GetResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6289,12 +6288,12 @@ const opGetResources = "GetResources"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetResourcesRequest(input *GetResourcesInput) (req *request.Request, output *GetResourcesOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetResourcesRequest(input *GetResourcesInput) (req *aws.Request, output *GetResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opGetResources,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/resources",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -6351,7 +6350,7 @@ func (c *APIGateway) GetResources(input *GetResourcesInput) (*GetResourcesOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetResourcesWithContext(ctx aws.Context, input *GetResourcesInput, opts ...request.Option) (*GetResourcesOutput, error) {
+func (c *APIGateway) GetResourcesWithContext(ctx aws.Context, input *GetResourcesInput, opts ...aws.Option) (*GetResourcesOutput, error) {
 	req, out := c.GetResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6386,9 +6385,9 @@ func (c *APIGateway) GetResourcesPages(input *GetResourcesInput, fn func(*GetRes
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetResourcesPagesWithContext(ctx aws.Context, input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetResourcesPagesWithContext(ctx aws.Context, input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetResourcesInput
 			if input != nil {
 				tmp := *input
@@ -6410,7 +6409,7 @@ func (c *APIGateway) GetResourcesPagesWithContext(ctx aws.Context, input *GetRes
 
 const opGetRestApi = "GetRestApi"
 
-// GetRestApiRequest generates a "aws/request.Request" representing the
+// GetRestApiRequest generates a "aws.Request" representing the
 // client's request for the GetRestApi operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6432,8 +6431,8 @@ const opGetRestApi = "GetRestApi"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetRestApiRequest(input *GetRestApiInput) (req *request.Request, output *RestApi) {
-	op := &request.Operation{
+func (c *APIGateway) GetRestApiRequest(input *GetRestApiInput) (req *aws.Request, output *RestApi) {
+	op := &aws.Operation{
 		Name:       opGetRestApi,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}",
@@ -6484,7 +6483,7 @@ func (c *APIGateway) GetRestApi(input *GetRestApiInput) (*RestApi, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetRestApiWithContext(ctx aws.Context, input *GetRestApiInput, opts ...request.Option) (*RestApi, error) {
+func (c *APIGateway) GetRestApiWithContext(ctx aws.Context, input *GetRestApiInput, opts ...aws.Option) (*RestApi, error) {
 	req, out := c.GetRestApiRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6493,7 +6492,7 @@ func (c *APIGateway) GetRestApiWithContext(ctx aws.Context, input *GetRestApiInp
 
 const opGetRestApis = "GetRestApis"
 
-// GetRestApisRequest generates a "aws/request.Request" representing the
+// GetRestApisRequest generates a "aws.Request" representing the
 // client's request for the GetRestApis operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6515,12 +6514,12 @@ const opGetRestApis = "GetRestApis"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetRestApisRequest(input *GetRestApisInput) (req *request.Request, output *GetRestApisOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetRestApisRequest(input *GetRestApisInput) (req *aws.Request, output *GetRestApisOutput) {
+	op := &aws.Operation{
 		Name:       opGetRestApis,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -6574,7 +6573,7 @@ func (c *APIGateway) GetRestApis(input *GetRestApisInput) (*GetRestApisOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetRestApisWithContext(ctx aws.Context, input *GetRestApisInput, opts ...request.Option) (*GetRestApisOutput, error) {
+func (c *APIGateway) GetRestApisWithContext(ctx aws.Context, input *GetRestApisInput, opts ...aws.Option) (*GetRestApisOutput, error) {
 	req, out := c.GetRestApisRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6609,9 +6608,9 @@ func (c *APIGateway) GetRestApisPages(input *GetRestApisInput, fn func(*GetRestA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetRestApisPagesWithContext(ctx aws.Context, input *GetRestApisInput, fn func(*GetRestApisOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetRestApisPagesWithContext(ctx aws.Context, input *GetRestApisInput, fn func(*GetRestApisOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetRestApisInput
 			if input != nil {
 				tmp := *input
@@ -6633,7 +6632,7 @@ func (c *APIGateway) GetRestApisPagesWithContext(ctx aws.Context, input *GetRest
 
 const opGetSdk = "GetSdk"
 
-// GetSdkRequest generates a "aws/request.Request" representing the
+// GetSdkRequest generates a "aws.Request" representing the
 // client's request for the GetSdk operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6655,8 +6654,8 @@ const opGetSdk = "GetSdk"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetSdkRequest(input *GetSdkInput) (req *request.Request, output *GetSdkOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetSdkRequest(input *GetSdkInput) (req *aws.Request, output *GetSdkOutput) {
+	op := &aws.Operation{
 		Name:       opGetSdk,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/stages/{stage_name}/sdks/{sdk_type}",
@@ -6715,7 +6714,7 @@ func (c *APIGateway) GetSdk(input *GetSdkInput) (*GetSdkOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetSdkWithContext(ctx aws.Context, input *GetSdkInput, opts ...request.Option) (*GetSdkOutput, error) {
+func (c *APIGateway) GetSdkWithContext(ctx aws.Context, input *GetSdkInput, opts ...aws.Option) (*GetSdkOutput, error) {
 	req, out := c.GetSdkRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6724,7 +6723,7 @@ func (c *APIGateway) GetSdkWithContext(ctx aws.Context, input *GetSdkInput, opts
 
 const opGetSdkType = "GetSdkType"
 
-// GetSdkTypeRequest generates a "aws/request.Request" representing the
+// GetSdkTypeRequest generates a "aws.Request" representing the
 // client's request for the GetSdkType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6746,8 +6745,8 @@ const opGetSdkType = "GetSdkType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetSdkTypeRequest(input *GetSdkTypeInput) (req *request.Request, output *SdkType) {
-	op := &request.Operation{
+func (c *APIGateway) GetSdkTypeRequest(input *GetSdkTypeInput) (req *aws.Request, output *SdkType) {
+	op := &aws.Operation{
 		Name:       opGetSdkType,
 		HTTPMethod: "GET",
 		HTTPPath:   "/sdktypes/{sdktype_id}",
@@ -6796,7 +6795,7 @@ func (c *APIGateway) GetSdkType(input *GetSdkTypeInput) (*SdkType, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetSdkTypeWithContext(ctx aws.Context, input *GetSdkTypeInput, opts ...request.Option) (*SdkType, error) {
+func (c *APIGateway) GetSdkTypeWithContext(ctx aws.Context, input *GetSdkTypeInput, opts ...aws.Option) (*SdkType, error) {
 	req, out := c.GetSdkTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6805,7 +6804,7 @@ func (c *APIGateway) GetSdkTypeWithContext(ctx aws.Context, input *GetSdkTypeInp
 
 const opGetSdkTypes = "GetSdkTypes"
 
-// GetSdkTypesRequest generates a "aws/request.Request" representing the
+// GetSdkTypesRequest generates a "aws.Request" representing the
 // client's request for the GetSdkTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6827,8 +6826,8 @@ const opGetSdkTypes = "GetSdkTypes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetSdkTypesRequest(input *GetSdkTypesInput) (req *request.Request, output *GetSdkTypesOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetSdkTypesRequest(input *GetSdkTypesInput) (req *aws.Request, output *GetSdkTypesOutput) {
+	op := &aws.Operation{
 		Name:       opGetSdkTypes,
 		HTTPMethod: "GET",
 		HTTPPath:   "/sdktypes",
@@ -6874,7 +6873,7 @@ func (c *APIGateway) GetSdkTypes(input *GetSdkTypesInput) (*GetSdkTypesOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetSdkTypesWithContext(ctx aws.Context, input *GetSdkTypesInput, opts ...request.Option) (*GetSdkTypesOutput, error) {
+func (c *APIGateway) GetSdkTypesWithContext(ctx aws.Context, input *GetSdkTypesInput, opts ...aws.Option) (*GetSdkTypesOutput, error) {
 	req, out := c.GetSdkTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6883,7 +6882,7 @@ func (c *APIGateway) GetSdkTypesWithContext(ctx aws.Context, input *GetSdkTypesI
 
 const opGetStage = "GetStage"
 
-// GetStageRequest generates a "aws/request.Request" representing the
+// GetStageRequest generates a "aws.Request" representing the
 // client's request for the GetStage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6905,8 +6904,8 @@ const opGetStage = "GetStage"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetStageRequest(input *GetStageInput) (req *request.Request, output *Stage) {
-	op := &request.Operation{
+func (c *APIGateway) GetStageRequest(input *GetStageInput) (req *aws.Request, output *Stage) {
+	op := &aws.Operation{
 		Name:       opGetStage,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/stages/{stage_name}",
@@ -6957,7 +6956,7 @@ func (c *APIGateway) GetStage(input *GetStageInput) (*Stage, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetStageWithContext(ctx aws.Context, input *GetStageInput, opts ...request.Option) (*Stage, error) {
+func (c *APIGateway) GetStageWithContext(ctx aws.Context, input *GetStageInput, opts ...aws.Option) (*Stage, error) {
 	req, out := c.GetStageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6966,7 +6965,7 @@ func (c *APIGateway) GetStageWithContext(ctx aws.Context, input *GetStageInput, 
 
 const opGetStages = "GetStages"
 
-// GetStagesRequest generates a "aws/request.Request" representing the
+// GetStagesRequest generates a "aws.Request" representing the
 // client's request for the GetStages operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6988,8 +6987,8 @@ const opGetStages = "GetStages"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetStagesRequest(input *GetStagesInput) (req *request.Request, output *GetStagesOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetStagesRequest(input *GetStagesInput) (req *aws.Request, output *GetStagesOutput) {
+	op := &aws.Operation{
 		Name:       opGetStages,
 		HTTPMethod: "GET",
 		HTTPPath:   "/restapis/{restapi_id}/stages",
@@ -7040,7 +7039,7 @@ func (c *APIGateway) GetStages(input *GetStagesInput) (*GetStagesOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetStagesWithContext(ctx aws.Context, input *GetStagesInput, opts ...request.Option) (*GetStagesOutput, error) {
+func (c *APIGateway) GetStagesWithContext(ctx aws.Context, input *GetStagesInput, opts ...aws.Option) (*GetStagesOutput, error) {
 	req, out := c.GetStagesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7049,7 +7048,7 @@ func (c *APIGateway) GetStagesWithContext(ctx aws.Context, input *GetStagesInput
 
 const opGetUsage = "GetUsage"
 
-// GetUsageRequest generates a "aws/request.Request" representing the
+// GetUsageRequest generates a "aws.Request" representing the
 // client's request for the GetUsage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7071,12 +7070,12 @@ const opGetUsage = "GetUsage"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetUsageRequest(input *GetUsageInput) (req *request.Request, output *Usage) {
-	op := &request.Operation{
+func (c *APIGateway) GetUsageRequest(input *GetUsageInput) (req *aws.Request, output *Usage) {
+	op := &aws.Operation{
 		Name:       opGetUsage,
 		HTTPMethod: "GET",
 		HTTPPath:   "/usageplans/{usageplanId}/usage",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -7133,7 +7132,7 @@ func (c *APIGateway) GetUsage(input *GetUsageInput) (*Usage, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetUsageWithContext(ctx aws.Context, input *GetUsageInput, opts ...request.Option) (*Usage, error) {
+func (c *APIGateway) GetUsageWithContext(ctx aws.Context, input *GetUsageInput, opts ...aws.Option) (*Usage, error) {
 	req, out := c.GetUsageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7168,9 +7167,9 @@ func (c *APIGateway) GetUsagePages(input *GetUsageInput, fn func(*Usage, bool) b
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetUsagePagesWithContext(ctx aws.Context, input *GetUsageInput, fn func(*Usage, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetUsagePagesWithContext(ctx aws.Context, input *GetUsageInput, fn func(*Usage, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetUsageInput
 			if input != nil {
 				tmp := *input
@@ -7192,7 +7191,7 @@ func (c *APIGateway) GetUsagePagesWithContext(ctx aws.Context, input *GetUsageIn
 
 const opGetUsagePlan = "GetUsagePlan"
 
-// GetUsagePlanRequest generates a "aws/request.Request" representing the
+// GetUsagePlanRequest generates a "aws.Request" representing the
 // client's request for the GetUsagePlan operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7214,8 +7213,8 @@ const opGetUsagePlan = "GetUsagePlan"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetUsagePlanRequest(input *GetUsagePlanInput) (req *request.Request, output *UsagePlan) {
-	op := &request.Operation{
+func (c *APIGateway) GetUsagePlanRequest(input *GetUsagePlanInput) (req *aws.Request, output *UsagePlan) {
+	op := &aws.Operation{
 		Name:       opGetUsagePlan,
 		HTTPMethod: "GET",
 		HTTPPath:   "/usageplans/{usageplanId}",
@@ -7270,7 +7269,7 @@ func (c *APIGateway) GetUsagePlan(input *GetUsagePlanInput) (*UsagePlan, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetUsagePlanWithContext(ctx aws.Context, input *GetUsagePlanInput, opts ...request.Option) (*UsagePlan, error) {
+func (c *APIGateway) GetUsagePlanWithContext(ctx aws.Context, input *GetUsagePlanInput, opts ...aws.Option) (*UsagePlan, error) {
 	req, out := c.GetUsagePlanRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7279,7 +7278,7 @@ func (c *APIGateway) GetUsagePlanWithContext(ctx aws.Context, input *GetUsagePla
 
 const opGetUsagePlanKey = "GetUsagePlanKey"
 
-// GetUsagePlanKeyRequest generates a "aws/request.Request" representing the
+// GetUsagePlanKeyRequest generates a "aws.Request" representing the
 // client's request for the GetUsagePlanKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7301,8 +7300,8 @@ const opGetUsagePlanKey = "GetUsagePlanKey"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetUsagePlanKeyRequest(input *GetUsagePlanKeyInput) (req *request.Request, output *UsagePlanKey) {
-	op := &request.Operation{
+func (c *APIGateway) GetUsagePlanKeyRequest(input *GetUsagePlanKeyInput) (req *aws.Request, output *UsagePlanKey) {
+	op := &aws.Operation{
 		Name:       opGetUsagePlanKey,
 		HTTPMethod: "GET",
 		HTTPPath:   "/usageplans/{usageplanId}/keys/{keyId}",
@@ -7357,7 +7356,7 @@ func (c *APIGateway) GetUsagePlanKey(input *GetUsagePlanKeyInput) (*UsagePlanKey
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetUsagePlanKeyWithContext(ctx aws.Context, input *GetUsagePlanKeyInput, opts ...request.Option) (*UsagePlanKey, error) {
+func (c *APIGateway) GetUsagePlanKeyWithContext(ctx aws.Context, input *GetUsagePlanKeyInput, opts ...aws.Option) (*UsagePlanKey, error) {
 	req, out := c.GetUsagePlanKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7366,7 +7365,7 @@ func (c *APIGateway) GetUsagePlanKeyWithContext(ctx aws.Context, input *GetUsage
 
 const opGetUsagePlanKeys = "GetUsagePlanKeys"
 
-// GetUsagePlanKeysRequest generates a "aws/request.Request" representing the
+// GetUsagePlanKeysRequest generates a "aws.Request" representing the
 // client's request for the GetUsagePlanKeys operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7388,12 +7387,12 @@ const opGetUsagePlanKeys = "GetUsagePlanKeys"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetUsagePlanKeysRequest(input *GetUsagePlanKeysInput) (req *request.Request, output *GetUsagePlanKeysOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetUsagePlanKeysRequest(input *GetUsagePlanKeysInput) (req *aws.Request, output *GetUsagePlanKeysOutput) {
+	op := &aws.Operation{
 		Name:       opGetUsagePlanKeys,
 		HTTPMethod: "GET",
 		HTTPPath:   "/usageplans/{usageplanId}/keys",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -7451,7 +7450,7 @@ func (c *APIGateway) GetUsagePlanKeys(input *GetUsagePlanKeysInput) (*GetUsagePl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetUsagePlanKeysWithContext(ctx aws.Context, input *GetUsagePlanKeysInput, opts ...request.Option) (*GetUsagePlanKeysOutput, error) {
+func (c *APIGateway) GetUsagePlanKeysWithContext(ctx aws.Context, input *GetUsagePlanKeysInput, opts ...aws.Option) (*GetUsagePlanKeysOutput, error) {
 	req, out := c.GetUsagePlanKeysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7486,9 +7485,9 @@ func (c *APIGateway) GetUsagePlanKeysPages(input *GetUsagePlanKeysInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetUsagePlanKeysPagesWithContext(ctx aws.Context, input *GetUsagePlanKeysInput, fn func(*GetUsagePlanKeysOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetUsagePlanKeysPagesWithContext(ctx aws.Context, input *GetUsagePlanKeysInput, fn func(*GetUsagePlanKeysOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetUsagePlanKeysInput
 			if input != nil {
 				tmp := *input
@@ -7510,7 +7509,7 @@ func (c *APIGateway) GetUsagePlanKeysPagesWithContext(ctx aws.Context, input *Ge
 
 const opGetUsagePlans = "GetUsagePlans"
 
-// GetUsagePlansRequest generates a "aws/request.Request" representing the
+// GetUsagePlansRequest generates a "aws.Request" representing the
 // client's request for the GetUsagePlans operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7532,12 +7531,12 @@ const opGetUsagePlans = "GetUsagePlans"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) GetUsagePlansRequest(input *GetUsagePlansInput) (req *request.Request, output *GetUsagePlansOutput) {
-	op := &request.Operation{
+func (c *APIGateway) GetUsagePlansRequest(input *GetUsagePlansInput) (req *aws.Request, output *GetUsagePlansOutput) {
+	op := &aws.Operation{
 		Name:       opGetUsagePlans,
 		HTTPMethod: "GET",
 		HTTPPath:   "/usageplans",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"position"},
 			OutputTokens:    []string{"position"},
 			LimitToken:      "limit",
@@ -7598,7 +7597,7 @@ func (c *APIGateway) GetUsagePlans(input *GetUsagePlansInput) (*GetUsagePlansOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetUsagePlansWithContext(ctx aws.Context, input *GetUsagePlansInput, opts ...request.Option) (*GetUsagePlansOutput, error) {
+func (c *APIGateway) GetUsagePlansWithContext(ctx aws.Context, input *GetUsagePlansInput, opts ...aws.Option) (*GetUsagePlansOutput, error) {
 	req, out := c.GetUsagePlansRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7633,9 +7632,9 @@ func (c *APIGateway) GetUsagePlansPages(input *GetUsagePlansInput, fn func(*GetU
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) GetUsagePlansPagesWithContext(ctx aws.Context, input *GetUsagePlansInput, fn func(*GetUsagePlansOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *APIGateway) GetUsagePlansPagesWithContext(ctx aws.Context, input *GetUsagePlansInput, fn func(*GetUsagePlansOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetUsagePlansInput
 			if input != nil {
 				tmp := *input
@@ -7657,7 +7656,7 @@ func (c *APIGateway) GetUsagePlansPagesWithContext(ctx aws.Context, input *GetUs
 
 const opImportApiKeys = "ImportApiKeys"
 
-// ImportApiKeysRequest generates a "aws/request.Request" representing the
+// ImportApiKeysRequest generates a "aws.Request" representing the
 // client's request for the ImportApiKeys operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7679,8 +7678,8 @@ const opImportApiKeys = "ImportApiKeys"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) ImportApiKeysRequest(input *ImportApiKeysInput) (req *request.Request, output *ImportApiKeysOutput) {
-	op := &request.Operation{
+func (c *APIGateway) ImportApiKeysRequest(input *ImportApiKeysInput) (req *aws.Request, output *ImportApiKeysOutput) {
+	op := &aws.Operation{
 		Name:       opImportApiKeys,
 		HTTPMethod: "POST",
 		HTTPPath:   "/apikeys?mode=import",
@@ -7742,7 +7741,7 @@ func (c *APIGateway) ImportApiKeys(input *ImportApiKeysInput) (*ImportApiKeysOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) ImportApiKeysWithContext(ctx aws.Context, input *ImportApiKeysInput, opts ...request.Option) (*ImportApiKeysOutput, error) {
+func (c *APIGateway) ImportApiKeysWithContext(ctx aws.Context, input *ImportApiKeysInput, opts ...aws.Option) (*ImportApiKeysOutput, error) {
 	req, out := c.ImportApiKeysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7751,7 +7750,7 @@ func (c *APIGateway) ImportApiKeysWithContext(ctx aws.Context, input *ImportApiK
 
 const opImportDocumentationParts = "ImportDocumentationParts"
 
-// ImportDocumentationPartsRequest generates a "aws/request.Request" representing the
+// ImportDocumentationPartsRequest generates a "aws.Request" representing the
 // client's request for the ImportDocumentationParts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7773,8 +7772,8 @@ const opImportDocumentationParts = "ImportDocumentationParts"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) ImportDocumentationPartsRequest(input *ImportDocumentationPartsInput) (req *request.Request, output *ImportDocumentationPartsOutput) {
-	op := &request.Operation{
+func (c *APIGateway) ImportDocumentationPartsRequest(input *ImportDocumentationPartsInput) (req *aws.Request, output *ImportDocumentationPartsOutput) {
+	op := &aws.Operation{
 		Name:       opImportDocumentationParts,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/parts",
@@ -7830,7 +7829,7 @@ func (c *APIGateway) ImportDocumentationParts(input *ImportDocumentationPartsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) ImportDocumentationPartsWithContext(ctx aws.Context, input *ImportDocumentationPartsInput, opts ...request.Option) (*ImportDocumentationPartsOutput, error) {
+func (c *APIGateway) ImportDocumentationPartsWithContext(ctx aws.Context, input *ImportDocumentationPartsInput, opts ...aws.Option) (*ImportDocumentationPartsOutput, error) {
 	req, out := c.ImportDocumentationPartsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7839,7 +7838,7 @@ func (c *APIGateway) ImportDocumentationPartsWithContext(ctx aws.Context, input 
 
 const opImportRestApi = "ImportRestApi"
 
-// ImportRestApiRequest generates a "aws/request.Request" representing the
+// ImportRestApiRequest generates a "aws.Request" representing the
 // client's request for the ImportRestApi operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7861,8 +7860,8 @@ const opImportRestApi = "ImportRestApi"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) ImportRestApiRequest(input *ImportRestApiInput) (req *request.Request, output *RestApi) {
-	op := &request.Operation{
+func (c *APIGateway) ImportRestApiRequest(input *ImportRestApiInput) (req *aws.Request, output *RestApi) {
+	op := &aws.Operation{
 		Name:       opImportRestApi,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis?mode=import",
@@ -7922,7 +7921,7 @@ func (c *APIGateway) ImportRestApi(input *ImportRestApiInput) (*RestApi, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) ImportRestApiWithContext(ctx aws.Context, input *ImportRestApiInput, opts ...request.Option) (*RestApi, error) {
+func (c *APIGateway) ImportRestApiWithContext(ctx aws.Context, input *ImportRestApiInput, opts ...aws.Option) (*RestApi, error) {
 	req, out := c.ImportRestApiRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7931,7 +7930,7 @@ func (c *APIGateway) ImportRestApiWithContext(ctx aws.Context, input *ImportRest
 
 const opPutGatewayResponse = "PutGatewayResponse"
 
-// PutGatewayResponseRequest generates a "aws/request.Request" representing the
+// PutGatewayResponseRequest generates a "aws.Request" representing the
 // client's request for the PutGatewayResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7953,8 +7952,8 @@ const opPutGatewayResponse = "PutGatewayResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) PutGatewayResponseRequest(input *PutGatewayResponseInput) (req *request.Request, output *UpdateGatewayResponseOutput) {
-	op := &request.Operation{
+func (c *APIGateway) PutGatewayResponseRequest(input *PutGatewayResponseInput) (req *aws.Request, output *UpdateGatewayResponseOutput) {
+	op := &aws.Operation{
 		Name:       opPutGatewayResponse,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/restapis/{restapi_id}/gatewayresponses/{response_type}",
@@ -8013,7 +8012,7 @@ func (c *APIGateway) PutGatewayResponse(input *PutGatewayResponseInput) (*Update
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) PutGatewayResponseWithContext(ctx aws.Context, input *PutGatewayResponseInput, opts ...request.Option) (*UpdateGatewayResponseOutput, error) {
+func (c *APIGateway) PutGatewayResponseWithContext(ctx aws.Context, input *PutGatewayResponseInput, opts ...aws.Option) (*UpdateGatewayResponseOutput, error) {
 	req, out := c.PutGatewayResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8022,7 +8021,7 @@ func (c *APIGateway) PutGatewayResponseWithContext(ctx aws.Context, input *PutGa
 
 const opPutIntegration = "PutIntegration"
 
-// PutIntegrationRequest generates a "aws/request.Request" representing the
+// PutIntegrationRequest generates a "aws.Request" representing the
 // client's request for the PutIntegration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8044,8 +8043,8 @@ const opPutIntegration = "PutIntegration"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) PutIntegrationRequest(input *PutIntegrationInput) (req *request.Request, output *Integration) {
-	op := &request.Operation{
+func (c *APIGateway) PutIntegrationRequest(input *PutIntegrationInput) (req *aws.Request, output *Integration) {
+	op := &aws.Operation{
 		Name:       opPutIntegration,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration",
@@ -8104,7 +8103,7 @@ func (c *APIGateway) PutIntegration(input *PutIntegrationInput) (*Integration, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) PutIntegrationWithContext(ctx aws.Context, input *PutIntegrationInput, opts ...request.Option) (*Integration, error) {
+func (c *APIGateway) PutIntegrationWithContext(ctx aws.Context, input *PutIntegrationInput, opts ...aws.Option) (*Integration, error) {
 	req, out := c.PutIntegrationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8113,7 +8112,7 @@ func (c *APIGateway) PutIntegrationWithContext(ctx aws.Context, input *PutIntegr
 
 const opPutIntegrationResponse = "PutIntegrationResponse"
 
-// PutIntegrationResponseRequest generates a "aws/request.Request" representing the
+// PutIntegrationResponseRequest generates a "aws.Request" representing the
 // client's request for the PutIntegrationResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8135,8 +8134,8 @@ const opPutIntegrationResponse = "PutIntegrationResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) PutIntegrationResponseRequest(input *PutIntegrationResponseInput) (req *request.Request, output *IntegrationResponse) {
-	op := &request.Operation{
+func (c *APIGateway) PutIntegrationResponseRequest(input *PutIntegrationResponseInput) (req *aws.Request, output *IntegrationResponse) {
+	op := &aws.Operation{
 		Name:       opPutIntegrationResponse,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}",
@@ -8198,7 +8197,7 @@ func (c *APIGateway) PutIntegrationResponse(input *PutIntegrationResponseInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) PutIntegrationResponseWithContext(ctx aws.Context, input *PutIntegrationResponseInput, opts ...request.Option) (*IntegrationResponse, error) {
+func (c *APIGateway) PutIntegrationResponseWithContext(ctx aws.Context, input *PutIntegrationResponseInput, opts ...aws.Option) (*IntegrationResponse, error) {
 	req, out := c.PutIntegrationResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8207,7 +8206,7 @@ func (c *APIGateway) PutIntegrationResponseWithContext(ctx aws.Context, input *P
 
 const opPutMethod = "PutMethod"
 
-// PutMethodRequest generates a "aws/request.Request" representing the
+// PutMethodRequest generates a "aws.Request" representing the
 // client's request for the PutMethod operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8229,8 +8228,8 @@ const opPutMethod = "PutMethod"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) PutMethodRequest(input *PutMethodInput) (req *request.Request, output *Method) {
-	op := &request.Operation{
+func (c *APIGateway) PutMethodRequest(input *PutMethodInput) (req *aws.Request, output *Method) {
+	op := &aws.Operation{
 		Name:       opPutMethod,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}",
@@ -8292,7 +8291,7 @@ func (c *APIGateway) PutMethod(input *PutMethodInput) (*Method, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) PutMethodWithContext(ctx aws.Context, input *PutMethodInput, opts ...request.Option) (*Method, error) {
+func (c *APIGateway) PutMethodWithContext(ctx aws.Context, input *PutMethodInput, opts ...aws.Option) (*Method, error) {
 	req, out := c.PutMethodRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8301,7 +8300,7 @@ func (c *APIGateway) PutMethodWithContext(ctx aws.Context, input *PutMethodInput
 
 const opPutMethodResponse = "PutMethodResponse"
 
-// PutMethodResponseRequest generates a "aws/request.Request" representing the
+// PutMethodResponseRequest generates a "aws.Request" representing the
 // client's request for the PutMethodResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8323,8 +8322,8 @@ const opPutMethodResponse = "PutMethodResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) PutMethodResponseRequest(input *PutMethodResponseInput) (req *request.Request, output *MethodResponse) {
-	op := &request.Operation{
+func (c *APIGateway) PutMethodResponseRequest(input *PutMethodResponseInput) (req *aws.Request, output *MethodResponse) {
+	op := &aws.Operation{
 		Name:       opPutMethodResponse,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}",
@@ -8386,7 +8385,7 @@ func (c *APIGateway) PutMethodResponse(input *PutMethodResponseInput) (*MethodRe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) PutMethodResponseWithContext(ctx aws.Context, input *PutMethodResponseInput, opts ...request.Option) (*MethodResponse, error) {
+func (c *APIGateway) PutMethodResponseWithContext(ctx aws.Context, input *PutMethodResponseInput, opts ...aws.Option) (*MethodResponse, error) {
 	req, out := c.PutMethodResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8395,7 +8394,7 @@ func (c *APIGateway) PutMethodResponseWithContext(ctx aws.Context, input *PutMet
 
 const opPutRestApi = "PutRestApi"
 
-// PutRestApiRequest generates a "aws/request.Request" representing the
+// PutRestApiRequest generates a "aws.Request" representing the
 // client's request for the PutRestApi operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8417,8 +8416,8 @@ const opPutRestApi = "PutRestApi"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) PutRestApiRequest(input *PutRestApiInput) (req *request.Request, output *RestApi) {
-	op := &request.Operation{
+func (c *APIGateway) PutRestApiRequest(input *PutRestApiInput) (req *aws.Request, output *RestApi) {
+	op := &aws.Operation{
 		Name:       opPutRestApi,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/restapis/{restapi_id}",
@@ -8483,7 +8482,7 @@ func (c *APIGateway) PutRestApi(input *PutRestApiInput) (*RestApi, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) PutRestApiWithContext(ctx aws.Context, input *PutRestApiInput, opts ...request.Option) (*RestApi, error) {
+func (c *APIGateway) PutRestApiWithContext(ctx aws.Context, input *PutRestApiInput, opts ...aws.Option) (*RestApi, error) {
 	req, out := c.PutRestApiRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8492,7 +8491,7 @@ func (c *APIGateway) PutRestApiWithContext(ctx aws.Context, input *PutRestApiInp
 
 const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
 
-// TestInvokeAuthorizerRequest generates a "aws/request.Request" representing the
+// TestInvokeAuthorizerRequest generates a "aws.Request" representing the
 // client's request for the TestInvokeAuthorizer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8514,8 +8513,8 @@ const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInput) (req *request.Request, output *TestInvokeAuthorizerOutput) {
-	op := &request.Operation{
+func (c *APIGateway) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInput) (req *aws.Request, output *TestInvokeAuthorizerOutput) {
+	op := &aws.Operation{
 		Name:       opTestInvokeAuthorizer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/authorizers/{authorizer_id}",
@@ -8573,7 +8572,7 @@ func (c *APIGateway) TestInvokeAuthorizer(input *TestInvokeAuthorizerInput) (*Te
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) TestInvokeAuthorizerWithContext(ctx aws.Context, input *TestInvokeAuthorizerInput, opts ...request.Option) (*TestInvokeAuthorizerOutput, error) {
+func (c *APIGateway) TestInvokeAuthorizerWithContext(ctx aws.Context, input *TestInvokeAuthorizerInput, opts ...aws.Option) (*TestInvokeAuthorizerOutput, error) {
 	req, out := c.TestInvokeAuthorizerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8582,7 +8581,7 @@ func (c *APIGateway) TestInvokeAuthorizerWithContext(ctx aws.Context, input *Tes
 
 const opTestInvokeMethod = "TestInvokeMethod"
 
-// TestInvokeMethodRequest generates a "aws/request.Request" representing the
+// TestInvokeMethodRequest generates a "aws.Request" representing the
 // client's request for the TestInvokeMethod operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8604,8 +8603,8 @@ const opTestInvokeMethod = "TestInvokeMethod"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) TestInvokeMethodRequest(input *TestInvokeMethodInput) (req *request.Request, output *TestInvokeMethodOutput) {
-	op := &request.Operation{
+func (c *APIGateway) TestInvokeMethodRequest(input *TestInvokeMethodInput) (req *aws.Request, output *TestInvokeMethodOutput) {
+	op := &aws.Operation{
 		Name:       opTestInvokeMethod,
 		HTTPMethod: "POST",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}",
@@ -8661,7 +8660,7 @@ func (c *APIGateway) TestInvokeMethod(input *TestInvokeMethodInput) (*TestInvoke
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) TestInvokeMethodWithContext(ctx aws.Context, input *TestInvokeMethodInput, opts ...request.Option) (*TestInvokeMethodOutput, error) {
+func (c *APIGateway) TestInvokeMethodWithContext(ctx aws.Context, input *TestInvokeMethodInput, opts ...aws.Option) (*TestInvokeMethodOutput, error) {
 	req, out := c.TestInvokeMethodRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8670,7 +8669,7 @@ func (c *APIGateway) TestInvokeMethodWithContext(ctx aws.Context, input *TestInv
 
 const opUpdateAccount = "UpdateAccount"
 
-// UpdateAccountRequest generates a "aws/request.Request" representing the
+// UpdateAccountRequest generates a "aws.Request" representing the
 // client's request for the UpdateAccount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8692,8 +8691,8 @@ const opUpdateAccount = "UpdateAccount"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateAccountRequest(input *UpdateAccountInput) (req *request.Request, output *Account) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateAccountRequest(input *UpdateAccountInput) (req *aws.Request, output *Account) {
+	op := &aws.Operation{
 		Name:       opUpdateAccount,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/account",
@@ -8748,7 +8747,7 @@ func (c *APIGateway) UpdateAccount(input *UpdateAccountInput) (*Account, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateAccountWithContext(ctx aws.Context, input *UpdateAccountInput, opts ...request.Option) (*Account, error) {
+func (c *APIGateway) UpdateAccountWithContext(ctx aws.Context, input *UpdateAccountInput, opts ...aws.Option) (*Account, error) {
 	req, out := c.UpdateAccountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8757,7 +8756,7 @@ func (c *APIGateway) UpdateAccountWithContext(ctx aws.Context, input *UpdateAcco
 
 const opUpdateApiKey = "UpdateApiKey"
 
-// UpdateApiKeyRequest generates a "aws/request.Request" representing the
+// UpdateApiKeyRequest generates a "aws.Request" representing the
 // client's request for the UpdateApiKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8779,8 +8778,8 @@ const opUpdateApiKey = "UpdateApiKey"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateApiKeyRequest(input *UpdateApiKeyInput) (req *request.Request, output *ApiKey) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateApiKeyRequest(input *UpdateApiKeyInput) (req *aws.Request, output *ApiKey) {
+	op := &aws.Operation{
 		Name:       opUpdateApiKey,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/apikeys/{api_Key}",
@@ -8839,7 +8838,7 @@ func (c *APIGateway) UpdateApiKey(input *UpdateApiKeyInput) (*ApiKey, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateApiKeyWithContext(ctx aws.Context, input *UpdateApiKeyInput, opts ...request.Option) (*ApiKey, error) {
+func (c *APIGateway) UpdateApiKeyWithContext(ctx aws.Context, input *UpdateApiKeyInput, opts ...aws.Option) (*ApiKey, error) {
 	req, out := c.UpdateApiKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8848,7 +8847,7 @@ func (c *APIGateway) UpdateApiKeyWithContext(ctx aws.Context, input *UpdateApiKe
 
 const opUpdateAuthorizer = "UpdateAuthorizer"
 
-// UpdateAuthorizerRequest generates a "aws/request.Request" representing the
+// UpdateAuthorizerRequest generates a "aws.Request" representing the
 // client's request for the UpdateAuthorizer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8870,8 +8869,8 @@ const opUpdateAuthorizer = "UpdateAuthorizer"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateAuthorizerRequest(input *UpdateAuthorizerInput) (req *request.Request, output *Authorizer) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateAuthorizerRequest(input *UpdateAuthorizerInput) (req *aws.Request, output *Authorizer) {
+	op := &aws.Operation{
 		Name:       opUpdateAuthorizer,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/authorizers/{authorizer_id}",
@@ -8928,7 +8927,7 @@ func (c *APIGateway) UpdateAuthorizer(input *UpdateAuthorizerInput) (*Authorizer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateAuthorizerWithContext(ctx aws.Context, input *UpdateAuthorizerInput, opts ...request.Option) (*Authorizer, error) {
+func (c *APIGateway) UpdateAuthorizerWithContext(ctx aws.Context, input *UpdateAuthorizerInput, opts ...aws.Option) (*Authorizer, error) {
 	req, out := c.UpdateAuthorizerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8937,7 +8936,7 @@ func (c *APIGateway) UpdateAuthorizerWithContext(ctx aws.Context, input *UpdateA
 
 const opUpdateBasePathMapping = "UpdateBasePathMapping"
 
-// UpdateBasePathMappingRequest generates a "aws/request.Request" representing the
+// UpdateBasePathMappingRequest generates a "aws.Request" representing the
 // client's request for the UpdateBasePathMapping operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8959,8 +8958,8 @@ const opUpdateBasePathMapping = "UpdateBasePathMapping"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateBasePathMappingRequest(input *UpdateBasePathMappingInput) (req *request.Request, output *BasePathMapping) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateBasePathMappingRequest(input *UpdateBasePathMappingInput) (req *aws.Request, output *BasePathMapping) {
+	op := &aws.Operation{
 		Name:       opUpdateBasePathMapping,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/domainnames/{domain_name}/basepathmappings/{base_path}",
@@ -9019,7 +9018,7 @@ func (c *APIGateway) UpdateBasePathMapping(input *UpdateBasePathMappingInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateBasePathMappingWithContext(ctx aws.Context, input *UpdateBasePathMappingInput, opts ...request.Option) (*BasePathMapping, error) {
+func (c *APIGateway) UpdateBasePathMappingWithContext(ctx aws.Context, input *UpdateBasePathMappingInput, opts ...aws.Option) (*BasePathMapping, error) {
 	req, out := c.UpdateBasePathMappingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9028,7 +9027,7 @@ func (c *APIGateway) UpdateBasePathMappingWithContext(ctx aws.Context, input *Up
 
 const opUpdateClientCertificate = "UpdateClientCertificate"
 
-// UpdateClientCertificateRequest generates a "aws/request.Request" representing the
+// UpdateClientCertificateRequest generates a "aws.Request" representing the
 // client's request for the UpdateClientCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9050,8 +9049,8 @@ const opUpdateClientCertificate = "UpdateClientCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateClientCertificateRequest(input *UpdateClientCertificateInput) (req *request.Request, output *ClientCertificate) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateClientCertificateRequest(input *UpdateClientCertificateInput) (req *aws.Request, output *ClientCertificate) {
+	op := &aws.Operation{
 		Name:       opUpdateClientCertificate,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/clientcertificates/{clientcertificate_id}",
@@ -9106,7 +9105,7 @@ func (c *APIGateway) UpdateClientCertificate(input *UpdateClientCertificateInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateClientCertificateWithContext(ctx aws.Context, input *UpdateClientCertificateInput, opts ...request.Option) (*ClientCertificate, error) {
+func (c *APIGateway) UpdateClientCertificateWithContext(ctx aws.Context, input *UpdateClientCertificateInput, opts ...aws.Option) (*ClientCertificate, error) {
 	req, out := c.UpdateClientCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9115,7 +9114,7 @@ func (c *APIGateway) UpdateClientCertificateWithContext(ctx aws.Context, input *
 
 const opUpdateDeployment = "UpdateDeployment"
 
-// UpdateDeploymentRequest generates a "aws/request.Request" representing the
+// UpdateDeploymentRequest generates a "aws.Request" representing the
 // client's request for the UpdateDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9137,8 +9136,8 @@ const opUpdateDeployment = "UpdateDeployment"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateDeploymentRequest(input *UpdateDeploymentInput) (req *request.Request, output *Deployment) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateDeploymentRequest(input *UpdateDeploymentInput) (req *aws.Request, output *Deployment) {
+	op := &aws.Operation{
 		Name:       opUpdateDeployment,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/deployments/{deployment_id}",
@@ -9197,7 +9196,7 @@ func (c *APIGateway) UpdateDeployment(input *UpdateDeploymentInput) (*Deployment
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateDeploymentWithContext(ctx aws.Context, input *UpdateDeploymentInput, opts ...request.Option) (*Deployment, error) {
+func (c *APIGateway) UpdateDeploymentWithContext(ctx aws.Context, input *UpdateDeploymentInput, opts ...aws.Option) (*Deployment, error) {
 	req, out := c.UpdateDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9206,7 +9205,7 @@ func (c *APIGateway) UpdateDeploymentWithContext(ctx aws.Context, input *UpdateD
 
 const opUpdateDocumentationPart = "UpdateDocumentationPart"
 
-// UpdateDocumentationPartRequest generates a "aws/request.Request" representing the
+// UpdateDocumentationPartRequest generates a "aws.Request" representing the
 // client's request for the UpdateDocumentationPart operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9228,8 +9227,8 @@ const opUpdateDocumentationPart = "UpdateDocumentationPart"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateDocumentationPartRequest(input *UpdateDocumentationPartInput) (req *request.Request, output *DocumentationPart) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateDocumentationPartRequest(input *UpdateDocumentationPartInput) (req *aws.Request, output *DocumentationPart) {
+	op := &aws.Operation{
 		Name:       opUpdateDocumentationPart,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/parts/{part_id}",
@@ -9289,7 +9288,7 @@ func (c *APIGateway) UpdateDocumentationPart(input *UpdateDocumentationPartInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateDocumentationPartWithContext(ctx aws.Context, input *UpdateDocumentationPartInput, opts ...request.Option) (*DocumentationPart, error) {
+func (c *APIGateway) UpdateDocumentationPartWithContext(ctx aws.Context, input *UpdateDocumentationPartInput, opts ...aws.Option) (*DocumentationPart, error) {
 	req, out := c.UpdateDocumentationPartRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9298,7 +9297,7 @@ func (c *APIGateway) UpdateDocumentationPartWithContext(ctx aws.Context, input *
 
 const opUpdateDocumentationVersion = "UpdateDocumentationVersion"
 
-// UpdateDocumentationVersionRequest generates a "aws/request.Request" representing the
+// UpdateDocumentationVersionRequest generates a "aws.Request" representing the
 // client's request for the UpdateDocumentationVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9320,8 +9319,8 @@ const opUpdateDocumentationVersion = "UpdateDocumentationVersion"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateDocumentationVersionRequest(input *UpdateDocumentationVersionInput) (req *request.Request, output *DocumentationVersion) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateDocumentationVersionRequest(input *UpdateDocumentationVersionInput) (req *aws.Request, output *DocumentationVersion) {
+	op := &aws.Operation{
 		Name:       opUpdateDocumentationVersion,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/documentation/versions/{doc_version}",
@@ -9378,7 +9377,7 @@ func (c *APIGateway) UpdateDocumentationVersion(input *UpdateDocumentationVersio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateDocumentationVersionWithContext(ctx aws.Context, input *UpdateDocumentationVersionInput, opts ...request.Option) (*DocumentationVersion, error) {
+func (c *APIGateway) UpdateDocumentationVersionWithContext(ctx aws.Context, input *UpdateDocumentationVersionInput, opts ...aws.Option) (*DocumentationVersion, error) {
 	req, out := c.UpdateDocumentationVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9387,7 +9386,7 @@ func (c *APIGateway) UpdateDocumentationVersionWithContext(ctx aws.Context, inpu
 
 const opUpdateDomainName = "UpdateDomainName"
 
-// UpdateDomainNameRequest generates a "aws/request.Request" representing the
+// UpdateDomainNameRequest generates a "aws.Request" representing the
 // client's request for the UpdateDomainName operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9409,8 +9408,8 @@ const opUpdateDomainName = "UpdateDomainName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateDomainNameRequest(input *UpdateDomainNameInput) (req *request.Request, output *DomainName) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateDomainNameRequest(input *UpdateDomainNameInput) (req *aws.Request, output *DomainName) {
+	op := &aws.Operation{
 		Name:       opUpdateDomainName,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/domainnames/{domain_name}",
@@ -9469,7 +9468,7 @@ func (c *APIGateway) UpdateDomainName(input *UpdateDomainNameInput) (*DomainName
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateDomainNameWithContext(ctx aws.Context, input *UpdateDomainNameInput, opts ...request.Option) (*DomainName, error) {
+func (c *APIGateway) UpdateDomainNameWithContext(ctx aws.Context, input *UpdateDomainNameInput, opts ...aws.Option) (*DomainName, error) {
 	req, out := c.UpdateDomainNameRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9478,7 +9477,7 @@ func (c *APIGateway) UpdateDomainNameWithContext(ctx aws.Context, input *UpdateD
 
 const opUpdateGatewayResponse = "UpdateGatewayResponse"
 
-// UpdateGatewayResponseRequest generates a "aws/request.Request" representing the
+// UpdateGatewayResponseRequest generates a "aws.Request" representing the
 // client's request for the UpdateGatewayResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9500,8 +9499,8 @@ const opUpdateGatewayResponse = "UpdateGatewayResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateGatewayResponseRequest(input *UpdateGatewayResponseInput) (req *request.Request, output *UpdateGatewayResponseOutput) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateGatewayResponseRequest(input *UpdateGatewayResponseInput) (req *aws.Request, output *UpdateGatewayResponseOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateGatewayResponse,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/gatewayresponses/{response_type}",
@@ -9556,7 +9555,7 @@ func (c *APIGateway) UpdateGatewayResponse(input *UpdateGatewayResponseInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateGatewayResponseWithContext(ctx aws.Context, input *UpdateGatewayResponseInput, opts ...request.Option) (*UpdateGatewayResponseOutput, error) {
+func (c *APIGateway) UpdateGatewayResponseWithContext(ctx aws.Context, input *UpdateGatewayResponseInput, opts ...aws.Option) (*UpdateGatewayResponseOutput, error) {
 	req, out := c.UpdateGatewayResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9565,7 +9564,7 @@ func (c *APIGateway) UpdateGatewayResponseWithContext(ctx aws.Context, input *Up
 
 const opUpdateIntegration = "UpdateIntegration"
 
-// UpdateIntegrationRequest generates a "aws/request.Request" representing the
+// UpdateIntegrationRequest generates a "aws.Request" representing the
 // client's request for the UpdateIntegration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9587,8 +9586,8 @@ const opUpdateIntegration = "UpdateIntegration"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateIntegrationRequest(input *UpdateIntegrationInput) (req *request.Request, output *Integration) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateIntegrationRequest(input *UpdateIntegrationInput) (req *aws.Request, output *Integration) {
+	op := &aws.Operation{
 		Name:       opUpdateIntegration,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration",
@@ -9647,7 +9646,7 @@ func (c *APIGateway) UpdateIntegration(input *UpdateIntegrationInput) (*Integrat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateIntegrationWithContext(ctx aws.Context, input *UpdateIntegrationInput, opts ...request.Option) (*Integration, error) {
+func (c *APIGateway) UpdateIntegrationWithContext(ctx aws.Context, input *UpdateIntegrationInput, opts ...aws.Option) (*Integration, error) {
 	req, out := c.UpdateIntegrationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9656,7 +9655,7 @@ func (c *APIGateway) UpdateIntegrationWithContext(ctx aws.Context, input *Update
 
 const opUpdateIntegrationResponse = "UpdateIntegrationResponse"
 
-// UpdateIntegrationResponseRequest generates a "aws/request.Request" representing the
+// UpdateIntegrationResponseRequest generates a "aws.Request" representing the
 // client's request for the UpdateIntegrationResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9678,8 +9677,8 @@ const opUpdateIntegrationResponse = "UpdateIntegrationResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateIntegrationResponseRequest(input *UpdateIntegrationResponseInput) (req *request.Request, output *IntegrationResponse) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateIntegrationResponseRequest(input *UpdateIntegrationResponseInput) (req *aws.Request, output *IntegrationResponse) {
+	op := &aws.Operation{
 		Name:       opUpdateIntegrationResponse,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration/responses/{status_code}",
@@ -9738,7 +9737,7 @@ func (c *APIGateway) UpdateIntegrationResponse(input *UpdateIntegrationResponseI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateIntegrationResponseWithContext(ctx aws.Context, input *UpdateIntegrationResponseInput, opts ...request.Option) (*IntegrationResponse, error) {
+func (c *APIGateway) UpdateIntegrationResponseWithContext(ctx aws.Context, input *UpdateIntegrationResponseInput, opts ...aws.Option) (*IntegrationResponse, error) {
 	req, out := c.UpdateIntegrationResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9747,7 +9746,7 @@ func (c *APIGateway) UpdateIntegrationResponseWithContext(ctx aws.Context, input
 
 const opUpdateMethod = "UpdateMethod"
 
-// UpdateMethodRequest generates a "aws/request.Request" representing the
+// UpdateMethodRequest generates a "aws.Request" representing the
 // client's request for the UpdateMethod operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9769,8 +9768,8 @@ const opUpdateMethod = "UpdateMethod"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateMethodRequest(input *UpdateMethodInput) (req *request.Request, output *Method) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateMethodRequest(input *UpdateMethodInput) (req *aws.Request, output *Method) {
+	op := &aws.Operation{
 		Name:       opUpdateMethod,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}",
@@ -9829,7 +9828,7 @@ func (c *APIGateway) UpdateMethod(input *UpdateMethodInput) (*Method, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateMethodWithContext(ctx aws.Context, input *UpdateMethodInput, opts ...request.Option) (*Method, error) {
+func (c *APIGateway) UpdateMethodWithContext(ctx aws.Context, input *UpdateMethodInput, opts ...aws.Option) (*Method, error) {
 	req, out := c.UpdateMethodRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9838,7 +9837,7 @@ func (c *APIGateway) UpdateMethodWithContext(ctx aws.Context, input *UpdateMetho
 
 const opUpdateMethodResponse = "UpdateMethodResponse"
 
-// UpdateMethodResponseRequest generates a "aws/request.Request" representing the
+// UpdateMethodResponseRequest generates a "aws.Request" representing the
 // client's request for the UpdateMethodResponse operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9860,8 +9859,8 @@ const opUpdateMethodResponse = "UpdateMethodResponse"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateMethodResponseRequest(input *UpdateMethodResponseInput) (req *request.Request, output *MethodResponse) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateMethodResponseRequest(input *UpdateMethodResponseInput) (req *aws.Request, output *MethodResponse) {
+	op := &aws.Operation{
 		Name:       opUpdateMethodResponse,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}",
@@ -9923,7 +9922,7 @@ func (c *APIGateway) UpdateMethodResponse(input *UpdateMethodResponseInput) (*Me
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateMethodResponseWithContext(ctx aws.Context, input *UpdateMethodResponseInput, opts ...request.Option) (*MethodResponse, error) {
+func (c *APIGateway) UpdateMethodResponseWithContext(ctx aws.Context, input *UpdateMethodResponseInput, opts ...aws.Option) (*MethodResponse, error) {
 	req, out := c.UpdateMethodResponseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9932,7 +9931,7 @@ func (c *APIGateway) UpdateMethodResponseWithContext(ctx aws.Context, input *Upd
 
 const opUpdateModel = "UpdateModel"
 
-// UpdateModelRequest generates a "aws/request.Request" representing the
+// UpdateModelRequest generates a "aws.Request" representing the
 // client's request for the UpdateModel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9954,8 +9953,8 @@ const opUpdateModel = "UpdateModel"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateModelRequest(input *UpdateModelInput) (req *request.Request, output *Model) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateModelRequest(input *UpdateModelInput) (req *aws.Request, output *Model) {
+	op := &aws.Operation{
 		Name:       opUpdateModel,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/models/{model_name}",
@@ -10014,7 +10013,7 @@ func (c *APIGateway) UpdateModel(input *UpdateModelInput) (*Model, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateModelWithContext(ctx aws.Context, input *UpdateModelInput, opts ...request.Option) (*Model, error) {
+func (c *APIGateway) UpdateModelWithContext(ctx aws.Context, input *UpdateModelInput, opts ...aws.Option) (*Model, error) {
 	req, out := c.UpdateModelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -10023,7 +10022,7 @@ func (c *APIGateway) UpdateModelWithContext(ctx aws.Context, input *UpdateModelI
 
 const opUpdateRequestValidator = "UpdateRequestValidator"
 
-// UpdateRequestValidatorRequest generates a "aws/request.Request" representing the
+// UpdateRequestValidatorRequest generates a "aws.Request" representing the
 // client's request for the UpdateRequestValidator operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -10045,8 +10044,8 @@ const opUpdateRequestValidator = "UpdateRequestValidator"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateRequestValidatorRequest(input *UpdateRequestValidatorInput) (req *request.Request, output *UpdateRequestValidatorOutput) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateRequestValidatorRequest(input *UpdateRequestValidatorInput) (req *aws.Request, output *UpdateRequestValidatorOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRequestValidator,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}",
@@ -10101,7 +10100,7 @@ func (c *APIGateway) UpdateRequestValidator(input *UpdateRequestValidatorInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateRequestValidatorWithContext(ctx aws.Context, input *UpdateRequestValidatorInput, opts ...request.Option) (*UpdateRequestValidatorOutput, error) {
+func (c *APIGateway) UpdateRequestValidatorWithContext(ctx aws.Context, input *UpdateRequestValidatorInput, opts ...aws.Option) (*UpdateRequestValidatorOutput, error) {
 	req, out := c.UpdateRequestValidatorRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -10110,7 +10109,7 @@ func (c *APIGateway) UpdateRequestValidatorWithContext(ctx aws.Context, input *U
 
 const opUpdateResource = "UpdateResource"
 
-// UpdateResourceRequest generates a "aws/request.Request" representing the
+// UpdateResourceRequest generates a "aws.Request" representing the
 // client's request for the UpdateResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -10132,8 +10131,8 @@ const opUpdateResource = "UpdateResource"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateResourceRequest(input *UpdateResourceInput) (req *request.Request, output *Resource) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateResourceRequest(input *UpdateResourceInput) (req *aws.Request, output *Resource) {
+	op := &aws.Operation{
 		Name:       opUpdateResource,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/resources/{resource_id}",
@@ -10192,7 +10191,7 @@ func (c *APIGateway) UpdateResource(input *UpdateResourceInput) (*Resource, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateResourceWithContext(ctx aws.Context, input *UpdateResourceInput, opts ...request.Option) (*Resource, error) {
+func (c *APIGateway) UpdateResourceWithContext(ctx aws.Context, input *UpdateResourceInput, opts ...aws.Option) (*Resource, error) {
 	req, out := c.UpdateResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -10201,7 +10200,7 @@ func (c *APIGateway) UpdateResourceWithContext(ctx aws.Context, input *UpdateRes
 
 const opUpdateRestApi = "UpdateRestApi"
 
-// UpdateRestApiRequest generates a "aws/request.Request" representing the
+// UpdateRestApiRequest generates a "aws.Request" representing the
 // client's request for the UpdateRestApi operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -10223,8 +10222,8 @@ const opUpdateRestApi = "UpdateRestApi"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateRestApiRequest(input *UpdateRestApiInput) (req *request.Request, output *RestApi) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateRestApiRequest(input *UpdateRestApiInput) (req *aws.Request, output *RestApi) {
+	op := &aws.Operation{
 		Name:       opUpdateRestApi,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}",
@@ -10283,7 +10282,7 @@ func (c *APIGateway) UpdateRestApi(input *UpdateRestApiInput) (*RestApi, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateRestApiWithContext(ctx aws.Context, input *UpdateRestApiInput, opts ...request.Option) (*RestApi, error) {
+func (c *APIGateway) UpdateRestApiWithContext(ctx aws.Context, input *UpdateRestApiInput, opts ...aws.Option) (*RestApi, error) {
 	req, out := c.UpdateRestApiRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -10292,7 +10291,7 @@ func (c *APIGateway) UpdateRestApiWithContext(ctx aws.Context, input *UpdateRest
 
 const opUpdateStage = "UpdateStage"
 
-// UpdateStageRequest generates a "aws/request.Request" representing the
+// UpdateStageRequest generates a "aws.Request" representing the
 // client's request for the UpdateStage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -10314,8 +10313,8 @@ const opUpdateStage = "UpdateStage"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateStageRequest(input *UpdateStageInput) (req *request.Request, output *Stage) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateStageRequest(input *UpdateStageInput) (req *aws.Request, output *Stage) {
+	op := &aws.Operation{
 		Name:       opUpdateStage,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/restapis/{restapi_id}/stages/{stage_name}",
@@ -10374,7 +10373,7 @@ func (c *APIGateway) UpdateStage(input *UpdateStageInput) (*Stage, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateStageWithContext(ctx aws.Context, input *UpdateStageInput, opts ...request.Option) (*Stage, error) {
+func (c *APIGateway) UpdateStageWithContext(ctx aws.Context, input *UpdateStageInput, opts ...aws.Option) (*Stage, error) {
 	req, out := c.UpdateStageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -10383,7 +10382,7 @@ func (c *APIGateway) UpdateStageWithContext(ctx aws.Context, input *UpdateStageI
 
 const opUpdateUsage = "UpdateUsage"
 
-// UpdateUsageRequest generates a "aws/request.Request" representing the
+// UpdateUsageRequest generates a "aws.Request" representing the
 // client's request for the UpdateUsage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -10405,8 +10404,8 @@ const opUpdateUsage = "UpdateUsage"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateUsageRequest(input *UpdateUsageInput) (req *request.Request, output *Usage) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateUsageRequest(input *UpdateUsageInput) (req *aws.Request, output *Usage) {
+	op := &aws.Operation{
 		Name:       opUpdateUsage,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/usageplans/{usageplanId}/keys/{keyId}/usage",
@@ -10462,7 +10461,7 @@ func (c *APIGateway) UpdateUsage(input *UpdateUsageInput) (*Usage, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateUsageWithContext(ctx aws.Context, input *UpdateUsageInput, opts ...request.Option) (*Usage, error) {
+func (c *APIGateway) UpdateUsageWithContext(ctx aws.Context, input *UpdateUsageInput, opts ...aws.Option) (*Usage, error) {
 	req, out := c.UpdateUsageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -10471,7 +10470,7 @@ func (c *APIGateway) UpdateUsageWithContext(ctx aws.Context, input *UpdateUsageI
 
 const opUpdateUsagePlan = "UpdateUsagePlan"
 
-// UpdateUsagePlanRequest generates a "aws/request.Request" representing the
+// UpdateUsagePlanRequest generates a "aws.Request" representing the
 // client's request for the UpdateUsagePlan operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -10493,8 +10492,8 @@ const opUpdateUsagePlan = "UpdateUsagePlan"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *APIGateway) UpdateUsagePlanRequest(input *UpdateUsagePlanInput) (req *request.Request, output *UsagePlan) {
-	op := &request.Operation{
+func (c *APIGateway) UpdateUsagePlanRequest(input *UpdateUsagePlanInput) (req *aws.Request, output *UsagePlan) {
+	op := &aws.Operation{
 		Name:       opUpdateUsagePlan,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/usageplans/{usageplanId}",
@@ -10553,7 +10552,7 @@ func (c *APIGateway) UpdateUsagePlan(input *UpdateUsagePlanInput) (*UsagePlan, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *APIGateway) UpdateUsagePlanWithContext(ctx aws.Context, input *UpdateUsagePlanInput, opts ...request.Option) (*UsagePlan, error) {
+func (c *APIGateway) UpdateUsagePlanWithContext(ctx aws.Context, input *UpdateUsagePlanInput, opts ...aws.Option) (*UsagePlan, error) {
 	req, out := c.UpdateUsagePlanRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -11222,15 +11221,15 @@ func (s CreateAuthorizerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAuthorizerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAuthorizerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAuthorizerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11337,12 +11336,12 @@ func (s CreateBasePathMappingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBasePathMappingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateBasePathMappingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBasePathMappingInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11418,9 +11417,9 @@ func (s CreateDeploymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDeploymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11506,19 +11505,19 @@ func (s CreateDocumentationPartInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDocumentationPartInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDocumentationPartInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDocumentationPartInput"}
 	if s.Location == nil {
-		invalidParams.Add(request.NewErrParamRequired("Location"))
+		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
 	if s.Properties == nil {
-		invalidParams.Add(request.NewErrParamRequired("Properties"))
+		invalidParams.Add(aws.NewErrParamRequired("Properties"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.Location != nil {
 		if err := s.Location.Validate(); err != nil {
-			invalidParams.AddNested("Location", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Location", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -11579,12 +11578,12 @@ func (s CreateDocumentationVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDocumentationVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDocumentationVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDocumentationVersionInput"}
 	if s.DocumentationVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentationVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentationVersion"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11661,9 +11660,9 @@ func (s CreateDomainNameInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainNameInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDomainNameInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainNameInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11747,15 +11746,15 @@ func (s CreateModelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateModelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateModelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateModelInput"}
 	if s.ContentType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContentType"))
+		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11827,9 +11826,9 @@ func (s CreateRequestValidatorInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRequestValidatorInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateRequestValidatorInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRequestValidatorInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11894,15 +11893,15 @@ func (s CreateResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceInput"}
 	if s.ParentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentId"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
 	if s.PathPart == nil {
-		invalidParams.Add(request.NewErrParamRequired("PathPart"))
+		invalidParams.Add(aws.NewErrParamRequired("PathPart"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11964,9 +11963,9 @@ func (s CreateRestApiInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRestApiInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateRestApiInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRestApiInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12054,15 +12053,15 @@ func (s CreateStageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStageInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StageName"))
+		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12155,9 +12154,9 @@ func (s CreateUsagePlanInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUsagePlanInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUsagePlanInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUsagePlanInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12230,15 +12229,15 @@ func (s CreateUsagePlanKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUsagePlanKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUsagePlanKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUsagePlanKeyInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyType == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyType"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyType"))
 	}
 	if s.UsagePlanId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsagePlanId"))
+		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12287,9 +12286,9 @@ func (s DeleteApiKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApiKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApiKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApiKeyInput"}
 	if s.ApiKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApiKey"))
+		invalidParams.Add(aws.NewErrParamRequired("ApiKey"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12345,12 +12344,12 @@ func (s DeleteAuthorizerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAuthorizerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAuthorizerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAuthorizerInput"}
 	if s.AuthorizerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AuthorizerId"))
+		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12412,12 +12411,12 @@ func (s DeleteBasePathMappingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBasePathMappingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBasePathMappingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBasePathMappingInput"}
 	if s.BasePath == nil {
-		invalidParams.Add(request.NewErrParamRequired("BasePath"))
+		invalidParams.Add(aws.NewErrParamRequired("BasePath"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12474,9 +12473,9 @@ func (s DeleteClientCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClientCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClientCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClientCertificateInput"}
 	if s.ClientCertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientCertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientCertificateId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12532,12 +12531,12 @@ func (s DeleteDeploymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeploymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDeploymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeploymentInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12599,12 +12598,12 @@ func (s DeleteDocumentationPartInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDocumentationPartInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDocumentationPartInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentationPartInput"}
 	if s.DocumentationPartId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentationPartId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentationPartId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12666,12 +12665,12 @@ func (s DeleteDocumentationVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDocumentationVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDocumentationVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentationVersionInput"}
 	if s.DocumentationVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentationVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentationVersion"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12728,9 +12727,9 @@ func (s DeleteDomainNameInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainNameInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDomainNameInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainNameInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12807,12 +12806,12 @@ func (s DeleteGatewayResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGatewayResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteGatewayResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGatewayResponseInput"}
 	if s.ResponseType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResponseType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResponseType"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12879,15 +12878,15 @@ func (s DeleteIntegrationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIntegrationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteIntegrationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntegrationInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12965,18 +12964,18 @@ func (s DeleteIntegrationResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIntegrationResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteIntegrationResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntegrationResponseInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StatusCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatusCode"))
+		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13055,15 +13054,15 @@ func (s DeleteMethodInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMethodInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMethodInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMethodInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13141,18 +13140,18 @@ func (s DeleteMethodResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMethodResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMethodResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMethodResponseInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StatusCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatusCode"))
+		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13226,12 +13225,12 @@ func (s DeleteModelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteModelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteModelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteModelInput"}
 	if s.ModelName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ModelName"))
+		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13293,12 +13292,12 @@ func (s DeleteRequestValidatorInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRequestValidatorInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRequestValidatorInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRequestValidatorInput"}
 	if s.RequestValidatorId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequestValidatorId"))
+		invalidParams.Add(aws.NewErrParamRequired("RequestValidatorId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13360,12 +13359,12 @@ func (s DeleteResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13422,9 +13421,9 @@ func (s DeleteRestApiInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRestApiInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRestApiInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRestApiInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13480,12 +13479,12 @@ func (s DeleteStageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteStageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteStageInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StageName"))
+		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13542,9 +13541,9 @@ func (s DeleteUsagePlanInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUsagePlanInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUsagePlanInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUsagePlanInput"}
 	if s.UsagePlanId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsagePlanId"))
+		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13588,12 +13587,12 @@ func (s DeleteUsagePlanKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUsagePlanKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUsagePlanKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUsagePlanKeyInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.UsagePlanId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsagePlanId"))
+		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13829,9 +13828,9 @@ func (s DocumentationPartLocation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DocumentationPartLocation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DocumentationPartLocation"}
+	invalidParams := aws.ErrInvalidParams{Context: "DocumentationPartLocation"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14011,12 +14010,12 @@ func (s FlushStageAuthorizersCacheInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FlushStageAuthorizersCacheInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FlushStageAuthorizersCacheInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "FlushStageAuthorizersCacheInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StageName"))
+		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14078,12 +14077,12 @@ func (s FlushStageCacheInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FlushStageCacheInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FlushStageCacheInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "FlushStageCacheInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StageName"))
+		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14184,9 +14183,9 @@ func (s GetApiKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApiKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetApiKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetApiKeyInput"}
 	if s.ApiKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApiKey"))
+		invalidParams.Add(aws.NewErrParamRequired("ApiKey"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14340,12 +14339,12 @@ func (s GetAuthorizerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAuthorizerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAuthorizerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAuthorizerInput"}
 	if s.AuthorizerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AuthorizerId"))
+		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14394,9 +14393,9 @@ func (s GetAuthorizersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAuthorizersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAuthorizersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAuthorizersInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14487,12 +14486,12 @@ func (s GetBasePathMappingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBasePathMappingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBasePathMappingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBasePathMappingInput"}
 	if s.BasePath == nil {
-		invalidParams.Add(request.NewErrParamRequired("BasePath"))
+		invalidParams.Add(aws.NewErrParamRequired("BasePath"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14542,9 +14541,9 @@ func (s GetBasePathMappingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBasePathMappingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBasePathMappingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBasePathMappingsInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14627,9 +14626,9 @@ func (s GetClientCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetClientCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetClientCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetClientCertificateInput"}
 	if s.ClientCertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientCertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientCertificateId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14748,12 +14747,12 @@ func (s GetDeploymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeploymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14809,9 +14808,9 @@ func (s GetDeploymentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeploymentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentsInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14908,12 +14907,12 @@ func (s GetDocumentationPartInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentationPartInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDocumentationPartInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentationPartInput"}
 	if s.DocumentationPartId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentationPartId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentationPartId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14972,9 +14971,9 @@ func (s GetDocumentationPartsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentationPartsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDocumentationPartsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentationPartsInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15080,12 +15079,12 @@ func (s GetDocumentationVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentationVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDocumentationVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentationVersionInput"}
 	if s.DocumentationVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentationVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentationVersion"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15134,9 +15133,9 @@ func (s GetDocumentationVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentationVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDocumentationVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentationVersionsInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15223,9 +15222,9 @@ func (s GetDomainNameInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDomainNameInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDomainNameInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDomainNameInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15354,15 +15353,15 @@ func (s GetExportInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetExportInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetExportInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetExportInput"}
 	if s.ExportType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExportType"))
+		invalidParams.Add(aws.NewErrParamRequired("ExportType"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StageName"))
+		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15491,12 +15490,12 @@ func (s GetGatewayResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGatewayResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGatewayResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGatewayResponseInput"}
 	if s.ResponseType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResponseType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResponseType"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15550,9 +15549,9 @@ func (s GetGatewayResponsesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGatewayResponsesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGatewayResponsesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGatewayResponsesInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15802,15 +15801,15 @@ func (s GetIntegrationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIntegrationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIntegrationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIntegrationInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15874,18 +15873,18 @@ func (s GetIntegrationResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIntegrationResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIntegrationResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIntegrationResponseInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StatusCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatusCode"))
+		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15950,15 +15949,15 @@ func (s GetMethodInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMethodInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMethodInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMethodInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16022,18 +16021,18 @@ func (s GetMethodResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMethodResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMethodResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMethodResponseInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StatusCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatusCode"))
+		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16098,12 +16097,12 @@ func (s GetModelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetModelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetModelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetModelInput"}
 	if s.ModelName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ModelName"))
+		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16157,12 +16156,12 @@ func (s GetModelTemplateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetModelTemplateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetModelTemplateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetModelTemplateInput"}
 	if s.ModelName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ModelName"))
+		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16239,9 +16238,9 @@ func (s GetModelsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetModelsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetModelsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetModelsInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16329,12 +16328,12 @@ func (s GetRequestValidatorInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRequestValidatorInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRequestValidatorInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRequestValidatorInput"}
 	if s.RequestValidatorId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequestValidatorId"))
+		invalidParams.Add(aws.NewErrParamRequired("RequestValidatorId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16383,9 +16382,9 @@ func (s GetRequestValidatorsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRequestValidatorsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRequestValidatorsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRequestValidatorsInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16485,12 +16484,12 @@ func (s GetResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16554,9 +16553,9 @@ func (s GetResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetResourcesInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16645,9 +16644,9 @@ func (s GetRestApiInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRestApiInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRestApiInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRestApiInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16771,15 +16770,15 @@ func (s GetSdkInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSdkInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSdkInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSdkInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.SdkType == nil {
-		invalidParams.Add(request.NewErrParamRequired("SdkType"))
+		invalidParams.Add(aws.NewErrParamRequired("SdkType"))
 	}
 	if s.StageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StageName"))
+		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16876,9 +16875,9 @@ func (s GetSdkTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSdkTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSdkTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSdkTypeInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16985,12 +16984,12 @@ func (s GetStageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetStageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetStageInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StageName"))
+		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17036,9 +17035,9 @@ func (s GetStagesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStagesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetStagesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetStagesInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17127,15 +17126,15 @@ func (s GetUsageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUsageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUsageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUsageInput"}
 	if s.EndDate == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndDate"))
+		invalidParams.Add(aws.NewErrParamRequired("EndDate"))
 	}
 	if s.StartDate == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartDate"))
+		invalidParams.Add(aws.NewErrParamRequired("StartDate"))
 	}
 	if s.UsagePlanId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsagePlanId"))
+		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17202,9 +17201,9 @@ func (s GetUsagePlanInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUsagePlanInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUsagePlanInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUsagePlanInput"}
 	if s.UsagePlanId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsagePlanId"))
+		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17248,12 +17247,12 @@ func (s GetUsagePlanKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUsagePlanKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUsagePlanKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUsagePlanKeyInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.UsagePlanId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsagePlanId"))
+		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17307,9 +17306,9 @@ func (s GetUsagePlanKeysInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUsagePlanKeysInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUsagePlanKeysInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUsagePlanKeysInput"}
 	if s.UsagePlanId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsagePlanId"))
+		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17487,12 +17486,12 @@ func (s ImportApiKeysInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportApiKeysInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ImportApiKeysInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ImportApiKeysInput"}
 	if s.Body == nil {
-		invalidParams.Add(request.NewErrParamRequired("Body"))
+		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
 	if s.Format == nil {
-		invalidParams.Add(request.NewErrParamRequired("Format"))
+		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17590,12 +17589,12 @@ func (s ImportDocumentationPartsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportDocumentationPartsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ImportDocumentationPartsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ImportDocumentationPartsInput"}
 	if s.Body == nil {
-		invalidParams.Add(request.NewErrParamRequired("Body"))
+		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17702,9 +17701,9 @@ func (s ImportRestApiInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportRestApiInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ImportRestApiInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ImportRestApiInput"}
 	if s.Body == nil {
-		invalidParams.Add(request.NewErrParamRequired("Body"))
+		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18716,12 +18715,12 @@ func (s PutGatewayResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutGatewayResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutGatewayResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutGatewayResponseInput"}
 	if s.ResponseType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResponseType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResponseType"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18866,18 +18865,18 @@ func (s PutIntegrationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutIntegrationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutIntegrationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutIntegrationInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19033,18 +19032,18 @@ func (s PutIntegrationResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutIntegrationResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutIntegrationResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutIntegrationResponseInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StatusCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatusCode"))
+		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19170,18 +19169,18 @@ func (s PutMethodInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMethodInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutMethodInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutMethodInput"}
 	if s.AuthorizationType == nil {
-		invalidParams.Add(request.NewErrParamRequired("AuthorizationType"))
+		invalidParams.Add(aws.NewErrParamRequired("AuthorizationType"))
 	}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19305,18 +19304,18 @@ func (s PutMethodResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMethodResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutMethodResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutMethodResponseInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StatusCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatusCode"))
+		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19405,12 +19404,12 @@ func (s PutRestApiInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRestApiInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutRestApiInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutRestApiInput"}
 	if s.Body == nil {
-		invalidParams.Add(request.NewErrParamRequired("Body"))
+		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20017,12 +20016,12 @@ func (s TestInvokeAuthorizerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestInvokeAuthorizerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TestInvokeAuthorizerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TestInvokeAuthorizerInput"}
 	if s.AuthorizerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AuthorizerId"))
+		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20204,15 +20203,15 @@ func (s TestInvokeMethodInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestInvokeMethodInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TestInvokeMethodInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TestInvokeMethodInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20418,9 +20417,9 @@ func (s UpdateApiKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApiKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApiKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApiKeyInput"}
 	if s.ApiKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApiKey"))
+		invalidParams.Add(aws.NewErrParamRequired("ApiKey"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20472,12 +20471,12 @@ func (s UpdateAuthorizerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAuthorizerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateAuthorizerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAuthorizerInput"}
 	if s.AuthorizerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AuthorizerId"))
+		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20535,12 +20534,12 @@ func (s UpdateBasePathMappingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBasePathMappingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateBasePathMappingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateBasePathMappingInput"}
 	if s.BasePath == nil {
-		invalidParams.Add(request.NewErrParamRequired("BasePath"))
+		invalidParams.Add(aws.NewErrParamRequired("BasePath"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20593,9 +20592,9 @@ func (s UpdateClientCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateClientCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateClientCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateClientCertificateInput"}
 	if s.ClientCertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientCertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientCertificateId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20648,12 +20647,12 @@ func (s UpdateDeploymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDeploymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDeploymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeploymentInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20711,12 +20710,12 @@ func (s UpdateDocumentationPartInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentationPartInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDocumentationPartInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentationPartInput"}
 	if s.DocumentationPartId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentationPartId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentationPartId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20774,12 +20773,12 @@ func (s UpdateDocumentationVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentationVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDocumentationVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentationVersionInput"}
 	if s.DocumentationVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentationVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentationVersion"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20832,9 +20831,9 @@ func (s UpdateDomainNameInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainNameInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDomainNameInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainNameInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20906,12 +20905,12 @@ func (s UpdateGatewayResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGatewayResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGatewayResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewayResponseInput"}
 	if s.ResponseType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResponseType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResponseType"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21098,15 +21097,15 @@ func (s UpdateIntegrationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateIntegrationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateIntegrationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateIntegrationInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21180,18 +21179,18 @@ func (s UpdateIntegrationResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateIntegrationResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateIntegrationResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateIntegrationResponseInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StatusCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatusCode"))
+		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21266,15 +21265,15 @@ func (s UpdateMethodInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMethodInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateMethodInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMethodInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21348,18 +21347,18 @@ func (s UpdateMethodResponseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMethodResponseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateMethodResponseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMethodResponseInput"}
 	if s.HttpMethod == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpMethod"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StatusCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatusCode"))
+		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21429,12 +21428,12 @@ func (s UpdateModelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateModelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateModelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateModelInput"}
 	if s.ModelName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ModelName"))
+		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21492,12 +21491,12 @@ func (s UpdateRequestValidatorInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRequestValidatorInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateRequestValidatorInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRequestValidatorInput"}
 	if s.RequestValidatorId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequestValidatorId"))
+		invalidParams.Add(aws.NewErrParamRequired("RequestValidatorId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21616,12 +21615,12 @@ func (s UpdateResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21674,9 +21673,9 @@ func (s UpdateRestApiInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRestApiInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateRestApiInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRestApiInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21728,12 +21727,12 @@ func (s UpdateStageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateStageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateStageInput"}
 	if s.RestApiId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestApiId"))
+		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
 	if s.StageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StageName"))
+		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21793,12 +21792,12 @@ func (s UpdateUsageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUsageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateUsageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUsageInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.UsagePlanId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsagePlanId"))
+		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21851,9 +21850,9 @@ func (s UpdateUsagePlanInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUsagePlanInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateUsagePlanInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUsagePlanInput"}
 	if s.UsagePlanId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsagePlanId"))
+		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
 
 	if invalidParams.Len() > 0 {

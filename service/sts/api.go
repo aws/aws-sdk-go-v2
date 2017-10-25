@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAssumeRole = "AssumeRole"
 
-// AssumeRoleRequest generates a "aws/request.Request" representing the
+// AssumeRoleRequest generates a "aws.Request" representing the
 // client's request for the AssumeRole operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opAssumeRole = "AssumeRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRole
-func (c *STS) AssumeRoleRequest(input *AssumeRoleInput) (req *request.Request, output *AssumeRoleOutput) {
-	op := &request.Operation{
+func (c *STS) AssumeRoleRequest(input *AssumeRoleInput) (req *aws.Request, output *AssumeRoleOutput) {
+	op := &aws.Operation{
 		Name:       opAssumeRole,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -183,7 +182,7 @@ func (c *STS) AssumeRole(input *AssumeRoleInput) (*AssumeRoleOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *STS) AssumeRoleWithContext(ctx aws.Context, input *AssumeRoleInput, opts ...request.Option) (*AssumeRoleOutput, error) {
+func (c *STS) AssumeRoleWithContext(ctx aws.Context, input *AssumeRoleInput, opts ...aws.Option) (*AssumeRoleOutput, error) {
 	req, out := c.AssumeRoleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -192,7 +191,7 @@ func (c *STS) AssumeRoleWithContext(ctx aws.Context, input *AssumeRoleInput, opt
 
 const opAssumeRoleWithSAML = "AssumeRoleWithSAML"
 
-// AssumeRoleWithSAMLRequest generates a "aws/request.Request" representing the
+// AssumeRoleWithSAMLRequest generates a "aws.Request" representing the
 // client's request for the AssumeRoleWithSAML operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -216,8 +215,8 @@ const opAssumeRoleWithSAML = "AssumeRoleWithSAML"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAML
-func (c *STS) AssumeRoleWithSAMLRequest(input *AssumeRoleWithSAMLInput) (req *request.Request, output *AssumeRoleWithSAMLOutput) {
-	op := &request.Operation{
+func (c *STS) AssumeRoleWithSAMLRequest(input *AssumeRoleWithSAMLInput) (req *aws.Request, output *AssumeRoleWithSAMLOutput) {
+	op := &aws.Operation{
 		Name:       opAssumeRoleWithSAML,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -356,7 +355,7 @@ func (c *STS) AssumeRoleWithSAML(input *AssumeRoleWithSAMLInput) (*AssumeRoleWit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *STS) AssumeRoleWithSAMLWithContext(ctx aws.Context, input *AssumeRoleWithSAMLInput, opts ...request.Option) (*AssumeRoleWithSAMLOutput, error) {
+func (c *STS) AssumeRoleWithSAMLWithContext(ctx aws.Context, input *AssumeRoleWithSAMLInput, opts ...aws.Option) (*AssumeRoleWithSAMLOutput, error) {
 	req, out := c.AssumeRoleWithSAMLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -365,7 +364,7 @@ func (c *STS) AssumeRoleWithSAMLWithContext(ctx aws.Context, input *AssumeRoleWi
 
 const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
 
-// AssumeRoleWithWebIdentityRequest generates a "aws/request.Request" representing the
+// AssumeRoleWithWebIdentityRequest generates a "aws.Request" representing the
 // client's request for the AssumeRoleWithWebIdentity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -389,8 +388,8 @@ const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentity
-func (c *STS) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdentityInput) (req *request.Request, output *AssumeRoleWithWebIdentityOutput) {
-	op := &request.Operation{
+func (c *STS) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdentityInput) (req *aws.Request, output *AssumeRoleWithWebIdentityOutput) {
+	op := &aws.Operation{
 		Name:       opAssumeRoleWithWebIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -558,7 +557,7 @@ func (c *STS) AssumeRoleWithWebIdentity(input *AssumeRoleWithWebIdentityInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *STS) AssumeRoleWithWebIdentityWithContext(ctx aws.Context, input *AssumeRoleWithWebIdentityInput, opts ...request.Option) (*AssumeRoleWithWebIdentityOutput, error) {
+func (c *STS) AssumeRoleWithWebIdentityWithContext(ctx aws.Context, input *AssumeRoleWithWebIdentityInput, opts ...aws.Option) (*AssumeRoleWithWebIdentityOutput, error) {
 	req, out := c.AssumeRoleWithWebIdentityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -567,7 +566,7 @@ func (c *STS) AssumeRoleWithWebIdentityWithContext(ctx aws.Context, input *Assum
 
 const opDecodeAuthorizationMessage = "DecodeAuthorizationMessage"
 
-// DecodeAuthorizationMessageRequest generates a "aws/request.Request" representing the
+// DecodeAuthorizationMessageRequest generates a "aws.Request" representing the
 // client's request for the DecodeAuthorizationMessage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -591,8 +590,8 @@ const opDecodeAuthorizationMessage = "DecodeAuthorizationMessage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessage
-func (c *STS) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMessageInput) (req *request.Request, output *DecodeAuthorizationMessageOutput) {
-	op := &request.Operation{
+func (c *STS) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMessageInput) (req *aws.Request, output *DecodeAuthorizationMessageOutput) {
+	op := &aws.Operation{
 		Name:       opDecodeAuthorizationMessage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -670,7 +669,7 @@ func (c *STS) DecodeAuthorizationMessage(input *DecodeAuthorizationMessageInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *STS) DecodeAuthorizationMessageWithContext(ctx aws.Context, input *DecodeAuthorizationMessageInput, opts ...request.Option) (*DecodeAuthorizationMessageOutput, error) {
+func (c *STS) DecodeAuthorizationMessageWithContext(ctx aws.Context, input *DecodeAuthorizationMessageInput, opts ...aws.Option) (*DecodeAuthorizationMessageOutput, error) {
 	req, out := c.DecodeAuthorizationMessageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -679,7 +678,7 @@ func (c *STS) DecodeAuthorizationMessageWithContext(ctx aws.Context, input *Deco
 
 const opGetCallerIdentity = "GetCallerIdentity"
 
-// GetCallerIdentityRequest generates a "aws/request.Request" representing the
+// GetCallerIdentityRequest generates a "aws.Request" representing the
 // client's request for the GetCallerIdentity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -703,8 +702,8 @@ const opGetCallerIdentity = "GetCallerIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentity
-func (c *STS) GetCallerIdentityRequest(input *GetCallerIdentityInput) (req *request.Request, output *GetCallerIdentityOutput) {
-	op := &request.Operation{
+func (c *STS) GetCallerIdentityRequest(input *GetCallerIdentityInput) (req *aws.Request, output *GetCallerIdentityOutput) {
+	op := &aws.Operation{
 		Name:       opGetCallerIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -745,7 +744,7 @@ func (c *STS) GetCallerIdentity(input *GetCallerIdentityInput) (*GetCallerIdenti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *STS) GetCallerIdentityWithContext(ctx aws.Context, input *GetCallerIdentityInput, opts ...request.Option) (*GetCallerIdentityOutput, error) {
+func (c *STS) GetCallerIdentityWithContext(ctx aws.Context, input *GetCallerIdentityInput, opts ...aws.Option) (*GetCallerIdentityOutput, error) {
 	req, out := c.GetCallerIdentityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -754,7 +753,7 @@ func (c *STS) GetCallerIdentityWithContext(ctx aws.Context, input *GetCallerIden
 
 const opGetFederationToken = "GetFederationToken"
 
-// GetFederationTokenRequest generates a "aws/request.Request" representing the
+// GetFederationTokenRequest generates a "aws.Request" representing the
 // client's request for the GetFederationToken operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -778,8 +777,8 @@ const opGetFederationToken = "GetFederationToken"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationToken
-func (c *STS) GetFederationTokenRequest(input *GetFederationTokenInput) (req *request.Request, output *GetFederationTokenOutput) {
-	op := &request.Operation{
+func (c *STS) GetFederationTokenRequest(input *GetFederationTokenInput) (req *aws.Request, output *GetFederationTokenOutput) {
+	op := &aws.Operation{
 		Name:       opGetFederationToken,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -914,7 +913,7 @@ func (c *STS) GetFederationToken(input *GetFederationTokenInput) (*GetFederation
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *STS) GetFederationTokenWithContext(ctx aws.Context, input *GetFederationTokenInput, opts ...request.Option) (*GetFederationTokenOutput, error) {
+func (c *STS) GetFederationTokenWithContext(ctx aws.Context, input *GetFederationTokenInput, opts ...aws.Option) (*GetFederationTokenOutput, error) {
 	req, out := c.GetFederationTokenRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -923,7 +922,7 @@ func (c *STS) GetFederationTokenWithContext(ctx aws.Context, input *GetFederatio
 
 const opGetSessionToken = "GetSessionToken"
 
-// GetSessionTokenRequest generates a "aws/request.Request" representing the
+// GetSessionTokenRequest generates a "aws.Request" representing the
 // client's request for the GetSessionToken operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -947,8 +946,8 @@ const opGetSessionToken = "GetSessionToken"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionToken
-func (c *STS) GetSessionTokenRequest(input *GetSessionTokenInput) (req *request.Request, output *GetSessionTokenOutput) {
-	op := &request.Operation{
+func (c *STS) GetSessionTokenRequest(input *GetSessionTokenInput) (req *aws.Request, output *GetSessionTokenOutput) {
+	op := &aws.Operation{
 		Name:       opGetSessionToken,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1042,7 +1041,7 @@ func (c *STS) GetSessionToken(input *GetSessionTokenInput) (*GetSessionTokenOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *STS) GetSessionTokenWithContext(ctx aws.Context, input *GetSessionTokenInput, opts ...request.Option) (*GetSessionTokenOutput, error) {
+func (c *STS) GetSessionTokenWithContext(ctx aws.Context, input *GetSessionTokenInput, opts ...aws.Option) (*GetSessionTokenOutput, error) {
 	req, out := c.GetSessionTokenRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1162,33 +1161,33 @@ func (s AssumeRoleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssumeRoleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssumeRoleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssumeRoleInput"}
 	if s.DurationSeconds != nil && *s.DurationSeconds < 900 {
-		invalidParams.Add(request.NewErrParamMinValue("DurationSeconds", 900))
+		invalidParams.Add(aws.NewErrParamMinValue("DurationSeconds", 900))
 	}
 	if s.ExternalId != nil && len(*s.ExternalId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ExternalId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ExternalId", 2))
 	}
 	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Policy", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
 	if s.RoleSessionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleSessionName"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleSessionName"))
 	}
 	if s.RoleSessionName != nil && len(*s.RoleSessionName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleSessionName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleSessionName", 2))
 	}
 	if s.SerialNumber != nil && len(*s.SerialNumber) < 9 {
-		invalidParams.Add(request.NewErrParamMinLen("SerialNumber", 9))
+		invalidParams.Add(aws.NewErrParamMinLen("SerialNumber", 9))
 	}
 	if s.TokenCode != nil && len(*s.TokenCode) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("TokenCode", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("TokenCode", 6))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1372,30 +1371,30 @@ func (s AssumeRoleWithSAMLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssumeRoleWithSAMLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssumeRoleWithSAMLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssumeRoleWithSAMLInput"}
 	if s.DurationSeconds != nil && *s.DurationSeconds < 900 {
-		invalidParams.Add(request.NewErrParamMinValue("DurationSeconds", 900))
+		invalidParams.Add(aws.NewErrParamMinValue("DurationSeconds", 900))
 	}
 	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Policy", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
 	if s.PrincipalArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("PrincipalArn"))
+		invalidParams.Add(aws.NewErrParamRequired("PrincipalArn"))
 	}
 	if s.PrincipalArn != nil && len(*s.PrincipalArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("PrincipalArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("PrincipalArn", 20))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
 	if s.SAMLAssertion == nil {
-		invalidParams.Add(request.NewErrParamRequired("SAMLAssertion"))
+		invalidParams.Add(aws.NewErrParamRequired("SAMLAssertion"))
 	}
 	if s.SAMLAssertion != nil && len(*s.SAMLAssertion) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("SAMLAssertion", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("SAMLAssertion", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1638,33 +1637,33 @@ func (s AssumeRoleWithWebIdentityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssumeRoleWithWebIdentityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssumeRoleWithWebIdentityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssumeRoleWithWebIdentityInput"}
 	if s.DurationSeconds != nil && *s.DurationSeconds < 900 {
-		invalidParams.Add(request.NewErrParamMinValue("DurationSeconds", 900))
+		invalidParams.Add(aws.NewErrParamMinValue("DurationSeconds", 900))
 	}
 	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Policy", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
 	if s.ProviderId != nil && len(*s.ProviderId) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("ProviderId", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("ProviderId", 4))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
 	if s.RoleSessionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleSessionName"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleSessionName"))
 	}
 	if s.RoleSessionName != nil && len(*s.RoleSessionName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleSessionName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleSessionName", 2))
 	}
 	if s.WebIdentityToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("WebIdentityToken"))
+		invalidParams.Add(aws.NewErrParamRequired("WebIdentityToken"))
 	}
 	if s.WebIdentityToken != nil && len(*s.WebIdentityToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("WebIdentityToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("WebIdentityToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1928,12 +1927,12 @@ func (s DecodeAuthorizationMessageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DecodeAuthorizationMessageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DecodeAuthorizationMessageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DecodeAuthorizationMessageInput"}
 	if s.EncodedMessage == nil {
-		invalidParams.Add(request.NewErrParamRequired("EncodedMessage"))
+		invalidParams.Add(aws.NewErrParamRequired("EncodedMessage"))
 	}
 	if s.EncodedMessage != nil && len(*s.EncodedMessage) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EncodedMessage", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EncodedMessage", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2149,18 +2148,18 @@ func (s GetFederationTokenInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFederationTokenInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetFederationTokenInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetFederationTokenInput"}
 	if s.DurationSeconds != nil && *s.DurationSeconds < 900 {
-		invalidParams.Add(request.NewErrParamMinValue("DurationSeconds", 900))
+		invalidParams.Add(aws.NewErrParamMinValue("DurationSeconds", 900))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
 	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Policy", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2290,15 +2289,15 @@ func (s GetSessionTokenInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSessionTokenInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSessionTokenInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSessionTokenInput"}
 	if s.DurationSeconds != nil && *s.DurationSeconds < 900 {
-		invalidParams.Add(request.NewErrParamMinValue("DurationSeconds", 900))
+		invalidParams.Add(aws.NewErrParamMinValue("DurationSeconds", 900))
 	}
 	if s.SerialNumber != nil && len(*s.SerialNumber) < 9 {
-		invalidParams.Add(request.NewErrParamMinLen("SerialNumber", 9))
+		invalidParams.Add(aws.NewErrParamMinLen("SerialNumber", 9))
 	}
 	if s.TokenCode != nil && len(*s.TokenCode) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("TokenCode", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("TokenCode", 6))
 	}
 
 	if invalidParams.Len() > 0 {

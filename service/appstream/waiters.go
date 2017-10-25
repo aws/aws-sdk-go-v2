@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilFleetStarted uses the Amazon AppStream API operation
@@ -25,30 +24,30 @@ func (c *AppStream) WaitUntilFleetStarted(input *DescribeFleetsInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) WaitUntilFleetStartedWithContext(ctx aws.Context, input *DescribeFleetsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *AppStream) WaitUntilFleetStartedWithContext(ctx aws.Context, input *DescribeFleetsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilFleetStarted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Fleets[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Fleets[].State",
 				Expected: "ACTIVE",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Fleets[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Fleets[].State",
 				Expected: "PENDING_DEACTIVATE",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Fleets[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Fleets[].State",
 				Expected: "INACTIVE",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeFleetsInput
 			if input != nil {
 				tmp := *input
@@ -81,30 +80,30 @@ func (c *AppStream) WaitUntilFleetStopped(input *DescribeFleetsInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) WaitUntilFleetStoppedWithContext(ctx aws.Context, input *DescribeFleetsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *AppStream) WaitUntilFleetStoppedWithContext(ctx aws.Context, input *DescribeFleetsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilFleetStopped",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Fleets[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Fleets[].State",
 				Expected: "INACTIVE",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Fleets[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Fleets[].State",
 				Expected: "PENDING_ACTIVATE",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Fleets[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Fleets[].State",
 				Expected: "ACTIVE",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeFleetsInput
 			if input != nil {
 				tmp := *input

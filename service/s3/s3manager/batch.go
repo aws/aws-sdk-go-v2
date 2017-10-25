@@ -6,9 +6,8 @@ import (
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
 )
@@ -244,8 +243,8 @@ func NewBatchDeleteWithClient(client s3iface.S3API, options ...func(*BatchDelete
 //	}); err != nil {
 //		return err
 //	}
-func NewBatchDelete(c client.ConfigProvider, options ...func(*BatchDelete)) *BatchDelete {
-	client := s3.New(c)
+func NewBatchDelete(cfg aws.Config, options ...func(*BatchDelete)) *BatchDelete {
+	client := s3.New(cfg)
 	return NewBatchDeleteWithClient(client, options...)
 }
 

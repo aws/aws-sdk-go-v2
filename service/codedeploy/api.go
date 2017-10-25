@@ -6,15 +6,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opAddTagsToOnPremisesInstances = "AddTagsToOnPremisesInstances"
 
-// AddTagsToOnPremisesInstancesRequest generates a "aws/request.Request" representing the
+// AddTagsToOnPremisesInstancesRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToOnPremisesInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -38,8 +37,8 @@ const opAddTagsToOnPremisesInstances = "AddTagsToOnPremisesInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstances
-func (c *CodeDeploy) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremisesInstancesInput) (req *request.Request, output *AddTagsToOnPremisesInstancesOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremisesInstancesInput) (req *aws.Request, output *AddTagsToOnPremisesInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToOnPremisesInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -102,7 +101,7 @@ func (c *CodeDeploy) AddTagsToOnPremisesInstances(input *AddTagsToOnPremisesInst
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) AddTagsToOnPremisesInstancesWithContext(ctx aws.Context, input *AddTagsToOnPremisesInstancesInput, opts ...request.Option) (*AddTagsToOnPremisesInstancesOutput, error) {
+func (c *CodeDeploy) AddTagsToOnPremisesInstancesWithContext(ctx aws.Context, input *AddTagsToOnPremisesInstancesInput, opts ...aws.Option) (*AddTagsToOnPremisesInstancesOutput, error) {
 	req, out := c.AddTagsToOnPremisesInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -111,7 +110,7 @@ func (c *CodeDeploy) AddTagsToOnPremisesInstancesWithContext(ctx aws.Context, in
 
 const opBatchGetApplicationRevisions = "BatchGetApplicationRevisions"
 
-// BatchGetApplicationRevisionsRequest generates a "aws/request.Request" representing the
+// BatchGetApplicationRevisionsRequest generates a "aws.Request" representing the
 // client's request for the BatchGetApplicationRevisions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -135,8 +134,8 @@ const opBatchGetApplicationRevisions = "BatchGetApplicationRevisions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisions
-func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicationRevisionsInput) (req *request.Request, output *BatchGetApplicationRevisionsOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicationRevisionsInput) (req *aws.Request, output *BatchGetApplicationRevisionsOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetApplicationRevisions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -196,7 +195,7 @@ func (c *CodeDeploy) BatchGetApplicationRevisions(input *BatchGetApplicationRevi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) BatchGetApplicationRevisionsWithContext(ctx aws.Context, input *BatchGetApplicationRevisionsInput, opts ...request.Option) (*BatchGetApplicationRevisionsOutput, error) {
+func (c *CodeDeploy) BatchGetApplicationRevisionsWithContext(ctx aws.Context, input *BatchGetApplicationRevisionsInput, opts ...aws.Option) (*BatchGetApplicationRevisionsOutput, error) {
 	req, out := c.BatchGetApplicationRevisionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -205,7 +204,7 @@ func (c *CodeDeploy) BatchGetApplicationRevisionsWithContext(ctx aws.Context, in
 
 const opBatchGetApplications = "BatchGetApplications"
 
-// BatchGetApplicationsRequest generates a "aws/request.Request" representing the
+// BatchGetApplicationsRequest generates a "aws.Request" representing the
 // client's request for the BatchGetApplications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -229,8 +228,8 @@ const opBatchGetApplications = "BatchGetApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications
-func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInput) (req *request.Request, output *BatchGetApplicationsOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInput) (req *aws.Request, output *BatchGetApplicationsOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetApplications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -284,7 +283,7 @@ func (c *CodeDeploy) BatchGetApplications(input *BatchGetApplicationsInput) (*Ba
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) BatchGetApplicationsWithContext(ctx aws.Context, input *BatchGetApplicationsInput, opts ...request.Option) (*BatchGetApplicationsOutput, error) {
+func (c *CodeDeploy) BatchGetApplicationsWithContext(ctx aws.Context, input *BatchGetApplicationsInput, opts ...aws.Option) (*BatchGetApplicationsOutput, error) {
 	req, out := c.BatchGetApplicationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -293,7 +292,7 @@ func (c *CodeDeploy) BatchGetApplicationsWithContext(ctx aws.Context, input *Bat
 
 const opBatchGetDeploymentGroups = "BatchGetDeploymentGroups"
 
-// BatchGetDeploymentGroupsRequest generates a "aws/request.Request" representing the
+// BatchGetDeploymentGroupsRequest generates a "aws.Request" representing the
 // client's request for the BatchGetDeploymentGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -317,8 +316,8 @@ const opBatchGetDeploymentGroups = "BatchGetDeploymentGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups
-func (c *CodeDeploy) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGroupsInput) (req *request.Request, output *BatchGetDeploymentGroupsOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGroupsInput) (req *aws.Request, output *BatchGetDeploymentGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetDeploymentGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -378,7 +377,7 @@ func (c *CodeDeploy) BatchGetDeploymentGroups(input *BatchGetDeploymentGroupsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) BatchGetDeploymentGroupsWithContext(ctx aws.Context, input *BatchGetDeploymentGroupsInput, opts ...request.Option) (*BatchGetDeploymentGroupsOutput, error) {
+func (c *CodeDeploy) BatchGetDeploymentGroupsWithContext(ctx aws.Context, input *BatchGetDeploymentGroupsInput, opts ...aws.Option) (*BatchGetDeploymentGroupsOutput, error) {
 	req, out := c.BatchGetDeploymentGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -387,7 +386,7 @@ func (c *CodeDeploy) BatchGetDeploymentGroupsWithContext(ctx aws.Context, input 
 
 const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 
-// BatchGetDeploymentInstancesRequest generates a "aws/request.Request" representing the
+// BatchGetDeploymentInstancesRequest generates a "aws.Request" representing the
 // client's request for the BatchGetDeploymentInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -411,8 +410,8 @@ const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances
-func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentInstancesInput) (req *request.Request, output *BatchGetDeploymentInstancesOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentInstancesInput) (req *aws.Request, output *BatchGetDeploymentInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetDeploymentInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -473,7 +472,7 @@ func (c *CodeDeploy) BatchGetDeploymentInstances(input *BatchGetDeploymentInstan
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) BatchGetDeploymentInstancesWithContext(ctx aws.Context, input *BatchGetDeploymentInstancesInput, opts ...request.Option) (*BatchGetDeploymentInstancesOutput, error) {
+func (c *CodeDeploy) BatchGetDeploymentInstancesWithContext(ctx aws.Context, input *BatchGetDeploymentInstancesInput, opts ...aws.Option) (*BatchGetDeploymentInstancesOutput, error) {
 	req, out := c.BatchGetDeploymentInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -482,7 +481,7 @@ func (c *CodeDeploy) BatchGetDeploymentInstancesWithContext(ctx aws.Context, inp
 
 const opBatchGetDeployments = "BatchGetDeployments"
 
-// BatchGetDeploymentsRequest generates a "aws/request.Request" representing the
+// BatchGetDeploymentsRequest generates a "aws.Request" representing the
 // client's request for the BatchGetDeployments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -506,8 +505,8 @@ const opBatchGetDeployments = "BatchGetDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments
-func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput) (req *request.Request, output *BatchGetDeploymentsOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput) (req *aws.Request, output *BatchGetDeploymentsOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetDeployments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -558,7 +557,7 @@ func (c *CodeDeploy) BatchGetDeployments(input *BatchGetDeploymentsInput) (*Batc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) BatchGetDeploymentsWithContext(ctx aws.Context, input *BatchGetDeploymentsInput, opts ...request.Option) (*BatchGetDeploymentsOutput, error) {
+func (c *CodeDeploy) BatchGetDeploymentsWithContext(ctx aws.Context, input *BatchGetDeploymentsInput, opts ...aws.Option) (*BatchGetDeploymentsOutput, error) {
 	req, out := c.BatchGetDeploymentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -567,7 +566,7 @@ func (c *CodeDeploy) BatchGetDeploymentsWithContext(ctx aws.Context, input *Batc
 
 const opBatchGetOnPremisesInstances = "BatchGetOnPremisesInstances"
 
-// BatchGetOnPremisesInstancesRequest generates a "aws/request.Request" representing the
+// BatchGetOnPremisesInstancesRequest generates a "aws.Request" representing the
 // client's request for the BatchGetOnPremisesInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -591,8 +590,8 @@ const opBatchGetOnPremisesInstances = "BatchGetOnPremisesInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstances
-func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremisesInstancesInput) (req *request.Request, output *BatchGetOnPremisesInstancesOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremisesInstancesInput) (req *aws.Request, output *BatchGetOnPremisesInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetOnPremisesInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -643,7 +642,7 @@ func (c *CodeDeploy) BatchGetOnPremisesInstances(input *BatchGetOnPremisesInstan
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) BatchGetOnPremisesInstancesWithContext(ctx aws.Context, input *BatchGetOnPremisesInstancesInput, opts ...request.Option) (*BatchGetOnPremisesInstancesOutput, error) {
+func (c *CodeDeploy) BatchGetOnPremisesInstancesWithContext(ctx aws.Context, input *BatchGetOnPremisesInstancesInput, opts ...aws.Option) (*BatchGetOnPremisesInstancesOutput, error) {
 	req, out := c.BatchGetOnPremisesInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -652,7 +651,7 @@ func (c *CodeDeploy) BatchGetOnPremisesInstancesWithContext(ctx aws.Context, inp
 
 const opContinueDeployment = "ContinueDeployment"
 
-// ContinueDeploymentRequest generates a "aws/request.Request" representing the
+// ContinueDeploymentRequest generates a "aws.Request" representing the
 // client's request for the ContinueDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -676,8 +675,8 @@ const opContinueDeployment = "ContinueDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeployment
-func (c *CodeDeploy) ContinueDeploymentRequest(input *ContinueDeploymentInput) (req *request.Request, output *ContinueDeploymentOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) ContinueDeploymentRequest(input *ContinueDeploymentInput) (req *aws.Request, output *ContinueDeploymentOutput) {
+	op := &aws.Operation{
 		Name:       opContinueDeployment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -744,7 +743,7 @@ func (c *CodeDeploy) ContinueDeployment(input *ContinueDeploymentInput) (*Contin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ContinueDeploymentWithContext(ctx aws.Context, input *ContinueDeploymentInput, opts ...request.Option) (*ContinueDeploymentOutput, error) {
+func (c *CodeDeploy) ContinueDeploymentWithContext(ctx aws.Context, input *ContinueDeploymentInput, opts ...aws.Option) (*ContinueDeploymentOutput, error) {
 	req, out := c.ContinueDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -753,7 +752,7 @@ func (c *CodeDeploy) ContinueDeploymentWithContext(ctx aws.Context, input *Conti
 
 const opCreateApplication = "CreateApplication"
 
-// CreateApplicationRequest generates a "aws/request.Request" representing the
+// CreateApplicationRequest generates a "aws.Request" representing the
 // client's request for the CreateApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -777,8 +776,8 @@ const opCreateApplication = "CreateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplication
-func (c *CodeDeploy) CreateApplicationRequest(input *CreateApplicationInput) (req *request.Request, output *CreateApplicationOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) CreateApplicationRequest(input *CreateApplicationInput) (req *aws.Request, output *CreateApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -833,7 +832,7 @@ func (c *CodeDeploy) CreateApplication(input *CreateApplicationInput) (*CreateAp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...request.Option) (*CreateApplicationOutput, error) {
+func (c *CodeDeploy) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...aws.Option) (*CreateApplicationOutput, error) {
 	req, out := c.CreateApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -842,7 +841,7 @@ func (c *CodeDeploy) CreateApplicationWithContext(ctx aws.Context, input *Create
 
 const opCreateDeployment = "CreateDeployment"
 
-// CreateDeploymentRequest generates a "aws/request.Request" representing the
+// CreateDeploymentRequest generates a "aws.Request" representing the
 // client's request for the CreateDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -866,8 +865,8 @@ const opCreateDeployment = "CreateDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeployment
-func (c *CodeDeploy) CreateDeploymentRequest(input *CreateDeploymentInput) (req *request.Request, output *CreateDeploymentOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) CreateDeploymentRequest(input *CreateDeploymentInput) (req *aws.Request, output *CreateDeploymentOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDeployment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -976,7 +975,7 @@ func (c *CodeDeploy) CreateDeployment(input *CreateDeploymentInput) (*CreateDepl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...request.Option) (*CreateDeploymentOutput, error) {
+func (c *CodeDeploy) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...aws.Option) (*CreateDeploymentOutput, error) {
 	req, out := c.CreateDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -985,7 +984,7 @@ func (c *CodeDeploy) CreateDeploymentWithContext(ctx aws.Context, input *CreateD
 
 const opCreateDeploymentConfig = "CreateDeploymentConfig"
 
-// CreateDeploymentConfigRequest generates a "aws/request.Request" representing the
+// CreateDeploymentConfigRequest generates a "aws.Request" representing the
 // client's request for the CreateDeploymentConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1009,8 +1008,8 @@ const opCreateDeploymentConfig = "CreateDeploymentConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfig
-func (c *CodeDeploy) CreateDeploymentConfigRequest(input *CreateDeploymentConfigInput) (req *request.Request, output *CreateDeploymentConfigOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) CreateDeploymentConfigRequest(input *CreateDeploymentConfigInput) (req *aws.Request, output *CreateDeploymentConfigOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDeploymentConfig,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1068,7 +1067,7 @@ func (c *CodeDeploy) CreateDeploymentConfig(input *CreateDeploymentConfigInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) CreateDeploymentConfigWithContext(ctx aws.Context, input *CreateDeploymentConfigInput, opts ...request.Option) (*CreateDeploymentConfigOutput, error) {
+func (c *CodeDeploy) CreateDeploymentConfigWithContext(ctx aws.Context, input *CreateDeploymentConfigInput, opts ...aws.Option) (*CreateDeploymentConfigOutput, error) {
 	req, out := c.CreateDeploymentConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1077,7 +1076,7 @@ func (c *CodeDeploy) CreateDeploymentConfigWithContext(ctx aws.Context, input *C
 
 const opCreateDeploymentGroup = "CreateDeploymentGroup"
 
-// CreateDeploymentGroupRequest generates a "aws/request.Request" representing the
+// CreateDeploymentGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateDeploymentGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1101,8 +1100,8 @@ const opCreateDeploymentGroup = "CreateDeploymentGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroup
-func (c *CodeDeploy) CreateDeploymentGroupRequest(input *CreateDeploymentGroupInput) (req *request.Request, output *CreateDeploymentGroupOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) CreateDeploymentGroupRequest(input *CreateDeploymentGroupInput) (req *aws.Request, output *CreateDeploymentGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDeploymentGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1245,7 +1244,7 @@ func (c *CodeDeploy) CreateDeploymentGroup(input *CreateDeploymentGroupInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) CreateDeploymentGroupWithContext(ctx aws.Context, input *CreateDeploymentGroupInput, opts ...request.Option) (*CreateDeploymentGroupOutput, error) {
+func (c *CodeDeploy) CreateDeploymentGroupWithContext(ctx aws.Context, input *CreateDeploymentGroupInput, opts ...aws.Option) (*CreateDeploymentGroupOutput, error) {
 	req, out := c.CreateDeploymentGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1254,7 +1253,7 @@ func (c *CodeDeploy) CreateDeploymentGroupWithContext(ctx aws.Context, input *Cr
 
 const opDeleteApplication = "DeleteApplication"
 
-// DeleteApplicationRequest generates a "aws/request.Request" representing the
+// DeleteApplicationRequest generates a "aws.Request" representing the
 // client's request for the DeleteApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1278,8 +1277,8 @@ const opDeleteApplication = "DeleteApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplication
-func (c *CodeDeploy) DeleteApplicationRequest(input *DeleteApplicationInput) (req *request.Request, output *DeleteApplicationOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) DeleteApplicationRequest(input *DeleteApplicationInput) (req *aws.Request, output *DeleteApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1329,7 +1328,7 @@ func (c *CodeDeploy) DeleteApplication(input *DeleteApplicationInput) (*DeleteAp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) DeleteApplicationWithContext(ctx aws.Context, input *DeleteApplicationInput, opts ...request.Option) (*DeleteApplicationOutput, error) {
+func (c *CodeDeploy) DeleteApplicationWithContext(ctx aws.Context, input *DeleteApplicationInput, opts ...aws.Option) (*DeleteApplicationOutput, error) {
 	req, out := c.DeleteApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1338,7 +1337,7 @@ func (c *CodeDeploy) DeleteApplicationWithContext(ctx aws.Context, input *Delete
 
 const opDeleteDeploymentConfig = "DeleteDeploymentConfig"
 
-// DeleteDeploymentConfigRequest generates a "aws/request.Request" representing the
+// DeleteDeploymentConfigRequest generates a "aws.Request" representing the
 // client's request for the DeleteDeploymentConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1362,8 +1361,8 @@ const opDeleteDeploymentConfig = "DeleteDeploymentConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfig
-func (c *CodeDeploy) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfigInput) (req *request.Request, output *DeleteDeploymentConfigOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfigInput) (req *aws.Request, output *DeleteDeploymentConfigOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDeploymentConfig,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1422,7 +1421,7 @@ func (c *CodeDeploy) DeleteDeploymentConfig(input *DeleteDeploymentConfigInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) DeleteDeploymentConfigWithContext(ctx aws.Context, input *DeleteDeploymentConfigInput, opts ...request.Option) (*DeleteDeploymentConfigOutput, error) {
+func (c *CodeDeploy) DeleteDeploymentConfigWithContext(ctx aws.Context, input *DeleteDeploymentConfigInput, opts ...aws.Option) (*DeleteDeploymentConfigOutput, error) {
 	req, out := c.DeleteDeploymentConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1431,7 +1430,7 @@ func (c *CodeDeploy) DeleteDeploymentConfigWithContext(ctx aws.Context, input *D
 
 const opDeleteDeploymentGroup = "DeleteDeploymentGroup"
 
-// DeleteDeploymentGroupRequest generates a "aws/request.Request" representing the
+// DeleteDeploymentGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteDeploymentGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1455,8 +1454,8 @@ const opDeleteDeploymentGroup = "DeleteDeploymentGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroup
-func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupInput) (req *request.Request, output *DeleteDeploymentGroupOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupInput) (req *aws.Request, output *DeleteDeploymentGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDeploymentGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1515,7 +1514,7 @@ func (c *CodeDeploy) DeleteDeploymentGroup(input *DeleteDeploymentGroupInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) DeleteDeploymentGroupWithContext(ctx aws.Context, input *DeleteDeploymentGroupInput, opts ...request.Option) (*DeleteDeploymentGroupOutput, error) {
+func (c *CodeDeploy) DeleteDeploymentGroupWithContext(ctx aws.Context, input *DeleteDeploymentGroupInput, opts ...aws.Option) (*DeleteDeploymentGroupOutput, error) {
 	req, out := c.DeleteDeploymentGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1524,7 +1523,7 @@ func (c *CodeDeploy) DeleteDeploymentGroupWithContext(ctx aws.Context, input *De
 
 const opDeregisterOnPremisesInstance = "DeregisterOnPremisesInstance"
 
-// DeregisterOnPremisesInstanceRequest generates a "aws/request.Request" representing the
+// DeregisterOnPremisesInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeregisterOnPremisesInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1548,8 +1547,8 @@ const opDeregisterOnPremisesInstance = "DeregisterOnPremisesInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstance
-func (c *CodeDeploy) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPremisesInstanceInput) (req *request.Request, output *DeregisterOnPremisesInstanceOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPremisesInstanceInput) (req *aws.Request, output *DeregisterOnPremisesInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterOnPremisesInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1599,7 +1598,7 @@ func (c *CodeDeploy) DeregisterOnPremisesInstance(input *DeregisterOnPremisesIns
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) DeregisterOnPremisesInstanceWithContext(ctx aws.Context, input *DeregisterOnPremisesInstanceInput, opts ...request.Option) (*DeregisterOnPremisesInstanceOutput, error) {
+func (c *CodeDeploy) DeregisterOnPremisesInstanceWithContext(ctx aws.Context, input *DeregisterOnPremisesInstanceInput, opts ...aws.Option) (*DeregisterOnPremisesInstanceOutput, error) {
 	req, out := c.DeregisterOnPremisesInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1608,7 +1607,7 @@ func (c *CodeDeploy) DeregisterOnPremisesInstanceWithContext(ctx aws.Context, in
 
 const opGetApplication = "GetApplication"
 
-// GetApplicationRequest generates a "aws/request.Request" representing the
+// GetApplicationRequest generates a "aws.Request" representing the
 // client's request for the GetApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1632,8 +1631,8 @@ const opGetApplication = "GetApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication
-func (c *CodeDeploy) GetApplicationRequest(input *GetApplicationInput) (req *request.Request, output *GetApplicationOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) GetApplicationRequest(input *GetApplicationInput) (req *aws.Request, output *GetApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opGetApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1684,7 +1683,7 @@ func (c *CodeDeploy) GetApplication(input *GetApplicationInput) (*GetApplication
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) GetApplicationWithContext(ctx aws.Context, input *GetApplicationInput, opts ...request.Option) (*GetApplicationOutput, error) {
+func (c *CodeDeploy) GetApplicationWithContext(ctx aws.Context, input *GetApplicationInput, opts ...aws.Option) (*GetApplicationOutput, error) {
 	req, out := c.GetApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1693,7 +1692,7 @@ func (c *CodeDeploy) GetApplicationWithContext(ctx aws.Context, input *GetApplic
 
 const opGetApplicationRevision = "GetApplicationRevision"
 
-// GetApplicationRevisionRequest generates a "aws/request.Request" representing the
+// GetApplicationRevisionRequest generates a "aws.Request" representing the
 // client's request for the GetApplicationRevision operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1717,8 +1716,8 @@ const opGetApplicationRevision = "GetApplicationRevision"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevision
-func (c *CodeDeploy) GetApplicationRevisionRequest(input *GetApplicationRevisionInput) (req *request.Request, output *GetApplicationRevisionOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) GetApplicationRevisionRequest(input *GetApplicationRevisionInput) (req *aws.Request, output *GetApplicationRevisionOutput) {
+	op := &aws.Operation{
 		Name:       opGetApplicationRevision,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1778,7 +1777,7 @@ func (c *CodeDeploy) GetApplicationRevision(input *GetApplicationRevisionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) GetApplicationRevisionWithContext(ctx aws.Context, input *GetApplicationRevisionInput, opts ...request.Option) (*GetApplicationRevisionOutput, error) {
+func (c *CodeDeploy) GetApplicationRevisionWithContext(ctx aws.Context, input *GetApplicationRevisionInput, opts ...aws.Option) (*GetApplicationRevisionOutput, error) {
 	req, out := c.GetApplicationRevisionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1787,7 +1786,7 @@ func (c *CodeDeploy) GetApplicationRevisionWithContext(ctx aws.Context, input *G
 
 const opGetDeployment = "GetDeployment"
 
-// GetDeploymentRequest generates a "aws/request.Request" representing the
+// GetDeploymentRequest generates a "aws.Request" representing the
 // client's request for the GetDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1811,8 +1810,8 @@ const opGetDeployment = "GetDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment
-func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) (req *request.Request, output *GetDeploymentOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) (req *aws.Request, output *GetDeploymentOutput) {
+	op := &aws.Operation{
 		Name:       opGetDeployment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1863,7 +1862,7 @@ func (c *CodeDeploy) GetDeployment(input *GetDeploymentInput) (*GetDeploymentOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) GetDeploymentWithContext(ctx aws.Context, input *GetDeploymentInput, opts ...request.Option) (*GetDeploymentOutput, error) {
+func (c *CodeDeploy) GetDeploymentWithContext(ctx aws.Context, input *GetDeploymentInput, opts ...aws.Option) (*GetDeploymentOutput, error) {
 	req, out := c.GetDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1872,7 +1871,7 @@ func (c *CodeDeploy) GetDeploymentWithContext(ctx aws.Context, input *GetDeploym
 
 const opGetDeploymentConfig = "GetDeploymentConfig"
 
-// GetDeploymentConfigRequest generates a "aws/request.Request" representing the
+// GetDeploymentConfigRequest generates a "aws.Request" representing the
 // client's request for the GetDeploymentConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1896,8 +1895,8 @@ const opGetDeploymentConfig = "GetDeploymentConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfig
-func (c *CodeDeploy) GetDeploymentConfigRequest(input *GetDeploymentConfigInput) (req *request.Request, output *GetDeploymentConfigOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) GetDeploymentConfigRequest(input *GetDeploymentConfigInput) (req *aws.Request, output *GetDeploymentConfigOutput) {
+	op := &aws.Operation{
 		Name:       opGetDeploymentConfig,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1949,7 +1948,7 @@ func (c *CodeDeploy) GetDeploymentConfig(input *GetDeploymentConfigInput) (*GetD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) GetDeploymentConfigWithContext(ctx aws.Context, input *GetDeploymentConfigInput, opts ...request.Option) (*GetDeploymentConfigOutput, error) {
+func (c *CodeDeploy) GetDeploymentConfigWithContext(ctx aws.Context, input *GetDeploymentConfigInput, opts ...aws.Option) (*GetDeploymentConfigOutput, error) {
 	req, out := c.GetDeploymentConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1958,7 +1957,7 @@ func (c *CodeDeploy) GetDeploymentConfigWithContext(ctx aws.Context, input *GetD
 
 const opGetDeploymentGroup = "GetDeploymentGroup"
 
-// GetDeploymentGroupRequest generates a "aws/request.Request" representing the
+// GetDeploymentGroupRequest generates a "aws.Request" representing the
 // client's request for the GetDeploymentGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1982,8 +1981,8 @@ const opGetDeploymentGroup = "GetDeploymentGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup
-func (c *CodeDeploy) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) (req *request.Request, output *GetDeploymentGroupOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) (req *aws.Request, output *GetDeploymentGroupOutput) {
+	op := &aws.Operation{
 		Name:       opGetDeploymentGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2044,7 +2043,7 @@ func (c *CodeDeploy) GetDeploymentGroup(input *GetDeploymentGroupInput) (*GetDep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) GetDeploymentGroupWithContext(ctx aws.Context, input *GetDeploymentGroupInput, opts ...request.Option) (*GetDeploymentGroupOutput, error) {
+func (c *CodeDeploy) GetDeploymentGroupWithContext(ctx aws.Context, input *GetDeploymentGroupInput, opts ...aws.Option) (*GetDeploymentGroupOutput, error) {
 	req, out := c.GetDeploymentGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2053,7 +2052,7 @@ func (c *CodeDeploy) GetDeploymentGroupWithContext(ctx aws.Context, input *GetDe
 
 const opGetDeploymentInstance = "GetDeploymentInstance"
 
-// GetDeploymentInstanceRequest generates a "aws/request.Request" representing the
+// GetDeploymentInstanceRequest generates a "aws.Request" representing the
 // client's request for the GetDeploymentInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2077,8 +2076,8 @@ const opGetDeploymentInstance = "GetDeploymentInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance
-func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceInput) (req *request.Request, output *GetDeploymentInstanceOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceInput) (req *aws.Request, output *GetDeploymentInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opGetDeploymentInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2138,7 +2137,7 @@ func (c *CodeDeploy) GetDeploymentInstance(input *GetDeploymentInstanceInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) GetDeploymentInstanceWithContext(ctx aws.Context, input *GetDeploymentInstanceInput, opts ...request.Option) (*GetDeploymentInstanceOutput, error) {
+func (c *CodeDeploy) GetDeploymentInstanceWithContext(ctx aws.Context, input *GetDeploymentInstanceInput, opts ...aws.Option) (*GetDeploymentInstanceOutput, error) {
 	req, out := c.GetDeploymentInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2147,7 +2146,7 @@ func (c *CodeDeploy) GetDeploymentInstanceWithContext(ctx aws.Context, input *Ge
 
 const opGetOnPremisesInstance = "GetOnPremisesInstance"
 
-// GetOnPremisesInstanceRequest generates a "aws/request.Request" representing the
+// GetOnPremisesInstanceRequest generates a "aws.Request" representing the
 // client's request for the GetOnPremisesInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2171,8 +2170,8 @@ const opGetOnPremisesInstance = "GetOnPremisesInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstance
-func (c *CodeDeploy) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceInput) (req *request.Request, output *GetOnPremisesInstanceOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceInput) (req *aws.Request, output *GetOnPremisesInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opGetOnPremisesInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2223,7 +2222,7 @@ func (c *CodeDeploy) GetOnPremisesInstance(input *GetOnPremisesInstanceInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) GetOnPremisesInstanceWithContext(ctx aws.Context, input *GetOnPremisesInstanceInput, opts ...request.Option) (*GetOnPremisesInstanceOutput, error) {
+func (c *CodeDeploy) GetOnPremisesInstanceWithContext(ctx aws.Context, input *GetOnPremisesInstanceInput, opts ...aws.Option) (*GetOnPremisesInstanceOutput, error) {
 	req, out := c.GetOnPremisesInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2232,7 +2231,7 @@ func (c *CodeDeploy) GetOnPremisesInstanceWithContext(ctx aws.Context, input *Ge
 
 const opListApplicationRevisions = "ListApplicationRevisions"
 
-// ListApplicationRevisionsRequest generates a "aws/request.Request" representing the
+// ListApplicationRevisionsRequest generates a "aws.Request" representing the
 // client's request for the ListApplicationRevisions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2256,12 +2255,12 @@ const opListApplicationRevisions = "ListApplicationRevisions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions
-func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevisionsInput) (req *request.Request, output *ListApplicationRevisionsOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevisionsInput) (req *aws.Request, output *ListApplicationRevisionsOutput) {
+	op := &aws.Operation{
 		Name:       opListApplicationRevisions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -2336,7 +2335,7 @@ func (c *CodeDeploy) ListApplicationRevisions(input *ListApplicationRevisionsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListApplicationRevisionsWithContext(ctx aws.Context, input *ListApplicationRevisionsInput, opts ...request.Option) (*ListApplicationRevisionsOutput, error) {
+func (c *CodeDeploy) ListApplicationRevisionsWithContext(ctx aws.Context, input *ListApplicationRevisionsInput, opts ...aws.Option) (*ListApplicationRevisionsOutput, error) {
 	req, out := c.ListApplicationRevisionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2371,9 +2370,9 @@ func (c *CodeDeploy) ListApplicationRevisionsPages(input *ListApplicationRevisio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListApplicationRevisionsPagesWithContext(ctx aws.Context, input *ListApplicationRevisionsInput, fn func(*ListApplicationRevisionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CodeDeploy) ListApplicationRevisionsPagesWithContext(ctx aws.Context, input *ListApplicationRevisionsInput, fn func(*ListApplicationRevisionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListApplicationRevisionsInput
 			if input != nil {
 				tmp := *input
@@ -2395,7 +2394,7 @@ func (c *CodeDeploy) ListApplicationRevisionsPagesWithContext(ctx aws.Context, i
 
 const opListApplications = "ListApplications"
 
-// ListApplicationsRequest generates a "aws/request.Request" representing the
+// ListApplicationsRequest generates a "aws.Request" representing the
 // client's request for the ListApplications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2419,12 +2418,12 @@ const opListApplications = "ListApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplications
-func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) (req *request.Request, output *ListApplicationsOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) (req *aws.Request, output *ListApplicationsOutput) {
+	op := &aws.Operation{
 		Name:       opListApplications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -2471,7 +2470,7 @@ func (c *CodeDeploy) ListApplications(input *ListApplicationsInput) (*ListApplic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListApplicationsWithContext(ctx aws.Context, input *ListApplicationsInput, opts ...request.Option) (*ListApplicationsOutput, error) {
+func (c *CodeDeploy) ListApplicationsWithContext(ctx aws.Context, input *ListApplicationsInput, opts ...aws.Option) (*ListApplicationsOutput, error) {
 	req, out := c.ListApplicationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2506,9 +2505,9 @@ func (c *CodeDeploy) ListApplicationsPages(input *ListApplicationsInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListApplicationsPagesWithContext(ctx aws.Context, input *ListApplicationsInput, fn func(*ListApplicationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CodeDeploy) ListApplicationsPagesWithContext(ctx aws.Context, input *ListApplicationsInput, fn func(*ListApplicationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListApplicationsInput
 			if input != nil {
 				tmp := *input
@@ -2530,7 +2529,7 @@ func (c *CodeDeploy) ListApplicationsPagesWithContext(ctx aws.Context, input *Li
 
 const opListDeploymentConfigs = "ListDeploymentConfigs"
 
-// ListDeploymentConfigsRequest generates a "aws/request.Request" representing the
+// ListDeploymentConfigsRequest generates a "aws.Request" representing the
 // client's request for the ListDeploymentConfigs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2554,12 +2553,12 @@ const opListDeploymentConfigs = "ListDeploymentConfigs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigs
-func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsInput) (req *request.Request, output *ListDeploymentConfigsOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsInput) (req *aws.Request, output *ListDeploymentConfigsOutput) {
+	op := &aws.Operation{
 		Name:       opListDeploymentConfigs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -2606,7 +2605,7 @@ func (c *CodeDeploy) ListDeploymentConfigs(input *ListDeploymentConfigsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentConfigsWithContext(ctx aws.Context, input *ListDeploymentConfigsInput, opts ...request.Option) (*ListDeploymentConfigsOutput, error) {
+func (c *CodeDeploy) ListDeploymentConfigsWithContext(ctx aws.Context, input *ListDeploymentConfigsInput, opts ...aws.Option) (*ListDeploymentConfigsOutput, error) {
 	req, out := c.ListDeploymentConfigsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2641,9 +2640,9 @@ func (c *CodeDeploy) ListDeploymentConfigsPages(input *ListDeploymentConfigsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentConfigsPagesWithContext(ctx aws.Context, input *ListDeploymentConfigsInput, fn func(*ListDeploymentConfigsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CodeDeploy) ListDeploymentConfigsPagesWithContext(ctx aws.Context, input *ListDeploymentConfigsInput, fn func(*ListDeploymentConfigsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDeploymentConfigsInput
 			if input != nil {
 				tmp := *input
@@ -2665,7 +2664,7 @@ func (c *CodeDeploy) ListDeploymentConfigsPagesWithContext(ctx aws.Context, inpu
 
 const opListDeploymentGroups = "ListDeploymentGroups"
 
-// ListDeploymentGroupsRequest generates a "aws/request.Request" representing the
+// ListDeploymentGroupsRequest generates a "aws.Request" representing the
 // client's request for the ListDeploymentGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2689,12 +2688,12 @@ const opListDeploymentGroups = "ListDeploymentGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroups
-func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInput) (req *request.Request, output *ListDeploymentGroupsOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInput) (req *aws.Request, output *ListDeploymentGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opListDeploymentGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -2751,7 +2750,7 @@ func (c *CodeDeploy) ListDeploymentGroups(input *ListDeploymentGroupsInput) (*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentGroupsWithContext(ctx aws.Context, input *ListDeploymentGroupsInput, opts ...request.Option) (*ListDeploymentGroupsOutput, error) {
+func (c *CodeDeploy) ListDeploymentGroupsWithContext(ctx aws.Context, input *ListDeploymentGroupsInput, opts ...aws.Option) (*ListDeploymentGroupsOutput, error) {
 	req, out := c.ListDeploymentGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2786,9 +2785,9 @@ func (c *CodeDeploy) ListDeploymentGroupsPages(input *ListDeploymentGroupsInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentGroupsPagesWithContext(ctx aws.Context, input *ListDeploymentGroupsInput, fn func(*ListDeploymentGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CodeDeploy) ListDeploymentGroupsPagesWithContext(ctx aws.Context, input *ListDeploymentGroupsInput, fn func(*ListDeploymentGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDeploymentGroupsInput
 			if input != nil {
 				tmp := *input
@@ -2810,7 +2809,7 @@ func (c *CodeDeploy) ListDeploymentGroupsPagesWithContext(ctx aws.Context, input
 
 const opListDeploymentInstances = "ListDeploymentInstances"
 
-// ListDeploymentInstancesRequest generates a "aws/request.Request" representing the
+// ListDeploymentInstancesRequest generates a "aws.Request" representing the
 // client's request for the ListDeploymentInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2834,12 +2833,12 @@ const opListDeploymentInstances = "ListDeploymentInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstances
-func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstancesInput) (req *request.Request, output *ListDeploymentInstancesOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstancesInput) (req *aws.Request, output *ListDeploymentInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opListDeploymentInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -2911,7 +2910,7 @@ func (c *CodeDeploy) ListDeploymentInstances(input *ListDeploymentInstancesInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentInstancesWithContext(ctx aws.Context, input *ListDeploymentInstancesInput, opts ...request.Option) (*ListDeploymentInstancesOutput, error) {
+func (c *CodeDeploy) ListDeploymentInstancesWithContext(ctx aws.Context, input *ListDeploymentInstancesInput, opts ...aws.Option) (*ListDeploymentInstancesOutput, error) {
 	req, out := c.ListDeploymentInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2946,9 +2945,9 @@ func (c *CodeDeploy) ListDeploymentInstancesPages(input *ListDeploymentInstances
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentInstancesPagesWithContext(ctx aws.Context, input *ListDeploymentInstancesInput, fn func(*ListDeploymentInstancesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CodeDeploy) ListDeploymentInstancesPagesWithContext(ctx aws.Context, input *ListDeploymentInstancesInput, fn func(*ListDeploymentInstancesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDeploymentInstancesInput
 			if input != nil {
 				tmp := *input
@@ -2970,7 +2969,7 @@ func (c *CodeDeploy) ListDeploymentInstancesPagesWithContext(ctx aws.Context, in
 
 const opListDeployments = "ListDeployments"
 
-// ListDeploymentsRequest generates a "aws/request.Request" representing the
+// ListDeploymentsRequest generates a "aws.Request" representing the
 // client's request for the ListDeployments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2994,12 +2993,12 @@ const opListDeployments = "ListDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeployments
-func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) (req *request.Request, output *ListDeploymentsOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) (req *aws.Request, output *ListDeploymentsOutput) {
+	op := &aws.Operation{
 		Name:       opListDeployments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -3072,7 +3071,7 @@ func (c *CodeDeploy) ListDeployments(input *ListDeploymentsInput) (*ListDeployme
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentsWithContext(ctx aws.Context, input *ListDeploymentsInput, opts ...request.Option) (*ListDeploymentsOutput, error) {
+func (c *CodeDeploy) ListDeploymentsWithContext(ctx aws.Context, input *ListDeploymentsInput, opts ...aws.Option) (*ListDeploymentsOutput, error) {
 	req, out := c.ListDeploymentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3107,9 +3106,9 @@ func (c *CodeDeploy) ListDeploymentsPages(input *ListDeploymentsInput, fn func(*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListDeploymentsPagesWithContext(ctx aws.Context, input *ListDeploymentsInput, fn func(*ListDeploymentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CodeDeploy) ListDeploymentsPagesWithContext(ctx aws.Context, input *ListDeploymentsInput, fn func(*ListDeploymentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDeploymentsInput
 			if input != nil {
 				tmp := *input
@@ -3131,7 +3130,7 @@ func (c *CodeDeploy) ListDeploymentsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListGitHubAccountTokenNames = "ListGitHubAccountTokenNames"
 
-// ListGitHubAccountTokenNamesRequest generates a "aws/request.Request" representing the
+// ListGitHubAccountTokenNamesRequest generates a "aws.Request" representing the
 // client's request for the ListGitHubAccountTokenNames operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3155,8 +3154,8 @@ const opListGitHubAccountTokenNames = "ListGitHubAccountTokenNames"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNames
-func (c *CodeDeploy) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccountTokenNamesInput) (req *request.Request, output *ListGitHubAccountTokenNamesOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccountTokenNamesInput) (req *aws.Request, output *ListGitHubAccountTokenNamesOutput) {
+	op := &aws.Operation{
 		Name:       opListGitHubAccountTokenNames,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3204,7 +3203,7 @@ func (c *CodeDeploy) ListGitHubAccountTokenNames(input *ListGitHubAccountTokenNa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListGitHubAccountTokenNamesWithContext(ctx aws.Context, input *ListGitHubAccountTokenNamesInput, opts ...request.Option) (*ListGitHubAccountTokenNamesOutput, error) {
+func (c *CodeDeploy) ListGitHubAccountTokenNamesWithContext(ctx aws.Context, input *ListGitHubAccountTokenNamesInput, opts ...aws.Option) (*ListGitHubAccountTokenNamesOutput, error) {
 	req, out := c.ListGitHubAccountTokenNamesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3213,7 +3212,7 @@ func (c *CodeDeploy) ListGitHubAccountTokenNamesWithContext(ctx aws.Context, inp
 
 const opListOnPremisesInstances = "ListOnPremisesInstances"
 
-// ListOnPremisesInstancesRequest generates a "aws/request.Request" representing the
+// ListOnPremisesInstancesRequest generates a "aws.Request" representing the
 // client's request for the ListOnPremisesInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3237,8 +3236,8 @@ const opListOnPremisesInstances = "ListOnPremisesInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstances
-func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstancesInput) (req *request.Request, output *ListOnPremisesInstancesOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstancesInput) (req *aws.Request, output *ListOnPremisesInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opListOnPremisesInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3293,7 +3292,7 @@ func (c *CodeDeploy) ListOnPremisesInstances(input *ListOnPremisesInstancesInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) ListOnPremisesInstancesWithContext(ctx aws.Context, input *ListOnPremisesInstancesInput, opts ...request.Option) (*ListOnPremisesInstancesOutput, error) {
+func (c *CodeDeploy) ListOnPremisesInstancesWithContext(ctx aws.Context, input *ListOnPremisesInstancesInput, opts ...aws.Option) (*ListOnPremisesInstancesOutput, error) {
 	req, out := c.ListOnPremisesInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3302,7 +3301,7 @@ func (c *CodeDeploy) ListOnPremisesInstancesWithContext(ctx aws.Context, input *
 
 const opRegisterApplicationRevision = "RegisterApplicationRevision"
 
-// RegisterApplicationRevisionRequest generates a "aws/request.Request" representing the
+// RegisterApplicationRevisionRequest generates a "aws.Request" representing the
 // client's request for the RegisterApplicationRevision operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3326,8 +3325,8 @@ const opRegisterApplicationRevision = "RegisterApplicationRevision"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevision
-func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicationRevisionInput) (req *request.Request, output *RegisterApplicationRevisionOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicationRevisionInput) (req *aws.Request, output *RegisterApplicationRevisionOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterApplicationRevision,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3389,7 +3388,7 @@ func (c *CodeDeploy) RegisterApplicationRevision(input *RegisterApplicationRevis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) RegisterApplicationRevisionWithContext(ctx aws.Context, input *RegisterApplicationRevisionInput, opts ...request.Option) (*RegisterApplicationRevisionOutput, error) {
+func (c *CodeDeploy) RegisterApplicationRevisionWithContext(ctx aws.Context, input *RegisterApplicationRevisionInput, opts ...aws.Option) (*RegisterApplicationRevisionOutput, error) {
 	req, out := c.RegisterApplicationRevisionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3398,7 +3397,7 @@ func (c *CodeDeploy) RegisterApplicationRevisionWithContext(ctx aws.Context, inp
 
 const opRegisterOnPremisesInstance = "RegisterOnPremisesInstance"
 
-// RegisterOnPremisesInstanceRequest generates a "aws/request.Request" representing the
+// RegisterOnPremisesInstanceRequest generates a "aws.Request" representing the
 // client's request for the RegisterOnPremisesInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3422,8 +3421,8 @@ const opRegisterOnPremisesInstance = "RegisterOnPremisesInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstance
-func (c *CodeDeploy) RegisterOnPremisesInstanceRequest(input *RegisterOnPremisesInstanceInput) (req *request.Request, output *RegisterOnPremisesInstanceOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) RegisterOnPremisesInstanceRequest(input *RegisterOnPremisesInstanceInput) (req *aws.Request, output *RegisterOnPremisesInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterOnPremisesInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3503,7 +3502,7 @@ func (c *CodeDeploy) RegisterOnPremisesInstance(input *RegisterOnPremisesInstanc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) RegisterOnPremisesInstanceWithContext(ctx aws.Context, input *RegisterOnPremisesInstanceInput, opts ...request.Option) (*RegisterOnPremisesInstanceOutput, error) {
+func (c *CodeDeploy) RegisterOnPremisesInstanceWithContext(ctx aws.Context, input *RegisterOnPremisesInstanceInput, opts ...aws.Option) (*RegisterOnPremisesInstanceOutput, error) {
 	req, out := c.RegisterOnPremisesInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3512,7 +3511,7 @@ func (c *CodeDeploy) RegisterOnPremisesInstanceWithContext(ctx aws.Context, inpu
 
 const opRemoveTagsFromOnPremisesInstances = "RemoveTagsFromOnPremisesInstances"
 
-// RemoveTagsFromOnPremisesInstancesRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromOnPremisesInstancesRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromOnPremisesInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3536,8 +3535,8 @@ const opRemoveTagsFromOnPremisesInstances = "RemoveTagsFromOnPremisesInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstances
-func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsFromOnPremisesInstancesInput) (req *request.Request, output *RemoveTagsFromOnPremisesInstancesOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsFromOnPremisesInstancesInput) (req *aws.Request, output *RemoveTagsFromOnPremisesInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromOnPremisesInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3600,7 +3599,7 @@ func (c *CodeDeploy) RemoveTagsFromOnPremisesInstances(input *RemoveTagsFromOnPr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesWithContext(ctx aws.Context, input *RemoveTagsFromOnPremisesInstancesInput, opts ...request.Option) (*RemoveTagsFromOnPremisesInstancesOutput, error) {
+func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesWithContext(ctx aws.Context, input *RemoveTagsFromOnPremisesInstancesInput, opts ...aws.Option) (*RemoveTagsFromOnPremisesInstancesOutput, error) {
 	req, out := c.RemoveTagsFromOnPremisesInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3609,7 +3608,7 @@ func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesWithContext(ctx aws.Contex
 
 const opSkipWaitTimeForInstanceTermination = "SkipWaitTimeForInstanceTermination"
 
-// SkipWaitTimeForInstanceTerminationRequest generates a "aws/request.Request" representing the
+// SkipWaitTimeForInstanceTerminationRequest generates a "aws.Request" representing the
 // client's request for the SkipWaitTimeForInstanceTermination operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3633,8 +3632,8 @@ const opSkipWaitTimeForInstanceTermination = "SkipWaitTimeForInstanceTermination
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTermination
-func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeForInstanceTerminationInput) (req *request.Request, output *SkipWaitTimeForInstanceTerminationOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeForInstanceTerminationInput) (req *aws.Request, output *SkipWaitTimeForInstanceTerminationOutput) {
+	op := &aws.Operation{
 		Name:       opSkipWaitTimeForInstanceTermination,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3697,7 +3696,7 @@ func (c *CodeDeploy) SkipWaitTimeForInstanceTermination(input *SkipWaitTimeForIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationWithContext(ctx aws.Context, input *SkipWaitTimeForInstanceTerminationInput, opts ...request.Option) (*SkipWaitTimeForInstanceTerminationOutput, error) {
+func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationWithContext(ctx aws.Context, input *SkipWaitTimeForInstanceTerminationInput, opts ...aws.Option) (*SkipWaitTimeForInstanceTerminationOutput, error) {
 	req, out := c.SkipWaitTimeForInstanceTerminationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3706,7 +3705,7 @@ func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationWithContext(ctx aws.Conte
 
 const opStopDeployment = "StopDeployment"
 
-// StopDeploymentRequest generates a "aws/request.Request" representing the
+// StopDeploymentRequest generates a "aws.Request" representing the
 // client's request for the StopDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3730,8 +3729,8 @@ const opStopDeployment = "StopDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeployment
-func (c *CodeDeploy) StopDeploymentRequest(input *StopDeploymentInput) (req *request.Request, output *StopDeploymentOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) StopDeploymentRequest(input *StopDeploymentInput) (req *aws.Request, output *StopDeploymentOutput) {
+	op := &aws.Operation{
 		Name:       opStopDeployment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3785,7 +3784,7 @@ func (c *CodeDeploy) StopDeployment(input *StopDeploymentInput) (*StopDeployment
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) StopDeploymentWithContext(ctx aws.Context, input *StopDeploymentInput, opts ...request.Option) (*StopDeploymentOutput, error) {
+func (c *CodeDeploy) StopDeploymentWithContext(ctx aws.Context, input *StopDeploymentInput, opts ...aws.Option) (*StopDeploymentOutput, error) {
 	req, out := c.StopDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3794,7 +3793,7 @@ func (c *CodeDeploy) StopDeploymentWithContext(ctx aws.Context, input *StopDeplo
 
 const opUpdateApplication = "UpdateApplication"
 
-// UpdateApplicationRequest generates a "aws/request.Request" representing the
+// UpdateApplicationRequest generates a "aws.Request" representing the
 // client's request for the UpdateApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3818,8 +3817,8 @@ const opUpdateApplication = "UpdateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplication
-func (c *CodeDeploy) UpdateApplicationRequest(input *UpdateApplicationInput) (req *request.Request, output *UpdateApplicationOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) UpdateApplicationRequest(input *UpdateApplicationInput) (req *aws.Request, output *UpdateApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3876,7 +3875,7 @@ func (c *CodeDeploy) UpdateApplication(input *UpdateApplicationInput) (*UpdateAp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...request.Option) (*UpdateApplicationOutput, error) {
+func (c *CodeDeploy) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...aws.Option) (*UpdateApplicationOutput, error) {
 	req, out := c.UpdateApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3885,7 +3884,7 @@ func (c *CodeDeploy) UpdateApplicationWithContext(ctx aws.Context, input *Update
 
 const opUpdateDeploymentGroup = "UpdateDeploymentGroup"
 
-// UpdateDeploymentGroupRequest generates a "aws/request.Request" representing the
+// UpdateDeploymentGroupRequest generates a "aws.Request" representing the
 // client's request for the UpdateDeploymentGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3909,8 +3908,8 @@ const opUpdateDeploymentGroup = "UpdateDeploymentGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroup
-func (c *CodeDeploy) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupInput) (req *request.Request, output *UpdateDeploymentGroupOutput) {
-	op := &request.Operation{
+func (c *CodeDeploy) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupInput) (req *aws.Request, output *UpdateDeploymentGroupOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDeploymentGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4051,7 +4050,7 @@ func (c *CodeDeploy) UpdateDeploymentGroup(input *UpdateDeploymentGroupInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) UpdateDeploymentGroupWithContext(ctx aws.Context, input *UpdateDeploymentGroupInput, opts ...request.Option) (*UpdateDeploymentGroupOutput, error) {
+func (c *CodeDeploy) UpdateDeploymentGroupWithContext(ctx aws.Context, input *UpdateDeploymentGroupInput, opts ...aws.Option) (*UpdateDeploymentGroupOutput, error) {
 	req, out := c.UpdateDeploymentGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4089,12 +4088,12 @@ func (s AddTagsToOnPremisesInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToOnPremisesInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToOnPremisesInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToOnPremisesInstancesInput"}
 	if s.InstanceNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceNames"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4368,15 +4367,15 @@ func (s BatchGetApplicationRevisionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetApplicationRevisionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetApplicationRevisionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetApplicationRevisionsInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.Revisions == nil {
-		invalidParams.Add(request.NewErrParamRequired("Revisions"))
+		invalidParams.Add(aws.NewErrParamRequired("Revisions"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4519,15 +4518,15 @@ func (s BatchGetDeploymentGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetDeploymentGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetDeploymentGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetDeploymentGroupsInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.DeploymentGroupNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentGroupNames"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentGroupNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4610,12 +4609,12 @@ func (s BatchGetDeploymentInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetDeploymentInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetDeploymentInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetDeploymentInstancesInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 	if s.InstanceIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceIds"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4922,12 +4921,12 @@ func (s CreateApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5013,15 +5012,15 @@ func (s CreateDeploymentConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDeploymentConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentConfigInput"}
 	if s.DeploymentConfigName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentConfigName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentConfigName"))
 	}
 	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentConfigName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
 	}
 	if s.MinimumHealthyHosts == nil {
-		invalidParams.Add(request.NewErrParamRequired("MinimumHealthyHosts"))
+		invalidParams.Add(aws.NewErrParamRequired("MinimumHealthyHosts"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5162,24 +5161,24 @@ func (s CreateDeploymentGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDeploymentGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentGroupInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentConfigName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
 	}
 	if s.DeploymentGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentGroupName"))
 	}
 	if s.DeploymentGroupName != nil && len(*s.DeploymentGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentGroupName", 1))
 	}
 	if s.ServiceRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5383,18 +5382,18 @@ func (s CreateDeploymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDeploymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentConfigName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
 	}
 	if s.DeploymentGroupName != nil && len(*s.DeploymentGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5512,12 +5511,12 @@ func (s DeleteApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5571,12 +5570,12 @@ func (s DeleteDeploymentConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeploymentConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDeploymentConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeploymentConfigInput"}
 	if s.DeploymentConfigName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentConfigName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentConfigName"))
 	}
 	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentConfigName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5635,18 +5634,18 @@ func (s DeleteDeploymentGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeploymentGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDeploymentGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeploymentGroupInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.DeploymentGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentGroupName"))
 	}
 	if s.DeploymentGroupName != nil && len(*s.DeploymentGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6405,9 +6404,9 @@ func (s DeregisterOnPremisesInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterOnPremisesInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterOnPremisesInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterOnPremisesInstanceInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6772,12 +6771,12 @@ func (s GetApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6845,15 +6844,15 @@ func (s GetApplicationRevisionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApplicationRevisionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetApplicationRevisionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetApplicationRevisionInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.Revision == nil {
-		invalidParams.Add(request.NewErrParamRequired("Revision"))
+		invalidParams.Add(aws.NewErrParamRequired("Revision"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6941,12 +6940,12 @@ func (s GetDeploymentConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeploymentConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentConfigInput"}
 	if s.DeploymentConfigName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentConfigName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentConfigName"))
 	}
 	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentConfigName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7015,18 +7014,18 @@ func (s GetDeploymentGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeploymentGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentGroupInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.DeploymentGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentGroupName"))
 	}
 	if s.DeploymentGroupName != nil && len(*s.DeploymentGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7095,9 +7094,9 @@ func (s GetDeploymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeploymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7140,12 +7139,12 @@ func (s GetDeploymentInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeploymentInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentInstanceInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7239,9 +7238,9 @@ func (s GetOnPremisesInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOnPremisesInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetOnPremisesInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetOnPremisesInstanceInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7718,12 +7717,12 @@ func (s ListApplicationRevisionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListApplicationRevisionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListApplicationRevisionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationRevisionsInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7964,12 +7963,12 @@ func (s ListDeploymentGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeploymentGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDeploymentGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDeploymentGroupsInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8082,9 +8081,9 @@ func (s ListDeploymentInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeploymentInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDeploymentInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDeploymentInstancesInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8200,12 +8199,12 @@ func (s ListDeploymentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeploymentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDeploymentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDeploymentsInput"}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.DeploymentGroupName != nil && len(*s.DeploymentGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8587,15 +8586,15 @@ func (s RegisterApplicationRevisionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterApplicationRevisionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterApplicationRevisionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterApplicationRevisionInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.Revision == nil {
-		invalidParams.Add(request.NewErrParamRequired("Revision"))
+		invalidParams.Add(aws.NewErrParamRequired("Revision"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8666,9 +8665,9 @@ func (s RegisterOnPremisesInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterOnPremisesInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterOnPremisesInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterOnPremisesInstanceInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8738,12 +8737,12 @@ func (s RemoveTagsFromOnPremisesInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromOnPremisesInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromOnPremisesInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromOnPremisesInstancesInput"}
 	if s.InstanceNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceNames"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9052,9 +9051,9 @@ func (s StopDeploymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopDeploymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopDeploymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopDeploymentInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9382,12 +9381,12 @@ func (s UpdateApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationInput"}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.NewApplicationName != nil && len(*s.NewApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NewApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NewApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9508,24 +9507,24 @@ func (s UpdateDeploymentGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDeploymentGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDeploymentGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeploymentGroupInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CurrentDeploymentGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentDeploymentGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentDeploymentGroupName"))
 	}
 	if s.CurrentDeploymentGroupName != nil && len(*s.CurrentDeploymentGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CurrentDeploymentGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CurrentDeploymentGroupName", 1))
 	}
 	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeploymentConfigName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
 	}
 	if s.NewDeploymentGroupName != nil && len(*s.NewDeploymentGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NewDeploymentGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NewDeploymentGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

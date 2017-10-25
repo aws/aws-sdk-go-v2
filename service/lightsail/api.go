@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAllocateStaticIp = "AllocateStaticIp"
 
-// AllocateStaticIpRequest generates a "aws/request.Request" representing the
+// AllocateStaticIpRequest generates a "aws.Request" representing the
 // client's request for the AllocateStaticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opAllocateStaticIp = "AllocateStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIp
-func (c *Lightsail) AllocateStaticIpRequest(input *AllocateStaticIpInput) (req *request.Request, output *AllocateStaticIpOutput) {
-	op := &request.Operation{
+func (c *Lightsail) AllocateStaticIpRequest(input *AllocateStaticIpInput) (req *aws.Request, output *AllocateStaticIpOutput) {
+	op := &aws.Operation{
 		Name:       opAllocateStaticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -107,7 +106,7 @@ func (c *Lightsail) AllocateStaticIp(input *AllocateStaticIpInput) (*AllocateSta
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) AllocateStaticIpWithContext(ctx aws.Context, input *AllocateStaticIpInput, opts ...request.Option) (*AllocateStaticIpOutput, error) {
+func (c *Lightsail) AllocateStaticIpWithContext(ctx aws.Context, input *AllocateStaticIpInput, opts ...aws.Option) (*AllocateStaticIpOutput, error) {
 	req, out := c.AllocateStaticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -116,7 +115,7 @@ func (c *Lightsail) AllocateStaticIpWithContext(ctx aws.Context, input *Allocate
 
 const opAttachStaticIp = "AttachStaticIp"
 
-// AttachStaticIpRequest generates a "aws/request.Request" representing the
+// AttachStaticIpRequest generates a "aws.Request" representing the
 // client's request for the AttachStaticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -140,8 +139,8 @@ const opAttachStaticIp = "AttachStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachStaticIp
-func (c *Lightsail) AttachStaticIpRequest(input *AttachStaticIpInput) (req *request.Request, output *AttachStaticIpOutput) {
-	op := &request.Operation{
+func (c *Lightsail) AttachStaticIpRequest(input *AttachStaticIpInput) (req *aws.Request, output *AttachStaticIpOutput) {
+	op := &aws.Operation{
 		Name:       opAttachStaticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -211,7 +210,7 @@ func (c *Lightsail) AttachStaticIp(input *AttachStaticIpInput) (*AttachStaticIpO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) AttachStaticIpWithContext(ctx aws.Context, input *AttachStaticIpInput, opts ...request.Option) (*AttachStaticIpOutput, error) {
+func (c *Lightsail) AttachStaticIpWithContext(ctx aws.Context, input *AttachStaticIpInput, opts ...aws.Option) (*AttachStaticIpOutput, error) {
 	req, out := c.AttachStaticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -220,7 +219,7 @@ func (c *Lightsail) AttachStaticIpWithContext(ctx aws.Context, input *AttachStat
 
 const opCloseInstancePublicPorts = "CloseInstancePublicPorts"
 
-// CloseInstancePublicPortsRequest generates a "aws/request.Request" representing the
+// CloseInstancePublicPortsRequest generates a "aws.Request" representing the
 // client's request for the CloseInstancePublicPorts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -244,8 +243,8 @@ const opCloseInstancePublicPorts = "CloseInstancePublicPorts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPorts
-func (c *Lightsail) CloseInstancePublicPortsRequest(input *CloseInstancePublicPortsInput) (req *request.Request, output *CloseInstancePublicPortsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) CloseInstancePublicPortsRequest(input *CloseInstancePublicPortsInput) (req *aws.Request, output *CloseInstancePublicPortsOutput) {
+	op := &aws.Operation{
 		Name:       opCloseInstancePublicPorts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -315,7 +314,7 @@ func (c *Lightsail) CloseInstancePublicPorts(input *CloseInstancePublicPortsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) CloseInstancePublicPortsWithContext(ctx aws.Context, input *CloseInstancePublicPortsInput, opts ...request.Option) (*CloseInstancePublicPortsOutput, error) {
+func (c *Lightsail) CloseInstancePublicPortsWithContext(ctx aws.Context, input *CloseInstancePublicPortsInput, opts ...aws.Option) (*CloseInstancePublicPortsOutput, error) {
 	req, out := c.CloseInstancePublicPortsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -324,7 +323,7 @@ func (c *Lightsail) CloseInstancePublicPortsWithContext(ctx aws.Context, input *
 
 const opCreateDomain = "CreateDomain"
 
-// CreateDomainRequest generates a "aws/request.Request" representing the
+// CreateDomainRequest generates a "aws.Request" representing the
 // client's request for the CreateDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -348,8 +347,8 @@ const opCreateDomain = "CreateDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomain
-func (c *Lightsail) CreateDomainRequest(input *CreateDomainInput) (req *request.Request, output *CreateDomainOutput) {
-	op := &request.Operation{
+func (c *Lightsail) CreateDomainRequest(input *CreateDomainInput) (req *aws.Request, output *CreateDomainOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -419,7 +418,7 @@ func (c *Lightsail) CreateDomain(input *CreateDomainInput) (*CreateDomainOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) CreateDomainWithContext(ctx aws.Context, input *CreateDomainInput, opts ...request.Option) (*CreateDomainOutput, error) {
+func (c *Lightsail) CreateDomainWithContext(ctx aws.Context, input *CreateDomainInput, opts ...aws.Option) (*CreateDomainOutput, error) {
 	req, out := c.CreateDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -428,7 +427,7 @@ func (c *Lightsail) CreateDomainWithContext(ctx aws.Context, input *CreateDomain
 
 const opCreateDomainEntry = "CreateDomainEntry"
 
-// CreateDomainEntryRequest generates a "aws/request.Request" representing the
+// CreateDomainEntryRequest generates a "aws.Request" representing the
 // client's request for the CreateDomainEntry operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -452,8 +451,8 @@ const opCreateDomainEntry = "CreateDomainEntry"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainEntry
-func (c *Lightsail) CreateDomainEntryRequest(input *CreateDomainEntryInput) (req *request.Request, output *CreateDomainEntryOutput) {
-	op := &request.Operation{
+func (c *Lightsail) CreateDomainEntryRequest(input *CreateDomainEntryInput) (req *aws.Request, output *CreateDomainEntryOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDomainEntry,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -524,7 +523,7 @@ func (c *Lightsail) CreateDomainEntry(input *CreateDomainEntryInput) (*CreateDom
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) CreateDomainEntryWithContext(ctx aws.Context, input *CreateDomainEntryInput, opts ...request.Option) (*CreateDomainEntryOutput, error) {
+func (c *Lightsail) CreateDomainEntryWithContext(ctx aws.Context, input *CreateDomainEntryInput, opts ...aws.Option) (*CreateDomainEntryOutput, error) {
 	req, out := c.CreateDomainEntryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -533,7 +532,7 @@ func (c *Lightsail) CreateDomainEntryWithContext(ctx aws.Context, input *CreateD
 
 const opCreateInstanceSnapshot = "CreateInstanceSnapshot"
 
-// CreateInstanceSnapshotRequest generates a "aws/request.Request" representing the
+// CreateInstanceSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CreateInstanceSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -557,8 +556,8 @@ const opCreateInstanceSnapshot = "CreateInstanceSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstanceSnapshot
-func (c *Lightsail) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotInput) (req *request.Request, output *CreateInstanceSnapshotOutput) {
-	op := &request.Operation{
+func (c *Lightsail) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotInput) (req *aws.Request, output *CreateInstanceSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCreateInstanceSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -629,7 +628,7 @@ func (c *Lightsail) CreateInstanceSnapshot(input *CreateInstanceSnapshotInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) CreateInstanceSnapshotWithContext(ctx aws.Context, input *CreateInstanceSnapshotInput, opts ...request.Option) (*CreateInstanceSnapshotOutput, error) {
+func (c *Lightsail) CreateInstanceSnapshotWithContext(ctx aws.Context, input *CreateInstanceSnapshotInput, opts ...aws.Option) (*CreateInstanceSnapshotOutput, error) {
 	req, out := c.CreateInstanceSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -638,7 +637,7 @@ func (c *Lightsail) CreateInstanceSnapshotWithContext(ctx aws.Context, input *Cr
 
 const opCreateInstances = "CreateInstances"
 
-// CreateInstancesRequest generates a "aws/request.Request" representing the
+// CreateInstancesRequest generates a "aws.Request" representing the
 // client's request for the CreateInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -662,8 +661,8 @@ const opCreateInstances = "CreateInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstances
-func (c *Lightsail) CreateInstancesRequest(input *CreateInstancesInput) (req *request.Request, output *CreateInstancesOutput) {
-	op := &request.Operation{
+func (c *Lightsail) CreateInstancesRequest(input *CreateInstancesInput) (req *aws.Request, output *CreateInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opCreateInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -733,7 +732,7 @@ func (c *Lightsail) CreateInstances(input *CreateInstancesInput) (*CreateInstanc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) CreateInstancesWithContext(ctx aws.Context, input *CreateInstancesInput, opts ...request.Option) (*CreateInstancesOutput, error) {
+func (c *Lightsail) CreateInstancesWithContext(ctx aws.Context, input *CreateInstancesInput, opts ...aws.Option) (*CreateInstancesOutput, error) {
 	req, out := c.CreateInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -742,7 +741,7 @@ func (c *Lightsail) CreateInstancesWithContext(ctx aws.Context, input *CreateIns
 
 const opCreateInstancesFromSnapshot = "CreateInstancesFromSnapshot"
 
-// CreateInstancesFromSnapshotRequest generates a "aws/request.Request" representing the
+// CreateInstancesFromSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CreateInstancesFromSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -766,8 +765,8 @@ const opCreateInstancesFromSnapshot = "CreateInstancesFromSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshot
-func (c *Lightsail) CreateInstancesFromSnapshotRequest(input *CreateInstancesFromSnapshotInput) (req *request.Request, output *CreateInstancesFromSnapshotOutput) {
-	op := &request.Operation{
+func (c *Lightsail) CreateInstancesFromSnapshotRequest(input *CreateInstancesFromSnapshotInput) (req *aws.Request, output *CreateInstancesFromSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCreateInstancesFromSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -838,7 +837,7 @@ func (c *Lightsail) CreateInstancesFromSnapshot(input *CreateInstancesFromSnapsh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) CreateInstancesFromSnapshotWithContext(ctx aws.Context, input *CreateInstancesFromSnapshotInput, opts ...request.Option) (*CreateInstancesFromSnapshotOutput, error) {
+func (c *Lightsail) CreateInstancesFromSnapshotWithContext(ctx aws.Context, input *CreateInstancesFromSnapshotInput, opts ...aws.Option) (*CreateInstancesFromSnapshotOutput, error) {
 	req, out := c.CreateInstancesFromSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -847,7 +846,7 @@ func (c *Lightsail) CreateInstancesFromSnapshotWithContext(ctx aws.Context, inpu
 
 const opCreateKeyPair = "CreateKeyPair"
 
-// CreateKeyPairRequest generates a "aws/request.Request" representing the
+// CreateKeyPairRequest generates a "aws.Request" representing the
 // client's request for the CreateKeyPair operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -871,8 +870,8 @@ const opCreateKeyPair = "CreateKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateKeyPair
-func (c *Lightsail) CreateKeyPairRequest(input *CreateKeyPairInput) (req *request.Request, output *CreateKeyPairOutput) {
-	op := &request.Operation{
+func (c *Lightsail) CreateKeyPairRequest(input *CreateKeyPairInput) (req *aws.Request, output *CreateKeyPairOutput) {
+	op := &aws.Operation{
 		Name:       opCreateKeyPair,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -942,7 +941,7 @@ func (c *Lightsail) CreateKeyPair(input *CreateKeyPairInput) (*CreateKeyPairOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) CreateKeyPairWithContext(ctx aws.Context, input *CreateKeyPairInput, opts ...request.Option) (*CreateKeyPairOutput, error) {
+func (c *Lightsail) CreateKeyPairWithContext(ctx aws.Context, input *CreateKeyPairInput, opts ...aws.Option) (*CreateKeyPairOutput, error) {
 	req, out := c.CreateKeyPairRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -951,7 +950,7 @@ func (c *Lightsail) CreateKeyPairWithContext(ctx aws.Context, input *CreateKeyPa
 
 const opDeleteDomain = "DeleteDomain"
 
-// DeleteDomainRequest generates a "aws/request.Request" representing the
+// DeleteDomainRequest generates a "aws.Request" representing the
 // client's request for the DeleteDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -975,8 +974,8 @@ const opDeleteDomain = "DeleteDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomain
-func (c *Lightsail) DeleteDomainRequest(input *DeleteDomainInput) (req *request.Request, output *DeleteDomainOutput) {
-	op := &request.Operation{
+func (c *Lightsail) DeleteDomainRequest(input *DeleteDomainInput) (req *aws.Request, output *DeleteDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1046,7 +1045,7 @@ func (c *Lightsail) DeleteDomain(input *DeleteDomainInput) (*DeleteDomainOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...request.Option) (*DeleteDomainOutput, error) {
+func (c *Lightsail) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...aws.Option) (*DeleteDomainOutput, error) {
 	req, out := c.DeleteDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1055,7 +1054,7 @@ func (c *Lightsail) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomain
 
 const opDeleteDomainEntry = "DeleteDomainEntry"
 
-// DeleteDomainEntryRequest generates a "aws/request.Request" representing the
+// DeleteDomainEntryRequest generates a "aws.Request" representing the
 // client's request for the DeleteDomainEntry operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1079,8 +1078,8 @@ const opDeleteDomainEntry = "DeleteDomainEntry"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainEntry
-func (c *Lightsail) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) (req *request.Request, output *DeleteDomainEntryOutput) {
-	op := &request.Operation{
+func (c *Lightsail) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) (req *aws.Request, output *DeleteDomainEntryOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDomainEntry,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1150,7 +1149,7 @@ func (c *Lightsail) DeleteDomainEntry(input *DeleteDomainEntryInput) (*DeleteDom
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) DeleteDomainEntryWithContext(ctx aws.Context, input *DeleteDomainEntryInput, opts ...request.Option) (*DeleteDomainEntryOutput, error) {
+func (c *Lightsail) DeleteDomainEntryWithContext(ctx aws.Context, input *DeleteDomainEntryInput, opts ...aws.Option) (*DeleteDomainEntryOutput, error) {
 	req, out := c.DeleteDomainEntryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1159,7 +1158,7 @@ func (c *Lightsail) DeleteDomainEntryWithContext(ctx aws.Context, input *DeleteD
 
 const opDeleteInstance = "DeleteInstance"
 
-// DeleteInstanceRequest generates a "aws/request.Request" representing the
+// DeleteInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeleteInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1183,8 +1182,8 @@ const opDeleteInstance = "DeleteInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstance
-func (c *Lightsail) DeleteInstanceRequest(input *DeleteInstanceInput) (req *request.Request, output *DeleteInstanceOutput) {
-	op := &request.Operation{
+func (c *Lightsail) DeleteInstanceRequest(input *DeleteInstanceInput) (req *aws.Request, output *DeleteInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1254,7 +1253,7 @@ func (c *Lightsail) DeleteInstance(input *DeleteInstanceInput) (*DeleteInstanceO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) DeleteInstanceWithContext(ctx aws.Context, input *DeleteInstanceInput, opts ...request.Option) (*DeleteInstanceOutput, error) {
+func (c *Lightsail) DeleteInstanceWithContext(ctx aws.Context, input *DeleteInstanceInput, opts ...aws.Option) (*DeleteInstanceOutput, error) {
 	req, out := c.DeleteInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1263,7 +1262,7 @@ func (c *Lightsail) DeleteInstanceWithContext(ctx aws.Context, input *DeleteInst
 
 const opDeleteInstanceSnapshot = "DeleteInstanceSnapshot"
 
-// DeleteInstanceSnapshotRequest generates a "aws/request.Request" representing the
+// DeleteInstanceSnapshotRequest generates a "aws.Request" representing the
 // client's request for the DeleteInstanceSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1287,8 +1286,8 @@ const opDeleteInstanceSnapshot = "DeleteInstanceSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceSnapshot
-func (c *Lightsail) DeleteInstanceSnapshotRequest(input *DeleteInstanceSnapshotInput) (req *request.Request, output *DeleteInstanceSnapshotOutput) {
-	op := &request.Operation{
+func (c *Lightsail) DeleteInstanceSnapshotRequest(input *DeleteInstanceSnapshotInput) (req *aws.Request, output *DeleteInstanceSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteInstanceSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1358,7 +1357,7 @@ func (c *Lightsail) DeleteInstanceSnapshot(input *DeleteInstanceSnapshotInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) DeleteInstanceSnapshotWithContext(ctx aws.Context, input *DeleteInstanceSnapshotInput, opts ...request.Option) (*DeleteInstanceSnapshotOutput, error) {
+func (c *Lightsail) DeleteInstanceSnapshotWithContext(ctx aws.Context, input *DeleteInstanceSnapshotInput, opts ...aws.Option) (*DeleteInstanceSnapshotOutput, error) {
 	req, out := c.DeleteInstanceSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1367,7 +1366,7 @@ func (c *Lightsail) DeleteInstanceSnapshotWithContext(ctx aws.Context, input *De
 
 const opDeleteKeyPair = "DeleteKeyPair"
 
-// DeleteKeyPairRequest generates a "aws/request.Request" representing the
+// DeleteKeyPairRequest generates a "aws.Request" representing the
 // client's request for the DeleteKeyPair operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1391,8 +1390,8 @@ const opDeleteKeyPair = "DeleteKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKeyPair
-func (c *Lightsail) DeleteKeyPairRequest(input *DeleteKeyPairInput) (req *request.Request, output *DeleteKeyPairOutput) {
-	op := &request.Operation{
+func (c *Lightsail) DeleteKeyPairRequest(input *DeleteKeyPairInput) (req *aws.Request, output *DeleteKeyPairOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteKeyPair,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1462,7 +1461,7 @@ func (c *Lightsail) DeleteKeyPair(input *DeleteKeyPairInput) (*DeleteKeyPairOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) DeleteKeyPairWithContext(ctx aws.Context, input *DeleteKeyPairInput, opts ...request.Option) (*DeleteKeyPairOutput, error) {
+func (c *Lightsail) DeleteKeyPairWithContext(ctx aws.Context, input *DeleteKeyPairInput, opts ...aws.Option) (*DeleteKeyPairOutput, error) {
 	req, out := c.DeleteKeyPairRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1471,7 +1470,7 @@ func (c *Lightsail) DeleteKeyPairWithContext(ctx aws.Context, input *DeleteKeyPa
 
 const opDetachStaticIp = "DetachStaticIp"
 
-// DetachStaticIpRequest generates a "aws/request.Request" representing the
+// DetachStaticIpRequest generates a "aws.Request" representing the
 // client's request for the DetachStaticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1495,8 +1494,8 @@ const opDetachStaticIp = "DetachStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIp
-func (c *Lightsail) DetachStaticIpRequest(input *DetachStaticIpInput) (req *request.Request, output *DetachStaticIpOutput) {
-	op := &request.Operation{
+func (c *Lightsail) DetachStaticIpRequest(input *DetachStaticIpInput) (req *aws.Request, output *DetachStaticIpOutput) {
+	op := &aws.Operation{
 		Name:       opDetachStaticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1566,7 +1565,7 @@ func (c *Lightsail) DetachStaticIp(input *DetachStaticIpInput) (*DetachStaticIpO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) DetachStaticIpWithContext(ctx aws.Context, input *DetachStaticIpInput, opts ...request.Option) (*DetachStaticIpOutput, error) {
+func (c *Lightsail) DetachStaticIpWithContext(ctx aws.Context, input *DetachStaticIpInput, opts ...aws.Option) (*DetachStaticIpOutput, error) {
 	req, out := c.DetachStaticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1575,7 +1574,7 @@ func (c *Lightsail) DetachStaticIpWithContext(ctx aws.Context, input *DetachStat
 
 const opDownloadDefaultKeyPair = "DownloadDefaultKeyPair"
 
-// DownloadDefaultKeyPairRequest generates a "aws/request.Request" representing the
+// DownloadDefaultKeyPairRequest generates a "aws.Request" representing the
 // client's request for the DownloadDefaultKeyPair operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1599,8 +1598,8 @@ const opDownloadDefaultKeyPair = "DownloadDefaultKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPair
-func (c *Lightsail) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairInput) (req *request.Request, output *DownloadDefaultKeyPairOutput) {
-	op := &request.Operation{
+func (c *Lightsail) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairInput) (req *aws.Request, output *DownloadDefaultKeyPairOutput) {
+	op := &aws.Operation{
 		Name:       opDownloadDefaultKeyPair,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1670,7 +1669,7 @@ func (c *Lightsail) DownloadDefaultKeyPair(input *DownloadDefaultKeyPairInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) DownloadDefaultKeyPairWithContext(ctx aws.Context, input *DownloadDefaultKeyPairInput, opts ...request.Option) (*DownloadDefaultKeyPairOutput, error) {
+func (c *Lightsail) DownloadDefaultKeyPairWithContext(ctx aws.Context, input *DownloadDefaultKeyPairInput, opts ...aws.Option) (*DownloadDefaultKeyPairOutput, error) {
 	req, out := c.DownloadDefaultKeyPairRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1679,7 +1678,7 @@ func (c *Lightsail) DownloadDefaultKeyPairWithContext(ctx aws.Context, input *Do
 
 const opGetActiveNames = "GetActiveNames"
 
-// GetActiveNamesRequest generates a "aws/request.Request" representing the
+// GetActiveNamesRequest generates a "aws.Request" representing the
 // client's request for the GetActiveNames operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1703,8 +1702,8 @@ const opGetActiveNames = "GetActiveNames"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNames
-func (c *Lightsail) GetActiveNamesRequest(input *GetActiveNamesInput) (req *request.Request, output *GetActiveNamesOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetActiveNamesRequest(input *GetActiveNamesInput) (req *aws.Request, output *GetActiveNamesOutput) {
+	op := &aws.Operation{
 		Name:       opGetActiveNames,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1774,7 +1773,7 @@ func (c *Lightsail) GetActiveNames(input *GetActiveNamesInput) (*GetActiveNamesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetActiveNamesWithContext(ctx aws.Context, input *GetActiveNamesInput, opts ...request.Option) (*GetActiveNamesOutput, error) {
+func (c *Lightsail) GetActiveNamesWithContext(ctx aws.Context, input *GetActiveNamesInput, opts ...aws.Option) (*GetActiveNamesOutput, error) {
 	req, out := c.GetActiveNamesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1783,7 +1782,7 @@ func (c *Lightsail) GetActiveNamesWithContext(ctx aws.Context, input *GetActiveN
 
 const opGetBlueprints = "GetBlueprints"
 
-// GetBlueprintsRequest generates a "aws/request.Request" representing the
+// GetBlueprintsRequest generates a "aws.Request" representing the
 // client's request for the GetBlueprints operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1807,8 +1806,8 @@ const opGetBlueprints = "GetBlueprints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprints
-func (c *Lightsail) GetBlueprintsRequest(input *GetBlueprintsInput) (req *request.Request, output *GetBlueprintsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetBlueprintsRequest(input *GetBlueprintsInput) (req *aws.Request, output *GetBlueprintsOutput) {
+	op := &aws.Operation{
 		Name:       opGetBlueprints,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1881,7 +1880,7 @@ func (c *Lightsail) GetBlueprints(input *GetBlueprintsInput) (*GetBlueprintsOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetBlueprintsWithContext(ctx aws.Context, input *GetBlueprintsInput, opts ...request.Option) (*GetBlueprintsOutput, error) {
+func (c *Lightsail) GetBlueprintsWithContext(ctx aws.Context, input *GetBlueprintsInput, opts ...aws.Option) (*GetBlueprintsOutput, error) {
 	req, out := c.GetBlueprintsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1890,7 +1889,7 @@ func (c *Lightsail) GetBlueprintsWithContext(ctx aws.Context, input *GetBlueprin
 
 const opGetBundles = "GetBundles"
 
-// GetBundlesRequest generates a "aws/request.Request" representing the
+// GetBundlesRequest generates a "aws.Request" representing the
 // client's request for the GetBundles operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1914,8 +1913,8 @@ const opGetBundles = "GetBundles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundles
-func (c *Lightsail) GetBundlesRequest(input *GetBundlesInput) (req *request.Request, output *GetBundlesOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetBundlesRequest(input *GetBundlesInput) (req *aws.Request, output *GetBundlesOutput) {
+	op := &aws.Operation{
 		Name:       opGetBundles,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1986,7 +1985,7 @@ func (c *Lightsail) GetBundles(input *GetBundlesInput) (*GetBundlesOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetBundlesWithContext(ctx aws.Context, input *GetBundlesInput, opts ...request.Option) (*GetBundlesOutput, error) {
+func (c *Lightsail) GetBundlesWithContext(ctx aws.Context, input *GetBundlesInput, opts ...aws.Option) (*GetBundlesOutput, error) {
 	req, out := c.GetBundlesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1995,7 +1994,7 @@ func (c *Lightsail) GetBundlesWithContext(ctx aws.Context, input *GetBundlesInpu
 
 const opGetDomain = "GetDomain"
 
-// GetDomainRequest generates a "aws/request.Request" representing the
+// GetDomainRequest generates a "aws.Request" representing the
 // client's request for the GetDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2019,8 +2018,8 @@ const opGetDomain = "GetDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomain
-func (c *Lightsail) GetDomainRequest(input *GetDomainInput) (req *request.Request, output *GetDomainOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetDomainRequest(input *GetDomainInput) (req *aws.Request, output *GetDomainOutput) {
+	op := &aws.Operation{
 		Name:       opGetDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2090,7 +2089,7 @@ func (c *Lightsail) GetDomain(input *GetDomainInput) (*GetDomainOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetDomainWithContext(ctx aws.Context, input *GetDomainInput, opts ...request.Option) (*GetDomainOutput, error) {
+func (c *Lightsail) GetDomainWithContext(ctx aws.Context, input *GetDomainInput, opts ...aws.Option) (*GetDomainOutput, error) {
 	req, out := c.GetDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2099,7 +2098,7 @@ func (c *Lightsail) GetDomainWithContext(ctx aws.Context, input *GetDomainInput,
 
 const opGetDomains = "GetDomains"
 
-// GetDomainsRequest generates a "aws/request.Request" representing the
+// GetDomainsRequest generates a "aws.Request" representing the
 // client's request for the GetDomains operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2123,8 +2122,8 @@ const opGetDomains = "GetDomains"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomains
-func (c *Lightsail) GetDomainsRequest(input *GetDomainsInput) (req *request.Request, output *GetDomainsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetDomainsRequest(input *GetDomainsInput) (req *aws.Request, output *GetDomainsOutput) {
+	op := &aws.Operation{
 		Name:       opGetDomains,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2194,7 +2193,7 @@ func (c *Lightsail) GetDomains(input *GetDomainsInput) (*GetDomainsOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetDomainsWithContext(ctx aws.Context, input *GetDomainsInput, opts ...request.Option) (*GetDomainsOutput, error) {
+func (c *Lightsail) GetDomainsWithContext(ctx aws.Context, input *GetDomainsInput, opts ...aws.Option) (*GetDomainsOutput, error) {
 	req, out := c.GetDomainsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2203,7 +2202,7 @@ func (c *Lightsail) GetDomainsWithContext(ctx aws.Context, input *GetDomainsInpu
 
 const opGetInstance = "GetInstance"
 
-// GetInstanceRequest generates a "aws/request.Request" representing the
+// GetInstanceRequest generates a "aws.Request" representing the
 // client's request for the GetInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2227,8 +2226,8 @@ const opGetInstance = "GetInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstance
-func (c *Lightsail) GetInstanceRequest(input *GetInstanceInput) (req *request.Request, output *GetInstanceOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetInstanceRequest(input *GetInstanceInput) (req *aws.Request, output *GetInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opGetInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2299,7 +2298,7 @@ func (c *Lightsail) GetInstance(input *GetInstanceInput) (*GetInstanceOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetInstanceWithContext(ctx aws.Context, input *GetInstanceInput, opts ...request.Option) (*GetInstanceOutput, error) {
+func (c *Lightsail) GetInstanceWithContext(ctx aws.Context, input *GetInstanceInput, opts ...aws.Option) (*GetInstanceOutput, error) {
 	req, out := c.GetInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2308,7 +2307,7 @@ func (c *Lightsail) GetInstanceWithContext(ctx aws.Context, input *GetInstanceIn
 
 const opGetInstanceAccessDetails = "GetInstanceAccessDetails"
 
-// GetInstanceAccessDetailsRequest generates a "aws/request.Request" representing the
+// GetInstanceAccessDetailsRequest generates a "aws.Request" representing the
 // client's request for the GetInstanceAccessDetails operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2332,8 +2331,8 @@ const opGetInstanceAccessDetails = "GetInstanceAccessDetails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceAccessDetails
-func (c *Lightsail) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDetailsInput) (req *request.Request, output *GetInstanceAccessDetailsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDetailsInput) (req *aws.Request, output *GetInstanceAccessDetailsOutput) {
+	op := &aws.Operation{
 		Name:       opGetInstanceAccessDetails,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2404,7 +2403,7 @@ func (c *Lightsail) GetInstanceAccessDetails(input *GetInstanceAccessDetailsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetInstanceAccessDetailsWithContext(ctx aws.Context, input *GetInstanceAccessDetailsInput, opts ...request.Option) (*GetInstanceAccessDetailsOutput, error) {
+func (c *Lightsail) GetInstanceAccessDetailsWithContext(ctx aws.Context, input *GetInstanceAccessDetailsInput, opts ...aws.Option) (*GetInstanceAccessDetailsOutput, error) {
 	req, out := c.GetInstanceAccessDetailsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2413,7 +2412,7 @@ func (c *Lightsail) GetInstanceAccessDetailsWithContext(ctx aws.Context, input *
 
 const opGetInstanceMetricData = "GetInstanceMetricData"
 
-// GetInstanceMetricDataRequest generates a "aws/request.Request" representing the
+// GetInstanceMetricDataRequest generates a "aws.Request" representing the
 // client's request for the GetInstanceMetricData operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2437,8 +2436,8 @@ const opGetInstanceMetricData = "GetInstanceMetricData"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricData
-func (c *Lightsail) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInput) (req *request.Request, output *GetInstanceMetricDataOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInput) (req *aws.Request, output *GetInstanceMetricDataOutput) {
+	op := &aws.Operation{
 		Name:       opGetInstanceMetricData,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2509,7 +2508,7 @@ func (c *Lightsail) GetInstanceMetricData(input *GetInstanceMetricDataInput) (*G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetInstanceMetricDataWithContext(ctx aws.Context, input *GetInstanceMetricDataInput, opts ...request.Option) (*GetInstanceMetricDataOutput, error) {
+func (c *Lightsail) GetInstanceMetricDataWithContext(ctx aws.Context, input *GetInstanceMetricDataInput, opts ...aws.Option) (*GetInstanceMetricDataOutput, error) {
 	req, out := c.GetInstanceMetricDataRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2518,7 +2517,7 @@ func (c *Lightsail) GetInstanceMetricDataWithContext(ctx aws.Context, input *Get
 
 const opGetInstancePortStates = "GetInstancePortStates"
 
-// GetInstancePortStatesRequest generates a "aws/request.Request" representing the
+// GetInstancePortStatesRequest generates a "aws.Request" representing the
 // client's request for the GetInstancePortStates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2542,8 +2541,8 @@ const opGetInstancePortStates = "GetInstancePortStates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStates
-func (c *Lightsail) GetInstancePortStatesRequest(input *GetInstancePortStatesInput) (req *request.Request, output *GetInstancePortStatesOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetInstancePortStatesRequest(input *GetInstancePortStatesInput) (req *aws.Request, output *GetInstancePortStatesOutput) {
+	op := &aws.Operation{
 		Name:       opGetInstancePortStates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2613,7 +2612,7 @@ func (c *Lightsail) GetInstancePortStates(input *GetInstancePortStatesInput) (*G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetInstancePortStatesWithContext(ctx aws.Context, input *GetInstancePortStatesInput, opts ...request.Option) (*GetInstancePortStatesOutput, error) {
+func (c *Lightsail) GetInstancePortStatesWithContext(ctx aws.Context, input *GetInstancePortStatesInput, opts ...aws.Option) (*GetInstancePortStatesOutput, error) {
 	req, out := c.GetInstancePortStatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2622,7 +2621,7 @@ func (c *Lightsail) GetInstancePortStatesWithContext(ctx aws.Context, input *Get
 
 const opGetInstanceSnapshot = "GetInstanceSnapshot"
 
-// GetInstanceSnapshotRequest generates a "aws/request.Request" representing the
+// GetInstanceSnapshotRequest generates a "aws.Request" representing the
 // client's request for the GetInstanceSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2646,8 +2645,8 @@ const opGetInstanceSnapshot = "GetInstanceSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshot
-func (c *Lightsail) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) (req *request.Request, output *GetInstanceSnapshotOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) (req *aws.Request, output *GetInstanceSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opGetInstanceSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2717,7 +2716,7 @@ func (c *Lightsail) GetInstanceSnapshot(input *GetInstanceSnapshotInput) (*GetIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetInstanceSnapshotWithContext(ctx aws.Context, input *GetInstanceSnapshotInput, opts ...request.Option) (*GetInstanceSnapshotOutput, error) {
+func (c *Lightsail) GetInstanceSnapshotWithContext(ctx aws.Context, input *GetInstanceSnapshotInput, opts ...aws.Option) (*GetInstanceSnapshotOutput, error) {
 	req, out := c.GetInstanceSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2726,7 +2725,7 @@ func (c *Lightsail) GetInstanceSnapshotWithContext(ctx aws.Context, input *GetIn
 
 const opGetInstanceSnapshots = "GetInstanceSnapshots"
 
-// GetInstanceSnapshotsRequest generates a "aws/request.Request" representing the
+// GetInstanceSnapshotsRequest generates a "aws.Request" representing the
 // client's request for the GetInstanceSnapshots operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2750,8 +2749,8 @@ const opGetInstanceSnapshots = "GetInstanceSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshots
-func (c *Lightsail) GetInstanceSnapshotsRequest(input *GetInstanceSnapshotsInput) (req *request.Request, output *GetInstanceSnapshotsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetInstanceSnapshotsRequest(input *GetInstanceSnapshotsInput) (req *aws.Request, output *GetInstanceSnapshotsOutput) {
+	op := &aws.Operation{
 		Name:       opGetInstanceSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2821,7 +2820,7 @@ func (c *Lightsail) GetInstanceSnapshots(input *GetInstanceSnapshotsInput) (*Get
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetInstanceSnapshotsWithContext(ctx aws.Context, input *GetInstanceSnapshotsInput, opts ...request.Option) (*GetInstanceSnapshotsOutput, error) {
+func (c *Lightsail) GetInstanceSnapshotsWithContext(ctx aws.Context, input *GetInstanceSnapshotsInput, opts ...aws.Option) (*GetInstanceSnapshotsOutput, error) {
 	req, out := c.GetInstanceSnapshotsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2830,7 +2829,7 @@ func (c *Lightsail) GetInstanceSnapshotsWithContext(ctx aws.Context, input *GetI
 
 const opGetInstanceState = "GetInstanceState"
 
-// GetInstanceStateRequest generates a "aws/request.Request" representing the
+// GetInstanceStateRequest generates a "aws.Request" representing the
 // client's request for the GetInstanceState operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2854,8 +2853,8 @@ const opGetInstanceState = "GetInstanceState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceState
-func (c *Lightsail) GetInstanceStateRequest(input *GetInstanceStateInput) (req *request.Request, output *GetInstanceStateOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetInstanceStateRequest(input *GetInstanceStateInput) (req *aws.Request, output *GetInstanceStateOutput) {
+	op := &aws.Operation{
 		Name:       opGetInstanceState,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2925,7 +2924,7 @@ func (c *Lightsail) GetInstanceState(input *GetInstanceStateInput) (*GetInstance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetInstanceStateWithContext(ctx aws.Context, input *GetInstanceStateInput, opts ...request.Option) (*GetInstanceStateOutput, error) {
+func (c *Lightsail) GetInstanceStateWithContext(ctx aws.Context, input *GetInstanceStateInput, opts ...aws.Option) (*GetInstanceStateOutput, error) {
 	req, out := c.GetInstanceStateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2934,7 +2933,7 @@ func (c *Lightsail) GetInstanceStateWithContext(ctx aws.Context, input *GetInsta
 
 const opGetInstances = "GetInstances"
 
-// GetInstancesRequest generates a "aws/request.Request" representing the
+// GetInstancesRequest generates a "aws.Request" representing the
 // client's request for the GetInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2958,8 +2957,8 @@ const opGetInstances = "GetInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstances
-func (c *Lightsail) GetInstancesRequest(input *GetInstancesInput) (req *request.Request, output *GetInstancesOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetInstancesRequest(input *GetInstancesInput) (req *aws.Request, output *GetInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opGetInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3030,7 +3029,7 @@ func (c *Lightsail) GetInstances(input *GetInstancesInput) (*GetInstancesOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetInstancesWithContext(ctx aws.Context, input *GetInstancesInput, opts ...request.Option) (*GetInstancesOutput, error) {
+func (c *Lightsail) GetInstancesWithContext(ctx aws.Context, input *GetInstancesInput, opts ...aws.Option) (*GetInstancesOutput, error) {
 	req, out := c.GetInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3039,7 +3038,7 @@ func (c *Lightsail) GetInstancesWithContext(ctx aws.Context, input *GetInstances
 
 const opGetKeyPair = "GetKeyPair"
 
-// GetKeyPairRequest generates a "aws/request.Request" representing the
+// GetKeyPairRequest generates a "aws.Request" representing the
 // client's request for the GetKeyPair operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3063,8 +3062,8 @@ const opGetKeyPair = "GetKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPair
-func (c *Lightsail) GetKeyPairRequest(input *GetKeyPairInput) (req *request.Request, output *GetKeyPairOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetKeyPairRequest(input *GetKeyPairInput) (req *aws.Request, output *GetKeyPairOutput) {
+	op := &aws.Operation{
 		Name:       opGetKeyPair,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3134,7 +3133,7 @@ func (c *Lightsail) GetKeyPair(input *GetKeyPairInput) (*GetKeyPairOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetKeyPairWithContext(ctx aws.Context, input *GetKeyPairInput, opts ...request.Option) (*GetKeyPairOutput, error) {
+func (c *Lightsail) GetKeyPairWithContext(ctx aws.Context, input *GetKeyPairInput, opts ...aws.Option) (*GetKeyPairOutput, error) {
 	req, out := c.GetKeyPairRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3143,7 +3142,7 @@ func (c *Lightsail) GetKeyPairWithContext(ctx aws.Context, input *GetKeyPairInpu
 
 const opGetKeyPairs = "GetKeyPairs"
 
-// GetKeyPairsRequest generates a "aws/request.Request" representing the
+// GetKeyPairsRequest generates a "aws.Request" representing the
 // client's request for the GetKeyPairs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3167,8 +3166,8 @@ const opGetKeyPairs = "GetKeyPairs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairs
-func (c *Lightsail) GetKeyPairsRequest(input *GetKeyPairsInput) (req *request.Request, output *GetKeyPairsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetKeyPairsRequest(input *GetKeyPairsInput) (req *aws.Request, output *GetKeyPairsOutput) {
+	op := &aws.Operation{
 		Name:       opGetKeyPairs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3238,7 +3237,7 @@ func (c *Lightsail) GetKeyPairs(input *GetKeyPairsInput) (*GetKeyPairsOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetKeyPairsWithContext(ctx aws.Context, input *GetKeyPairsInput, opts ...request.Option) (*GetKeyPairsOutput, error) {
+func (c *Lightsail) GetKeyPairsWithContext(ctx aws.Context, input *GetKeyPairsInput, opts ...aws.Option) (*GetKeyPairsOutput, error) {
 	req, out := c.GetKeyPairsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3247,7 +3246,7 @@ func (c *Lightsail) GetKeyPairsWithContext(ctx aws.Context, input *GetKeyPairsIn
 
 const opGetOperation = "GetOperation"
 
-// GetOperationRequest generates a "aws/request.Request" representing the
+// GetOperationRequest generates a "aws.Request" representing the
 // client's request for the GetOperation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3271,8 +3270,8 @@ const opGetOperation = "GetOperation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperation
-func (c *Lightsail) GetOperationRequest(input *GetOperationInput) (req *request.Request, output *GetOperationOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetOperationRequest(input *GetOperationInput) (req *aws.Request, output *GetOperationOutput) {
+	op := &aws.Operation{
 		Name:       opGetOperation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3344,7 +3343,7 @@ func (c *Lightsail) GetOperation(input *GetOperationInput) (*GetOperationOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetOperationWithContext(ctx aws.Context, input *GetOperationInput, opts ...request.Option) (*GetOperationOutput, error) {
+func (c *Lightsail) GetOperationWithContext(ctx aws.Context, input *GetOperationInput, opts ...aws.Option) (*GetOperationOutput, error) {
 	req, out := c.GetOperationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3353,7 +3352,7 @@ func (c *Lightsail) GetOperationWithContext(ctx aws.Context, input *GetOperation
 
 const opGetOperations = "GetOperations"
 
-// GetOperationsRequest generates a "aws/request.Request" representing the
+// GetOperationsRequest generates a "aws.Request" representing the
 // client's request for the GetOperations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3377,8 +3376,8 @@ const opGetOperations = "GetOperations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperations
-func (c *Lightsail) GetOperationsRequest(input *GetOperationsInput) (req *request.Request, output *GetOperationsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetOperationsRequest(input *GetOperationsInput) (req *aws.Request, output *GetOperationsOutput) {
+	op := &aws.Operation{
 		Name:       opGetOperations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3452,7 +3451,7 @@ func (c *Lightsail) GetOperations(input *GetOperationsInput) (*GetOperationsOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetOperationsWithContext(ctx aws.Context, input *GetOperationsInput, opts ...request.Option) (*GetOperationsOutput, error) {
+func (c *Lightsail) GetOperationsWithContext(ctx aws.Context, input *GetOperationsInput, opts ...aws.Option) (*GetOperationsOutput, error) {
 	req, out := c.GetOperationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3461,7 +3460,7 @@ func (c *Lightsail) GetOperationsWithContext(ctx aws.Context, input *GetOperatio
 
 const opGetOperationsForResource = "GetOperationsForResource"
 
-// GetOperationsForResourceRequest generates a "aws/request.Request" representing the
+// GetOperationsForResourceRequest generates a "aws.Request" representing the
 // client's request for the GetOperationsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3485,8 +3484,8 @@ const opGetOperationsForResource = "GetOperationsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResource
-func (c *Lightsail) GetOperationsForResourceRequest(input *GetOperationsForResourceInput) (req *request.Request, output *GetOperationsForResourceOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetOperationsForResourceRequest(input *GetOperationsForResourceInput) (req *aws.Request, output *GetOperationsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opGetOperationsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3556,7 +3555,7 @@ func (c *Lightsail) GetOperationsForResource(input *GetOperationsForResourceInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetOperationsForResourceWithContext(ctx aws.Context, input *GetOperationsForResourceInput, opts ...request.Option) (*GetOperationsForResourceOutput, error) {
+func (c *Lightsail) GetOperationsForResourceWithContext(ctx aws.Context, input *GetOperationsForResourceInput, opts ...aws.Option) (*GetOperationsForResourceOutput, error) {
 	req, out := c.GetOperationsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3565,7 +3564,7 @@ func (c *Lightsail) GetOperationsForResourceWithContext(ctx aws.Context, input *
 
 const opGetRegions = "GetRegions"
 
-// GetRegionsRequest generates a "aws/request.Request" representing the
+// GetRegionsRequest generates a "aws.Request" representing the
 // client's request for the GetRegions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3589,8 +3588,8 @@ const opGetRegions = "GetRegions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRegions
-func (c *Lightsail) GetRegionsRequest(input *GetRegionsInput) (req *request.Request, output *GetRegionsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetRegionsRequest(input *GetRegionsInput) (req *aws.Request, output *GetRegionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetRegions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3661,7 +3660,7 @@ func (c *Lightsail) GetRegions(input *GetRegionsInput) (*GetRegionsOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetRegionsWithContext(ctx aws.Context, input *GetRegionsInput, opts ...request.Option) (*GetRegionsOutput, error) {
+func (c *Lightsail) GetRegionsWithContext(ctx aws.Context, input *GetRegionsInput, opts ...aws.Option) (*GetRegionsOutput, error) {
 	req, out := c.GetRegionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3670,7 +3669,7 @@ func (c *Lightsail) GetRegionsWithContext(ctx aws.Context, input *GetRegionsInpu
 
 const opGetStaticIp = "GetStaticIp"
 
-// GetStaticIpRequest generates a "aws/request.Request" representing the
+// GetStaticIpRequest generates a "aws.Request" representing the
 // client's request for the GetStaticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3694,8 +3693,8 @@ const opGetStaticIp = "GetStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIp
-func (c *Lightsail) GetStaticIpRequest(input *GetStaticIpInput) (req *request.Request, output *GetStaticIpOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetStaticIpRequest(input *GetStaticIpInput) (req *aws.Request, output *GetStaticIpOutput) {
+	op := &aws.Operation{
 		Name:       opGetStaticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3765,7 +3764,7 @@ func (c *Lightsail) GetStaticIp(input *GetStaticIpInput) (*GetStaticIpOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetStaticIpWithContext(ctx aws.Context, input *GetStaticIpInput, opts ...request.Option) (*GetStaticIpOutput, error) {
+func (c *Lightsail) GetStaticIpWithContext(ctx aws.Context, input *GetStaticIpInput, opts ...aws.Option) (*GetStaticIpOutput, error) {
 	req, out := c.GetStaticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3774,7 +3773,7 @@ func (c *Lightsail) GetStaticIpWithContext(ctx aws.Context, input *GetStaticIpIn
 
 const opGetStaticIps = "GetStaticIps"
 
-// GetStaticIpsRequest generates a "aws/request.Request" representing the
+// GetStaticIpsRequest generates a "aws.Request" representing the
 // client's request for the GetStaticIps operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3798,8 +3797,8 @@ const opGetStaticIps = "GetStaticIps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIps
-func (c *Lightsail) GetStaticIpsRequest(input *GetStaticIpsInput) (req *request.Request, output *GetStaticIpsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) GetStaticIpsRequest(input *GetStaticIpsInput) (req *aws.Request, output *GetStaticIpsOutput) {
+	op := &aws.Operation{
 		Name:       opGetStaticIps,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3869,7 +3868,7 @@ func (c *Lightsail) GetStaticIps(input *GetStaticIpsInput) (*GetStaticIpsOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) GetStaticIpsWithContext(ctx aws.Context, input *GetStaticIpsInput, opts ...request.Option) (*GetStaticIpsOutput, error) {
+func (c *Lightsail) GetStaticIpsWithContext(ctx aws.Context, input *GetStaticIpsInput, opts ...aws.Option) (*GetStaticIpsOutput, error) {
 	req, out := c.GetStaticIpsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3878,7 +3877,7 @@ func (c *Lightsail) GetStaticIpsWithContext(ctx aws.Context, input *GetStaticIps
 
 const opImportKeyPair = "ImportKeyPair"
 
-// ImportKeyPairRequest generates a "aws/request.Request" representing the
+// ImportKeyPairRequest generates a "aws.Request" representing the
 // client's request for the ImportKeyPair operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3902,8 +3901,8 @@ const opImportKeyPair = "ImportKeyPair"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ImportKeyPair
-func (c *Lightsail) ImportKeyPairRequest(input *ImportKeyPairInput) (req *request.Request, output *ImportKeyPairOutput) {
-	op := &request.Operation{
+func (c *Lightsail) ImportKeyPairRequest(input *ImportKeyPairInput) (req *aws.Request, output *ImportKeyPairOutput) {
+	op := &aws.Operation{
 		Name:       opImportKeyPair,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3973,7 +3972,7 @@ func (c *Lightsail) ImportKeyPair(input *ImportKeyPairInput) (*ImportKeyPairOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) ImportKeyPairWithContext(ctx aws.Context, input *ImportKeyPairInput, opts ...request.Option) (*ImportKeyPairOutput, error) {
+func (c *Lightsail) ImportKeyPairWithContext(ctx aws.Context, input *ImportKeyPairInput, opts ...aws.Option) (*ImportKeyPairOutput, error) {
 	req, out := c.ImportKeyPairRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3982,7 +3981,7 @@ func (c *Lightsail) ImportKeyPairWithContext(ctx aws.Context, input *ImportKeyPa
 
 const opIsVpcPeered = "IsVpcPeered"
 
-// IsVpcPeeredRequest generates a "aws/request.Request" representing the
+// IsVpcPeeredRequest generates a "aws.Request" representing the
 // client's request for the IsVpcPeered operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4006,8 +4005,8 @@ const opIsVpcPeered = "IsVpcPeered"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeered
-func (c *Lightsail) IsVpcPeeredRequest(input *IsVpcPeeredInput) (req *request.Request, output *IsVpcPeeredOutput) {
-	op := &request.Operation{
+func (c *Lightsail) IsVpcPeeredRequest(input *IsVpcPeeredInput) (req *aws.Request, output *IsVpcPeeredOutput) {
+	op := &aws.Operation{
 		Name:       opIsVpcPeered,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4077,7 +4076,7 @@ func (c *Lightsail) IsVpcPeered(input *IsVpcPeeredInput) (*IsVpcPeeredOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) IsVpcPeeredWithContext(ctx aws.Context, input *IsVpcPeeredInput, opts ...request.Option) (*IsVpcPeeredOutput, error) {
+func (c *Lightsail) IsVpcPeeredWithContext(ctx aws.Context, input *IsVpcPeeredInput, opts ...aws.Option) (*IsVpcPeeredOutput, error) {
 	req, out := c.IsVpcPeeredRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4086,7 +4085,7 @@ func (c *Lightsail) IsVpcPeeredWithContext(ctx aws.Context, input *IsVpcPeeredIn
 
 const opOpenInstancePublicPorts = "OpenInstancePublicPorts"
 
-// OpenInstancePublicPortsRequest generates a "aws/request.Request" representing the
+// OpenInstancePublicPortsRequest generates a "aws.Request" representing the
 // client's request for the OpenInstancePublicPorts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4110,8 +4109,8 @@ const opOpenInstancePublicPorts = "OpenInstancePublicPorts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPorts
-func (c *Lightsail) OpenInstancePublicPortsRequest(input *OpenInstancePublicPortsInput) (req *request.Request, output *OpenInstancePublicPortsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) OpenInstancePublicPortsRequest(input *OpenInstancePublicPortsInput) (req *aws.Request, output *OpenInstancePublicPortsOutput) {
+	op := &aws.Operation{
 		Name:       opOpenInstancePublicPorts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4181,7 +4180,7 @@ func (c *Lightsail) OpenInstancePublicPorts(input *OpenInstancePublicPortsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) OpenInstancePublicPortsWithContext(ctx aws.Context, input *OpenInstancePublicPortsInput, opts ...request.Option) (*OpenInstancePublicPortsOutput, error) {
+func (c *Lightsail) OpenInstancePublicPortsWithContext(ctx aws.Context, input *OpenInstancePublicPortsInput, opts ...aws.Option) (*OpenInstancePublicPortsOutput, error) {
 	req, out := c.OpenInstancePublicPortsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4190,7 +4189,7 @@ func (c *Lightsail) OpenInstancePublicPortsWithContext(ctx aws.Context, input *O
 
 const opPeerVpc = "PeerVpc"
 
-// PeerVpcRequest generates a "aws/request.Request" representing the
+// PeerVpcRequest generates a "aws.Request" representing the
 // client's request for the PeerVpc operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4214,8 +4213,8 @@ const opPeerVpc = "PeerVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpc
-func (c *Lightsail) PeerVpcRequest(input *PeerVpcInput) (req *request.Request, output *PeerVpcOutput) {
-	op := &request.Operation{
+func (c *Lightsail) PeerVpcRequest(input *PeerVpcInput) (req *aws.Request, output *PeerVpcOutput) {
+	op := &aws.Operation{
 		Name:       opPeerVpc,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4285,7 +4284,7 @@ func (c *Lightsail) PeerVpc(input *PeerVpcInput) (*PeerVpcOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) PeerVpcWithContext(ctx aws.Context, input *PeerVpcInput, opts ...request.Option) (*PeerVpcOutput, error) {
+func (c *Lightsail) PeerVpcWithContext(ctx aws.Context, input *PeerVpcInput, opts ...aws.Option) (*PeerVpcOutput, error) {
 	req, out := c.PeerVpcRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4294,7 +4293,7 @@ func (c *Lightsail) PeerVpcWithContext(ctx aws.Context, input *PeerVpcInput, opt
 
 const opPutInstancePublicPorts = "PutInstancePublicPorts"
 
-// PutInstancePublicPortsRequest generates a "aws/request.Request" representing the
+// PutInstancePublicPortsRequest generates a "aws.Request" representing the
 // client's request for the PutInstancePublicPorts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4318,8 +4317,8 @@ const opPutInstancePublicPorts = "PutInstancePublicPorts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutInstancePublicPorts
-func (c *Lightsail) PutInstancePublicPortsRequest(input *PutInstancePublicPortsInput) (req *request.Request, output *PutInstancePublicPortsOutput) {
-	op := &request.Operation{
+func (c *Lightsail) PutInstancePublicPortsRequest(input *PutInstancePublicPortsInput) (req *aws.Request, output *PutInstancePublicPortsOutput) {
+	op := &aws.Operation{
 		Name:       opPutInstancePublicPorts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4390,7 +4389,7 @@ func (c *Lightsail) PutInstancePublicPorts(input *PutInstancePublicPortsInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) PutInstancePublicPortsWithContext(ctx aws.Context, input *PutInstancePublicPortsInput, opts ...request.Option) (*PutInstancePublicPortsOutput, error) {
+func (c *Lightsail) PutInstancePublicPortsWithContext(ctx aws.Context, input *PutInstancePublicPortsInput, opts ...aws.Option) (*PutInstancePublicPortsOutput, error) {
 	req, out := c.PutInstancePublicPortsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4399,7 +4398,7 @@ func (c *Lightsail) PutInstancePublicPortsWithContext(ctx aws.Context, input *Pu
 
 const opRebootInstance = "RebootInstance"
 
-// RebootInstanceRequest generates a "aws/request.Request" representing the
+// RebootInstanceRequest generates a "aws.Request" representing the
 // client's request for the RebootInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4423,8 +4422,8 @@ const opRebootInstance = "RebootInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootInstance
-func (c *Lightsail) RebootInstanceRequest(input *RebootInstanceInput) (req *request.Request, output *RebootInstanceOutput) {
-	op := &request.Operation{
+func (c *Lightsail) RebootInstanceRequest(input *RebootInstanceInput) (req *aws.Request, output *RebootInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opRebootInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4497,7 +4496,7 @@ func (c *Lightsail) RebootInstance(input *RebootInstanceInput) (*RebootInstanceO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) RebootInstanceWithContext(ctx aws.Context, input *RebootInstanceInput, opts ...request.Option) (*RebootInstanceOutput, error) {
+func (c *Lightsail) RebootInstanceWithContext(ctx aws.Context, input *RebootInstanceInput, opts ...aws.Option) (*RebootInstanceOutput, error) {
 	req, out := c.RebootInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4506,7 +4505,7 @@ func (c *Lightsail) RebootInstanceWithContext(ctx aws.Context, input *RebootInst
 
 const opReleaseStaticIp = "ReleaseStaticIp"
 
-// ReleaseStaticIpRequest generates a "aws/request.Request" representing the
+// ReleaseStaticIpRequest generates a "aws.Request" representing the
 // client's request for the ReleaseStaticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4530,8 +4529,8 @@ const opReleaseStaticIp = "ReleaseStaticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ReleaseStaticIp
-func (c *Lightsail) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) (req *request.Request, output *ReleaseStaticIpOutput) {
-	op := &request.Operation{
+func (c *Lightsail) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) (req *aws.Request, output *ReleaseStaticIpOutput) {
+	op := &aws.Operation{
 		Name:       opReleaseStaticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4601,7 +4600,7 @@ func (c *Lightsail) ReleaseStaticIp(input *ReleaseStaticIpInput) (*ReleaseStatic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) ReleaseStaticIpWithContext(ctx aws.Context, input *ReleaseStaticIpInput, opts ...request.Option) (*ReleaseStaticIpOutput, error) {
+func (c *Lightsail) ReleaseStaticIpWithContext(ctx aws.Context, input *ReleaseStaticIpInput, opts ...aws.Option) (*ReleaseStaticIpOutput, error) {
 	req, out := c.ReleaseStaticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4610,7 +4609,7 @@ func (c *Lightsail) ReleaseStaticIpWithContext(ctx aws.Context, input *ReleaseSt
 
 const opStartInstance = "StartInstance"
 
-// StartInstanceRequest generates a "aws/request.Request" representing the
+// StartInstanceRequest generates a "aws.Request" representing the
 // client's request for the StartInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4634,8 +4633,8 @@ const opStartInstance = "StartInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartInstance
-func (c *Lightsail) StartInstanceRequest(input *StartInstanceInput) (req *request.Request, output *StartInstanceOutput) {
-	op := &request.Operation{
+func (c *Lightsail) StartInstanceRequest(input *StartInstanceInput) (req *aws.Request, output *StartInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opStartInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4706,7 +4705,7 @@ func (c *Lightsail) StartInstance(input *StartInstanceInput) (*StartInstanceOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) StartInstanceWithContext(ctx aws.Context, input *StartInstanceInput, opts ...request.Option) (*StartInstanceOutput, error) {
+func (c *Lightsail) StartInstanceWithContext(ctx aws.Context, input *StartInstanceInput, opts ...aws.Option) (*StartInstanceOutput, error) {
 	req, out := c.StartInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4715,7 +4714,7 @@ func (c *Lightsail) StartInstanceWithContext(ctx aws.Context, input *StartInstan
 
 const opStopInstance = "StopInstance"
 
-// StopInstanceRequest generates a "aws/request.Request" representing the
+// StopInstanceRequest generates a "aws.Request" representing the
 // client's request for the StopInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4739,8 +4738,8 @@ const opStopInstance = "StopInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstance
-func (c *Lightsail) StopInstanceRequest(input *StopInstanceInput) (req *request.Request, output *StopInstanceOutput) {
-	op := &request.Operation{
+func (c *Lightsail) StopInstanceRequest(input *StopInstanceInput) (req *aws.Request, output *StopInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opStopInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4810,7 +4809,7 @@ func (c *Lightsail) StopInstance(input *StopInstanceInput) (*StopInstanceOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) StopInstanceWithContext(ctx aws.Context, input *StopInstanceInput, opts ...request.Option) (*StopInstanceOutput, error) {
+func (c *Lightsail) StopInstanceWithContext(ctx aws.Context, input *StopInstanceInput, opts ...aws.Option) (*StopInstanceOutput, error) {
 	req, out := c.StopInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4819,7 +4818,7 @@ func (c *Lightsail) StopInstanceWithContext(ctx aws.Context, input *StopInstance
 
 const opUnpeerVpc = "UnpeerVpc"
 
-// UnpeerVpcRequest generates a "aws/request.Request" representing the
+// UnpeerVpcRequest generates a "aws.Request" representing the
 // client's request for the UnpeerVpc operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4843,8 +4842,8 @@ const opUnpeerVpc = "UnpeerVpc"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpc
-func (c *Lightsail) UnpeerVpcRequest(input *UnpeerVpcInput) (req *request.Request, output *UnpeerVpcOutput) {
-	op := &request.Operation{
+func (c *Lightsail) UnpeerVpcRequest(input *UnpeerVpcInput) (req *aws.Request, output *UnpeerVpcOutput) {
+	op := &aws.Operation{
 		Name:       opUnpeerVpc,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4914,7 +4913,7 @@ func (c *Lightsail) UnpeerVpc(input *UnpeerVpcInput) (*UnpeerVpcOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) UnpeerVpcWithContext(ctx aws.Context, input *UnpeerVpcInput, opts ...request.Option) (*UnpeerVpcOutput, error) {
+func (c *Lightsail) UnpeerVpcWithContext(ctx aws.Context, input *UnpeerVpcInput, opts ...aws.Option) (*UnpeerVpcOutput, error) {
 	req, out := c.UnpeerVpcRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4923,7 +4922,7 @@ func (c *Lightsail) UnpeerVpcWithContext(ctx aws.Context, input *UnpeerVpcInput,
 
 const opUpdateDomainEntry = "UpdateDomainEntry"
 
-// UpdateDomainEntryRequest generates a "aws/request.Request" representing the
+// UpdateDomainEntryRequest generates a "aws.Request" representing the
 // client's request for the UpdateDomainEntry operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4947,8 +4946,8 @@ const opUpdateDomainEntry = "UpdateDomainEntry"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDomainEntry
-func (c *Lightsail) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) (req *request.Request, output *UpdateDomainEntryOutput) {
-	op := &request.Operation{
+func (c *Lightsail) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) (req *aws.Request, output *UpdateDomainEntryOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDomainEntry,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5018,7 +5017,7 @@ func (c *Lightsail) UpdateDomainEntry(input *UpdateDomainEntryInput) (*UpdateDom
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lightsail) UpdateDomainEntryWithContext(ctx aws.Context, input *UpdateDomainEntryInput, opts ...request.Option) (*UpdateDomainEntryOutput, error) {
+func (c *Lightsail) UpdateDomainEntryWithContext(ctx aws.Context, input *UpdateDomainEntryInput, opts ...aws.Option) (*UpdateDomainEntryOutput, error) {
 	req, out := c.UpdateDomainEntryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5047,9 +5046,9 @@ func (s AllocateStaticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocateStaticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AllocateStaticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AllocateStaticIpInput"}
 	if s.StaticIpName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StaticIpName"))
+		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5116,12 +5115,12 @@ func (s AttachStaticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachStaticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachStaticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachStaticIpInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 	if s.StaticIpName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StaticIpName"))
+		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5453,12 +5452,12 @@ func (s CloseInstancePublicPortsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloseInstancePublicPortsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloseInstancePublicPortsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloseInstancePublicPortsInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 	if s.PortInfo == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortInfo"))
+		invalidParams.Add(aws.NewErrParamRequired("PortInfo"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5532,12 +5531,12 @@ func (s CreateDomainEntryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainEntryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDomainEntryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainEntryInput"}
 	if s.DomainEntry == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainEntry"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainEntry"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5609,9 +5608,9 @@ func (s CreateDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5678,12 +5677,12 @@ func (s CreateInstanceSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstanceSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateInstanceSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceSnapshotInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 	if s.InstanceSnapshotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceSnapshotName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5785,18 +5784,18 @@ func (s CreateInstancesFromSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstancesFromSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateInstancesFromSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateInstancesFromSnapshotInput"}
 	if s.AvailabilityZone == nil {
-		invalidParams.Add(request.NewErrParamRequired("AvailabilityZone"))
+		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
 	}
 	if s.BundleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BundleId"))
+		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
 	if s.InstanceNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceNames"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
 	if s.InstanceSnapshotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceSnapshotName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5929,18 +5928,18 @@ func (s CreateInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateInstancesInput"}
 	if s.AvailabilityZone == nil {
-		invalidParams.Add(request.NewErrParamRequired("AvailabilityZone"))
+		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
 	}
 	if s.BlueprintId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BlueprintId"))
+		invalidParams.Add(aws.NewErrParamRequired("BlueprintId"))
 	}
 	if s.BundleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BundleId"))
+		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
 	if s.InstanceNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceNames"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6038,9 +6037,9 @@ func (s CreateKeyPairInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateKeyPairInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateKeyPairInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateKeyPairInput"}
 	if s.KeyPairName == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyPairName"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6135,12 +6134,12 @@ func (s DeleteDomainEntryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainEntryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDomainEntryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainEntryInput"}
 	if s.DomainEntry == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainEntry"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainEntry"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6208,9 +6207,9 @@ func (s DeleteDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6272,9 +6271,9 @@ func (s DeleteInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6336,9 +6335,9 @@ func (s DeleteInstanceSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInstanceSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteInstanceSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceSnapshotInput"}
 	if s.InstanceSnapshotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceSnapshotName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6400,9 +6399,9 @@ func (s DeleteKeyPairInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteKeyPairInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteKeyPairInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteKeyPairInput"}
 	if s.KeyPairName == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyPairName"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6464,9 +6463,9 @@ func (s DetachStaticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachStaticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachStaticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachStaticIpInput"}
 	if s.StaticIpName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StaticIpName"))
+		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7060,9 +7059,9 @@ func (s GetDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7187,9 +7186,9 @@ func (s GetInstanceAccessDetailsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceAccessDetailsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInstanceAccessDetailsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceAccessDetailsInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7257,9 +7256,9 @@ func (s GetInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7326,30 +7325,30 @@ func (s GetInstanceMetricDataInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceMetricDataInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInstanceMetricDataInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceMetricDataInput"}
 	if s.EndTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndTime"))
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.Period == nil {
-		invalidParams.Add(request.NewErrParamRequired("Period"))
+		invalidParams.Add(aws.NewErrParamRequired("Period"))
 	}
 	if s.Period != nil && *s.Period < 60 {
-		invalidParams.Add(request.NewErrParamMinValue("Period", 60))
+		invalidParams.Add(aws.NewErrParamMinValue("Period", 60))
 	}
 	if s.StartTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartTime"))
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
 	if s.Statistics == nil {
-		invalidParams.Add(request.NewErrParamRequired("Statistics"))
+		invalidParams.Add(aws.NewErrParamRequired("Statistics"))
 	}
 	if s.Unit == nil {
-		invalidParams.Add(request.NewErrParamRequired("Unit"))
+		invalidParams.Add(aws.NewErrParamRequired("Unit"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7480,9 +7479,9 @@ func (s GetInstancePortStatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstancePortStatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInstancePortStatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInstancePortStatesInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7543,9 +7542,9 @@ func (s GetInstanceSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInstanceSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceSnapshotInput"}
 	if s.InstanceSnapshotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceSnapshotName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7667,9 +7666,9 @@ func (s GetInstanceStateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceStateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInstanceStateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceStateInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7789,9 +7788,9 @@ func (s GetKeyPairInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetKeyPairInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetKeyPairInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetKeyPairInput"}
 	if s.KeyPairName == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyPairName"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7911,9 +7910,9 @@ func (s GetOperationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOperationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetOperationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetOperationInput"}
 	if s.OperationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OperationId"))
+		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7979,9 +7978,9 @@ func (s GetOperationsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOperationsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetOperationsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetOperationsForResourceInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8182,9 +8181,9 @@ func (s GetStaticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStaticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetStaticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetStaticIpInput"}
 	if s.StaticIpName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StaticIpName"))
+		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8311,12 +8310,12 @@ func (s ImportKeyPairInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportKeyPairInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ImportKeyPairInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ImportKeyPairInput"}
 	if s.KeyPairName == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyPairName"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
 	}
 	if s.PublicKeyBase64 == nil {
-		invalidParams.Add(request.NewErrParamRequired("PublicKeyBase64"))
+		invalidParams.Add(aws.NewErrParamRequired("PublicKeyBase64"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9301,12 +9300,12 @@ func (s OpenInstancePublicPortsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OpenInstancePublicPortsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "OpenInstancePublicPortsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "OpenInstancePublicPortsInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 	if s.PortInfo == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortInfo"))
+		invalidParams.Add(aws.NewErrParamRequired("PortInfo"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9585,12 +9584,12 @@ func (s PutInstancePublicPortsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutInstancePublicPortsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutInstancePublicPortsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutInstancePublicPortsInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 	if s.PortInfos == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortInfos"))
+		invalidParams.Add(aws.NewErrParamRequired("PortInfos"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9657,9 +9656,9 @@ func (s RebootInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebootInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebootInstanceInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9782,9 +9781,9 @@ func (s ReleaseStaticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReleaseStaticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReleaseStaticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReleaseStaticIpInput"}
 	if s.StaticIpName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StaticIpName"))
+		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9879,9 +9878,9 @@ func (s StartInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartInstanceInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10041,9 +10040,9 @@ func (s StopInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopInstanceInput"}
 	if s.InstanceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceName"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10148,12 +10147,12 @@ func (s UpdateDomainEntryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainEntryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDomainEntryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainEntryInput"}
 	if s.DomainEntry == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainEntry"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainEntry"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {

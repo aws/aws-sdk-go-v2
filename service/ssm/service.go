@@ -4,9 +4,6 @@ package ssm
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
@@ -18,14 +15,14 @@ import (
 // SSM methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type SSM struct {
-	*client.Client
+	*aws.Client
 }
 
 // Used for custom client initialization logic
-var initClient func(*client.Client)
+var initClient func(*aws.Client)
 
 // Used for custom request initialization logic
-var initRequest func(*request.Request)
+var initRequest func(*aws.Request)
 
 // Service information constants
 const (
@@ -33,36 +30,31 @@ const (
 	EndpointsID = ServiceName // Service ID for Regions and Endpoints metadata.
 )
 
-// New creates a new instance of the SSM client with a session.
+// New creates a new instance of the SSM client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a SSM client from just a session.
-//     svc := ssm.New(mySession)
+//     // Create a SSM client from just a config.
+//     svc := ssm.New(myConfig)
 //
 //     // Create a SSM client with additional configuration
-//     svc := ssm.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func New(p client.ConfigProvider, cfgs ...*aws.Config) *SSM {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := ssm.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func New(config aws.Config) *SSM {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *SSM {
 	svc := &SSM{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2014-11-06",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "AmazonSSM",
 			},
-			handlers,
 		),
 	}
 
@@ -83,7 +75,7 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 
 // newRequest creates a new request for a SSM operation and runs any
 // custom request initialization.
-func (c *SSM) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *SSM) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	// Run custom request initialization if present

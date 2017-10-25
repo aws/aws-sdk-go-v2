@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opActivatePipeline = "ActivatePipeline"
 
-// ActivatePipelineRequest generates a "aws/request.Request" representing the
+// ActivatePipelineRequest generates a "aws.Request" representing the
 // client's request for the ActivatePipeline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opActivatePipeline = "ActivatePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipeline
-func (c *DataPipeline) ActivatePipelineRequest(input *ActivatePipelineInput) (req *request.Request, output *ActivatePipelineOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) ActivatePipelineRequest(input *ActivatePipelineInput) (req *aws.Request, output *ActivatePipelineOutput) {
+	op := &aws.Operation{
 		Name:       opActivatePipeline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -104,7 +103,7 @@ func (c *DataPipeline) ActivatePipeline(input *ActivatePipelineInput) (*Activate
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) ActivatePipelineWithContext(ctx aws.Context, input *ActivatePipelineInput, opts ...request.Option) (*ActivatePipelineOutput, error) {
+func (c *DataPipeline) ActivatePipelineWithContext(ctx aws.Context, input *ActivatePipelineInput, opts ...aws.Option) (*ActivatePipelineOutput, error) {
 	req, out := c.ActivatePipelineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -113,7 +112,7 @@ func (c *DataPipeline) ActivatePipelineWithContext(ctx aws.Context, input *Activ
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws/request.Request" representing the
+// AddTagsRequest generates a "aws.Request" representing the
 // client's request for the AddTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -137,8 +136,8 @@ const opAddTags = "AddTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/AddTags
-func (c *DataPipeline) AddTagsRequest(input *AddTagsInput) (req *request.Request, output *AddTagsOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -195,7 +194,7 @@ func (c *DataPipeline) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...request.Option) (*AddTagsOutput, error) {
+func (c *DataPipeline) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
 	req, out := c.AddTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -204,7 +203,7 @@ func (c *DataPipeline) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, 
 
 const opCreatePipeline = "CreatePipeline"
 
-// CreatePipelineRequest generates a "aws/request.Request" representing the
+// CreatePipelineRequest generates a "aws.Request" representing the
 // client's request for the CreatePipeline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -228,8 +227,8 @@ const opCreatePipeline = "CreatePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/CreatePipeline
-func (c *DataPipeline) CreatePipelineRequest(input *CreatePipelineInput) (req *request.Request, output *CreatePipelineOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) CreatePipelineRequest(input *CreatePipelineInput) (req *aws.Request, output *CreatePipelineOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePipeline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -280,7 +279,7 @@ func (c *DataPipeline) CreatePipeline(input *CreatePipelineInput) (*CreatePipeli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) CreatePipelineWithContext(ctx aws.Context, input *CreatePipelineInput, opts ...request.Option) (*CreatePipelineOutput, error) {
+func (c *DataPipeline) CreatePipelineWithContext(ctx aws.Context, input *CreatePipelineInput, opts ...aws.Option) (*CreatePipelineOutput, error) {
 	req, out := c.CreatePipelineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -289,7 +288,7 @@ func (c *DataPipeline) CreatePipelineWithContext(ctx aws.Context, input *CreateP
 
 const opDeactivatePipeline = "DeactivatePipeline"
 
-// DeactivatePipelineRequest generates a "aws/request.Request" representing the
+// DeactivatePipelineRequest generates a "aws.Request" representing the
 // client's request for the DeactivatePipeline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -313,8 +312,8 @@ const opDeactivatePipeline = "DeactivatePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipeline
-func (c *DataPipeline) DeactivatePipelineRequest(input *DeactivatePipelineInput) (req *request.Request, output *DeactivatePipelineOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) DeactivatePipelineRequest(input *DeactivatePipelineInput) (req *aws.Request, output *DeactivatePipelineOutput) {
+	op := &aws.Operation{
 		Name:       opDeactivatePipeline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -376,7 +375,7 @@ func (c *DataPipeline) DeactivatePipeline(input *DeactivatePipelineInput) (*Deac
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) DeactivatePipelineWithContext(ctx aws.Context, input *DeactivatePipelineInput, opts ...request.Option) (*DeactivatePipelineOutput, error) {
+func (c *DataPipeline) DeactivatePipelineWithContext(ctx aws.Context, input *DeactivatePipelineInput, opts ...aws.Option) (*DeactivatePipelineOutput, error) {
 	req, out := c.DeactivatePipelineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -385,7 +384,7 @@ func (c *DataPipeline) DeactivatePipelineWithContext(ctx aws.Context, input *Dea
 
 const opDeletePipeline = "DeletePipeline"
 
-// DeletePipelineRequest generates a "aws/request.Request" representing the
+// DeletePipelineRequest generates a "aws.Request" representing the
 // client's request for the DeletePipeline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -409,8 +408,8 @@ const opDeletePipeline = "DeletePipeline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeletePipeline
-func (c *DataPipeline) DeletePipelineRequest(input *DeletePipelineInput) (req *request.Request, output *DeletePipelineOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) DeletePipelineRequest(input *DeletePipelineInput) (req *aws.Request, output *DeletePipelineOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePipeline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -473,7 +472,7 @@ func (c *DataPipeline) DeletePipeline(input *DeletePipelineInput) (*DeletePipeli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) DeletePipelineWithContext(ctx aws.Context, input *DeletePipelineInput, opts ...request.Option) (*DeletePipelineOutput, error) {
+func (c *DataPipeline) DeletePipelineWithContext(ctx aws.Context, input *DeletePipelineInput, opts ...aws.Option) (*DeletePipelineOutput, error) {
 	req, out := c.DeletePipelineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -482,7 +481,7 @@ func (c *DataPipeline) DeletePipelineWithContext(ctx aws.Context, input *DeleteP
 
 const opDescribeObjects = "DescribeObjects"
 
-// DescribeObjectsRequest generates a "aws/request.Request" representing the
+// DescribeObjectsRequest generates a "aws.Request" representing the
 // client's request for the DescribeObjects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -506,12 +505,12 @@ const opDescribeObjects = "DescribeObjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribeObjects
-func (c *DataPipeline) DescribeObjectsRequest(input *DescribeObjectsInput) (req *request.Request, output *DescribeObjectsOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) DescribeObjectsRequest(input *DescribeObjectsInput) (req *aws.Request, output *DescribeObjectsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeObjects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"marker"},
 			OutputTokens:    []string{"marker"},
 			LimitToken:      "",
@@ -572,7 +571,7 @@ func (c *DataPipeline) DescribeObjects(input *DescribeObjectsInput) (*DescribeOb
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) DescribeObjectsWithContext(ctx aws.Context, input *DescribeObjectsInput, opts ...request.Option) (*DescribeObjectsOutput, error) {
+func (c *DataPipeline) DescribeObjectsWithContext(ctx aws.Context, input *DescribeObjectsInput, opts ...aws.Option) (*DescribeObjectsOutput, error) {
 	req, out := c.DescribeObjectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -607,9 +606,9 @@ func (c *DataPipeline) DescribeObjectsPages(input *DescribeObjectsInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) DescribeObjectsPagesWithContext(ctx aws.Context, input *DescribeObjectsInput, fn func(*DescribeObjectsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DataPipeline) DescribeObjectsPagesWithContext(ctx aws.Context, input *DescribeObjectsInput, fn func(*DescribeObjectsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeObjectsInput
 			if input != nil {
 				tmp := *input
@@ -631,7 +630,7 @@ func (c *DataPipeline) DescribeObjectsPagesWithContext(ctx aws.Context, input *D
 
 const opDescribePipelines = "DescribePipelines"
 
-// DescribePipelinesRequest generates a "aws/request.Request" representing the
+// DescribePipelinesRequest generates a "aws.Request" representing the
 // client's request for the DescribePipelines operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -655,8 +654,8 @@ const opDescribePipelines = "DescribePipelines"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelines
-func (c *DataPipeline) DescribePipelinesRequest(input *DescribePipelinesInput) (req *request.Request, output *DescribePipelinesOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) DescribePipelinesRequest(input *DescribePipelinesInput) (req *aws.Request, output *DescribePipelinesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePipelines,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -721,7 +720,7 @@ func (c *DataPipeline) DescribePipelines(input *DescribePipelinesInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) DescribePipelinesWithContext(ctx aws.Context, input *DescribePipelinesInput, opts ...request.Option) (*DescribePipelinesOutput, error) {
+func (c *DataPipeline) DescribePipelinesWithContext(ctx aws.Context, input *DescribePipelinesInput, opts ...aws.Option) (*DescribePipelinesOutput, error) {
 	req, out := c.DescribePipelinesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -730,7 +729,7 @@ func (c *DataPipeline) DescribePipelinesWithContext(ctx aws.Context, input *Desc
 
 const opEvaluateExpression = "EvaluateExpression"
 
-// EvaluateExpressionRequest generates a "aws/request.Request" representing the
+// EvaluateExpressionRequest generates a "aws.Request" representing the
 // client's request for the EvaluateExpression operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -754,8 +753,8 @@ const opEvaluateExpression = "EvaluateExpression"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/EvaluateExpression
-func (c *DataPipeline) EvaluateExpressionRequest(input *EvaluateExpressionInput) (req *request.Request, output *EvaluateExpressionOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) EvaluateExpressionRequest(input *EvaluateExpressionInput) (req *aws.Request, output *EvaluateExpressionOutput) {
+	op := &aws.Operation{
 		Name:       opEvaluateExpression,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -817,7 +816,7 @@ func (c *DataPipeline) EvaluateExpression(input *EvaluateExpressionInput) (*Eval
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) EvaluateExpressionWithContext(ctx aws.Context, input *EvaluateExpressionInput, opts ...request.Option) (*EvaluateExpressionOutput, error) {
+func (c *DataPipeline) EvaluateExpressionWithContext(ctx aws.Context, input *EvaluateExpressionInput, opts ...aws.Option) (*EvaluateExpressionOutput, error) {
 	req, out := c.EvaluateExpressionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -826,7 +825,7 @@ func (c *DataPipeline) EvaluateExpressionWithContext(ctx aws.Context, input *Eva
 
 const opGetPipelineDefinition = "GetPipelineDefinition"
 
-// GetPipelineDefinitionRequest generates a "aws/request.Request" representing the
+// GetPipelineDefinitionRequest generates a "aws.Request" representing the
 // client's request for the GetPipelineDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -850,8 +849,8 @@ const opGetPipelineDefinition = "GetPipelineDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/GetPipelineDefinition
-func (c *DataPipeline) GetPipelineDefinitionRequest(input *GetPipelineDefinitionInput) (req *request.Request, output *GetPipelineDefinitionOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) GetPipelineDefinitionRequest(input *GetPipelineDefinitionInput) (req *aws.Request, output *GetPipelineDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opGetPipelineDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -909,7 +908,7 @@ func (c *DataPipeline) GetPipelineDefinition(input *GetPipelineDefinitionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) GetPipelineDefinitionWithContext(ctx aws.Context, input *GetPipelineDefinitionInput, opts ...request.Option) (*GetPipelineDefinitionOutput, error) {
+func (c *DataPipeline) GetPipelineDefinitionWithContext(ctx aws.Context, input *GetPipelineDefinitionInput, opts ...aws.Option) (*GetPipelineDefinitionOutput, error) {
 	req, out := c.GetPipelineDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -918,7 +917,7 @@ func (c *DataPipeline) GetPipelineDefinitionWithContext(ctx aws.Context, input *
 
 const opListPipelines = "ListPipelines"
 
-// ListPipelinesRequest generates a "aws/request.Request" representing the
+// ListPipelinesRequest generates a "aws.Request" representing the
 // client's request for the ListPipelines operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -942,12 +941,12 @@ const opListPipelines = "ListPipelines"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ListPipelines
-func (c *DataPipeline) ListPipelinesRequest(input *ListPipelinesInput) (req *request.Request, output *ListPipelinesOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) ListPipelinesRequest(input *ListPipelinesInput) (req *aws.Request, output *ListPipelinesOutput) {
+	op := &aws.Operation{
 		Name:       opListPipelines,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"marker"},
 			OutputTokens:    []string{"marker"},
 			LimitToken:      "",
@@ -1000,7 +999,7 @@ func (c *DataPipeline) ListPipelines(input *ListPipelinesInput) (*ListPipelinesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) ListPipelinesWithContext(ctx aws.Context, input *ListPipelinesInput, opts ...request.Option) (*ListPipelinesOutput, error) {
+func (c *DataPipeline) ListPipelinesWithContext(ctx aws.Context, input *ListPipelinesInput, opts ...aws.Option) (*ListPipelinesOutput, error) {
 	req, out := c.ListPipelinesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1035,9 +1034,9 @@ func (c *DataPipeline) ListPipelinesPages(input *ListPipelinesInput, fn func(*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) ListPipelinesPagesWithContext(ctx aws.Context, input *ListPipelinesInput, fn func(*ListPipelinesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DataPipeline) ListPipelinesPagesWithContext(ctx aws.Context, input *ListPipelinesInput, fn func(*ListPipelinesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPipelinesInput
 			if input != nil {
 				tmp := *input
@@ -1059,7 +1058,7 @@ func (c *DataPipeline) ListPipelinesPagesWithContext(ctx aws.Context, input *Lis
 
 const opPollForTask = "PollForTask"
 
-// PollForTaskRequest generates a "aws/request.Request" representing the
+// PollForTaskRequest generates a "aws.Request" representing the
 // client's request for the PollForTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1083,8 +1082,8 @@ const opPollForTask = "PollForTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PollForTask
-func (c *DataPipeline) PollForTaskRequest(input *PollForTaskInput) (req *request.Request, output *PollForTaskOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) PollForTaskRequest(input *PollForTaskInput) (req *aws.Request, output *PollForTaskOutput) {
+	op := &aws.Operation{
 		Name:       opPollForTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1150,7 +1149,7 @@ func (c *DataPipeline) PollForTask(input *PollForTaskInput) (*PollForTaskOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) PollForTaskWithContext(ctx aws.Context, input *PollForTaskInput, opts ...request.Option) (*PollForTaskOutput, error) {
+func (c *DataPipeline) PollForTaskWithContext(ctx aws.Context, input *PollForTaskInput, opts ...aws.Option) (*PollForTaskOutput, error) {
 	req, out := c.PollForTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1159,7 +1158,7 @@ func (c *DataPipeline) PollForTaskWithContext(ctx aws.Context, input *PollForTas
 
 const opPutPipelineDefinition = "PutPipelineDefinition"
 
-// PutPipelineDefinitionRequest generates a "aws/request.Request" representing the
+// PutPipelineDefinitionRequest generates a "aws.Request" representing the
 // client's request for the PutPipelineDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1183,8 +1182,8 @@ const opPutPipelineDefinition = "PutPipelineDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PutPipelineDefinition
-func (c *DataPipeline) PutPipelineDefinitionRequest(input *PutPipelineDefinitionInput) (req *request.Request, output *PutPipelineDefinitionOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) PutPipelineDefinitionRequest(input *PutPipelineDefinitionInput) (req *aws.Request, output *PutPipelineDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opPutPipelineDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1254,7 +1253,7 @@ func (c *DataPipeline) PutPipelineDefinition(input *PutPipelineDefinitionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) PutPipelineDefinitionWithContext(ctx aws.Context, input *PutPipelineDefinitionInput, opts ...request.Option) (*PutPipelineDefinitionOutput, error) {
+func (c *DataPipeline) PutPipelineDefinitionWithContext(ctx aws.Context, input *PutPipelineDefinitionInput, opts ...aws.Option) (*PutPipelineDefinitionOutput, error) {
 	req, out := c.PutPipelineDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1263,7 +1262,7 @@ func (c *DataPipeline) PutPipelineDefinitionWithContext(ctx aws.Context, input *
 
 const opQueryObjects = "QueryObjects"
 
-// QueryObjectsRequest generates a "aws/request.Request" representing the
+// QueryObjectsRequest generates a "aws.Request" representing the
 // client's request for the QueryObjects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1287,12 +1286,12 @@ const opQueryObjects = "QueryObjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/QueryObjects
-func (c *DataPipeline) QueryObjectsRequest(input *QueryObjectsInput) (req *request.Request, output *QueryObjectsOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) QueryObjectsRequest(input *QueryObjectsInput) (req *aws.Request, output *QueryObjectsOutput) {
+	op := &aws.Operation{
 		Name:       opQueryObjects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"marker"},
 			OutputTokens:    []string{"marker"},
 			LimitToken:      "limit",
@@ -1352,7 +1351,7 @@ func (c *DataPipeline) QueryObjects(input *QueryObjectsInput) (*QueryObjectsOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) QueryObjectsWithContext(ctx aws.Context, input *QueryObjectsInput, opts ...request.Option) (*QueryObjectsOutput, error) {
+func (c *DataPipeline) QueryObjectsWithContext(ctx aws.Context, input *QueryObjectsInput, opts ...aws.Option) (*QueryObjectsOutput, error) {
 	req, out := c.QueryObjectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1387,9 +1386,9 @@ func (c *DataPipeline) QueryObjectsPages(input *QueryObjectsInput, fn func(*Quer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) QueryObjectsPagesWithContext(ctx aws.Context, input *QueryObjectsInput, fn func(*QueryObjectsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DataPipeline) QueryObjectsPagesWithContext(ctx aws.Context, input *QueryObjectsInput, fn func(*QueryObjectsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *QueryObjectsInput
 			if input != nil {
 				tmp := *input
@@ -1411,7 +1410,7 @@ func (c *DataPipeline) QueryObjectsPagesWithContext(ctx aws.Context, input *Quer
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws/request.Request" representing the
+// RemoveTagsRequest generates a "aws.Request" representing the
 // client's request for the RemoveTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1435,8 +1434,8 @@ const opRemoveTags = "RemoveTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/RemoveTags
-func (c *DataPipeline) RemoveTagsRequest(input *RemoveTagsInput) (req *request.Request, output *RemoveTagsOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1493,7 +1492,7 @@ func (c *DataPipeline) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...request.Option) (*RemoveTagsOutput, error) {
+func (c *DataPipeline) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
 	req, out := c.RemoveTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1502,7 +1501,7 @@ func (c *DataPipeline) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsI
 
 const opReportTaskProgress = "ReportTaskProgress"
 
-// ReportTaskProgressRequest generates a "aws/request.Request" representing the
+// ReportTaskProgressRequest generates a "aws.Request" representing the
 // client's request for the ReportTaskProgress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1526,8 +1525,8 @@ const opReportTaskProgress = "ReportTaskProgress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskProgress
-func (c *DataPipeline) ReportTaskProgressRequest(input *ReportTaskProgressInput) (req *request.Request, output *ReportTaskProgressOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) ReportTaskProgressRequest(input *ReportTaskProgressInput) (req *aws.Request, output *ReportTaskProgressOutput) {
+	op := &aws.Operation{
 		Name:       opReportTaskProgress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1598,7 +1597,7 @@ func (c *DataPipeline) ReportTaskProgress(input *ReportTaskProgressInput) (*Repo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) ReportTaskProgressWithContext(ctx aws.Context, input *ReportTaskProgressInput, opts ...request.Option) (*ReportTaskProgressOutput, error) {
+func (c *DataPipeline) ReportTaskProgressWithContext(ctx aws.Context, input *ReportTaskProgressInput, opts ...aws.Option) (*ReportTaskProgressOutput, error) {
 	req, out := c.ReportTaskProgressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1607,7 +1606,7 @@ func (c *DataPipeline) ReportTaskProgressWithContext(ctx aws.Context, input *Rep
 
 const opReportTaskRunnerHeartbeat = "ReportTaskRunnerHeartbeat"
 
-// ReportTaskRunnerHeartbeatRequest generates a "aws/request.Request" representing the
+// ReportTaskRunnerHeartbeatRequest generates a "aws.Request" representing the
 // client's request for the ReportTaskRunnerHeartbeat operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1631,8 +1630,8 @@ const opReportTaskRunnerHeartbeat = "ReportTaskRunnerHeartbeat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskRunnerHeartbeat
-func (c *DataPipeline) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerHeartbeatInput) (req *request.Request, output *ReportTaskRunnerHeartbeatOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerHeartbeatInput) (req *aws.Request, output *ReportTaskRunnerHeartbeatOutput) {
+	op := &aws.Operation{
 		Name:       opReportTaskRunnerHeartbeat,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1686,7 +1685,7 @@ func (c *DataPipeline) ReportTaskRunnerHeartbeat(input *ReportTaskRunnerHeartbea
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) ReportTaskRunnerHeartbeatWithContext(ctx aws.Context, input *ReportTaskRunnerHeartbeatInput, opts ...request.Option) (*ReportTaskRunnerHeartbeatOutput, error) {
+func (c *DataPipeline) ReportTaskRunnerHeartbeatWithContext(ctx aws.Context, input *ReportTaskRunnerHeartbeatInput, opts ...aws.Option) (*ReportTaskRunnerHeartbeatOutput, error) {
 	req, out := c.ReportTaskRunnerHeartbeatRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1695,7 +1694,7 @@ func (c *DataPipeline) ReportTaskRunnerHeartbeatWithContext(ctx aws.Context, inp
 
 const opSetStatus = "SetStatus"
 
-// SetStatusRequest generates a "aws/request.Request" representing the
+// SetStatusRequest generates a "aws.Request" representing the
 // client's request for the SetStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1719,8 +1718,8 @@ const opSetStatus = "SetStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetStatus
-func (c *DataPipeline) SetStatusRequest(input *SetStatusInput) (req *request.Request, output *SetStatusOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) SetStatusRequest(input *SetStatusInput) (req *aws.Request, output *SetStatusOutput) {
+	op := &aws.Operation{
 		Name:       opSetStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1783,7 +1782,7 @@ func (c *DataPipeline) SetStatus(input *SetStatusInput) (*SetStatusOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) SetStatusWithContext(ctx aws.Context, input *SetStatusInput, opts ...request.Option) (*SetStatusOutput, error) {
+func (c *DataPipeline) SetStatusWithContext(ctx aws.Context, input *SetStatusInput, opts ...aws.Option) (*SetStatusOutput, error) {
 	req, out := c.SetStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1792,7 +1791,7 @@ func (c *DataPipeline) SetStatusWithContext(ctx aws.Context, input *SetStatusInp
 
 const opSetTaskStatus = "SetTaskStatus"
 
-// SetTaskStatusRequest generates a "aws/request.Request" representing the
+// SetTaskStatusRequest generates a "aws.Request" representing the
 // client's request for the SetTaskStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1816,8 +1815,8 @@ const opSetTaskStatus = "SetTaskStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatus
-func (c *DataPipeline) SetTaskStatusRequest(input *SetTaskStatusInput) (req *request.Request, output *SetTaskStatusOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) SetTaskStatusRequest(input *SetTaskStatusInput) (req *aws.Request, output *SetTaskStatusOutput) {
+	op := &aws.Operation{
 		Name:       opSetTaskStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1881,7 +1880,7 @@ func (c *DataPipeline) SetTaskStatus(input *SetTaskStatusInput) (*SetTaskStatusO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) SetTaskStatusWithContext(ctx aws.Context, input *SetTaskStatusInput, opts ...request.Option) (*SetTaskStatusOutput, error) {
+func (c *DataPipeline) SetTaskStatusWithContext(ctx aws.Context, input *SetTaskStatusInput, opts ...aws.Option) (*SetTaskStatusOutput, error) {
 	req, out := c.SetTaskStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1890,7 +1889,7 @@ func (c *DataPipeline) SetTaskStatusWithContext(ctx aws.Context, input *SetTaskS
 
 const opValidatePipelineDefinition = "ValidatePipelineDefinition"
 
-// ValidatePipelineDefinitionRequest generates a "aws/request.Request" representing the
+// ValidatePipelineDefinitionRequest generates a "aws.Request" representing the
 // client's request for the ValidatePipelineDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1914,8 +1913,8 @@ const opValidatePipelineDefinition = "ValidatePipelineDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidatePipelineDefinition
-func (c *DataPipeline) ValidatePipelineDefinitionRequest(input *ValidatePipelineDefinitionInput) (req *request.Request, output *ValidatePipelineDefinitionOutput) {
-	op := &request.Operation{
+func (c *DataPipeline) ValidatePipelineDefinitionRequest(input *ValidatePipelineDefinitionInput) (req *aws.Request, output *ValidatePipelineDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opValidatePipelineDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1973,7 +1972,7 @@ func (c *DataPipeline) ValidatePipelineDefinition(input *ValidatePipelineDefinit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DataPipeline) ValidatePipelineDefinitionWithContext(ctx aws.Context, input *ValidatePipelineDefinitionInput, opts ...request.Option) (*ValidatePipelineDefinitionOutput, error) {
+func (c *DataPipeline) ValidatePipelineDefinitionWithContext(ctx aws.Context, input *ValidatePipelineDefinitionInput, opts ...aws.Option) (*ValidatePipelineDefinitionOutput, error) {
 	req, out := c.ValidatePipelineDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2010,12 +2009,12 @@ func (s ActivatePipelineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActivatePipelineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ActivatePipelineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ActivatePipelineInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 	if s.ParameterValues != nil {
 		for i, v := range s.ParameterValues {
@@ -2023,7 +2022,7 @@ func (s *ActivatePipelineInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2096,15 +2095,15 @@ func (s AddTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -2112,7 +2111,7 @@ func (s *AddTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2200,18 +2199,18 @@ func (s CreatePipelineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePipelineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePipelineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePipelineInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.UniqueId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UniqueId"))
+		invalidParams.Add(aws.NewErrParamRequired("UniqueId"))
 	}
 	if s.UniqueId != nil && len(*s.UniqueId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UniqueId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UniqueId", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -2219,7 +2218,7 @@ func (s *CreatePipelineInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2310,12 +2309,12 @@ func (s DeactivatePipelineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeactivatePipelineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeactivatePipelineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeactivatePipelineInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2375,12 +2374,12 @@ func (s DeletePipelineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePipelineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePipelineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePipelineInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2449,15 +2448,15 @@ func (s DescribeObjectsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeObjectsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeObjectsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeObjectsInput"}
 	if s.ObjectIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectIds"))
 	}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2561,9 +2560,9 @@ func (s DescribePipelinesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePipelinesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribePipelinesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribePipelinesInput"}
 	if s.PipelineIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineIds"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2638,21 +2637,21 @@ func (s EvaluateExpressionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EvaluateExpressionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EvaluateExpressionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EvaluateExpressionInput"}
 	if s.Expression == nil {
-		invalidParams.Add(request.NewErrParamRequired("Expression"))
+		invalidParams.Add(aws.NewErrParamRequired("Expression"))
 	}
 	if s.ObjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectId"))
 	}
 	if s.ObjectId != nil && len(*s.ObjectId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ObjectId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ObjectId", 1))
 	}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2737,15 +2736,15 @@ func (s Field) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Field) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Field"}
+	invalidParams := aws.ErrInvalidParams{Context: "Field"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.RefValue != nil && len(*s.RefValue) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RefValue", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RefValue", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2800,12 +2799,12 @@ func (s GetPipelineDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPipelineDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPipelineDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPipelineDefinitionInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3079,15 +3078,15 @@ func (s ParameterAttribute) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParameterAttribute) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ParameterAttribute"}
+	invalidParams := aws.ErrInvalidParams{Context: "ParameterAttribute"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.StringValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("StringValue"))
+		invalidParams.Add(aws.NewErrParamRequired("StringValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3136,15 +3135,15 @@ func (s ParameterObject) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParameterObject) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ParameterObject"}
+	invalidParams := aws.ErrInvalidParams{Context: "ParameterObject"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -3152,7 +3151,7 @@ func (s *ParameterObject) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3203,15 +3202,15 @@ func (s ParameterValue) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParameterValue) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ParameterValue"}
+	invalidParams := aws.ErrInvalidParams{Context: "ParameterValue"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.StringValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("StringValue"))
+		invalidParams.Add(aws.NewErrParamRequired("StringValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3374,21 +3373,21 @@ func (s PipelineObject) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PipelineObject) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PipelineObject"}
+	invalidParams := aws.ErrInvalidParams{Context: "PipelineObject"}
 	if s.Fields == nil {
-		invalidParams.Add(request.NewErrParamRequired("Fields"))
+		invalidParams.Add(aws.NewErrParamRequired("Fields"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Fields != nil {
 		for i, v := range s.Fields {
@@ -3396,7 +3395,7 @@ func (s *PipelineObject) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Fields", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Fields", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3463,12 +3462,12 @@ func (s PollForTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PollForTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PollForTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PollForTaskInput"}
 	if s.Hostname != nil && len(*s.Hostname) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Hostname", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Hostname", 1))
 	}
 	if s.WorkerGroup == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkerGroup"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkerGroup"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3558,15 +3557,15 @@ func (s PutPipelineDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutPipelineDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutPipelineDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutPipelineDefinitionInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 	if s.PipelineObjects == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineObjects"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineObjects"))
 	}
 	if s.ParameterObjects != nil {
 		for i, v := range s.ParameterObjects {
@@ -3574,7 +3573,7 @@ func (s *PutPipelineDefinitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterObjects", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterObjects", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3584,7 +3583,7 @@ func (s *PutPipelineDefinitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3594,7 +3593,7 @@ func (s *PutPipelineDefinitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PipelineObjects", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PipelineObjects", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3747,15 +3746,15 @@ func (s QueryObjectsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QueryObjectsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "QueryObjectsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "QueryObjectsInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 	if s.Sphere == nil {
-		invalidParams.Add(request.NewErrParamRequired("Sphere"))
+		invalidParams.Add(aws.NewErrParamRequired("Sphere"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3868,15 +3867,15 @@ func (s RemoveTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3941,12 +3940,12 @@ func (s ReportTaskProgressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReportTaskProgressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReportTaskProgressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReportTaskProgressInput"}
 	if s.TaskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskId"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
 	}
 	if s.Fields != nil {
 		for i, v := range s.Fields {
@@ -3954,7 +3953,7 @@ func (s *ReportTaskProgressInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Fields", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Fields", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4042,15 +4041,15 @@ func (s ReportTaskRunnerHeartbeatInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReportTaskRunnerHeartbeatInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReportTaskRunnerHeartbeatInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReportTaskRunnerHeartbeatInput"}
 	if s.Hostname != nil && len(*s.Hostname) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Hostname", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Hostname", 1))
 	}
 	if s.TaskrunnerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskrunnerId"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskrunnerId"))
 	}
 	if s.TaskrunnerId != nil && len(*s.TaskrunnerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskrunnerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskrunnerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4178,18 +4177,18 @@ func (s SetStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetStatusInput"}
 	if s.ObjectIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectIds"))
 	}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4279,15 +4278,15 @@ func (s SetTaskStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTaskStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetTaskStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetTaskStatusInput"}
 	if s.TaskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskId"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
 	}
 	if s.TaskStatus == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskStatus"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskStatus"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4378,15 +4377,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4496,15 +4495,15 @@ func (s ValidatePipelineDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ValidatePipelineDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ValidatePipelineDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ValidatePipelineDefinitionInput"}
 	if s.PipelineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineId"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PipelineId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
 	if s.PipelineObjects == nil {
-		invalidParams.Add(request.NewErrParamRequired("PipelineObjects"))
+		invalidParams.Add(aws.NewErrParamRequired("PipelineObjects"))
 	}
 	if s.ParameterObjects != nil {
 		for i, v := range s.ParameterObjects {
@@ -4512,7 +4511,7 @@ func (s *ValidatePipelineDefinitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterObjects", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterObjects", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4522,7 +4521,7 @@ func (s *ValidatePipelineDefinitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterValues", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4532,7 +4531,7 @@ func (s *ValidatePipelineDefinitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PipelineObjects", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PipelineObjects", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

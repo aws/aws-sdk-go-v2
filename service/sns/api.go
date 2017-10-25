@@ -6,15 +6,14 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opAddPermission = "AddPermission"
 
-// AddPermissionRequest generates a "aws/request.Request" representing the
+// AddPermissionRequest generates a "aws.Request" representing the
 // client's request for the AddPermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -38,8 +37,8 @@ const opAddPermission = "AddPermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermission
-func (c *SNS) AddPermissionRequest(input *AddPermissionInput) (req *request.Request, output *AddPermissionOutput) {
-	op := &request.Operation{
+func (c *SNS) AddPermissionRequest(input *AddPermissionInput) (req *aws.Request, output *AddPermissionOutput) {
+	op := &aws.Operation{
 		Name:       opAddPermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -96,7 +95,7 @@ func (c *SNS) AddPermission(input *AddPermissionInput) (*AddPermissionOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInput, opts ...request.Option) (*AddPermissionOutput, error) {
+func (c *SNS) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInput, opts ...aws.Option) (*AddPermissionOutput, error) {
 	req, out := c.AddPermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -105,7 +104,7 @@ func (c *SNS) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInpu
 
 const opCheckIfPhoneNumberIsOptedOut = "CheckIfPhoneNumberIsOptedOut"
 
-// CheckIfPhoneNumberIsOptedOutRequest generates a "aws/request.Request" representing the
+// CheckIfPhoneNumberIsOptedOutRequest generates a "aws.Request" representing the
 // client's request for the CheckIfPhoneNumberIsOptedOut operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -129,8 +128,8 @@ const opCheckIfPhoneNumberIsOptedOut = "CheckIfPhoneNumberIsOptedOut"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOut
-func (c *SNS) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIsOptedOutInput) (req *request.Request, output *CheckIfPhoneNumberIsOptedOutOutput) {
-	op := &request.Operation{
+func (c *SNS) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIsOptedOutInput) (req *aws.Request, output *CheckIfPhoneNumberIsOptedOutOutput) {
+	op := &aws.Operation{
 		Name:       opCheckIfPhoneNumberIsOptedOut,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -190,7 +189,7 @@ func (c *SNS) CheckIfPhoneNumberIsOptedOut(input *CheckIfPhoneNumberIsOptedOutIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) CheckIfPhoneNumberIsOptedOutWithContext(ctx aws.Context, input *CheckIfPhoneNumberIsOptedOutInput, opts ...request.Option) (*CheckIfPhoneNumberIsOptedOutOutput, error) {
+func (c *SNS) CheckIfPhoneNumberIsOptedOutWithContext(ctx aws.Context, input *CheckIfPhoneNumberIsOptedOutInput, opts ...aws.Option) (*CheckIfPhoneNumberIsOptedOutOutput, error) {
 	req, out := c.CheckIfPhoneNumberIsOptedOutRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -199,7 +198,7 @@ func (c *SNS) CheckIfPhoneNumberIsOptedOutWithContext(ctx aws.Context, input *Ch
 
 const opConfirmSubscription = "ConfirmSubscription"
 
-// ConfirmSubscriptionRequest generates a "aws/request.Request" representing the
+// ConfirmSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the ConfirmSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -223,8 +222,8 @@ const opConfirmSubscription = "ConfirmSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscription
-func (c *SNS) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) (req *request.Request, output *ConfirmSubscriptionOutput) {
-	op := &request.Operation{
+func (c *SNS) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) (req *aws.Request, output *ConfirmSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opConfirmSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -285,7 +284,7 @@ func (c *SNS) ConfirmSubscription(input *ConfirmSubscriptionInput) (*ConfirmSubs
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ConfirmSubscriptionWithContext(ctx aws.Context, input *ConfirmSubscriptionInput, opts ...request.Option) (*ConfirmSubscriptionOutput, error) {
+func (c *SNS) ConfirmSubscriptionWithContext(ctx aws.Context, input *ConfirmSubscriptionInput, opts ...aws.Option) (*ConfirmSubscriptionOutput, error) {
 	req, out := c.ConfirmSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -294,7 +293,7 @@ func (c *SNS) ConfirmSubscriptionWithContext(ctx aws.Context, input *ConfirmSubs
 
 const opCreatePlatformApplication = "CreatePlatformApplication"
 
-// CreatePlatformApplicationRequest generates a "aws/request.Request" representing the
+// CreatePlatformApplicationRequest generates a "aws.Request" representing the
 // client's request for the CreatePlatformApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -318,8 +317,8 @@ const opCreatePlatformApplication = "CreatePlatformApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplication
-func (c *SNS) CreatePlatformApplicationRequest(input *CreatePlatformApplicationInput) (req *request.Request, output *CreatePlatformApplicationOutput) {
-	op := &request.Operation{
+func (c *SNS) CreatePlatformApplicationRequest(input *CreatePlatformApplicationInput) (req *aws.Request, output *CreatePlatformApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePlatformApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -395,7 +394,7 @@ func (c *SNS) CreatePlatformApplication(input *CreatePlatformApplicationInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) CreatePlatformApplicationWithContext(ctx aws.Context, input *CreatePlatformApplicationInput, opts ...request.Option) (*CreatePlatformApplicationOutput, error) {
+func (c *SNS) CreatePlatformApplicationWithContext(ctx aws.Context, input *CreatePlatformApplicationInput, opts ...aws.Option) (*CreatePlatformApplicationOutput, error) {
 	req, out := c.CreatePlatformApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -404,7 +403,7 @@ func (c *SNS) CreatePlatformApplicationWithContext(ctx aws.Context, input *Creat
 
 const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
 
-// CreatePlatformEndpointRequest generates a "aws/request.Request" representing the
+// CreatePlatformEndpointRequest generates a "aws.Request" representing the
 // client's request for the CreatePlatformEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -428,8 +427,8 @@ const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpoint
-func (c *SNS) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInput) (req *request.Request, output *CreatePlatformEndpointOutput) {
-	op := &request.Operation{
+func (c *SNS) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInput) (req *aws.Request, output *CreatePlatformEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePlatformEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -496,7 +495,7 @@ func (c *SNS) CreatePlatformEndpoint(input *CreatePlatformEndpointInput) (*Creat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) CreatePlatformEndpointWithContext(ctx aws.Context, input *CreatePlatformEndpointInput, opts ...request.Option) (*CreatePlatformEndpointOutput, error) {
+func (c *SNS) CreatePlatformEndpointWithContext(ctx aws.Context, input *CreatePlatformEndpointInput, opts ...aws.Option) (*CreatePlatformEndpointOutput, error) {
 	req, out := c.CreatePlatformEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -505,7 +504,7 @@ func (c *SNS) CreatePlatformEndpointWithContext(ctx aws.Context, input *CreatePl
 
 const opCreateTopic = "CreateTopic"
 
-// CreateTopicRequest generates a "aws/request.Request" representing the
+// CreateTopicRequest generates a "aws.Request" representing the
 // client's request for the CreateTopic operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -529,8 +528,8 @@ const opCreateTopic = "CreateTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopic
-func (c *SNS) CreateTopicRequest(input *CreateTopicInput) (req *request.Request, output *CreateTopicOutput) {
-	op := &request.Operation{
+func (c *SNS) CreateTopicRequest(input *CreateTopicInput) (req *aws.Request, output *CreateTopicOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTopic,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -588,7 +587,7 @@ func (c *SNS) CreateTopic(input *CreateTopicInput) (*CreateTopicOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) CreateTopicWithContext(ctx aws.Context, input *CreateTopicInput, opts ...request.Option) (*CreateTopicOutput, error) {
+func (c *SNS) CreateTopicWithContext(ctx aws.Context, input *CreateTopicInput, opts ...aws.Option) (*CreateTopicOutput, error) {
 	req, out := c.CreateTopicRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -597,7 +596,7 @@ func (c *SNS) CreateTopicWithContext(ctx aws.Context, input *CreateTopicInput, o
 
 const opDeleteEndpoint = "DeleteEndpoint"
 
-// DeleteEndpointRequest generates a "aws/request.Request" representing the
+// DeleteEndpointRequest generates a "aws.Request" representing the
 // client's request for the DeleteEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -621,8 +620,8 @@ const opDeleteEndpoint = "DeleteEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpoint
-func (c *SNS) DeleteEndpointRequest(input *DeleteEndpointInput) (req *request.Request, output *DeleteEndpointOutput) {
-	op := &request.Operation{
+func (c *SNS) DeleteEndpointRequest(input *DeleteEndpointInput) (req *aws.Request, output *DeleteEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -680,7 +679,7 @@ func (c *SNS) DeleteEndpoint(input *DeleteEndpointInput) (*DeleteEndpointOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) DeleteEndpointWithContext(ctx aws.Context, input *DeleteEndpointInput, opts ...request.Option) (*DeleteEndpointOutput, error) {
+func (c *SNS) DeleteEndpointWithContext(ctx aws.Context, input *DeleteEndpointInput, opts ...aws.Option) (*DeleteEndpointOutput, error) {
 	req, out := c.DeleteEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -689,7 +688,7 @@ func (c *SNS) DeleteEndpointWithContext(ctx aws.Context, input *DeleteEndpointIn
 
 const opDeletePlatformApplication = "DeletePlatformApplication"
 
-// DeletePlatformApplicationRequest generates a "aws/request.Request" representing the
+// DeletePlatformApplicationRequest generates a "aws.Request" representing the
 // client's request for the DeletePlatformApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -713,8 +712,8 @@ const opDeletePlatformApplication = "DeletePlatformApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplication
-func (c *SNS) DeletePlatformApplicationRequest(input *DeletePlatformApplicationInput) (req *request.Request, output *DeletePlatformApplicationOutput) {
-	op := &request.Operation{
+func (c *SNS) DeletePlatformApplicationRequest(input *DeletePlatformApplicationInput) (req *aws.Request, output *DeletePlatformApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePlatformApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -769,7 +768,7 @@ func (c *SNS) DeletePlatformApplication(input *DeletePlatformApplicationInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) DeletePlatformApplicationWithContext(ctx aws.Context, input *DeletePlatformApplicationInput, opts ...request.Option) (*DeletePlatformApplicationOutput, error) {
+func (c *SNS) DeletePlatformApplicationWithContext(ctx aws.Context, input *DeletePlatformApplicationInput, opts ...aws.Option) (*DeletePlatformApplicationOutput, error) {
 	req, out := c.DeletePlatformApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -778,7 +777,7 @@ func (c *SNS) DeletePlatformApplicationWithContext(ctx aws.Context, input *Delet
 
 const opDeleteTopic = "DeleteTopic"
 
-// DeleteTopicRequest generates a "aws/request.Request" representing the
+// DeleteTopicRequest generates a "aws.Request" representing the
 // client's request for the DeleteTopic operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -802,8 +801,8 @@ const opDeleteTopic = "DeleteTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopic
-func (c *SNS) DeleteTopicRequest(input *DeleteTopicInput) (req *request.Request, output *DeleteTopicOutput) {
-	op := &request.Operation{
+func (c *SNS) DeleteTopicRequest(input *DeleteTopicInput) (req *aws.Request, output *DeleteTopicOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTopic,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -862,7 +861,7 @@ func (c *SNS) DeleteTopic(input *DeleteTopicInput) (*DeleteTopicOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) DeleteTopicWithContext(ctx aws.Context, input *DeleteTopicInput, opts ...request.Option) (*DeleteTopicOutput, error) {
+func (c *SNS) DeleteTopicWithContext(ctx aws.Context, input *DeleteTopicInput, opts ...aws.Option) (*DeleteTopicOutput, error) {
 	req, out := c.DeleteTopicRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -871,7 +870,7 @@ func (c *SNS) DeleteTopicWithContext(ctx aws.Context, input *DeleteTopicInput, o
 
 const opGetEndpointAttributes = "GetEndpointAttributes"
 
-// GetEndpointAttributesRequest generates a "aws/request.Request" representing the
+// GetEndpointAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetEndpointAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -895,8 +894,8 @@ const opGetEndpointAttributes = "GetEndpointAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributes
-func (c *SNS) GetEndpointAttributesRequest(input *GetEndpointAttributesInput) (req *request.Request, output *GetEndpointAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) GetEndpointAttributesRequest(input *GetEndpointAttributesInput) (req *aws.Request, output *GetEndpointAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetEndpointAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -952,7 +951,7 @@ func (c *SNS) GetEndpointAttributes(input *GetEndpointAttributesInput) (*GetEndp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) GetEndpointAttributesWithContext(ctx aws.Context, input *GetEndpointAttributesInput, opts ...request.Option) (*GetEndpointAttributesOutput, error) {
+func (c *SNS) GetEndpointAttributesWithContext(ctx aws.Context, input *GetEndpointAttributesInput, opts ...aws.Option) (*GetEndpointAttributesOutput, error) {
 	req, out := c.GetEndpointAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -961,7 +960,7 @@ func (c *SNS) GetEndpointAttributesWithContext(ctx aws.Context, input *GetEndpoi
 
 const opGetPlatformApplicationAttributes = "GetPlatformApplicationAttributes"
 
-// GetPlatformApplicationAttributesRequest generates a "aws/request.Request" representing the
+// GetPlatformApplicationAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetPlatformApplicationAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -985,8 +984,8 @@ const opGetPlatformApplicationAttributes = "GetPlatformApplicationAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributes
-func (c *SNS) GetPlatformApplicationAttributesRequest(input *GetPlatformApplicationAttributesInput) (req *request.Request, output *GetPlatformApplicationAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) GetPlatformApplicationAttributesRequest(input *GetPlatformApplicationAttributesInput) (req *aws.Request, output *GetPlatformApplicationAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetPlatformApplicationAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1042,7 +1041,7 @@ func (c *SNS) GetPlatformApplicationAttributes(input *GetPlatformApplicationAttr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) GetPlatformApplicationAttributesWithContext(ctx aws.Context, input *GetPlatformApplicationAttributesInput, opts ...request.Option) (*GetPlatformApplicationAttributesOutput, error) {
+func (c *SNS) GetPlatformApplicationAttributesWithContext(ctx aws.Context, input *GetPlatformApplicationAttributesInput, opts ...aws.Option) (*GetPlatformApplicationAttributesOutput, error) {
 	req, out := c.GetPlatformApplicationAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1051,7 +1050,7 @@ func (c *SNS) GetPlatformApplicationAttributesWithContext(ctx aws.Context, input
 
 const opGetSMSAttributes = "GetSMSAttributes"
 
-// GetSMSAttributesRequest generates a "aws/request.Request" representing the
+// GetSMSAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetSMSAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1075,8 +1074,8 @@ const opGetSMSAttributes = "GetSMSAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributes
-func (c *SNS) GetSMSAttributesRequest(input *GetSMSAttributesInput) (req *request.Request, output *GetSMSAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) GetSMSAttributesRequest(input *GetSMSAttributesInput) (req *aws.Request, output *GetSMSAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetSMSAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1133,7 +1132,7 @@ func (c *SNS) GetSMSAttributes(input *GetSMSAttributesInput) (*GetSMSAttributesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) GetSMSAttributesWithContext(ctx aws.Context, input *GetSMSAttributesInput, opts ...request.Option) (*GetSMSAttributesOutput, error) {
+func (c *SNS) GetSMSAttributesWithContext(ctx aws.Context, input *GetSMSAttributesInput, opts ...aws.Option) (*GetSMSAttributesOutput, error) {
 	req, out := c.GetSMSAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1142,7 +1141,7 @@ func (c *SNS) GetSMSAttributesWithContext(ctx aws.Context, input *GetSMSAttribut
 
 const opGetSubscriptionAttributes = "GetSubscriptionAttributes"
 
-// GetSubscriptionAttributesRequest generates a "aws/request.Request" representing the
+// GetSubscriptionAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetSubscriptionAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1166,8 +1165,8 @@ const opGetSubscriptionAttributes = "GetSubscriptionAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributes
-func (c *SNS) GetSubscriptionAttributesRequest(input *GetSubscriptionAttributesInput) (req *request.Request, output *GetSubscriptionAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) GetSubscriptionAttributesRequest(input *GetSubscriptionAttributesInput) (req *aws.Request, output *GetSubscriptionAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetSubscriptionAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1221,7 +1220,7 @@ func (c *SNS) GetSubscriptionAttributes(input *GetSubscriptionAttributesInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) GetSubscriptionAttributesWithContext(ctx aws.Context, input *GetSubscriptionAttributesInput, opts ...request.Option) (*GetSubscriptionAttributesOutput, error) {
+func (c *SNS) GetSubscriptionAttributesWithContext(ctx aws.Context, input *GetSubscriptionAttributesInput, opts ...aws.Option) (*GetSubscriptionAttributesOutput, error) {
 	req, out := c.GetSubscriptionAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1230,7 +1229,7 @@ func (c *SNS) GetSubscriptionAttributesWithContext(ctx aws.Context, input *GetSu
 
 const opGetTopicAttributes = "GetTopicAttributes"
 
-// GetTopicAttributesRequest generates a "aws/request.Request" representing the
+// GetTopicAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetTopicAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1254,8 +1253,8 @@ const opGetTopicAttributes = "GetTopicAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributes
-func (c *SNS) GetTopicAttributesRequest(input *GetTopicAttributesInput) (req *request.Request, output *GetTopicAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) GetTopicAttributesRequest(input *GetTopicAttributesInput) (req *aws.Request, output *GetTopicAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetTopicAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1310,7 +1309,7 @@ func (c *SNS) GetTopicAttributes(input *GetTopicAttributesInput) (*GetTopicAttri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) GetTopicAttributesWithContext(ctx aws.Context, input *GetTopicAttributesInput, opts ...request.Option) (*GetTopicAttributesOutput, error) {
+func (c *SNS) GetTopicAttributesWithContext(ctx aws.Context, input *GetTopicAttributesInput, opts ...aws.Option) (*GetTopicAttributesOutput, error) {
 	req, out := c.GetTopicAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1319,7 +1318,7 @@ func (c *SNS) GetTopicAttributesWithContext(ctx aws.Context, input *GetTopicAttr
 
 const opListEndpointsByPlatformApplication = "ListEndpointsByPlatformApplication"
 
-// ListEndpointsByPlatformApplicationRequest generates a "aws/request.Request" representing the
+// ListEndpointsByPlatformApplicationRequest generates a "aws.Request" representing the
 // client's request for the ListEndpointsByPlatformApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1343,12 +1342,12 @@ const opListEndpointsByPlatformApplication = "ListEndpointsByPlatformApplication
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplication
-func (c *SNS) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPlatformApplicationInput) (req *request.Request, output *ListEndpointsByPlatformApplicationOutput) {
-	op := &request.Operation{
+func (c *SNS) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPlatformApplicationInput) (req *aws.Request, output *ListEndpointsByPlatformApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opListEndpointsByPlatformApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -1411,7 +1410,7 @@ func (c *SNS) ListEndpointsByPlatformApplication(input *ListEndpointsByPlatformA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListEndpointsByPlatformApplicationWithContext(ctx aws.Context, input *ListEndpointsByPlatformApplicationInput, opts ...request.Option) (*ListEndpointsByPlatformApplicationOutput, error) {
+func (c *SNS) ListEndpointsByPlatformApplicationWithContext(ctx aws.Context, input *ListEndpointsByPlatformApplicationInput, opts ...aws.Option) (*ListEndpointsByPlatformApplicationOutput, error) {
 	req, out := c.ListEndpointsByPlatformApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1446,9 +1445,9 @@ func (c *SNS) ListEndpointsByPlatformApplicationPages(input *ListEndpointsByPlat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListEndpointsByPlatformApplicationPagesWithContext(ctx aws.Context, input *ListEndpointsByPlatformApplicationInput, fn func(*ListEndpointsByPlatformApplicationOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SNS) ListEndpointsByPlatformApplicationPagesWithContext(ctx aws.Context, input *ListEndpointsByPlatformApplicationInput, fn func(*ListEndpointsByPlatformApplicationOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListEndpointsByPlatformApplicationInput
 			if input != nil {
 				tmp := *input
@@ -1470,7 +1469,7 @@ func (c *SNS) ListEndpointsByPlatformApplicationPagesWithContext(ctx aws.Context
 
 const opListPhoneNumbersOptedOut = "ListPhoneNumbersOptedOut"
 
-// ListPhoneNumbersOptedOutRequest generates a "aws/request.Request" representing the
+// ListPhoneNumbersOptedOutRequest generates a "aws.Request" representing the
 // client's request for the ListPhoneNumbersOptedOut operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1494,8 +1493,8 @@ const opListPhoneNumbersOptedOut = "ListPhoneNumbersOptedOut"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOut
-func (c *SNS) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOutInput) (req *request.Request, output *ListPhoneNumbersOptedOutOutput) {
-	op := &request.Operation{
+func (c *SNS) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOutInput) (req *aws.Request, output *ListPhoneNumbersOptedOutOutput) {
+	op := &aws.Operation{
 		Name:       opListPhoneNumbersOptedOut,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1558,7 +1557,7 @@ func (c *SNS) ListPhoneNumbersOptedOut(input *ListPhoneNumbersOptedOutInput) (*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListPhoneNumbersOptedOutWithContext(ctx aws.Context, input *ListPhoneNumbersOptedOutInput, opts ...request.Option) (*ListPhoneNumbersOptedOutOutput, error) {
+func (c *SNS) ListPhoneNumbersOptedOutWithContext(ctx aws.Context, input *ListPhoneNumbersOptedOutInput, opts ...aws.Option) (*ListPhoneNumbersOptedOutOutput, error) {
 	req, out := c.ListPhoneNumbersOptedOutRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1567,7 +1566,7 @@ func (c *SNS) ListPhoneNumbersOptedOutWithContext(ctx aws.Context, input *ListPh
 
 const opListPlatformApplications = "ListPlatformApplications"
 
-// ListPlatformApplicationsRequest generates a "aws/request.Request" representing the
+// ListPlatformApplicationsRequest generates a "aws.Request" representing the
 // client's request for the ListPlatformApplications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1591,12 +1590,12 @@ const opListPlatformApplications = "ListPlatformApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplications
-func (c *SNS) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInput) (req *request.Request, output *ListPlatformApplicationsOutput) {
-	op := &request.Operation{
+func (c *SNS) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInput) (req *aws.Request, output *ListPlatformApplicationsOutput) {
+	op := &aws.Operation{
 		Name:       opListPlatformApplications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -1656,7 +1655,7 @@ func (c *SNS) ListPlatformApplications(input *ListPlatformApplicationsInput) (*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListPlatformApplicationsWithContext(ctx aws.Context, input *ListPlatformApplicationsInput, opts ...request.Option) (*ListPlatformApplicationsOutput, error) {
+func (c *SNS) ListPlatformApplicationsWithContext(ctx aws.Context, input *ListPlatformApplicationsInput, opts ...aws.Option) (*ListPlatformApplicationsOutput, error) {
 	req, out := c.ListPlatformApplicationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1691,9 +1690,9 @@ func (c *SNS) ListPlatformApplicationsPages(input *ListPlatformApplicationsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListPlatformApplicationsPagesWithContext(ctx aws.Context, input *ListPlatformApplicationsInput, fn func(*ListPlatformApplicationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SNS) ListPlatformApplicationsPagesWithContext(ctx aws.Context, input *ListPlatformApplicationsInput, fn func(*ListPlatformApplicationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPlatformApplicationsInput
 			if input != nil {
 				tmp := *input
@@ -1715,7 +1714,7 @@ func (c *SNS) ListPlatformApplicationsPagesWithContext(ctx aws.Context, input *L
 
 const opListSubscriptions = "ListSubscriptions"
 
-// ListSubscriptionsRequest generates a "aws/request.Request" representing the
+// ListSubscriptionsRequest generates a "aws.Request" representing the
 // client's request for the ListSubscriptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1739,12 +1738,12 @@ const opListSubscriptions = "ListSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptions
-func (c *SNS) ListSubscriptionsRequest(input *ListSubscriptionsInput) (req *request.Request, output *ListSubscriptionsOutput) {
-	op := &request.Operation{
+func (c *SNS) ListSubscriptionsRequest(input *ListSubscriptionsInput) (req *aws.Request, output *ListSubscriptionsOutput) {
+	op := &aws.Operation{
 		Name:       opListSubscriptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -1800,7 +1799,7 @@ func (c *SNS) ListSubscriptions(input *ListSubscriptionsInput) (*ListSubscriptio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListSubscriptionsWithContext(ctx aws.Context, input *ListSubscriptionsInput, opts ...request.Option) (*ListSubscriptionsOutput, error) {
+func (c *SNS) ListSubscriptionsWithContext(ctx aws.Context, input *ListSubscriptionsInput, opts ...aws.Option) (*ListSubscriptionsOutput, error) {
 	req, out := c.ListSubscriptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1835,9 +1834,9 @@ func (c *SNS) ListSubscriptionsPages(input *ListSubscriptionsInput, fn func(*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListSubscriptionsPagesWithContext(ctx aws.Context, input *ListSubscriptionsInput, fn func(*ListSubscriptionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SNS) ListSubscriptionsPagesWithContext(ctx aws.Context, input *ListSubscriptionsInput, fn func(*ListSubscriptionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListSubscriptionsInput
 			if input != nil {
 				tmp := *input
@@ -1859,7 +1858,7 @@ func (c *SNS) ListSubscriptionsPagesWithContext(ctx aws.Context, input *ListSubs
 
 const opListSubscriptionsByTopic = "ListSubscriptionsByTopic"
 
-// ListSubscriptionsByTopicRequest generates a "aws/request.Request" representing the
+// ListSubscriptionsByTopicRequest generates a "aws.Request" representing the
 // client's request for the ListSubscriptionsByTopic operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1883,12 +1882,12 @@ const opListSubscriptionsByTopic = "ListSubscriptionsByTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopic
-func (c *SNS) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInput) (req *request.Request, output *ListSubscriptionsByTopicOutput) {
-	op := &request.Operation{
+func (c *SNS) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInput) (req *aws.Request, output *ListSubscriptionsByTopicOutput) {
+	op := &aws.Operation{
 		Name:       opListSubscriptionsByTopic,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -1947,7 +1946,7 @@ func (c *SNS) ListSubscriptionsByTopic(input *ListSubscriptionsByTopicInput) (*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListSubscriptionsByTopicWithContext(ctx aws.Context, input *ListSubscriptionsByTopicInput, opts ...request.Option) (*ListSubscriptionsByTopicOutput, error) {
+func (c *SNS) ListSubscriptionsByTopicWithContext(ctx aws.Context, input *ListSubscriptionsByTopicInput, opts ...aws.Option) (*ListSubscriptionsByTopicOutput, error) {
 	req, out := c.ListSubscriptionsByTopicRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1982,9 +1981,9 @@ func (c *SNS) ListSubscriptionsByTopicPages(input *ListSubscriptionsByTopicInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListSubscriptionsByTopicPagesWithContext(ctx aws.Context, input *ListSubscriptionsByTopicInput, fn func(*ListSubscriptionsByTopicOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SNS) ListSubscriptionsByTopicPagesWithContext(ctx aws.Context, input *ListSubscriptionsByTopicInput, fn func(*ListSubscriptionsByTopicOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListSubscriptionsByTopicInput
 			if input != nil {
 				tmp := *input
@@ -2006,7 +2005,7 @@ func (c *SNS) ListSubscriptionsByTopicPagesWithContext(ctx aws.Context, input *L
 
 const opListTopics = "ListTopics"
 
-// ListTopicsRequest generates a "aws/request.Request" representing the
+// ListTopicsRequest generates a "aws.Request" representing the
 // client's request for the ListTopics operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2030,12 +2029,12 @@ const opListTopics = "ListTopics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTopics
-func (c *SNS) ListTopicsRequest(input *ListTopicsInput) (req *request.Request, output *ListTopicsOutput) {
-	op := &request.Operation{
+func (c *SNS) ListTopicsRequest(input *ListTopicsInput) (req *aws.Request, output *ListTopicsOutput) {
+	op := &aws.Operation{
 		Name:       opListTopics,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -2090,7 +2089,7 @@ func (c *SNS) ListTopics(input *ListTopicsInput) (*ListTopicsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListTopicsWithContext(ctx aws.Context, input *ListTopicsInput, opts ...request.Option) (*ListTopicsOutput, error) {
+func (c *SNS) ListTopicsWithContext(ctx aws.Context, input *ListTopicsInput, opts ...aws.Option) (*ListTopicsOutput, error) {
 	req, out := c.ListTopicsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2125,9 +2124,9 @@ func (c *SNS) ListTopicsPages(input *ListTopicsInput, fn func(*ListTopicsOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) ListTopicsPagesWithContext(ctx aws.Context, input *ListTopicsInput, fn func(*ListTopicsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SNS) ListTopicsPagesWithContext(ctx aws.Context, input *ListTopicsInput, fn func(*ListTopicsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTopicsInput
 			if input != nil {
 				tmp := *input
@@ -2149,7 +2148,7 @@ func (c *SNS) ListTopicsPagesWithContext(ctx aws.Context, input *ListTopicsInput
 
 const opOptInPhoneNumber = "OptInPhoneNumber"
 
-// OptInPhoneNumberRequest generates a "aws/request.Request" representing the
+// OptInPhoneNumberRequest generates a "aws.Request" representing the
 // client's request for the OptInPhoneNumber operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2173,8 +2172,8 @@ const opOptInPhoneNumber = "OptInPhoneNumber"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumber
-func (c *SNS) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) (req *request.Request, output *OptInPhoneNumberOutput) {
-	op := &request.Operation{
+func (c *SNS) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) (req *aws.Request, output *OptInPhoneNumberOutput) {
+	op := &aws.Operation{
 		Name:       opOptInPhoneNumber,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2232,7 +2231,7 @@ func (c *SNS) OptInPhoneNumber(input *OptInPhoneNumberInput) (*OptInPhoneNumberO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) OptInPhoneNumberWithContext(ctx aws.Context, input *OptInPhoneNumberInput, opts ...request.Option) (*OptInPhoneNumberOutput, error) {
+func (c *SNS) OptInPhoneNumberWithContext(ctx aws.Context, input *OptInPhoneNumberInput, opts ...aws.Option) (*OptInPhoneNumberOutput, error) {
 	req, out := c.OptInPhoneNumberRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2241,7 +2240,7 @@ func (c *SNS) OptInPhoneNumberWithContext(ctx aws.Context, input *OptInPhoneNumb
 
 const opPublish = "Publish"
 
-// PublishRequest generates a "aws/request.Request" representing the
+// PublishRequest generates a "aws.Request" representing the
 // client's request for the Publish operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2265,8 +2264,8 @@ const opPublish = "Publish"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Publish
-func (c *SNS) PublishRequest(input *PublishInput) (req *request.Request, output *PublishOutput) {
-	op := &request.Operation{
+func (c *SNS) PublishRequest(input *PublishInput) (req *aws.Request, output *PublishOutput) {
+	op := &aws.Operation{
 		Name:       opPublish,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2340,7 +2339,7 @@ func (c *SNS) Publish(input *PublishInput) (*PublishOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) PublishWithContext(ctx aws.Context, input *PublishInput, opts ...request.Option) (*PublishOutput, error) {
+func (c *SNS) PublishWithContext(ctx aws.Context, input *PublishInput, opts ...aws.Option) (*PublishOutput, error) {
 	req, out := c.PublishRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2349,7 +2348,7 @@ func (c *SNS) PublishWithContext(ctx aws.Context, input *PublishInput, opts ...r
 
 const opRemovePermission = "RemovePermission"
 
-// RemovePermissionRequest generates a "aws/request.Request" representing the
+// RemovePermissionRequest generates a "aws.Request" representing the
 // client's request for the RemovePermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2373,8 +2372,8 @@ const opRemovePermission = "RemovePermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermission
-func (c *SNS) RemovePermissionRequest(input *RemovePermissionInput) (req *request.Request, output *RemovePermissionOutput) {
-	op := &request.Operation{
+func (c *SNS) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Request, output *RemovePermissionOutput) {
+	op := &aws.Operation{
 		Name:       opRemovePermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2430,7 +2429,7 @@ func (c *SNS) RemovePermission(input *RemovePermissionInput) (*RemovePermissionO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...request.Option) (*RemovePermissionOutput, error) {
+func (c *SNS) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...aws.Option) (*RemovePermissionOutput, error) {
 	req, out := c.RemovePermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2439,7 +2438,7 @@ func (c *SNS) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissi
 
 const opSetEndpointAttributes = "SetEndpointAttributes"
 
-// SetEndpointAttributesRequest generates a "aws/request.Request" representing the
+// SetEndpointAttributesRequest generates a "aws.Request" representing the
 // client's request for the SetEndpointAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2463,8 +2462,8 @@ const opSetEndpointAttributes = "SetEndpointAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributes
-func (c *SNS) SetEndpointAttributesRequest(input *SetEndpointAttributesInput) (req *request.Request, output *SetEndpointAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) SetEndpointAttributesRequest(input *SetEndpointAttributesInput) (req *aws.Request, output *SetEndpointAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opSetEndpointAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2522,7 +2521,7 @@ func (c *SNS) SetEndpointAttributes(input *SetEndpointAttributesInput) (*SetEndp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) SetEndpointAttributesWithContext(ctx aws.Context, input *SetEndpointAttributesInput, opts ...request.Option) (*SetEndpointAttributesOutput, error) {
+func (c *SNS) SetEndpointAttributesWithContext(ctx aws.Context, input *SetEndpointAttributesInput, opts ...aws.Option) (*SetEndpointAttributesOutput, error) {
 	req, out := c.SetEndpointAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2531,7 +2530,7 @@ func (c *SNS) SetEndpointAttributesWithContext(ctx aws.Context, input *SetEndpoi
 
 const opSetPlatformApplicationAttributes = "SetPlatformApplicationAttributes"
 
-// SetPlatformApplicationAttributesRequest generates a "aws/request.Request" representing the
+// SetPlatformApplicationAttributesRequest generates a "aws.Request" representing the
 // client's request for the SetPlatformApplicationAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2555,8 +2554,8 @@ const opSetPlatformApplicationAttributes = "SetPlatformApplicationAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributes
-func (c *SNS) SetPlatformApplicationAttributesRequest(input *SetPlatformApplicationAttributesInput) (req *request.Request, output *SetPlatformApplicationAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) SetPlatformApplicationAttributesRequest(input *SetPlatformApplicationAttributesInput) (req *aws.Request, output *SetPlatformApplicationAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opSetPlatformApplicationAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2616,7 +2615,7 @@ func (c *SNS) SetPlatformApplicationAttributes(input *SetPlatformApplicationAttr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) SetPlatformApplicationAttributesWithContext(ctx aws.Context, input *SetPlatformApplicationAttributesInput, opts ...request.Option) (*SetPlatformApplicationAttributesOutput, error) {
+func (c *SNS) SetPlatformApplicationAttributesWithContext(ctx aws.Context, input *SetPlatformApplicationAttributesInput, opts ...aws.Option) (*SetPlatformApplicationAttributesOutput, error) {
 	req, out := c.SetPlatformApplicationAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2625,7 +2624,7 @@ func (c *SNS) SetPlatformApplicationAttributesWithContext(ctx aws.Context, input
 
 const opSetSMSAttributes = "SetSMSAttributes"
 
-// SetSMSAttributesRequest generates a "aws/request.Request" representing the
+// SetSMSAttributesRequest generates a "aws.Request" representing the
 // client's request for the SetSMSAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2649,8 +2648,8 @@ const opSetSMSAttributes = "SetSMSAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributes
-func (c *SNS) SetSMSAttributesRequest(input *SetSMSAttributesInput) (req *request.Request, output *SetSMSAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) SetSMSAttributesRequest(input *SetSMSAttributesInput) (req *aws.Request, output *SetSMSAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opSetSMSAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2711,7 +2710,7 @@ func (c *SNS) SetSMSAttributes(input *SetSMSAttributesInput) (*SetSMSAttributesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) SetSMSAttributesWithContext(ctx aws.Context, input *SetSMSAttributesInput, opts ...request.Option) (*SetSMSAttributesOutput, error) {
+func (c *SNS) SetSMSAttributesWithContext(ctx aws.Context, input *SetSMSAttributesInput, opts ...aws.Option) (*SetSMSAttributesOutput, error) {
 	req, out := c.SetSMSAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2720,7 +2719,7 @@ func (c *SNS) SetSMSAttributesWithContext(ctx aws.Context, input *SetSMSAttribut
 
 const opSetSubscriptionAttributes = "SetSubscriptionAttributes"
 
-// SetSubscriptionAttributesRequest generates a "aws/request.Request" representing the
+// SetSubscriptionAttributesRequest generates a "aws.Request" representing the
 // client's request for the SetSubscriptionAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2744,8 +2743,8 @@ const opSetSubscriptionAttributes = "SetSubscriptionAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSubscriptionAttributes
-func (c *SNS) SetSubscriptionAttributesRequest(input *SetSubscriptionAttributesInput) (req *request.Request, output *SetSubscriptionAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) SetSubscriptionAttributesRequest(input *SetSubscriptionAttributesInput) (req *aws.Request, output *SetSubscriptionAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opSetSubscriptionAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2801,7 +2800,7 @@ func (c *SNS) SetSubscriptionAttributes(input *SetSubscriptionAttributesInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) SetSubscriptionAttributesWithContext(ctx aws.Context, input *SetSubscriptionAttributesInput, opts ...request.Option) (*SetSubscriptionAttributesOutput, error) {
+func (c *SNS) SetSubscriptionAttributesWithContext(ctx aws.Context, input *SetSubscriptionAttributesInput, opts ...aws.Option) (*SetSubscriptionAttributesOutput, error) {
 	req, out := c.SetSubscriptionAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2810,7 +2809,7 @@ func (c *SNS) SetSubscriptionAttributesWithContext(ctx aws.Context, input *SetSu
 
 const opSetTopicAttributes = "SetTopicAttributes"
 
-// SetTopicAttributesRequest generates a "aws/request.Request" representing the
+// SetTopicAttributesRequest generates a "aws.Request" representing the
 // client's request for the SetTopicAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2834,8 +2833,8 @@ const opSetTopicAttributes = "SetTopicAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetTopicAttributes
-func (c *SNS) SetTopicAttributesRequest(input *SetTopicAttributesInput) (req *request.Request, output *SetTopicAttributesOutput) {
-	op := &request.Operation{
+func (c *SNS) SetTopicAttributesRequest(input *SetTopicAttributesInput) (req *aws.Request, output *SetTopicAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opSetTopicAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2891,7 +2890,7 @@ func (c *SNS) SetTopicAttributes(input *SetTopicAttributesInput) (*SetTopicAttri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) SetTopicAttributesWithContext(ctx aws.Context, input *SetTopicAttributesInput, opts ...request.Option) (*SetTopicAttributesOutput, error) {
+func (c *SNS) SetTopicAttributesWithContext(ctx aws.Context, input *SetTopicAttributesInput, opts ...aws.Option) (*SetTopicAttributesOutput, error) {
 	req, out := c.SetTopicAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2900,7 +2899,7 @@ func (c *SNS) SetTopicAttributesWithContext(ctx aws.Context, input *SetTopicAttr
 
 const opSubscribe = "Subscribe"
 
-// SubscribeRequest generates a "aws/request.Request" representing the
+// SubscribeRequest generates a "aws.Request" representing the
 // client's request for the Subscribe operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2924,8 +2923,8 @@ const opSubscribe = "Subscribe"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Subscribe
-func (c *SNS) SubscribeRequest(input *SubscribeInput) (req *request.Request, output *SubscribeOutput) {
-	op := &request.Operation{
+func (c *SNS) SubscribeRequest(input *SubscribeInput) (req *aws.Request, output *SubscribeOutput) {
+	op := &aws.Operation{
 		Name:       opSubscribe,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2985,7 +2984,7 @@ func (c *SNS) Subscribe(input *SubscribeInput) (*SubscribeOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) SubscribeWithContext(ctx aws.Context, input *SubscribeInput, opts ...request.Option) (*SubscribeOutput, error) {
+func (c *SNS) SubscribeWithContext(ctx aws.Context, input *SubscribeInput, opts ...aws.Option) (*SubscribeOutput, error) {
 	req, out := c.SubscribeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2994,7 +2993,7 @@ func (c *SNS) SubscribeWithContext(ctx aws.Context, input *SubscribeInput, opts 
 
 const opUnsubscribe = "Unsubscribe"
 
-// UnsubscribeRequest generates a "aws/request.Request" representing the
+// UnsubscribeRequest generates a "aws.Request" representing the
 // client's request for the Unsubscribe operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3018,8 +3017,8 @@ const opUnsubscribe = "Unsubscribe"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Unsubscribe
-func (c *SNS) UnsubscribeRequest(input *UnsubscribeInput) (req *request.Request, output *UnsubscribeOutput) {
-	op := &request.Operation{
+func (c *SNS) UnsubscribeRequest(input *UnsubscribeInput) (req *aws.Request, output *UnsubscribeOutput) {
+	op := &aws.Operation{
 		Name:       opUnsubscribe,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3080,7 +3079,7 @@ func (c *SNS) Unsubscribe(input *UnsubscribeInput) (*UnsubscribeOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SNS) UnsubscribeWithContext(ctx aws.Context, input *UnsubscribeInput, opts ...request.Option) (*UnsubscribeOutput, error) {
+func (c *SNS) UnsubscribeWithContext(ctx aws.Context, input *UnsubscribeInput, opts ...aws.Option) (*UnsubscribeOutput, error) {
 	req, out := c.UnsubscribeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3128,18 +3127,18 @@ func (s AddPermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddPermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddPermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddPermissionInput"}
 	if s.AWSAccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AWSAccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AWSAccountId"))
 	}
 	if s.ActionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActionName"))
+		invalidParams.Add(aws.NewErrParamRequired("ActionName"))
 	}
 	if s.Label == nil {
-		invalidParams.Add(request.NewErrParamRequired("Label"))
+		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3210,9 +3209,9 @@ func (s CheckIfPhoneNumberIsOptedOutInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckIfPhoneNumberIsOptedOutInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CheckIfPhoneNumberIsOptedOutInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CheckIfPhoneNumberIsOptedOutInput"}
 	if s.PhoneNumber == nil {
-		invalidParams.Add(request.NewErrParamRequired("PhoneNumber"))
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumber"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3292,12 +3291,12 @@ func (s ConfirmSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfirmSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfirmSubscriptionInput"}
 	if s.Token == nil {
-		invalidParams.Add(request.NewErrParamRequired("Token"))
+		invalidParams.Add(aws.NewErrParamRequired("Token"))
 	}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3385,15 +3384,15 @@ func (s CreatePlatformApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlatformApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePlatformApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePlatformApplicationInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Platform == nil {
-		invalidParams.Add(request.NewErrParamRequired("Platform"))
+		invalidParams.Add(aws.NewErrParamRequired("Platform"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3485,12 +3484,12 @@ func (s CreatePlatformEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlatformEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePlatformEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePlatformEndpointInput"}
 	if s.PlatformApplicationArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlatformApplicationArn"))
+		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
 	if s.Token == nil {
-		invalidParams.Add(request.NewErrParamRequired("Token"))
+		invalidParams.Add(aws.NewErrParamRequired("Token"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3575,9 +3574,9 @@ func (s CreateTopicInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTopicInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTopicInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTopicInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3640,9 +3639,9 @@ func (s DeleteEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEndpointInput"}
 	if s.EndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3695,9 +3694,9 @@ func (s DeletePlatformApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePlatformApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePlatformApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePlatformApplicationInput"}
 	if s.PlatformApplicationArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlatformApplicationArn"))
+		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3749,9 +3748,9 @@ func (s DeleteTopicInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTopicInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTopicInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTopicInput"}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3838,9 +3837,9 @@ func (s GetEndpointAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEndpointAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetEndpointAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetEndpointAttributesInput"}
 	if s.EndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3916,9 +3915,9 @@ func (s GetPlatformApplicationAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPlatformApplicationAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPlatformApplicationAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPlatformApplicationAttributesInput"}
 	if s.PlatformApplicationArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlatformApplicationArn"))
+		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4049,9 +4048,9 @@ func (s GetSubscriptionAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSubscriptionAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSubscriptionAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSubscriptionAttributesInput"}
 	if s.SubscriptionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4131,9 +4130,9 @@ func (s GetTopicAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTopicAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTopicAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTopicAttributesInput"}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4224,9 +4223,9 @@ func (s ListEndpointsByPlatformApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListEndpointsByPlatformApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListEndpointsByPlatformApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListEndpointsByPlatformApplicationInput"}
 	if s.PlatformApplicationArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlatformApplicationArn"))
+		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4432,9 +4431,9 @@ func (s ListSubscriptionsByTopicInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSubscriptionsByTopicInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListSubscriptionsByTopicInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListSubscriptionsByTopicInput"}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4651,9 +4650,9 @@ func (s MessageAttributeValue) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MessageAttributeValue) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MessageAttributeValue"}
+	invalidParams := aws.ErrInvalidParams{Context: "MessageAttributeValue"}
 	if s.DataType == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataType"))
+		invalidParams.Add(aws.NewErrParamRequired("DataType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4703,9 +4702,9 @@ func (s OptInPhoneNumberInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OptInPhoneNumberInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "OptInPhoneNumberInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "OptInPhoneNumberInput"}
 	if s.PhoneNumber == nil {
-		invalidParams.Add(request.NewErrParamRequired("PhoneNumber"))
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumber"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4879,9 +4878,9 @@ func (s PublishInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PublishInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PublishInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PublishInput"}
 	if s.Message == nil {
-		invalidParams.Add(request.NewErrParamRequired("Message"))
+		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
 	if s.MessageAttributes != nil {
 		for i, v := range s.MessageAttributes {
@@ -4889,7 +4888,7 @@ func (s *PublishInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4997,12 +4996,12 @@ func (s RemovePermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemovePermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemovePermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemovePermissionInput"}
 	if s.Label == nil {
-		invalidParams.Add(request.NewErrParamRequired("Label"))
+		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5079,12 +5078,12 @@ func (s SetEndpointAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetEndpointAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetEndpointAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetEndpointAttributesInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.EndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5181,12 +5180,12 @@ func (s SetPlatformApplicationAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetPlatformApplicationAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetPlatformApplicationAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetPlatformApplicationAttributesInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.PlatformApplicationArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlatformApplicationArn"))
+		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5316,9 +5315,9 @@ func (s SetSMSAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetSMSAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetSMSAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetSMSAttributesInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5383,12 +5382,12 @@ func (s SetSubscriptionAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetSubscriptionAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetSubscriptionAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetSubscriptionAttributesInput"}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.SubscriptionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5464,12 +5463,12 @@ func (s SetTopicAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTopicAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetTopicAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetTopicAttributesInput"}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5577,12 +5576,12 @@ func (s SubscribeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SubscribeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SubscribeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SubscribeInput"}
 	if s.Protocol == nil {
-		invalidParams.Add(request.NewErrParamRequired("Protocol"))
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5745,9 +5744,9 @@ func (s UnsubscribeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnsubscribeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UnsubscribeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UnsubscribeInput"}
 	if s.SubscriptionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionArn"))
 	}
 
 	if invalidParams.Len() > 0 {

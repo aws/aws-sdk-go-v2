@@ -10,7 +10,6 @@ package route53domainsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := route53domains.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := route53domains.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,106 +64,106 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type Route53DomainsAPI interface {
 	CheckDomainAvailability(*route53domains.CheckDomainAvailabilityInput) (*route53domains.CheckDomainAvailabilityOutput, error)
-	CheckDomainAvailabilityWithContext(aws.Context, *route53domains.CheckDomainAvailabilityInput, ...request.Option) (*route53domains.CheckDomainAvailabilityOutput, error)
-	CheckDomainAvailabilityRequest(*route53domains.CheckDomainAvailabilityInput) (*request.Request, *route53domains.CheckDomainAvailabilityOutput)
+	CheckDomainAvailabilityWithContext(aws.Context, *route53domains.CheckDomainAvailabilityInput, ...aws.Option) (*route53domains.CheckDomainAvailabilityOutput, error)
+	CheckDomainAvailabilityRequest(*route53domains.CheckDomainAvailabilityInput) (*aws.Request, *route53domains.CheckDomainAvailabilityOutput)
 
 	CheckDomainTransferability(*route53domains.CheckDomainTransferabilityInput) (*route53domains.CheckDomainTransferabilityOutput, error)
-	CheckDomainTransferabilityWithContext(aws.Context, *route53domains.CheckDomainTransferabilityInput, ...request.Option) (*route53domains.CheckDomainTransferabilityOutput, error)
-	CheckDomainTransferabilityRequest(*route53domains.CheckDomainTransferabilityInput) (*request.Request, *route53domains.CheckDomainTransferabilityOutput)
+	CheckDomainTransferabilityWithContext(aws.Context, *route53domains.CheckDomainTransferabilityInput, ...aws.Option) (*route53domains.CheckDomainTransferabilityOutput, error)
+	CheckDomainTransferabilityRequest(*route53domains.CheckDomainTransferabilityInput) (*aws.Request, *route53domains.CheckDomainTransferabilityOutput)
 
 	DeleteTagsForDomain(*route53domains.DeleteTagsForDomainInput) (*route53domains.DeleteTagsForDomainOutput, error)
-	DeleteTagsForDomainWithContext(aws.Context, *route53domains.DeleteTagsForDomainInput, ...request.Option) (*route53domains.DeleteTagsForDomainOutput, error)
-	DeleteTagsForDomainRequest(*route53domains.DeleteTagsForDomainInput) (*request.Request, *route53domains.DeleteTagsForDomainOutput)
+	DeleteTagsForDomainWithContext(aws.Context, *route53domains.DeleteTagsForDomainInput, ...aws.Option) (*route53domains.DeleteTagsForDomainOutput, error)
+	DeleteTagsForDomainRequest(*route53domains.DeleteTagsForDomainInput) (*aws.Request, *route53domains.DeleteTagsForDomainOutput)
 
 	DisableDomainAutoRenew(*route53domains.DisableDomainAutoRenewInput) (*route53domains.DisableDomainAutoRenewOutput, error)
-	DisableDomainAutoRenewWithContext(aws.Context, *route53domains.DisableDomainAutoRenewInput, ...request.Option) (*route53domains.DisableDomainAutoRenewOutput, error)
-	DisableDomainAutoRenewRequest(*route53domains.DisableDomainAutoRenewInput) (*request.Request, *route53domains.DisableDomainAutoRenewOutput)
+	DisableDomainAutoRenewWithContext(aws.Context, *route53domains.DisableDomainAutoRenewInput, ...aws.Option) (*route53domains.DisableDomainAutoRenewOutput, error)
+	DisableDomainAutoRenewRequest(*route53domains.DisableDomainAutoRenewInput) (*aws.Request, *route53domains.DisableDomainAutoRenewOutput)
 
 	DisableDomainTransferLock(*route53domains.DisableDomainTransferLockInput) (*route53domains.DisableDomainTransferLockOutput, error)
-	DisableDomainTransferLockWithContext(aws.Context, *route53domains.DisableDomainTransferLockInput, ...request.Option) (*route53domains.DisableDomainTransferLockOutput, error)
-	DisableDomainTransferLockRequest(*route53domains.DisableDomainTransferLockInput) (*request.Request, *route53domains.DisableDomainTransferLockOutput)
+	DisableDomainTransferLockWithContext(aws.Context, *route53domains.DisableDomainTransferLockInput, ...aws.Option) (*route53domains.DisableDomainTransferLockOutput, error)
+	DisableDomainTransferLockRequest(*route53domains.DisableDomainTransferLockInput) (*aws.Request, *route53domains.DisableDomainTransferLockOutput)
 
 	EnableDomainAutoRenew(*route53domains.EnableDomainAutoRenewInput) (*route53domains.EnableDomainAutoRenewOutput, error)
-	EnableDomainAutoRenewWithContext(aws.Context, *route53domains.EnableDomainAutoRenewInput, ...request.Option) (*route53domains.EnableDomainAutoRenewOutput, error)
-	EnableDomainAutoRenewRequest(*route53domains.EnableDomainAutoRenewInput) (*request.Request, *route53domains.EnableDomainAutoRenewOutput)
+	EnableDomainAutoRenewWithContext(aws.Context, *route53domains.EnableDomainAutoRenewInput, ...aws.Option) (*route53domains.EnableDomainAutoRenewOutput, error)
+	EnableDomainAutoRenewRequest(*route53domains.EnableDomainAutoRenewInput) (*aws.Request, *route53domains.EnableDomainAutoRenewOutput)
 
 	EnableDomainTransferLock(*route53domains.EnableDomainTransferLockInput) (*route53domains.EnableDomainTransferLockOutput, error)
-	EnableDomainTransferLockWithContext(aws.Context, *route53domains.EnableDomainTransferLockInput, ...request.Option) (*route53domains.EnableDomainTransferLockOutput, error)
-	EnableDomainTransferLockRequest(*route53domains.EnableDomainTransferLockInput) (*request.Request, *route53domains.EnableDomainTransferLockOutput)
+	EnableDomainTransferLockWithContext(aws.Context, *route53domains.EnableDomainTransferLockInput, ...aws.Option) (*route53domains.EnableDomainTransferLockOutput, error)
+	EnableDomainTransferLockRequest(*route53domains.EnableDomainTransferLockInput) (*aws.Request, *route53domains.EnableDomainTransferLockOutput)
 
 	GetContactReachabilityStatus(*route53domains.GetContactReachabilityStatusInput) (*route53domains.GetContactReachabilityStatusOutput, error)
-	GetContactReachabilityStatusWithContext(aws.Context, *route53domains.GetContactReachabilityStatusInput, ...request.Option) (*route53domains.GetContactReachabilityStatusOutput, error)
-	GetContactReachabilityStatusRequest(*route53domains.GetContactReachabilityStatusInput) (*request.Request, *route53domains.GetContactReachabilityStatusOutput)
+	GetContactReachabilityStatusWithContext(aws.Context, *route53domains.GetContactReachabilityStatusInput, ...aws.Option) (*route53domains.GetContactReachabilityStatusOutput, error)
+	GetContactReachabilityStatusRequest(*route53domains.GetContactReachabilityStatusInput) (*aws.Request, *route53domains.GetContactReachabilityStatusOutput)
 
 	GetDomainDetail(*route53domains.GetDomainDetailInput) (*route53domains.GetDomainDetailOutput, error)
-	GetDomainDetailWithContext(aws.Context, *route53domains.GetDomainDetailInput, ...request.Option) (*route53domains.GetDomainDetailOutput, error)
-	GetDomainDetailRequest(*route53domains.GetDomainDetailInput) (*request.Request, *route53domains.GetDomainDetailOutput)
+	GetDomainDetailWithContext(aws.Context, *route53domains.GetDomainDetailInput, ...aws.Option) (*route53domains.GetDomainDetailOutput, error)
+	GetDomainDetailRequest(*route53domains.GetDomainDetailInput) (*aws.Request, *route53domains.GetDomainDetailOutput)
 
 	GetDomainSuggestions(*route53domains.GetDomainSuggestionsInput) (*route53domains.GetDomainSuggestionsOutput, error)
-	GetDomainSuggestionsWithContext(aws.Context, *route53domains.GetDomainSuggestionsInput, ...request.Option) (*route53domains.GetDomainSuggestionsOutput, error)
-	GetDomainSuggestionsRequest(*route53domains.GetDomainSuggestionsInput) (*request.Request, *route53domains.GetDomainSuggestionsOutput)
+	GetDomainSuggestionsWithContext(aws.Context, *route53domains.GetDomainSuggestionsInput, ...aws.Option) (*route53domains.GetDomainSuggestionsOutput, error)
+	GetDomainSuggestionsRequest(*route53domains.GetDomainSuggestionsInput) (*aws.Request, *route53domains.GetDomainSuggestionsOutput)
 
 	GetOperationDetail(*route53domains.GetOperationDetailInput) (*route53domains.GetOperationDetailOutput, error)
-	GetOperationDetailWithContext(aws.Context, *route53domains.GetOperationDetailInput, ...request.Option) (*route53domains.GetOperationDetailOutput, error)
-	GetOperationDetailRequest(*route53domains.GetOperationDetailInput) (*request.Request, *route53domains.GetOperationDetailOutput)
+	GetOperationDetailWithContext(aws.Context, *route53domains.GetOperationDetailInput, ...aws.Option) (*route53domains.GetOperationDetailOutput, error)
+	GetOperationDetailRequest(*route53domains.GetOperationDetailInput) (*aws.Request, *route53domains.GetOperationDetailOutput)
 
 	ListDomains(*route53domains.ListDomainsInput) (*route53domains.ListDomainsOutput, error)
-	ListDomainsWithContext(aws.Context, *route53domains.ListDomainsInput, ...request.Option) (*route53domains.ListDomainsOutput, error)
-	ListDomainsRequest(*route53domains.ListDomainsInput) (*request.Request, *route53domains.ListDomainsOutput)
+	ListDomainsWithContext(aws.Context, *route53domains.ListDomainsInput, ...aws.Option) (*route53domains.ListDomainsOutput, error)
+	ListDomainsRequest(*route53domains.ListDomainsInput) (*aws.Request, *route53domains.ListDomainsOutput)
 
 	ListDomainsPages(*route53domains.ListDomainsInput, func(*route53domains.ListDomainsOutput, bool) bool) error
-	ListDomainsPagesWithContext(aws.Context, *route53domains.ListDomainsInput, func(*route53domains.ListDomainsOutput, bool) bool, ...request.Option) error
+	ListDomainsPagesWithContext(aws.Context, *route53domains.ListDomainsInput, func(*route53domains.ListDomainsOutput, bool) bool, ...aws.Option) error
 
 	ListOperations(*route53domains.ListOperationsInput) (*route53domains.ListOperationsOutput, error)
-	ListOperationsWithContext(aws.Context, *route53domains.ListOperationsInput, ...request.Option) (*route53domains.ListOperationsOutput, error)
-	ListOperationsRequest(*route53domains.ListOperationsInput) (*request.Request, *route53domains.ListOperationsOutput)
+	ListOperationsWithContext(aws.Context, *route53domains.ListOperationsInput, ...aws.Option) (*route53domains.ListOperationsOutput, error)
+	ListOperationsRequest(*route53domains.ListOperationsInput) (*aws.Request, *route53domains.ListOperationsOutput)
 
 	ListOperationsPages(*route53domains.ListOperationsInput, func(*route53domains.ListOperationsOutput, bool) bool) error
-	ListOperationsPagesWithContext(aws.Context, *route53domains.ListOperationsInput, func(*route53domains.ListOperationsOutput, bool) bool, ...request.Option) error
+	ListOperationsPagesWithContext(aws.Context, *route53domains.ListOperationsInput, func(*route53domains.ListOperationsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsForDomain(*route53domains.ListTagsForDomainInput) (*route53domains.ListTagsForDomainOutput, error)
-	ListTagsForDomainWithContext(aws.Context, *route53domains.ListTagsForDomainInput, ...request.Option) (*route53domains.ListTagsForDomainOutput, error)
-	ListTagsForDomainRequest(*route53domains.ListTagsForDomainInput) (*request.Request, *route53domains.ListTagsForDomainOutput)
+	ListTagsForDomainWithContext(aws.Context, *route53domains.ListTagsForDomainInput, ...aws.Option) (*route53domains.ListTagsForDomainOutput, error)
+	ListTagsForDomainRequest(*route53domains.ListTagsForDomainInput) (*aws.Request, *route53domains.ListTagsForDomainOutput)
 
 	RegisterDomain(*route53domains.RegisterDomainInput) (*route53domains.RegisterDomainOutput, error)
-	RegisterDomainWithContext(aws.Context, *route53domains.RegisterDomainInput, ...request.Option) (*route53domains.RegisterDomainOutput, error)
-	RegisterDomainRequest(*route53domains.RegisterDomainInput) (*request.Request, *route53domains.RegisterDomainOutput)
+	RegisterDomainWithContext(aws.Context, *route53domains.RegisterDomainInput, ...aws.Option) (*route53domains.RegisterDomainOutput, error)
+	RegisterDomainRequest(*route53domains.RegisterDomainInput) (*aws.Request, *route53domains.RegisterDomainOutput)
 
 	RenewDomain(*route53domains.RenewDomainInput) (*route53domains.RenewDomainOutput, error)
-	RenewDomainWithContext(aws.Context, *route53domains.RenewDomainInput, ...request.Option) (*route53domains.RenewDomainOutput, error)
-	RenewDomainRequest(*route53domains.RenewDomainInput) (*request.Request, *route53domains.RenewDomainOutput)
+	RenewDomainWithContext(aws.Context, *route53domains.RenewDomainInput, ...aws.Option) (*route53domains.RenewDomainOutput, error)
+	RenewDomainRequest(*route53domains.RenewDomainInput) (*aws.Request, *route53domains.RenewDomainOutput)
 
 	ResendContactReachabilityEmail(*route53domains.ResendContactReachabilityEmailInput) (*route53domains.ResendContactReachabilityEmailOutput, error)
-	ResendContactReachabilityEmailWithContext(aws.Context, *route53domains.ResendContactReachabilityEmailInput, ...request.Option) (*route53domains.ResendContactReachabilityEmailOutput, error)
-	ResendContactReachabilityEmailRequest(*route53domains.ResendContactReachabilityEmailInput) (*request.Request, *route53domains.ResendContactReachabilityEmailOutput)
+	ResendContactReachabilityEmailWithContext(aws.Context, *route53domains.ResendContactReachabilityEmailInput, ...aws.Option) (*route53domains.ResendContactReachabilityEmailOutput, error)
+	ResendContactReachabilityEmailRequest(*route53domains.ResendContactReachabilityEmailInput) (*aws.Request, *route53domains.ResendContactReachabilityEmailOutput)
 
 	RetrieveDomainAuthCode(*route53domains.RetrieveDomainAuthCodeInput) (*route53domains.RetrieveDomainAuthCodeOutput, error)
-	RetrieveDomainAuthCodeWithContext(aws.Context, *route53domains.RetrieveDomainAuthCodeInput, ...request.Option) (*route53domains.RetrieveDomainAuthCodeOutput, error)
-	RetrieveDomainAuthCodeRequest(*route53domains.RetrieveDomainAuthCodeInput) (*request.Request, *route53domains.RetrieveDomainAuthCodeOutput)
+	RetrieveDomainAuthCodeWithContext(aws.Context, *route53domains.RetrieveDomainAuthCodeInput, ...aws.Option) (*route53domains.RetrieveDomainAuthCodeOutput, error)
+	RetrieveDomainAuthCodeRequest(*route53domains.RetrieveDomainAuthCodeInput) (*aws.Request, *route53domains.RetrieveDomainAuthCodeOutput)
 
 	TransferDomain(*route53domains.TransferDomainInput) (*route53domains.TransferDomainOutput, error)
-	TransferDomainWithContext(aws.Context, *route53domains.TransferDomainInput, ...request.Option) (*route53domains.TransferDomainOutput, error)
-	TransferDomainRequest(*route53domains.TransferDomainInput) (*request.Request, *route53domains.TransferDomainOutput)
+	TransferDomainWithContext(aws.Context, *route53domains.TransferDomainInput, ...aws.Option) (*route53domains.TransferDomainOutput, error)
+	TransferDomainRequest(*route53domains.TransferDomainInput) (*aws.Request, *route53domains.TransferDomainOutput)
 
 	UpdateDomainContact(*route53domains.UpdateDomainContactInput) (*route53domains.UpdateDomainContactOutput, error)
-	UpdateDomainContactWithContext(aws.Context, *route53domains.UpdateDomainContactInput, ...request.Option) (*route53domains.UpdateDomainContactOutput, error)
-	UpdateDomainContactRequest(*route53domains.UpdateDomainContactInput) (*request.Request, *route53domains.UpdateDomainContactOutput)
+	UpdateDomainContactWithContext(aws.Context, *route53domains.UpdateDomainContactInput, ...aws.Option) (*route53domains.UpdateDomainContactOutput, error)
+	UpdateDomainContactRequest(*route53domains.UpdateDomainContactInput) (*aws.Request, *route53domains.UpdateDomainContactOutput)
 
 	UpdateDomainContactPrivacy(*route53domains.UpdateDomainContactPrivacyInput) (*route53domains.UpdateDomainContactPrivacyOutput, error)
-	UpdateDomainContactPrivacyWithContext(aws.Context, *route53domains.UpdateDomainContactPrivacyInput, ...request.Option) (*route53domains.UpdateDomainContactPrivacyOutput, error)
-	UpdateDomainContactPrivacyRequest(*route53domains.UpdateDomainContactPrivacyInput) (*request.Request, *route53domains.UpdateDomainContactPrivacyOutput)
+	UpdateDomainContactPrivacyWithContext(aws.Context, *route53domains.UpdateDomainContactPrivacyInput, ...aws.Option) (*route53domains.UpdateDomainContactPrivacyOutput, error)
+	UpdateDomainContactPrivacyRequest(*route53domains.UpdateDomainContactPrivacyInput) (*aws.Request, *route53domains.UpdateDomainContactPrivacyOutput)
 
 	UpdateDomainNameservers(*route53domains.UpdateDomainNameserversInput) (*route53domains.UpdateDomainNameserversOutput, error)
-	UpdateDomainNameserversWithContext(aws.Context, *route53domains.UpdateDomainNameserversInput, ...request.Option) (*route53domains.UpdateDomainNameserversOutput, error)
-	UpdateDomainNameserversRequest(*route53domains.UpdateDomainNameserversInput) (*request.Request, *route53domains.UpdateDomainNameserversOutput)
+	UpdateDomainNameserversWithContext(aws.Context, *route53domains.UpdateDomainNameserversInput, ...aws.Option) (*route53domains.UpdateDomainNameserversOutput, error)
+	UpdateDomainNameserversRequest(*route53domains.UpdateDomainNameserversInput) (*aws.Request, *route53domains.UpdateDomainNameserversOutput)
 
 	UpdateTagsForDomain(*route53domains.UpdateTagsForDomainInput) (*route53domains.UpdateTagsForDomainOutput, error)
-	UpdateTagsForDomainWithContext(aws.Context, *route53domains.UpdateTagsForDomainInput, ...request.Option) (*route53domains.UpdateTagsForDomainOutput, error)
-	UpdateTagsForDomainRequest(*route53domains.UpdateTagsForDomainInput) (*request.Request, *route53domains.UpdateTagsForDomainOutput)
+	UpdateTagsForDomainWithContext(aws.Context, *route53domains.UpdateTagsForDomainInput, ...aws.Option) (*route53domains.UpdateTagsForDomainOutput, error)
+	UpdateTagsForDomainRequest(*route53domains.UpdateTagsForDomainInput) (*aws.Request, *route53domains.UpdateTagsForDomainOutput)
 
 	ViewBilling(*route53domains.ViewBillingInput) (*route53domains.ViewBillingOutput, error)
-	ViewBillingWithContext(aws.Context, *route53domains.ViewBillingInput, ...request.Option) (*route53domains.ViewBillingOutput, error)
-	ViewBillingRequest(*route53domains.ViewBillingInput) (*request.Request, *route53domains.ViewBillingOutput)
+	ViewBillingWithContext(aws.Context, *route53domains.ViewBillingInput, ...aws.Option) (*route53domains.ViewBillingOutput, error)
+	ViewBillingRequest(*route53domains.ViewBillingInput) (*aws.Request, *route53domains.ViewBillingOutput)
 }
 
 var _ Route53DomainsAPI = (*route53domains.Route53Domains)(nil)

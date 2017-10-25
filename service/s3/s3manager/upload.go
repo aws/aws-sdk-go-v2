@@ -9,10 +9,9 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
 )
@@ -267,9 +266,9 @@ type Uploader struct {
 //     uploader := s3manager.NewUploader(session, func(u *s3manager.Uploader) {
 //          u.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
-func NewUploader(c client.ConfigProvider, options ...func(*Uploader)) *Uploader {
+func NewUploader(cfg aws.Config, options ...func(*Uploader)) *Uploader {
 	u := &Uploader{
-		S3:                s3.New(c),
+		S3:                s3.New(cfg),
 		PartSize:          DefaultUploadPartSize,
 		Concurrency:       DefaultUploadConcurrency,
 		LeavePartsOnError: false,

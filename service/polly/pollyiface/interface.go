@@ -10,7 +10,6 @@ package pollyiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/polly"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := polly.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := polly.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,28 +64,28 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type PollyAPI interface {
 	DeleteLexicon(*polly.DeleteLexiconInput) (*polly.DeleteLexiconOutput, error)
-	DeleteLexiconWithContext(aws.Context, *polly.DeleteLexiconInput, ...request.Option) (*polly.DeleteLexiconOutput, error)
-	DeleteLexiconRequest(*polly.DeleteLexiconInput) (*request.Request, *polly.DeleteLexiconOutput)
+	DeleteLexiconWithContext(aws.Context, *polly.DeleteLexiconInput, ...aws.Option) (*polly.DeleteLexiconOutput, error)
+	DeleteLexiconRequest(*polly.DeleteLexiconInput) (*aws.Request, *polly.DeleteLexiconOutput)
 
 	DescribeVoices(*polly.DescribeVoicesInput) (*polly.DescribeVoicesOutput, error)
-	DescribeVoicesWithContext(aws.Context, *polly.DescribeVoicesInput, ...request.Option) (*polly.DescribeVoicesOutput, error)
-	DescribeVoicesRequest(*polly.DescribeVoicesInput) (*request.Request, *polly.DescribeVoicesOutput)
+	DescribeVoicesWithContext(aws.Context, *polly.DescribeVoicesInput, ...aws.Option) (*polly.DescribeVoicesOutput, error)
+	DescribeVoicesRequest(*polly.DescribeVoicesInput) (*aws.Request, *polly.DescribeVoicesOutput)
 
 	GetLexicon(*polly.GetLexiconInput) (*polly.GetLexiconOutput, error)
-	GetLexiconWithContext(aws.Context, *polly.GetLexiconInput, ...request.Option) (*polly.GetLexiconOutput, error)
-	GetLexiconRequest(*polly.GetLexiconInput) (*request.Request, *polly.GetLexiconOutput)
+	GetLexiconWithContext(aws.Context, *polly.GetLexiconInput, ...aws.Option) (*polly.GetLexiconOutput, error)
+	GetLexiconRequest(*polly.GetLexiconInput) (*aws.Request, *polly.GetLexiconOutput)
 
 	ListLexicons(*polly.ListLexiconsInput) (*polly.ListLexiconsOutput, error)
-	ListLexiconsWithContext(aws.Context, *polly.ListLexiconsInput, ...request.Option) (*polly.ListLexiconsOutput, error)
-	ListLexiconsRequest(*polly.ListLexiconsInput) (*request.Request, *polly.ListLexiconsOutput)
+	ListLexiconsWithContext(aws.Context, *polly.ListLexiconsInput, ...aws.Option) (*polly.ListLexiconsOutput, error)
+	ListLexiconsRequest(*polly.ListLexiconsInput) (*aws.Request, *polly.ListLexiconsOutput)
 
 	PutLexicon(*polly.PutLexiconInput) (*polly.PutLexiconOutput, error)
-	PutLexiconWithContext(aws.Context, *polly.PutLexiconInput, ...request.Option) (*polly.PutLexiconOutput, error)
-	PutLexiconRequest(*polly.PutLexiconInput) (*request.Request, *polly.PutLexiconOutput)
+	PutLexiconWithContext(aws.Context, *polly.PutLexiconInput, ...aws.Option) (*polly.PutLexiconOutput, error)
+	PutLexiconRequest(*polly.PutLexiconInput) (*aws.Request, *polly.PutLexiconOutput)
 
 	SynthesizeSpeech(*polly.SynthesizeSpeechInput) (*polly.SynthesizeSpeechOutput, error)
-	SynthesizeSpeechWithContext(aws.Context, *polly.SynthesizeSpeechInput, ...request.Option) (*polly.SynthesizeSpeechOutput, error)
-	SynthesizeSpeechRequest(*polly.SynthesizeSpeechInput) (*request.Request, *polly.SynthesizeSpeechOutput)
+	SynthesizeSpeechWithContext(aws.Context, *polly.SynthesizeSpeechInput, ...aws.Option) (*polly.SynthesizeSpeechOutput, error)
+	SynthesizeSpeechRequest(*polly.SynthesizeSpeechInput) (*aws.Request, *polly.SynthesizeSpeechOutput)
 }
 
 var _ PollyAPI = (*polly.Polly)(nil)

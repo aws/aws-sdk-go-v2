@@ -10,7 +10,6 @@ package workspacesiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := workspaces.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := workspaces.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,69 +64,69 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type WorkSpacesAPI interface {
 	CreateTags(*workspaces.CreateTagsInput) (*workspaces.CreateTagsOutput, error)
-	CreateTagsWithContext(aws.Context, *workspaces.CreateTagsInput, ...request.Option) (*workspaces.CreateTagsOutput, error)
-	CreateTagsRequest(*workspaces.CreateTagsInput) (*request.Request, *workspaces.CreateTagsOutput)
+	CreateTagsWithContext(aws.Context, *workspaces.CreateTagsInput, ...aws.Option) (*workspaces.CreateTagsOutput, error)
+	CreateTagsRequest(*workspaces.CreateTagsInput) (*aws.Request, *workspaces.CreateTagsOutput)
 
 	CreateWorkspaces(*workspaces.CreateWorkspacesInput) (*workspaces.CreateWorkspacesOutput, error)
-	CreateWorkspacesWithContext(aws.Context, *workspaces.CreateWorkspacesInput, ...request.Option) (*workspaces.CreateWorkspacesOutput, error)
-	CreateWorkspacesRequest(*workspaces.CreateWorkspacesInput) (*request.Request, *workspaces.CreateWorkspacesOutput)
+	CreateWorkspacesWithContext(aws.Context, *workspaces.CreateWorkspacesInput, ...aws.Option) (*workspaces.CreateWorkspacesOutput, error)
+	CreateWorkspacesRequest(*workspaces.CreateWorkspacesInput) (*aws.Request, *workspaces.CreateWorkspacesOutput)
 
 	DeleteTags(*workspaces.DeleteTagsInput) (*workspaces.DeleteTagsOutput, error)
-	DeleteTagsWithContext(aws.Context, *workspaces.DeleteTagsInput, ...request.Option) (*workspaces.DeleteTagsOutput, error)
-	DeleteTagsRequest(*workspaces.DeleteTagsInput) (*request.Request, *workspaces.DeleteTagsOutput)
+	DeleteTagsWithContext(aws.Context, *workspaces.DeleteTagsInput, ...aws.Option) (*workspaces.DeleteTagsOutput, error)
+	DeleteTagsRequest(*workspaces.DeleteTagsInput) (*aws.Request, *workspaces.DeleteTagsOutput)
 
 	DescribeTags(*workspaces.DescribeTagsInput) (*workspaces.DescribeTagsOutput, error)
-	DescribeTagsWithContext(aws.Context, *workspaces.DescribeTagsInput, ...request.Option) (*workspaces.DescribeTagsOutput, error)
-	DescribeTagsRequest(*workspaces.DescribeTagsInput) (*request.Request, *workspaces.DescribeTagsOutput)
+	DescribeTagsWithContext(aws.Context, *workspaces.DescribeTagsInput, ...aws.Option) (*workspaces.DescribeTagsOutput, error)
+	DescribeTagsRequest(*workspaces.DescribeTagsInput) (*aws.Request, *workspaces.DescribeTagsOutput)
 
 	DescribeWorkspaceBundles(*workspaces.DescribeWorkspaceBundlesInput) (*workspaces.DescribeWorkspaceBundlesOutput, error)
-	DescribeWorkspaceBundlesWithContext(aws.Context, *workspaces.DescribeWorkspaceBundlesInput, ...request.Option) (*workspaces.DescribeWorkspaceBundlesOutput, error)
-	DescribeWorkspaceBundlesRequest(*workspaces.DescribeWorkspaceBundlesInput) (*request.Request, *workspaces.DescribeWorkspaceBundlesOutput)
+	DescribeWorkspaceBundlesWithContext(aws.Context, *workspaces.DescribeWorkspaceBundlesInput, ...aws.Option) (*workspaces.DescribeWorkspaceBundlesOutput, error)
+	DescribeWorkspaceBundlesRequest(*workspaces.DescribeWorkspaceBundlesInput) (*aws.Request, *workspaces.DescribeWorkspaceBundlesOutput)
 
 	DescribeWorkspaceBundlesPages(*workspaces.DescribeWorkspaceBundlesInput, func(*workspaces.DescribeWorkspaceBundlesOutput, bool) bool) error
-	DescribeWorkspaceBundlesPagesWithContext(aws.Context, *workspaces.DescribeWorkspaceBundlesInput, func(*workspaces.DescribeWorkspaceBundlesOutput, bool) bool, ...request.Option) error
+	DescribeWorkspaceBundlesPagesWithContext(aws.Context, *workspaces.DescribeWorkspaceBundlesInput, func(*workspaces.DescribeWorkspaceBundlesOutput, bool) bool, ...aws.Option) error
 
 	DescribeWorkspaceDirectories(*workspaces.DescribeWorkspaceDirectoriesInput) (*workspaces.DescribeWorkspaceDirectoriesOutput, error)
-	DescribeWorkspaceDirectoriesWithContext(aws.Context, *workspaces.DescribeWorkspaceDirectoriesInput, ...request.Option) (*workspaces.DescribeWorkspaceDirectoriesOutput, error)
-	DescribeWorkspaceDirectoriesRequest(*workspaces.DescribeWorkspaceDirectoriesInput) (*request.Request, *workspaces.DescribeWorkspaceDirectoriesOutput)
+	DescribeWorkspaceDirectoriesWithContext(aws.Context, *workspaces.DescribeWorkspaceDirectoriesInput, ...aws.Option) (*workspaces.DescribeWorkspaceDirectoriesOutput, error)
+	DescribeWorkspaceDirectoriesRequest(*workspaces.DescribeWorkspaceDirectoriesInput) (*aws.Request, *workspaces.DescribeWorkspaceDirectoriesOutput)
 
 	DescribeWorkspaceDirectoriesPages(*workspaces.DescribeWorkspaceDirectoriesInput, func(*workspaces.DescribeWorkspaceDirectoriesOutput, bool) bool) error
-	DescribeWorkspaceDirectoriesPagesWithContext(aws.Context, *workspaces.DescribeWorkspaceDirectoriesInput, func(*workspaces.DescribeWorkspaceDirectoriesOutput, bool) bool, ...request.Option) error
+	DescribeWorkspaceDirectoriesPagesWithContext(aws.Context, *workspaces.DescribeWorkspaceDirectoriesInput, func(*workspaces.DescribeWorkspaceDirectoriesOutput, bool) bool, ...aws.Option) error
 
 	DescribeWorkspaces(*workspaces.DescribeWorkspacesInput) (*workspaces.DescribeWorkspacesOutput, error)
-	DescribeWorkspacesWithContext(aws.Context, *workspaces.DescribeWorkspacesInput, ...request.Option) (*workspaces.DescribeWorkspacesOutput, error)
-	DescribeWorkspacesRequest(*workspaces.DescribeWorkspacesInput) (*request.Request, *workspaces.DescribeWorkspacesOutput)
+	DescribeWorkspacesWithContext(aws.Context, *workspaces.DescribeWorkspacesInput, ...aws.Option) (*workspaces.DescribeWorkspacesOutput, error)
+	DescribeWorkspacesRequest(*workspaces.DescribeWorkspacesInput) (*aws.Request, *workspaces.DescribeWorkspacesOutput)
 
 	DescribeWorkspacesPages(*workspaces.DescribeWorkspacesInput, func(*workspaces.DescribeWorkspacesOutput, bool) bool) error
-	DescribeWorkspacesPagesWithContext(aws.Context, *workspaces.DescribeWorkspacesInput, func(*workspaces.DescribeWorkspacesOutput, bool) bool, ...request.Option) error
+	DescribeWorkspacesPagesWithContext(aws.Context, *workspaces.DescribeWorkspacesInput, func(*workspaces.DescribeWorkspacesOutput, bool) bool, ...aws.Option) error
 
 	DescribeWorkspacesConnectionStatus(*workspaces.DescribeWorkspacesConnectionStatusInput) (*workspaces.DescribeWorkspacesConnectionStatusOutput, error)
-	DescribeWorkspacesConnectionStatusWithContext(aws.Context, *workspaces.DescribeWorkspacesConnectionStatusInput, ...request.Option) (*workspaces.DescribeWorkspacesConnectionStatusOutput, error)
-	DescribeWorkspacesConnectionStatusRequest(*workspaces.DescribeWorkspacesConnectionStatusInput) (*request.Request, *workspaces.DescribeWorkspacesConnectionStatusOutput)
+	DescribeWorkspacesConnectionStatusWithContext(aws.Context, *workspaces.DescribeWorkspacesConnectionStatusInput, ...aws.Option) (*workspaces.DescribeWorkspacesConnectionStatusOutput, error)
+	DescribeWorkspacesConnectionStatusRequest(*workspaces.DescribeWorkspacesConnectionStatusInput) (*aws.Request, *workspaces.DescribeWorkspacesConnectionStatusOutput)
 
 	ModifyWorkspaceProperties(*workspaces.ModifyWorkspacePropertiesInput) (*workspaces.ModifyWorkspacePropertiesOutput, error)
-	ModifyWorkspacePropertiesWithContext(aws.Context, *workspaces.ModifyWorkspacePropertiesInput, ...request.Option) (*workspaces.ModifyWorkspacePropertiesOutput, error)
-	ModifyWorkspacePropertiesRequest(*workspaces.ModifyWorkspacePropertiesInput) (*request.Request, *workspaces.ModifyWorkspacePropertiesOutput)
+	ModifyWorkspacePropertiesWithContext(aws.Context, *workspaces.ModifyWorkspacePropertiesInput, ...aws.Option) (*workspaces.ModifyWorkspacePropertiesOutput, error)
+	ModifyWorkspacePropertiesRequest(*workspaces.ModifyWorkspacePropertiesInput) (*aws.Request, *workspaces.ModifyWorkspacePropertiesOutput)
 
 	RebootWorkspaces(*workspaces.RebootWorkspacesInput) (*workspaces.RebootWorkspacesOutput, error)
-	RebootWorkspacesWithContext(aws.Context, *workspaces.RebootWorkspacesInput, ...request.Option) (*workspaces.RebootWorkspacesOutput, error)
-	RebootWorkspacesRequest(*workspaces.RebootWorkspacesInput) (*request.Request, *workspaces.RebootWorkspacesOutput)
+	RebootWorkspacesWithContext(aws.Context, *workspaces.RebootWorkspacesInput, ...aws.Option) (*workspaces.RebootWorkspacesOutput, error)
+	RebootWorkspacesRequest(*workspaces.RebootWorkspacesInput) (*aws.Request, *workspaces.RebootWorkspacesOutput)
 
 	RebuildWorkspaces(*workspaces.RebuildWorkspacesInput) (*workspaces.RebuildWorkspacesOutput, error)
-	RebuildWorkspacesWithContext(aws.Context, *workspaces.RebuildWorkspacesInput, ...request.Option) (*workspaces.RebuildWorkspacesOutput, error)
-	RebuildWorkspacesRequest(*workspaces.RebuildWorkspacesInput) (*request.Request, *workspaces.RebuildWorkspacesOutput)
+	RebuildWorkspacesWithContext(aws.Context, *workspaces.RebuildWorkspacesInput, ...aws.Option) (*workspaces.RebuildWorkspacesOutput, error)
+	RebuildWorkspacesRequest(*workspaces.RebuildWorkspacesInput) (*aws.Request, *workspaces.RebuildWorkspacesOutput)
 
 	StartWorkspaces(*workspaces.StartWorkspacesInput) (*workspaces.StartWorkspacesOutput, error)
-	StartWorkspacesWithContext(aws.Context, *workspaces.StartWorkspacesInput, ...request.Option) (*workspaces.StartWorkspacesOutput, error)
-	StartWorkspacesRequest(*workspaces.StartWorkspacesInput) (*request.Request, *workspaces.StartWorkspacesOutput)
+	StartWorkspacesWithContext(aws.Context, *workspaces.StartWorkspacesInput, ...aws.Option) (*workspaces.StartWorkspacesOutput, error)
+	StartWorkspacesRequest(*workspaces.StartWorkspacesInput) (*aws.Request, *workspaces.StartWorkspacesOutput)
 
 	StopWorkspaces(*workspaces.StopWorkspacesInput) (*workspaces.StopWorkspacesOutput, error)
-	StopWorkspacesWithContext(aws.Context, *workspaces.StopWorkspacesInput, ...request.Option) (*workspaces.StopWorkspacesOutput, error)
-	StopWorkspacesRequest(*workspaces.StopWorkspacesInput) (*request.Request, *workspaces.StopWorkspacesOutput)
+	StopWorkspacesWithContext(aws.Context, *workspaces.StopWorkspacesInput, ...aws.Option) (*workspaces.StopWorkspacesOutput, error)
+	StopWorkspacesRequest(*workspaces.StopWorkspacesInput) (*aws.Request, *workspaces.StopWorkspacesOutput)
 
 	TerminateWorkspaces(*workspaces.TerminateWorkspacesInput) (*workspaces.TerminateWorkspacesOutput, error)
-	TerminateWorkspacesWithContext(aws.Context, *workspaces.TerminateWorkspacesInput, ...request.Option) (*workspaces.TerminateWorkspacesOutput, error)
-	TerminateWorkspacesRequest(*workspaces.TerminateWorkspacesInput) (*request.Request, *workspaces.TerminateWorkspacesOutput)
+	TerminateWorkspacesWithContext(aws.Context, *workspaces.TerminateWorkspacesInput, ...aws.Option) (*workspaces.TerminateWorkspacesOutput, error)
+	TerminateWorkspacesRequest(*workspaces.TerminateWorkspacesInput) (*aws.Request, *workspaces.TerminateWorkspacesOutput)
 }
 
 var _ WorkSpacesAPI = (*workspaces.WorkSpaces)(nil)

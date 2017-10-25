@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 )
 
@@ -29,7 +29,12 @@ func parseTime(layout, value string) *time.Time {
 //
 // This example adds a permission for an S3 bucket to invoke a Lambda function.
 func ExampleLambda_AddPermission_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.AddPermissionInput{
 		Action:        aws.String("lambda:InvokeFunction"),
 		FunctionName:  aws.String("MyFunction"),
@@ -73,7 +78,12 @@ func ExampleLambda_AddPermission_shared00() {
 //
 // This example creates a Lambda function.
 func ExampleLambda_CreateFunction_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.CreateFunctionInput{
 		Code:         &lambda.FunctionCode{},
 		Description:  aws.String(""),
@@ -121,7 +131,12 @@ func ExampleLambda_CreateFunction_shared00() {
 //
 // This operation deletes a Lambda function alias
 func ExampleLambda_DeleteAlias_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.DeleteAliasInput{
 		FunctionName: aws.String("myFunction"),
 		Name:         aws.String("alias"),
@@ -155,7 +170,12 @@ func ExampleLambda_DeleteAlias_shared00() {
 //
 // This operation deletes a Lambda function event source mapping
 func ExampleLambda_DeleteEventSourceMapping_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.DeleteEventSourceMappingInput{
 		UUID: aws.String("12345kxodurf3443"),
 	}
@@ -190,7 +210,12 @@ func ExampleLambda_DeleteEventSourceMapping_shared00() {
 //
 // This operation deletes a Lambda function
 func ExampleLambda_DeleteFunction_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.DeleteFunctionInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
@@ -228,7 +253,12 @@ func ExampleLambda_DeleteFunction_shared00() {
 //
 // This operation retrieves a Lambda customer's account settings
 func ExampleLambda_GetAccountSettings_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.GetAccountSettingsInput{}
 
 	result, err := svc.GetAccountSettings(input)
@@ -257,7 +287,12 @@ func ExampleLambda_GetAccountSettings_shared00() {
 //
 // This operation retrieves a Lambda function alias
 func ExampleLambda_GetAlias_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.GetAliasInput{
 		FunctionName: aws.String("myFunction"),
 		Name:         aws.String("myFunctionAlias"),
@@ -293,7 +328,12 @@ func ExampleLambda_GetAlias_shared00() {
 //
 // This operation retrieves a Lambda function's event source mapping
 func ExampleLambda_GetEventSourceMapping_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.GetEventSourceMappingInput{
 		UUID: aws.String("123489-xxxxx-kdla8d89d7"),
 	}
@@ -328,7 +368,12 @@ func ExampleLambda_GetEventSourceMapping_shared00() {
 //
 // This operation retrieves a Lambda function's event source mapping
 func ExampleLambda_GetFunction_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.GetFunctionInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
@@ -364,7 +409,12 @@ func ExampleLambda_GetFunction_shared00() {
 //
 // This operation retrieves a Lambda function's event source mapping
 func ExampleLambda_GetFunctionConfiguration_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.GetFunctionConfigurationInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
@@ -400,7 +450,12 @@ func ExampleLambda_GetFunctionConfiguration_shared00() {
 //
 // This operation retrieves a Lambda function policy
 func ExampleLambda_GetPolicy_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.GetPolicyInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
@@ -436,7 +491,12 @@ func ExampleLambda_GetPolicy_shared00() {
 //
 // This operation invokes a Lambda function
 func ExampleLambda_Invoke_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.InvokeInput{
 		ClientContext:  aws.String("MyApp"),
 		FunctionName:   aws.String("MyFunction"),
@@ -508,7 +568,12 @@ func ExampleLambda_Invoke_shared00() {
 //
 // This operation invokes a Lambda function asynchronously
 func ExampleLambda_InvokeAsync_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.InvokeAsyncInput{
 		FunctionName: aws.String("myFunction"),
 		InvokeArgs:   aws.ReadSeekCloser(strings.NewReader("fileb://file-path/input.json")),
@@ -544,7 +609,12 @@ func ExampleLambda_InvokeAsync_shared00() {
 //
 // This operation retrieves a Lambda function's aliases
 func ExampleLambda_ListAliases_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.ListAliasesInput{
 		FunctionName:    aws.String("myFunction"),
 		FunctionVersion: aws.String("1"),
@@ -582,7 +652,12 @@ func ExampleLambda_ListAliases_shared00() {
 //
 // This operation retrieves a Lambda functions
 func ExampleLambda_ListFunctions_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.ListFunctionsInput{
 		Marker:   aws.String(""),
 		MaxItems: aws.Int64(123),
@@ -616,7 +691,12 @@ func ExampleLambda_ListFunctions_shared00() {
 //
 // This operation retrieves a Lambda function versions
 func ExampleLambda_ListVersionsByFunction_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.ListVersionsByFunctionInput{
 		FunctionName: aws.String("myFunction"),
 		Marker:       aws.String(""),
@@ -653,7 +733,12 @@ func ExampleLambda_ListVersionsByFunction_shared00() {
 //
 // This operation publishes a version of a Lambda function
 func ExampleLambda_PublishVersion_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.PublishVersionInput{
 		CodeSha256:   aws.String(""),
 		Description:  aws.String(""),
@@ -692,7 +777,12 @@ func ExampleLambda_PublishVersion_shared00() {
 //
 // This operation removes a Lambda function's permissions
 func ExampleLambda_RemovePermission_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.RemovePermissionInput{
 		FunctionName: aws.String("myFunction"),
 		Qualifier:    aws.String("1"),
@@ -729,7 +819,12 @@ func ExampleLambda_RemovePermission_shared00() {
 //
 // This operation updates a Lambda function alias
 func ExampleLambda_UpdateAlias_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.UpdateAliasInput{
 		Description:     aws.String(""),
 		FunctionName:    aws.String("myFunction"),
@@ -767,7 +862,12 @@ func ExampleLambda_UpdateAlias_shared00() {
 //
 // This operation updates a Lambda function event source mapping
 func ExampleLambda_UpdateEventSourceMapping_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.UpdateEventSourceMappingInput{
 		BatchSize:    aws.Int64(123),
 		Enabled:      aws.Bool(true),
@@ -807,7 +907,12 @@ func ExampleLambda_UpdateEventSourceMapping_shared00() {
 //
 // This operation updates a Lambda function's code
 func ExampleLambda_UpdateFunctionCode_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.UpdateFunctionCodeInput{
 		FunctionName:    aws.String("myFunction"),
 		Publish:         aws.Bool(true),
@@ -849,7 +954,12 @@ func ExampleLambda_UpdateFunctionCode_shared00() {
 //
 // This operation updates a Lambda function's configuration
 func ExampleLambda_UpdateFunctionConfiguration_shared00() {
-	svc := lambda.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lambda.New(cfg)
 	input := &lambda.UpdateFunctionConfigurationInput{
 		Description:  aws.String(""),
 		FunctionName: aws.String("myFunction"),

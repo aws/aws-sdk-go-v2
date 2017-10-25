@@ -1,7 +1,6 @@
 package iotdataplane_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -10,14 +9,15 @@ import (
 )
 
 func TestRequireEndpointIfRegionProvided(t *testing.T) {
-	svc := iotdataplane.New(unit.Session, &aws.Config{
-		Region:                 aws.String("mock-region"),
-		DisableParamValidation: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
+
+	svc := iotdataplane.New(cfg)
 	req, _ := svc.GetThingShadowRequest(nil)
 	err := req.Build()
 
-	if e, a := "", svc.Endpoint; e != a {
+	if e, a := "", req.Metadata.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err == nil {
@@ -29,15 +29,16 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 }
 
 func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
-	svc := iotdataplane.New(unit.Session, &aws.Config{
-		DisableParamValidation: aws.Bool(true),
-	})
-	fmt.Println(svc.ClientInfo.SigningRegion)
+	cfg := unit.Config()
+	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
+
+	svc := iotdataplane.New(cfg)
 
 	req, _ := svc.GetThingShadowRequest(nil)
 	err := req.Build()
 
-	if e, a := "", svc.Endpoint; e != a {
+	if e, a := "", req.Metadata.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err == nil {
@@ -49,15 +50,15 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 }
 
 func TestRequireEndpointUsed(t *testing.T) {
-	svc := iotdataplane.New(unit.Session, &aws.Config{
-		Region:                 aws.String("mock-region"),
-		DisableParamValidation: aws.Bool(true),
-		Endpoint:               aws.String("https://endpoint"),
-	})
+	cfg := unit.Config()
+	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
+
+	svc := iotdataplane.New(cfg)
 	req, _ := svc.GetThingShadowRequest(nil)
 	err := req.Build()
 
-	if e, a := "https://endpoint", svc.Endpoint; e != a {
+	if e, a := "https://endpoint", req.Metadata.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err != nil {

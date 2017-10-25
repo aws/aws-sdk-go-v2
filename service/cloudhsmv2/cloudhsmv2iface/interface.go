@@ -10,7 +10,6 @@ package cloudhsmv2iface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := cloudhsmv2.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := cloudhsmv2.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,53 +64,53 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CloudHSMV2API interface {
 	CreateCluster(*cloudhsmv2.CreateClusterInput) (*cloudhsmv2.CreateClusterOutput, error)
-	CreateClusterWithContext(aws.Context, *cloudhsmv2.CreateClusterInput, ...request.Option) (*cloudhsmv2.CreateClusterOutput, error)
-	CreateClusterRequest(*cloudhsmv2.CreateClusterInput) (*request.Request, *cloudhsmv2.CreateClusterOutput)
+	CreateClusterWithContext(aws.Context, *cloudhsmv2.CreateClusterInput, ...aws.Option) (*cloudhsmv2.CreateClusterOutput, error)
+	CreateClusterRequest(*cloudhsmv2.CreateClusterInput) (*aws.Request, *cloudhsmv2.CreateClusterOutput)
 
 	CreateHsm(*cloudhsmv2.CreateHsmInput) (*cloudhsmv2.CreateHsmOutput, error)
-	CreateHsmWithContext(aws.Context, *cloudhsmv2.CreateHsmInput, ...request.Option) (*cloudhsmv2.CreateHsmOutput, error)
-	CreateHsmRequest(*cloudhsmv2.CreateHsmInput) (*request.Request, *cloudhsmv2.CreateHsmOutput)
+	CreateHsmWithContext(aws.Context, *cloudhsmv2.CreateHsmInput, ...aws.Option) (*cloudhsmv2.CreateHsmOutput, error)
+	CreateHsmRequest(*cloudhsmv2.CreateHsmInput) (*aws.Request, *cloudhsmv2.CreateHsmOutput)
 
 	DeleteCluster(*cloudhsmv2.DeleteClusterInput) (*cloudhsmv2.DeleteClusterOutput, error)
-	DeleteClusterWithContext(aws.Context, *cloudhsmv2.DeleteClusterInput, ...request.Option) (*cloudhsmv2.DeleteClusterOutput, error)
-	DeleteClusterRequest(*cloudhsmv2.DeleteClusterInput) (*request.Request, *cloudhsmv2.DeleteClusterOutput)
+	DeleteClusterWithContext(aws.Context, *cloudhsmv2.DeleteClusterInput, ...aws.Option) (*cloudhsmv2.DeleteClusterOutput, error)
+	DeleteClusterRequest(*cloudhsmv2.DeleteClusterInput) (*aws.Request, *cloudhsmv2.DeleteClusterOutput)
 
 	DeleteHsm(*cloudhsmv2.DeleteHsmInput) (*cloudhsmv2.DeleteHsmOutput, error)
-	DeleteHsmWithContext(aws.Context, *cloudhsmv2.DeleteHsmInput, ...request.Option) (*cloudhsmv2.DeleteHsmOutput, error)
-	DeleteHsmRequest(*cloudhsmv2.DeleteHsmInput) (*request.Request, *cloudhsmv2.DeleteHsmOutput)
+	DeleteHsmWithContext(aws.Context, *cloudhsmv2.DeleteHsmInput, ...aws.Option) (*cloudhsmv2.DeleteHsmOutput, error)
+	DeleteHsmRequest(*cloudhsmv2.DeleteHsmInput) (*aws.Request, *cloudhsmv2.DeleteHsmOutput)
 
 	DescribeBackups(*cloudhsmv2.DescribeBackupsInput) (*cloudhsmv2.DescribeBackupsOutput, error)
-	DescribeBackupsWithContext(aws.Context, *cloudhsmv2.DescribeBackupsInput, ...request.Option) (*cloudhsmv2.DescribeBackupsOutput, error)
-	DescribeBackupsRequest(*cloudhsmv2.DescribeBackupsInput) (*request.Request, *cloudhsmv2.DescribeBackupsOutput)
+	DescribeBackupsWithContext(aws.Context, *cloudhsmv2.DescribeBackupsInput, ...aws.Option) (*cloudhsmv2.DescribeBackupsOutput, error)
+	DescribeBackupsRequest(*cloudhsmv2.DescribeBackupsInput) (*aws.Request, *cloudhsmv2.DescribeBackupsOutput)
 
 	DescribeBackupsPages(*cloudhsmv2.DescribeBackupsInput, func(*cloudhsmv2.DescribeBackupsOutput, bool) bool) error
-	DescribeBackupsPagesWithContext(aws.Context, *cloudhsmv2.DescribeBackupsInput, func(*cloudhsmv2.DescribeBackupsOutput, bool) bool, ...request.Option) error
+	DescribeBackupsPagesWithContext(aws.Context, *cloudhsmv2.DescribeBackupsInput, func(*cloudhsmv2.DescribeBackupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeClusters(*cloudhsmv2.DescribeClustersInput) (*cloudhsmv2.DescribeClustersOutput, error)
-	DescribeClustersWithContext(aws.Context, *cloudhsmv2.DescribeClustersInput, ...request.Option) (*cloudhsmv2.DescribeClustersOutput, error)
-	DescribeClustersRequest(*cloudhsmv2.DescribeClustersInput) (*request.Request, *cloudhsmv2.DescribeClustersOutput)
+	DescribeClustersWithContext(aws.Context, *cloudhsmv2.DescribeClustersInput, ...aws.Option) (*cloudhsmv2.DescribeClustersOutput, error)
+	DescribeClustersRequest(*cloudhsmv2.DescribeClustersInput) (*aws.Request, *cloudhsmv2.DescribeClustersOutput)
 
 	DescribeClustersPages(*cloudhsmv2.DescribeClustersInput, func(*cloudhsmv2.DescribeClustersOutput, bool) bool) error
-	DescribeClustersPagesWithContext(aws.Context, *cloudhsmv2.DescribeClustersInput, func(*cloudhsmv2.DescribeClustersOutput, bool) bool, ...request.Option) error
+	DescribeClustersPagesWithContext(aws.Context, *cloudhsmv2.DescribeClustersInput, func(*cloudhsmv2.DescribeClustersOutput, bool) bool, ...aws.Option) error
 
 	InitializeCluster(*cloudhsmv2.InitializeClusterInput) (*cloudhsmv2.InitializeClusterOutput, error)
-	InitializeClusterWithContext(aws.Context, *cloudhsmv2.InitializeClusterInput, ...request.Option) (*cloudhsmv2.InitializeClusterOutput, error)
-	InitializeClusterRequest(*cloudhsmv2.InitializeClusterInput) (*request.Request, *cloudhsmv2.InitializeClusterOutput)
+	InitializeClusterWithContext(aws.Context, *cloudhsmv2.InitializeClusterInput, ...aws.Option) (*cloudhsmv2.InitializeClusterOutput, error)
+	InitializeClusterRequest(*cloudhsmv2.InitializeClusterInput) (*aws.Request, *cloudhsmv2.InitializeClusterOutput)
 
 	ListTags(*cloudhsmv2.ListTagsInput) (*cloudhsmv2.ListTagsOutput, error)
-	ListTagsWithContext(aws.Context, *cloudhsmv2.ListTagsInput, ...request.Option) (*cloudhsmv2.ListTagsOutput, error)
-	ListTagsRequest(*cloudhsmv2.ListTagsInput) (*request.Request, *cloudhsmv2.ListTagsOutput)
+	ListTagsWithContext(aws.Context, *cloudhsmv2.ListTagsInput, ...aws.Option) (*cloudhsmv2.ListTagsOutput, error)
+	ListTagsRequest(*cloudhsmv2.ListTagsInput) (*aws.Request, *cloudhsmv2.ListTagsOutput)
 
 	ListTagsPages(*cloudhsmv2.ListTagsInput, func(*cloudhsmv2.ListTagsOutput, bool) bool) error
-	ListTagsPagesWithContext(aws.Context, *cloudhsmv2.ListTagsInput, func(*cloudhsmv2.ListTagsOutput, bool) bool, ...request.Option) error
+	ListTagsPagesWithContext(aws.Context, *cloudhsmv2.ListTagsInput, func(*cloudhsmv2.ListTagsOutput, bool) bool, ...aws.Option) error
 
 	TagResource(*cloudhsmv2.TagResourceInput) (*cloudhsmv2.TagResourceOutput, error)
-	TagResourceWithContext(aws.Context, *cloudhsmv2.TagResourceInput, ...request.Option) (*cloudhsmv2.TagResourceOutput, error)
-	TagResourceRequest(*cloudhsmv2.TagResourceInput) (*request.Request, *cloudhsmv2.TagResourceOutput)
+	TagResourceWithContext(aws.Context, *cloudhsmv2.TagResourceInput, ...aws.Option) (*cloudhsmv2.TagResourceOutput, error)
+	TagResourceRequest(*cloudhsmv2.TagResourceInput) (*aws.Request, *cloudhsmv2.TagResourceOutput)
 
 	UntagResource(*cloudhsmv2.UntagResourceInput) (*cloudhsmv2.UntagResourceOutput, error)
-	UntagResourceWithContext(aws.Context, *cloudhsmv2.UntagResourceInput, ...request.Option) (*cloudhsmv2.UntagResourceOutput, error)
-	UntagResourceRequest(*cloudhsmv2.UntagResourceInput) (*request.Request, *cloudhsmv2.UntagResourceOutput)
+	UntagResourceWithContext(aws.Context, *cloudhsmv2.UntagResourceInput, ...aws.Option) (*cloudhsmv2.UntagResourceOutput, error)
+	UntagResourceRequest(*cloudhsmv2.UntagResourceInput) (*aws.Request, *cloudhsmv2.UntagResourceOutput)
 }
 
 var _ CloudHSMV2API = (*cloudhsmv2.CloudHSMV2)(nil)

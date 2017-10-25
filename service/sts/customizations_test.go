@@ -4,13 +4,19 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
-var svc = sts.New(unit.Session, &aws.Config{
-	Region: aws.String("mock-region"),
-})
+func init() {
+	cfg := unit.Config()
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	svc = sts.New(cfg)
+}
+
+var svc *sts.STS
 
 func TestUnsignedRequest_AssumeRoleWithSAML(t *testing.T) {
 	req, _ := svc.AssumeRoleWithSAMLRequest(&sts.AssumeRoleWithSAMLInput{

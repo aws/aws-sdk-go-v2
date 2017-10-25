@@ -4,13 +4,12 @@ package support
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddAttachmentsToSet = "AddAttachmentsToSet"
 
-// AddAttachmentsToSetRequest generates a "aws/request.Request" representing the
+// AddAttachmentsToSetRequest generates a "aws.Request" representing the
 // client's request for the AddAttachmentsToSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -34,8 +33,8 @@ const opAddAttachmentsToSet = "AddAttachmentsToSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSet
-func (c *Support) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) (req *request.Request, output *AddAttachmentsToSetOutput) {
-	op := &request.Operation{
+func (c *Support) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) (req *aws.Request, output *AddAttachmentsToSetOutput) {
+	op := &aws.Operation{
 		Name:       opAddAttachmentsToSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -104,7 +103,7 @@ func (c *Support) AddAttachmentsToSet(input *AddAttachmentsToSetInput) (*AddAtta
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) AddAttachmentsToSetWithContext(ctx aws.Context, input *AddAttachmentsToSetInput, opts ...request.Option) (*AddAttachmentsToSetOutput, error) {
+func (c *Support) AddAttachmentsToSetWithContext(ctx aws.Context, input *AddAttachmentsToSetInput, opts ...aws.Option) (*AddAttachmentsToSetOutput, error) {
 	req, out := c.AddAttachmentsToSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -113,7 +112,7 @@ func (c *Support) AddAttachmentsToSetWithContext(ctx aws.Context, input *AddAtta
 
 const opAddCommunicationToCase = "AddCommunicationToCase"
 
-// AddCommunicationToCaseRequest generates a "aws/request.Request" representing the
+// AddCommunicationToCaseRequest generates a "aws.Request" representing the
 // client's request for the AddCommunicationToCase operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -137,8 +136,8 @@ const opAddCommunicationToCase = "AddCommunicationToCase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCase
-func (c *Support) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInput) (req *request.Request, output *AddCommunicationToCaseOutput) {
-	op := &request.Operation{
+func (c *Support) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInput) (req *aws.Request, output *AddCommunicationToCaseOutput) {
+	op := &aws.Operation{
 		Name:       opAddCommunicationToCase,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -200,7 +199,7 @@ func (c *Support) AddCommunicationToCase(input *AddCommunicationToCaseInput) (*A
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) AddCommunicationToCaseWithContext(ctx aws.Context, input *AddCommunicationToCaseInput, opts ...request.Option) (*AddCommunicationToCaseOutput, error) {
+func (c *Support) AddCommunicationToCaseWithContext(ctx aws.Context, input *AddCommunicationToCaseInput, opts ...aws.Option) (*AddCommunicationToCaseOutput, error) {
 	req, out := c.AddCommunicationToCaseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -209,7 +208,7 @@ func (c *Support) AddCommunicationToCaseWithContext(ctx aws.Context, input *AddC
 
 const opCreateCase = "CreateCase"
 
-// CreateCaseRequest generates a "aws/request.Request" representing the
+// CreateCaseRequest generates a "aws.Request" representing the
 // client's request for the CreateCase operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -233,8 +232,8 @@ const opCreateCase = "CreateCase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCase
-func (c *Support) CreateCaseRequest(input *CreateCaseInput) (req *request.Request, output *CreateCaseOutput) {
-	op := &request.Operation{
+func (c *Support) CreateCaseRequest(input *CreateCaseInput) (req *aws.Request, output *CreateCaseOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCase,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -332,7 +331,7 @@ func (c *Support) CreateCase(input *CreateCaseInput) (*CreateCaseOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) CreateCaseWithContext(ctx aws.Context, input *CreateCaseInput, opts ...request.Option) (*CreateCaseOutput, error) {
+func (c *Support) CreateCaseWithContext(ctx aws.Context, input *CreateCaseInput, opts ...aws.Option) (*CreateCaseOutput, error) {
 	req, out := c.CreateCaseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -341,7 +340,7 @@ func (c *Support) CreateCaseWithContext(ctx aws.Context, input *CreateCaseInput,
 
 const opDescribeAttachment = "DescribeAttachment"
 
-// DescribeAttachmentRequest generates a "aws/request.Request" representing the
+// DescribeAttachmentRequest generates a "aws.Request" representing the
 // client's request for the DescribeAttachment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -365,8 +364,8 @@ const opDescribeAttachment = "DescribeAttachment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachment
-func (c *Support) DescribeAttachmentRequest(input *DescribeAttachmentInput) (req *request.Request, output *DescribeAttachmentOutput) {
-	op := &request.Operation{
+func (c *Support) DescribeAttachmentRequest(input *DescribeAttachmentInput) (req *aws.Request, output *DescribeAttachmentOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAttachment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -421,7 +420,7 @@ func (c *Support) DescribeAttachment(input *DescribeAttachmentInput) (*DescribeA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeAttachmentWithContext(ctx aws.Context, input *DescribeAttachmentInput, opts ...request.Option) (*DescribeAttachmentOutput, error) {
+func (c *Support) DescribeAttachmentWithContext(ctx aws.Context, input *DescribeAttachmentInput, opts ...aws.Option) (*DescribeAttachmentOutput, error) {
 	req, out := c.DescribeAttachmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -430,7 +429,7 @@ func (c *Support) DescribeAttachmentWithContext(ctx aws.Context, input *Describe
 
 const opDescribeCases = "DescribeCases"
 
-// DescribeCasesRequest generates a "aws/request.Request" representing the
+// DescribeCasesRequest generates a "aws.Request" representing the
 // client's request for the DescribeCases operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -454,12 +453,12 @@ const opDescribeCases = "DescribeCases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCases
-func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) (req *request.Request, output *DescribeCasesOutput) {
-	op := &request.Operation{
+func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) (req *aws.Request, output *DescribeCasesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCases,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -523,7 +522,7 @@ func (c *Support) DescribeCases(input *DescribeCasesInput) (*DescribeCasesOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeCasesWithContext(ctx aws.Context, input *DescribeCasesInput, opts ...request.Option) (*DescribeCasesOutput, error) {
+func (c *Support) DescribeCasesWithContext(ctx aws.Context, input *DescribeCasesInput, opts ...aws.Option) (*DescribeCasesOutput, error) {
 	req, out := c.DescribeCasesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -558,9 +557,9 @@ func (c *Support) DescribeCasesPages(input *DescribeCasesInput, fn func(*Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeCasesPagesWithContext(ctx aws.Context, input *DescribeCasesInput, fn func(*DescribeCasesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Support) DescribeCasesPagesWithContext(ctx aws.Context, input *DescribeCasesInput, fn func(*DescribeCasesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCasesInput
 			if input != nil {
 				tmp := *input
@@ -582,7 +581,7 @@ func (c *Support) DescribeCasesPagesWithContext(ctx aws.Context, input *Describe
 
 const opDescribeCommunications = "DescribeCommunications"
 
-// DescribeCommunicationsRequest generates a "aws/request.Request" representing the
+// DescribeCommunicationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeCommunications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -606,12 +605,12 @@ const opDescribeCommunications = "DescribeCommunications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCommunications
-func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInput) (req *request.Request, output *DescribeCommunicationsOutput) {
-	op := &request.Operation{
+func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInput) (req *aws.Request, output *DescribeCommunicationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCommunications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -670,7 +669,7 @@ func (c *Support) DescribeCommunications(input *DescribeCommunicationsInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeCommunicationsWithContext(ctx aws.Context, input *DescribeCommunicationsInput, opts ...request.Option) (*DescribeCommunicationsOutput, error) {
+func (c *Support) DescribeCommunicationsWithContext(ctx aws.Context, input *DescribeCommunicationsInput, opts ...aws.Option) (*DescribeCommunicationsOutput, error) {
 	req, out := c.DescribeCommunicationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -705,9 +704,9 @@ func (c *Support) DescribeCommunicationsPages(input *DescribeCommunicationsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeCommunicationsPagesWithContext(ctx aws.Context, input *DescribeCommunicationsInput, fn func(*DescribeCommunicationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Support) DescribeCommunicationsPagesWithContext(ctx aws.Context, input *DescribeCommunicationsInput, fn func(*DescribeCommunicationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCommunicationsInput
 			if input != nil {
 				tmp := *input
@@ -729,7 +728,7 @@ func (c *Support) DescribeCommunicationsPagesWithContext(ctx aws.Context, input 
 
 const opDescribeServices = "DescribeServices"
 
-// DescribeServicesRequest generates a "aws/request.Request" representing the
+// DescribeServicesRequest generates a "aws.Request" representing the
 // client's request for the DescribeServices operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -753,8 +752,8 @@ const opDescribeServices = "DescribeServices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServices
-func (c *Support) DescribeServicesRequest(input *DescribeServicesInput) (req *request.Request, output *DescribeServicesOutput) {
-	op := &request.Operation{
+func (c *Support) DescribeServicesRequest(input *DescribeServicesInput) (req *aws.Request, output *DescribeServicesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeServices,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -809,7 +808,7 @@ func (c *Support) DescribeServices(input *DescribeServicesInput) (*DescribeServi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeServicesWithContext(ctx aws.Context, input *DescribeServicesInput, opts ...request.Option) (*DescribeServicesOutput, error) {
+func (c *Support) DescribeServicesWithContext(ctx aws.Context, input *DescribeServicesInput, opts ...aws.Option) (*DescribeServicesOutput, error) {
 	req, out := c.DescribeServicesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -818,7 +817,7 @@ func (c *Support) DescribeServicesWithContext(ctx aws.Context, input *DescribeSe
 
 const opDescribeSeverityLevels = "DescribeSeverityLevels"
 
-// DescribeSeverityLevelsRequest generates a "aws/request.Request" representing the
+// DescribeSeverityLevelsRequest generates a "aws.Request" representing the
 // client's request for the DescribeSeverityLevels operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -842,8 +841,8 @@ const opDescribeSeverityLevels = "DescribeSeverityLevels"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevels
-func (c *Support) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInput) (req *request.Request, output *DescribeSeverityLevelsOutput) {
-	op := &request.Operation{
+func (c *Support) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInput) (req *aws.Request, output *DescribeSeverityLevelsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSeverityLevels,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -890,7 +889,7 @@ func (c *Support) DescribeSeverityLevels(input *DescribeSeverityLevelsInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeSeverityLevelsWithContext(ctx aws.Context, input *DescribeSeverityLevelsInput, opts ...request.Option) (*DescribeSeverityLevelsOutput, error) {
+func (c *Support) DescribeSeverityLevelsWithContext(ctx aws.Context, input *DescribeSeverityLevelsInput, opts ...aws.Option) (*DescribeSeverityLevelsOutput, error) {
 	req, out := c.DescribeSeverityLevelsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -899,7 +898,7 @@ func (c *Support) DescribeSeverityLevelsWithContext(ctx aws.Context, input *Desc
 
 const opDescribeTrustedAdvisorCheckRefreshStatuses = "DescribeTrustedAdvisorCheckRefreshStatuses"
 
-// DescribeTrustedAdvisorCheckRefreshStatusesRequest generates a "aws/request.Request" representing the
+// DescribeTrustedAdvisorCheckRefreshStatusesRequest generates a "aws.Request" representing the
 // client's request for the DescribeTrustedAdvisorCheckRefreshStatuses operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -923,8 +922,8 @@ const opDescribeTrustedAdvisorCheckRefreshStatuses = "DescribeTrustedAdvisorChec
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckRefreshStatuses
-func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *DescribeTrustedAdvisorCheckRefreshStatusesInput) (req *request.Request, output *DescribeTrustedAdvisorCheckRefreshStatusesOutput) {
-	op := &request.Operation{
+func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *DescribeTrustedAdvisorCheckRefreshStatusesInput) (req *aws.Request, output *DescribeTrustedAdvisorCheckRefreshStatusesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorCheckRefreshStatuses,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -974,7 +973,7 @@ func (c *Support) DescribeTrustedAdvisorCheckRefreshStatuses(input *DescribeTrus
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesWithContext(ctx aws.Context, input *DescribeTrustedAdvisorCheckRefreshStatusesInput, opts ...request.Option) (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
+func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesWithContext(ctx aws.Context, input *DescribeTrustedAdvisorCheckRefreshStatusesInput, opts ...aws.Option) (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
 	req, out := c.DescribeTrustedAdvisorCheckRefreshStatusesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -983,7 +982,7 @@ func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesWithContext(ctx aws.
 
 const opDescribeTrustedAdvisorCheckResult = "DescribeTrustedAdvisorCheckResult"
 
-// DescribeTrustedAdvisorCheckResultRequest generates a "aws/request.Request" representing the
+// DescribeTrustedAdvisorCheckResultRequest generates a "aws.Request" representing the
 // client's request for the DescribeTrustedAdvisorCheckResult operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1007,8 +1006,8 @@ const opDescribeTrustedAdvisorCheckResult = "DescribeTrustedAdvisorCheckResult"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckResult
-func (c *Support) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTrustedAdvisorCheckResultInput) (req *request.Request, output *DescribeTrustedAdvisorCheckResultOutput) {
-	op := &request.Operation{
+func (c *Support) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTrustedAdvisorCheckResultInput) (req *aws.Request, output *DescribeTrustedAdvisorCheckResultOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorCheckResult,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1072,7 +1071,7 @@ func (c *Support) DescribeTrustedAdvisorCheckResult(input *DescribeTrustedAdviso
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeTrustedAdvisorCheckResultWithContext(ctx aws.Context, input *DescribeTrustedAdvisorCheckResultInput, opts ...request.Option) (*DescribeTrustedAdvisorCheckResultOutput, error) {
+func (c *Support) DescribeTrustedAdvisorCheckResultWithContext(ctx aws.Context, input *DescribeTrustedAdvisorCheckResultInput, opts ...aws.Option) (*DescribeTrustedAdvisorCheckResultOutput, error) {
 	req, out := c.DescribeTrustedAdvisorCheckResultRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1081,7 +1080,7 @@ func (c *Support) DescribeTrustedAdvisorCheckResultWithContext(ctx aws.Context, 
 
 const opDescribeTrustedAdvisorCheckSummaries = "DescribeTrustedAdvisorCheckSummaries"
 
-// DescribeTrustedAdvisorCheckSummariesRequest generates a "aws/request.Request" representing the
+// DescribeTrustedAdvisorCheckSummariesRequest generates a "aws.Request" representing the
 // client's request for the DescribeTrustedAdvisorCheckSummaries operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1105,8 +1104,8 @@ const opDescribeTrustedAdvisorCheckSummaries = "DescribeTrustedAdvisorCheckSumma
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckSummaries
-func (c *Support) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTrustedAdvisorCheckSummariesInput) (req *request.Request, output *DescribeTrustedAdvisorCheckSummariesOutput) {
-	op := &request.Operation{
+func (c *Support) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTrustedAdvisorCheckSummariesInput) (req *aws.Request, output *DescribeTrustedAdvisorCheckSummariesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorCheckSummaries,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1154,7 +1153,7 @@ func (c *Support) DescribeTrustedAdvisorCheckSummaries(input *DescribeTrustedAdv
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeTrustedAdvisorCheckSummariesWithContext(ctx aws.Context, input *DescribeTrustedAdvisorCheckSummariesInput, opts ...request.Option) (*DescribeTrustedAdvisorCheckSummariesOutput, error) {
+func (c *Support) DescribeTrustedAdvisorCheckSummariesWithContext(ctx aws.Context, input *DescribeTrustedAdvisorCheckSummariesInput, opts ...aws.Option) (*DescribeTrustedAdvisorCheckSummariesOutput, error) {
 	req, out := c.DescribeTrustedAdvisorCheckSummariesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1163,7 +1162,7 @@ func (c *Support) DescribeTrustedAdvisorCheckSummariesWithContext(ctx aws.Contex
 
 const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
 
-// DescribeTrustedAdvisorChecksRequest generates a "aws/request.Request" representing the
+// DescribeTrustedAdvisorChecksRequest generates a "aws.Request" representing the
 // client's request for the DescribeTrustedAdvisorChecks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1187,8 +1186,8 @@ const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorChecks
-func (c *Support) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvisorChecksInput) (req *request.Request, output *DescribeTrustedAdvisorChecksOutput) {
-	op := &request.Operation{
+func (c *Support) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvisorChecksInput) (req *aws.Request, output *DescribeTrustedAdvisorChecksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTrustedAdvisorChecks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1236,7 +1235,7 @@ func (c *Support) DescribeTrustedAdvisorChecks(input *DescribeTrustedAdvisorChec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) DescribeTrustedAdvisorChecksWithContext(ctx aws.Context, input *DescribeTrustedAdvisorChecksInput, opts ...request.Option) (*DescribeTrustedAdvisorChecksOutput, error) {
+func (c *Support) DescribeTrustedAdvisorChecksWithContext(ctx aws.Context, input *DescribeTrustedAdvisorChecksInput, opts ...aws.Option) (*DescribeTrustedAdvisorChecksOutput, error) {
 	req, out := c.DescribeTrustedAdvisorChecksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1245,7 +1244,7 @@ func (c *Support) DescribeTrustedAdvisorChecksWithContext(ctx aws.Context, input
 
 const opRefreshTrustedAdvisorCheck = "RefreshTrustedAdvisorCheck"
 
-// RefreshTrustedAdvisorCheckRequest generates a "aws/request.Request" representing the
+// RefreshTrustedAdvisorCheckRequest generates a "aws.Request" representing the
 // client's request for the RefreshTrustedAdvisorCheck operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1269,8 +1268,8 @@ const opRefreshTrustedAdvisorCheck = "RefreshTrustedAdvisorCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheck
-func (c *Support) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisorCheckInput) (req *request.Request, output *RefreshTrustedAdvisorCheckOutput) {
-	op := &request.Operation{
+func (c *Support) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisorCheckInput) (req *aws.Request, output *RefreshTrustedAdvisorCheckOutput) {
+	op := &aws.Operation{
 		Name:       opRefreshTrustedAdvisorCheck,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1331,7 +1330,7 @@ func (c *Support) RefreshTrustedAdvisorCheck(input *RefreshTrustedAdvisorCheckIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) RefreshTrustedAdvisorCheckWithContext(ctx aws.Context, input *RefreshTrustedAdvisorCheckInput, opts ...request.Option) (*RefreshTrustedAdvisorCheckOutput, error) {
+func (c *Support) RefreshTrustedAdvisorCheckWithContext(ctx aws.Context, input *RefreshTrustedAdvisorCheckInput, opts ...aws.Option) (*RefreshTrustedAdvisorCheckOutput, error) {
 	req, out := c.RefreshTrustedAdvisorCheckRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1340,7 +1339,7 @@ func (c *Support) RefreshTrustedAdvisorCheckWithContext(ctx aws.Context, input *
 
 const opResolveCase = "ResolveCase"
 
-// ResolveCaseRequest generates a "aws/request.Request" representing the
+// ResolveCaseRequest generates a "aws.Request" representing the
 // client's request for the ResolveCase operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1364,8 +1363,8 @@ const opResolveCase = "ResolveCase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ResolveCase
-func (c *Support) ResolveCaseRequest(input *ResolveCaseInput) (req *request.Request, output *ResolveCaseOutput) {
-	op := &request.Operation{
+func (c *Support) ResolveCaseRequest(input *ResolveCaseInput) (req *aws.Request, output *ResolveCaseOutput) {
+	op := &aws.Operation{
 		Name:       opResolveCase,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1414,7 +1413,7 @@ func (c *Support) ResolveCase(input *ResolveCaseInput) (*ResolveCaseOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Support) ResolveCaseWithContext(ctx aws.Context, input *ResolveCaseInput, opts ...request.Option) (*ResolveCaseOutput, error) {
+func (c *Support) ResolveCaseWithContext(ctx aws.Context, input *ResolveCaseInput, opts ...aws.Option) (*ResolveCaseOutput, error) {
 	req, out := c.ResolveCaseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1450,9 +1449,9 @@ func (s AddAttachmentsToSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddAttachmentsToSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddAttachmentsToSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddAttachmentsToSetInput"}
 	if s.Attachments == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attachments"))
+		invalidParams.Add(aws.NewErrParamRequired("Attachments"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1546,12 +1545,12 @@ func (s AddCommunicationToCaseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddCommunicationToCaseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddCommunicationToCaseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddCommunicationToCaseInput"}
 	if s.CommunicationBody == nil {
-		invalidParams.Add(request.NewErrParamRequired("CommunicationBody"))
+		invalidParams.Add(aws.NewErrParamRequired("CommunicationBody"))
 	}
 	if s.CommunicationBody != nil && len(*s.CommunicationBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CommunicationBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CommunicationBody", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2003,15 +2002,15 @@ func (s CreateCaseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCaseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCaseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCaseInput"}
 	if s.CommunicationBody == nil {
-		invalidParams.Add(request.NewErrParamRequired("CommunicationBody"))
+		invalidParams.Add(aws.NewErrParamRequired("CommunicationBody"))
 	}
 	if s.CommunicationBody != nil && len(*s.CommunicationBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CommunicationBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CommunicationBody", 1))
 	}
 	if s.Subject == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subject"))
+		invalidParams.Add(aws.NewErrParamRequired("Subject"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2124,9 +2123,9 @@ func (s DescribeAttachmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAttachmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAttachmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAttachmentInput"}
 	if s.AttachmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttachmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("AttachmentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2218,9 +2217,9 @@ func (s DescribeCasesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCasesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCasesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCasesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2355,12 +2354,12 @@ func (s DescribeCommunicationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCommunicationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCommunicationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCommunicationsInput"}
 	if s.CaseId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CaseId"))
+		invalidParams.Add(aws.NewErrParamRequired("CaseId"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2569,9 +2568,9 @@ func (s DescribeTrustedAdvisorCheckRefreshStatusesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTrustedAdvisorCheckRefreshStatusesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckRefreshStatusesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckRefreshStatusesInput"}
 	if s.CheckIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("CheckIds"))
+		invalidParams.Add(aws.NewErrParamRequired("CheckIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2641,9 +2640,9 @@ func (s DescribeTrustedAdvisorCheckResultInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTrustedAdvisorCheckResultInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckResultInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckResultInput"}
 	if s.CheckId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CheckId"))
+		invalidParams.Add(aws.NewErrParamRequired("CheckId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2712,9 +2711,9 @@ func (s DescribeTrustedAdvisorCheckSummariesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTrustedAdvisorCheckSummariesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckSummariesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckSummariesInput"}
 	if s.CheckIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("CheckIds"))
+		invalidParams.Add(aws.NewErrParamRequired("CheckIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2781,9 +2780,9 @@ func (s DescribeTrustedAdvisorChecksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTrustedAdvisorChecksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTrustedAdvisorChecksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorChecksInput"}
 	if s.Language == nil {
-		invalidParams.Add(request.NewErrParamRequired("Language"))
+		invalidParams.Add(aws.NewErrParamRequired("Language"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2884,9 +2883,9 @@ func (s RefreshTrustedAdvisorCheckInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RefreshTrustedAdvisorCheckInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RefreshTrustedAdvisorCheckInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RefreshTrustedAdvisorCheckInput"}
 	if s.CheckId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CheckId"))
+		invalidParams.Add(aws.NewErrParamRequired("CheckId"))
 	}
 
 	if invalidParams.Len() > 0 {

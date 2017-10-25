@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	metadata "github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
@@ -57,7 +57,7 @@ func buildNewRequest(data interface{}) *request.Request {
 		}{
 			"Test",
 		},
-		ClientInfo: metadata.ClientInfo{
+		Metadata: metadata.Metadata{
 			ServiceName:   "test",
 			TargetPrefix:  "test",
 			JSONVersion:   "test",

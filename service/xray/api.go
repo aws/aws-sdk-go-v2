@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opBatchGetTraces = "BatchGetTraces"
 
-// BatchGetTracesRequest generates a "aws/request.Request" representing the
+// BatchGetTracesRequest generates a "aws.Request" representing the
 // client's request for the BatchGetTraces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opBatchGetTraces = "BatchGetTraces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTraces
-func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) (req *request.Request, output *BatchGetTracesOutput) {
-	op := &request.Operation{
+func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) (req *aws.Request, output *BatchGetTracesOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetTraces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/Traces",
@@ -87,7 +86,7 @@ func (c *XRay) BatchGetTraces(input *BatchGetTracesInput) (*BatchGetTracesOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *XRay) BatchGetTracesWithContext(ctx aws.Context, input *BatchGetTracesInput, opts ...request.Option) (*BatchGetTracesOutput, error) {
+func (c *XRay) BatchGetTracesWithContext(ctx aws.Context, input *BatchGetTracesInput, opts ...aws.Option) (*BatchGetTracesOutput, error) {
 	req, out := c.BatchGetTracesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -96,7 +95,7 @@ func (c *XRay) BatchGetTracesWithContext(ctx aws.Context, input *BatchGetTracesI
 
 const opGetServiceGraph = "GetServiceGraph"
 
-// GetServiceGraphRequest generates a "aws/request.Request" representing the
+// GetServiceGraphRequest generates a "aws.Request" representing the
 // client's request for the GetServiceGraph operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -120,8 +119,8 @@ const opGetServiceGraph = "GetServiceGraph"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraph
-func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) (req *request.Request, output *GetServiceGraphOutput) {
-	op := &request.Operation{
+func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) (req *aws.Request, output *GetServiceGraphOutput) {
+	op := &aws.Operation{
 		Name:       opGetServiceGraph,
 		HTTPMethod: "POST",
 		HTTPPath:   "/ServiceGraph",
@@ -173,7 +172,7 @@ func (c *XRay) GetServiceGraph(input *GetServiceGraphInput) (*GetServiceGraphOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *XRay) GetServiceGraphWithContext(ctx aws.Context, input *GetServiceGraphInput, opts ...request.Option) (*GetServiceGraphOutput, error) {
+func (c *XRay) GetServiceGraphWithContext(ctx aws.Context, input *GetServiceGraphInput, opts ...aws.Option) (*GetServiceGraphOutput, error) {
 	req, out := c.GetServiceGraphRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -182,7 +181,7 @@ func (c *XRay) GetServiceGraphWithContext(ctx aws.Context, input *GetServiceGrap
 
 const opGetTraceGraph = "GetTraceGraph"
 
-// GetTraceGraphRequest generates a "aws/request.Request" representing the
+// GetTraceGraphRequest generates a "aws.Request" representing the
 // client's request for the GetTraceGraph operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -206,8 +205,8 @@ const opGetTraceGraph = "GetTraceGraph"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraph
-func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) (req *request.Request, output *GetTraceGraphOutput) {
-	op := &request.Operation{
+func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) (req *aws.Request, output *GetTraceGraphOutput) {
+	op := &aws.Operation{
 		Name:       opGetTraceGraph,
 		HTTPMethod: "POST",
 		HTTPPath:   "/TraceGraph",
@@ -255,7 +254,7 @@ func (c *XRay) GetTraceGraph(input *GetTraceGraphInput) (*GetTraceGraphOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *XRay) GetTraceGraphWithContext(ctx aws.Context, input *GetTraceGraphInput, opts ...request.Option) (*GetTraceGraphOutput, error) {
+func (c *XRay) GetTraceGraphWithContext(ctx aws.Context, input *GetTraceGraphInput, opts ...aws.Option) (*GetTraceGraphOutput, error) {
 	req, out := c.GetTraceGraphRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -264,7 +263,7 @@ func (c *XRay) GetTraceGraphWithContext(ctx aws.Context, input *GetTraceGraphInp
 
 const opGetTraceSummaries = "GetTraceSummaries"
 
-// GetTraceSummariesRequest generates a "aws/request.Request" representing the
+// GetTraceSummariesRequest generates a "aws.Request" representing the
 // client's request for the GetTraceSummaries operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -288,8 +287,8 @@ const opGetTraceSummaries = "GetTraceSummaries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummaries
-func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) (req *request.Request, output *GetTraceSummariesOutput) {
-	op := &request.Operation{
+func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) (req *aws.Request, output *GetTraceSummariesOutput) {
+	op := &aws.Operation{
 		Name:       opGetTraceSummaries,
 		HTTPMethod: "POST",
 		HTTPPath:   "/TraceSummaries",
@@ -353,7 +352,7 @@ func (c *XRay) GetTraceSummaries(input *GetTraceSummariesInput) (*GetTraceSummar
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *XRay) GetTraceSummariesWithContext(ctx aws.Context, input *GetTraceSummariesInput, opts ...request.Option) (*GetTraceSummariesOutput, error) {
+func (c *XRay) GetTraceSummariesWithContext(ctx aws.Context, input *GetTraceSummariesInput, opts ...aws.Option) (*GetTraceSummariesOutput, error) {
 	req, out := c.GetTraceSummariesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -362,7 +361,7 @@ func (c *XRay) GetTraceSummariesWithContext(ctx aws.Context, input *GetTraceSumm
 
 const opPutTelemetryRecords = "PutTelemetryRecords"
 
-// PutTelemetryRecordsRequest generates a "aws/request.Request" representing the
+// PutTelemetryRecordsRequest generates a "aws.Request" representing the
 // client's request for the PutTelemetryRecords operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -386,8 +385,8 @@ const opPutTelemetryRecords = "PutTelemetryRecords"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecords
-func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) (req *request.Request, output *PutTelemetryRecordsOutput) {
-	op := &request.Operation{
+func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) (req *aws.Request, output *PutTelemetryRecordsOutput) {
+	op := &aws.Operation{
 		Name:       opPutTelemetryRecords,
 		HTTPMethod: "POST",
 		HTTPPath:   "/TelemetryRecords",
@@ -435,7 +434,7 @@ func (c *XRay) PutTelemetryRecords(input *PutTelemetryRecordsInput) (*PutTelemet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *XRay) PutTelemetryRecordsWithContext(ctx aws.Context, input *PutTelemetryRecordsInput, opts ...request.Option) (*PutTelemetryRecordsOutput, error) {
+func (c *XRay) PutTelemetryRecordsWithContext(ctx aws.Context, input *PutTelemetryRecordsInput, opts ...aws.Option) (*PutTelemetryRecordsOutput, error) {
 	req, out := c.PutTelemetryRecordsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -444,7 +443,7 @@ func (c *XRay) PutTelemetryRecordsWithContext(ctx aws.Context, input *PutTelemet
 
 const opPutTraceSegments = "PutTraceSegments"
 
-// PutTraceSegmentsRequest generates a "aws/request.Request" representing the
+// PutTraceSegmentsRequest generates a "aws.Request" representing the
 // client's request for the PutTraceSegments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -468,8 +467,8 @@ const opPutTraceSegments = "PutTraceSegments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegments
-func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) (req *request.Request, output *PutTraceSegmentsOutput) {
-	op := &request.Operation{
+func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) (req *aws.Request, output *PutTraceSegmentsOutput) {
+	op := &aws.Operation{
 		Name:       opPutTraceSegments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/TraceSegments",
@@ -562,7 +561,7 @@ func (c *XRay) PutTraceSegments(input *PutTraceSegmentsInput) (*PutTraceSegments
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *XRay) PutTraceSegmentsWithContext(ctx aws.Context, input *PutTraceSegmentsInput, opts ...request.Option) (*PutTraceSegmentsOutput, error) {
+func (c *XRay) PutTraceSegmentsWithContext(ctx aws.Context, input *PutTraceSegmentsInput, opts ...aws.Option) (*PutTraceSegmentsOutput, error) {
 	req, out := c.PutTraceSegmentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -744,9 +743,9 @@ func (s BatchGetTracesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetTracesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetTracesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetTracesInput"}
 	if s.TraceIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("TraceIds"))
+		invalidParams.Add(aws.NewErrParamRequired("TraceIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1049,12 +1048,12 @@ func (s GetServiceGraphInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetServiceGraphInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetServiceGraphInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetServiceGraphInput"}
 	if s.EndTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndTime"))
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
 	if s.StartTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartTime"))
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1158,9 +1157,9 @@ func (s GetTraceGraphInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTraceGraphInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTraceGraphInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTraceGraphInput"}
 	if s.TraceIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("TraceIds"))
+		invalidParams.Add(aws.NewErrParamRequired("TraceIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1252,12 +1251,12 @@ func (s GetTraceSummariesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTraceSummariesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTraceSummariesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTraceSummariesInput"}
 	if s.EndTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndTime"))
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
 	if s.StartTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartTime"))
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1471,9 +1470,9 @@ func (s PutTelemetryRecordsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutTelemetryRecordsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutTelemetryRecordsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutTelemetryRecordsInput"}
 	if s.TelemetryRecords == nil {
-		invalidParams.Add(request.NewErrParamRequired("TelemetryRecords"))
+		invalidParams.Add(aws.NewErrParamRequired("TelemetryRecords"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1543,9 +1542,9 @@ func (s PutTraceSegmentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutTraceSegmentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutTraceSegmentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutTraceSegmentsInput"}
 	if s.TraceSegmentDocuments == nil {
-		invalidParams.Add(request.NewErrParamRequired("TraceSegmentDocuments"))
+		invalidParams.Add(aws.NewErrParamRequired("TraceSegmentDocuments"))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -33,12 +33,12 @@ func TestGetBucketRegion_Exists(t *testing.T) {
 	for i, c := range testGetBucketRegionCases {
 		server := testSetupGetBucketRegionServer(c.RespRegion, c.StatusCode, true)
 
-		sess := unit.Session.Copy()
-		sess.Config.Endpoint = aws.String(server.URL)
-		sess.Config.DisableSSL = aws.Bool(true)
+		cfg := unit.Config()
+		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+		cfg.DisableSSL = aws.Bool(true)
 
 		ctx := aws.BackgroundContext()
-		region, err := GetBucketRegion(ctx, sess, "bucket", "region")
+		region, err := GetBucketRegion(ctx, cfg, "bucket", "region")
 		if err != nil {
 			t.Fatalf("%d, expect no error, got %v", i, err)
 		}
@@ -51,12 +51,12 @@ func TestGetBucketRegion_Exists(t *testing.T) {
 func TestGetBucketRegion_NotExists(t *testing.T) {
 	server := testSetupGetBucketRegionServer("ignore-region", 404, false)
 
-	sess := unit.Session.Copy()
-	sess.Config.Endpoint = aws.String(server.URL)
-	sess.Config.DisableSSL = aws.Bool(true)
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+	cfg.DisableSSL = aws.Bool(true)
 
 	ctx := aws.BackgroundContext()
-	region, err := GetBucketRegion(ctx, sess, "bucket", "region")
+	region, err := GetBucketRegion(ctx, cfg, "bucket", "region")
 	if err == nil {
 		t.Fatalf("expect error, but did not get one")
 	}
@@ -73,11 +73,12 @@ func TestGetBucketRegionWithClient(t *testing.T) {
 	for i, c := range testGetBucketRegionCases {
 		server := testSetupGetBucketRegionServer(c.RespRegion, c.StatusCode, true)
 
-		svc := s3.New(unit.Session, &aws.Config{
-			Region:     aws.String("region"),
-			Endpoint:   aws.String(server.URL),
-			DisableSSL: aws.Bool(true),
-		})
+		cfg := unit.Config()
+		cfg.Region = aws.String("region")
+		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+		cfg.DisableSSL = aws.Bool(true)
+
+		svc := s3.New(cfg)
 
 		ctx := aws.BackgroundContext()
 

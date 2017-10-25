@@ -4,8 +4,7 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
@@ -45,8 +44,8 @@ type DecryptionClient struct {
 //	svc := s3crypto.NewDecryptionClient(sess, func(svc *s3crypto.DecryptionClient{
 //		// Custom client options here
 //	}))
-func NewDecryptionClient(prov client.ConfigProvider, options ...func(*DecryptionClient)) *DecryptionClient {
-	s3client := s3.New(prov)
+func NewDecryptionClient(cfg aws.Config, options ...func(*DecryptionClient)) *DecryptionClient {
+	s3client := s3.New(cfg)
 	client := &DecryptionClient{
 		S3Client: s3client,
 		LoadStrategy: defaultV2LoadStrategy{
@@ -54,7 +53,7 @@ func NewDecryptionClient(prov client.ConfigProvider, options ...func(*Decryption
 		},
 		WrapRegistry: map[string]WrapEntry{
 			KMSWrap: (kmsKeyHandler{
-				kms: kms.New(prov),
+				kms: kms.New(cfg),
 			}).decryptHandler,
 		},
 		CEKRegistry: map[string]CEKEntry{

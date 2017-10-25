@@ -10,7 +10,6 @@ package rdsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := rds.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := rds.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,417 +64,417 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type RDSAPI interface {
 	AddRoleToDBCluster(*rds.AddRoleToDBClusterInput) (*rds.AddRoleToDBClusterOutput, error)
-	AddRoleToDBClusterWithContext(aws.Context, *rds.AddRoleToDBClusterInput, ...request.Option) (*rds.AddRoleToDBClusterOutput, error)
-	AddRoleToDBClusterRequest(*rds.AddRoleToDBClusterInput) (*request.Request, *rds.AddRoleToDBClusterOutput)
+	AddRoleToDBClusterWithContext(aws.Context, *rds.AddRoleToDBClusterInput, ...aws.Option) (*rds.AddRoleToDBClusterOutput, error)
+	AddRoleToDBClusterRequest(*rds.AddRoleToDBClusterInput) (*aws.Request, *rds.AddRoleToDBClusterOutput)
 
 	AddSourceIdentifierToSubscription(*rds.AddSourceIdentifierToSubscriptionInput) (*rds.AddSourceIdentifierToSubscriptionOutput, error)
-	AddSourceIdentifierToSubscriptionWithContext(aws.Context, *rds.AddSourceIdentifierToSubscriptionInput, ...request.Option) (*rds.AddSourceIdentifierToSubscriptionOutput, error)
-	AddSourceIdentifierToSubscriptionRequest(*rds.AddSourceIdentifierToSubscriptionInput) (*request.Request, *rds.AddSourceIdentifierToSubscriptionOutput)
+	AddSourceIdentifierToSubscriptionWithContext(aws.Context, *rds.AddSourceIdentifierToSubscriptionInput, ...aws.Option) (*rds.AddSourceIdentifierToSubscriptionOutput, error)
+	AddSourceIdentifierToSubscriptionRequest(*rds.AddSourceIdentifierToSubscriptionInput) (*aws.Request, *rds.AddSourceIdentifierToSubscriptionOutput)
 
 	AddTagsToResource(*rds.AddTagsToResourceInput) (*rds.AddTagsToResourceOutput, error)
-	AddTagsToResourceWithContext(aws.Context, *rds.AddTagsToResourceInput, ...request.Option) (*rds.AddTagsToResourceOutput, error)
-	AddTagsToResourceRequest(*rds.AddTagsToResourceInput) (*request.Request, *rds.AddTagsToResourceOutput)
+	AddTagsToResourceWithContext(aws.Context, *rds.AddTagsToResourceInput, ...aws.Option) (*rds.AddTagsToResourceOutput, error)
+	AddTagsToResourceRequest(*rds.AddTagsToResourceInput) (*aws.Request, *rds.AddTagsToResourceOutput)
 
 	ApplyPendingMaintenanceAction(*rds.ApplyPendingMaintenanceActionInput) (*rds.ApplyPendingMaintenanceActionOutput, error)
-	ApplyPendingMaintenanceActionWithContext(aws.Context, *rds.ApplyPendingMaintenanceActionInput, ...request.Option) (*rds.ApplyPendingMaintenanceActionOutput, error)
-	ApplyPendingMaintenanceActionRequest(*rds.ApplyPendingMaintenanceActionInput) (*request.Request, *rds.ApplyPendingMaintenanceActionOutput)
+	ApplyPendingMaintenanceActionWithContext(aws.Context, *rds.ApplyPendingMaintenanceActionInput, ...aws.Option) (*rds.ApplyPendingMaintenanceActionOutput, error)
+	ApplyPendingMaintenanceActionRequest(*rds.ApplyPendingMaintenanceActionInput) (*aws.Request, *rds.ApplyPendingMaintenanceActionOutput)
 
 	AuthorizeDBSecurityGroupIngress(*rds.AuthorizeDBSecurityGroupIngressInput) (*rds.AuthorizeDBSecurityGroupIngressOutput, error)
-	AuthorizeDBSecurityGroupIngressWithContext(aws.Context, *rds.AuthorizeDBSecurityGroupIngressInput, ...request.Option) (*rds.AuthorizeDBSecurityGroupIngressOutput, error)
-	AuthorizeDBSecurityGroupIngressRequest(*rds.AuthorizeDBSecurityGroupIngressInput) (*request.Request, *rds.AuthorizeDBSecurityGroupIngressOutput)
+	AuthorizeDBSecurityGroupIngressWithContext(aws.Context, *rds.AuthorizeDBSecurityGroupIngressInput, ...aws.Option) (*rds.AuthorizeDBSecurityGroupIngressOutput, error)
+	AuthorizeDBSecurityGroupIngressRequest(*rds.AuthorizeDBSecurityGroupIngressInput) (*aws.Request, *rds.AuthorizeDBSecurityGroupIngressOutput)
 
 	CopyDBClusterParameterGroup(*rds.CopyDBClusterParameterGroupInput) (*rds.CopyDBClusterParameterGroupOutput, error)
-	CopyDBClusterParameterGroupWithContext(aws.Context, *rds.CopyDBClusterParameterGroupInput, ...request.Option) (*rds.CopyDBClusterParameterGroupOutput, error)
-	CopyDBClusterParameterGroupRequest(*rds.CopyDBClusterParameterGroupInput) (*request.Request, *rds.CopyDBClusterParameterGroupOutput)
+	CopyDBClusterParameterGroupWithContext(aws.Context, *rds.CopyDBClusterParameterGroupInput, ...aws.Option) (*rds.CopyDBClusterParameterGroupOutput, error)
+	CopyDBClusterParameterGroupRequest(*rds.CopyDBClusterParameterGroupInput) (*aws.Request, *rds.CopyDBClusterParameterGroupOutput)
 
 	CopyDBClusterSnapshot(*rds.CopyDBClusterSnapshotInput) (*rds.CopyDBClusterSnapshotOutput, error)
-	CopyDBClusterSnapshotWithContext(aws.Context, *rds.CopyDBClusterSnapshotInput, ...request.Option) (*rds.CopyDBClusterSnapshotOutput, error)
-	CopyDBClusterSnapshotRequest(*rds.CopyDBClusterSnapshotInput) (*request.Request, *rds.CopyDBClusterSnapshotOutput)
+	CopyDBClusterSnapshotWithContext(aws.Context, *rds.CopyDBClusterSnapshotInput, ...aws.Option) (*rds.CopyDBClusterSnapshotOutput, error)
+	CopyDBClusterSnapshotRequest(*rds.CopyDBClusterSnapshotInput) (*aws.Request, *rds.CopyDBClusterSnapshotOutput)
 
 	CopyDBParameterGroup(*rds.CopyDBParameterGroupInput) (*rds.CopyDBParameterGroupOutput, error)
-	CopyDBParameterGroupWithContext(aws.Context, *rds.CopyDBParameterGroupInput, ...request.Option) (*rds.CopyDBParameterGroupOutput, error)
-	CopyDBParameterGroupRequest(*rds.CopyDBParameterGroupInput) (*request.Request, *rds.CopyDBParameterGroupOutput)
+	CopyDBParameterGroupWithContext(aws.Context, *rds.CopyDBParameterGroupInput, ...aws.Option) (*rds.CopyDBParameterGroupOutput, error)
+	CopyDBParameterGroupRequest(*rds.CopyDBParameterGroupInput) (*aws.Request, *rds.CopyDBParameterGroupOutput)
 
 	CopyDBSnapshot(*rds.CopyDBSnapshotInput) (*rds.CopyDBSnapshotOutput, error)
-	CopyDBSnapshotWithContext(aws.Context, *rds.CopyDBSnapshotInput, ...request.Option) (*rds.CopyDBSnapshotOutput, error)
-	CopyDBSnapshotRequest(*rds.CopyDBSnapshotInput) (*request.Request, *rds.CopyDBSnapshotOutput)
+	CopyDBSnapshotWithContext(aws.Context, *rds.CopyDBSnapshotInput, ...aws.Option) (*rds.CopyDBSnapshotOutput, error)
+	CopyDBSnapshotRequest(*rds.CopyDBSnapshotInput) (*aws.Request, *rds.CopyDBSnapshotOutput)
 
 	CopyOptionGroup(*rds.CopyOptionGroupInput) (*rds.CopyOptionGroupOutput, error)
-	CopyOptionGroupWithContext(aws.Context, *rds.CopyOptionGroupInput, ...request.Option) (*rds.CopyOptionGroupOutput, error)
-	CopyOptionGroupRequest(*rds.CopyOptionGroupInput) (*request.Request, *rds.CopyOptionGroupOutput)
+	CopyOptionGroupWithContext(aws.Context, *rds.CopyOptionGroupInput, ...aws.Option) (*rds.CopyOptionGroupOutput, error)
+	CopyOptionGroupRequest(*rds.CopyOptionGroupInput) (*aws.Request, *rds.CopyOptionGroupOutput)
 
 	CreateDBCluster(*rds.CreateDBClusterInput) (*rds.CreateDBClusterOutput, error)
-	CreateDBClusterWithContext(aws.Context, *rds.CreateDBClusterInput, ...request.Option) (*rds.CreateDBClusterOutput, error)
-	CreateDBClusterRequest(*rds.CreateDBClusterInput) (*request.Request, *rds.CreateDBClusterOutput)
+	CreateDBClusterWithContext(aws.Context, *rds.CreateDBClusterInput, ...aws.Option) (*rds.CreateDBClusterOutput, error)
+	CreateDBClusterRequest(*rds.CreateDBClusterInput) (*aws.Request, *rds.CreateDBClusterOutput)
 
 	CreateDBClusterParameterGroup(*rds.CreateDBClusterParameterGroupInput) (*rds.CreateDBClusterParameterGroupOutput, error)
-	CreateDBClusterParameterGroupWithContext(aws.Context, *rds.CreateDBClusterParameterGroupInput, ...request.Option) (*rds.CreateDBClusterParameterGroupOutput, error)
-	CreateDBClusterParameterGroupRequest(*rds.CreateDBClusterParameterGroupInput) (*request.Request, *rds.CreateDBClusterParameterGroupOutput)
+	CreateDBClusterParameterGroupWithContext(aws.Context, *rds.CreateDBClusterParameterGroupInput, ...aws.Option) (*rds.CreateDBClusterParameterGroupOutput, error)
+	CreateDBClusterParameterGroupRequest(*rds.CreateDBClusterParameterGroupInput) (*aws.Request, *rds.CreateDBClusterParameterGroupOutput)
 
 	CreateDBClusterSnapshot(*rds.CreateDBClusterSnapshotInput) (*rds.CreateDBClusterSnapshotOutput, error)
-	CreateDBClusterSnapshotWithContext(aws.Context, *rds.CreateDBClusterSnapshotInput, ...request.Option) (*rds.CreateDBClusterSnapshotOutput, error)
-	CreateDBClusterSnapshotRequest(*rds.CreateDBClusterSnapshotInput) (*request.Request, *rds.CreateDBClusterSnapshotOutput)
+	CreateDBClusterSnapshotWithContext(aws.Context, *rds.CreateDBClusterSnapshotInput, ...aws.Option) (*rds.CreateDBClusterSnapshotOutput, error)
+	CreateDBClusterSnapshotRequest(*rds.CreateDBClusterSnapshotInput) (*aws.Request, *rds.CreateDBClusterSnapshotOutput)
 
 	CreateDBInstance(*rds.CreateDBInstanceInput) (*rds.CreateDBInstanceOutput, error)
-	CreateDBInstanceWithContext(aws.Context, *rds.CreateDBInstanceInput, ...request.Option) (*rds.CreateDBInstanceOutput, error)
-	CreateDBInstanceRequest(*rds.CreateDBInstanceInput) (*request.Request, *rds.CreateDBInstanceOutput)
+	CreateDBInstanceWithContext(aws.Context, *rds.CreateDBInstanceInput, ...aws.Option) (*rds.CreateDBInstanceOutput, error)
+	CreateDBInstanceRequest(*rds.CreateDBInstanceInput) (*aws.Request, *rds.CreateDBInstanceOutput)
 
 	CreateDBInstanceReadReplica(*rds.CreateDBInstanceReadReplicaInput) (*rds.CreateDBInstanceReadReplicaOutput, error)
-	CreateDBInstanceReadReplicaWithContext(aws.Context, *rds.CreateDBInstanceReadReplicaInput, ...request.Option) (*rds.CreateDBInstanceReadReplicaOutput, error)
-	CreateDBInstanceReadReplicaRequest(*rds.CreateDBInstanceReadReplicaInput) (*request.Request, *rds.CreateDBInstanceReadReplicaOutput)
+	CreateDBInstanceReadReplicaWithContext(aws.Context, *rds.CreateDBInstanceReadReplicaInput, ...aws.Option) (*rds.CreateDBInstanceReadReplicaOutput, error)
+	CreateDBInstanceReadReplicaRequest(*rds.CreateDBInstanceReadReplicaInput) (*aws.Request, *rds.CreateDBInstanceReadReplicaOutput)
 
 	CreateDBParameterGroup(*rds.CreateDBParameterGroupInput) (*rds.CreateDBParameterGroupOutput, error)
-	CreateDBParameterGroupWithContext(aws.Context, *rds.CreateDBParameterGroupInput, ...request.Option) (*rds.CreateDBParameterGroupOutput, error)
-	CreateDBParameterGroupRequest(*rds.CreateDBParameterGroupInput) (*request.Request, *rds.CreateDBParameterGroupOutput)
+	CreateDBParameterGroupWithContext(aws.Context, *rds.CreateDBParameterGroupInput, ...aws.Option) (*rds.CreateDBParameterGroupOutput, error)
+	CreateDBParameterGroupRequest(*rds.CreateDBParameterGroupInput) (*aws.Request, *rds.CreateDBParameterGroupOutput)
 
 	CreateDBSecurityGroup(*rds.CreateDBSecurityGroupInput) (*rds.CreateDBSecurityGroupOutput, error)
-	CreateDBSecurityGroupWithContext(aws.Context, *rds.CreateDBSecurityGroupInput, ...request.Option) (*rds.CreateDBSecurityGroupOutput, error)
-	CreateDBSecurityGroupRequest(*rds.CreateDBSecurityGroupInput) (*request.Request, *rds.CreateDBSecurityGroupOutput)
+	CreateDBSecurityGroupWithContext(aws.Context, *rds.CreateDBSecurityGroupInput, ...aws.Option) (*rds.CreateDBSecurityGroupOutput, error)
+	CreateDBSecurityGroupRequest(*rds.CreateDBSecurityGroupInput) (*aws.Request, *rds.CreateDBSecurityGroupOutput)
 
 	CreateDBSnapshot(*rds.CreateDBSnapshotInput) (*rds.CreateDBSnapshotOutput, error)
-	CreateDBSnapshotWithContext(aws.Context, *rds.CreateDBSnapshotInput, ...request.Option) (*rds.CreateDBSnapshotOutput, error)
-	CreateDBSnapshotRequest(*rds.CreateDBSnapshotInput) (*request.Request, *rds.CreateDBSnapshotOutput)
+	CreateDBSnapshotWithContext(aws.Context, *rds.CreateDBSnapshotInput, ...aws.Option) (*rds.CreateDBSnapshotOutput, error)
+	CreateDBSnapshotRequest(*rds.CreateDBSnapshotInput) (*aws.Request, *rds.CreateDBSnapshotOutput)
 
 	CreateDBSubnetGroup(*rds.CreateDBSubnetGroupInput) (*rds.CreateDBSubnetGroupOutput, error)
-	CreateDBSubnetGroupWithContext(aws.Context, *rds.CreateDBSubnetGroupInput, ...request.Option) (*rds.CreateDBSubnetGroupOutput, error)
-	CreateDBSubnetGroupRequest(*rds.CreateDBSubnetGroupInput) (*request.Request, *rds.CreateDBSubnetGroupOutput)
+	CreateDBSubnetGroupWithContext(aws.Context, *rds.CreateDBSubnetGroupInput, ...aws.Option) (*rds.CreateDBSubnetGroupOutput, error)
+	CreateDBSubnetGroupRequest(*rds.CreateDBSubnetGroupInput) (*aws.Request, *rds.CreateDBSubnetGroupOutput)
 
 	CreateEventSubscription(*rds.CreateEventSubscriptionInput) (*rds.CreateEventSubscriptionOutput, error)
-	CreateEventSubscriptionWithContext(aws.Context, *rds.CreateEventSubscriptionInput, ...request.Option) (*rds.CreateEventSubscriptionOutput, error)
-	CreateEventSubscriptionRequest(*rds.CreateEventSubscriptionInput) (*request.Request, *rds.CreateEventSubscriptionOutput)
+	CreateEventSubscriptionWithContext(aws.Context, *rds.CreateEventSubscriptionInput, ...aws.Option) (*rds.CreateEventSubscriptionOutput, error)
+	CreateEventSubscriptionRequest(*rds.CreateEventSubscriptionInput) (*aws.Request, *rds.CreateEventSubscriptionOutput)
 
 	CreateOptionGroup(*rds.CreateOptionGroupInput) (*rds.CreateOptionGroupOutput, error)
-	CreateOptionGroupWithContext(aws.Context, *rds.CreateOptionGroupInput, ...request.Option) (*rds.CreateOptionGroupOutput, error)
-	CreateOptionGroupRequest(*rds.CreateOptionGroupInput) (*request.Request, *rds.CreateOptionGroupOutput)
+	CreateOptionGroupWithContext(aws.Context, *rds.CreateOptionGroupInput, ...aws.Option) (*rds.CreateOptionGroupOutput, error)
+	CreateOptionGroupRequest(*rds.CreateOptionGroupInput) (*aws.Request, *rds.CreateOptionGroupOutput)
 
 	DeleteDBCluster(*rds.DeleteDBClusterInput) (*rds.DeleteDBClusterOutput, error)
-	DeleteDBClusterWithContext(aws.Context, *rds.DeleteDBClusterInput, ...request.Option) (*rds.DeleteDBClusterOutput, error)
-	DeleteDBClusterRequest(*rds.DeleteDBClusterInput) (*request.Request, *rds.DeleteDBClusterOutput)
+	DeleteDBClusterWithContext(aws.Context, *rds.DeleteDBClusterInput, ...aws.Option) (*rds.DeleteDBClusterOutput, error)
+	DeleteDBClusterRequest(*rds.DeleteDBClusterInput) (*aws.Request, *rds.DeleteDBClusterOutput)
 
 	DeleteDBClusterParameterGroup(*rds.DeleteDBClusterParameterGroupInput) (*rds.DeleteDBClusterParameterGroupOutput, error)
-	DeleteDBClusterParameterGroupWithContext(aws.Context, *rds.DeleteDBClusterParameterGroupInput, ...request.Option) (*rds.DeleteDBClusterParameterGroupOutput, error)
-	DeleteDBClusterParameterGroupRequest(*rds.DeleteDBClusterParameterGroupInput) (*request.Request, *rds.DeleteDBClusterParameterGroupOutput)
+	DeleteDBClusterParameterGroupWithContext(aws.Context, *rds.DeleteDBClusterParameterGroupInput, ...aws.Option) (*rds.DeleteDBClusterParameterGroupOutput, error)
+	DeleteDBClusterParameterGroupRequest(*rds.DeleteDBClusterParameterGroupInput) (*aws.Request, *rds.DeleteDBClusterParameterGroupOutput)
 
 	DeleteDBClusterSnapshot(*rds.DeleteDBClusterSnapshotInput) (*rds.DeleteDBClusterSnapshotOutput, error)
-	DeleteDBClusterSnapshotWithContext(aws.Context, *rds.DeleteDBClusterSnapshotInput, ...request.Option) (*rds.DeleteDBClusterSnapshotOutput, error)
-	DeleteDBClusterSnapshotRequest(*rds.DeleteDBClusterSnapshotInput) (*request.Request, *rds.DeleteDBClusterSnapshotOutput)
+	DeleteDBClusterSnapshotWithContext(aws.Context, *rds.DeleteDBClusterSnapshotInput, ...aws.Option) (*rds.DeleteDBClusterSnapshotOutput, error)
+	DeleteDBClusterSnapshotRequest(*rds.DeleteDBClusterSnapshotInput) (*aws.Request, *rds.DeleteDBClusterSnapshotOutput)
 
 	DeleteDBInstance(*rds.DeleteDBInstanceInput) (*rds.DeleteDBInstanceOutput, error)
-	DeleteDBInstanceWithContext(aws.Context, *rds.DeleteDBInstanceInput, ...request.Option) (*rds.DeleteDBInstanceOutput, error)
-	DeleteDBInstanceRequest(*rds.DeleteDBInstanceInput) (*request.Request, *rds.DeleteDBInstanceOutput)
+	DeleteDBInstanceWithContext(aws.Context, *rds.DeleteDBInstanceInput, ...aws.Option) (*rds.DeleteDBInstanceOutput, error)
+	DeleteDBInstanceRequest(*rds.DeleteDBInstanceInput) (*aws.Request, *rds.DeleteDBInstanceOutput)
 
 	DeleteDBParameterGroup(*rds.DeleteDBParameterGroupInput) (*rds.DeleteDBParameterGroupOutput, error)
-	DeleteDBParameterGroupWithContext(aws.Context, *rds.DeleteDBParameterGroupInput, ...request.Option) (*rds.DeleteDBParameterGroupOutput, error)
-	DeleteDBParameterGroupRequest(*rds.DeleteDBParameterGroupInput) (*request.Request, *rds.DeleteDBParameterGroupOutput)
+	DeleteDBParameterGroupWithContext(aws.Context, *rds.DeleteDBParameterGroupInput, ...aws.Option) (*rds.DeleteDBParameterGroupOutput, error)
+	DeleteDBParameterGroupRequest(*rds.DeleteDBParameterGroupInput) (*aws.Request, *rds.DeleteDBParameterGroupOutput)
 
 	DeleteDBSecurityGroup(*rds.DeleteDBSecurityGroupInput) (*rds.DeleteDBSecurityGroupOutput, error)
-	DeleteDBSecurityGroupWithContext(aws.Context, *rds.DeleteDBSecurityGroupInput, ...request.Option) (*rds.DeleteDBSecurityGroupOutput, error)
-	DeleteDBSecurityGroupRequest(*rds.DeleteDBSecurityGroupInput) (*request.Request, *rds.DeleteDBSecurityGroupOutput)
+	DeleteDBSecurityGroupWithContext(aws.Context, *rds.DeleteDBSecurityGroupInput, ...aws.Option) (*rds.DeleteDBSecurityGroupOutput, error)
+	DeleteDBSecurityGroupRequest(*rds.DeleteDBSecurityGroupInput) (*aws.Request, *rds.DeleteDBSecurityGroupOutput)
 
 	DeleteDBSnapshot(*rds.DeleteDBSnapshotInput) (*rds.DeleteDBSnapshotOutput, error)
-	DeleteDBSnapshotWithContext(aws.Context, *rds.DeleteDBSnapshotInput, ...request.Option) (*rds.DeleteDBSnapshotOutput, error)
-	DeleteDBSnapshotRequest(*rds.DeleteDBSnapshotInput) (*request.Request, *rds.DeleteDBSnapshotOutput)
+	DeleteDBSnapshotWithContext(aws.Context, *rds.DeleteDBSnapshotInput, ...aws.Option) (*rds.DeleteDBSnapshotOutput, error)
+	DeleteDBSnapshotRequest(*rds.DeleteDBSnapshotInput) (*aws.Request, *rds.DeleteDBSnapshotOutput)
 
 	DeleteDBSubnetGroup(*rds.DeleteDBSubnetGroupInput) (*rds.DeleteDBSubnetGroupOutput, error)
-	DeleteDBSubnetGroupWithContext(aws.Context, *rds.DeleteDBSubnetGroupInput, ...request.Option) (*rds.DeleteDBSubnetGroupOutput, error)
-	DeleteDBSubnetGroupRequest(*rds.DeleteDBSubnetGroupInput) (*request.Request, *rds.DeleteDBSubnetGroupOutput)
+	DeleteDBSubnetGroupWithContext(aws.Context, *rds.DeleteDBSubnetGroupInput, ...aws.Option) (*rds.DeleteDBSubnetGroupOutput, error)
+	DeleteDBSubnetGroupRequest(*rds.DeleteDBSubnetGroupInput) (*aws.Request, *rds.DeleteDBSubnetGroupOutput)
 
 	DeleteEventSubscription(*rds.DeleteEventSubscriptionInput) (*rds.DeleteEventSubscriptionOutput, error)
-	DeleteEventSubscriptionWithContext(aws.Context, *rds.DeleteEventSubscriptionInput, ...request.Option) (*rds.DeleteEventSubscriptionOutput, error)
-	DeleteEventSubscriptionRequest(*rds.DeleteEventSubscriptionInput) (*request.Request, *rds.DeleteEventSubscriptionOutput)
+	DeleteEventSubscriptionWithContext(aws.Context, *rds.DeleteEventSubscriptionInput, ...aws.Option) (*rds.DeleteEventSubscriptionOutput, error)
+	DeleteEventSubscriptionRequest(*rds.DeleteEventSubscriptionInput) (*aws.Request, *rds.DeleteEventSubscriptionOutput)
 
 	DeleteOptionGroup(*rds.DeleteOptionGroupInput) (*rds.DeleteOptionGroupOutput, error)
-	DeleteOptionGroupWithContext(aws.Context, *rds.DeleteOptionGroupInput, ...request.Option) (*rds.DeleteOptionGroupOutput, error)
-	DeleteOptionGroupRequest(*rds.DeleteOptionGroupInput) (*request.Request, *rds.DeleteOptionGroupOutput)
+	DeleteOptionGroupWithContext(aws.Context, *rds.DeleteOptionGroupInput, ...aws.Option) (*rds.DeleteOptionGroupOutput, error)
+	DeleteOptionGroupRequest(*rds.DeleteOptionGroupInput) (*aws.Request, *rds.DeleteOptionGroupOutput)
 
 	DescribeAccountAttributes(*rds.DescribeAccountAttributesInput) (*rds.DescribeAccountAttributesOutput, error)
-	DescribeAccountAttributesWithContext(aws.Context, *rds.DescribeAccountAttributesInput, ...request.Option) (*rds.DescribeAccountAttributesOutput, error)
-	DescribeAccountAttributesRequest(*rds.DescribeAccountAttributesInput) (*request.Request, *rds.DescribeAccountAttributesOutput)
+	DescribeAccountAttributesWithContext(aws.Context, *rds.DescribeAccountAttributesInput, ...aws.Option) (*rds.DescribeAccountAttributesOutput, error)
+	DescribeAccountAttributesRequest(*rds.DescribeAccountAttributesInput) (*aws.Request, *rds.DescribeAccountAttributesOutput)
 
 	DescribeCertificates(*rds.DescribeCertificatesInput) (*rds.DescribeCertificatesOutput, error)
-	DescribeCertificatesWithContext(aws.Context, *rds.DescribeCertificatesInput, ...request.Option) (*rds.DescribeCertificatesOutput, error)
-	DescribeCertificatesRequest(*rds.DescribeCertificatesInput) (*request.Request, *rds.DescribeCertificatesOutput)
+	DescribeCertificatesWithContext(aws.Context, *rds.DescribeCertificatesInput, ...aws.Option) (*rds.DescribeCertificatesOutput, error)
+	DescribeCertificatesRequest(*rds.DescribeCertificatesInput) (*aws.Request, *rds.DescribeCertificatesOutput)
 
 	DescribeDBClusterParameterGroups(*rds.DescribeDBClusterParameterGroupsInput) (*rds.DescribeDBClusterParameterGroupsOutput, error)
-	DescribeDBClusterParameterGroupsWithContext(aws.Context, *rds.DescribeDBClusterParameterGroupsInput, ...request.Option) (*rds.DescribeDBClusterParameterGroupsOutput, error)
-	DescribeDBClusterParameterGroupsRequest(*rds.DescribeDBClusterParameterGroupsInput) (*request.Request, *rds.DescribeDBClusterParameterGroupsOutput)
+	DescribeDBClusterParameterGroupsWithContext(aws.Context, *rds.DescribeDBClusterParameterGroupsInput, ...aws.Option) (*rds.DescribeDBClusterParameterGroupsOutput, error)
+	DescribeDBClusterParameterGroupsRequest(*rds.DescribeDBClusterParameterGroupsInput) (*aws.Request, *rds.DescribeDBClusterParameterGroupsOutput)
 
 	DescribeDBClusterParameters(*rds.DescribeDBClusterParametersInput) (*rds.DescribeDBClusterParametersOutput, error)
-	DescribeDBClusterParametersWithContext(aws.Context, *rds.DescribeDBClusterParametersInput, ...request.Option) (*rds.DescribeDBClusterParametersOutput, error)
-	DescribeDBClusterParametersRequest(*rds.DescribeDBClusterParametersInput) (*request.Request, *rds.DescribeDBClusterParametersOutput)
+	DescribeDBClusterParametersWithContext(aws.Context, *rds.DescribeDBClusterParametersInput, ...aws.Option) (*rds.DescribeDBClusterParametersOutput, error)
+	DescribeDBClusterParametersRequest(*rds.DescribeDBClusterParametersInput) (*aws.Request, *rds.DescribeDBClusterParametersOutput)
 
 	DescribeDBClusterSnapshotAttributes(*rds.DescribeDBClusterSnapshotAttributesInput) (*rds.DescribeDBClusterSnapshotAttributesOutput, error)
-	DescribeDBClusterSnapshotAttributesWithContext(aws.Context, *rds.DescribeDBClusterSnapshotAttributesInput, ...request.Option) (*rds.DescribeDBClusterSnapshotAttributesOutput, error)
-	DescribeDBClusterSnapshotAttributesRequest(*rds.DescribeDBClusterSnapshotAttributesInput) (*request.Request, *rds.DescribeDBClusterSnapshotAttributesOutput)
+	DescribeDBClusterSnapshotAttributesWithContext(aws.Context, *rds.DescribeDBClusterSnapshotAttributesInput, ...aws.Option) (*rds.DescribeDBClusterSnapshotAttributesOutput, error)
+	DescribeDBClusterSnapshotAttributesRequest(*rds.DescribeDBClusterSnapshotAttributesInput) (*aws.Request, *rds.DescribeDBClusterSnapshotAttributesOutput)
 
 	DescribeDBClusterSnapshots(*rds.DescribeDBClusterSnapshotsInput) (*rds.DescribeDBClusterSnapshotsOutput, error)
-	DescribeDBClusterSnapshotsWithContext(aws.Context, *rds.DescribeDBClusterSnapshotsInput, ...request.Option) (*rds.DescribeDBClusterSnapshotsOutput, error)
-	DescribeDBClusterSnapshotsRequest(*rds.DescribeDBClusterSnapshotsInput) (*request.Request, *rds.DescribeDBClusterSnapshotsOutput)
+	DescribeDBClusterSnapshotsWithContext(aws.Context, *rds.DescribeDBClusterSnapshotsInput, ...aws.Option) (*rds.DescribeDBClusterSnapshotsOutput, error)
+	DescribeDBClusterSnapshotsRequest(*rds.DescribeDBClusterSnapshotsInput) (*aws.Request, *rds.DescribeDBClusterSnapshotsOutput)
 
 	DescribeDBClusters(*rds.DescribeDBClustersInput) (*rds.DescribeDBClustersOutput, error)
-	DescribeDBClustersWithContext(aws.Context, *rds.DescribeDBClustersInput, ...request.Option) (*rds.DescribeDBClustersOutput, error)
-	DescribeDBClustersRequest(*rds.DescribeDBClustersInput) (*request.Request, *rds.DescribeDBClustersOutput)
+	DescribeDBClustersWithContext(aws.Context, *rds.DescribeDBClustersInput, ...aws.Option) (*rds.DescribeDBClustersOutput, error)
+	DescribeDBClustersRequest(*rds.DescribeDBClustersInput) (*aws.Request, *rds.DescribeDBClustersOutput)
 
 	DescribeDBEngineVersions(*rds.DescribeDBEngineVersionsInput) (*rds.DescribeDBEngineVersionsOutput, error)
-	DescribeDBEngineVersionsWithContext(aws.Context, *rds.DescribeDBEngineVersionsInput, ...request.Option) (*rds.DescribeDBEngineVersionsOutput, error)
-	DescribeDBEngineVersionsRequest(*rds.DescribeDBEngineVersionsInput) (*request.Request, *rds.DescribeDBEngineVersionsOutput)
+	DescribeDBEngineVersionsWithContext(aws.Context, *rds.DescribeDBEngineVersionsInput, ...aws.Option) (*rds.DescribeDBEngineVersionsOutput, error)
+	DescribeDBEngineVersionsRequest(*rds.DescribeDBEngineVersionsInput) (*aws.Request, *rds.DescribeDBEngineVersionsOutput)
 
 	DescribeDBEngineVersionsPages(*rds.DescribeDBEngineVersionsInput, func(*rds.DescribeDBEngineVersionsOutput, bool) bool) error
-	DescribeDBEngineVersionsPagesWithContext(aws.Context, *rds.DescribeDBEngineVersionsInput, func(*rds.DescribeDBEngineVersionsOutput, bool) bool, ...request.Option) error
+	DescribeDBEngineVersionsPagesWithContext(aws.Context, *rds.DescribeDBEngineVersionsInput, func(*rds.DescribeDBEngineVersionsOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBInstances(*rds.DescribeDBInstancesInput) (*rds.DescribeDBInstancesOutput, error)
-	DescribeDBInstancesWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...request.Option) (*rds.DescribeDBInstancesOutput, error)
-	DescribeDBInstancesRequest(*rds.DescribeDBInstancesInput) (*request.Request, *rds.DescribeDBInstancesOutput)
+	DescribeDBInstancesWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...aws.Option) (*rds.DescribeDBInstancesOutput, error)
+	DescribeDBInstancesRequest(*rds.DescribeDBInstancesInput) (*aws.Request, *rds.DescribeDBInstancesOutput)
 
 	DescribeDBInstancesPages(*rds.DescribeDBInstancesInput, func(*rds.DescribeDBInstancesOutput, bool) bool) error
-	DescribeDBInstancesPagesWithContext(aws.Context, *rds.DescribeDBInstancesInput, func(*rds.DescribeDBInstancesOutput, bool) bool, ...request.Option) error
+	DescribeDBInstancesPagesWithContext(aws.Context, *rds.DescribeDBInstancesInput, func(*rds.DescribeDBInstancesOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBLogFiles(*rds.DescribeDBLogFilesInput) (*rds.DescribeDBLogFilesOutput, error)
-	DescribeDBLogFilesWithContext(aws.Context, *rds.DescribeDBLogFilesInput, ...request.Option) (*rds.DescribeDBLogFilesOutput, error)
-	DescribeDBLogFilesRequest(*rds.DescribeDBLogFilesInput) (*request.Request, *rds.DescribeDBLogFilesOutput)
+	DescribeDBLogFilesWithContext(aws.Context, *rds.DescribeDBLogFilesInput, ...aws.Option) (*rds.DescribeDBLogFilesOutput, error)
+	DescribeDBLogFilesRequest(*rds.DescribeDBLogFilesInput) (*aws.Request, *rds.DescribeDBLogFilesOutput)
 
 	DescribeDBLogFilesPages(*rds.DescribeDBLogFilesInput, func(*rds.DescribeDBLogFilesOutput, bool) bool) error
-	DescribeDBLogFilesPagesWithContext(aws.Context, *rds.DescribeDBLogFilesInput, func(*rds.DescribeDBLogFilesOutput, bool) bool, ...request.Option) error
+	DescribeDBLogFilesPagesWithContext(aws.Context, *rds.DescribeDBLogFilesInput, func(*rds.DescribeDBLogFilesOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBParameterGroups(*rds.DescribeDBParameterGroupsInput) (*rds.DescribeDBParameterGroupsOutput, error)
-	DescribeDBParameterGroupsWithContext(aws.Context, *rds.DescribeDBParameterGroupsInput, ...request.Option) (*rds.DescribeDBParameterGroupsOutput, error)
-	DescribeDBParameterGroupsRequest(*rds.DescribeDBParameterGroupsInput) (*request.Request, *rds.DescribeDBParameterGroupsOutput)
+	DescribeDBParameterGroupsWithContext(aws.Context, *rds.DescribeDBParameterGroupsInput, ...aws.Option) (*rds.DescribeDBParameterGroupsOutput, error)
+	DescribeDBParameterGroupsRequest(*rds.DescribeDBParameterGroupsInput) (*aws.Request, *rds.DescribeDBParameterGroupsOutput)
 
 	DescribeDBParameterGroupsPages(*rds.DescribeDBParameterGroupsInput, func(*rds.DescribeDBParameterGroupsOutput, bool) bool) error
-	DescribeDBParameterGroupsPagesWithContext(aws.Context, *rds.DescribeDBParameterGroupsInput, func(*rds.DescribeDBParameterGroupsOutput, bool) bool, ...request.Option) error
+	DescribeDBParameterGroupsPagesWithContext(aws.Context, *rds.DescribeDBParameterGroupsInput, func(*rds.DescribeDBParameterGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBParameters(*rds.DescribeDBParametersInput) (*rds.DescribeDBParametersOutput, error)
-	DescribeDBParametersWithContext(aws.Context, *rds.DescribeDBParametersInput, ...request.Option) (*rds.DescribeDBParametersOutput, error)
-	DescribeDBParametersRequest(*rds.DescribeDBParametersInput) (*request.Request, *rds.DescribeDBParametersOutput)
+	DescribeDBParametersWithContext(aws.Context, *rds.DescribeDBParametersInput, ...aws.Option) (*rds.DescribeDBParametersOutput, error)
+	DescribeDBParametersRequest(*rds.DescribeDBParametersInput) (*aws.Request, *rds.DescribeDBParametersOutput)
 
 	DescribeDBParametersPages(*rds.DescribeDBParametersInput, func(*rds.DescribeDBParametersOutput, bool) bool) error
-	DescribeDBParametersPagesWithContext(aws.Context, *rds.DescribeDBParametersInput, func(*rds.DescribeDBParametersOutput, bool) bool, ...request.Option) error
+	DescribeDBParametersPagesWithContext(aws.Context, *rds.DescribeDBParametersInput, func(*rds.DescribeDBParametersOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBSecurityGroups(*rds.DescribeDBSecurityGroupsInput) (*rds.DescribeDBSecurityGroupsOutput, error)
-	DescribeDBSecurityGroupsWithContext(aws.Context, *rds.DescribeDBSecurityGroupsInput, ...request.Option) (*rds.DescribeDBSecurityGroupsOutput, error)
-	DescribeDBSecurityGroupsRequest(*rds.DescribeDBSecurityGroupsInput) (*request.Request, *rds.DescribeDBSecurityGroupsOutput)
+	DescribeDBSecurityGroupsWithContext(aws.Context, *rds.DescribeDBSecurityGroupsInput, ...aws.Option) (*rds.DescribeDBSecurityGroupsOutput, error)
+	DescribeDBSecurityGroupsRequest(*rds.DescribeDBSecurityGroupsInput) (*aws.Request, *rds.DescribeDBSecurityGroupsOutput)
 
 	DescribeDBSecurityGroupsPages(*rds.DescribeDBSecurityGroupsInput, func(*rds.DescribeDBSecurityGroupsOutput, bool) bool) error
-	DescribeDBSecurityGroupsPagesWithContext(aws.Context, *rds.DescribeDBSecurityGroupsInput, func(*rds.DescribeDBSecurityGroupsOutput, bool) bool, ...request.Option) error
+	DescribeDBSecurityGroupsPagesWithContext(aws.Context, *rds.DescribeDBSecurityGroupsInput, func(*rds.DescribeDBSecurityGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBSnapshotAttributes(*rds.DescribeDBSnapshotAttributesInput) (*rds.DescribeDBSnapshotAttributesOutput, error)
-	DescribeDBSnapshotAttributesWithContext(aws.Context, *rds.DescribeDBSnapshotAttributesInput, ...request.Option) (*rds.DescribeDBSnapshotAttributesOutput, error)
-	DescribeDBSnapshotAttributesRequest(*rds.DescribeDBSnapshotAttributesInput) (*request.Request, *rds.DescribeDBSnapshotAttributesOutput)
+	DescribeDBSnapshotAttributesWithContext(aws.Context, *rds.DescribeDBSnapshotAttributesInput, ...aws.Option) (*rds.DescribeDBSnapshotAttributesOutput, error)
+	DescribeDBSnapshotAttributesRequest(*rds.DescribeDBSnapshotAttributesInput) (*aws.Request, *rds.DescribeDBSnapshotAttributesOutput)
 
 	DescribeDBSnapshots(*rds.DescribeDBSnapshotsInput) (*rds.DescribeDBSnapshotsOutput, error)
-	DescribeDBSnapshotsWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, ...request.Option) (*rds.DescribeDBSnapshotsOutput, error)
-	DescribeDBSnapshotsRequest(*rds.DescribeDBSnapshotsInput) (*request.Request, *rds.DescribeDBSnapshotsOutput)
+	DescribeDBSnapshotsWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, ...aws.Option) (*rds.DescribeDBSnapshotsOutput, error)
+	DescribeDBSnapshotsRequest(*rds.DescribeDBSnapshotsInput) (*aws.Request, *rds.DescribeDBSnapshotsOutput)
 
 	DescribeDBSnapshotsPages(*rds.DescribeDBSnapshotsInput, func(*rds.DescribeDBSnapshotsOutput, bool) bool) error
-	DescribeDBSnapshotsPagesWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, func(*rds.DescribeDBSnapshotsOutput, bool) bool, ...request.Option) error
+	DescribeDBSnapshotsPagesWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, func(*rds.DescribeDBSnapshotsOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBSubnetGroups(*rds.DescribeDBSubnetGroupsInput) (*rds.DescribeDBSubnetGroupsOutput, error)
-	DescribeDBSubnetGroupsWithContext(aws.Context, *rds.DescribeDBSubnetGroupsInput, ...request.Option) (*rds.DescribeDBSubnetGroupsOutput, error)
-	DescribeDBSubnetGroupsRequest(*rds.DescribeDBSubnetGroupsInput) (*request.Request, *rds.DescribeDBSubnetGroupsOutput)
+	DescribeDBSubnetGroupsWithContext(aws.Context, *rds.DescribeDBSubnetGroupsInput, ...aws.Option) (*rds.DescribeDBSubnetGroupsOutput, error)
+	DescribeDBSubnetGroupsRequest(*rds.DescribeDBSubnetGroupsInput) (*aws.Request, *rds.DescribeDBSubnetGroupsOutput)
 
 	DescribeDBSubnetGroupsPages(*rds.DescribeDBSubnetGroupsInput, func(*rds.DescribeDBSubnetGroupsOutput, bool) bool) error
-	DescribeDBSubnetGroupsPagesWithContext(aws.Context, *rds.DescribeDBSubnetGroupsInput, func(*rds.DescribeDBSubnetGroupsOutput, bool) bool, ...request.Option) error
+	DescribeDBSubnetGroupsPagesWithContext(aws.Context, *rds.DescribeDBSubnetGroupsInput, func(*rds.DescribeDBSubnetGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeEngineDefaultClusterParameters(*rds.DescribeEngineDefaultClusterParametersInput) (*rds.DescribeEngineDefaultClusterParametersOutput, error)
-	DescribeEngineDefaultClusterParametersWithContext(aws.Context, *rds.DescribeEngineDefaultClusterParametersInput, ...request.Option) (*rds.DescribeEngineDefaultClusterParametersOutput, error)
-	DescribeEngineDefaultClusterParametersRequest(*rds.DescribeEngineDefaultClusterParametersInput) (*request.Request, *rds.DescribeEngineDefaultClusterParametersOutput)
+	DescribeEngineDefaultClusterParametersWithContext(aws.Context, *rds.DescribeEngineDefaultClusterParametersInput, ...aws.Option) (*rds.DescribeEngineDefaultClusterParametersOutput, error)
+	DescribeEngineDefaultClusterParametersRequest(*rds.DescribeEngineDefaultClusterParametersInput) (*aws.Request, *rds.DescribeEngineDefaultClusterParametersOutput)
 
 	DescribeEngineDefaultParameters(*rds.DescribeEngineDefaultParametersInput) (*rds.DescribeEngineDefaultParametersOutput, error)
-	DescribeEngineDefaultParametersWithContext(aws.Context, *rds.DescribeEngineDefaultParametersInput, ...request.Option) (*rds.DescribeEngineDefaultParametersOutput, error)
-	DescribeEngineDefaultParametersRequest(*rds.DescribeEngineDefaultParametersInput) (*request.Request, *rds.DescribeEngineDefaultParametersOutput)
+	DescribeEngineDefaultParametersWithContext(aws.Context, *rds.DescribeEngineDefaultParametersInput, ...aws.Option) (*rds.DescribeEngineDefaultParametersOutput, error)
+	DescribeEngineDefaultParametersRequest(*rds.DescribeEngineDefaultParametersInput) (*aws.Request, *rds.DescribeEngineDefaultParametersOutput)
 
 	DescribeEngineDefaultParametersPages(*rds.DescribeEngineDefaultParametersInput, func(*rds.DescribeEngineDefaultParametersOutput, bool) bool) error
-	DescribeEngineDefaultParametersPagesWithContext(aws.Context, *rds.DescribeEngineDefaultParametersInput, func(*rds.DescribeEngineDefaultParametersOutput, bool) bool, ...request.Option) error
+	DescribeEngineDefaultParametersPagesWithContext(aws.Context, *rds.DescribeEngineDefaultParametersInput, func(*rds.DescribeEngineDefaultParametersOutput, bool) bool, ...aws.Option) error
 
 	DescribeEventCategories(*rds.DescribeEventCategoriesInput) (*rds.DescribeEventCategoriesOutput, error)
-	DescribeEventCategoriesWithContext(aws.Context, *rds.DescribeEventCategoriesInput, ...request.Option) (*rds.DescribeEventCategoriesOutput, error)
-	DescribeEventCategoriesRequest(*rds.DescribeEventCategoriesInput) (*request.Request, *rds.DescribeEventCategoriesOutput)
+	DescribeEventCategoriesWithContext(aws.Context, *rds.DescribeEventCategoriesInput, ...aws.Option) (*rds.DescribeEventCategoriesOutput, error)
+	DescribeEventCategoriesRequest(*rds.DescribeEventCategoriesInput) (*aws.Request, *rds.DescribeEventCategoriesOutput)
 
 	DescribeEventSubscriptions(*rds.DescribeEventSubscriptionsInput) (*rds.DescribeEventSubscriptionsOutput, error)
-	DescribeEventSubscriptionsWithContext(aws.Context, *rds.DescribeEventSubscriptionsInput, ...request.Option) (*rds.DescribeEventSubscriptionsOutput, error)
-	DescribeEventSubscriptionsRequest(*rds.DescribeEventSubscriptionsInput) (*request.Request, *rds.DescribeEventSubscriptionsOutput)
+	DescribeEventSubscriptionsWithContext(aws.Context, *rds.DescribeEventSubscriptionsInput, ...aws.Option) (*rds.DescribeEventSubscriptionsOutput, error)
+	DescribeEventSubscriptionsRequest(*rds.DescribeEventSubscriptionsInput) (*aws.Request, *rds.DescribeEventSubscriptionsOutput)
 
 	DescribeEventSubscriptionsPages(*rds.DescribeEventSubscriptionsInput, func(*rds.DescribeEventSubscriptionsOutput, bool) bool) error
-	DescribeEventSubscriptionsPagesWithContext(aws.Context, *rds.DescribeEventSubscriptionsInput, func(*rds.DescribeEventSubscriptionsOutput, bool) bool, ...request.Option) error
+	DescribeEventSubscriptionsPagesWithContext(aws.Context, *rds.DescribeEventSubscriptionsInput, func(*rds.DescribeEventSubscriptionsOutput, bool) bool, ...aws.Option) error
 
 	DescribeEvents(*rds.DescribeEventsInput) (*rds.DescribeEventsOutput, error)
-	DescribeEventsWithContext(aws.Context, *rds.DescribeEventsInput, ...request.Option) (*rds.DescribeEventsOutput, error)
-	DescribeEventsRequest(*rds.DescribeEventsInput) (*request.Request, *rds.DescribeEventsOutput)
+	DescribeEventsWithContext(aws.Context, *rds.DescribeEventsInput, ...aws.Option) (*rds.DescribeEventsOutput, error)
+	DescribeEventsRequest(*rds.DescribeEventsInput) (*aws.Request, *rds.DescribeEventsOutput)
 
 	DescribeEventsPages(*rds.DescribeEventsInput, func(*rds.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *rds.DescribeEventsInput, func(*rds.DescribeEventsOutput, bool) bool, ...request.Option) error
+	DescribeEventsPagesWithContext(aws.Context, *rds.DescribeEventsInput, func(*rds.DescribeEventsOutput, bool) bool, ...aws.Option) error
 
 	DescribeOptionGroupOptions(*rds.DescribeOptionGroupOptionsInput) (*rds.DescribeOptionGroupOptionsOutput, error)
-	DescribeOptionGroupOptionsWithContext(aws.Context, *rds.DescribeOptionGroupOptionsInput, ...request.Option) (*rds.DescribeOptionGroupOptionsOutput, error)
-	DescribeOptionGroupOptionsRequest(*rds.DescribeOptionGroupOptionsInput) (*request.Request, *rds.DescribeOptionGroupOptionsOutput)
+	DescribeOptionGroupOptionsWithContext(aws.Context, *rds.DescribeOptionGroupOptionsInput, ...aws.Option) (*rds.DescribeOptionGroupOptionsOutput, error)
+	DescribeOptionGroupOptionsRequest(*rds.DescribeOptionGroupOptionsInput) (*aws.Request, *rds.DescribeOptionGroupOptionsOutput)
 
 	DescribeOptionGroupOptionsPages(*rds.DescribeOptionGroupOptionsInput, func(*rds.DescribeOptionGroupOptionsOutput, bool) bool) error
-	DescribeOptionGroupOptionsPagesWithContext(aws.Context, *rds.DescribeOptionGroupOptionsInput, func(*rds.DescribeOptionGroupOptionsOutput, bool) bool, ...request.Option) error
+	DescribeOptionGroupOptionsPagesWithContext(aws.Context, *rds.DescribeOptionGroupOptionsInput, func(*rds.DescribeOptionGroupOptionsOutput, bool) bool, ...aws.Option) error
 
 	DescribeOptionGroups(*rds.DescribeOptionGroupsInput) (*rds.DescribeOptionGroupsOutput, error)
-	DescribeOptionGroupsWithContext(aws.Context, *rds.DescribeOptionGroupsInput, ...request.Option) (*rds.DescribeOptionGroupsOutput, error)
-	DescribeOptionGroupsRequest(*rds.DescribeOptionGroupsInput) (*request.Request, *rds.DescribeOptionGroupsOutput)
+	DescribeOptionGroupsWithContext(aws.Context, *rds.DescribeOptionGroupsInput, ...aws.Option) (*rds.DescribeOptionGroupsOutput, error)
+	DescribeOptionGroupsRequest(*rds.DescribeOptionGroupsInput) (*aws.Request, *rds.DescribeOptionGroupsOutput)
 
 	DescribeOptionGroupsPages(*rds.DescribeOptionGroupsInput, func(*rds.DescribeOptionGroupsOutput, bool) bool) error
-	DescribeOptionGroupsPagesWithContext(aws.Context, *rds.DescribeOptionGroupsInput, func(*rds.DescribeOptionGroupsOutput, bool) bool, ...request.Option) error
+	DescribeOptionGroupsPagesWithContext(aws.Context, *rds.DescribeOptionGroupsInput, func(*rds.DescribeOptionGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeOrderableDBInstanceOptions(*rds.DescribeOrderableDBInstanceOptionsInput) (*rds.DescribeOrderableDBInstanceOptionsOutput, error)
-	DescribeOrderableDBInstanceOptionsWithContext(aws.Context, *rds.DescribeOrderableDBInstanceOptionsInput, ...request.Option) (*rds.DescribeOrderableDBInstanceOptionsOutput, error)
-	DescribeOrderableDBInstanceOptionsRequest(*rds.DescribeOrderableDBInstanceOptionsInput) (*request.Request, *rds.DescribeOrderableDBInstanceOptionsOutput)
+	DescribeOrderableDBInstanceOptionsWithContext(aws.Context, *rds.DescribeOrderableDBInstanceOptionsInput, ...aws.Option) (*rds.DescribeOrderableDBInstanceOptionsOutput, error)
+	DescribeOrderableDBInstanceOptionsRequest(*rds.DescribeOrderableDBInstanceOptionsInput) (*aws.Request, *rds.DescribeOrderableDBInstanceOptionsOutput)
 
 	DescribeOrderableDBInstanceOptionsPages(*rds.DescribeOrderableDBInstanceOptionsInput, func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool) error
-	DescribeOrderableDBInstanceOptionsPagesWithContext(aws.Context, *rds.DescribeOrderableDBInstanceOptionsInput, func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool, ...request.Option) error
+	DescribeOrderableDBInstanceOptionsPagesWithContext(aws.Context, *rds.DescribeOrderableDBInstanceOptionsInput, func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool, ...aws.Option) error
 
 	DescribePendingMaintenanceActions(*rds.DescribePendingMaintenanceActionsInput) (*rds.DescribePendingMaintenanceActionsOutput, error)
-	DescribePendingMaintenanceActionsWithContext(aws.Context, *rds.DescribePendingMaintenanceActionsInput, ...request.Option) (*rds.DescribePendingMaintenanceActionsOutput, error)
-	DescribePendingMaintenanceActionsRequest(*rds.DescribePendingMaintenanceActionsInput) (*request.Request, *rds.DescribePendingMaintenanceActionsOutput)
+	DescribePendingMaintenanceActionsWithContext(aws.Context, *rds.DescribePendingMaintenanceActionsInput, ...aws.Option) (*rds.DescribePendingMaintenanceActionsOutput, error)
+	DescribePendingMaintenanceActionsRequest(*rds.DescribePendingMaintenanceActionsInput) (*aws.Request, *rds.DescribePendingMaintenanceActionsOutput)
 
 	DescribeReservedDBInstances(*rds.DescribeReservedDBInstancesInput) (*rds.DescribeReservedDBInstancesOutput, error)
-	DescribeReservedDBInstancesWithContext(aws.Context, *rds.DescribeReservedDBInstancesInput, ...request.Option) (*rds.DescribeReservedDBInstancesOutput, error)
-	DescribeReservedDBInstancesRequest(*rds.DescribeReservedDBInstancesInput) (*request.Request, *rds.DescribeReservedDBInstancesOutput)
+	DescribeReservedDBInstancesWithContext(aws.Context, *rds.DescribeReservedDBInstancesInput, ...aws.Option) (*rds.DescribeReservedDBInstancesOutput, error)
+	DescribeReservedDBInstancesRequest(*rds.DescribeReservedDBInstancesInput) (*aws.Request, *rds.DescribeReservedDBInstancesOutput)
 
 	DescribeReservedDBInstancesPages(*rds.DescribeReservedDBInstancesInput, func(*rds.DescribeReservedDBInstancesOutput, bool) bool) error
-	DescribeReservedDBInstancesPagesWithContext(aws.Context, *rds.DescribeReservedDBInstancesInput, func(*rds.DescribeReservedDBInstancesOutput, bool) bool, ...request.Option) error
+	DescribeReservedDBInstancesPagesWithContext(aws.Context, *rds.DescribeReservedDBInstancesInput, func(*rds.DescribeReservedDBInstancesOutput, bool) bool, ...aws.Option) error
 
 	DescribeReservedDBInstancesOfferings(*rds.DescribeReservedDBInstancesOfferingsInput) (*rds.DescribeReservedDBInstancesOfferingsOutput, error)
-	DescribeReservedDBInstancesOfferingsWithContext(aws.Context, *rds.DescribeReservedDBInstancesOfferingsInput, ...request.Option) (*rds.DescribeReservedDBInstancesOfferingsOutput, error)
-	DescribeReservedDBInstancesOfferingsRequest(*rds.DescribeReservedDBInstancesOfferingsInput) (*request.Request, *rds.DescribeReservedDBInstancesOfferingsOutput)
+	DescribeReservedDBInstancesOfferingsWithContext(aws.Context, *rds.DescribeReservedDBInstancesOfferingsInput, ...aws.Option) (*rds.DescribeReservedDBInstancesOfferingsOutput, error)
+	DescribeReservedDBInstancesOfferingsRequest(*rds.DescribeReservedDBInstancesOfferingsInput) (*aws.Request, *rds.DescribeReservedDBInstancesOfferingsOutput)
 
 	DescribeReservedDBInstancesOfferingsPages(*rds.DescribeReservedDBInstancesOfferingsInput, func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool) error
-	DescribeReservedDBInstancesOfferingsPagesWithContext(aws.Context, *rds.DescribeReservedDBInstancesOfferingsInput, func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool, ...request.Option) error
+	DescribeReservedDBInstancesOfferingsPagesWithContext(aws.Context, *rds.DescribeReservedDBInstancesOfferingsInput, func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool, ...aws.Option) error
 
 	DescribeSourceRegions(*rds.DescribeSourceRegionsInput) (*rds.DescribeSourceRegionsOutput, error)
-	DescribeSourceRegionsWithContext(aws.Context, *rds.DescribeSourceRegionsInput, ...request.Option) (*rds.DescribeSourceRegionsOutput, error)
-	DescribeSourceRegionsRequest(*rds.DescribeSourceRegionsInput) (*request.Request, *rds.DescribeSourceRegionsOutput)
+	DescribeSourceRegionsWithContext(aws.Context, *rds.DescribeSourceRegionsInput, ...aws.Option) (*rds.DescribeSourceRegionsOutput, error)
+	DescribeSourceRegionsRequest(*rds.DescribeSourceRegionsInput) (*aws.Request, *rds.DescribeSourceRegionsOutput)
 
 	DownloadDBLogFilePortion(*rds.DownloadDBLogFilePortionInput) (*rds.DownloadDBLogFilePortionOutput, error)
-	DownloadDBLogFilePortionWithContext(aws.Context, *rds.DownloadDBLogFilePortionInput, ...request.Option) (*rds.DownloadDBLogFilePortionOutput, error)
-	DownloadDBLogFilePortionRequest(*rds.DownloadDBLogFilePortionInput) (*request.Request, *rds.DownloadDBLogFilePortionOutput)
+	DownloadDBLogFilePortionWithContext(aws.Context, *rds.DownloadDBLogFilePortionInput, ...aws.Option) (*rds.DownloadDBLogFilePortionOutput, error)
+	DownloadDBLogFilePortionRequest(*rds.DownloadDBLogFilePortionInput) (*aws.Request, *rds.DownloadDBLogFilePortionOutput)
 
 	DownloadDBLogFilePortionPages(*rds.DownloadDBLogFilePortionInput, func(*rds.DownloadDBLogFilePortionOutput, bool) bool) error
-	DownloadDBLogFilePortionPagesWithContext(aws.Context, *rds.DownloadDBLogFilePortionInput, func(*rds.DownloadDBLogFilePortionOutput, bool) bool, ...request.Option) error
+	DownloadDBLogFilePortionPagesWithContext(aws.Context, *rds.DownloadDBLogFilePortionInput, func(*rds.DownloadDBLogFilePortionOutput, bool) bool, ...aws.Option) error
 
 	FailoverDBCluster(*rds.FailoverDBClusterInput) (*rds.FailoverDBClusterOutput, error)
-	FailoverDBClusterWithContext(aws.Context, *rds.FailoverDBClusterInput, ...request.Option) (*rds.FailoverDBClusterOutput, error)
-	FailoverDBClusterRequest(*rds.FailoverDBClusterInput) (*request.Request, *rds.FailoverDBClusterOutput)
+	FailoverDBClusterWithContext(aws.Context, *rds.FailoverDBClusterInput, ...aws.Option) (*rds.FailoverDBClusterOutput, error)
+	FailoverDBClusterRequest(*rds.FailoverDBClusterInput) (*aws.Request, *rds.FailoverDBClusterOutput)
 
 	ListTagsForResource(*rds.ListTagsForResourceInput) (*rds.ListTagsForResourceOutput, error)
-	ListTagsForResourceWithContext(aws.Context, *rds.ListTagsForResourceInput, ...request.Option) (*rds.ListTagsForResourceOutput, error)
-	ListTagsForResourceRequest(*rds.ListTagsForResourceInput) (*request.Request, *rds.ListTagsForResourceOutput)
+	ListTagsForResourceWithContext(aws.Context, *rds.ListTagsForResourceInput, ...aws.Option) (*rds.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*rds.ListTagsForResourceInput) (*aws.Request, *rds.ListTagsForResourceOutput)
 
 	ModifyDBCluster(*rds.ModifyDBClusterInput) (*rds.ModifyDBClusterOutput, error)
-	ModifyDBClusterWithContext(aws.Context, *rds.ModifyDBClusterInput, ...request.Option) (*rds.ModifyDBClusterOutput, error)
-	ModifyDBClusterRequest(*rds.ModifyDBClusterInput) (*request.Request, *rds.ModifyDBClusterOutput)
+	ModifyDBClusterWithContext(aws.Context, *rds.ModifyDBClusterInput, ...aws.Option) (*rds.ModifyDBClusterOutput, error)
+	ModifyDBClusterRequest(*rds.ModifyDBClusterInput) (*aws.Request, *rds.ModifyDBClusterOutput)
 
 	ModifyDBClusterParameterGroup(*rds.ModifyDBClusterParameterGroupInput) (*rds.DBClusterParameterGroupNameMessage, error)
-	ModifyDBClusterParameterGroupWithContext(aws.Context, *rds.ModifyDBClusterParameterGroupInput, ...request.Option) (*rds.DBClusterParameterGroupNameMessage, error)
-	ModifyDBClusterParameterGroupRequest(*rds.ModifyDBClusterParameterGroupInput) (*request.Request, *rds.DBClusterParameterGroupNameMessage)
+	ModifyDBClusterParameterGroupWithContext(aws.Context, *rds.ModifyDBClusterParameterGroupInput, ...aws.Option) (*rds.DBClusterParameterGroupNameMessage, error)
+	ModifyDBClusterParameterGroupRequest(*rds.ModifyDBClusterParameterGroupInput) (*aws.Request, *rds.DBClusterParameterGroupNameMessage)
 
 	ModifyDBClusterSnapshotAttribute(*rds.ModifyDBClusterSnapshotAttributeInput) (*rds.ModifyDBClusterSnapshotAttributeOutput, error)
-	ModifyDBClusterSnapshotAttributeWithContext(aws.Context, *rds.ModifyDBClusterSnapshotAttributeInput, ...request.Option) (*rds.ModifyDBClusterSnapshotAttributeOutput, error)
-	ModifyDBClusterSnapshotAttributeRequest(*rds.ModifyDBClusterSnapshotAttributeInput) (*request.Request, *rds.ModifyDBClusterSnapshotAttributeOutput)
+	ModifyDBClusterSnapshotAttributeWithContext(aws.Context, *rds.ModifyDBClusterSnapshotAttributeInput, ...aws.Option) (*rds.ModifyDBClusterSnapshotAttributeOutput, error)
+	ModifyDBClusterSnapshotAttributeRequest(*rds.ModifyDBClusterSnapshotAttributeInput) (*aws.Request, *rds.ModifyDBClusterSnapshotAttributeOutput)
 
 	ModifyDBInstance(*rds.ModifyDBInstanceInput) (*rds.ModifyDBInstanceOutput, error)
-	ModifyDBInstanceWithContext(aws.Context, *rds.ModifyDBInstanceInput, ...request.Option) (*rds.ModifyDBInstanceOutput, error)
-	ModifyDBInstanceRequest(*rds.ModifyDBInstanceInput) (*request.Request, *rds.ModifyDBInstanceOutput)
+	ModifyDBInstanceWithContext(aws.Context, *rds.ModifyDBInstanceInput, ...aws.Option) (*rds.ModifyDBInstanceOutput, error)
+	ModifyDBInstanceRequest(*rds.ModifyDBInstanceInput) (*aws.Request, *rds.ModifyDBInstanceOutput)
 
 	ModifyDBParameterGroup(*rds.ModifyDBParameterGroupInput) (*rds.DBParameterGroupNameMessage, error)
-	ModifyDBParameterGroupWithContext(aws.Context, *rds.ModifyDBParameterGroupInput, ...request.Option) (*rds.DBParameterGroupNameMessage, error)
-	ModifyDBParameterGroupRequest(*rds.ModifyDBParameterGroupInput) (*request.Request, *rds.DBParameterGroupNameMessage)
+	ModifyDBParameterGroupWithContext(aws.Context, *rds.ModifyDBParameterGroupInput, ...aws.Option) (*rds.DBParameterGroupNameMessage, error)
+	ModifyDBParameterGroupRequest(*rds.ModifyDBParameterGroupInput) (*aws.Request, *rds.DBParameterGroupNameMessage)
 
 	ModifyDBSnapshot(*rds.ModifyDBSnapshotInput) (*rds.ModifyDBSnapshotOutput, error)
-	ModifyDBSnapshotWithContext(aws.Context, *rds.ModifyDBSnapshotInput, ...request.Option) (*rds.ModifyDBSnapshotOutput, error)
-	ModifyDBSnapshotRequest(*rds.ModifyDBSnapshotInput) (*request.Request, *rds.ModifyDBSnapshotOutput)
+	ModifyDBSnapshotWithContext(aws.Context, *rds.ModifyDBSnapshotInput, ...aws.Option) (*rds.ModifyDBSnapshotOutput, error)
+	ModifyDBSnapshotRequest(*rds.ModifyDBSnapshotInput) (*aws.Request, *rds.ModifyDBSnapshotOutput)
 
 	ModifyDBSnapshotAttribute(*rds.ModifyDBSnapshotAttributeInput) (*rds.ModifyDBSnapshotAttributeOutput, error)
-	ModifyDBSnapshotAttributeWithContext(aws.Context, *rds.ModifyDBSnapshotAttributeInput, ...request.Option) (*rds.ModifyDBSnapshotAttributeOutput, error)
-	ModifyDBSnapshotAttributeRequest(*rds.ModifyDBSnapshotAttributeInput) (*request.Request, *rds.ModifyDBSnapshotAttributeOutput)
+	ModifyDBSnapshotAttributeWithContext(aws.Context, *rds.ModifyDBSnapshotAttributeInput, ...aws.Option) (*rds.ModifyDBSnapshotAttributeOutput, error)
+	ModifyDBSnapshotAttributeRequest(*rds.ModifyDBSnapshotAttributeInput) (*aws.Request, *rds.ModifyDBSnapshotAttributeOutput)
 
 	ModifyDBSubnetGroup(*rds.ModifyDBSubnetGroupInput) (*rds.ModifyDBSubnetGroupOutput, error)
-	ModifyDBSubnetGroupWithContext(aws.Context, *rds.ModifyDBSubnetGroupInput, ...request.Option) (*rds.ModifyDBSubnetGroupOutput, error)
-	ModifyDBSubnetGroupRequest(*rds.ModifyDBSubnetGroupInput) (*request.Request, *rds.ModifyDBSubnetGroupOutput)
+	ModifyDBSubnetGroupWithContext(aws.Context, *rds.ModifyDBSubnetGroupInput, ...aws.Option) (*rds.ModifyDBSubnetGroupOutput, error)
+	ModifyDBSubnetGroupRequest(*rds.ModifyDBSubnetGroupInput) (*aws.Request, *rds.ModifyDBSubnetGroupOutput)
 
 	ModifyEventSubscription(*rds.ModifyEventSubscriptionInput) (*rds.ModifyEventSubscriptionOutput, error)
-	ModifyEventSubscriptionWithContext(aws.Context, *rds.ModifyEventSubscriptionInput, ...request.Option) (*rds.ModifyEventSubscriptionOutput, error)
-	ModifyEventSubscriptionRequest(*rds.ModifyEventSubscriptionInput) (*request.Request, *rds.ModifyEventSubscriptionOutput)
+	ModifyEventSubscriptionWithContext(aws.Context, *rds.ModifyEventSubscriptionInput, ...aws.Option) (*rds.ModifyEventSubscriptionOutput, error)
+	ModifyEventSubscriptionRequest(*rds.ModifyEventSubscriptionInput) (*aws.Request, *rds.ModifyEventSubscriptionOutput)
 
 	ModifyOptionGroup(*rds.ModifyOptionGroupInput) (*rds.ModifyOptionGroupOutput, error)
-	ModifyOptionGroupWithContext(aws.Context, *rds.ModifyOptionGroupInput, ...request.Option) (*rds.ModifyOptionGroupOutput, error)
-	ModifyOptionGroupRequest(*rds.ModifyOptionGroupInput) (*request.Request, *rds.ModifyOptionGroupOutput)
+	ModifyOptionGroupWithContext(aws.Context, *rds.ModifyOptionGroupInput, ...aws.Option) (*rds.ModifyOptionGroupOutput, error)
+	ModifyOptionGroupRequest(*rds.ModifyOptionGroupInput) (*aws.Request, *rds.ModifyOptionGroupOutput)
 
 	PromoteReadReplica(*rds.PromoteReadReplicaInput) (*rds.PromoteReadReplicaOutput, error)
-	PromoteReadReplicaWithContext(aws.Context, *rds.PromoteReadReplicaInput, ...request.Option) (*rds.PromoteReadReplicaOutput, error)
-	PromoteReadReplicaRequest(*rds.PromoteReadReplicaInput) (*request.Request, *rds.PromoteReadReplicaOutput)
+	PromoteReadReplicaWithContext(aws.Context, *rds.PromoteReadReplicaInput, ...aws.Option) (*rds.PromoteReadReplicaOutput, error)
+	PromoteReadReplicaRequest(*rds.PromoteReadReplicaInput) (*aws.Request, *rds.PromoteReadReplicaOutput)
 
 	PromoteReadReplicaDBCluster(*rds.PromoteReadReplicaDBClusterInput) (*rds.PromoteReadReplicaDBClusterOutput, error)
-	PromoteReadReplicaDBClusterWithContext(aws.Context, *rds.PromoteReadReplicaDBClusterInput, ...request.Option) (*rds.PromoteReadReplicaDBClusterOutput, error)
-	PromoteReadReplicaDBClusterRequest(*rds.PromoteReadReplicaDBClusterInput) (*request.Request, *rds.PromoteReadReplicaDBClusterOutput)
+	PromoteReadReplicaDBClusterWithContext(aws.Context, *rds.PromoteReadReplicaDBClusterInput, ...aws.Option) (*rds.PromoteReadReplicaDBClusterOutput, error)
+	PromoteReadReplicaDBClusterRequest(*rds.PromoteReadReplicaDBClusterInput) (*aws.Request, *rds.PromoteReadReplicaDBClusterOutput)
 
 	PurchaseReservedDBInstancesOffering(*rds.PurchaseReservedDBInstancesOfferingInput) (*rds.PurchaseReservedDBInstancesOfferingOutput, error)
-	PurchaseReservedDBInstancesOfferingWithContext(aws.Context, *rds.PurchaseReservedDBInstancesOfferingInput, ...request.Option) (*rds.PurchaseReservedDBInstancesOfferingOutput, error)
-	PurchaseReservedDBInstancesOfferingRequest(*rds.PurchaseReservedDBInstancesOfferingInput) (*request.Request, *rds.PurchaseReservedDBInstancesOfferingOutput)
+	PurchaseReservedDBInstancesOfferingWithContext(aws.Context, *rds.PurchaseReservedDBInstancesOfferingInput, ...aws.Option) (*rds.PurchaseReservedDBInstancesOfferingOutput, error)
+	PurchaseReservedDBInstancesOfferingRequest(*rds.PurchaseReservedDBInstancesOfferingInput) (*aws.Request, *rds.PurchaseReservedDBInstancesOfferingOutput)
 
 	RebootDBInstance(*rds.RebootDBInstanceInput) (*rds.RebootDBInstanceOutput, error)
-	RebootDBInstanceWithContext(aws.Context, *rds.RebootDBInstanceInput, ...request.Option) (*rds.RebootDBInstanceOutput, error)
-	RebootDBInstanceRequest(*rds.RebootDBInstanceInput) (*request.Request, *rds.RebootDBInstanceOutput)
+	RebootDBInstanceWithContext(aws.Context, *rds.RebootDBInstanceInput, ...aws.Option) (*rds.RebootDBInstanceOutput, error)
+	RebootDBInstanceRequest(*rds.RebootDBInstanceInput) (*aws.Request, *rds.RebootDBInstanceOutput)
 
 	RemoveRoleFromDBCluster(*rds.RemoveRoleFromDBClusterInput) (*rds.RemoveRoleFromDBClusterOutput, error)
-	RemoveRoleFromDBClusterWithContext(aws.Context, *rds.RemoveRoleFromDBClusterInput, ...request.Option) (*rds.RemoveRoleFromDBClusterOutput, error)
-	RemoveRoleFromDBClusterRequest(*rds.RemoveRoleFromDBClusterInput) (*request.Request, *rds.RemoveRoleFromDBClusterOutput)
+	RemoveRoleFromDBClusterWithContext(aws.Context, *rds.RemoveRoleFromDBClusterInput, ...aws.Option) (*rds.RemoveRoleFromDBClusterOutput, error)
+	RemoveRoleFromDBClusterRequest(*rds.RemoveRoleFromDBClusterInput) (*aws.Request, *rds.RemoveRoleFromDBClusterOutput)
 
 	RemoveSourceIdentifierFromSubscription(*rds.RemoveSourceIdentifierFromSubscriptionInput) (*rds.RemoveSourceIdentifierFromSubscriptionOutput, error)
-	RemoveSourceIdentifierFromSubscriptionWithContext(aws.Context, *rds.RemoveSourceIdentifierFromSubscriptionInput, ...request.Option) (*rds.RemoveSourceIdentifierFromSubscriptionOutput, error)
-	RemoveSourceIdentifierFromSubscriptionRequest(*rds.RemoveSourceIdentifierFromSubscriptionInput) (*request.Request, *rds.RemoveSourceIdentifierFromSubscriptionOutput)
+	RemoveSourceIdentifierFromSubscriptionWithContext(aws.Context, *rds.RemoveSourceIdentifierFromSubscriptionInput, ...aws.Option) (*rds.RemoveSourceIdentifierFromSubscriptionOutput, error)
+	RemoveSourceIdentifierFromSubscriptionRequest(*rds.RemoveSourceIdentifierFromSubscriptionInput) (*aws.Request, *rds.RemoveSourceIdentifierFromSubscriptionOutput)
 
 	RemoveTagsFromResource(*rds.RemoveTagsFromResourceInput) (*rds.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceWithContext(aws.Context, *rds.RemoveTagsFromResourceInput, ...request.Option) (*rds.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceRequest(*rds.RemoveTagsFromResourceInput) (*request.Request, *rds.RemoveTagsFromResourceOutput)
+	RemoveTagsFromResourceWithContext(aws.Context, *rds.RemoveTagsFromResourceInput, ...aws.Option) (*rds.RemoveTagsFromResourceOutput, error)
+	RemoveTagsFromResourceRequest(*rds.RemoveTagsFromResourceInput) (*aws.Request, *rds.RemoveTagsFromResourceOutput)
 
 	ResetDBClusterParameterGroup(*rds.ResetDBClusterParameterGroupInput) (*rds.DBClusterParameterGroupNameMessage, error)
-	ResetDBClusterParameterGroupWithContext(aws.Context, *rds.ResetDBClusterParameterGroupInput, ...request.Option) (*rds.DBClusterParameterGroupNameMessage, error)
-	ResetDBClusterParameterGroupRequest(*rds.ResetDBClusterParameterGroupInput) (*request.Request, *rds.DBClusterParameterGroupNameMessage)
+	ResetDBClusterParameterGroupWithContext(aws.Context, *rds.ResetDBClusterParameterGroupInput, ...aws.Option) (*rds.DBClusterParameterGroupNameMessage, error)
+	ResetDBClusterParameterGroupRequest(*rds.ResetDBClusterParameterGroupInput) (*aws.Request, *rds.DBClusterParameterGroupNameMessage)
 
 	ResetDBParameterGroup(*rds.ResetDBParameterGroupInput) (*rds.DBParameterGroupNameMessage, error)
-	ResetDBParameterGroupWithContext(aws.Context, *rds.ResetDBParameterGroupInput, ...request.Option) (*rds.DBParameterGroupNameMessage, error)
-	ResetDBParameterGroupRequest(*rds.ResetDBParameterGroupInput) (*request.Request, *rds.DBParameterGroupNameMessage)
+	ResetDBParameterGroupWithContext(aws.Context, *rds.ResetDBParameterGroupInput, ...aws.Option) (*rds.DBParameterGroupNameMessage, error)
+	ResetDBParameterGroupRequest(*rds.ResetDBParameterGroupInput) (*aws.Request, *rds.DBParameterGroupNameMessage)
 
 	RestoreDBClusterFromS3(*rds.RestoreDBClusterFromS3Input) (*rds.RestoreDBClusterFromS3Output, error)
-	RestoreDBClusterFromS3WithContext(aws.Context, *rds.RestoreDBClusterFromS3Input, ...request.Option) (*rds.RestoreDBClusterFromS3Output, error)
-	RestoreDBClusterFromS3Request(*rds.RestoreDBClusterFromS3Input) (*request.Request, *rds.RestoreDBClusterFromS3Output)
+	RestoreDBClusterFromS3WithContext(aws.Context, *rds.RestoreDBClusterFromS3Input, ...aws.Option) (*rds.RestoreDBClusterFromS3Output, error)
+	RestoreDBClusterFromS3Request(*rds.RestoreDBClusterFromS3Input) (*aws.Request, *rds.RestoreDBClusterFromS3Output)
 
 	RestoreDBClusterFromSnapshot(*rds.RestoreDBClusterFromSnapshotInput) (*rds.RestoreDBClusterFromSnapshotOutput, error)
-	RestoreDBClusterFromSnapshotWithContext(aws.Context, *rds.RestoreDBClusterFromSnapshotInput, ...request.Option) (*rds.RestoreDBClusterFromSnapshotOutput, error)
-	RestoreDBClusterFromSnapshotRequest(*rds.RestoreDBClusterFromSnapshotInput) (*request.Request, *rds.RestoreDBClusterFromSnapshotOutput)
+	RestoreDBClusterFromSnapshotWithContext(aws.Context, *rds.RestoreDBClusterFromSnapshotInput, ...aws.Option) (*rds.RestoreDBClusterFromSnapshotOutput, error)
+	RestoreDBClusterFromSnapshotRequest(*rds.RestoreDBClusterFromSnapshotInput) (*aws.Request, *rds.RestoreDBClusterFromSnapshotOutput)
 
 	RestoreDBClusterToPointInTime(*rds.RestoreDBClusterToPointInTimeInput) (*rds.RestoreDBClusterToPointInTimeOutput, error)
-	RestoreDBClusterToPointInTimeWithContext(aws.Context, *rds.RestoreDBClusterToPointInTimeInput, ...request.Option) (*rds.RestoreDBClusterToPointInTimeOutput, error)
-	RestoreDBClusterToPointInTimeRequest(*rds.RestoreDBClusterToPointInTimeInput) (*request.Request, *rds.RestoreDBClusterToPointInTimeOutput)
+	RestoreDBClusterToPointInTimeWithContext(aws.Context, *rds.RestoreDBClusterToPointInTimeInput, ...aws.Option) (*rds.RestoreDBClusterToPointInTimeOutput, error)
+	RestoreDBClusterToPointInTimeRequest(*rds.RestoreDBClusterToPointInTimeInput) (*aws.Request, *rds.RestoreDBClusterToPointInTimeOutput)
 
 	RestoreDBInstanceFromDBSnapshot(*rds.RestoreDBInstanceFromDBSnapshotInput) (*rds.RestoreDBInstanceFromDBSnapshotOutput, error)
-	RestoreDBInstanceFromDBSnapshotWithContext(aws.Context, *rds.RestoreDBInstanceFromDBSnapshotInput, ...request.Option) (*rds.RestoreDBInstanceFromDBSnapshotOutput, error)
-	RestoreDBInstanceFromDBSnapshotRequest(*rds.RestoreDBInstanceFromDBSnapshotInput) (*request.Request, *rds.RestoreDBInstanceFromDBSnapshotOutput)
+	RestoreDBInstanceFromDBSnapshotWithContext(aws.Context, *rds.RestoreDBInstanceFromDBSnapshotInput, ...aws.Option) (*rds.RestoreDBInstanceFromDBSnapshotOutput, error)
+	RestoreDBInstanceFromDBSnapshotRequest(*rds.RestoreDBInstanceFromDBSnapshotInput) (*aws.Request, *rds.RestoreDBInstanceFromDBSnapshotOutput)
 
 	RestoreDBInstanceToPointInTime(*rds.RestoreDBInstanceToPointInTimeInput) (*rds.RestoreDBInstanceToPointInTimeOutput, error)
-	RestoreDBInstanceToPointInTimeWithContext(aws.Context, *rds.RestoreDBInstanceToPointInTimeInput, ...request.Option) (*rds.RestoreDBInstanceToPointInTimeOutput, error)
-	RestoreDBInstanceToPointInTimeRequest(*rds.RestoreDBInstanceToPointInTimeInput) (*request.Request, *rds.RestoreDBInstanceToPointInTimeOutput)
+	RestoreDBInstanceToPointInTimeWithContext(aws.Context, *rds.RestoreDBInstanceToPointInTimeInput, ...aws.Option) (*rds.RestoreDBInstanceToPointInTimeOutput, error)
+	RestoreDBInstanceToPointInTimeRequest(*rds.RestoreDBInstanceToPointInTimeInput) (*aws.Request, *rds.RestoreDBInstanceToPointInTimeOutput)
 
 	RevokeDBSecurityGroupIngress(*rds.RevokeDBSecurityGroupIngressInput) (*rds.RevokeDBSecurityGroupIngressOutput, error)
-	RevokeDBSecurityGroupIngressWithContext(aws.Context, *rds.RevokeDBSecurityGroupIngressInput, ...request.Option) (*rds.RevokeDBSecurityGroupIngressOutput, error)
-	RevokeDBSecurityGroupIngressRequest(*rds.RevokeDBSecurityGroupIngressInput) (*request.Request, *rds.RevokeDBSecurityGroupIngressOutput)
+	RevokeDBSecurityGroupIngressWithContext(aws.Context, *rds.RevokeDBSecurityGroupIngressInput, ...aws.Option) (*rds.RevokeDBSecurityGroupIngressOutput, error)
+	RevokeDBSecurityGroupIngressRequest(*rds.RevokeDBSecurityGroupIngressInput) (*aws.Request, *rds.RevokeDBSecurityGroupIngressOutput)
 
 	StartDBInstance(*rds.StartDBInstanceInput) (*rds.StartDBInstanceOutput, error)
-	StartDBInstanceWithContext(aws.Context, *rds.StartDBInstanceInput, ...request.Option) (*rds.StartDBInstanceOutput, error)
-	StartDBInstanceRequest(*rds.StartDBInstanceInput) (*request.Request, *rds.StartDBInstanceOutput)
+	StartDBInstanceWithContext(aws.Context, *rds.StartDBInstanceInput, ...aws.Option) (*rds.StartDBInstanceOutput, error)
+	StartDBInstanceRequest(*rds.StartDBInstanceInput) (*aws.Request, *rds.StartDBInstanceOutput)
 
 	StopDBInstance(*rds.StopDBInstanceInput) (*rds.StopDBInstanceOutput, error)
-	StopDBInstanceWithContext(aws.Context, *rds.StopDBInstanceInput, ...request.Option) (*rds.StopDBInstanceOutput, error)
-	StopDBInstanceRequest(*rds.StopDBInstanceInput) (*request.Request, *rds.StopDBInstanceOutput)
+	StopDBInstanceWithContext(aws.Context, *rds.StopDBInstanceInput, ...aws.Option) (*rds.StopDBInstanceOutput, error)
+	StopDBInstanceRequest(*rds.StopDBInstanceInput) (*aws.Request, *rds.StopDBInstanceOutput)
 
 	WaitUntilDBInstanceAvailable(*rds.DescribeDBInstancesInput) error
-	WaitUntilDBInstanceAvailableWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...request.WaiterOption) error
+	WaitUntilDBInstanceAvailableWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
 	WaitUntilDBInstanceDeleted(*rds.DescribeDBInstancesInput) error
-	WaitUntilDBInstanceDeletedWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...request.WaiterOption) error
+	WaitUntilDBInstanceDeletedWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
 }
 
 var _ RDSAPI = (*rds.RDS)(nil)

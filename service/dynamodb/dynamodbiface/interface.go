@@ -10,7 +10,6 @@ package dynamodbiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := dynamodb.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := dynamodb.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,98 +64,98 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type DynamoDBAPI interface {
 	BatchGetItem(*dynamodb.BatchGetItemInput) (*dynamodb.BatchGetItemOutput, error)
-	BatchGetItemWithContext(aws.Context, *dynamodb.BatchGetItemInput, ...request.Option) (*dynamodb.BatchGetItemOutput, error)
-	BatchGetItemRequest(*dynamodb.BatchGetItemInput) (*request.Request, *dynamodb.BatchGetItemOutput)
+	BatchGetItemWithContext(aws.Context, *dynamodb.BatchGetItemInput, ...aws.Option) (*dynamodb.BatchGetItemOutput, error)
+	BatchGetItemRequest(*dynamodb.BatchGetItemInput) (*aws.Request, *dynamodb.BatchGetItemOutput)
 
 	BatchGetItemPages(*dynamodb.BatchGetItemInput, func(*dynamodb.BatchGetItemOutput, bool) bool) error
-	BatchGetItemPagesWithContext(aws.Context, *dynamodb.BatchGetItemInput, func(*dynamodb.BatchGetItemOutput, bool) bool, ...request.Option) error
+	BatchGetItemPagesWithContext(aws.Context, *dynamodb.BatchGetItemInput, func(*dynamodb.BatchGetItemOutput, bool) bool, ...aws.Option) error
 
 	BatchWriteItem(*dynamodb.BatchWriteItemInput) (*dynamodb.BatchWriteItemOutput, error)
-	BatchWriteItemWithContext(aws.Context, *dynamodb.BatchWriteItemInput, ...request.Option) (*dynamodb.BatchWriteItemOutput, error)
-	BatchWriteItemRequest(*dynamodb.BatchWriteItemInput) (*request.Request, *dynamodb.BatchWriteItemOutput)
+	BatchWriteItemWithContext(aws.Context, *dynamodb.BatchWriteItemInput, ...aws.Option) (*dynamodb.BatchWriteItemOutput, error)
+	BatchWriteItemRequest(*dynamodb.BatchWriteItemInput) (*aws.Request, *dynamodb.BatchWriteItemOutput)
 
 	CreateTable(*dynamodb.CreateTableInput) (*dynamodb.CreateTableOutput, error)
-	CreateTableWithContext(aws.Context, *dynamodb.CreateTableInput, ...request.Option) (*dynamodb.CreateTableOutput, error)
-	CreateTableRequest(*dynamodb.CreateTableInput) (*request.Request, *dynamodb.CreateTableOutput)
+	CreateTableWithContext(aws.Context, *dynamodb.CreateTableInput, ...aws.Option) (*dynamodb.CreateTableOutput, error)
+	CreateTableRequest(*dynamodb.CreateTableInput) (*aws.Request, *dynamodb.CreateTableOutput)
 
 	DeleteItem(*dynamodb.DeleteItemInput) (*dynamodb.DeleteItemOutput, error)
-	DeleteItemWithContext(aws.Context, *dynamodb.DeleteItemInput, ...request.Option) (*dynamodb.DeleteItemOutput, error)
-	DeleteItemRequest(*dynamodb.DeleteItemInput) (*request.Request, *dynamodb.DeleteItemOutput)
+	DeleteItemWithContext(aws.Context, *dynamodb.DeleteItemInput, ...aws.Option) (*dynamodb.DeleteItemOutput, error)
+	DeleteItemRequest(*dynamodb.DeleteItemInput) (*aws.Request, *dynamodb.DeleteItemOutput)
 
 	DeleteTable(*dynamodb.DeleteTableInput) (*dynamodb.DeleteTableOutput, error)
-	DeleteTableWithContext(aws.Context, *dynamodb.DeleteTableInput, ...request.Option) (*dynamodb.DeleteTableOutput, error)
-	DeleteTableRequest(*dynamodb.DeleteTableInput) (*request.Request, *dynamodb.DeleteTableOutput)
+	DeleteTableWithContext(aws.Context, *dynamodb.DeleteTableInput, ...aws.Option) (*dynamodb.DeleteTableOutput, error)
+	DeleteTableRequest(*dynamodb.DeleteTableInput) (*aws.Request, *dynamodb.DeleteTableOutput)
 
 	DescribeLimits(*dynamodb.DescribeLimitsInput) (*dynamodb.DescribeLimitsOutput, error)
-	DescribeLimitsWithContext(aws.Context, *dynamodb.DescribeLimitsInput, ...request.Option) (*dynamodb.DescribeLimitsOutput, error)
-	DescribeLimitsRequest(*dynamodb.DescribeLimitsInput) (*request.Request, *dynamodb.DescribeLimitsOutput)
+	DescribeLimitsWithContext(aws.Context, *dynamodb.DescribeLimitsInput, ...aws.Option) (*dynamodb.DescribeLimitsOutput, error)
+	DescribeLimitsRequest(*dynamodb.DescribeLimitsInput) (*aws.Request, *dynamodb.DescribeLimitsOutput)
 
 	DescribeTable(*dynamodb.DescribeTableInput) (*dynamodb.DescribeTableOutput, error)
-	DescribeTableWithContext(aws.Context, *dynamodb.DescribeTableInput, ...request.Option) (*dynamodb.DescribeTableOutput, error)
-	DescribeTableRequest(*dynamodb.DescribeTableInput) (*request.Request, *dynamodb.DescribeTableOutput)
+	DescribeTableWithContext(aws.Context, *dynamodb.DescribeTableInput, ...aws.Option) (*dynamodb.DescribeTableOutput, error)
+	DescribeTableRequest(*dynamodb.DescribeTableInput) (*aws.Request, *dynamodb.DescribeTableOutput)
 
 	DescribeTimeToLive(*dynamodb.DescribeTimeToLiveInput) (*dynamodb.DescribeTimeToLiveOutput, error)
-	DescribeTimeToLiveWithContext(aws.Context, *dynamodb.DescribeTimeToLiveInput, ...request.Option) (*dynamodb.DescribeTimeToLiveOutput, error)
-	DescribeTimeToLiveRequest(*dynamodb.DescribeTimeToLiveInput) (*request.Request, *dynamodb.DescribeTimeToLiveOutput)
+	DescribeTimeToLiveWithContext(aws.Context, *dynamodb.DescribeTimeToLiveInput, ...aws.Option) (*dynamodb.DescribeTimeToLiveOutput, error)
+	DescribeTimeToLiveRequest(*dynamodb.DescribeTimeToLiveInput) (*aws.Request, *dynamodb.DescribeTimeToLiveOutput)
 
 	GetItem(*dynamodb.GetItemInput) (*dynamodb.GetItemOutput, error)
-	GetItemWithContext(aws.Context, *dynamodb.GetItemInput, ...request.Option) (*dynamodb.GetItemOutput, error)
-	GetItemRequest(*dynamodb.GetItemInput) (*request.Request, *dynamodb.GetItemOutput)
+	GetItemWithContext(aws.Context, *dynamodb.GetItemInput, ...aws.Option) (*dynamodb.GetItemOutput, error)
+	GetItemRequest(*dynamodb.GetItemInput) (*aws.Request, *dynamodb.GetItemOutput)
 
 	ListTables(*dynamodb.ListTablesInput) (*dynamodb.ListTablesOutput, error)
-	ListTablesWithContext(aws.Context, *dynamodb.ListTablesInput, ...request.Option) (*dynamodb.ListTablesOutput, error)
-	ListTablesRequest(*dynamodb.ListTablesInput) (*request.Request, *dynamodb.ListTablesOutput)
+	ListTablesWithContext(aws.Context, *dynamodb.ListTablesInput, ...aws.Option) (*dynamodb.ListTablesOutput, error)
+	ListTablesRequest(*dynamodb.ListTablesInput) (*aws.Request, *dynamodb.ListTablesOutput)
 
 	ListTablesPages(*dynamodb.ListTablesInput, func(*dynamodb.ListTablesOutput, bool) bool) error
-	ListTablesPagesWithContext(aws.Context, *dynamodb.ListTablesInput, func(*dynamodb.ListTablesOutput, bool) bool, ...request.Option) error
+	ListTablesPagesWithContext(aws.Context, *dynamodb.ListTablesInput, func(*dynamodb.ListTablesOutput, bool) bool, ...aws.Option) error
 
 	ListTagsOfResource(*dynamodb.ListTagsOfResourceInput) (*dynamodb.ListTagsOfResourceOutput, error)
-	ListTagsOfResourceWithContext(aws.Context, *dynamodb.ListTagsOfResourceInput, ...request.Option) (*dynamodb.ListTagsOfResourceOutput, error)
-	ListTagsOfResourceRequest(*dynamodb.ListTagsOfResourceInput) (*request.Request, *dynamodb.ListTagsOfResourceOutput)
+	ListTagsOfResourceWithContext(aws.Context, *dynamodb.ListTagsOfResourceInput, ...aws.Option) (*dynamodb.ListTagsOfResourceOutput, error)
+	ListTagsOfResourceRequest(*dynamodb.ListTagsOfResourceInput) (*aws.Request, *dynamodb.ListTagsOfResourceOutput)
 
 	PutItem(*dynamodb.PutItemInput) (*dynamodb.PutItemOutput, error)
-	PutItemWithContext(aws.Context, *dynamodb.PutItemInput, ...request.Option) (*dynamodb.PutItemOutput, error)
-	PutItemRequest(*dynamodb.PutItemInput) (*request.Request, *dynamodb.PutItemOutput)
+	PutItemWithContext(aws.Context, *dynamodb.PutItemInput, ...aws.Option) (*dynamodb.PutItemOutput, error)
+	PutItemRequest(*dynamodb.PutItemInput) (*aws.Request, *dynamodb.PutItemOutput)
 
 	Query(*dynamodb.QueryInput) (*dynamodb.QueryOutput, error)
-	QueryWithContext(aws.Context, *dynamodb.QueryInput, ...request.Option) (*dynamodb.QueryOutput, error)
-	QueryRequest(*dynamodb.QueryInput) (*request.Request, *dynamodb.QueryOutput)
+	QueryWithContext(aws.Context, *dynamodb.QueryInput, ...aws.Option) (*dynamodb.QueryOutput, error)
+	QueryRequest(*dynamodb.QueryInput) (*aws.Request, *dynamodb.QueryOutput)
 
 	QueryPages(*dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool) error
-	QueryPagesWithContext(aws.Context, *dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool, ...request.Option) error
+	QueryPagesWithContext(aws.Context, *dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool, ...aws.Option) error
 
 	Scan(*dynamodb.ScanInput) (*dynamodb.ScanOutput, error)
-	ScanWithContext(aws.Context, *dynamodb.ScanInput, ...request.Option) (*dynamodb.ScanOutput, error)
-	ScanRequest(*dynamodb.ScanInput) (*request.Request, *dynamodb.ScanOutput)
+	ScanWithContext(aws.Context, *dynamodb.ScanInput, ...aws.Option) (*dynamodb.ScanOutput, error)
+	ScanRequest(*dynamodb.ScanInput) (*aws.Request, *dynamodb.ScanOutput)
 
 	ScanPages(*dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool) error
-	ScanPagesWithContext(aws.Context, *dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool, ...request.Option) error
+	ScanPagesWithContext(aws.Context, *dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool, ...aws.Option) error
 
 	TagResource(*dynamodb.TagResourceInput) (*dynamodb.TagResourceOutput, error)
-	TagResourceWithContext(aws.Context, *dynamodb.TagResourceInput, ...request.Option) (*dynamodb.TagResourceOutput, error)
-	TagResourceRequest(*dynamodb.TagResourceInput) (*request.Request, *dynamodb.TagResourceOutput)
+	TagResourceWithContext(aws.Context, *dynamodb.TagResourceInput, ...aws.Option) (*dynamodb.TagResourceOutput, error)
+	TagResourceRequest(*dynamodb.TagResourceInput) (*aws.Request, *dynamodb.TagResourceOutput)
 
 	UntagResource(*dynamodb.UntagResourceInput) (*dynamodb.UntagResourceOutput, error)
-	UntagResourceWithContext(aws.Context, *dynamodb.UntagResourceInput, ...request.Option) (*dynamodb.UntagResourceOutput, error)
-	UntagResourceRequest(*dynamodb.UntagResourceInput) (*request.Request, *dynamodb.UntagResourceOutput)
+	UntagResourceWithContext(aws.Context, *dynamodb.UntagResourceInput, ...aws.Option) (*dynamodb.UntagResourceOutput, error)
+	UntagResourceRequest(*dynamodb.UntagResourceInput) (*aws.Request, *dynamodb.UntagResourceOutput)
 
 	UpdateItem(*dynamodb.UpdateItemInput) (*dynamodb.UpdateItemOutput, error)
-	UpdateItemWithContext(aws.Context, *dynamodb.UpdateItemInput, ...request.Option) (*dynamodb.UpdateItemOutput, error)
-	UpdateItemRequest(*dynamodb.UpdateItemInput) (*request.Request, *dynamodb.UpdateItemOutput)
+	UpdateItemWithContext(aws.Context, *dynamodb.UpdateItemInput, ...aws.Option) (*dynamodb.UpdateItemOutput, error)
+	UpdateItemRequest(*dynamodb.UpdateItemInput) (*aws.Request, *dynamodb.UpdateItemOutput)
 
 	UpdateTable(*dynamodb.UpdateTableInput) (*dynamodb.UpdateTableOutput, error)
-	UpdateTableWithContext(aws.Context, *dynamodb.UpdateTableInput, ...request.Option) (*dynamodb.UpdateTableOutput, error)
-	UpdateTableRequest(*dynamodb.UpdateTableInput) (*request.Request, *dynamodb.UpdateTableOutput)
+	UpdateTableWithContext(aws.Context, *dynamodb.UpdateTableInput, ...aws.Option) (*dynamodb.UpdateTableOutput, error)
+	UpdateTableRequest(*dynamodb.UpdateTableInput) (*aws.Request, *dynamodb.UpdateTableOutput)
 
 	UpdateTimeToLive(*dynamodb.UpdateTimeToLiveInput) (*dynamodb.UpdateTimeToLiveOutput, error)
-	UpdateTimeToLiveWithContext(aws.Context, *dynamodb.UpdateTimeToLiveInput, ...request.Option) (*dynamodb.UpdateTimeToLiveOutput, error)
-	UpdateTimeToLiveRequest(*dynamodb.UpdateTimeToLiveInput) (*request.Request, *dynamodb.UpdateTimeToLiveOutput)
+	UpdateTimeToLiveWithContext(aws.Context, *dynamodb.UpdateTimeToLiveInput, ...aws.Option) (*dynamodb.UpdateTimeToLiveOutput, error)
+	UpdateTimeToLiveRequest(*dynamodb.UpdateTimeToLiveInput) (*aws.Request, *dynamodb.UpdateTimeToLiveOutput)
 
 	WaitUntilTableExists(*dynamodb.DescribeTableInput) error
-	WaitUntilTableExistsWithContext(aws.Context, *dynamodb.DescribeTableInput, ...request.WaiterOption) error
+	WaitUntilTableExistsWithContext(aws.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
 
 	WaitUntilTableNotExists(*dynamodb.DescribeTableInput) error
-	WaitUntilTableNotExistsWithContext(aws.Context, *dynamodb.DescribeTableInput, ...request.WaiterOption) error
+	WaitUntilTableNotExistsWithContext(aws.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
 }
 
 var _ DynamoDBAPI = (*dynamodb.DynamoDB)(nil)

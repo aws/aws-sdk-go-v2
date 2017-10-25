@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opBatchCheckLayerAvailability = "BatchCheckLayerAvailability"
 
-// BatchCheckLayerAvailabilityRequest generates a "aws/request.Request" representing the
+// BatchCheckLayerAvailabilityRequest generates a "aws.Request" representing the
 // client's request for the BatchCheckLayerAvailability operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opBatchCheckLayerAvailability = "BatchCheckLayerAvailability"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchCheckLayerAvailability
-func (c *ECR) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvailabilityInput) (req *request.Request, output *BatchCheckLayerAvailabilityOutput) {
-	op := &request.Operation{
+func (c *ECR) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvailabilityInput) (req *aws.Request, output *BatchCheckLayerAvailabilityOutput) {
+	op := &aws.Operation{
 		Name:       opBatchCheckLayerAvailability,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -95,7 +94,7 @@ func (c *ECR) BatchCheckLayerAvailability(input *BatchCheckLayerAvailabilityInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) BatchCheckLayerAvailabilityWithContext(ctx aws.Context, input *BatchCheckLayerAvailabilityInput, opts ...request.Option) (*BatchCheckLayerAvailabilityOutput, error) {
+func (c *ECR) BatchCheckLayerAvailabilityWithContext(ctx aws.Context, input *BatchCheckLayerAvailabilityInput, opts ...aws.Option) (*BatchCheckLayerAvailabilityOutput, error) {
 	req, out := c.BatchCheckLayerAvailabilityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -104,7 +103,7 @@ func (c *ECR) BatchCheckLayerAvailabilityWithContext(ctx aws.Context, input *Bat
 
 const opBatchDeleteImage = "BatchDeleteImage"
 
-// BatchDeleteImageRequest generates a "aws/request.Request" representing the
+// BatchDeleteImageRequest generates a "aws.Request" representing the
 // client's request for the BatchDeleteImage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -128,8 +127,8 @@ const opBatchDeleteImage = "BatchDeleteImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage
-func (c *ECR) BatchDeleteImageRequest(input *BatchDeleteImageInput) (req *request.Request, output *BatchDeleteImageOutput) {
-	op := &request.Operation{
+func (c *ECR) BatchDeleteImageRequest(input *BatchDeleteImageInput) (req *aws.Request, output *BatchDeleteImageOutput) {
+	op := &aws.Operation{
 		Name:       opBatchDeleteImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -190,7 +189,7 @@ func (c *ECR) BatchDeleteImage(input *BatchDeleteImageInput) (*BatchDeleteImageO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) BatchDeleteImageWithContext(ctx aws.Context, input *BatchDeleteImageInput, opts ...request.Option) (*BatchDeleteImageOutput, error) {
+func (c *ECR) BatchDeleteImageWithContext(ctx aws.Context, input *BatchDeleteImageInput, opts ...aws.Option) (*BatchDeleteImageOutput, error) {
 	req, out := c.BatchDeleteImageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -199,7 +198,7 @@ func (c *ECR) BatchDeleteImageWithContext(ctx aws.Context, input *BatchDeleteIma
 
 const opBatchGetImage = "BatchGetImage"
 
-// BatchGetImageRequest generates a "aws/request.Request" representing the
+// BatchGetImageRequest generates a "aws.Request" representing the
 // client's request for the BatchGetImage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -223,8 +222,8 @@ const opBatchGetImage = "BatchGetImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage
-func (c *ECR) BatchGetImageRequest(input *BatchGetImageInput) (req *request.Request, output *BatchGetImageOutput) {
-	op := &request.Operation{
+func (c *ECR) BatchGetImageRequest(input *BatchGetImageInput) (req *aws.Request, output *BatchGetImageOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -278,7 +277,7 @@ func (c *ECR) BatchGetImage(input *BatchGetImageInput) (*BatchGetImageOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) BatchGetImageWithContext(ctx aws.Context, input *BatchGetImageInput, opts ...request.Option) (*BatchGetImageOutput, error) {
+func (c *ECR) BatchGetImageWithContext(ctx aws.Context, input *BatchGetImageInput, opts ...aws.Option) (*BatchGetImageOutput, error) {
 	req, out := c.BatchGetImageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -287,7 +286,7 @@ func (c *ECR) BatchGetImageWithContext(ctx aws.Context, input *BatchGetImageInpu
 
 const opCompleteLayerUpload = "CompleteLayerUpload"
 
-// CompleteLayerUploadRequest generates a "aws/request.Request" representing the
+// CompleteLayerUploadRequest generates a "aws.Request" representing the
 // client's request for the CompleteLayerUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -311,8 +310,8 @@ const opCompleteLayerUpload = "CompleteLayerUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CompleteLayerUpload
-func (c *ECR) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) (req *request.Request, output *CompleteLayerUploadOutput) {
-	op := &request.Operation{
+func (c *ECR) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) (req *aws.Request, output *CompleteLayerUploadOutput) {
+	op := &aws.Operation{
 		Name:       opCompleteLayerUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -388,7 +387,7 @@ func (c *ECR) CompleteLayerUpload(input *CompleteLayerUploadInput) (*CompleteLay
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) CompleteLayerUploadWithContext(ctx aws.Context, input *CompleteLayerUploadInput, opts ...request.Option) (*CompleteLayerUploadOutput, error) {
+func (c *ECR) CompleteLayerUploadWithContext(ctx aws.Context, input *CompleteLayerUploadInput, opts ...aws.Option) (*CompleteLayerUploadOutput, error) {
 	req, out := c.CompleteLayerUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -397,7 +396,7 @@ func (c *ECR) CompleteLayerUploadWithContext(ctx aws.Context, input *CompleteLay
 
 const opCreateRepository = "CreateRepository"
 
-// CreateRepositoryRequest generates a "aws/request.Request" representing the
+// CreateRepositoryRequest generates a "aws.Request" representing the
 // client's request for the CreateRepository operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -421,8 +420,8 @@ const opCreateRepository = "CreateRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepository
-func (c *ECR) CreateRepositoryRequest(input *CreateRepositoryInput) (req *request.Request, output *CreateRepositoryOutput) {
-	op := &request.Operation{
+func (c *ECR) CreateRepositoryRequest(input *CreateRepositoryInput) (req *aws.Request, output *CreateRepositoryOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRepository,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -480,7 +479,7 @@ func (c *ECR) CreateRepository(input *CreateRepositoryInput) (*CreateRepositoryO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) CreateRepositoryWithContext(ctx aws.Context, input *CreateRepositoryInput, opts ...request.Option) (*CreateRepositoryOutput, error) {
+func (c *ECR) CreateRepositoryWithContext(ctx aws.Context, input *CreateRepositoryInput, opts ...aws.Option) (*CreateRepositoryOutput, error) {
 	req, out := c.CreateRepositoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -489,7 +488,7 @@ func (c *ECR) CreateRepositoryWithContext(ctx aws.Context, input *CreateReposito
 
 const opDeleteRepository = "DeleteRepository"
 
-// DeleteRepositoryRequest generates a "aws/request.Request" representing the
+// DeleteRepositoryRequest generates a "aws.Request" representing the
 // client's request for the DeleteRepository operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -513,8 +512,8 @@ const opDeleteRepository = "DeleteRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepository
-func (c *ECR) DeleteRepositoryRequest(input *DeleteRepositoryInput) (req *request.Request, output *DeleteRepositoryOutput) {
-	op := &request.Operation{
+func (c *ECR) DeleteRepositoryRequest(input *DeleteRepositoryInput) (req *aws.Request, output *DeleteRepositoryOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRepository,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -572,7 +571,7 @@ func (c *ECR) DeleteRepository(input *DeleteRepositoryInput) (*DeleteRepositoryO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) DeleteRepositoryWithContext(ctx aws.Context, input *DeleteRepositoryInput, opts ...request.Option) (*DeleteRepositoryOutput, error) {
+func (c *ECR) DeleteRepositoryWithContext(ctx aws.Context, input *DeleteRepositoryInput, opts ...aws.Option) (*DeleteRepositoryOutput, error) {
 	req, out := c.DeleteRepositoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -581,7 +580,7 @@ func (c *ECR) DeleteRepositoryWithContext(ctx aws.Context, input *DeleteReposito
 
 const opDeleteRepositoryPolicy = "DeleteRepositoryPolicy"
 
-// DeleteRepositoryPolicyRequest generates a "aws/request.Request" representing the
+// DeleteRepositoryPolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteRepositoryPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -605,8 +604,8 @@ const opDeleteRepositoryPolicy = "DeleteRepositoryPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryPolicy
-func (c *ECR) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInput) (req *request.Request, output *DeleteRepositoryPolicyOutput) {
-	op := &request.Operation{
+func (c *ECR) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInput) (req *aws.Request, output *DeleteRepositoryPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRepositoryPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -663,7 +662,7 @@ func (c *ECR) DeleteRepositoryPolicy(input *DeleteRepositoryPolicyInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) DeleteRepositoryPolicyWithContext(ctx aws.Context, input *DeleteRepositoryPolicyInput, opts ...request.Option) (*DeleteRepositoryPolicyOutput, error) {
+func (c *ECR) DeleteRepositoryPolicyWithContext(ctx aws.Context, input *DeleteRepositoryPolicyInput, opts ...aws.Option) (*DeleteRepositoryPolicyOutput, error) {
 	req, out := c.DeleteRepositoryPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -672,7 +671,7 @@ func (c *ECR) DeleteRepositoryPolicyWithContext(ctx aws.Context, input *DeleteRe
 
 const opDescribeImages = "DescribeImages"
 
-// DescribeImagesRequest generates a "aws/request.Request" representing the
+// DescribeImagesRequest generates a "aws.Request" representing the
 // client's request for the DescribeImages operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -696,12 +695,12 @@ const opDescribeImages = "DescribeImages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages
-func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) (req *request.Request, output *DescribeImagesOutput) {
-	op := &request.Operation{
+func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) (req *aws.Request, output *DescribeImagesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeImages,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -765,7 +764,7 @@ func (c *ECR) DescribeImages(input *DescribeImagesInput) (*DescribeImagesOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) DescribeImagesWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...request.Option) (*DescribeImagesOutput, error) {
+func (c *ECR) DescribeImagesWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...aws.Option) (*DescribeImagesOutput, error) {
 	req, out := c.DescribeImagesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -800,9 +799,9 @@ func (c *ECR) DescribeImagesPages(input *DescribeImagesInput, fn func(*DescribeI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) DescribeImagesPagesWithContext(ctx aws.Context, input *DescribeImagesInput, fn func(*DescribeImagesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ECR) DescribeImagesPagesWithContext(ctx aws.Context, input *DescribeImagesInput, fn func(*DescribeImagesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeImagesInput
 			if input != nil {
 				tmp := *input
@@ -824,7 +823,7 @@ func (c *ECR) DescribeImagesPagesWithContext(ctx aws.Context, input *DescribeIma
 
 const opDescribeRepositories = "DescribeRepositories"
 
-// DescribeRepositoriesRequest generates a "aws/request.Request" representing the
+// DescribeRepositoriesRequest generates a "aws.Request" representing the
 // client's request for the DescribeRepositories operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -848,12 +847,12 @@ const opDescribeRepositories = "DescribeRepositories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositories
-func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) (req *request.Request, output *DescribeRepositoriesOutput) {
-	op := &request.Operation{
+func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) (req *aws.Request, output *DescribeRepositoriesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeRepositories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -908,7 +907,7 @@ func (c *ECR) DescribeRepositories(input *DescribeRepositoriesInput) (*DescribeR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) DescribeRepositoriesWithContext(ctx aws.Context, input *DescribeRepositoriesInput, opts ...request.Option) (*DescribeRepositoriesOutput, error) {
+func (c *ECR) DescribeRepositoriesWithContext(ctx aws.Context, input *DescribeRepositoriesInput, opts ...aws.Option) (*DescribeRepositoriesOutput, error) {
 	req, out := c.DescribeRepositoriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -943,9 +942,9 @@ func (c *ECR) DescribeRepositoriesPages(input *DescribeRepositoriesInput, fn fun
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) DescribeRepositoriesPagesWithContext(ctx aws.Context, input *DescribeRepositoriesInput, fn func(*DescribeRepositoriesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ECR) DescribeRepositoriesPagesWithContext(ctx aws.Context, input *DescribeRepositoriesInput, fn func(*DescribeRepositoriesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeRepositoriesInput
 			if input != nil {
 				tmp := *input
@@ -967,7 +966,7 @@ func (c *ECR) DescribeRepositoriesPagesWithContext(ctx aws.Context, input *Descr
 
 const opGetAuthorizationToken = "GetAuthorizationToken"
 
-// GetAuthorizationTokenRequest generates a "aws/request.Request" representing the
+// GetAuthorizationTokenRequest generates a "aws.Request" representing the
 // client's request for the GetAuthorizationToken operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -991,8 +990,8 @@ const opGetAuthorizationToken = "GetAuthorizationToken"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationToken
-func (c *ECR) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput) (req *request.Request, output *GetAuthorizationTokenOutput) {
-	op := &request.Operation{
+func (c *ECR) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput) (req *aws.Request, output *GetAuthorizationTokenOutput) {
+	op := &aws.Operation{
 		Name:       opGetAuthorizationToken,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1048,7 +1047,7 @@ func (c *ECR) GetAuthorizationToken(input *GetAuthorizationTokenInput) (*GetAuth
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) GetAuthorizationTokenWithContext(ctx aws.Context, input *GetAuthorizationTokenInput, opts ...request.Option) (*GetAuthorizationTokenOutput, error) {
+func (c *ECR) GetAuthorizationTokenWithContext(ctx aws.Context, input *GetAuthorizationTokenInput, opts ...aws.Option) (*GetAuthorizationTokenOutput, error) {
 	req, out := c.GetAuthorizationTokenRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1057,7 +1056,7 @@ func (c *ECR) GetAuthorizationTokenWithContext(ctx aws.Context, input *GetAuthor
 
 const opGetDownloadUrlForLayer = "GetDownloadUrlForLayer"
 
-// GetDownloadUrlForLayerRequest generates a "aws/request.Request" representing the
+// GetDownloadUrlForLayerRequest generates a "aws.Request" representing the
 // client's request for the GetDownloadUrlForLayer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1081,8 +1080,8 @@ const opGetDownloadUrlForLayer = "GetDownloadUrlForLayer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetDownloadUrlForLayer
-func (c *ECR) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInput) (req *request.Request, output *GetDownloadUrlForLayerOutput) {
-	op := &request.Operation{
+func (c *ECR) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInput) (req *aws.Request, output *GetDownloadUrlForLayerOutput) {
+	op := &aws.Operation{
 		Name:       opGetDownloadUrlForLayer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1148,7 +1147,7 @@ func (c *ECR) GetDownloadUrlForLayer(input *GetDownloadUrlForLayerInput) (*GetDo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) GetDownloadUrlForLayerWithContext(ctx aws.Context, input *GetDownloadUrlForLayerInput, opts ...request.Option) (*GetDownloadUrlForLayerOutput, error) {
+func (c *ECR) GetDownloadUrlForLayerWithContext(ctx aws.Context, input *GetDownloadUrlForLayerInput, opts ...aws.Option) (*GetDownloadUrlForLayerOutput, error) {
 	req, out := c.GetDownloadUrlForLayerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1157,7 +1156,7 @@ func (c *ECR) GetDownloadUrlForLayerWithContext(ctx aws.Context, input *GetDownl
 
 const opGetRepositoryPolicy = "GetRepositoryPolicy"
 
-// GetRepositoryPolicyRequest generates a "aws/request.Request" representing the
+// GetRepositoryPolicyRequest generates a "aws.Request" representing the
 // client's request for the GetRepositoryPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1181,8 +1180,8 @@ const opGetRepositoryPolicy = "GetRepositoryPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRepositoryPolicy
-func (c *ECR) GetRepositoryPolicyRequest(input *GetRepositoryPolicyInput) (req *request.Request, output *GetRepositoryPolicyOutput) {
-	op := &request.Operation{
+func (c *ECR) GetRepositoryPolicyRequest(input *GetRepositoryPolicyInput) (req *aws.Request, output *GetRepositoryPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opGetRepositoryPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1239,7 +1238,7 @@ func (c *ECR) GetRepositoryPolicy(input *GetRepositoryPolicyInput) (*GetReposito
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) GetRepositoryPolicyWithContext(ctx aws.Context, input *GetRepositoryPolicyInput, opts ...request.Option) (*GetRepositoryPolicyOutput, error) {
+func (c *ECR) GetRepositoryPolicyWithContext(ctx aws.Context, input *GetRepositoryPolicyInput, opts ...aws.Option) (*GetRepositoryPolicyOutput, error) {
 	req, out := c.GetRepositoryPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1248,7 +1247,7 @@ func (c *ECR) GetRepositoryPolicyWithContext(ctx aws.Context, input *GetReposito
 
 const opInitiateLayerUpload = "InitiateLayerUpload"
 
-// InitiateLayerUploadRequest generates a "aws/request.Request" representing the
+// InitiateLayerUploadRequest generates a "aws.Request" representing the
 // client's request for the InitiateLayerUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1272,8 +1271,8 @@ const opInitiateLayerUpload = "InitiateLayerUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUpload
-func (c *ECR) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) (req *request.Request, output *InitiateLayerUploadOutput) {
-	op := &request.Operation{
+func (c *ECR) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) (req *aws.Request, output *InitiateLayerUploadOutput) {
+	op := &aws.Operation{
 		Name:       opInitiateLayerUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1330,7 +1329,7 @@ func (c *ECR) InitiateLayerUpload(input *InitiateLayerUploadInput) (*InitiateLay
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) InitiateLayerUploadWithContext(ctx aws.Context, input *InitiateLayerUploadInput, opts ...request.Option) (*InitiateLayerUploadOutput, error) {
+func (c *ECR) InitiateLayerUploadWithContext(ctx aws.Context, input *InitiateLayerUploadInput, opts ...aws.Option) (*InitiateLayerUploadOutput, error) {
 	req, out := c.InitiateLayerUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1339,7 +1338,7 @@ func (c *ECR) InitiateLayerUploadWithContext(ctx aws.Context, input *InitiateLay
 
 const opListImages = "ListImages"
 
-// ListImagesRequest generates a "aws/request.Request" representing the
+// ListImagesRequest generates a "aws.Request" representing the
 // client's request for the ListImages operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1363,12 +1362,12 @@ const opListImages = "ListImages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImages
-func (c *ECR) ListImagesRequest(input *ListImagesInput) (req *request.Request, output *ListImagesOutput) {
-	op := &request.Operation{
+func (c *ECR) ListImagesRequest(input *ListImagesInput) (req *aws.Request, output *ListImagesOutput) {
+	op := &aws.Operation{
 		Name:       opListImages,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -1429,7 +1428,7 @@ func (c *ECR) ListImages(input *ListImagesInput) (*ListImagesOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) ListImagesWithContext(ctx aws.Context, input *ListImagesInput, opts ...request.Option) (*ListImagesOutput, error) {
+func (c *ECR) ListImagesWithContext(ctx aws.Context, input *ListImagesInput, opts ...aws.Option) (*ListImagesOutput, error) {
 	req, out := c.ListImagesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1464,9 +1463,9 @@ func (c *ECR) ListImagesPages(input *ListImagesInput, fn func(*ListImagesOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) ListImagesPagesWithContext(ctx aws.Context, input *ListImagesInput, fn func(*ListImagesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ECR) ListImagesPagesWithContext(ctx aws.Context, input *ListImagesInput, fn func(*ListImagesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListImagesInput
 			if input != nil {
 				tmp := *input
@@ -1488,7 +1487,7 @@ func (c *ECR) ListImagesPagesWithContext(ctx aws.Context, input *ListImagesInput
 
 const opPutImage = "PutImage"
 
-// PutImageRequest generates a "aws/request.Request" representing the
+// PutImageRequest generates a "aws.Request" representing the
 // client's request for the PutImage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1512,8 +1511,8 @@ const opPutImage = "PutImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImage
-func (c *ECR) PutImageRequest(input *PutImageInput) (req *request.Request, output *PutImageOutput) {
-	op := &request.Operation{
+func (c *ECR) PutImageRequest(input *PutImageInput) (req *aws.Request, output *PutImageOutput) {
+	op := &aws.Operation{
 		Name:       opPutImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1584,7 +1583,7 @@ func (c *ECR) PutImage(input *PutImageInput) (*PutImageOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) PutImageWithContext(ctx aws.Context, input *PutImageInput, opts ...request.Option) (*PutImageOutput, error) {
+func (c *ECR) PutImageWithContext(ctx aws.Context, input *PutImageInput, opts ...aws.Option) (*PutImageOutput, error) {
 	req, out := c.PutImageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1593,7 +1592,7 @@ func (c *ECR) PutImageWithContext(ctx aws.Context, input *PutImageInput, opts ..
 
 const opSetRepositoryPolicy = "SetRepositoryPolicy"
 
-// SetRepositoryPolicyRequest generates a "aws/request.Request" representing the
+// SetRepositoryPolicyRequest generates a "aws.Request" representing the
 // client's request for the SetRepositoryPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1617,8 +1616,8 @@ const opSetRepositoryPolicy = "SetRepositoryPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicy
-func (c *ECR) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) (req *request.Request, output *SetRepositoryPolicyOutput) {
-	op := &request.Operation{
+func (c *ECR) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) (req *aws.Request, output *SetRepositoryPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opSetRepositoryPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1671,7 +1670,7 @@ func (c *ECR) SetRepositoryPolicy(input *SetRepositoryPolicyInput) (*SetReposito
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) SetRepositoryPolicyWithContext(ctx aws.Context, input *SetRepositoryPolicyInput, opts ...request.Option) (*SetRepositoryPolicyOutput, error) {
+func (c *ECR) SetRepositoryPolicyWithContext(ctx aws.Context, input *SetRepositoryPolicyInput, opts ...aws.Option) (*SetRepositoryPolicyOutput, error) {
 	req, out := c.SetRepositoryPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1680,7 +1679,7 @@ func (c *ECR) SetRepositoryPolicyWithContext(ctx aws.Context, input *SetReposito
 
 const opUploadLayerPart = "UploadLayerPart"
 
-// UploadLayerPartRequest generates a "aws/request.Request" representing the
+// UploadLayerPartRequest generates a "aws.Request" representing the
 // client's request for the UploadLayerPart operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1704,8 +1703,8 @@ const opUploadLayerPart = "UploadLayerPart"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadLayerPart
-func (c *ECR) UploadLayerPartRequest(input *UploadLayerPartInput) (req *request.Request, output *UploadLayerPartOutput) {
-	op := &request.Operation{
+func (c *ECR) UploadLayerPartRequest(input *UploadLayerPartInput) (req *aws.Request, output *UploadLayerPartOutput) {
+	op := &aws.Operation{
 		Name:       opUploadLayerPart,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1776,7 +1775,7 @@ func (c *ECR) UploadLayerPart(input *UploadLayerPartInput) (*UploadLayerPartOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECR) UploadLayerPartWithContext(ctx aws.Context, input *UploadLayerPartInput, opts ...request.Option) (*UploadLayerPartOutput, error) {
+func (c *ECR) UploadLayerPartWithContext(ctx aws.Context, input *UploadLayerPartInput, opts ...aws.Option) (*UploadLayerPartOutput, error) {
 	req, out := c.UploadLayerPartRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1862,18 +1861,18 @@ func (s BatchCheckLayerAvailabilityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchCheckLayerAvailabilityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchCheckLayerAvailabilityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchCheckLayerAvailabilityInput"}
 	if s.LayerDigests == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerDigests"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerDigests"))
 	}
 	if s.LayerDigests != nil && len(s.LayerDigests) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LayerDigests", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LayerDigests", 1))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1968,18 +1967,18 @@ func (s BatchDeleteImageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteImageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDeleteImageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteImageInput"}
 	if s.ImageIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ImageIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ImageIds"))
 	}
 	if s.ImageIds != nil && len(s.ImageIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ImageIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ImageIds", 1))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2077,21 +2076,21 @@ func (s BatchGetImageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetImageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetImageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetImageInput"}
 	if s.AcceptedMediaTypes != nil && len(s.AcceptedMediaTypes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AcceptedMediaTypes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AcceptedMediaTypes", 1))
 	}
 	if s.ImageIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ImageIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ImageIds"))
 	}
 	if s.ImageIds != nil && len(s.ImageIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ImageIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ImageIds", 1))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2194,21 +2193,21 @@ func (s CompleteLayerUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompleteLayerUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CompleteLayerUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CompleteLayerUploadInput"}
 	if s.LayerDigests == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerDigests"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerDigests"))
 	}
 	if s.LayerDigests != nil && len(s.LayerDigests) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LayerDigests", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LayerDigests", 1))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2316,12 +2315,12 @@ func (s CreateRepositoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRepositoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateRepositoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRepositoryInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2389,12 +2388,12 @@ func (s DeleteRepositoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRepositoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRepositoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRepositoryInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2473,12 +2472,12 @@ func (s DeleteRepositoryPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRepositoryPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRepositoryPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRepositoryPolicyInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2616,18 +2615,18 @@ func (s DescribeImagesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeImagesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeImagesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeImagesInput"}
 	if s.ImageIds != nil && len(s.ImageIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ImageIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ImageIds", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2753,12 +2752,12 @@ func (s DescribeRepositoriesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRepositoriesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeRepositoriesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeRepositoriesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.RepositoryNames != nil && len(s.RepositoryNames) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryNames", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryNames", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2849,9 +2848,9 @@ func (s GetAuthorizationTokenInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAuthorizationTokenInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAuthorizationTokenInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAuthorizationTokenInput"}
 	if s.RegistryIds != nil && len(s.RegistryIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RegistryIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RegistryIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2922,15 +2921,15 @@ func (s GetDownloadUrlForLayerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDownloadUrlForLayerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDownloadUrlForLayerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDownloadUrlForLayerInput"}
 	if s.LayerDigest == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerDigest"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerDigest"))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3016,12 +3015,12 @@ func (s GetRepositoryPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRepositoryPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRepositoryPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRepositoryPolicyInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3315,12 +3314,12 @@ func (s InitiateLayerUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateLayerUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InitiateLayerUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InitiateLayerUploadInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3546,15 +3545,15 @@ func (s ListImagesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListImagesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListImagesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListImagesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3665,15 +3664,15 @@ func (s PutImageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutImageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutImageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutImageInput"}
 	if s.ImageManifest == nil {
-		invalidParams.Add(request.NewErrParamRequired("ImageManifest"))
+		invalidParams.Add(aws.NewErrParamRequired("ImageManifest"))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3832,15 +3831,15 @@ func (s SetRepositoryPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetRepositoryPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetRepositoryPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetRepositoryPolicyInput"}
 	if s.PolicyText == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyText"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyText"))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3964,24 +3963,24 @@ func (s UploadLayerPartInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadLayerPartInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UploadLayerPartInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UploadLayerPartInput"}
 	if s.LayerPartBlob == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerPartBlob"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerPartBlob"))
 	}
 	if s.PartFirstByte == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartFirstByte"))
+		invalidParams.Add(aws.NewErrParamRequired("PartFirstByte"))
 	}
 	if s.PartLastByte == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartLastByte"))
+		invalidParams.Add(aws.NewErrParamRequired("PartLastByte"))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 
 	if invalidParams.Len() > 0 {

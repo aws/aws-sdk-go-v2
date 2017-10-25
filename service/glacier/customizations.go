@@ -4,8 +4,8 @@ import (
 	"encoding/hex"
 	"reflect"
 
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 var (
@@ -50,5 +50,5 @@ func addChecksum(r *request.Request) {
 }
 
 func addAPIVersion(r *request.Request) {
-	r.HTTPRequest.Header.Set("X-Amz-Glacier-Version", r.ClientInfo.APIVersion)
+	r.HTTPRequest.Header.Set("X-Amz-Glacier-Version", r.Metadata.APIVersion)
 }

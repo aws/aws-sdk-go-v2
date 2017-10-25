@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilBatchPredictionAvailable uses the Amazon Machine Learning API operation
@@ -25,25 +24,25 @@ func (c *MachineLearning) WaitUntilBatchPredictionAvailable(input *DescribeBatch
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) WaitUntilBatchPredictionAvailableWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *MachineLearning) WaitUntilBatchPredictionAvailableWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilBatchPredictionAvailable",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Results[].Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Results[].Status",
 				Expected: "COMPLETED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Results[].Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Results[].Status",
 				Expected: "FAILED",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeBatchPredictionsInput
 			if input != nil {
 				tmp := *input
@@ -76,25 +75,25 @@ func (c *MachineLearning) WaitUntilDataSourceAvailable(input *DescribeDataSource
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) WaitUntilDataSourceAvailableWithContext(ctx aws.Context, input *DescribeDataSourcesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *MachineLearning) WaitUntilDataSourceAvailableWithContext(ctx aws.Context, input *DescribeDataSourcesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilDataSourceAvailable",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Results[].Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Results[].Status",
 				Expected: "COMPLETED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Results[].Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Results[].Status",
 				Expected: "FAILED",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeDataSourcesInput
 			if input != nil {
 				tmp := *input
@@ -127,25 +126,25 @@ func (c *MachineLearning) WaitUntilEvaluationAvailable(input *DescribeEvaluation
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) WaitUntilEvaluationAvailableWithContext(ctx aws.Context, input *DescribeEvaluationsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *MachineLearning) WaitUntilEvaluationAvailableWithContext(ctx aws.Context, input *DescribeEvaluationsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilEvaluationAvailable",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Results[].Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Results[].Status",
 				Expected: "COMPLETED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Results[].Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Results[].Status",
 				Expected: "FAILED",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeEvaluationsInput
 			if input != nil {
 				tmp := *input
@@ -178,25 +177,25 @@ func (c *MachineLearning) WaitUntilMLModelAvailable(input *DescribeMLModelsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) WaitUntilMLModelAvailableWithContext(ctx aws.Context, input *DescribeMLModelsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *MachineLearning) WaitUntilMLModelAvailableWithContext(ctx aws.Context, input *DescribeMLModelsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilMLModelAvailable",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Results[].Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Results[].Status",
 				Expected: "COMPLETED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Results[].Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Results[].Status",
 				Expected: "FAILED",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeMLModelsInput
 			if input != nil {
 				tmp := *input

@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	credentials "github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
@@ -395,13 +395,15 @@ func TestBatchDeleteList(t *testing.T) {
 }
 
 func buildS3SvcClient(u string) *s3.S3 {
-	return s3.New(unit.Session, &aws.Config{
-		Endpoint:         aws.String(u),
-		S3ForcePathStyle: aws.Bool(true),
-		DisableSSL:       aws.Bool(true),
-		Credentials:      credentials.NewStaticCredentials("AKID", "SECRET", "SESSION"),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(u)
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.CredentialsLoader = credentials.NewCredentialsLoader(
+		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+	)
 
+	return s3.New(cfg)
 }
 
 func TestBatchDeleteList_EmptyListObjects(t *testing.T) {

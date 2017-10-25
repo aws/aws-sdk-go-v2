@@ -10,7 +10,6 @@ package stsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := sts.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := sts.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,32 +64,32 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type STSAPI interface {
 	AssumeRole(*sts.AssumeRoleInput) (*sts.AssumeRoleOutput, error)
-	AssumeRoleWithContext(aws.Context, *sts.AssumeRoleInput, ...request.Option) (*sts.AssumeRoleOutput, error)
-	AssumeRoleRequest(*sts.AssumeRoleInput) (*request.Request, *sts.AssumeRoleOutput)
+	AssumeRoleWithContext(aws.Context, *sts.AssumeRoleInput, ...aws.Option) (*sts.AssumeRoleOutput, error)
+	AssumeRoleRequest(*sts.AssumeRoleInput) (*aws.Request, *sts.AssumeRoleOutput)
 
 	AssumeRoleWithSAML(*sts.AssumeRoleWithSAMLInput) (*sts.AssumeRoleWithSAMLOutput, error)
-	AssumeRoleWithSAMLWithContext(aws.Context, *sts.AssumeRoleWithSAMLInput, ...request.Option) (*sts.AssumeRoleWithSAMLOutput, error)
-	AssumeRoleWithSAMLRequest(*sts.AssumeRoleWithSAMLInput) (*request.Request, *sts.AssumeRoleWithSAMLOutput)
+	AssumeRoleWithSAMLWithContext(aws.Context, *sts.AssumeRoleWithSAMLInput, ...aws.Option) (*sts.AssumeRoleWithSAMLOutput, error)
+	AssumeRoleWithSAMLRequest(*sts.AssumeRoleWithSAMLInput) (*aws.Request, *sts.AssumeRoleWithSAMLOutput)
 
 	AssumeRoleWithWebIdentity(*sts.AssumeRoleWithWebIdentityInput) (*sts.AssumeRoleWithWebIdentityOutput, error)
-	AssumeRoleWithWebIdentityWithContext(aws.Context, *sts.AssumeRoleWithWebIdentityInput, ...request.Option) (*sts.AssumeRoleWithWebIdentityOutput, error)
-	AssumeRoleWithWebIdentityRequest(*sts.AssumeRoleWithWebIdentityInput) (*request.Request, *sts.AssumeRoleWithWebIdentityOutput)
+	AssumeRoleWithWebIdentityWithContext(aws.Context, *sts.AssumeRoleWithWebIdentityInput, ...aws.Option) (*sts.AssumeRoleWithWebIdentityOutput, error)
+	AssumeRoleWithWebIdentityRequest(*sts.AssumeRoleWithWebIdentityInput) (*aws.Request, *sts.AssumeRoleWithWebIdentityOutput)
 
 	DecodeAuthorizationMessage(*sts.DecodeAuthorizationMessageInput) (*sts.DecodeAuthorizationMessageOutput, error)
-	DecodeAuthorizationMessageWithContext(aws.Context, *sts.DecodeAuthorizationMessageInput, ...request.Option) (*sts.DecodeAuthorizationMessageOutput, error)
-	DecodeAuthorizationMessageRequest(*sts.DecodeAuthorizationMessageInput) (*request.Request, *sts.DecodeAuthorizationMessageOutput)
+	DecodeAuthorizationMessageWithContext(aws.Context, *sts.DecodeAuthorizationMessageInput, ...aws.Option) (*sts.DecodeAuthorizationMessageOutput, error)
+	DecodeAuthorizationMessageRequest(*sts.DecodeAuthorizationMessageInput) (*aws.Request, *sts.DecodeAuthorizationMessageOutput)
 
 	GetCallerIdentity(*sts.GetCallerIdentityInput) (*sts.GetCallerIdentityOutput, error)
-	GetCallerIdentityWithContext(aws.Context, *sts.GetCallerIdentityInput, ...request.Option) (*sts.GetCallerIdentityOutput, error)
-	GetCallerIdentityRequest(*sts.GetCallerIdentityInput) (*request.Request, *sts.GetCallerIdentityOutput)
+	GetCallerIdentityWithContext(aws.Context, *sts.GetCallerIdentityInput, ...aws.Option) (*sts.GetCallerIdentityOutput, error)
+	GetCallerIdentityRequest(*sts.GetCallerIdentityInput) (*aws.Request, *sts.GetCallerIdentityOutput)
 
 	GetFederationToken(*sts.GetFederationTokenInput) (*sts.GetFederationTokenOutput, error)
-	GetFederationTokenWithContext(aws.Context, *sts.GetFederationTokenInput, ...request.Option) (*sts.GetFederationTokenOutput, error)
-	GetFederationTokenRequest(*sts.GetFederationTokenInput) (*request.Request, *sts.GetFederationTokenOutput)
+	GetFederationTokenWithContext(aws.Context, *sts.GetFederationTokenInput, ...aws.Option) (*sts.GetFederationTokenOutput, error)
+	GetFederationTokenRequest(*sts.GetFederationTokenInput) (*aws.Request, *sts.GetFederationTokenOutput)
 
 	GetSessionToken(*sts.GetSessionTokenInput) (*sts.GetSessionTokenOutput, error)
-	GetSessionTokenWithContext(aws.Context, *sts.GetSessionTokenInput, ...request.Option) (*sts.GetSessionTokenOutput, error)
-	GetSessionTokenRequest(*sts.GetSessionTokenInput) (*request.Request, *sts.GetSessionTokenOutput)
+	GetSessionTokenWithContext(aws.Context, *sts.GetSessionTokenInput, ...aws.Option) (*sts.GetSessionTokenOutput, error)
+	GetSessionTokenRequest(*sts.GetSessionTokenInput) (*aws.Request, *sts.GetSessionTokenOutput)
 }
 
 var _ STSAPI = (*sts.STS)(nil)

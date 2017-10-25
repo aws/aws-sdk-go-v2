@@ -2,23 +2,20 @@ package corehandlers_test
 
 import (
 	"fmt"
-	"testing"
 	"reflect"
+	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
 	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 )
 
-var testSvc = func() *client.Client {
-	s := &client.Client{
-		Config: aws.Config{},
-		ClientInfo: metadata.ClientInfo{
+var testSvc = func() *aws.Client {
+	s := &aws.Client{
+		Config: unit.Config(),
+		Metadata: aws.Metadata{
 			ServiceName: "mock-service",
 			APIVersion:  "2015-01-01",
 		},
@@ -38,15 +35,15 @@ type StructShape struct {
 }
 
 func (s *StructShape) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StructShape"}
+	invalidParams := aws.ErrInvalidParams{Context: "StructShape"}
 	if s.RequiredList == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequiredList"))
+		invalidParams.Add(aws.NewErrParamRequired("RequiredList"))
 	}
 	if s.RequiredMap == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequiredMap"))
+		invalidParams.Add(aws.NewErrParamRequired("RequiredMap"))
 	}
 	if s.RequiredBool == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequiredBool"))
+		invalidParams.Add(aws.NewErrParamRequired("RequiredBool"))
 	}
 	if s.RequiredList != nil {
 		for i, v := range s.RequiredList {
@@ -54,7 +51,7 @@ func (s *StructShape) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RequiredList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RequiredList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -64,13 +61,13 @@ func (s *StructShape) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RequiredMap", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RequiredMap", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.OptionalStruct != nil {
 		if err := s.OptionalStruct.Validate(); err != nil {
-			invalidParams.AddNested("OptionalStruct", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OptionalStruct", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -87,9 +84,9 @@ type ConditionalStructShape struct {
 }
 
 func (s *ConditionalStructShape) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConditionalStructShape"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConditionalStructShape"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -109,7 +106,7 @@ func TestNoErrors(t *testing.T) {
 		OptionalStruct: &ConditionalStructShape{Name: aws.String("Name")},
 	}
 
-	req := testSvc.NewRequest(&request.Operation{}, input, nil)
+	req := testSvc.NewRequest(&aws.Operation{}, input, nil)
 	corehandlers.ValidateParametersHandler.Fn(req)
 	if req.Error != nil {
 		t.Fatalf("expect no error, got %v", req.Error)
@@ -118,7 +115,7 @@ func TestNoErrors(t *testing.T) {
 
 func TestMissingRequiredParameters(t *testing.T) {
 	input := &StructShape{}
-	req := testSvc.NewRequest(&request.Operation{}, input, nil)
+	req := testSvc.NewRequest(&aws.Operation{}, input, nil)
 	corehandlers.ValidateParametersHandler.Fn(req)
 
 	if req.Error == nil {
@@ -161,7 +158,7 @@ func TestNestedMissingRequiredParameters(t *testing.T) {
 		OptionalStruct: &ConditionalStructShape{},
 	}
 
-	req := testSvc.NewRequest(&request.Operation{}, input, nil)
+	req := testSvc.NewRequest(&aws.Operation{}, input, nil)
 	corehandlers.ValidateParametersHandler.Fn(req)
 
 	if req.Error == nil {
@@ -196,15 +193,15 @@ type testInput struct {
 }
 
 func (s testInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "testInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "testInput"}
 	if s.StringField != nil && len(*s.StringField) < 5 {
-		invalidParams.Add(request.NewErrParamMinLen("StringField", 5))
+		invalidParams.Add(aws.NewErrParamMinLen("StringField", 5))
 	}
 	if s.ListField != nil && len(s.ListField) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("ListField", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("ListField", 3))
 	}
 	if s.MapField != nil && len(s.MapField) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("MapField", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("MapField", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -219,27 +216,27 @@ var testsFieldMin = []struct {
 }{
 	{
 		err: func() awserr.Error {
-			invalidParams := request.ErrInvalidParams{Context: "testInput"}
-			invalidParams.Add(request.NewErrParamMinLen("StringField", 5))
+			invalidParams := aws.ErrInvalidParams{Context: "testInput"}
+			invalidParams.Add(aws.NewErrParamMinLen("StringField", 5))
 			return invalidParams
 		}(),
 		in: testInput{StringField: aws.String("abcd")},
 	},
 	{
 		err: func() awserr.Error {
-			invalidParams := request.ErrInvalidParams{Context: "testInput"}
-			invalidParams.Add(request.NewErrParamMinLen("StringField", 5))
-			invalidParams.Add(request.NewErrParamMinLen("ListField", 3))
+			invalidParams := aws.ErrInvalidParams{Context: "testInput"}
+			invalidParams.Add(aws.NewErrParamMinLen("StringField", 5))
+			invalidParams.Add(aws.NewErrParamMinLen("ListField", 3))
 			return invalidParams
 		}(),
 		in: testInput{StringField: aws.String("abcd"), ListField: []string{"a", "b"}},
 	},
 	{
 		err: func() awserr.Error {
-			invalidParams := request.ErrInvalidParams{Context: "testInput"}
-			invalidParams.Add(request.NewErrParamMinLen("StringField", 5))
-			invalidParams.Add(request.NewErrParamMinLen("ListField", 3))
-			invalidParams.Add(request.NewErrParamMinLen("MapField", 4))
+			invalidParams := aws.ErrInvalidParams{Context: "testInput"}
+			invalidParams.Add(aws.NewErrParamMinLen("StringField", 5))
+			invalidParams.Add(aws.NewErrParamMinLen("ListField", 3))
+			invalidParams.Add(aws.NewErrParamMinLen("MapField", 4))
 			return invalidParams
 		}(),
 		in: testInput{StringField: aws.String("abcd"), ListField: []string{"a", "b"}, MapField: map[string]string{"a": "a", "b": "b"}},
@@ -253,10 +250,10 @@ var testsFieldMin = []struct {
 
 func TestValidateFieldMinParameter(t *testing.T) {
 	for i, c := range testsFieldMin {
-		req := testSvc.NewRequest(&request.Operation{}, &c.in, nil)
+		req := testSvc.NewRequest(&aws.Operation{}, &c.in, nil)
 		corehandlers.ValidateParametersHandler.Fn(req)
 
-		if e, a := c.err, req.Error; !reflect.DeepEqual(e,a) {
+		if e, a := c.err, req.Error; !reflect.DeepEqual(e, a) {
 			t.Errorf("%d, expect %v, got %v", i, e, a)
 		}
 	}
@@ -274,7 +271,7 @@ func BenchmarkValidateAny(b *testing.B) {
 		input.Records = append(input.Records, record)
 	}
 
-	req, _ := kinesis.New(unit.Session).PutRecordsRequest(input)
+	req, _ := kinesis.New(unit.Config()).PutRecordsRequest(input)
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

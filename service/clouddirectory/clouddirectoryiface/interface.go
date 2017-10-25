@@ -10,7 +10,6 @@ package clouddirectoryiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := clouddirectory.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := clouddirectory.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,294 +64,294 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CloudDirectoryAPI interface {
 	AddFacetToObject(*clouddirectory.AddFacetToObjectInput) (*clouddirectory.AddFacetToObjectOutput, error)
-	AddFacetToObjectWithContext(aws.Context, *clouddirectory.AddFacetToObjectInput, ...request.Option) (*clouddirectory.AddFacetToObjectOutput, error)
-	AddFacetToObjectRequest(*clouddirectory.AddFacetToObjectInput) (*request.Request, *clouddirectory.AddFacetToObjectOutput)
+	AddFacetToObjectWithContext(aws.Context, *clouddirectory.AddFacetToObjectInput, ...aws.Option) (*clouddirectory.AddFacetToObjectOutput, error)
+	AddFacetToObjectRequest(*clouddirectory.AddFacetToObjectInput) (*aws.Request, *clouddirectory.AddFacetToObjectOutput)
 
 	ApplySchema(*clouddirectory.ApplySchemaInput) (*clouddirectory.ApplySchemaOutput, error)
-	ApplySchemaWithContext(aws.Context, *clouddirectory.ApplySchemaInput, ...request.Option) (*clouddirectory.ApplySchemaOutput, error)
-	ApplySchemaRequest(*clouddirectory.ApplySchemaInput) (*request.Request, *clouddirectory.ApplySchemaOutput)
+	ApplySchemaWithContext(aws.Context, *clouddirectory.ApplySchemaInput, ...aws.Option) (*clouddirectory.ApplySchemaOutput, error)
+	ApplySchemaRequest(*clouddirectory.ApplySchemaInput) (*aws.Request, *clouddirectory.ApplySchemaOutput)
 
 	AttachObject(*clouddirectory.AttachObjectInput) (*clouddirectory.AttachObjectOutput, error)
-	AttachObjectWithContext(aws.Context, *clouddirectory.AttachObjectInput, ...request.Option) (*clouddirectory.AttachObjectOutput, error)
-	AttachObjectRequest(*clouddirectory.AttachObjectInput) (*request.Request, *clouddirectory.AttachObjectOutput)
+	AttachObjectWithContext(aws.Context, *clouddirectory.AttachObjectInput, ...aws.Option) (*clouddirectory.AttachObjectOutput, error)
+	AttachObjectRequest(*clouddirectory.AttachObjectInput) (*aws.Request, *clouddirectory.AttachObjectOutput)
 
 	AttachPolicy(*clouddirectory.AttachPolicyInput) (*clouddirectory.AttachPolicyOutput, error)
-	AttachPolicyWithContext(aws.Context, *clouddirectory.AttachPolicyInput, ...request.Option) (*clouddirectory.AttachPolicyOutput, error)
-	AttachPolicyRequest(*clouddirectory.AttachPolicyInput) (*request.Request, *clouddirectory.AttachPolicyOutput)
+	AttachPolicyWithContext(aws.Context, *clouddirectory.AttachPolicyInput, ...aws.Option) (*clouddirectory.AttachPolicyOutput, error)
+	AttachPolicyRequest(*clouddirectory.AttachPolicyInput) (*aws.Request, *clouddirectory.AttachPolicyOutput)
 
 	AttachToIndex(*clouddirectory.AttachToIndexInput) (*clouddirectory.AttachToIndexOutput, error)
-	AttachToIndexWithContext(aws.Context, *clouddirectory.AttachToIndexInput, ...request.Option) (*clouddirectory.AttachToIndexOutput, error)
-	AttachToIndexRequest(*clouddirectory.AttachToIndexInput) (*request.Request, *clouddirectory.AttachToIndexOutput)
+	AttachToIndexWithContext(aws.Context, *clouddirectory.AttachToIndexInput, ...aws.Option) (*clouddirectory.AttachToIndexOutput, error)
+	AttachToIndexRequest(*clouddirectory.AttachToIndexInput) (*aws.Request, *clouddirectory.AttachToIndexOutput)
 
 	AttachTypedLink(*clouddirectory.AttachTypedLinkInput) (*clouddirectory.AttachTypedLinkOutput, error)
-	AttachTypedLinkWithContext(aws.Context, *clouddirectory.AttachTypedLinkInput, ...request.Option) (*clouddirectory.AttachTypedLinkOutput, error)
-	AttachTypedLinkRequest(*clouddirectory.AttachTypedLinkInput) (*request.Request, *clouddirectory.AttachTypedLinkOutput)
+	AttachTypedLinkWithContext(aws.Context, *clouddirectory.AttachTypedLinkInput, ...aws.Option) (*clouddirectory.AttachTypedLinkOutput, error)
+	AttachTypedLinkRequest(*clouddirectory.AttachTypedLinkInput) (*aws.Request, *clouddirectory.AttachTypedLinkOutput)
 
 	BatchRead(*clouddirectory.BatchReadInput) (*clouddirectory.BatchReadOutput, error)
-	BatchReadWithContext(aws.Context, *clouddirectory.BatchReadInput, ...request.Option) (*clouddirectory.BatchReadOutput, error)
-	BatchReadRequest(*clouddirectory.BatchReadInput) (*request.Request, *clouddirectory.BatchReadOutput)
+	BatchReadWithContext(aws.Context, *clouddirectory.BatchReadInput, ...aws.Option) (*clouddirectory.BatchReadOutput, error)
+	BatchReadRequest(*clouddirectory.BatchReadInput) (*aws.Request, *clouddirectory.BatchReadOutput)
 
 	BatchWrite(*clouddirectory.BatchWriteInput) (*clouddirectory.BatchWriteOutput, error)
-	BatchWriteWithContext(aws.Context, *clouddirectory.BatchWriteInput, ...request.Option) (*clouddirectory.BatchWriteOutput, error)
-	BatchWriteRequest(*clouddirectory.BatchWriteInput) (*request.Request, *clouddirectory.BatchWriteOutput)
+	BatchWriteWithContext(aws.Context, *clouddirectory.BatchWriteInput, ...aws.Option) (*clouddirectory.BatchWriteOutput, error)
+	BatchWriteRequest(*clouddirectory.BatchWriteInput) (*aws.Request, *clouddirectory.BatchWriteOutput)
 
 	CreateDirectory(*clouddirectory.CreateDirectoryInput) (*clouddirectory.CreateDirectoryOutput, error)
-	CreateDirectoryWithContext(aws.Context, *clouddirectory.CreateDirectoryInput, ...request.Option) (*clouddirectory.CreateDirectoryOutput, error)
-	CreateDirectoryRequest(*clouddirectory.CreateDirectoryInput) (*request.Request, *clouddirectory.CreateDirectoryOutput)
+	CreateDirectoryWithContext(aws.Context, *clouddirectory.CreateDirectoryInput, ...aws.Option) (*clouddirectory.CreateDirectoryOutput, error)
+	CreateDirectoryRequest(*clouddirectory.CreateDirectoryInput) (*aws.Request, *clouddirectory.CreateDirectoryOutput)
 
 	CreateFacet(*clouddirectory.CreateFacetInput) (*clouddirectory.CreateFacetOutput, error)
-	CreateFacetWithContext(aws.Context, *clouddirectory.CreateFacetInput, ...request.Option) (*clouddirectory.CreateFacetOutput, error)
-	CreateFacetRequest(*clouddirectory.CreateFacetInput) (*request.Request, *clouddirectory.CreateFacetOutput)
+	CreateFacetWithContext(aws.Context, *clouddirectory.CreateFacetInput, ...aws.Option) (*clouddirectory.CreateFacetOutput, error)
+	CreateFacetRequest(*clouddirectory.CreateFacetInput) (*aws.Request, *clouddirectory.CreateFacetOutput)
 
 	CreateIndex(*clouddirectory.CreateIndexInput) (*clouddirectory.CreateIndexOutput, error)
-	CreateIndexWithContext(aws.Context, *clouddirectory.CreateIndexInput, ...request.Option) (*clouddirectory.CreateIndexOutput, error)
-	CreateIndexRequest(*clouddirectory.CreateIndexInput) (*request.Request, *clouddirectory.CreateIndexOutput)
+	CreateIndexWithContext(aws.Context, *clouddirectory.CreateIndexInput, ...aws.Option) (*clouddirectory.CreateIndexOutput, error)
+	CreateIndexRequest(*clouddirectory.CreateIndexInput) (*aws.Request, *clouddirectory.CreateIndexOutput)
 
 	CreateObject(*clouddirectory.CreateObjectInput) (*clouddirectory.CreateObjectOutput, error)
-	CreateObjectWithContext(aws.Context, *clouddirectory.CreateObjectInput, ...request.Option) (*clouddirectory.CreateObjectOutput, error)
-	CreateObjectRequest(*clouddirectory.CreateObjectInput) (*request.Request, *clouddirectory.CreateObjectOutput)
+	CreateObjectWithContext(aws.Context, *clouddirectory.CreateObjectInput, ...aws.Option) (*clouddirectory.CreateObjectOutput, error)
+	CreateObjectRequest(*clouddirectory.CreateObjectInput) (*aws.Request, *clouddirectory.CreateObjectOutput)
 
 	CreateSchema(*clouddirectory.CreateSchemaInput) (*clouddirectory.CreateSchemaOutput, error)
-	CreateSchemaWithContext(aws.Context, *clouddirectory.CreateSchemaInput, ...request.Option) (*clouddirectory.CreateSchemaOutput, error)
-	CreateSchemaRequest(*clouddirectory.CreateSchemaInput) (*request.Request, *clouddirectory.CreateSchemaOutput)
+	CreateSchemaWithContext(aws.Context, *clouddirectory.CreateSchemaInput, ...aws.Option) (*clouddirectory.CreateSchemaOutput, error)
+	CreateSchemaRequest(*clouddirectory.CreateSchemaInput) (*aws.Request, *clouddirectory.CreateSchemaOutput)
 
 	CreateTypedLinkFacet(*clouddirectory.CreateTypedLinkFacetInput) (*clouddirectory.CreateTypedLinkFacetOutput, error)
-	CreateTypedLinkFacetWithContext(aws.Context, *clouddirectory.CreateTypedLinkFacetInput, ...request.Option) (*clouddirectory.CreateTypedLinkFacetOutput, error)
-	CreateTypedLinkFacetRequest(*clouddirectory.CreateTypedLinkFacetInput) (*request.Request, *clouddirectory.CreateTypedLinkFacetOutput)
+	CreateTypedLinkFacetWithContext(aws.Context, *clouddirectory.CreateTypedLinkFacetInput, ...aws.Option) (*clouddirectory.CreateTypedLinkFacetOutput, error)
+	CreateTypedLinkFacetRequest(*clouddirectory.CreateTypedLinkFacetInput) (*aws.Request, *clouddirectory.CreateTypedLinkFacetOutput)
 
 	DeleteDirectory(*clouddirectory.DeleteDirectoryInput) (*clouddirectory.DeleteDirectoryOutput, error)
-	DeleteDirectoryWithContext(aws.Context, *clouddirectory.DeleteDirectoryInput, ...request.Option) (*clouddirectory.DeleteDirectoryOutput, error)
-	DeleteDirectoryRequest(*clouddirectory.DeleteDirectoryInput) (*request.Request, *clouddirectory.DeleteDirectoryOutput)
+	DeleteDirectoryWithContext(aws.Context, *clouddirectory.DeleteDirectoryInput, ...aws.Option) (*clouddirectory.DeleteDirectoryOutput, error)
+	DeleteDirectoryRequest(*clouddirectory.DeleteDirectoryInput) (*aws.Request, *clouddirectory.DeleteDirectoryOutput)
 
 	DeleteFacet(*clouddirectory.DeleteFacetInput) (*clouddirectory.DeleteFacetOutput, error)
-	DeleteFacetWithContext(aws.Context, *clouddirectory.DeleteFacetInput, ...request.Option) (*clouddirectory.DeleteFacetOutput, error)
-	DeleteFacetRequest(*clouddirectory.DeleteFacetInput) (*request.Request, *clouddirectory.DeleteFacetOutput)
+	DeleteFacetWithContext(aws.Context, *clouddirectory.DeleteFacetInput, ...aws.Option) (*clouddirectory.DeleteFacetOutput, error)
+	DeleteFacetRequest(*clouddirectory.DeleteFacetInput) (*aws.Request, *clouddirectory.DeleteFacetOutput)
 
 	DeleteObject(*clouddirectory.DeleteObjectInput) (*clouddirectory.DeleteObjectOutput, error)
-	DeleteObjectWithContext(aws.Context, *clouddirectory.DeleteObjectInput, ...request.Option) (*clouddirectory.DeleteObjectOutput, error)
-	DeleteObjectRequest(*clouddirectory.DeleteObjectInput) (*request.Request, *clouddirectory.DeleteObjectOutput)
+	DeleteObjectWithContext(aws.Context, *clouddirectory.DeleteObjectInput, ...aws.Option) (*clouddirectory.DeleteObjectOutput, error)
+	DeleteObjectRequest(*clouddirectory.DeleteObjectInput) (*aws.Request, *clouddirectory.DeleteObjectOutput)
 
 	DeleteSchema(*clouddirectory.DeleteSchemaInput) (*clouddirectory.DeleteSchemaOutput, error)
-	DeleteSchemaWithContext(aws.Context, *clouddirectory.DeleteSchemaInput, ...request.Option) (*clouddirectory.DeleteSchemaOutput, error)
-	DeleteSchemaRequest(*clouddirectory.DeleteSchemaInput) (*request.Request, *clouddirectory.DeleteSchemaOutput)
+	DeleteSchemaWithContext(aws.Context, *clouddirectory.DeleteSchemaInput, ...aws.Option) (*clouddirectory.DeleteSchemaOutput, error)
+	DeleteSchemaRequest(*clouddirectory.DeleteSchemaInput) (*aws.Request, *clouddirectory.DeleteSchemaOutput)
 
 	DeleteTypedLinkFacet(*clouddirectory.DeleteTypedLinkFacetInput) (*clouddirectory.DeleteTypedLinkFacetOutput, error)
-	DeleteTypedLinkFacetWithContext(aws.Context, *clouddirectory.DeleteTypedLinkFacetInput, ...request.Option) (*clouddirectory.DeleteTypedLinkFacetOutput, error)
-	DeleteTypedLinkFacetRequest(*clouddirectory.DeleteTypedLinkFacetInput) (*request.Request, *clouddirectory.DeleteTypedLinkFacetOutput)
+	DeleteTypedLinkFacetWithContext(aws.Context, *clouddirectory.DeleteTypedLinkFacetInput, ...aws.Option) (*clouddirectory.DeleteTypedLinkFacetOutput, error)
+	DeleteTypedLinkFacetRequest(*clouddirectory.DeleteTypedLinkFacetInput) (*aws.Request, *clouddirectory.DeleteTypedLinkFacetOutput)
 
 	DetachFromIndex(*clouddirectory.DetachFromIndexInput) (*clouddirectory.DetachFromIndexOutput, error)
-	DetachFromIndexWithContext(aws.Context, *clouddirectory.DetachFromIndexInput, ...request.Option) (*clouddirectory.DetachFromIndexOutput, error)
-	DetachFromIndexRequest(*clouddirectory.DetachFromIndexInput) (*request.Request, *clouddirectory.DetachFromIndexOutput)
+	DetachFromIndexWithContext(aws.Context, *clouddirectory.DetachFromIndexInput, ...aws.Option) (*clouddirectory.DetachFromIndexOutput, error)
+	DetachFromIndexRequest(*clouddirectory.DetachFromIndexInput) (*aws.Request, *clouddirectory.DetachFromIndexOutput)
 
 	DetachObject(*clouddirectory.DetachObjectInput) (*clouddirectory.DetachObjectOutput, error)
-	DetachObjectWithContext(aws.Context, *clouddirectory.DetachObjectInput, ...request.Option) (*clouddirectory.DetachObjectOutput, error)
-	DetachObjectRequest(*clouddirectory.DetachObjectInput) (*request.Request, *clouddirectory.DetachObjectOutput)
+	DetachObjectWithContext(aws.Context, *clouddirectory.DetachObjectInput, ...aws.Option) (*clouddirectory.DetachObjectOutput, error)
+	DetachObjectRequest(*clouddirectory.DetachObjectInput) (*aws.Request, *clouddirectory.DetachObjectOutput)
 
 	DetachPolicy(*clouddirectory.DetachPolicyInput) (*clouddirectory.DetachPolicyOutput, error)
-	DetachPolicyWithContext(aws.Context, *clouddirectory.DetachPolicyInput, ...request.Option) (*clouddirectory.DetachPolicyOutput, error)
-	DetachPolicyRequest(*clouddirectory.DetachPolicyInput) (*request.Request, *clouddirectory.DetachPolicyOutput)
+	DetachPolicyWithContext(aws.Context, *clouddirectory.DetachPolicyInput, ...aws.Option) (*clouddirectory.DetachPolicyOutput, error)
+	DetachPolicyRequest(*clouddirectory.DetachPolicyInput) (*aws.Request, *clouddirectory.DetachPolicyOutput)
 
 	DetachTypedLink(*clouddirectory.DetachTypedLinkInput) (*clouddirectory.DetachTypedLinkOutput, error)
-	DetachTypedLinkWithContext(aws.Context, *clouddirectory.DetachTypedLinkInput, ...request.Option) (*clouddirectory.DetachTypedLinkOutput, error)
-	DetachTypedLinkRequest(*clouddirectory.DetachTypedLinkInput) (*request.Request, *clouddirectory.DetachTypedLinkOutput)
+	DetachTypedLinkWithContext(aws.Context, *clouddirectory.DetachTypedLinkInput, ...aws.Option) (*clouddirectory.DetachTypedLinkOutput, error)
+	DetachTypedLinkRequest(*clouddirectory.DetachTypedLinkInput) (*aws.Request, *clouddirectory.DetachTypedLinkOutput)
 
 	DisableDirectory(*clouddirectory.DisableDirectoryInput) (*clouddirectory.DisableDirectoryOutput, error)
-	DisableDirectoryWithContext(aws.Context, *clouddirectory.DisableDirectoryInput, ...request.Option) (*clouddirectory.DisableDirectoryOutput, error)
-	DisableDirectoryRequest(*clouddirectory.DisableDirectoryInput) (*request.Request, *clouddirectory.DisableDirectoryOutput)
+	DisableDirectoryWithContext(aws.Context, *clouddirectory.DisableDirectoryInput, ...aws.Option) (*clouddirectory.DisableDirectoryOutput, error)
+	DisableDirectoryRequest(*clouddirectory.DisableDirectoryInput) (*aws.Request, *clouddirectory.DisableDirectoryOutput)
 
 	EnableDirectory(*clouddirectory.EnableDirectoryInput) (*clouddirectory.EnableDirectoryOutput, error)
-	EnableDirectoryWithContext(aws.Context, *clouddirectory.EnableDirectoryInput, ...request.Option) (*clouddirectory.EnableDirectoryOutput, error)
-	EnableDirectoryRequest(*clouddirectory.EnableDirectoryInput) (*request.Request, *clouddirectory.EnableDirectoryOutput)
+	EnableDirectoryWithContext(aws.Context, *clouddirectory.EnableDirectoryInput, ...aws.Option) (*clouddirectory.EnableDirectoryOutput, error)
+	EnableDirectoryRequest(*clouddirectory.EnableDirectoryInput) (*aws.Request, *clouddirectory.EnableDirectoryOutput)
 
 	GetDirectory(*clouddirectory.GetDirectoryInput) (*clouddirectory.GetDirectoryOutput, error)
-	GetDirectoryWithContext(aws.Context, *clouddirectory.GetDirectoryInput, ...request.Option) (*clouddirectory.GetDirectoryOutput, error)
-	GetDirectoryRequest(*clouddirectory.GetDirectoryInput) (*request.Request, *clouddirectory.GetDirectoryOutput)
+	GetDirectoryWithContext(aws.Context, *clouddirectory.GetDirectoryInput, ...aws.Option) (*clouddirectory.GetDirectoryOutput, error)
+	GetDirectoryRequest(*clouddirectory.GetDirectoryInput) (*aws.Request, *clouddirectory.GetDirectoryOutput)
 
 	GetFacet(*clouddirectory.GetFacetInput) (*clouddirectory.GetFacetOutput, error)
-	GetFacetWithContext(aws.Context, *clouddirectory.GetFacetInput, ...request.Option) (*clouddirectory.GetFacetOutput, error)
-	GetFacetRequest(*clouddirectory.GetFacetInput) (*request.Request, *clouddirectory.GetFacetOutput)
+	GetFacetWithContext(aws.Context, *clouddirectory.GetFacetInput, ...aws.Option) (*clouddirectory.GetFacetOutput, error)
+	GetFacetRequest(*clouddirectory.GetFacetInput) (*aws.Request, *clouddirectory.GetFacetOutput)
 
 	GetObjectInformation(*clouddirectory.GetObjectInformationInput) (*clouddirectory.GetObjectInformationOutput, error)
-	GetObjectInformationWithContext(aws.Context, *clouddirectory.GetObjectInformationInput, ...request.Option) (*clouddirectory.GetObjectInformationOutput, error)
-	GetObjectInformationRequest(*clouddirectory.GetObjectInformationInput) (*request.Request, *clouddirectory.GetObjectInformationOutput)
+	GetObjectInformationWithContext(aws.Context, *clouddirectory.GetObjectInformationInput, ...aws.Option) (*clouddirectory.GetObjectInformationOutput, error)
+	GetObjectInformationRequest(*clouddirectory.GetObjectInformationInput) (*aws.Request, *clouddirectory.GetObjectInformationOutput)
 
 	GetSchemaAsJson(*clouddirectory.GetSchemaAsJsonInput) (*clouddirectory.GetSchemaAsJsonOutput, error)
-	GetSchemaAsJsonWithContext(aws.Context, *clouddirectory.GetSchemaAsJsonInput, ...request.Option) (*clouddirectory.GetSchemaAsJsonOutput, error)
-	GetSchemaAsJsonRequest(*clouddirectory.GetSchemaAsJsonInput) (*request.Request, *clouddirectory.GetSchemaAsJsonOutput)
+	GetSchemaAsJsonWithContext(aws.Context, *clouddirectory.GetSchemaAsJsonInput, ...aws.Option) (*clouddirectory.GetSchemaAsJsonOutput, error)
+	GetSchemaAsJsonRequest(*clouddirectory.GetSchemaAsJsonInput) (*aws.Request, *clouddirectory.GetSchemaAsJsonOutput)
 
 	GetTypedLinkFacetInformation(*clouddirectory.GetTypedLinkFacetInformationInput) (*clouddirectory.GetTypedLinkFacetInformationOutput, error)
-	GetTypedLinkFacetInformationWithContext(aws.Context, *clouddirectory.GetTypedLinkFacetInformationInput, ...request.Option) (*clouddirectory.GetTypedLinkFacetInformationOutput, error)
-	GetTypedLinkFacetInformationRequest(*clouddirectory.GetTypedLinkFacetInformationInput) (*request.Request, *clouddirectory.GetTypedLinkFacetInformationOutput)
+	GetTypedLinkFacetInformationWithContext(aws.Context, *clouddirectory.GetTypedLinkFacetInformationInput, ...aws.Option) (*clouddirectory.GetTypedLinkFacetInformationOutput, error)
+	GetTypedLinkFacetInformationRequest(*clouddirectory.GetTypedLinkFacetInformationInput) (*aws.Request, *clouddirectory.GetTypedLinkFacetInformationOutput)
 
 	ListAppliedSchemaArns(*clouddirectory.ListAppliedSchemaArnsInput) (*clouddirectory.ListAppliedSchemaArnsOutput, error)
-	ListAppliedSchemaArnsWithContext(aws.Context, *clouddirectory.ListAppliedSchemaArnsInput, ...request.Option) (*clouddirectory.ListAppliedSchemaArnsOutput, error)
-	ListAppliedSchemaArnsRequest(*clouddirectory.ListAppliedSchemaArnsInput) (*request.Request, *clouddirectory.ListAppliedSchemaArnsOutput)
+	ListAppliedSchemaArnsWithContext(aws.Context, *clouddirectory.ListAppliedSchemaArnsInput, ...aws.Option) (*clouddirectory.ListAppliedSchemaArnsOutput, error)
+	ListAppliedSchemaArnsRequest(*clouddirectory.ListAppliedSchemaArnsInput) (*aws.Request, *clouddirectory.ListAppliedSchemaArnsOutput)
 
 	ListAppliedSchemaArnsPages(*clouddirectory.ListAppliedSchemaArnsInput, func(*clouddirectory.ListAppliedSchemaArnsOutput, bool) bool) error
-	ListAppliedSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListAppliedSchemaArnsInput, func(*clouddirectory.ListAppliedSchemaArnsOutput, bool) bool, ...request.Option) error
+	ListAppliedSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListAppliedSchemaArnsInput, func(*clouddirectory.ListAppliedSchemaArnsOutput, bool) bool, ...aws.Option) error
 
 	ListAttachedIndices(*clouddirectory.ListAttachedIndicesInput) (*clouddirectory.ListAttachedIndicesOutput, error)
-	ListAttachedIndicesWithContext(aws.Context, *clouddirectory.ListAttachedIndicesInput, ...request.Option) (*clouddirectory.ListAttachedIndicesOutput, error)
-	ListAttachedIndicesRequest(*clouddirectory.ListAttachedIndicesInput) (*request.Request, *clouddirectory.ListAttachedIndicesOutput)
+	ListAttachedIndicesWithContext(aws.Context, *clouddirectory.ListAttachedIndicesInput, ...aws.Option) (*clouddirectory.ListAttachedIndicesOutput, error)
+	ListAttachedIndicesRequest(*clouddirectory.ListAttachedIndicesInput) (*aws.Request, *clouddirectory.ListAttachedIndicesOutput)
 
 	ListAttachedIndicesPages(*clouddirectory.ListAttachedIndicesInput, func(*clouddirectory.ListAttachedIndicesOutput, bool) bool) error
-	ListAttachedIndicesPagesWithContext(aws.Context, *clouddirectory.ListAttachedIndicesInput, func(*clouddirectory.ListAttachedIndicesOutput, bool) bool, ...request.Option) error
+	ListAttachedIndicesPagesWithContext(aws.Context, *clouddirectory.ListAttachedIndicesInput, func(*clouddirectory.ListAttachedIndicesOutput, bool) bool, ...aws.Option) error
 
 	ListDevelopmentSchemaArns(*clouddirectory.ListDevelopmentSchemaArnsInput) (*clouddirectory.ListDevelopmentSchemaArnsOutput, error)
-	ListDevelopmentSchemaArnsWithContext(aws.Context, *clouddirectory.ListDevelopmentSchemaArnsInput, ...request.Option) (*clouddirectory.ListDevelopmentSchemaArnsOutput, error)
-	ListDevelopmentSchemaArnsRequest(*clouddirectory.ListDevelopmentSchemaArnsInput) (*request.Request, *clouddirectory.ListDevelopmentSchemaArnsOutput)
+	ListDevelopmentSchemaArnsWithContext(aws.Context, *clouddirectory.ListDevelopmentSchemaArnsInput, ...aws.Option) (*clouddirectory.ListDevelopmentSchemaArnsOutput, error)
+	ListDevelopmentSchemaArnsRequest(*clouddirectory.ListDevelopmentSchemaArnsInput) (*aws.Request, *clouddirectory.ListDevelopmentSchemaArnsOutput)
 
 	ListDevelopmentSchemaArnsPages(*clouddirectory.ListDevelopmentSchemaArnsInput, func(*clouddirectory.ListDevelopmentSchemaArnsOutput, bool) bool) error
-	ListDevelopmentSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListDevelopmentSchemaArnsInput, func(*clouddirectory.ListDevelopmentSchemaArnsOutput, bool) bool, ...request.Option) error
+	ListDevelopmentSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListDevelopmentSchemaArnsInput, func(*clouddirectory.ListDevelopmentSchemaArnsOutput, bool) bool, ...aws.Option) error
 
 	ListDirectories(*clouddirectory.ListDirectoriesInput) (*clouddirectory.ListDirectoriesOutput, error)
-	ListDirectoriesWithContext(aws.Context, *clouddirectory.ListDirectoriesInput, ...request.Option) (*clouddirectory.ListDirectoriesOutput, error)
-	ListDirectoriesRequest(*clouddirectory.ListDirectoriesInput) (*request.Request, *clouddirectory.ListDirectoriesOutput)
+	ListDirectoriesWithContext(aws.Context, *clouddirectory.ListDirectoriesInput, ...aws.Option) (*clouddirectory.ListDirectoriesOutput, error)
+	ListDirectoriesRequest(*clouddirectory.ListDirectoriesInput) (*aws.Request, *clouddirectory.ListDirectoriesOutput)
 
 	ListDirectoriesPages(*clouddirectory.ListDirectoriesInput, func(*clouddirectory.ListDirectoriesOutput, bool) bool) error
-	ListDirectoriesPagesWithContext(aws.Context, *clouddirectory.ListDirectoriesInput, func(*clouddirectory.ListDirectoriesOutput, bool) bool, ...request.Option) error
+	ListDirectoriesPagesWithContext(aws.Context, *clouddirectory.ListDirectoriesInput, func(*clouddirectory.ListDirectoriesOutput, bool) bool, ...aws.Option) error
 
 	ListFacetAttributes(*clouddirectory.ListFacetAttributesInput) (*clouddirectory.ListFacetAttributesOutput, error)
-	ListFacetAttributesWithContext(aws.Context, *clouddirectory.ListFacetAttributesInput, ...request.Option) (*clouddirectory.ListFacetAttributesOutput, error)
-	ListFacetAttributesRequest(*clouddirectory.ListFacetAttributesInput) (*request.Request, *clouddirectory.ListFacetAttributesOutput)
+	ListFacetAttributesWithContext(aws.Context, *clouddirectory.ListFacetAttributesInput, ...aws.Option) (*clouddirectory.ListFacetAttributesOutput, error)
+	ListFacetAttributesRequest(*clouddirectory.ListFacetAttributesInput) (*aws.Request, *clouddirectory.ListFacetAttributesOutput)
 
 	ListFacetAttributesPages(*clouddirectory.ListFacetAttributesInput, func(*clouddirectory.ListFacetAttributesOutput, bool) bool) error
-	ListFacetAttributesPagesWithContext(aws.Context, *clouddirectory.ListFacetAttributesInput, func(*clouddirectory.ListFacetAttributesOutput, bool) bool, ...request.Option) error
+	ListFacetAttributesPagesWithContext(aws.Context, *clouddirectory.ListFacetAttributesInput, func(*clouddirectory.ListFacetAttributesOutput, bool) bool, ...aws.Option) error
 
 	ListFacetNames(*clouddirectory.ListFacetNamesInput) (*clouddirectory.ListFacetNamesOutput, error)
-	ListFacetNamesWithContext(aws.Context, *clouddirectory.ListFacetNamesInput, ...request.Option) (*clouddirectory.ListFacetNamesOutput, error)
-	ListFacetNamesRequest(*clouddirectory.ListFacetNamesInput) (*request.Request, *clouddirectory.ListFacetNamesOutput)
+	ListFacetNamesWithContext(aws.Context, *clouddirectory.ListFacetNamesInput, ...aws.Option) (*clouddirectory.ListFacetNamesOutput, error)
+	ListFacetNamesRequest(*clouddirectory.ListFacetNamesInput) (*aws.Request, *clouddirectory.ListFacetNamesOutput)
 
 	ListFacetNamesPages(*clouddirectory.ListFacetNamesInput, func(*clouddirectory.ListFacetNamesOutput, bool) bool) error
-	ListFacetNamesPagesWithContext(aws.Context, *clouddirectory.ListFacetNamesInput, func(*clouddirectory.ListFacetNamesOutput, bool) bool, ...request.Option) error
+	ListFacetNamesPagesWithContext(aws.Context, *clouddirectory.ListFacetNamesInput, func(*clouddirectory.ListFacetNamesOutput, bool) bool, ...aws.Option) error
 
 	ListIncomingTypedLinks(*clouddirectory.ListIncomingTypedLinksInput) (*clouddirectory.ListIncomingTypedLinksOutput, error)
-	ListIncomingTypedLinksWithContext(aws.Context, *clouddirectory.ListIncomingTypedLinksInput, ...request.Option) (*clouddirectory.ListIncomingTypedLinksOutput, error)
-	ListIncomingTypedLinksRequest(*clouddirectory.ListIncomingTypedLinksInput) (*request.Request, *clouddirectory.ListIncomingTypedLinksOutput)
+	ListIncomingTypedLinksWithContext(aws.Context, *clouddirectory.ListIncomingTypedLinksInput, ...aws.Option) (*clouddirectory.ListIncomingTypedLinksOutput, error)
+	ListIncomingTypedLinksRequest(*clouddirectory.ListIncomingTypedLinksInput) (*aws.Request, *clouddirectory.ListIncomingTypedLinksOutput)
 
 	ListIndex(*clouddirectory.ListIndexInput) (*clouddirectory.ListIndexOutput, error)
-	ListIndexWithContext(aws.Context, *clouddirectory.ListIndexInput, ...request.Option) (*clouddirectory.ListIndexOutput, error)
-	ListIndexRequest(*clouddirectory.ListIndexInput) (*request.Request, *clouddirectory.ListIndexOutput)
+	ListIndexWithContext(aws.Context, *clouddirectory.ListIndexInput, ...aws.Option) (*clouddirectory.ListIndexOutput, error)
+	ListIndexRequest(*clouddirectory.ListIndexInput) (*aws.Request, *clouddirectory.ListIndexOutput)
 
 	ListIndexPages(*clouddirectory.ListIndexInput, func(*clouddirectory.ListIndexOutput, bool) bool) error
-	ListIndexPagesWithContext(aws.Context, *clouddirectory.ListIndexInput, func(*clouddirectory.ListIndexOutput, bool) bool, ...request.Option) error
+	ListIndexPagesWithContext(aws.Context, *clouddirectory.ListIndexInput, func(*clouddirectory.ListIndexOutput, bool) bool, ...aws.Option) error
 
 	ListObjectAttributes(*clouddirectory.ListObjectAttributesInput) (*clouddirectory.ListObjectAttributesOutput, error)
-	ListObjectAttributesWithContext(aws.Context, *clouddirectory.ListObjectAttributesInput, ...request.Option) (*clouddirectory.ListObjectAttributesOutput, error)
-	ListObjectAttributesRequest(*clouddirectory.ListObjectAttributesInput) (*request.Request, *clouddirectory.ListObjectAttributesOutput)
+	ListObjectAttributesWithContext(aws.Context, *clouddirectory.ListObjectAttributesInput, ...aws.Option) (*clouddirectory.ListObjectAttributesOutput, error)
+	ListObjectAttributesRequest(*clouddirectory.ListObjectAttributesInput) (*aws.Request, *clouddirectory.ListObjectAttributesOutput)
 
 	ListObjectAttributesPages(*clouddirectory.ListObjectAttributesInput, func(*clouddirectory.ListObjectAttributesOutput, bool) bool) error
-	ListObjectAttributesPagesWithContext(aws.Context, *clouddirectory.ListObjectAttributesInput, func(*clouddirectory.ListObjectAttributesOutput, bool) bool, ...request.Option) error
+	ListObjectAttributesPagesWithContext(aws.Context, *clouddirectory.ListObjectAttributesInput, func(*clouddirectory.ListObjectAttributesOutput, bool) bool, ...aws.Option) error
 
 	ListObjectChildren(*clouddirectory.ListObjectChildrenInput) (*clouddirectory.ListObjectChildrenOutput, error)
-	ListObjectChildrenWithContext(aws.Context, *clouddirectory.ListObjectChildrenInput, ...request.Option) (*clouddirectory.ListObjectChildrenOutput, error)
-	ListObjectChildrenRequest(*clouddirectory.ListObjectChildrenInput) (*request.Request, *clouddirectory.ListObjectChildrenOutput)
+	ListObjectChildrenWithContext(aws.Context, *clouddirectory.ListObjectChildrenInput, ...aws.Option) (*clouddirectory.ListObjectChildrenOutput, error)
+	ListObjectChildrenRequest(*clouddirectory.ListObjectChildrenInput) (*aws.Request, *clouddirectory.ListObjectChildrenOutput)
 
 	ListObjectChildrenPages(*clouddirectory.ListObjectChildrenInput, func(*clouddirectory.ListObjectChildrenOutput, bool) bool) error
-	ListObjectChildrenPagesWithContext(aws.Context, *clouddirectory.ListObjectChildrenInput, func(*clouddirectory.ListObjectChildrenOutput, bool) bool, ...request.Option) error
+	ListObjectChildrenPagesWithContext(aws.Context, *clouddirectory.ListObjectChildrenInput, func(*clouddirectory.ListObjectChildrenOutput, bool) bool, ...aws.Option) error
 
 	ListObjectParentPaths(*clouddirectory.ListObjectParentPathsInput) (*clouddirectory.ListObjectParentPathsOutput, error)
-	ListObjectParentPathsWithContext(aws.Context, *clouddirectory.ListObjectParentPathsInput, ...request.Option) (*clouddirectory.ListObjectParentPathsOutput, error)
-	ListObjectParentPathsRequest(*clouddirectory.ListObjectParentPathsInput) (*request.Request, *clouddirectory.ListObjectParentPathsOutput)
+	ListObjectParentPathsWithContext(aws.Context, *clouddirectory.ListObjectParentPathsInput, ...aws.Option) (*clouddirectory.ListObjectParentPathsOutput, error)
+	ListObjectParentPathsRequest(*clouddirectory.ListObjectParentPathsInput) (*aws.Request, *clouddirectory.ListObjectParentPathsOutput)
 
 	ListObjectParentPathsPages(*clouddirectory.ListObjectParentPathsInput, func(*clouddirectory.ListObjectParentPathsOutput, bool) bool) error
-	ListObjectParentPathsPagesWithContext(aws.Context, *clouddirectory.ListObjectParentPathsInput, func(*clouddirectory.ListObjectParentPathsOutput, bool) bool, ...request.Option) error
+	ListObjectParentPathsPagesWithContext(aws.Context, *clouddirectory.ListObjectParentPathsInput, func(*clouddirectory.ListObjectParentPathsOutput, bool) bool, ...aws.Option) error
 
 	ListObjectParents(*clouddirectory.ListObjectParentsInput) (*clouddirectory.ListObjectParentsOutput, error)
-	ListObjectParentsWithContext(aws.Context, *clouddirectory.ListObjectParentsInput, ...request.Option) (*clouddirectory.ListObjectParentsOutput, error)
-	ListObjectParentsRequest(*clouddirectory.ListObjectParentsInput) (*request.Request, *clouddirectory.ListObjectParentsOutput)
+	ListObjectParentsWithContext(aws.Context, *clouddirectory.ListObjectParentsInput, ...aws.Option) (*clouddirectory.ListObjectParentsOutput, error)
+	ListObjectParentsRequest(*clouddirectory.ListObjectParentsInput) (*aws.Request, *clouddirectory.ListObjectParentsOutput)
 
 	ListObjectParentsPages(*clouddirectory.ListObjectParentsInput, func(*clouddirectory.ListObjectParentsOutput, bool) bool) error
-	ListObjectParentsPagesWithContext(aws.Context, *clouddirectory.ListObjectParentsInput, func(*clouddirectory.ListObjectParentsOutput, bool) bool, ...request.Option) error
+	ListObjectParentsPagesWithContext(aws.Context, *clouddirectory.ListObjectParentsInput, func(*clouddirectory.ListObjectParentsOutput, bool) bool, ...aws.Option) error
 
 	ListObjectPolicies(*clouddirectory.ListObjectPoliciesInput) (*clouddirectory.ListObjectPoliciesOutput, error)
-	ListObjectPoliciesWithContext(aws.Context, *clouddirectory.ListObjectPoliciesInput, ...request.Option) (*clouddirectory.ListObjectPoliciesOutput, error)
-	ListObjectPoliciesRequest(*clouddirectory.ListObjectPoliciesInput) (*request.Request, *clouddirectory.ListObjectPoliciesOutput)
+	ListObjectPoliciesWithContext(aws.Context, *clouddirectory.ListObjectPoliciesInput, ...aws.Option) (*clouddirectory.ListObjectPoliciesOutput, error)
+	ListObjectPoliciesRequest(*clouddirectory.ListObjectPoliciesInput) (*aws.Request, *clouddirectory.ListObjectPoliciesOutput)
 
 	ListObjectPoliciesPages(*clouddirectory.ListObjectPoliciesInput, func(*clouddirectory.ListObjectPoliciesOutput, bool) bool) error
-	ListObjectPoliciesPagesWithContext(aws.Context, *clouddirectory.ListObjectPoliciesInput, func(*clouddirectory.ListObjectPoliciesOutput, bool) bool, ...request.Option) error
+	ListObjectPoliciesPagesWithContext(aws.Context, *clouddirectory.ListObjectPoliciesInput, func(*clouddirectory.ListObjectPoliciesOutput, bool) bool, ...aws.Option) error
 
 	ListOutgoingTypedLinks(*clouddirectory.ListOutgoingTypedLinksInput) (*clouddirectory.ListOutgoingTypedLinksOutput, error)
-	ListOutgoingTypedLinksWithContext(aws.Context, *clouddirectory.ListOutgoingTypedLinksInput, ...request.Option) (*clouddirectory.ListOutgoingTypedLinksOutput, error)
-	ListOutgoingTypedLinksRequest(*clouddirectory.ListOutgoingTypedLinksInput) (*request.Request, *clouddirectory.ListOutgoingTypedLinksOutput)
+	ListOutgoingTypedLinksWithContext(aws.Context, *clouddirectory.ListOutgoingTypedLinksInput, ...aws.Option) (*clouddirectory.ListOutgoingTypedLinksOutput, error)
+	ListOutgoingTypedLinksRequest(*clouddirectory.ListOutgoingTypedLinksInput) (*aws.Request, *clouddirectory.ListOutgoingTypedLinksOutput)
 
 	ListPolicyAttachments(*clouddirectory.ListPolicyAttachmentsInput) (*clouddirectory.ListPolicyAttachmentsOutput, error)
-	ListPolicyAttachmentsWithContext(aws.Context, *clouddirectory.ListPolicyAttachmentsInput, ...request.Option) (*clouddirectory.ListPolicyAttachmentsOutput, error)
-	ListPolicyAttachmentsRequest(*clouddirectory.ListPolicyAttachmentsInput) (*request.Request, *clouddirectory.ListPolicyAttachmentsOutput)
+	ListPolicyAttachmentsWithContext(aws.Context, *clouddirectory.ListPolicyAttachmentsInput, ...aws.Option) (*clouddirectory.ListPolicyAttachmentsOutput, error)
+	ListPolicyAttachmentsRequest(*clouddirectory.ListPolicyAttachmentsInput) (*aws.Request, *clouddirectory.ListPolicyAttachmentsOutput)
 
 	ListPolicyAttachmentsPages(*clouddirectory.ListPolicyAttachmentsInput, func(*clouddirectory.ListPolicyAttachmentsOutput, bool) bool) error
-	ListPolicyAttachmentsPagesWithContext(aws.Context, *clouddirectory.ListPolicyAttachmentsInput, func(*clouddirectory.ListPolicyAttachmentsOutput, bool) bool, ...request.Option) error
+	ListPolicyAttachmentsPagesWithContext(aws.Context, *clouddirectory.ListPolicyAttachmentsInput, func(*clouddirectory.ListPolicyAttachmentsOutput, bool) bool, ...aws.Option) error
 
 	ListPublishedSchemaArns(*clouddirectory.ListPublishedSchemaArnsInput) (*clouddirectory.ListPublishedSchemaArnsOutput, error)
-	ListPublishedSchemaArnsWithContext(aws.Context, *clouddirectory.ListPublishedSchemaArnsInput, ...request.Option) (*clouddirectory.ListPublishedSchemaArnsOutput, error)
-	ListPublishedSchemaArnsRequest(*clouddirectory.ListPublishedSchemaArnsInput) (*request.Request, *clouddirectory.ListPublishedSchemaArnsOutput)
+	ListPublishedSchemaArnsWithContext(aws.Context, *clouddirectory.ListPublishedSchemaArnsInput, ...aws.Option) (*clouddirectory.ListPublishedSchemaArnsOutput, error)
+	ListPublishedSchemaArnsRequest(*clouddirectory.ListPublishedSchemaArnsInput) (*aws.Request, *clouddirectory.ListPublishedSchemaArnsOutput)
 
 	ListPublishedSchemaArnsPages(*clouddirectory.ListPublishedSchemaArnsInput, func(*clouddirectory.ListPublishedSchemaArnsOutput, bool) bool) error
-	ListPublishedSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListPublishedSchemaArnsInput, func(*clouddirectory.ListPublishedSchemaArnsOutput, bool) bool, ...request.Option) error
+	ListPublishedSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListPublishedSchemaArnsInput, func(*clouddirectory.ListPublishedSchemaArnsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsForResource(*clouddirectory.ListTagsForResourceInput) (*clouddirectory.ListTagsForResourceOutput, error)
-	ListTagsForResourceWithContext(aws.Context, *clouddirectory.ListTagsForResourceInput, ...request.Option) (*clouddirectory.ListTagsForResourceOutput, error)
-	ListTagsForResourceRequest(*clouddirectory.ListTagsForResourceInput) (*request.Request, *clouddirectory.ListTagsForResourceOutput)
+	ListTagsForResourceWithContext(aws.Context, *clouddirectory.ListTagsForResourceInput, ...aws.Option) (*clouddirectory.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*clouddirectory.ListTagsForResourceInput) (*aws.Request, *clouddirectory.ListTagsForResourceOutput)
 
 	ListTagsForResourcePages(*clouddirectory.ListTagsForResourceInput, func(*clouddirectory.ListTagsForResourceOutput, bool) bool) error
-	ListTagsForResourcePagesWithContext(aws.Context, *clouddirectory.ListTagsForResourceInput, func(*clouddirectory.ListTagsForResourceOutput, bool) bool, ...request.Option) error
+	ListTagsForResourcePagesWithContext(aws.Context, *clouddirectory.ListTagsForResourceInput, func(*clouddirectory.ListTagsForResourceOutput, bool) bool, ...aws.Option) error
 
 	ListTypedLinkFacetAttributes(*clouddirectory.ListTypedLinkFacetAttributesInput) (*clouddirectory.ListTypedLinkFacetAttributesOutput, error)
-	ListTypedLinkFacetAttributesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetAttributesInput, ...request.Option) (*clouddirectory.ListTypedLinkFacetAttributesOutput, error)
-	ListTypedLinkFacetAttributesRequest(*clouddirectory.ListTypedLinkFacetAttributesInput) (*request.Request, *clouddirectory.ListTypedLinkFacetAttributesOutput)
+	ListTypedLinkFacetAttributesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetAttributesInput, ...aws.Option) (*clouddirectory.ListTypedLinkFacetAttributesOutput, error)
+	ListTypedLinkFacetAttributesRequest(*clouddirectory.ListTypedLinkFacetAttributesInput) (*aws.Request, *clouddirectory.ListTypedLinkFacetAttributesOutput)
 
 	ListTypedLinkFacetAttributesPages(*clouddirectory.ListTypedLinkFacetAttributesInput, func(*clouddirectory.ListTypedLinkFacetAttributesOutput, bool) bool) error
-	ListTypedLinkFacetAttributesPagesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetAttributesInput, func(*clouddirectory.ListTypedLinkFacetAttributesOutput, bool) bool, ...request.Option) error
+	ListTypedLinkFacetAttributesPagesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetAttributesInput, func(*clouddirectory.ListTypedLinkFacetAttributesOutput, bool) bool, ...aws.Option) error
 
 	ListTypedLinkFacetNames(*clouddirectory.ListTypedLinkFacetNamesInput) (*clouddirectory.ListTypedLinkFacetNamesOutput, error)
-	ListTypedLinkFacetNamesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetNamesInput, ...request.Option) (*clouddirectory.ListTypedLinkFacetNamesOutput, error)
-	ListTypedLinkFacetNamesRequest(*clouddirectory.ListTypedLinkFacetNamesInput) (*request.Request, *clouddirectory.ListTypedLinkFacetNamesOutput)
+	ListTypedLinkFacetNamesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetNamesInput, ...aws.Option) (*clouddirectory.ListTypedLinkFacetNamesOutput, error)
+	ListTypedLinkFacetNamesRequest(*clouddirectory.ListTypedLinkFacetNamesInput) (*aws.Request, *clouddirectory.ListTypedLinkFacetNamesOutput)
 
 	ListTypedLinkFacetNamesPages(*clouddirectory.ListTypedLinkFacetNamesInput, func(*clouddirectory.ListTypedLinkFacetNamesOutput, bool) bool) error
-	ListTypedLinkFacetNamesPagesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetNamesInput, func(*clouddirectory.ListTypedLinkFacetNamesOutput, bool) bool, ...request.Option) error
+	ListTypedLinkFacetNamesPagesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetNamesInput, func(*clouddirectory.ListTypedLinkFacetNamesOutput, bool) bool, ...aws.Option) error
 
 	LookupPolicy(*clouddirectory.LookupPolicyInput) (*clouddirectory.LookupPolicyOutput, error)
-	LookupPolicyWithContext(aws.Context, *clouddirectory.LookupPolicyInput, ...request.Option) (*clouddirectory.LookupPolicyOutput, error)
-	LookupPolicyRequest(*clouddirectory.LookupPolicyInput) (*request.Request, *clouddirectory.LookupPolicyOutput)
+	LookupPolicyWithContext(aws.Context, *clouddirectory.LookupPolicyInput, ...aws.Option) (*clouddirectory.LookupPolicyOutput, error)
+	LookupPolicyRequest(*clouddirectory.LookupPolicyInput) (*aws.Request, *clouddirectory.LookupPolicyOutput)
 
 	LookupPolicyPages(*clouddirectory.LookupPolicyInput, func(*clouddirectory.LookupPolicyOutput, bool) bool) error
-	LookupPolicyPagesWithContext(aws.Context, *clouddirectory.LookupPolicyInput, func(*clouddirectory.LookupPolicyOutput, bool) bool, ...request.Option) error
+	LookupPolicyPagesWithContext(aws.Context, *clouddirectory.LookupPolicyInput, func(*clouddirectory.LookupPolicyOutput, bool) bool, ...aws.Option) error
 
 	PublishSchema(*clouddirectory.PublishSchemaInput) (*clouddirectory.PublishSchemaOutput, error)
-	PublishSchemaWithContext(aws.Context, *clouddirectory.PublishSchemaInput, ...request.Option) (*clouddirectory.PublishSchemaOutput, error)
-	PublishSchemaRequest(*clouddirectory.PublishSchemaInput) (*request.Request, *clouddirectory.PublishSchemaOutput)
+	PublishSchemaWithContext(aws.Context, *clouddirectory.PublishSchemaInput, ...aws.Option) (*clouddirectory.PublishSchemaOutput, error)
+	PublishSchemaRequest(*clouddirectory.PublishSchemaInput) (*aws.Request, *clouddirectory.PublishSchemaOutput)
 
 	PutSchemaFromJson(*clouddirectory.PutSchemaFromJsonInput) (*clouddirectory.PutSchemaFromJsonOutput, error)
-	PutSchemaFromJsonWithContext(aws.Context, *clouddirectory.PutSchemaFromJsonInput, ...request.Option) (*clouddirectory.PutSchemaFromJsonOutput, error)
-	PutSchemaFromJsonRequest(*clouddirectory.PutSchemaFromJsonInput) (*request.Request, *clouddirectory.PutSchemaFromJsonOutput)
+	PutSchemaFromJsonWithContext(aws.Context, *clouddirectory.PutSchemaFromJsonInput, ...aws.Option) (*clouddirectory.PutSchemaFromJsonOutput, error)
+	PutSchemaFromJsonRequest(*clouddirectory.PutSchemaFromJsonInput) (*aws.Request, *clouddirectory.PutSchemaFromJsonOutput)
 
 	RemoveFacetFromObject(*clouddirectory.RemoveFacetFromObjectInput) (*clouddirectory.RemoveFacetFromObjectOutput, error)
-	RemoveFacetFromObjectWithContext(aws.Context, *clouddirectory.RemoveFacetFromObjectInput, ...request.Option) (*clouddirectory.RemoveFacetFromObjectOutput, error)
-	RemoveFacetFromObjectRequest(*clouddirectory.RemoveFacetFromObjectInput) (*request.Request, *clouddirectory.RemoveFacetFromObjectOutput)
+	RemoveFacetFromObjectWithContext(aws.Context, *clouddirectory.RemoveFacetFromObjectInput, ...aws.Option) (*clouddirectory.RemoveFacetFromObjectOutput, error)
+	RemoveFacetFromObjectRequest(*clouddirectory.RemoveFacetFromObjectInput) (*aws.Request, *clouddirectory.RemoveFacetFromObjectOutput)
 
 	TagResource(*clouddirectory.TagResourceInput) (*clouddirectory.TagResourceOutput, error)
-	TagResourceWithContext(aws.Context, *clouddirectory.TagResourceInput, ...request.Option) (*clouddirectory.TagResourceOutput, error)
-	TagResourceRequest(*clouddirectory.TagResourceInput) (*request.Request, *clouddirectory.TagResourceOutput)
+	TagResourceWithContext(aws.Context, *clouddirectory.TagResourceInput, ...aws.Option) (*clouddirectory.TagResourceOutput, error)
+	TagResourceRequest(*clouddirectory.TagResourceInput) (*aws.Request, *clouddirectory.TagResourceOutput)
 
 	UntagResource(*clouddirectory.UntagResourceInput) (*clouddirectory.UntagResourceOutput, error)
-	UntagResourceWithContext(aws.Context, *clouddirectory.UntagResourceInput, ...request.Option) (*clouddirectory.UntagResourceOutput, error)
-	UntagResourceRequest(*clouddirectory.UntagResourceInput) (*request.Request, *clouddirectory.UntagResourceOutput)
+	UntagResourceWithContext(aws.Context, *clouddirectory.UntagResourceInput, ...aws.Option) (*clouddirectory.UntagResourceOutput, error)
+	UntagResourceRequest(*clouddirectory.UntagResourceInput) (*aws.Request, *clouddirectory.UntagResourceOutput)
 
 	UpdateFacet(*clouddirectory.UpdateFacetInput) (*clouddirectory.UpdateFacetOutput, error)
-	UpdateFacetWithContext(aws.Context, *clouddirectory.UpdateFacetInput, ...request.Option) (*clouddirectory.UpdateFacetOutput, error)
-	UpdateFacetRequest(*clouddirectory.UpdateFacetInput) (*request.Request, *clouddirectory.UpdateFacetOutput)
+	UpdateFacetWithContext(aws.Context, *clouddirectory.UpdateFacetInput, ...aws.Option) (*clouddirectory.UpdateFacetOutput, error)
+	UpdateFacetRequest(*clouddirectory.UpdateFacetInput) (*aws.Request, *clouddirectory.UpdateFacetOutput)
 
 	UpdateObjectAttributes(*clouddirectory.UpdateObjectAttributesInput) (*clouddirectory.UpdateObjectAttributesOutput, error)
-	UpdateObjectAttributesWithContext(aws.Context, *clouddirectory.UpdateObjectAttributesInput, ...request.Option) (*clouddirectory.UpdateObjectAttributesOutput, error)
-	UpdateObjectAttributesRequest(*clouddirectory.UpdateObjectAttributesInput) (*request.Request, *clouddirectory.UpdateObjectAttributesOutput)
+	UpdateObjectAttributesWithContext(aws.Context, *clouddirectory.UpdateObjectAttributesInput, ...aws.Option) (*clouddirectory.UpdateObjectAttributesOutput, error)
+	UpdateObjectAttributesRequest(*clouddirectory.UpdateObjectAttributesInput) (*aws.Request, *clouddirectory.UpdateObjectAttributesOutput)
 
 	UpdateSchema(*clouddirectory.UpdateSchemaInput) (*clouddirectory.UpdateSchemaOutput, error)
-	UpdateSchemaWithContext(aws.Context, *clouddirectory.UpdateSchemaInput, ...request.Option) (*clouddirectory.UpdateSchemaOutput, error)
-	UpdateSchemaRequest(*clouddirectory.UpdateSchemaInput) (*request.Request, *clouddirectory.UpdateSchemaOutput)
+	UpdateSchemaWithContext(aws.Context, *clouddirectory.UpdateSchemaInput, ...aws.Option) (*clouddirectory.UpdateSchemaOutput, error)
+	UpdateSchemaRequest(*clouddirectory.UpdateSchemaInput) (*aws.Request, *clouddirectory.UpdateSchemaOutput)
 
 	UpdateTypedLinkFacet(*clouddirectory.UpdateTypedLinkFacetInput) (*clouddirectory.UpdateTypedLinkFacetOutput, error)
-	UpdateTypedLinkFacetWithContext(aws.Context, *clouddirectory.UpdateTypedLinkFacetInput, ...request.Option) (*clouddirectory.UpdateTypedLinkFacetOutput, error)
-	UpdateTypedLinkFacetRequest(*clouddirectory.UpdateTypedLinkFacetInput) (*request.Request, *clouddirectory.UpdateTypedLinkFacetOutput)
+	UpdateTypedLinkFacetWithContext(aws.Context, *clouddirectory.UpdateTypedLinkFacetInput, ...aws.Option) (*clouddirectory.UpdateTypedLinkFacetOutput, error)
+	UpdateTypedLinkFacetRequest(*clouddirectory.UpdateTypedLinkFacetInput) (*aws.Request, *clouddirectory.UpdateTypedLinkFacetOutput)
 }
 
 var _ CloudDirectoryAPI = (*clouddirectory.CloudDirectory)(nil)

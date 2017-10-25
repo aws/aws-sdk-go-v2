@@ -3,7 +3,7 @@ package machinelearning
 import (
 	"net/url"
 
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 )
 
 func init() {
@@ -22,9 +22,9 @@ func updatePredictEndpoint(r *request.Request) {
 		return
 	}
 
-	r.ClientInfo.Endpoint = *r.Params.(*PredictInput).PredictEndpoint
+	r.Metadata.Endpoint = *r.Params.(*PredictInput).PredictEndpoint
 
-	uri, err := url.Parse(r.ClientInfo.Endpoint)
+	uri, err := url.Parse(r.Metadata.Endpoint)
 	if err != nil {
 		r.Error = err
 		return

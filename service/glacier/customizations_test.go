@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
 )
 
@@ -21,7 +21,7 @@ var (
 		return bytes.NewReader(buf)
 	}()
 
-	svc = glacier.New(unit.Session)
+	svc = glacier.New(unit.Config())
 )
 
 func TestCustomizations(t *testing.T) {
@@ -35,7 +35,7 @@ func TestCustomizations(t *testing.T) {
 	}
 
 	// Sets API version
-	if e, a := req.ClientInfo.APIVersion, req.HTTPRequest.Header.Get("x-amz-glacier-version"); e != a {
+	if e, a := req.Metadata.APIVersion, req.HTTPRequest.Header.Get("x-amz-glacier-version"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 

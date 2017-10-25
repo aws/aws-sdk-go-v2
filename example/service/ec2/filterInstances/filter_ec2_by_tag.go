@@ -4,12 +4,11 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 )
 
@@ -18,11 +17,17 @@ import (
 // Usage:
 // filter_ec2_by_tag <name_filter>
 func main() {
-	sess := session.Must(session.NewSession())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
 
 	nameFilter := os.Args[1]
 	awsRegion := "us-east-1"
-	svc := ec2.New(sess, &aws.Config{Region: aws.String(awsRegion)})
+
+	cfg.Region = aws.String(awsRegion)
+	svc := ec2.New(cfg)
+
 	fmt.Printf("listing instances with tag %v in: %v\n", nameFilter, awsRegion)
 	params := &ec2.DescribeInstancesInput{
 		Filters: []*ec2.Filter{
@@ -34,10 +39,16 @@ func main() {
 			},
 		},
 	}
+
 	resp, err := svc.DescribeInstances(params)
 	if err != nil {
-		fmt.Println("there was an error listing instances in", awsRegion, err.Error())
-		log.Fatal(err.Error())
+		exitErrorf("failed to describe instances, %s, %v", awsRegion, err)
 	}
+
 	fmt.Printf("%+v\n", *resp)
+}
+
+func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
+	os.Exit(1)
 }

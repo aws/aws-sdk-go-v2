@@ -4,9 +4,6 @@ package dynamodbstreams
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
@@ -18,14 +15,14 @@ import (
 // DynamoDBStreams methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type DynamoDBStreams struct {
-	*client.Client
+	*aws.Client
 }
 
 // Used for custom client initialization logic
-var initClient func(*client.Client)
+var initClient func(*aws.Client)
 
 // Used for custom request initialization logic
-var initRequest func(*request.Request)
+var initRequest func(*aws.Request)
 
 // Service information constants
 const (
@@ -33,39 +30,32 @@ const (
 	EndpointsID = ServiceName        // Service ID for Regions and Endpoints metadata.
 )
 
-// New creates a new instance of the DynamoDBStreams client with a session.
+// New creates a new instance of the DynamoDBStreams client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a DynamoDBStreams client from just a session.
-//     svc := dynamodbstreams.New(mySession)
+//     // Create a DynamoDBStreams client from just a config.
+//     svc := dynamodbstreams.New(myConfig)
 //
 //     // Create a DynamoDBStreams client with additional configuration
-//     svc := dynamodbstreams.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func New(p client.ConfigProvider, cfgs ...*aws.Config) *DynamoDBStreams {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := dynamodbstreams.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func New(config aws.Config) *DynamoDBStreams {
+	var signingName string
+	signingName = "dynamodb"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *DynamoDBStreams {
-	if len(signingName) == 0 {
-		signingName = "dynamodb"
-	}
 	svc := &DynamoDBStreams{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2012-08-10",
 				JSONVersion:   "1.0",
 				TargetPrefix:  "DynamoDBStreams_20120810",
 			},
-			handlers,
 		),
 	}
 
@@ -86,7 +76,7 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 
 // newRequest creates a new request for a DynamoDBStreams operation and runs any
 // custom request initialization.
-func (c *DynamoDBStreams) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *DynamoDBStreams) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	// Run custom request initialization if present

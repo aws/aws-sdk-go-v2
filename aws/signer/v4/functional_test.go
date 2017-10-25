@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -31,7 +32,10 @@ var standaloneSignCases = []struct {
 }
 
 func TestPresignHandler(t *testing.T) {
-	svc := s3.New(unit.Session)
+	cfg := unit.Config()
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	svc := s3.New(cfg)
 	req, _ := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket:             aws.String("bucket"),
 		Key:                aws.String("key"),
@@ -81,7 +85,10 @@ func TestPresignHandler(t *testing.T) {
 }
 
 func TestPresignRequest(t *testing.T) {
-	svc := s3.New(unit.Session)
+	cfg := unit.Config()
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	svc := s3.New(cfg)
 	req, _ := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket:             aws.String("bucket"),
 		Key:                aws.String("key"),
@@ -140,7 +147,7 @@ func TestPresignRequest(t *testing.T) {
 func TestStandaloneSign_CustomURIEscape(t *testing.T) {
 	var expectSig = `AWS4-HMAC-SHA256 Credential=AKID/19700101/us-east-1/es/aws4_request, SignedHeaders=host;x-amz-date;x-amz-security-token, Signature=6601e883cc6d23871fd6c2a394c5677ea2b8c82b04a6446786d64cd74f520967`
 
-	creds := unit.Session.Config.Credentials
+	creds := unit.Config().CredentialsLoader
 	signer := v4.NewSigner(creds, func(s *v4.Signer) {
 		s.DisableURIPathEscaping = true
 	})

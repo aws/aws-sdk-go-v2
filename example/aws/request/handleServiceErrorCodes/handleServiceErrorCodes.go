@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -32,9 +32,12 @@ func main() {
 	if len(os.Args) < 3 {
 		exitErrorf("Usage: %s <bucket> <key>", filepath.Base(os.Args[0]))
 	}
-	sess := session.Must(session.NewSession())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
 
-	svc := s3.New(sess)
+	svc := s3.New(cfg)
 	resp, err := svc.GetObject(&s3.GetObjectInput{
 		Bucket: aws.String(os.Args[1]),
 		Key:    aws.String(os.Args[2]),

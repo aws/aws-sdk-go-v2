@@ -5,7 +5,8 @@ package efs
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
+	_ "github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
 	"github.com/aws/aws-sdk-go-v2/service/efs"
 	"github.com/gucumber/gucumber"
 )
@@ -13,7 +14,9 @@ import (
 func init() {
 	gucumber.Before("@efs", func() {
 		// FIXME remove custom region
-		gucumber.World["client"] = efs.New(smoke.Session,
-			aws.NewConfig().WithRegion("us-west-2"))
+		cfg := integration.Config()
+		cfg.Region = aws.String("us-west-2")
+
+		gucumber.World["client"] = efs.New(cfg)
 	})
 }

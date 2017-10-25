@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateTags = "CreateTags"
 
-// CreateTagsRequest generates a "aws/request.Request" representing the
+// CreateTagsRequest generates a "aws.Request" representing the
 // client's request for the CreateTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opCreateTags = "CreateTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTags
-func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) (req *request.Request, output *CreateTagsOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -89,7 +88,7 @@ func (c *WorkSpaces) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...request.Option) (*CreateTagsOutput, error) {
+func (c *WorkSpaces) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...aws.Option) (*CreateTagsOutput, error) {
 	req, out := c.CreateTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -98,7 +97,7 @@ func (c *WorkSpaces) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInp
 
 const opCreateWorkspaces = "CreateWorkspaces"
 
-// CreateWorkspacesRequest generates a "aws/request.Request" representing the
+// CreateWorkspacesRequest generates a "aws.Request" representing the
 // client's request for the CreateWorkspaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -122,8 +121,8 @@ const opCreateWorkspaces = "CreateWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces
-func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) (req *request.Request, output *CreateWorkspacesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) (req *aws.Request, output *CreateWorkspacesOutput) {
+	op := &aws.Operation{
 		Name:       opCreateWorkspaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -173,7 +172,7 @@ func (c *WorkSpaces) CreateWorkspaces(input *CreateWorkspacesInput) (*CreateWork
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) CreateWorkspacesWithContext(ctx aws.Context, input *CreateWorkspacesInput, opts ...request.Option) (*CreateWorkspacesOutput, error) {
+func (c *WorkSpaces) CreateWorkspacesWithContext(ctx aws.Context, input *CreateWorkspacesInput, opts ...aws.Option) (*CreateWorkspacesOutput, error) {
 	req, out := c.CreateWorkspacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -182,7 +181,7 @@ func (c *WorkSpaces) CreateWorkspacesWithContext(ctx aws.Context, input *CreateW
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws/request.Request" representing the
+// DeleteTagsRequest generates a "aws.Request" representing the
 // client's request for the DeleteTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -206,8 +205,8 @@ const opDeleteTags = "DeleteTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTags
-func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Request, output *DeleteTagsOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -255,7 +254,7 @@ func (c *WorkSpaces) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...request.Option) (*DeleteTagsOutput, error) {
+func (c *WorkSpaces) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
 	req, out := c.DeleteTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -264,7 +263,7 @@ func (c *WorkSpaces) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInp
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws/request.Request" representing the
+// DescribeTagsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -288,8 +287,8 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTags
-func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -334,7 +333,7 @@ func (c *WorkSpaces) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...request.Option) (*DescribeTagsOutput, error) {
+func (c *WorkSpaces) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
 	req, out := c.DescribeTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -343,7 +342,7 @@ func (c *WorkSpaces) DescribeTagsWithContext(ctx aws.Context, input *DescribeTag
 
 const opDescribeWorkspaceBundles = "DescribeWorkspaceBundles"
 
-// DescribeWorkspaceBundlesRequest generates a "aws/request.Request" representing the
+// DescribeWorkspaceBundlesRequest generates a "aws.Request" representing the
 // client's request for the DescribeWorkspaceBundles operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -367,12 +366,12 @@ const opDescribeWorkspaceBundles = "DescribeWorkspaceBundles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles
-func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBundlesInput) (req *request.Request, output *DescribeWorkspaceBundlesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBundlesInput) (req *aws.Request, output *DescribeWorkspaceBundlesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeWorkspaceBundles,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -428,7 +427,7 @@ func (c *WorkSpaces) DescribeWorkspaceBundles(input *DescribeWorkspaceBundlesInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceBundlesWithContext(ctx aws.Context, input *DescribeWorkspaceBundlesInput, opts ...request.Option) (*DescribeWorkspaceBundlesOutput, error) {
+func (c *WorkSpaces) DescribeWorkspaceBundlesWithContext(ctx aws.Context, input *DescribeWorkspaceBundlesInput, opts ...aws.Option) (*DescribeWorkspaceBundlesOutput, error) {
 	req, out := c.DescribeWorkspaceBundlesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -463,9 +462,9 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesPages(input *DescribeWorkspaceBundl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceBundlesPagesWithContext(ctx aws.Context, input *DescribeWorkspaceBundlesInput, fn func(*DescribeWorkspaceBundlesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *WorkSpaces) DescribeWorkspaceBundlesPagesWithContext(ctx aws.Context, input *DescribeWorkspaceBundlesInput, fn func(*DescribeWorkspaceBundlesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeWorkspaceBundlesInput
 			if input != nil {
 				tmp := *input
@@ -487,7 +486,7 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesPagesWithContext(ctx aws.Context, i
 
 const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
 
-// DescribeWorkspaceDirectoriesRequest generates a "aws/request.Request" representing the
+// DescribeWorkspaceDirectoriesRequest generates a "aws.Request" representing the
 // client's request for the DescribeWorkspaceDirectories operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -511,12 +510,12 @@ const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories
-func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspaceDirectoriesInput) (req *request.Request, output *DescribeWorkspaceDirectoriesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspaceDirectoriesInput) (req *aws.Request, output *DescribeWorkspaceDirectoriesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeWorkspaceDirectories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -570,7 +569,7 @@ func (c *WorkSpaces) DescribeWorkspaceDirectories(input *DescribeWorkspaceDirect
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceDirectoriesWithContext(ctx aws.Context, input *DescribeWorkspaceDirectoriesInput, opts ...request.Option) (*DescribeWorkspaceDirectoriesOutput, error) {
+func (c *WorkSpaces) DescribeWorkspaceDirectoriesWithContext(ctx aws.Context, input *DescribeWorkspaceDirectoriesInput, opts ...aws.Option) (*DescribeWorkspaceDirectoriesOutput, error) {
 	req, out := c.DescribeWorkspaceDirectoriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -605,9 +604,9 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesPages(input *DescribeWorkspaceD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceDirectoriesPagesWithContext(ctx aws.Context, input *DescribeWorkspaceDirectoriesInput, fn func(*DescribeWorkspaceDirectoriesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *WorkSpaces) DescribeWorkspaceDirectoriesPagesWithContext(ctx aws.Context, input *DescribeWorkspaceDirectoriesInput, fn func(*DescribeWorkspaceDirectoriesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeWorkspaceDirectoriesInput
 			if input != nil {
 				tmp := *input
@@ -629,7 +628,7 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesPagesWithContext(ctx aws.Contex
 
 const opDescribeWorkspaces = "DescribeWorkspaces"
 
-// DescribeWorkspacesRequest generates a "aws/request.Request" representing the
+// DescribeWorkspacesRequest generates a "aws.Request" representing the
 // client's request for the DescribeWorkspaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -653,12 +652,12 @@ const opDescribeWorkspaces = "DescribeWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces
-func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) (req *request.Request, output *DescribeWorkspacesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) (req *aws.Request, output *DescribeWorkspacesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeWorkspaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "Limit",
@@ -716,7 +715,7 @@ func (c *WorkSpaces) DescribeWorkspaces(input *DescribeWorkspacesInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspacesWithContext(ctx aws.Context, input *DescribeWorkspacesInput, opts ...request.Option) (*DescribeWorkspacesOutput, error) {
+func (c *WorkSpaces) DescribeWorkspacesWithContext(ctx aws.Context, input *DescribeWorkspacesInput, opts ...aws.Option) (*DescribeWorkspacesOutput, error) {
 	req, out := c.DescribeWorkspacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -751,9 +750,9 @@ func (c *WorkSpaces) DescribeWorkspacesPages(input *DescribeWorkspacesInput, fn 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspacesPagesWithContext(ctx aws.Context, input *DescribeWorkspacesInput, fn func(*DescribeWorkspacesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *WorkSpaces) DescribeWorkspacesPagesWithContext(ctx aws.Context, input *DescribeWorkspacesInput, fn func(*DescribeWorkspacesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeWorkspacesInput
 			if input != nil {
 				tmp := *input
@@ -775,7 +774,7 @@ func (c *WorkSpaces) DescribeWorkspacesPagesWithContext(ctx aws.Context, input *
 
 const opDescribeWorkspacesConnectionStatus = "DescribeWorkspacesConnectionStatus"
 
-// DescribeWorkspacesConnectionStatusRequest generates a "aws/request.Request" representing the
+// DescribeWorkspacesConnectionStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeWorkspacesConnectionStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -799,8 +798,8 @@ const opDescribeWorkspacesConnectionStatus = "DescribeWorkspacesConnectionStatus
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatus
-func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWorkspacesConnectionStatusInput) (req *request.Request, output *DescribeWorkspacesConnectionStatusOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWorkspacesConnectionStatusInput) (req *aws.Request, output *DescribeWorkspacesConnectionStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeWorkspacesConnectionStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -845,7 +844,7 @@ func (c *WorkSpaces) DescribeWorkspacesConnectionStatus(input *DescribeWorkspace
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspacesConnectionStatusWithContext(ctx aws.Context, input *DescribeWorkspacesConnectionStatusInput, opts ...request.Option) (*DescribeWorkspacesConnectionStatusOutput, error) {
+func (c *WorkSpaces) DescribeWorkspacesConnectionStatusWithContext(ctx aws.Context, input *DescribeWorkspacesConnectionStatusInput, opts ...aws.Option) (*DescribeWorkspacesConnectionStatusOutput, error) {
 	req, out := c.DescribeWorkspacesConnectionStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -854,7 +853,7 @@ func (c *WorkSpaces) DescribeWorkspacesConnectionStatusWithContext(ctx aws.Conte
 
 const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
 
-// ModifyWorkspacePropertiesRequest generates a "aws/request.Request" representing the
+// ModifyWorkspacePropertiesRequest generates a "aws.Request" representing the
 // client's request for the ModifyWorkspaceProperties operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -878,8 +877,8 @@ const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceProperties
-func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspacePropertiesInput) (req *request.Request, output *ModifyWorkspacePropertiesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspacePropertiesInput) (req *aws.Request, output *ModifyWorkspacePropertiesOutput) {
+	op := &aws.Operation{
 		Name:       opModifyWorkspaceProperties,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -945,7 +944,7 @@ func (c *WorkSpaces) ModifyWorkspaceProperties(input *ModifyWorkspacePropertiesI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) ModifyWorkspacePropertiesWithContext(ctx aws.Context, input *ModifyWorkspacePropertiesInput, opts ...request.Option) (*ModifyWorkspacePropertiesOutput, error) {
+func (c *WorkSpaces) ModifyWorkspacePropertiesWithContext(ctx aws.Context, input *ModifyWorkspacePropertiesInput, opts ...aws.Option) (*ModifyWorkspacePropertiesOutput, error) {
 	req, out := c.ModifyWorkspacePropertiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -954,7 +953,7 @@ func (c *WorkSpaces) ModifyWorkspacePropertiesWithContext(ctx aws.Context, input
 
 const opRebootWorkspaces = "RebootWorkspaces"
 
-// RebootWorkspacesRequest generates a "aws/request.Request" representing the
+// RebootWorkspacesRequest generates a "aws.Request" representing the
 // client's request for the RebootWorkspaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -978,8 +977,8 @@ const opRebootWorkspaces = "RebootWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspaces
-func (c *WorkSpaces) RebootWorkspacesRequest(input *RebootWorkspacesInput) (req *request.Request, output *RebootWorkspacesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) RebootWorkspacesRequest(input *RebootWorkspacesInput) (req *aws.Request, output *RebootWorkspacesOutput) {
+	op := &aws.Operation{
 		Name:       opRebootWorkspaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1024,7 +1023,7 @@ func (c *WorkSpaces) RebootWorkspaces(input *RebootWorkspacesInput) (*RebootWork
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) RebootWorkspacesWithContext(ctx aws.Context, input *RebootWorkspacesInput, opts ...request.Option) (*RebootWorkspacesOutput, error) {
+func (c *WorkSpaces) RebootWorkspacesWithContext(ctx aws.Context, input *RebootWorkspacesInput, opts ...aws.Option) (*RebootWorkspacesOutput, error) {
 	req, out := c.RebootWorkspacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1033,7 +1032,7 @@ func (c *WorkSpaces) RebootWorkspacesWithContext(ctx aws.Context, input *RebootW
 
 const opRebuildWorkspaces = "RebuildWorkspaces"
 
-// RebuildWorkspacesRequest generates a "aws/request.Request" representing the
+// RebuildWorkspacesRequest generates a "aws.Request" representing the
 // client's request for the RebuildWorkspaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1057,8 +1056,8 @@ const opRebuildWorkspaces = "RebuildWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspaces
-func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) (req *request.Request, output *RebuildWorkspacesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) (req *aws.Request, output *RebuildWorkspacesOutput) {
+	op := &aws.Operation{
 		Name:       opRebuildWorkspaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1116,7 +1115,7 @@ func (c *WorkSpaces) RebuildWorkspaces(input *RebuildWorkspacesInput) (*RebuildW
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) RebuildWorkspacesWithContext(ctx aws.Context, input *RebuildWorkspacesInput, opts ...request.Option) (*RebuildWorkspacesOutput, error) {
+func (c *WorkSpaces) RebuildWorkspacesWithContext(ctx aws.Context, input *RebuildWorkspacesInput, opts ...aws.Option) (*RebuildWorkspacesOutput, error) {
 	req, out := c.RebuildWorkspacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1125,7 +1124,7 @@ func (c *WorkSpaces) RebuildWorkspacesWithContext(ctx aws.Context, input *Rebuil
 
 const opStartWorkspaces = "StartWorkspaces"
 
-// StartWorkspacesRequest generates a "aws/request.Request" representing the
+// StartWorkspacesRequest generates a "aws.Request" representing the
 // client's request for the StartWorkspaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1149,8 +1148,8 @@ const opStartWorkspaces = "StartWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspaces
-func (c *WorkSpaces) StartWorkspacesRequest(input *StartWorkspacesInput) (req *request.Request, output *StartWorkspacesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) StartWorkspacesRequest(input *StartWorkspacesInput) (req *aws.Request, output *StartWorkspacesOutput) {
+	op := &aws.Operation{
 		Name:       opStartWorkspaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1191,7 +1190,7 @@ func (c *WorkSpaces) StartWorkspaces(input *StartWorkspacesInput) (*StartWorkspa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) StartWorkspacesWithContext(ctx aws.Context, input *StartWorkspacesInput, opts ...request.Option) (*StartWorkspacesOutput, error) {
+func (c *WorkSpaces) StartWorkspacesWithContext(ctx aws.Context, input *StartWorkspacesInput, opts ...aws.Option) (*StartWorkspacesOutput, error) {
 	req, out := c.StartWorkspacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1200,7 +1199,7 @@ func (c *WorkSpaces) StartWorkspacesWithContext(ctx aws.Context, input *StartWor
 
 const opStopWorkspaces = "StopWorkspaces"
 
-// StopWorkspacesRequest generates a "aws/request.Request" representing the
+// StopWorkspacesRequest generates a "aws.Request" representing the
 // client's request for the StopWorkspaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1224,8 +1223,8 @@ const opStopWorkspaces = "StopWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspaces
-func (c *WorkSpaces) StopWorkspacesRequest(input *StopWorkspacesInput) (req *request.Request, output *StopWorkspacesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) StopWorkspacesRequest(input *StopWorkspacesInput) (req *aws.Request, output *StopWorkspacesOutput) {
+	op := &aws.Operation{
 		Name:       opStopWorkspaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1266,7 +1265,7 @@ func (c *WorkSpaces) StopWorkspaces(input *StopWorkspacesInput) (*StopWorkspaces
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) StopWorkspacesWithContext(ctx aws.Context, input *StopWorkspacesInput, opts ...request.Option) (*StopWorkspacesOutput, error) {
+func (c *WorkSpaces) StopWorkspacesWithContext(ctx aws.Context, input *StopWorkspacesInput, opts ...aws.Option) (*StopWorkspacesOutput, error) {
 	req, out := c.StopWorkspacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1275,7 +1274,7 @@ func (c *WorkSpaces) StopWorkspacesWithContext(ctx aws.Context, input *StopWorks
 
 const opTerminateWorkspaces = "TerminateWorkspaces"
 
-// TerminateWorkspacesRequest generates a "aws/request.Request" representing the
+// TerminateWorkspacesRequest generates a "aws.Request" representing the
 // client's request for the TerminateWorkspaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1299,8 +1298,8 @@ const opTerminateWorkspaces = "TerminateWorkspaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspaces
-func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput) (req *request.Request, output *TerminateWorkspacesOutput) {
-	op := &request.Operation{
+func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput) (req *aws.Request, output *TerminateWorkspacesOutput) {
+	op := &aws.Operation{
 		Name:       opTerminateWorkspaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1349,7 +1348,7 @@ func (c *WorkSpaces) TerminateWorkspaces(input *TerminateWorkspacesInput) (*Term
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkSpaces) TerminateWorkspacesWithContext(ctx aws.Context, input *TerminateWorkspacesInput, opts ...request.Option) (*TerminateWorkspacesOutput, error) {
+func (c *WorkSpaces) TerminateWorkspacesWithContext(ctx aws.Context, input *TerminateWorkspacesInput, opts ...aws.Option) (*TerminateWorkspacesOutput, error) {
 	req, out := c.TerminateWorkspacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1409,15 +1408,15 @@ func (s CreateTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -1425,7 +1424,7 @@ func (s *CreateTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1487,12 +1486,12 @@ func (s CreateWorkspacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateWorkspacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateWorkspacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateWorkspacesInput"}
 	if s.Workspaces == nil {
-		invalidParams.Add(request.NewErrParamRequired("Workspaces"))
+		invalidParams.Add(aws.NewErrParamRequired("Workspaces"))
 	}
 	if s.Workspaces != nil && len(s.Workspaces) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Workspaces", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Workspaces", 1))
 	}
 	if s.Workspaces != nil {
 		for i, v := range s.Workspaces {
@@ -1500,7 +1499,7 @@ func (s *CreateWorkspacesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Workspaces", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Workspaces", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1647,15 +1646,15 @@ func (s DeleteTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1715,12 +1714,12 @@ func (s DescribeTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1796,12 +1795,12 @@ func (s DescribeWorkspaceBundlesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkspaceBundlesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkspaceBundlesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspaceBundlesInput"}
 	if s.BundleIds != nil && len(s.BundleIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BundleIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BundleIds", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1891,12 +1890,12 @@ func (s DescribeWorkspaceDirectoriesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkspaceDirectoriesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkspaceDirectoriesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspaceDirectoriesInput"}
 	if s.DirectoryIds != nil && len(s.DirectoryIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DirectoryIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DirectoryIds", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1977,12 +1976,12 @@ func (s DescribeWorkspacesConnectionStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkspacesConnectionStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkspacesConnectionStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspacesConnectionStatusInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.WorkspaceIds != nil && len(s.WorkspaceIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkspaceIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkspaceIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2084,18 +2083,18 @@ func (s DescribeWorkspacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkspacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkspacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkspacesInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
 	}
 	if s.WorkspaceIds != nil && len(s.WorkspaceIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkspaceIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkspaceIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2296,12 +2295,12 @@ func (s ModifyWorkspacePropertiesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyWorkspacePropertiesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyWorkspacePropertiesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyWorkspacePropertiesInput"}
 	if s.WorkspaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
 	}
 	if s.WorkspaceProperties == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkspaceProperties"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkspaceProperties"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2361,9 +2360,9 @@ func (s RebootRequest) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootRequest) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebootRequest"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebootRequest"}
 	if s.WorkspaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2401,12 +2400,12 @@ func (s RebootWorkspacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootWorkspacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebootWorkspacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebootWorkspacesInput"}
 	if s.RebootWorkspaceRequests == nil {
-		invalidParams.Add(request.NewErrParamRequired("RebootWorkspaceRequests"))
+		invalidParams.Add(aws.NewErrParamRequired("RebootWorkspaceRequests"))
 	}
 	if s.RebootWorkspaceRequests != nil && len(s.RebootWorkspaceRequests) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RebootWorkspaceRequests", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RebootWorkspaceRequests", 1))
 	}
 	if s.RebootWorkspaceRequests != nil {
 		for i, v := range s.RebootWorkspaceRequests {
@@ -2414,7 +2413,7 @@ func (s *RebootWorkspacesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RebootWorkspaceRequests", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RebootWorkspaceRequests", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2480,9 +2479,9 @@ func (s RebuildRequest) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebuildRequest) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebuildRequest"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebuildRequest"}
 	if s.WorkspaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2520,12 +2519,12 @@ func (s RebuildWorkspacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebuildWorkspacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebuildWorkspacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebuildWorkspacesInput"}
 	if s.RebuildWorkspaceRequests == nil {
-		invalidParams.Add(request.NewErrParamRequired("RebuildWorkspaceRequests"))
+		invalidParams.Add(aws.NewErrParamRequired("RebuildWorkspaceRequests"))
 	}
 	if s.RebuildWorkspaceRequests != nil && len(s.RebuildWorkspaceRequests) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RebuildWorkspaceRequests", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RebuildWorkspaceRequests", 1))
 	}
 	if s.RebuildWorkspaceRequests != nil {
 		for i, v := range s.RebuildWorkspaceRequests {
@@ -2533,7 +2532,7 @@ func (s *RebuildWorkspacesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RebuildWorkspaceRequests", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RebuildWorkspaceRequests", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2622,12 +2621,12 @@ func (s StartWorkspacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartWorkspacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartWorkspacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartWorkspacesInput"}
 	if s.StartWorkspaceRequests == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartWorkspaceRequests"))
+		invalidParams.Add(aws.NewErrParamRequired("StartWorkspaceRequests"))
 	}
 	if s.StartWorkspaceRequests != nil && len(s.StartWorkspaceRequests) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StartWorkspaceRequests", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StartWorkspaceRequests", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2713,12 +2712,12 @@ func (s StopWorkspacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopWorkspacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopWorkspacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopWorkspacesInput"}
 	if s.StopWorkspaceRequests == nil {
-		invalidParams.Add(request.NewErrParamRequired("StopWorkspaceRequests"))
+		invalidParams.Add(aws.NewErrParamRequired("StopWorkspaceRequests"))
 	}
 	if s.StopWorkspaceRequests != nil && len(s.StopWorkspaceRequests) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StopWorkspaceRequests", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StopWorkspaceRequests", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2783,12 +2782,12 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2833,9 +2832,9 @@ func (s TerminateRequest) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateRequest) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TerminateRequest"}
+	invalidParams := aws.ErrInvalidParams{Context: "TerminateRequest"}
 	if s.WorkspaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkspaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2873,12 +2872,12 @@ func (s TerminateWorkspacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateWorkspacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TerminateWorkspacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TerminateWorkspacesInput"}
 	if s.TerminateWorkspaceRequests == nil {
-		invalidParams.Add(request.NewErrParamRequired("TerminateWorkspaceRequests"))
+		invalidParams.Add(aws.NewErrParamRequired("TerminateWorkspaceRequests"))
 	}
 	if s.TerminateWorkspaceRequests != nil && len(s.TerminateWorkspaceRequests) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TerminateWorkspaceRequests", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TerminateWorkspaceRequests", 1))
 	}
 	if s.TerminateWorkspaceRequests != nil {
 		for i, v := range s.TerminateWorkspaceRequests {
@@ -2886,7 +2885,7 @@ func (s *TerminateWorkspacesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TerminateWorkspaceRequests", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TerminateWorkspaceRequests", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3442,18 +3441,18 @@ func (s WorkspaceRequest) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkspaceRequest) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "WorkspaceRequest"}
+	invalidParams := aws.ErrInvalidParams{Context: "WorkspaceRequest"}
 	if s.BundleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BundleId"))
+		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.UserName == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserName"))
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
 	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -3461,7 +3460,7 @@ func (s *WorkspaceRequest) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

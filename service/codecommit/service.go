@@ -4,9 +4,6 @@ package codecommit
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
@@ -18,14 +15,14 @@ import (
 // CodeCommit methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type CodeCommit struct {
-	*client.Client
+	*aws.Client
 }
 
 // Used for custom client initialization logic
-var initClient func(*client.Client)
+var initClient func(*aws.Client)
 
 // Used for custom request initialization logic
-var initRequest func(*request.Request)
+var initRequest func(*aws.Request)
 
 // Service information constants
 const (
@@ -33,36 +30,31 @@ const (
 	EndpointsID = ServiceName  // Service ID for Regions and Endpoints metadata.
 )
 
-// New creates a new instance of the CodeCommit client with a session.
+// New creates a new instance of the CodeCommit client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a CodeCommit client from just a session.
-//     svc := codecommit.New(mySession)
+//     // Create a CodeCommit client from just a config.
+//     svc := codecommit.New(myConfig)
 //
 //     // Create a CodeCommit client with additional configuration
-//     svc := codecommit.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func New(p client.ConfigProvider, cfgs ...*aws.Config) *CodeCommit {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := codecommit.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func New(config aws.Config) *CodeCommit {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *CodeCommit {
 	svc := &CodeCommit{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2015-04-13",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "CodeCommit_20150413",
 			},
-			handlers,
 		),
 	}
 
@@ -83,7 +75,7 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 
 // newRequest creates a new request for a CodeCommit operation and runs any
 // custom request initialization.
-func (c *CodeCommit) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *CodeCommit) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	// Run custom request initialization if present

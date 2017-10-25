@@ -6,12 +6,17 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
 func TestSSECustomerKeyOverHTTPError(t *testing.T) {
-	s := s3.New(unit.Session, &aws.Config{DisableSSL: aws.Bool(true)})
+	cfg := unit.Config()
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	s := s3.New(cfg)
 	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
 		Bucket:         aws.String("bucket"),
 		CopySource:     aws.String("bucket/source"),
@@ -32,7 +37,11 @@ func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 }
 
 func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
-	s := s3.New(unit.Session, &aws.Config{DisableSSL: aws.Bool(true)})
+	cfg := unit.Config()
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	s := s3.New(cfg)
 	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
 		Bucket:     aws.String("bucket"),
 		CopySource: aws.String("bucket/source"),
@@ -53,7 +62,7 @@ func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
 }
 
 func TestComputeSSEKeys(t *testing.T) {
-	s := s3.New(unit.Session)
+	s := s3.New(unit.Config())
 	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
 		Bucket:                   aws.String("bucket"),
 		CopySource:               aws.String("bucket/source"),
@@ -81,7 +90,7 @@ func TestComputeSSEKeys(t *testing.T) {
 }
 
 func TestComputeSSEKeysShortcircuit(t *testing.T) {
-	s := s3.New(unit.Session)
+	s := s3.New(unit.Config())
 	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
 		Bucket:                      aws.String("bucket"),
 		CopySource:                  aws.String("bucket/source"),

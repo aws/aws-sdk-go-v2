@@ -57,6 +57,7 @@ const (
 	CloudhsmServiceID                     = "cloudhsm"                     // Cloudhsm.
 	Cloudhsmv2ServiceID                   = "cloudhsmv2"                   // Cloudhsmv2.
 	CloudsearchServiceID                  = "cloudsearch"                  // Cloudsearch.
+	CloudsearchdomainServiceID            = "cloudsearchdomain"            // Cloudsearchdomain.
 	CloudtrailServiceID                   = "cloudtrail"                   // Cloudtrail.
 	CodebuildServiceID                    = "codebuild"                    // Codebuild.
 	CodecommitServiceID                   = "codecommit"                   // Codecommit.
@@ -68,6 +69,7 @@ const (
 	CognitoSyncServiceID                  = "cognito-sync"                 // CognitoSync.
 	ConfigServiceID                       = "config"                       // Config.
 	CurServiceID                          = "cur"                          // Cur.
+	DataIotServiceID                      = "data.iot"                     // DataIot.
 	DatapipelineServiceID                 = "datapipeline"                 // Datapipeline.
 	DevicefarmServiceID                   = "devicefarm"                   // Devicefarm.
 	DirectconnectServiceID                = "directconnect"                // Directconnect.
@@ -457,6 +459,11 @@ var awsPartition = partition{
 				"us-west-2":      endpoint{},
 			},
 		},
+		"cloudsearchdomain": service{
+			Defaults: endpoint{
+				Unresolveable: boxedTrue,
+			},
+		},
 		"cloudtrail": service{
 
 			Endpoints: endpoints{
@@ -634,6 +641,11 @@ var awsPartition = partition{
 
 			Endpoints: endpoints{
 				"us-east-1": endpoint{},
+			},
+		},
+		"data.iot": service{
+			Defaults: endpoint{
+				Unresolveable: boxedTrue,
 			},
 		},
 		"datapipeline": service{
@@ -1909,6 +1921,11 @@ var awscnPartition = partition{
 				"cn-north-1": endpoint{},
 			},
 		},
+		"cloudsearchdomain": service{
+			Defaults: endpoint{
+				Unresolveable: boxedTrue,
+			},
+		},
 		"cloudtrail": service{
 
 			Endpoints: endpoints{
@@ -1925,6 +1942,11 @@ var awscnPartition = partition{
 
 			Endpoints: endpoints{
 				"cn-north-1": endpoint{},
+			},
+		},
+		"data.iot": service{
+			Defaults: endpoint{
+				Unresolveable: boxedTrue,
 			},
 		},
 		"directconnect": service{
@@ -2203,6 +2225,11 @@ var awsusgovPartition = partition{
 				"us-gov-west-1": endpoint{},
 			},
 		},
+		"cloudsearchdomain": service{
+			Defaults: endpoint{
+				Unresolveable: boxedTrue,
+			},
+		},
 		"cloudtrail": service{
 
 			Endpoints: endpoints{
@@ -2219,6 +2246,11 @@ var awsusgovPartition = partition{
 
 			Endpoints: endpoints{
 				"us-gov-west-1": endpoint{},
+			},
+		},
+		"data.iot": service{
+			Defaults: endpoint{
+				Unresolveable: boxedTrue,
 			},
 		},
 		"directconnect": service{

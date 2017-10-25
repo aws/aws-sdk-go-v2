@@ -44,6 +44,7 @@ func (o *Operation) HasOutput() bool {
 	return o.OutputRef.ShapeName != ""
 }
 
+// GetSigner returns the signer to use for a request.
 func (o *Operation) GetSigner() string {
 	if o.AuthType == "v4-unsigned-body" {
 		o.API.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v4"] = true
@@ -53,7 +54,7 @@ func (o *Operation) GetSigner() string {
 
 	switch o.AuthType {
 	case "none":
-		buf.WriteString("req.Config.Credentials = credentials.AnonymousCredentials")
+		buf.WriteString("req.Config.CredentialsLoader = aws.AnonymousCredentials")
 	case "v4-unsigned-body":
 		buf.WriteString("req.Handlers.Sign.Remove(v4.SignRequestHandler)\n")
 		buf.WriteString("handler := v4.BuildNamedHandler(\"v4.CustomSignerHandler\", v4.WithUnsignedPayload)\n")
@@ -70,7 +71,7 @@ var tplOperation = template.Must(template.New("operation").Funcs(template.FuncMa
 }).Parse(`
 const op{{ .ExportedName }} = "{{ .Name }}"
 
-// {{ .ExportedName }}Request generates a "aws/request.Request" representing the
+// {{ .ExportedName }}Request generates a "aws.Request" representing the
 // client's request for the {{ .ExportedName }} operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -98,15 +99,15 @@ const op{{ .ExportedName }} = "{{ .Name }}"
 // Please also see {{ $crosslinkURL }}
 {{ end -}}
 func (c *{{ .API.StructName }}) {{ .ExportedName }}Request(` +
-	`input {{ .InputRef.GoType }}) (req *request.Request, output {{ .OutputRef.GoType }}) {
+	`input {{ .InputRef.GoType }}) (req *aws.Request, output {{ .OutputRef.GoType }}) {
 	{{ if (or .Deprecated (or .InputRef.Deprecated .OutputRef.Deprecated)) }}if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, {{ .ExportedName }}, has been deprecated")
 	}
-	op := &request.Operation{ {{ else }} op := &request.Operation{ {{ end }}	
+	op := &aws.Operation{ {{ else }} op := &aws.Operation{ {{ end }}	
 		Name:       op{{ .ExportedName }},
 		{{ if ne .HTTP.Method "" }}HTTPMethod: "{{ .HTTP.Method }}",
 		{{ end }}HTTPPath: {{ if ne .HTTP.RequestURI "" }}"{{ .HTTP.RequestURI }}"{{ else }}"/"{{ end }},
-		{{ if .Paginator }}Paginator: &request.Paginator{
+		{{ if .Paginator }}Paginator: &aws.Paginator{
 				InputTokens: {{ .Paginator.InputTokensString }},
 				OutputTokens: {{ .Paginator.OutputTokensString }},
 				LimitToken: "{{ .Paginator.LimitKey }}",
@@ -170,7 +171,7 @@ func (c *{{ .API.StructName }}) {{ .ExportedName }}(` +
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
 func (c *{{ .API.StructName }}) {{ .ExportedName }}WithContext(` +
-	`ctx aws.Context, input {{ .InputRef.GoType }}, opts ...request.Option) ` +
+	`ctx aws.Context, input {{ .InputRef.GoType }}, opts ...aws.Option) ` +
 	`({{ .OutputRef.GoType }}, error) {
 	req, out := c.{{ .ExportedName }}Request(input)
 	req.SetContext(ctx)
@@ -212,9 +213,9 @@ func (c *{{ .API.StructName }}) {{ .ExportedName }}PagesWithContext(` +
 	`ctx aws.Context, ` +
 	`input {{ .InputRef.GoType }}, ` +
 	`fn func({{ .OutputRef.GoType }}, bool) bool, ` +
-	`opts ...request.Option) error {
-	p := request.Pagination {
-		NewRequest: func() (*request.Request, error) {
+	`opts ...aws.Option) error {
+	p := aws.Pagination {
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy {{ .InputRef.GoType }}
 			if input != nil  {
 				tmp := *input
@@ -250,12 +251,12 @@ func (o *Operation) GoCode() string {
 // tplInfSig defines the template for rendering an Operation's signature within an Interface definition.
 var tplInfSig = template.Must(template.New("opsig").Parse(`
 {{ .ExportedName }}({{ .InputRef.GoTypeWithPkgName }}) ({{ .OutputRef.GoTypeWithPkgName }}, error)
-{{ .ExportedName }}WithContext(aws.Context, {{ .InputRef.GoTypeWithPkgName }}, ...request.Option) ({{ .OutputRef.GoTypeWithPkgName }}, error)
-{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) (*request.Request, {{ .OutputRef.GoTypeWithPkgName }})
+{{ .ExportedName }}WithContext(aws.Context, {{ .InputRef.GoTypeWithPkgName }}, ...aws.Option) ({{ .OutputRef.GoTypeWithPkgName }}, error)
+{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) (*aws.Request, {{ .OutputRef.GoTypeWithPkgName }})
 
 {{ if .Paginator -}}
 {{ .ExportedName }}Pages({{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool) error
-{{ .ExportedName }}PagesWithContext(aws.Context, {{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool, ...request.Option) error
+{{ .ExportedName }}PagesWithContext(aws.Context, {{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool, ...aws.Option) error
 {{- end }}
 `))
 
@@ -274,7 +275,10 @@ func (o *Operation) InterfaceSignature() string {
 // tplExample defines the template for rendering an Operation example
 var tplExample = template.Must(template.New("operationExample").Parse(`
 func Example{{ .API.StructName }}_{{ .ExportedName }}() {
-	sess := session.Must(session.NewSession())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
 
 	svc := {{ .API.PackageName }}.New(sess)
 

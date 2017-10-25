@@ -38,22 +38,22 @@ type ShapeValidation struct {
 var validationGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").Parse(`
 {{ define "requiredValue" -}}
     if s.{{ .Name }} == nil { 
-		invalidParams.Add(request.NewErrParamRequired("{{ .Name }}"))
+		invalidParams.Add(aws.NewErrParamRequired("{{ .Name }}"))
     }
 {{- end }}
 {{ define "minLen" -}}
 	if s.{{ .Name }} != nil && len(s.{{ .Name }}) < {{ .Ref.Shape.Min }} {
-		invalidParams.Add(request.NewErrParamMinLen("{{ .Name }}", {{ .Ref.Shape.Min }}))
+		invalidParams.Add(aws.NewErrParamMinLen("{{ .Name }}", {{ .Ref.Shape.Min }}))
 	}
 {{- end }}
 {{ define "minLenString" -}}
 	if s.{{ .Name }} != nil && len(*s.{{ .Name }}) < {{ .Ref.Shape.Min }} {
-		invalidParams.Add(request.NewErrParamMinLen("{{ .Name }}", {{ .Ref.Shape.Min }}))
+		invalidParams.Add(aws.NewErrParamMinLen("{{ .Name }}", {{ .Ref.Shape.Min }}))
 	}
 {{- end }}
 {{ define "minVal" -}}
 	if s.{{ .Name }} != nil && *s.{{ .Name }} < {{ .Ref.Shape.Min }} {
-		invalidParams.Add(request.NewErrParamMinValue("{{ .Name }}", {{ .Ref.Shape.Min }}))
+		invalidParams.Add(aws.NewErrParamMinValue("{{ .Name }}", {{ .Ref.Shape.Min }}))
 	}
 {{- end }}
 {{ define "nestedMapList" -}}
@@ -61,7 +61,7 @@ var validationGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").
 		for i, v := range s.{{ .Name }} {
 			if v == nil { continue }
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "{{ .Name }}", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "{{ .Name }}", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -69,7 +69,7 @@ var validationGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").
 {{ define "nestedStruct" -}}
     if s.{{ .Name }} != nil { 
 		if err := s.{{ .Name }}.Validate(); err != nil {
-			invalidParams.AddNested("{{ .Name }}", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("{{ .Name }}", err.(aws.ErrInvalidParams))
 		}
 	}
 {{- end }}
@@ -121,7 +121,7 @@ type ShapeValidations []ShapeValidation
 var validateShapeTmpl = template.Must(template.New("ValidateShape").Parse(`
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *{{ .Shape.ShapeName }}) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "{{ .Shape.ShapeName }}"}
+	invalidParams := aws.ErrInvalidParams{Context: "{{ .Shape.ShapeName }}"}
 	{{ range $_, $v := .Validations -}}
 		{{ $v.GoCode }}
 	{{ end }}

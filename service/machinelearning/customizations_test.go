@@ -7,13 +7,13 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
 )
 
 func TestPredictEndpoint(t *testing.T) {
-	ml := machinelearning.New(unit.Session)
+	ml := machinelearning.New(unit.Config())
 	ml.Handlers.Send.Clear()
 	ml.Handlers.Send.PushBack(func(r *request.Request) {
 		r.HTTPResponse = &http.Response{

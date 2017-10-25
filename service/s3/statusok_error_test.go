@@ -158,9 +158,11 @@ func newCopyTestSvc(errMsg string) *s3.S3 {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, errMsg, http.StatusOK)
 	}))
-	return s3.New(unit.Session, aws.NewConfig().
-		WithEndpoint(server.URL).
-		WithDisableSSL(true).
-		WithMaxRetries(0).
-		WithS3ForcePathStyle(true))
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+	cfg.S3ForcePathStyle = aws.Bool(true)
+
+	return s3.New(cfg)
 }

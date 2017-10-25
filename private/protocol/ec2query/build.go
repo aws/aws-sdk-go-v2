@@ -6,8 +6,8 @@ package ec2query
 import (
 	"net/url"
 
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query/queryutil"
 )
 
@@ -18,7 +18,7 @@ var BuildHandler = request.NamedHandler{Name: "awssdk.ec2query.Build", Fn: Build
 func Build(r *request.Request) {
 	body := url.Values{
 		"Action":  {r.Operation.Name},
-		"Version": {r.ClientInfo.APIVersion},
+		"Version": {r.Metadata.APIVersion},
 	}
 	if err := queryutil.Parse(body, r.Params, true); err != nil {
 		r.Error = awserr.New("SerializationError", "failed encoding EC2 Query request", err)

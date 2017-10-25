@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilStreamExists uses the Kinesis API operation
@@ -25,20 +24,20 @@ func (c *Kinesis) WaitUntilStreamExists(input *DescribeStreamInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) WaitUntilStreamExistsWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *Kinesis) WaitUntilStreamExistsWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilStreamExists",
 		MaxAttempts: 18,
-		Delay:       request.ConstantWaiterDelay(10 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(10 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "StreamDescription.StreamStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "StreamDescription.StreamStatus",
 				Expected: "ACTIVE",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeStreamInput
 			if input != nil {
 				tmp := *input
@@ -71,20 +70,20 @@ func (c *Kinesis) WaitUntilStreamNotExists(input *DescribeStreamInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) WaitUntilStreamNotExistsWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *Kinesis) WaitUntilStreamNotExistsWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilStreamNotExists",
 		MaxAttempts: 18,
-		Delay:       request.ConstantWaiterDelay(10 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(10 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ResourceNotFoundException",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeStreamInput
 			if input != nil {
 				tmp := *input

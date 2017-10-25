@@ -10,7 +10,6 @@ package cloudsearchiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := cloudsearch.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := cloudsearch.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,100 +64,100 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CloudSearchAPI interface {
 	BuildSuggesters(*cloudsearch.BuildSuggestersInput) (*cloudsearch.BuildSuggestersOutput, error)
-	BuildSuggestersWithContext(aws.Context, *cloudsearch.BuildSuggestersInput, ...request.Option) (*cloudsearch.BuildSuggestersOutput, error)
-	BuildSuggestersRequest(*cloudsearch.BuildSuggestersInput) (*request.Request, *cloudsearch.BuildSuggestersOutput)
+	BuildSuggestersWithContext(aws.Context, *cloudsearch.BuildSuggestersInput, ...aws.Option) (*cloudsearch.BuildSuggestersOutput, error)
+	BuildSuggestersRequest(*cloudsearch.BuildSuggestersInput) (*aws.Request, *cloudsearch.BuildSuggestersOutput)
 
 	CreateDomain(*cloudsearch.CreateDomainInput) (*cloudsearch.CreateDomainOutput, error)
-	CreateDomainWithContext(aws.Context, *cloudsearch.CreateDomainInput, ...request.Option) (*cloudsearch.CreateDomainOutput, error)
-	CreateDomainRequest(*cloudsearch.CreateDomainInput) (*request.Request, *cloudsearch.CreateDomainOutput)
+	CreateDomainWithContext(aws.Context, *cloudsearch.CreateDomainInput, ...aws.Option) (*cloudsearch.CreateDomainOutput, error)
+	CreateDomainRequest(*cloudsearch.CreateDomainInput) (*aws.Request, *cloudsearch.CreateDomainOutput)
 
 	DefineAnalysisScheme(*cloudsearch.DefineAnalysisSchemeInput) (*cloudsearch.DefineAnalysisSchemeOutput, error)
-	DefineAnalysisSchemeWithContext(aws.Context, *cloudsearch.DefineAnalysisSchemeInput, ...request.Option) (*cloudsearch.DefineAnalysisSchemeOutput, error)
-	DefineAnalysisSchemeRequest(*cloudsearch.DefineAnalysisSchemeInput) (*request.Request, *cloudsearch.DefineAnalysisSchemeOutput)
+	DefineAnalysisSchemeWithContext(aws.Context, *cloudsearch.DefineAnalysisSchemeInput, ...aws.Option) (*cloudsearch.DefineAnalysisSchemeOutput, error)
+	DefineAnalysisSchemeRequest(*cloudsearch.DefineAnalysisSchemeInput) (*aws.Request, *cloudsearch.DefineAnalysisSchemeOutput)
 
 	DefineExpression(*cloudsearch.DefineExpressionInput) (*cloudsearch.DefineExpressionOutput, error)
-	DefineExpressionWithContext(aws.Context, *cloudsearch.DefineExpressionInput, ...request.Option) (*cloudsearch.DefineExpressionOutput, error)
-	DefineExpressionRequest(*cloudsearch.DefineExpressionInput) (*request.Request, *cloudsearch.DefineExpressionOutput)
+	DefineExpressionWithContext(aws.Context, *cloudsearch.DefineExpressionInput, ...aws.Option) (*cloudsearch.DefineExpressionOutput, error)
+	DefineExpressionRequest(*cloudsearch.DefineExpressionInput) (*aws.Request, *cloudsearch.DefineExpressionOutput)
 
 	DefineIndexField(*cloudsearch.DefineIndexFieldInput) (*cloudsearch.DefineIndexFieldOutput, error)
-	DefineIndexFieldWithContext(aws.Context, *cloudsearch.DefineIndexFieldInput, ...request.Option) (*cloudsearch.DefineIndexFieldOutput, error)
-	DefineIndexFieldRequest(*cloudsearch.DefineIndexFieldInput) (*request.Request, *cloudsearch.DefineIndexFieldOutput)
+	DefineIndexFieldWithContext(aws.Context, *cloudsearch.DefineIndexFieldInput, ...aws.Option) (*cloudsearch.DefineIndexFieldOutput, error)
+	DefineIndexFieldRequest(*cloudsearch.DefineIndexFieldInput) (*aws.Request, *cloudsearch.DefineIndexFieldOutput)
 
 	DefineSuggester(*cloudsearch.DefineSuggesterInput) (*cloudsearch.DefineSuggesterOutput, error)
-	DefineSuggesterWithContext(aws.Context, *cloudsearch.DefineSuggesterInput, ...request.Option) (*cloudsearch.DefineSuggesterOutput, error)
-	DefineSuggesterRequest(*cloudsearch.DefineSuggesterInput) (*request.Request, *cloudsearch.DefineSuggesterOutput)
+	DefineSuggesterWithContext(aws.Context, *cloudsearch.DefineSuggesterInput, ...aws.Option) (*cloudsearch.DefineSuggesterOutput, error)
+	DefineSuggesterRequest(*cloudsearch.DefineSuggesterInput) (*aws.Request, *cloudsearch.DefineSuggesterOutput)
 
 	DeleteAnalysisScheme(*cloudsearch.DeleteAnalysisSchemeInput) (*cloudsearch.DeleteAnalysisSchemeOutput, error)
-	DeleteAnalysisSchemeWithContext(aws.Context, *cloudsearch.DeleteAnalysisSchemeInput, ...request.Option) (*cloudsearch.DeleteAnalysisSchemeOutput, error)
-	DeleteAnalysisSchemeRequest(*cloudsearch.DeleteAnalysisSchemeInput) (*request.Request, *cloudsearch.DeleteAnalysisSchemeOutput)
+	DeleteAnalysisSchemeWithContext(aws.Context, *cloudsearch.DeleteAnalysisSchemeInput, ...aws.Option) (*cloudsearch.DeleteAnalysisSchemeOutput, error)
+	DeleteAnalysisSchemeRequest(*cloudsearch.DeleteAnalysisSchemeInput) (*aws.Request, *cloudsearch.DeleteAnalysisSchemeOutput)
 
 	DeleteDomain(*cloudsearch.DeleteDomainInput) (*cloudsearch.DeleteDomainOutput, error)
-	DeleteDomainWithContext(aws.Context, *cloudsearch.DeleteDomainInput, ...request.Option) (*cloudsearch.DeleteDomainOutput, error)
-	DeleteDomainRequest(*cloudsearch.DeleteDomainInput) (*request.Request, *cloudsearch.DeleteDomainOutput)
+	DeleteDomainWithContext(aws.Context, *cloudsearch.DeleteDomainInput, ...aws.Option) (*cloudsearch.DeleteDomainOutput, error)
+	DeleteDomainRequest(*cloudsearch.DeleteDomainInput) (*aws.Request, *cloudsearch.DeleteDomainOutput)
 
 	DeleteExpression(*cloudsearch.DeleteExpressionInput) (*cloudsearch.DeleteExpressionOutput, error)
-	DeleteExpressionWithContext(aws.Context, *cloudsearch.DeleteExpressionInput, ...request.Option) (*cloudsearch.DeleteExpressionOutput, error)
-	DeleteExpressionRequest(*cloudsearch.DeleteExpressionInput) (*request.Request, *cloudsearch.DeleteExpressionOutput)
+	DeleteExpressionWithContext(aws.Context, *cloudsearch.DeleteExpressionInput, ...aws.Option) (*cloudsearch.DeleteExpressionOutput, error)
+	DeleteExpressionRequest(*cloudsearch.DeleteExpressionInput) (*aws.Request, *cloudsearch.DeleteExpressionOutput)
 
 	DeleteIndexField(*cloudsearch.DeleteIndexFieldInput) (*cloudsearch.DeleteIndexFieldOutput, error)
-	DeleteIndexFieldWithContext(aws.Context, *cloudsearch.DeleteIndexFieldInput, ...request.Option) (*cloudsearch.DeleteIndexFieldOutput, error)
-	DeleteIndexFieldRequest(*cloudsearch.DeleteIndexFieldInput) (*request.Request, *cloudsearch.DeleteIndexFieldOutput)
+	DeleteIndexFieldWithContext(aws.Context, *cloudsearch.DeleteIndexFieldInput, ...aws.Option) (*cloudsearch.DeleteIndexFieldOutput, error)
+	DeleteIndexFieldRequest(*cloudsearch.DeleteIndexFieldInput) (*aws.Request, *cloudsearch.DeleteIndexFieldOutput)
 
 	DeleteSuggester(*cloudsearch.DeleteSuggesterInput) (*cloudsearch.DeleteSuggesterOutput, error)
-	DeleteSuggesterWithContext(aws.Context, *cloudsearch.DeleteSuggesterInput, ...request.Option) (*cloudsearch.DeleteSuggesterOutput, error)
-	DeleteSuggesterRequest(*cloudsearch.DeleteSuggesterInput) (*request.Request, *cloudsearch.DeleteSuggesterOutput)
+	DeleteSuggesterWithContext(aws.Context, *cloudsearch.DeleteSuggesterInput, ...aws.Option) (*cloudsearch.DeleteSuggesterOutput, error)
+	DeleteSuggesterRequest(*cloudsearch.DeleteSuggesterInput) (*aws.Request, *cloudsearch.DeleteSuggesterOutput)
 
 	DescribeAnalysisSchemes(*cloudsearch.DescribeAnalysisSchemesInput) (*cloudsearch.DescribeAnalysisSchemesOutput, error)
-	DescribeAnalysisSchemesWithContext(aws.Context, *cloudsearch.DescribeAnalysisSchemesInput, ...request.Option) (*cloudsearch.DescribeAnalysisSchemesOutput, error)
-	DescribeAnalysisSchemesRequest(*cloudsearch.DescribeAnalysisSchemesInput) (*request.Request, *cloudsearch.DescribeAnalysisSchemesOutput)
+	DescribeAnalysisSchemesWithContext(aws.Context, *cloudsearch.DescribeAnalysisSchemesInput, ...aws.Option) (*cloudsearch.DescribeAnalysisSchemesOutput, error)
+	DescribeAnalysisSchemesRequest(*cloudsearch.DescribeAnalysisSchemesInput) (*aws.Request, *cloudsearch.DescribeAnalysisSchemesOutput)
 
 	DescribeAvailabilityOptions(*cloudsearch.DescribeAvailabilityOptionsInput) (*cloudsearch.DescribeAvailabilityOptionsOutput, error)
-	DescribeAvailabilityOptionsWithContext(aws.Context, *cloudsearch.DescribeAvailabilityOptionsInput, ...request.Option) (*cloudsearch.DescribeAvailabilityOptionsOutput, error)
-	DescribeAvailabilityOptionsRequest(*cloudsearch.DescribeAvailabilityOptionsInput) (*request.Request, *cloudsearch.DescribeAvailabilityOptionsOutput)
+	DescribeAvailabilityOptionsWithContext(aws.Context, *cloudsearch.DescribeAvailabilityOptionsInput, ...aws.Option) (*cloudsearch.DescribeAvailabilityOptionsOutput, error)
+	DescribeAvailabilityOptionsRequest(*cloudsearch.DescribeAvailabilityOptionsInput) (*aws.Request, *cloudsearch.DescribeAvailabilityOptionsOutput)
 
 	DescribeDomains(*cloudsearch.DescribeDomainsInput) (*cloudsearch.DescribeDomainsOutput, error)
-	DescribeDomainsWithContext(aws.Context, *cloudsearch.DescribeDomainsInput, ...request.Option) (*cloudsearch.DescribeDomainsOutput, error)
-	DescribeDomainsRequest(*cloudsearch.DescribeDomainsInput) (*request.Request, *cloudsearch.DescribeDomainsOutput)
+	DescribeDomainsWithContext(aws.Context, *cloudsearch.DescribeDomainsInput, ...aws.Option) (*cloudsearch.DescribeDomainsOutput, error)
+	DescribeDomainsRequest(*cloudsearch.DescribeDomainsInput) (*aws.Request, *cloudsearch.DescribeDomainsOutput)
 
 	DescribeExpressions(*cloudsearch.DescribeExpressionsInput) (*cloudsearch.DescribeExpressionsOutput, error)
-	DescribeExpressionsWithContext(aws.Context, *cloudsearch.DescribeExpressionsInput, ...request.Option) (*cloudsearch.DescribeExpressionsOutput, error)
-	DescribeExpressionsRequest(*cloudsearch.DescribeExpressionsInput) (*request.Request, *cloudsearch.DescribeExpressionsOutput)
+	DescribeExpressionsWithContext(aws.Context, *cloudsearch.DescribeExpressionsInput, ...aws.Option) (*cloudsearch.DescribeExpressionsOutput, error)
+	DescribeExpressionsRequest(*cloudsearch.DescribeExpressionsInput) (*aws.Request, *cloudsearch.DescribeExpressionsOutput)
 
 	DescribeIndexFields(*cloudsearch.DescribeIndexFieldsInput) (*cloudsearch.DescribeIndexFieldsOutput, error)
-	DescribeIndexFieldsWithContext(aws.Context, *cloudsearch.DescribeIndexFieldsInput, ...request.Option) (*cloudsearch.DescribeIndexFieldsOutput, error)
-	DescribeIndexFieldsRequest(*cloudsearch.DescribeIndexFieldsInput) (*request.Request, *cloudsearch.DescribeIndexFieldsOutput)
+	DescribeIndexFieldsWithContext(aws.Context, *cloudsearch.DescribeIndexFieldsInput, ...aws.Option) (*cloudsearch.DescribeIndexFieldsOutput, error)
+	DescribeIndexFieldsRequest(*cloudsearch.DescribeIndexFieldsInput) (*aws.Request, *cloudsearch.DescribeIndexFieldsOutput)
 
 	DescribeScalingParameters(*cloudsearch.DescribeScalingParametersInput) (*cloudsearch.DescribeScalingParametersOutput, error)
-	DescribeScalingParametersWithContext(aws.Context, *cloudsearch.DescribeScalingParametersInput, ...request.Option) (*cloudsearch.DescribeScalingParametersOutput, error)
-	DescribeScalingParametersRequest(*cloudsearch.DescribeScalingParametersInput) (*request.Request, *cloudsearch.DescribeScalingParametersOutput)
+	DescribeScalingParametersWithContext(aws.Context, *cloudsearch.DescribeScalingParametersInput, ...aws.Option) (*cloudsearch.DescribeScalingParametersOutput, error)
+	DescribeScalingParametersRequest(*cloudsearch.DescribeScalingParametersInput) (*aws.Request, *cloudsearch.DescribeScalingParametersOutput)
 
 	DescribeServiceAccessPolicies(*cloudsearch.DescribeServiceAccessPoliciesInput) (*cloudsearch.DescribeServiceAccessPoliciesOutput, error)
-	DescribeServiceAccessPoliciesWithContext(aws.Context, *cloudsearch.DescribeServiceAccessPoliciesInput, ...request.Option) (*cloudsearch.DescribeServiceAccessPoliciesOutput, error)
-	DescribeServiceAccessPoliciesRequest(*cloudsearch.DescribeServiceAccessPoliciesInput) (*request.Request, *cloudsearch.DescribeServiceAccessPoliciesOutput)
+	DescribeServiceAccessPoliciesWithContext(aws.Context, *cloudsearch.DescribeServiceAccessPoliciesInput, ...aws.Option) (*cloudsearch.DescribeServiceAccessPoliciesOutput, error)
+	DescribeServiceAccessPoliciesRequest(*cloudsearch.DescribeServiceAccessPoliciesInput) (*aws.Request, *cloudsearch.DescribeServiceAccessPoliciesOutput)
 
 	DescribeSuggesters(*cloudsearch.DescribeSuggestersInput) (*cloudsearch.DescribeSuggestersOutput, error)
-	DescribeSuggestersWithContext(aws.Context, *cloudsearch.DescribeSuggestersInput, ...request.Option) (*cloudsearch.DescribeSuggestersOutput, error)
-	DescribeSuggestersRequest(*cloudsearch.DescribeSuggestersInput) (*request.Request, *cloudsearch.DescribeSuggestersOutput)
+	DescribeSuggestersWithContext(aws.Context, *cloudsearch.DescribeSuggestersInput, ...aws.Option) (*cloudsearch.DescribeSuggestersOutput, error)
+	DescribeSuggestersRequest(*cloudsearch.DescribeSuggestersInput) (*aws.Request, *cloudsearch.DescribeSuggestersOutput)
 
 	IndexDocuments(*cloudsearch.IndexDocumentsInput) (*cloudsearch.IndexDocumentsOutput, error)
-	IndexDocumentsWithContext(aws.Context, *cloudsearch.IndexDocumentsInput, ...request.Option) (*cloudsearch.IndexDocumentsOutput, error)
-	IndexDocumentsRequest(*cloudsearch.IndexDocumentsInput) (*request.Request, *cloudsearch.IndexDocumentsOutput)
+	IndexDocumentsWithContext(aws.Context, *cloudsearch.IndexDocumentsInput, ...aws.Option) (*cloudsearch.IndexDocumentsOutput, error)
+	IndexDocumentsRequest(*cloudsearch.IndexDocumentsInput) (*aws.Request, *cloudsearch.IndexDocumentsOutput)
 
 	ListDomainNames(*cloudsearch.ListDomainNamesInput) (*cloudsearch.ListDomainNamesOutput, error)
-	ListDomainNamesWithContext(aws.Context, *cloudsearch.ListDomainNamesInput, ...request.Option) (*cloudsearch.ListDomainNamesOutput, error)
-	ListDomainNamesRequest(*cloudsearch.ListDomainNamesInput) (*request.Request, *cloudsearch.ListDomainNamesOutput)
+	ListDomainNamesWithContext(aws.Context, *cloudsearch.ListDomainNamesInput, ...aws.Option) (*cloudsearch.ListDomainNamesOutput, error)
+	ListDomainNamesRequest(*cloudsearch.ListDomainNamesInput) (*aws.Request, *cloudsearch.ListDomainNamesOutput)
 
 	UpdateAvailabilityOptions(*cloudsearch.UpdateAvailabilityOptionsInput) (*cloudsearch.UpdateAvailabilityOptionsOutput, error)
-	UpdateAvailabilityOptionsWithContext(aws.Context, *cloudsearch.UpdateAvailabilityOptionsInput, ...request.Option) (*cloudsearch.UpdateAvailabilityOptionsOutput, error)
-	UpdateAvailabilityOptionsRequest(*cloudsearch.UpdateAvailabilityOptionsInput) (*request.Request, *cloudsearch.UpdateAvailabilityOptionsOutput)
+	UpdateAvailabilityOptionsWithContext(aws.Context, *cloudsearch.UpdateAvailabilityOptionsInput, ...aws.Option) (*cloudsearch.UpdateAvailabilityOptionsOutput, error)
+	UpdateAvailabilityOptionsRequest(*cloudsearch.UpdateAvailabilityOptionsInput) (*aws.Request, *cloudsearch.UpdateAvailabilityOptionsOutput)
 
 	UpdateScalingParameters(*cloudsearch.UpdateScalingParametersInput) (*cloudsearch.UpdateScalingParametersOutput, error)
-	UpdateScalingParametersWithContext(aws.Context, *cloudsearch.UpdateScalingParametersInput, ...request.Option) (*cloudsearch.UpdateScalingParametersOutput, error)
-	UpdateScalingParametersRequest(*cloudsearch.UpdateScalingParametersInput) (*request.Request, *cloudsearch.UpdateScalingParametersOutput)
+	UpdateScalingParametersWithContext(aws.Context, *cloudsearch.UpdateScalingParametersInput, ...aws.Option) (*cloudsearch.UpdateScalingParametersOutput, error)
+	UpdateScalingParametersRequest(*cloudsearch.UpdateScalingParametersInput) (*aws.Request, *cloudsearch.UpdateScalingParametersOutput)
 
 	UpdateServiceAccessPolicies(*cloudsearch.UpdateServiceAccessPoliciesInput) (*cloudsearch.UpdateServiceAccessPoliciesOutput, error)
-	UpdateServiceAccessPoliciesWithContext(aws.Context, *cloudsearch.UpdateServiceAccessPoliciesInput, ...request.Option) (*cloudsearch.UpdateServiceAccessPoliciesOutput, error)
-	UpdateServiceAccessPoliciesRequest(*cloudsearch.UpdateServiceAccessPoliciesInput) (*request.Request, *cloudsearch.UpdateServiceAccessPoliciesOutput)
+	UpdateServiceAccessPoliciesWithContext(aws.Context, *cloudsearch.UpdateServiceAccessPoliciesInput, ...aws.Option) (*cloudsearch.UpdateServiceAccessPoliciesOutput, error)
+	UpdateServiceAccessPoliciesRequest(*cloudsearch.UpdateServiceAccessPoliciesInput) (*aws.Request, *cloudsearch.UpdateServiceAccessPoliciesOutput)
 }
 
 var _ CloudSearchAPI = (*cloudsearch.CloudSearch)(nil)

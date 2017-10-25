@@ -69,12 +69,11 @@ type Metadata struct {
 	Protocol            string
 	UID                 string
 	EndpointsID         string
-
-	NoResolveEndpoint bool
 }
 
 var serviceAliases map[string]string
 
+// Bootstrap intiializes the codegen setup needed before API models are read.
 func Bootstrap() error {
 	b, err := ioutil.ReadFile(filepath.Join("..", "models", "customizations", "service-aliases.json"))
 	if err != nil {
@@ -266,18 +265,10 @@ var tplAPI = template.Must(template.New("api").Parse(`
 // APIGoCode renders the API in Go code. Returning it as a string
 func (a *API) APIGoCode() string {
 	a.resetImports()
-	a.imports["github.com/aws/aws-sdk-go-v2/aws/awsutil"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/aws/request"] = true
+	a.imports["github.com/aws/aws-sdk-go-v2/internal/awsutil"] = true
 	if a.OperationHasOutputPlaceholder() {
 		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol/"+a.ProtocolPackage()] = true
 		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol"] = true
-	}
-
-	for _, op := range a.Operations {
-		if op.AuthType == "none" {
-			a.imports["github.com/aws/aws-sdk-go-v2/aws/credentials"] = true
-			break
-		}
 	}
 
 	var buf bytes.Buffer
@@ -410,14 +401,14 @@ var tplService = template.Must(template.New("service").Funcs(template.FuncMap{
 // {{ .StructName }} methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type {{ .StructName }} struct {
-	*client.Client
+	*aws.Client
 }
 
 {{ if .UseInitMethods }}// Used for custom client initialization logic
-var initClient func(*client.Client)
+var initClient func(*aws.Client)
 
 // Used for custom request initialization logic
-var initRequest func(*request.Request)
+var initRequest func(*aws.Request)
 {{ end }}
 
 
@@ -429,54 +420,38 @@ const (
 )
 {{- end }}
 
-// New creates a new instance of the {{ .StructName }} client with a session.
+// New creates a new instance of the {{ .StructName }} client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a {{ .StructName }} client from just a session.
-//     svc := {{ .PackageName }}.New(mySession)
+//     // Create a {{ .StructName }} client from just a config.
+//     svc := {{ .PackageName }}.New(myConfig)
 //
 //     // Create a {{ .StructName }} client with additional configuration
-//     svc := {{ .PackageName }}.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func New(p client.ConfigProvider, cfgs ...*aws.Config) *{{ .StructName }} {
-	{{ if .Metadata.NoResolveEndpoint -}}
-		var c client.Config
-		if v, ok := p.(client.ConfigNoResolveEndpointProvider); ok {
-			c = v.ClientConfigNoResolveEndpoint(cfgs...)
-		} else {
-			c = p.ClientConfig({{ EndpointsIDValue . }}, cfgs...)
-		}
-	{{- else -}}
-		c := p.ClientConfig({{ EndpointsIDValue . }}, cfgs...)
-	{{- end }}
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
-
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *{{ .StructName }} {
+//     svc := {{ .PackageName }}.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func New(config aws.Config) *{{ .StructName }} {
+	var signingName string
 	{{- if .Metadata.SigningName }}
-		if len(signingName) == 0 {
-			signingName = "{{ .Metadata.SigningName }}"
-		}
+		signingName = "{{ .Metadata.SigningName }}"
 	{{- end }}
+	signingRegion := aws.StringValue(config.Region)
+
     svc := &{{ .StructName }}{
-    	Client: client.New(
-    		cfg,
-    		metadata.ClientInfo{
-			ServiceName: {{ ServiceNameValue . }},
-			SigningName: signingName,
-			SigningRegion: signingRegion,
-			Endpoint:     endpoint,
-			APIVersion:   "{{ .Metadata.APIVersion }}",
-			{{ if .Metadata.JSONVersion -}}
-				JSONVersion:  "{{ .Metadata.JSONVersion }}",
-			{{- end }}
-			{{ if .Metadata.TargetPrefix -}}
-				TargetPrefix: "{{ .Metadata.TargetPrefix }}",
-			{{- end }}
+    	Client: aws.NewClient(
+    		config,
+    		aws.Metadata{
+				ServiceName: {{ ServiceNameValue . }},
+				SigningName: signingName,
+				SigningRegion: signingRegion,
+				APIVersion:   "{{ .Metadata.APIVersion }}",
+				{{ if .Metadata.JSONVersion -}}
+					JSONVersion:  "{{ .Metadata.JSONVersion }}",
+				{{- end }}
+				{{ if .Metadata.TargetPrefix -}}
+					TargetPrefix: "{{ .Metadata.TargetPrefix }}",
+				{{- end }}
     		},
-    		handlers,
     	),
     }
 
@@ -501,7 +476,7 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 
 // newRequest creates a new request for a {{ .StructName }} operation and runs any
 // custom request initialization.
-func (c *{{ .StructName }}) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *{{ .StructName }}) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	{{ if .UseInitMethods }}// Run custom request initialization if present
@@ -531,11 +506,11 @@ func (a *API) ServicePackageDoc() string {
 // ServiceGoCode renders service go code. Returning it as a string.
 func (a *API) ServiceGoCode() string {
 	a.resetImports()
-	a.imports["github.com/aws/aws-sdk-go-v2/aws/client"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/aws/client/metadata"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/aws/request"] = true
+	a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
+	a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
+	a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
 	if a.Metadata.SignatureVersion == "v2" {
-		a.imports["github.com/aws/aws-sdk-go-v2/private/signer/v2"] = true
+		a.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v2"] = true
 		a.imports["github.com/aws/aws-sdk-go-v2/aws/corehandlers"] = true
 	} else {
 		a.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v4"] = true
@@ -564,12 +539,11 @@ func (a *API) ExampleGoCode() string {
 		}
 	}
 
-	code := fmt.Sprintf("import (\n%q\n%q\n%q\n\n%q\n%q\n%q\n",
+	code := fmt.Sprintf("import (\n%q\n%q\n%q\n\n%q\n%q\n",
 		"bytes",
 		"fmt",
 		"time",
 		"github.com/aws/aws-sdk-go-v2/aws",
-		"github.com/aws/aws-sdk-go-v2/aws/session",
 		path.Join(a.SvcClientImportPath, a.PackageName()),
 	)
 	for k := range imports {
@@ -599,8 +573,12 @@ var tplInterface = template.Must(template.New("interface").Parse(`
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := {{ .PackageName }}.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := {{ .PackageName }}.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -646,8 +624,7 @@ var _ {{ .StructName }}API = (*{{ .PackageName }}.{{ .StructName }})(nil)
 func (a *API) InterfaceGoCode() string {
 	a.resetImports()
 	a.imports = map[string]bool{
-		"github.com/aws/aws-sdk-go-v2/aws":                   true,
-		"github.com/aws/aws-sdk-go-v2/aws/request":           true,
+		"github.com/aws/aws-sdk-go-v2/aws":                true,
 		path.Join(a.SvcClientImportPath, a.PackageName()): true,
 	}
 

@@ -10,8 +10,8 @@ import (
 	"io/ioutil"
 	"strings"
 
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/json/jsonutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
 )
@@ -44,16 +44,16 @@ func Build(req *request.Request) {
 		buf = emptyJSON
 	}
 
-	if req.ClientInfo.TargetPrefix != "" || string(buf) != "{}" {
+	if req.Metadata.TargetPrefix != "" || string(buf) != "{}" {
 		req.SetBufferBody(buf)
 	}
 
-	if req.ClientInfo.TargetPrefix != "" {
-		target := req.ClientInfo.TargetPrefix + "." + req.Operation.Name
+	if req.Metadata.TargetPrefix != "" {
+		target := req.Metadata.TargetPrefix + "." + req.Operation.Name
 		req.HTTPRequest.Header.Add("X-Amz-Target", target)
 	}
-	if req.ClientInfo.JSONVersion != "" {
-		jsonVersion := req.ClientInfo.JSONVersion
+	if req.Metadata.JSONVersion != "" {
+		jsonVersion := req.Metadata.JSONVersion
 		req.HTTPRequest.Header.Add("Content-Type", "application/x-amz-json-"+jsonVersion)
 	}
 }

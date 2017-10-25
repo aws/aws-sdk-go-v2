@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAssociateVPCWithHostedZone = "AssociateVPCWithHostedZone"
 
-// AssociateVPCWithHostedZoneRequest generates a "aws/request.Request" representing the
+// AssociateVPCWithHostedZoneRequest generates a "aws.Request" representing the
 // client's request for the AssociateVPCWithHostedZone operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAssociateVPCWithHostedZone = "AssociateVPCWithHostedZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZone
-func (c *Route53) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHostedZoneInput) (req *request.Request, output *AssociateVPCWithHostedZoneOutput) {
-	op := &request.Operation{
+func (c *Route53) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHostedZoneInput) (req *aws.Request, output *AssociateVPCWithHostedZoneOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateVPCWithHostedZone,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}/associatevpc",
@@ -127,7 +126,7 @@ func (c *Route53) AssociateVPCWithHostedZone(input *AssociateVPCWithHostedZoneIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) AssociateVPCWithHostedZoneWithContext(ctx aws.Context, input *AssociateVPCWithHostedZoneInput, opts ...request.Option) (*AssociateVPCWithHostedZoneOutput, error) {
+func (c *Route53) AssociateVPCWithHostedZoneWithContext(ctx aws.Context, input *AssociateVPCWithHostedZoneInput, opts ...aws.Option) (*AssociateVPCWithHostedZoneOutput, error) {
 	req, out := c.AssociateVPCWithHostedZoneRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -136,7 +135,7 @@ func (c *Route53) AssociateVPCWithHostedZoneWithContext(ctx aws.Context, input *
 
 const opChangeResourceRecordSets = "ChangeResourceRecordSets"
 
-// ChangeResourceRecordSetsRequest generates a "aws/request.Request" representing the
+// ChangeResourceRecordSetsRequest generates a "aws.Request" representing the
 // client's request for the ChangeResourceRecordSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -160,8 +159,8 @@ const opChangeResourceRecordSets = "ChangeResourceRecordSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSets
-func (c *Route53) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSetsInput) (req *request.Request, output *ChangeResourceRecordSetsOutput) {
-	op := &request.Operation{
+func (c *Route53) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSetsInput) (req *aws.Request, output *ChangeResourceRecordSetsOutput) {
+	op := &aws.Operation{
 		Name:       opChangeResourceRecordSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}/rrset/",
@@ -302,7 +301,7 @@ func (c *Route53) ChangeResourceRecordSets(input *ChangeResourceRecordSetsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ChangeResourceRecordSetsWithContext(ctx aws.Context, input *ChangeResourceRecordSetsInput, opts ...request.Option) (*ChangeResourceRecordSetsOutput, error) {
+func (c *Route53) ChangeResourceRecordSetsWithContext(ctx aws.Context, input *ChangeResourceRecordSetsInput, opts ...aws.Option) (*ChangeResourceRecordSetsOutput, error) {
 	req, out := c.ChangeResourceRecordSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -311,7 +310,7 @@ func (c *Route53) ChangeResourceRecordSetsWithContext(ctx aws.Context, input *Ch
 
 const opChangeTagsForResource = "ChangeTagsForResource"
 
-// ChangeTagsForResourceRequest generates a "aws/request.Request" representing the
+// ChangeTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ChangeTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -335,8 +334,8 @@ const opChangeTagsForResource = "ChangeTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeTagsForResource
-func (c *Route53) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput) (req *request.Request, output *ChangeTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *Route53) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput) (req *aws.Request, output *ChangeTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opChangeTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/tags/{ResourceType}/{ResourceId}",
@@ -402,7 +401,7 @@ func (c *Route53) ChangeTagsForResource(input *ChangeTagsForResourceInput) (*Cha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ChangeTagsForResourceWithContext(ctx aws.Context, input *ChangeTagsForResourceInput, opts ...request.Option) (*ChangeTagsForResourceOutput, error) {
+func (c *Route53) ChangeTagsForResourceWithContext(ctx aws.Context, input *ChangeTagsForResourceInput, opts ...aws.Option) (*ChangeTagsForResourceOutput, error) {
 	req, out := c.ChangeTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -411,7 +410,7 @@ func (c *Route53) ChangeTagsForResourceWithContext(ctx aws.Context, input *Chang
 
 const opCreateHealthCheck = "CreateHealthCheck"
 
-// CreateHealthCheckRequest generates a "aws/request.Request" representing the
+// CreateHealthCheckRequest generates a "aws.Request" representing the
 // client's request for the CreateHealthCheck operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -435,8 +434,8 @@ const opCreateHealthCheck = "CreateHealthCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheck
-func (c *Route53) CreateHealthCheckRequest(input *CreateHealthCheckInput) (req *request.Request, output *CreateHealthCheckOutput) {
-	op := &request.Operation{
+func (c *Route53) CreateHealthCheckRequest(input *CreateHealthCheckInput) (req *aws.Request, output *CreateHealthCheckOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHealthCheck,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/healthcheck",
@@ -528,7 +527,7 @@ func (c *Route53) CreateHealthCheck(input *CreateHealthCheckInput) (*CreateHealt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) CreateHealthCheckWithContext(ctx aws.Context, input *CreateHealthCheckInput, opts ...request.Option) (*CreateHealthCheckOutput, error) {
+func (c *Route53) CreateHealthCheckWithContext(ctx aws.Context, input *CreateHealthCheckInput, opts ...aws.Option) (*CreateHealthCheckOutput, error) {
 	req, out := c.CreateHealthCheckRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -537,7 +536,7 @@ func (c *Route53) CreateHealthCheckWithContext(ctx aws.Context, input *CreateHea
 
 const opCreateHostedZone = "CreateHostedZone"
 
-// CreateHostedZoneRequest generates a "aws/request.Request" representing the
+// CreateHostedZoneRequest generates a "aws.Request" representing the
 // client's request for the CreateHostedZone operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -561,8 +560,8 @@ const opCreateHostedZone = "CreateHostedZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZone
-func (c *Route53) CreateHostedZoneRequest(input *CreateHostedZoneInput) (req *request.Request, output *CreateHostedZoneOutput) {
-	op := &request.Operation{
+func (c *Route53) CreateHostedZoneRequest(input *CreateHostedZoneInput) (req *aws.Request, output *CreateHostedZoneOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHostedZone,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/hostedzone",
@@ -688,7 +687,7 @@ func (c *Route53) CreateHostedZone(input *CreateHostedZoneInput) (*CreateHostedZ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) CreateHostedZoneWithContext(ctx aws.Context, input *CreateHostedZoneInput, opts ...request.Option) (*CreateHostedZoneOutput, error) {
+func (c *Route53) CreateHostedZoneWithContext(ctx aws.Context, input *CreateHostedZoneInput, opts ...aws.Option) (*CreateHostedZoneOutput, error) {
 	req, out := c.CreateHostedZoneRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -697,7 +696,7 @@ func (c *Route53) CreateHostedZoneWithContext(ctx aws.Context, input *CreateHost
 
 const opCreateQueryLoggingConfig = "CreateQueryLoggingConfig"
 
-// CreateQueryLoggingConfigRequest generates a "aws/request.Request" representing the
+// CreateQueryLoggingConfigRequest generates a "aws.Request" representing the
 // client's request for the CreateQueryLoggingConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -721,8 +720,8 @@ const opCreateQueryLoggingConfig = "CreateQueryLoggingConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfig
-func (c *Route53) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfigInput) (req *request.Request, output *CreateQueryLoggingConfigOutput) {
-	op := &request.Operation{
+func (c *Route53) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfigInput) (req *aws.Request, output *CreateQueryLoggingConfigOutput) {
+	op := &aws.Operation{
 		Name:       opCreateQueryLoggingConfig,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/queryloggingconfig",
@@ -889,7 +888,7 @@ func (c *Route53) CreateQueryLoggingConfig(input *CreateQueryLoggingConfigInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) CreateQueryLoggingConfigWithContext(ctx aws.Context, input *CreateQueryLoggingConfigInput, opts ...request.Option) (*CreateQueryLoggingConfigOutput, error) {
+func (c *Route53) CreateQueryLoggingConfigWithContext(ctx aws.Context, input *CreateQueryLoggingConfigInput, opts ...aws.Option) (*CreateQueryLoggingConfigOutput, error) {
 	req, out := c.CreateQueryLoggingConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -898,7 +897,7 @@ func (c *Route53) CreateQueryLoggingConfigWithContext(ctx aws.Context, input *Cr
 
 const opCreateReusableDelegationSet = "CreateReusableDelegationSet"
 
-// CreateReusableDelegationSetRequest generates a "aws/request.Request" representing the
+// CreateReusableDelegationSetRequest generates a "aws.Request" representing the
 // client's request for the CreateReusableDelegationSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -922,8 +921,8 @@ const opCreateReusableDelegationSet = "CreateReusableDelegationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateReusableDelegationSet
-func (c *Route53) CreateReusableDelegationSetRequest(input *CreateReusableDelegationSetInput) (req *request.Request, output *CreateReusableDelegationSetOutput) {
-	op := &request.Operation{
+func (c *Route53) CreateReusableDelegationSetRequest(input *CreateReusableDelegationSetInput) (req *aws.Request, output *CreateReusableDelegationSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateReusableDelegationSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/delegationset",
@@ -998,7 +997,7 @@ func (c *Route53) CreateReusableDelegationSet(input *CreateReusableDelegationSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) CreateReusableDelegationSetWithContext(ctx aws.Context, input *CreateReusableDelegationSetInput, opts ...request.Option) (*CreateReusableDelegationSetOutput, error) {
+func (c *Route53) CreateReusableDelegationSetWithContext(ctx aws.Context, input *CreateReusableDelegationSetInput, opts ...aws.Option) (*CreateReusableDelegationSetOutput, error) {
 	req, out := c.CreateReusableDelegationSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1007,7 +1006,7 @@ func (c *Route53) CreateReusableDelegationSetWithContext(ctx aws.Context, input 
 
 const opCreateTrafficPolicy = "CreateTrafficPolicy"
 
-// CreateTrafficPolicyRequest generates a "aws/request.Request" representing the
+// CreateTrafficPolicyRequest generates a "aws.Request" representing the
 // client's request for the CreateTrafficPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1031,8 +1030,8 @@ const opCreateTrafficPolicy = "CreateTrafficPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicy
-func (c *Route53) CreateTrafficPolicyRequest(input *CreateTrafficPolicyInput) (req *request.Request, output *CreateTrafficPolicyOutput) {
-	op := &request.Operation{
+func (c *Route53) CreateTrafficPolicyRequest(input *CreateTrafficPolicyInput) (req *aws.Request, output *CreateTrafficPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTrafficPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/trafficpolicy",
@@ -1091,7 +1090,7 @@ func (c *Route53) CreateTrafficPolicy(input *CreateTrafficPolicyInput) (*CreateT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) CreateTrafficPolicyWithContext(ctx aws.Context, input *CreateTrafficPolicyInput, opts ...request.Option) (*CreateTrafficPolicyOutput, error) {
+func (c *Route53) CreateTrafficPolicyWithContext(ctx aws.Context, input *CreateTrafficPolicyInput, opts ...aws.Option) (*CreateTrafficPolicyOutput, error) {
 	req, out := c.CreateTrafficPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1100,7 +1099,7 @@ func (c *Route53) CreateTrafficPolicyWithContext(ctx aws.Context, input *CreateT
 
 const opCreateTrafficPolicyInstance = "CreateTrafficPolicyInstance"
 
-// CreateTrafficPolicyInstanceRequest generates a "aws/request.Request" representing the
+// CreateTrafficPolicyInstanceRequest generates a "aws.Request" representing the
 // client's request for the CreateTrafficPolicyInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1124,8 +1123,8 @@ const opCreateTrafficPolicyInstance = "CreateTrafficPolicyInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstance
-func (c *Route53) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyInstanceInput) (req *request.Request, output *CreateTrafficPolicyInstanceOutput) {
-	op := &request.Operation{
+func (c *Route53) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyInstanceInput) (req *aws.Request, output *CreateTrafficPolicyInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTrafficPolicyInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/trafficpolicyinstance",
@@ -1189,7 +1188,7 @@ func (c *Route53) CreateTrafficPolicyInstance(input *CreateTrafficPolicyInstance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) CreateTrafficPolicyInstanceWithContext(ctx aws.Context, input *CreateTrafficPolicyInstanceInput, opts ...request.Option) (*CreateTrafficPolicyInstanceOutput, error) {
+func (c *Route53) CreateTrafficPolicyInstanceWithContext(ctx aws.Context, input *CreateTrafficPolicyInstanceInput, opts ...aws.Option) (*CreateTrafficPolicyInstanceOutput, error) {
 	req, out := c.CreateTrafficPolicyInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1198,7 +1197,7 @@ func (c *Route53) CreateTrafficPolicyInstanceWithContext(ctx aws.Context, input 
 
 const opCreateTrafficPolicyVersion = "CreateTrafficPolicyVersion"
 
-// CreateTrafficPolicyVersionRequest generates a "aws/request.Request" representing the
+// CreateTrafficPolicyVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateTrafficPolicyVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1222,8 +1221,8 @@ const opCreateTrafficPolicyVersion = "CreateTrafficPolicyVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyVersion
-func (c *Route53) CreateTrafficPolicyVersionRequest(input *CreateTrafficPolicyVersionInput) (req *request.Request, output *CreateTrafficPolicyVersionOutput) {
-	op := &request.Operation{
+func (c *Route53) CreateTrafficPolicyVersionRequest(input *CreateTrafficPolicyVersionInput) (req *aws.Request, output *CreateTrafficPolicyVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTrafficPolicyVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/trafficpolicy/{Id}",
@@ -1286,7 +1285,7 @@ func (c *Route53) CreateTrafficPolicyVersion(input *CreateTrafficPolicyVersionIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) CreateTrafficPolicyVersionWithContext(ctx aws.Context, input *CreateTrafficPolicyVersionInput, opts ...request.Option) (*CreateTrafficPolicyVersionOutput, error) {
+func (c *Route53) CreateTrafficPolicyVersionWithContext(ctx aws.Context, input *CreateTrafficPolicyVersionInput, opts ...aws.Option) (*CreateTrafficPolicyVersionOutput, error) {
 	req, out := c.CreateTrafficPolicyVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1295,7 +1294,7 @@ func (c *Route53) CreateTrafficPolicyVersionWithContext(ctx aws.Context, input *
 
 const opCreateVPCAssociationAuthorization = "CreateVPCAssociationAuthorization"
 
-// CreateVPCAssociationAuthorizationRequest generates a "aws/request.Request" representing the
+// CreateVPCAssociationAuthorizationRequest generates a "aws.Request" representing the
 // client's request for the CreateVPCAssociationAuthorization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1319,8 +1318,8 @@ const opCreateVPCAssociationAuthorization = "CreateVPCAssociationAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorization
-func (c *Route53) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssociationAuthorizationInput) (req *request.Request, output *CreateVPCAssociationAuthorizationOutput) {
-	op := &request.Operation{
+func (c *Route53) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssociationAuthorizationInput) (req *aws.Request, output *CreateVPCAssociationAuthorizationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateVPCAssociationAuthorization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}/authorizevpcassociation",
@@ -1392,7 +1391,7 @@ func (c *Route53) CreateVPCAssociationAuthorization(input *CreateVPCAssociationA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) CreateVPCAssociationAuthorizationWithContext(ctx aws.Context, input *CreateVPCAssociationAuthorizationInput, opts ...request.Option) (*CreateVPCAssociationAuthorizationOutput, error) {
+func (c *Route53) CreateVPCAssociationAuthorizationWithContext(ctx aws.Context, input *CreateVPCAssociationAuthorizationInput, opts ...aws.Option) (*CreateVPCAssociationAuthorizationOutput, error) {
 	req, out := c.CreateVPCAssociationAuthorizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1401,7 +1400,7 @@ func (c *Route53) CreateVPCAssociationAuthorizationWithContext(ctx aws.Context, 
 
 const opDeleteHealthCheck = "DeleteHealthCheck"
 
-// DeleteHealthCheckRequest generates a "aws/request.Request" representing the
+// DeleteHealthCheckRequest generates a "aws.Request" representing the
 // client's request for the DeleteHealthCheck operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1425,8 +1424,8 @@ const opDeleteHealthCheck = "DeleteHealthCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheck
-func (c *Route53) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) (req *request.Request, output *DeleteHealthCheckOutput) {
-	op := &request.Operation{
+func (c *Route53) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) (req *aws.Request, output *DeleteHealthCheckOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteHealthCheck,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2013-04-01/healthcheck/{HealthCheckId}",
@@ -1486,7 +1485,7 @@ func (c *Route53) DeleteHealthCheck(input *DeleteHealthCheckInput) (*DeleteHealt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) DeleteHealthCheckWithContext(ctx aws.Context, input *DeleteHealthCheckInput, opts ...request.Option) (*DeleteHealthCheckOutput, error) {
+func (c *Route53) DeleteHealthCheckWithContext(ctx aws.Context, input *DeleteHealthCheckInput, opts ...aws.Option) (*DeleteHealthCheckOutput, error) {
 	req, out := c.DeleteHealthCheckRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1495,7 +1494,7 @@ func (c *Route53) DeleteHealthCheckWithContext(ctx aws.Context, input *DeleteHea
 
 const opDeleteHostedZone = "DeleteHostedZone"
 
-// DeleteHostedZoneRequest generates a "aws/request.Request" representing the
+// DeleteHostedZoneRequest generates a "aws.Request" representing the
 // client's request for the DeleteHostedZone operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1519,8 +1518,8 @@ const opDeleteHostedZone = "DeleteHostedZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZone
-func (c *Route53) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) (req *request.Request, output *DeleteHostedZoneOutput) {
-	op := &request.Operation{
+func (c *Route53) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) (req *aws.Request, output *DeleteHostedZoneOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteHostedZone,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}",
@@ -1610,7 +1609,7 @@ func (c *Route53) DeleteHostedZone(input *DeleteHostedZoneInput) (*DeleteHostedZ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) DeleteHostedZoneWithContext(ctx aws.Context, input *DeleteHostedZoneInput, opts ...request.Option) (*DeleteHostedZoneOutput, error) {
+func (c *Route53) DeleteHostedZoneWithContext(ctx aws.Context, input *DeleteHostedZoneInput, opts ...aws.Option) (*DeleteHostedZoneOutput, error) {
 	req, out := c.DeleteHostedZoneRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1619,7 +1618,7 @@ func (c *Route53) DeleteHostedZoneWithContext(ctx aws.Context, input *DeleteHost
 
 const opDeleteQueryLoggingConfig = "DeleteQueryLoggingConfig"
 
-// DeleteQueryLoggingConfigRequest generates a "aws/request.Request" representing the
+// DeleteQueryLoggingConfigRequest generates a "aws.Request" representing the
 // client's request for the DeleteQueryLoggingConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1643,8 +1642,8 @@ const opDeleteQueryLoggingConfig = "DeleteQueryLoggingConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfig
-func (c *Route53) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfigInput) (req *request.Request, output *DeleteQueryLoggingConfigOutput) {
-	op := &request.Operation{
+func (c *Route53) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfigInput) (req *aws.Request, output *DeleteQueryLoggingConfigOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteQueryLoggingConfig,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2013-04-01/queryloggingconfig/{Id}",
@@ -1700,7 +1699,7 @@ func (c *Route53) DeleteQueryLoggingConfig(input *DeleteQueryLoggingConfigInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) DeleteQueryLoggingConfigWithContext(ctx aws.Context, input *DeleteQueryLoggingConfigInput, opts ...request.Option) (*DeleteQueryLoggingConfigOutput, error) {
+func (c *Route53) DeleteQueryLoggingConfigWithContext(ctx aws.Context, input *DeleteQueryLoggingConfigInput, opts ...aws.Option) (*DeleteQueryLoggingConfigOutput, error) {
 	req, out := c.DeleteQueryLoggingConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1709,7 +1708,7 @@ func (c *Route53) DeleteQueryLoggingConfigWithContext(ctx aws.Context, input *De
 
 const opDeleteReusableDelegationSet = "DeleteReusableDelegationSet"
 
-// DeleteReusableDelegationSetRequest generates a "aws/request.Request" representing the
+// DeleteReusableDelegationSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteReusableDelegationSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1733,8 +1732,8 @@ const opDeleteReusableDelegationSet = "DeleteReusableDelegationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteReusableDelegationSet
-func (c *Route53) DeleteReusableDelegationSetRequest(input *DeleteReusableDelegationSetInput) (req *request.Request, output *DeleteReusableDelegationSetOutput) {
-	op := &request.Operation{
+func (c *Route53) DeleteReusableDelegationSetRequest(input *DeleteReusableDelegationSetInput) (req *aws.Request, output *DeleteReusableDelegationSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReusableDelegationSet,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2013-04-01/delegationset/{Id}",
@@ -1796,7 +1795,7 @@ func (c *Route53) DeleteReusableDelegationSet(input *DeleteReusableDelegationSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) DeleteReusableDelegationSetWithContext(ctx aws.Context, input *DeleteReusableDelegationSetInput, opts ...request.Option) (*DeleteReusableDelegationSetOutput, error) {
+func (c *Route53) DeleteReusableDelegationSetWithContext(ctx aws.Context, input *DeleteReusableDelegationSetInput, opts ...aws.Option) (*DeleteReusableDelegationSetOutput, error) {
 	req, out := c.DeleteReusableDelegationSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1805,7 +1804,7 @@ func (c *Route53) DeleteReusableDelegationSetWithContext(ctx aws.Context, input 
 
 const opDeleteTrafficPolicy = "DeleteTrafficPolicy"
 
-// DeleteTrafficPolicyRequest generates a "aws/request.Request" representing the
+// DeleteTrafficPolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteTrafficPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1829,8 +1828,8 @@ const opDeleteTrafficPolicy = "DeleteTrafficPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicy
-func (c *Route53) DeleteTrafficPolicyRequest(input *DeleteTrafficPolicyInput) (req *request.Request, output *DeleteTrafficPolicyOutput) {
-	op := &request.Operation{
+func (c *Route53) DeleteTrafficPolicyRequest(input *DeleteTrafficPolicyInput) (req *aws.Request, output *DeleteTrafficPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTrafficPolicy,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2013-04-01/trafficpolicy/{Id}/{Version}",
@@ -1886,7 +1885,7 @@ func (c *Route53) DeleteTrafficPolicy(input *DeleteTrafficPolicyInput) (*DeleteT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) DeleteTrafficPolicyWithContext(ctx aws.Context, input *DeleteTrafficPolicyInput, opts ...request.Option) (*DeleteTrafficPolicyOutput, error) {
+func (c *Route53) DeleteTrafficPolicyWithContext(ctx aws.Context, input *DeleteTrafficPolicyInput, opts ...aws.Option) (*DeleteTrafficPolicyOutput, error) {
 	req, out := c.DeleteTrafficPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1895,7 +1894,7 @@ func (c *Route53) DeleteTrafficPolicyWithContext(ctx aws.Context, input *DeleteT
 
 const opDeleteTrafficPolicyInstance = "DeleteTrafficPolicyInstance"
 
-// DeleteTrafficPolicyInstanceRequest generates a "aws/request.Request" representing the
+// DeleteTrafficPolicyInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeleteTrafficPolicyInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1919,8 +1918,8 @@ const opDeleteTrafficPolicyInstance = "DeleteTrafficPolicyInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstance
-func (c *Route53) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyInstanceInput) (req *request.Request, output *DeleteTrafficPolicyInstanceOutput) {
-	op := &request.Operation{
+func (c *Route53) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyInstanceInput) (req *aws.Request, output *DeleteTrafficPolicyInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTrafficPolicyInstance,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2013-04-01/trafficpolicyinstance/{Id}",
@@ -1979,7 +1978,7 @@ func (c *Route53) DeleteTrafficPolicyInstance(input *DeleteTrafficPolicyInstance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) DeleteTrafficPolicyInstanceWithContext(ctx aws.Context, input *DeleteTrafficPolicyInstanceInput, opts ...request.Option) (*DeleteTrafficPolicyInstanceOutput, error) {
+func (c *Route53) DeleteTrafficPolicyInstanceWithContext(ctx aws.Context, input *DeleteTrafficPolicyInstanceInput, opts ...aws.Option) (*DeleteTrafficPolicyInstanceOutput, error) {
 	req, out := c.DeleteTrafficPolicyInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1988,7 +1987,7 @@ func (c *Route53) DeleteTrafficPolicyInstanceWithContext(ctx aws.Context, input 
 
 const opDeleteVPCAssociationAuthorization = "DeleteVPCAssociationAuthorization"
 
-// DeleteVPCAssociationAuthorizationRequest generates a "aws/request.Request" representing the
+// DeleteVPCAssociationAuthorizationRequest generates a "aws.Request" representing the
 // client's request for the DeleteVPCAssociationAuthorization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2012,8 +2011,8 @@ const opDeleteVPCAssociationAuthorization = "DeleteVPCAssociationAuthorization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorization
-func (c *Route53) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssociationAuthorizationInput) (req *request.Request, output *DeleteVPCAssociationAuthorizationOutput) {
-	op := &request.Operation{
+func (c *Route53) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssociationAuthorizationInput) (req *aws.Request, output *DeleteVPCAssociationAuthorizationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteVPCAssociationAuthorization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}/deauthorizevpcassociation",
@@ -2082,7 +2081,7 @@ func (c *Route53) DeleteVPCAssociationAuthorization(input *DeleteVPCAssociationA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) DeleteVPCAssociationAuthorizationWithContext(ctx aws.Context, input *DeleteVPCAssociationAuthorizationInput, opts ...request.Option) (*DeleteVPCAssociationAuthorizationOutput, error) {
+func (c *Route53) DeleteVPCAssociationAuthorizationWithContext(ctx aws.Context, input *DeleteVPCAssociationAuthorizationInput, opts ...aws.Option) (*DeleteVPCAssociationAuthorizationOutput, error) {
 	req, out := c.DeleteVPCAssociationAuthorizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2091,7 +2090,7 @@ func (c *Route53) DeleteVPCAssociationAuthorizationWithContext(ctx aws.Context, 
 
 const opDisassociateVPCFromHostedZone = "DisassociateVPCFromHostedZone"
 
-// DisassociateVPCFromHostedZoneRequest generates a "aws/request.Request" representing the
+// DisassociateVPCFromHostedZoneRequest generates a "aws.Request" representing the
 // client's request for the DisassociateVPCFromHostedZone operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2115,8 +2114,8 @@ const opDisassociateVPCFromHostedZone = "DisassociateVPCFromHostedZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZone
-func (c *Route53) DisassociateVPCFromHostedZoneRequest(input *DisassociateVPCFromHostedZoneInput) (req *request.Request, output *DisassociateVPCFromHostedZoneOutput) {
-	op := &request.Operation{
+func (c *Route53) DisassociateVPCFromHostedZoneRequest(input *DisassociateVPCFromHostedZoneInput) (req *aws.Request, output *DisassociateVPCFromHostedZoneOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateVPCFromHostedZone,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}/disassociatevpc",
@@ -2182,7 +2181,7 @@ func (c *Route53) DisassociateVPCFromHostedZone(input *DisassociateVPCFromHosted
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) DisassociateVPCFromHostedZoneWithContext(ctx aws.Context, input *DisassociateVPCFromHostedZoneInput, opts ...request.Option) (*DisassociateVPCFromHostedZoneOutput, error) {
+func (c *Route53) DisassociateVPCFromHostedZoneWithContext(ctx aws.Context, input *DisassociateVPCFromHostedZoneInput, opts ...aws.Option) (*DisassociateVPCFromHostedZoneOutput, error) {
 	req, out := c.DisassociateVPCFromHostedZoneRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2191,7 +2190,7 @@ func (c *Route53) DisassociateVPCFromHostedZoneWithContext(ctx aws.Context, inpu
 
 const opGetChange = "GetChange"
 
-// GetChangeRequest generates a "aws/request.Request" representing the
+// GetChangeRequest generates a "aws.Request" representing the
 // client's request for the GetChange operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2215,8 +2214,8 @@ const opGetChange = "GetChange"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChange
-func (c *Route53) GetChangeRequest(input *GetChangeInput) (req *request.Request, output *GetChangeOutput) {
-	op := &request.Operation{
+func (c *Route53) GetChangeRequest(input *GetChangeInput) (req *aws.Request, output *GetChangeOutput) {
+	op := &aws.Operation{
 		Name:       opGetChange,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/change/{Id}",
@@ -2272,7 +2271,7 @@ func (c *Route53) GetChange(input *GetChangeInput) (*GetChangeOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetChangeWithContext(ctx aws.Context, input *GetChangeInput, opts ...request.Option) (*GetChangeOutput, error) {
+func (c *Route53) GetChangeWithContext(ctx aws.Context, input *GetChangeInput, opts ...aws.Option) (*GetChangeOutput, error) {
 	req, out := c.GetChangeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2281,7 +2280,7 @@ func (c *Route53) GetChangeWithContext(ctx aws.Context, input *GetChangeInput, o
 
 const opGetCheckerIpRanges = "GetCheckerIpRanges"
 
-// GetCheckerIpRangesRequest generates a "aws/request.Request" representing the
+// GetCheckerIpRangesRequest generates a "aws.Request" representing the
 // client's request for the GetCheckerIpRanges operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2305,8 +2304,8 @@ const opGetCheckerIpRanges = "GetCheckerIpRanges"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRanges
-func (c *Route53) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) (req *request.Request, output *GetCheckerIpRangesOutput) {
-	op := &request.Operation{
+func (c *Route53) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) (req *aws.Request, output *GetCheckerIpRangesOutput) {
+	op := &aws.Operation{
 		Name:       opGetCheckerIpRanges,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/checkeripranges",
@@ -2349,7 +2348,7 @@ func (c *Route53) GetCheckerIpRanges(input *GetCheckerIpRangesInput) (*GetChecke
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetCheckerIpRangesWithContext(ctx aws.Context, input *GetCheckerIpRangesInput, opts ...request.Option) (*GetCheckerIpRangesOutput, error) {
+func (c *Route53) GetCheckerIpRangesWithContext(ctx aws.Context, input *GetCheckerIpRangesInput, opts ...aws.Option) (*GetCheckerIpRangesOutput, error) {
 	req, out := c.GetCheckerIpRangesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2358,7 +2357,7 @@ func (c *Route53) GetCheckerIpRangesWithContext(ctx aws.Context, input *GetCheck
 
 const opGetGeoLocation = "GetGeoLocation"
 
-// GetGeoLocationRequest generates a "aws/request.Request" representing the
+// GetGeoLocationRequest generates a "aws.Request" representing the
 // client's request for the GetGeoLocation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2382,8 +2381,8 @@ const opGetGeoLocation = "GetGeoLocation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocation
-func (c *Route53) GetGeoLocationRequest(input *GetGeoLocationInput) (req *request.Request, output *GetGeoLocationOutput) {
-	op := &request.Operation{
+func (c *Route53) GetGeoLocationRequest(input *GetGeoLocationInput) (req *aws.Request, output *GetGeoLocationOutput) {
+	op := &aws.Operation{
 		Name:       opGetGeoLocation,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/geolocation",
@@ -2448,7 +2447,7 @@ func (c *Route53) GetGeoLocation(input *GetGeoLocationInput) (*GetGeoLocationOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetGeoLocationWithContext(ctx aws.Context, input *GetGeoLocationInput, opts ...request.Option) (*GetGeoLocationOutput, error) {
+func (c *Route53) GetGeoLocationWithContext(ctx aws.Context, input *GetGeoLocationInput, opts ...aws.Option) (*GetGeoLocationOutput, error) {
 	req, out := c.GetGeoLocationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2457,7 +2456,7 @@ func (c *Route53) GetGeoLocationWithContext(ctx aws.Context, input *GetGeoLocati
 
 const opGetHealthCheck = "GetHealthCheck"
 
-// GetHealthCheckRequest generates a "aws/request.Request" representing the
+// GetHealthCheckRequest generates a "aws.Request" representing the
 // client's request for the GetHealthCheck operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2481,8 +2480,8 @@ const opGetHealthCheck = "GetHealthCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheck
-func (c *Route53) GetHealthCheckRequest(input *GetHealthCheckInput) (req *request.Request, output *GetHealthCheckOutput) {
-	op := &request.Operation{
+func (c *Route53) GetHealthCheckRequest(input *GetHealthCheckInput) (req *aws.Request, output *GetHealthCheckOutput) {
+	op := &aws.Operation{
 		Name:       opGetHealthCheck,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/healthcheck/{HealthCheckId}",
@@ -2535,7 +2534,7 @@ func (c *Route53) GetHealthCheck(input *GetHealthCheckInput) (*GetHealthCheckOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetHealthCheckWithContext(ctx aws.Context, input *GetHealthCheckInput, opts ...request.Option) (*GetHealthCheckOutput, error) {
+func (c *Route53) GetHealthCheckWithContext(ctx aws.Context, input *GetHealthCheckInput, opts ...aws.Option) (*GetHealthCheckOutput, error) {
 	req, out := c.GetHealthCheckRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2544,7 +2543,7 @@ func (c *Route53) GetHealthCheckWithContext(ctx aws.Context, input *GetHealthChe
 
 const opGetHealthCheckCount = "GetHealthCheckCount"
 
-// GetHealthCheckCountRequest generates a "aws/request.Request" representing the
+// GetHealthCheckCountRequest generates a "aws.Request" representing the
 // client's request for the GetHealthCheckCount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2568,8 +2567,8 @@ const opGetHealthCheckCount = "GetHealthCheckCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCount
-func (c *Route53) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) (req *request.Request, output *GetHealthCheckCountOutput) {
-	op := &request.Operation{
+func (c *Route53) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) (req *aws.Request, output *GetHealthCheckCountOutput) {
+	op := &aws.Operation{
 		Name:       opGetHealthCheckCount,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/healthcheckcount",
@@ -2610,7 +2609,7 @@ func (c *Route53) GetHealthCheckCount(input *GetHealthCheckCountInput) (*GetHeal
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetHealthCheckCountWithContext(ctx aws.Context, input *GetHealthCheckCountInput, opts ...request.Option) (*GetHealthCheckCountOutput, error) {
+func (c *Route53) GetHealthCheckCountWithContext(ctx aws.Context, input *GetHealthCheckCountInput, opts ...aws.Option) (*GetHealthCheckCountOutput, error) {
 	req, out := c.GetHealthCheckCountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2619,7 +2618,7 @@ func (c *Route53) GetHealthCheckCountWithContext(ctx aws.Context, input *GetHeal
 
 const opGetHealthCheckLastFailureReason = "GetHealthCheckLastFailureReason"
 
-// GetHealthCheckLastFailureReasonRequest generates a "aws/request.Request" representing the
+// GetHealthCheckLastFailureReasonRequest generates a "aws.Request" representing the
 // client's request for the GetHealthCheckLastFailureReason operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2643,8 +2642,8 @@ const opGetHealthCheckLastFailureReason = "GetHealthCheckLastFailureReason"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckLastFailureReason
-func (c *Route53) GetHealthCheckLastFailureReasonRequest(input *GetHealthCheckLastFailureReasonInput) (req *request.Request, output *GetHealthCheckLastFailureReasonOutput) {
-	op := &request.Operation{
+func (c *Route53) GetHealthCheckLastFailureReasonRequest(input *GetHealthCheckLastFailureReasonInput) (req *aws.Request, output *GetHealthCheckLastFailureReasonOutput) {
+	op := &aws.Operation{
 		Name:       opGetHealthCheckLastFailureReason,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/healthcheck/{HealthCheckId}/lastfailurereason",
@@ -2693,7 +2692,7 @@ func (c *Route53) GetHealthCheckLastFailureReason(input *GetHealthCheckLastFailu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetHealthCheckLastFailureReasonWithContext(ctx aws.Context, input *GetHealthCheckLastFailureReasonInput, opts ...request.Option) (*GetHealthCheckLastFailureReasonOutput, error) {
+func (c *Route53) GetHealthCheckLastFailureReasonWithContext(ctx aws.Context, input *GetHealthCheckLastFailureReasonInput, opts ...aws.Option) (*GetHealthCheckLastFailureReasonOutput, error) {
 	req, out := c.GetHealthCheckLastFailureReasonRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2702,7 +2701,7 @@ func (c *Route53) GetHealthCheckLastFailureReasonWithContext(ctx aws.Context, in
 
 const opGetHealthCheckStatus = "GetHealthCheckStatus"
 
-// GetHealthCheckStatusRequest generates a "aws/request.Request" representing the
+// GetHealthCheckStatusRequest generates a "aws.Request" representing the
 // client's request for the GetHealthCheckStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2726,8 +2725,8 @@ const opGetHealthCheckStatus = "GetHealthCheckStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckStatus
-func (c *Route53) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) (req *request.Request, output *GetHealthCheckStatusOutput) {
-	op := &request.Operation{
+func (c *Route53) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) (req *aws.Request, output *GetHealthCheckStatusOutput) {
+	op := &aws.Operation{
 		Name:       opGetHealthCheckStatus,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/healthcheck/{HealthCheckId}/status",
@@ -2776,7 +2775,7 @@ func (c *Route53) GetHealthCheckStatus(input *GetHealthCheckStatusInput) (*GetHe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetHealthCheckStatusWithContext(ctx aws.Context, input *GetHealthCheckStatusInput, opts ...request.Option) (*GetHealthCheckStatusOutput, error) {
+func (c *Route53) GetHealthCheckStatusWithContext(ctx aws.Context, input *GetHealthCheckStatusInput, opts ...aws.Option) (*GetHealthCheckStatusOutput, error) {
 	req, out := c.GetHealthCheckStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2785,7 +2784,7 @@ func (c *Route53) GetHealthCheckStatusWithContext(ctx aws.Context, input *GetHea
 
 const opGetHostedZone = "GetHostedZone"
 
-// GetHostedZoneRequest generates a "aws/request.Request" representing the
+// GetHostedZoneRequest generates a "aws.Request" representing the
 // client's request for the GetHostedZone operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2809,8 +2808,8 @@ const opGetHostedZone = "GetHostedZone"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZone
-func (c *Route53) GetHostedZoneRequest(input *GetHostedZoneInput) (req *request.Request, output *GetHostedZoneOutput) {
-	op := &request.Operation{
+func (c *Route53) GetHostedZoneRequest(input *GetHostedZoneInput) (req *aws.Request, output *GetHostedZoneOutput) {
+	op := &aws.Operation{
 		Name:       opGetHostedZone,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}",
@@ -2859,7 +2858,7 @@ func (c *Route53) GetHostedZone(input *GetHostedZoneInput) (*GetHostedZoneOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetHostedZoneWithContext(ctx aws.Context, input *GetHostedZoneInput, opts ...request.Option) (*GetHostedZoneOutput, error) {
+func (c *Route53) GetHostedZoneWithContext(ctx aws.Context, input *GetHostedZoneInput, opts ...aws.Option) (*GetHostedZoneOutput, error) {
 	req, out := c.GetHostedZoneRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2868,7 +2867,7 @@ func (c *Route53) GetHostedZoneWithContext(ctx aws.Context, input *GetHostedZone
 
 const opGetHostedZoneCount = "GetHostedZoneCount"
 
-// GetHostedZoneCountRequest generates a "aws/request.Request" representing the
+// GetHostedZoneCountRequest generates a "aws.Request" representing the
 // client's request for the GetHostedZoneCount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2892,8 +2891,8 @@ const opGetHostedZoneCount = "GetHostedZoneCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCount
-func (c *Route53) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) (req *request.Request, output *GetHostedZoneCountOutput) {
-	op := &request.Operation{
+func (c *Route53) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) (req *aws.Request, output *GetHostedZoneCountOutput) {
+	op := &aws.Operation{
 		Name:       opGetHostedZoneCount,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/hostedzonecount",
@@ -2939,7 +2938,7 @@ func (c *Route53) GetHostedZoneCount(input *GetHostedZoneCountInput) (*GetHosted
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetHostedZoneCountWithContext(ctx aws.Context, input *GetHostedZoneCountInput, opts ...request.Option) (*GetHostedZoneCountOutput, error) {
+func (c *Route53) GetHostedZoneCountWithContext(ctx aws.Context, input *GetHostedZoneCountInput, opts ...aws.Option) (*GetHostedZoneCountOutput, error) {
 	req, out := c.GetHostedZoneCountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2948,7 +2947,7 @@ func (c *Route53) GetHostedZoneCountWithContext(ctx aws.Context, input *GetHoste
 
 const opGetQueryLoggingConfig = "GetQueryLoggingConfig"
 
-// GetQueryLoggingConfigRequest generates a "aws/request.Request" representing the
+// GetQueryLoggingConfigRequest generates a "aws.Request" representing the
 // client's request for the GetQueryLoggingConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2972,8 +2971,8 @@ const opGetQueryLoggingConfig = "GetQueryLoggingConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfig
-func (c *Route53) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput) (req *request.Request, output *GetQueryLoggingConfigOutput) {
-	op := &request.Operation{
+func (c *Route53) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput) (req *aws.Request, output *GetQueryLoggingConfigOutput) {
+	op := &aws.Operation{
 		Name:       opGetQueryLoggingConfig,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/queryloggingconfig/{Id}",
@@ -3024,7 +3023,7 @@ func (c *Route53) GetQueryLoggingConfig(input *GetQueryLoggingConfigInput) (*Get
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetQueryLoggingConfigWithContext(ctx aws.Context, input *GetQueryLoggingConfigInput, opts ...request.Option) (*GetQueryLoggingConfigOutput, error) {
+func (c *Route53) GetQueryLoggingConfigWithContext(ctx aws.Context, input *GetQueryLoggingConfigInput, opts ...aws.Option) (*GetQueryLoggingConfigOutput, error) {
 	req, out := c.GetQueryLoggingConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3033,7 +3032,7 @@ func (c *Route53) GetQueryLoggingConfigWithContext(ctx aws.Context, input *GetQu
 
 const opGetReusableDelegationSet = "GetReusableDelegationSet"
 
-// GetReusableDelegationSetRequest generates a "aws/request.Request" representing the
+// GetReusableDelegationSetRequest generates a "aws.Request" representing the
 // client's request for the GetReusableDelegationSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3057,8 +3056,8 @@ const opGetReusableDelegationSet = "GetReusableDelegationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSet
-func (c *Route53) GetReusableDelegationSetRequest(input *GetReusableDelegationSetInput) (req *request.Request, output *GetReusableDelegationSetOutput) {
-	op := &request.Operation{
+func (c *Route53) GetReusableDelegationSetRequest(input *GetReusableDelegationSetInput) (req *aws.Request, output *GetReusableDelegationSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetReusableDelegationSet,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/delegationset/{Id}",
@@ -3110,7 +3109,7 @@ func (c *Route53) GetReusableDelegationSet(input *GetReusableDelegationSetInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetReusableDelegationSetWithContext(ctx aws.Context, input *GetReusableDelegationSetInput, opts ...request.Option) (*GetReusableDelegationSetOutput, error) {
+func (c *Route53) GetReusableDelegationSetWithContext(ctx aws.Context, input *GetReusableDelegationSetInput, opts ...aws.Option) (*GetReusableDelegationSetOutput, error) {
 	req, out := c.GetReusableDelegationSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3119,7 +3118,7 @@ func (c *Route53) GetReusableDelegationSetWithContext(ctx aws.Context, input *Ge
 
 const opGetTrafficPolicy = "GetTrafficPolicy"
 
-// GetTrafficPolicyRequest generates a "aws/request.Request" representing the
+// GetTrafficPolicyRequest generates a "aws.Request" representing the
 // client's request for the GetTrafficPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3143,8 +3142,8 @@ const opGetTrafficPolicy = "GetTrafficPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicy
-func (c *Route53) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) (req *request.Request, output *GetTrafficPolicyOutput) {
-	op := &request.Operation{
+func (c *Route53) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) (req *aws.Request, output *GetTrafficPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opGetTrafficPolicy,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/trafficpolicy/{Id}/{Version}",
@@ -3192,7 +3191,7 @@ func (c *Route53) GetTrafficPolicy(input *GetTrafficPolicyInput) (*GetTrafficPol
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetTrafficPolicyWithContext(ctx aws.Context, input *GetTrafficPolicyInput, opts ...request.Option) (*GetTrafficPolicyOutput, error) {
+func (c *Route53) GetTrafficPolicyWithContext(ctx aws.Context, input *GetTrafficPolicyInput, opts ...aws.Option) (*GetTrafficPolicyOutput, error) {
 	req, out := c.GetTrafficPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3201,7 +3200,7 @@ func (c *Route53) GetTrafficPolicyWithContext(ctx aws.Context, input *GetTraffic
 
 const opGetTrafficPolicyInstance = "GetTrafficPolicyInstance"
 
-// GetTrafficPolicyInstanceRequest generates a "aws/request.Request" representing the
+// GetTrafficPolicyInstanceRequest generates a "aws.Request" representing the
 // client's request for the GetTrafficPolicyInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3225,8 +3224,8 @@ const opGetTrafficPolicyInstance = "GetTrafficPolicyInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstance
-func (c *Route53) GetTrafficPolicyInstanceRequest(input *GetTrafficPolicyInstanceInput) (req *request.Request, output *GetTrafficPolicyInstanceOutput) {
-	op := &request.Operation{
+func (c *Route53) GetTrafficPolicyInstanceRequest(input *GetTrafficPolicyInstanceInput) (req *aws.Request, output *GetTrafficPolicyInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opGetTrafficPolicyInstance,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/trafficpolicyinstance/{Id}",
@@ -3282,7 +3281,7 @@ func (c *Route53) GetTrafficPolicyInstance(input *GetTrafficPolicyInstanceInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetTrafficPolicyInstanceWithContext(ctx aws.Context, input *GetTrafficPolicyInstanceInput, opts ...request.Option) (*GetTrafficPolicyInstanceOutput, error) {
+func (c *Route53) GetTrafficPolicyInstanceWithContext(ctx aws.Context, input *GetTrafficPolicyInstanceInput, opts ...aws.Option) (*GetTrafficPolicyInstanceOutput, error) {
 	req, out := c.GetTrafficPolicyInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3291,7 +3290,7 @@ func (c *Route53) GetTrafficPolicyInstanceWithContext(ctx aws.Context, input *Ge
 
 const opGetTrafficPolicyInstanceCount = "GetTrafficPolicyInstanceCount"
 
-// GetTrafficPolicyInstanceCountRequest generates a "aws/request.Request" representing the
+// GetTrafficPolicyInstanceCountRequest generates a "aws.Request" representing the
 // client's request for the GetTrafficPolicyInstanceCount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3315,8 +3314,8 @@ const opGetTrafficPolicyInstanceCount = "GetTrafficPolicyInstanceCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCount
-func (c *Route53) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyInstanceCountInput) (req *request.Request, output *GetTrafficPolicyInstanceCountOutput) {
-	op := &request.Operation{
+func (c *Route53) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyInstanceCountInput) (req *aws.Request, output *GetTrafficPolicyInstanceCountOutput) {
+	op := &aws.Operation{
 		Name:       opGetTrafficPolicyInstanceCount,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/trafficpolicyinstancecount",
@@ -3357,7 +3356,7 @@ func (c *Route53) GetTrafficPolicyInstanceCount(input *GetTrafficPolicyInstanceC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) GetTrafficPolicyInstanceCountWithContext(ctx aws.Context, input *GetTrafficPolicyInstanceCountInput, opts ...request.Option) (*GetTrafficPolicyInstanceCountOutput, error) {
+func (c *Route53) GetTrafficPolicyInstanceCountWithContext(ctx aws.Context, input *GetTrafficPolicyInstanceCountInput, opts ...aws.Option) (*GetTrafficPolicyInstanceCountOutput, error) {
 	req, out := c.GetTrafficPolicyInstanceCountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3366,7 +3365,7 @@ func (c *Route53) GetTrafficPolicyInstanceCountWithContext(ctx aws.Context, inpu
 
 const opListGeoLocations = "ListGeoLocations"
 
-// ListGeoLocationsRequest generates a "aws/request.Request" representing the
+// ListGeoLocationsRequest generates a "aws.Request" representing the
 // client's request for the ListGeoLocations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3390,8 +3389,8 @@ const opListGeoLocations = "ListGeoLocations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocations
-func (c *Route53) ListGeoLocationsRequest(input *ListGeoLocationsInput) (req *request.Request, output *ListGeoLocationsOutput) {
-	op := &request.Operation{
+func (c *Route53) ListGeoLocationsRequest(input *ListGeoLocationsInput) (req *aws.Request, output *ListGeoLocationsOutput) {
+	op := &aws.Operation{
 		Name:       opListGeoLocations,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/geolocations",
@@ -3441,7 +3440,7 @@ func (c *Route53) ListGeoLocations(input *ListGeoLocationsInput) (*ListGeoLocati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListGeoLocationsWithContext(ctx aws.Context, input *ListGeoLocationsInput, opts ...request.Option) (*ListGeoLocationsOutput, error) {
+func (c *Route53) ListGeoLocationsWithContext(ctx aws.Context, input *ListGeoLocationsInput, opts ...aws.Option) (*ListGeoLocationsOutput, error) {
 	req, out := c.ListGeoLocationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3450,7 +3449,7 @@ func (c *Route53) ListGeoLocationsWithContext(ctx aws.Context, input *ListGeoLoc
 
 const opListHealthChecks = "ListHealthChecks"
 
-// ListHealthChecksRequest generates a "aws/request.Request" representing the
+// ListHealthChecksRequest generates a "aws.Request" representing the
 // client's request for the ListHealthChecks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3474,12 +3473,12 @@ const opListHealthChecks = "ListHealthChecks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecks
-func (c *Route53) ListHealthChecksRequest(input *ListHealthChecksInput) (req *request.Request, output *ListHealthChecksOutput) {
-	op := &request.Operation{
+func (c *Route53) ListHealthChecksRequest(input *ListHealthChecksInput) (req *aws.Request, output *ListHealthChecksOutput) {
+	op := &aws.Operation{
 		Name:       opListHealthChecks,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/healthcheck",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "MaxItems",
@@ -3531,7 +3530,7 @@ func (c *Route53) ListHealthChecks(input *ListHealthChecksInput) (*ListHealthChe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListHealthChecksWithContext(ctx aws.Context, input *ListHealthChecksInput, opts ...request.Option) (*ListHealthChecksOutput, error) {
+func (c *Route53) ListHealthChecksWithContext(ctx aws.Context, input *ListHealthChecksInput, opts ...aws.Option) (*ListHealthChecksOutput, error) {
 	req, out := c.ListHealthChecksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3566,9 +3565,9 @@ func (c *Route53) ListHealthChecksPages(input *ListHealthChecksInput, fn func(*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListHealthChecksPagesWithContext(ctx aws.Context, input *ListHealthChecksInput, fn func(*ListHealthChecksOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Route53) ListHealthChecksPagesWithContext(ctx aws.Context, input *ListHealthChecksInput, fn func(*ListHealthChecksOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListHealthChecksInput
 			if input != nil {
 				tmp := *input
@@ -3590,7 +3589,7 @@ func (c *Route53) ListHealthChecksPagesWithContext(ctx aws.Context, input *ListH
 
 const opListHostedZones = "ListHostedZones"
 
-// ListHostedZonesRequest generates a "aws/request.Request" representing the
+// ListHostedZonesRequest generates a "aws.Request" representing the
 // client's request for the ListHostedZones operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3614,12 +3613,12 @@ const opListHostedZones = "ListHostedZones"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZones
-func (c *Route53) ListHostedZonesRequest(input *ListHostedZonesInput) (req *request.Request, output *ListHostedZonesOutput) {
-	op := &request.Operation{
+func (c *Route53) ListHostedZonesRequest(input *ListHostedZonesInput) (req *aws.Request, output *ListHostedZonesOutput) {
+	op := &aws.Operation{
 		Name:       opListHostedZones,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/hostedzone",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "MaxItems",
@@ -3678,7 +3677,7 @@ func (c *Route53) ListHostedZones(input *ListHostedZonesInput) (*ListHostedZones
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListHostedZonesWithContext(ctx aws.Context, input *ListHostedZonesInput, opts ...request.Option) (*ListHostedZonesOutput, error) {
+func (c *Route53) ListHostedZonesWithContext(ctx aws.Context, input *ListHostedZonesInput, opts ...aws.Option) (*ListHostedZonesOutput, error) {
 	req, out := c.ListHostedZonesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3713,9 +3712,9 @@ func (c *Route53) ListHostedZonesPages(input *ListHostedZonesInput, fn func(*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListHostedZonesPagesWithContext(ctx aws.Context, input *ListHostedZonesInput, fn func(*ListHostedZonesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Route53) ListHostedZonesPagesWithContext(ctx aws.Context, input *ListHostedZonesInput, fn func(*ListHostedZonesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListHostedZonesInput
 			if input != nil {
 				tmp := *input
@@ -3737,7 +3736,7 @@ func (c *Route53) ListHostedZonesPagesWithContext(ctx aws.Context, input *ListHo
 
 const opListHostedZonesByName = "ListHostedZonesByName"
 
-// ListHostedZonesByNameRequest generates a "aws/request.Request" representing the
+// ListHostedZonesByNameRequest generates a "aws.Request" representing the
 // client's request for the ListHostedZonesByName operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3761,8 +3760,8 @@ const opListHostedZonesByName = "ListHostedZonesByName"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByName
-func (c *Route53) ListHostedZonesByNameRequest(input *ListHostedZonesByNameInput) (req *request.Request, output *ListHostedZonesByNameOutput) {
-	op := &request.Operation{
+func (c *Route53) ListHostedZonesByNameRequest(input *ListHostedZonesByNameInput) (req *aws.Request, output *ListHostedZonesByNameOutput) {
+	op := &aws.Operation{
 		Name:       opListHostedZonesByName,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/hostedzonesbyname",
@@ -3859,7 +3858,7 @@ func (c *Route53) ListHostedZonesByName(input *ListHostedZonesByNameInput) (*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListHostedZonesByNameWithContext(ctx aws.Context, input *ListHostedZonesByNameInput, opts ...request.Option) (*ListHostedZonesByNameOutput, error) {
+func (c *Route53) ListHostedZonesByNameWithContext(ctx aws.Context, input *ListHostedZonesByNameInput, opts ...aws.Option) (*ListHostedZonesByNameOutput, error) {
 	req, out := c.ListHostedZonesByNameRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3868,7 +3867,7 @@ func (c *Route53) ListHostedZonesByNameWithContext(ctx aws.Context, input *ListH
 
 const opListQueryLoggingConfigs = "ListQueryLoggingConfigs"
 
-// ListQueryLoggingConfigsRequest generates a "aws/request.Request" representing the
+// ListQueryLoggingConfigsRequest generates a "aws.Request" representing the
 // client's request for the ListQueryLoggingConfigs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3892,8 +3891,8 @@ const opListQueryLoggingConfigs = "ListQueryLoggingConfigs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigs
-func (c *Route53) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsInput) (req *request.Request, output *ListQueryLoggingConfigsOutput) {
-	op := &request.Operation{
+func (c *Route53) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsInput) (req *aws.Request, output *ListQueryLoggingConfigsOutput) {
+	op := &aws.Operation{
 		Name:       opListQueryLoggingConfigs,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/queryloggingconfig",
@@ -3952,7 +3951,7 @@ func (c *Route53) ListQueryLoggingConfigs(input *ListQueryLoggingConfigsInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListQueryLoggingConfigsWithContext(ctx aws.Context, input *ListQueryLoggingConfigsInput, opts ...request.Option) (*ListQueryLoggingConfigsOutput, error) {
+func (c *Route53) ListQueryLoggingConfigsWithContext(ctx aws.Context, input *ListQueryLoggingConfigsInput, opts ...aws.Option) (*ListQueryLoggingConfigsOutput, error) {
 	req, out := c.ListQueryLoggingConfigsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3961,7 +3960,7 @@ func (c *Route53) ListQueryLoggingConfigsWithContext(ctx aws.Context, input *Lis
 
 const opListResourceRecordSets = "ListResourceRecordSets"
 
-// ListResourceRecordSetsRequest generates a "aws/request.Request" representing the
+// ListResourceRecordSetsRequest generates a "aws.Request" representing the
 // client's request for the ListResourceRecordSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3985,12 +3984,12 @@ const opListResourceRecordSets = "ListResourceRecordSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSets
-func (c *Route53) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInput) (req *request.Request, output *ListResourceRecordSetsOutput) {
-	op := &request.Operation{
+func (c *Route53) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInput) (req *aws.Request, output *ListResourceRecordSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListResourceRecordSets,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}/rrset",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"StartRecordName", "StartRecordType", "StartRecordIdentifier"},
 			OutputTokens:    []string{"NextRecordName", "NextRecordType", "NextRecordIdentifier"},
 			LimitToken:      "MaxItems",
@@ -4078,7 +4077,7 @@ func (c *Route53) ListResourceRecordSets(input *ListResourceRecordSetsInput) (*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListResourceRecordSetsWithContext(ctx aws.Context, input *ListResourceRecordSetsInput, opts ...request.Option) (*ListResourceRecordSetsOutput, error) {
+func (c *Route53) ListResourceRecordSetsWithContext(ctx aws.Context, input *ListResourceRecordSetsInput, opts ...aws.Option) (*ListResourceRecordSetsOutput, error) {
 	req, out := c.ListResourceRecordSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4113,9 +4112,9 @@ func (c *Route53) ListResourceRecordSetsPages(input *ListResourceRecordSetsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListResourceRecordSetsPagesWithContext(ctx aws.Context, input *ListResourceRecordSetsInput, fn func(*ListResourceRecordSetsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Route53) ListResourceRecordSetsPagesWithContext(ctx aws.Context, input *ListResourceRecordSetsInput, fn func(*ListResourceRecordSetsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListResourceRecordSetsInput
 			if input != nil {
 				tmp := *input
@@ -4137,7 +4136,7 @@ func (c *Route53) ListResourceRecordSetsPagesWithContext(ctx aws.Context, input 
 
 const opListReusableDelegationSets = "ListReusableDelegationSets"
 
-// ListReusableDelegationSetsRequest generates a "aws/request.Request" representing the
+// ListReusableDelegationSetsRequest generates a "aws.Request" representing the
 // client's request for the ListReusableDelegationSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4161,8 +4160,8 @@ const opListReusableDelegationSets = "ListReusableDelegationSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSets
-func (c *Route53) ListReusableDelegationSetsRequest(input *ListReusableDelegationSetsInput) (req *request.Request, output *ListReusableDelegationSetsOutput) {
-	op := &request.Operation{
+func (c *Route53) ListReusableDelegationSetsRequest(input *ListReusableDelegationSetsInput) (req *aws.Request, output *ListReusableDelegationSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListReusableDelegationSets,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/delegationset",
@@ -4208,7 +4207,7 @@ func (c *Route53) ListReusableDelegationSets(input *ListReusableDelegationSetsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListReusableDelegationSetsWithContext(ctx aws.Context, input *ListReusableDelegationSetsInput, opts ...request.Option) (*ListReusableDelegationSetsOutput, error) {
+func (c *Route53) ListReusableDelegationSetsWithContext(ctx aws.Context, input *ListReusableDelegationSetsInput, opts ...aws.Option) (*ListReusableDelegationSetsOutput, error) {
 	req, out := c.ListReusableDelegationSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4217,7 +4216,7 @@ func (c *Route53) ListReusableDelegationSetsWithContext(ctx aws.Context, input *
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4241,8 +4240,8 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResource
-func (c *Route53) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *Route53) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/tags/{ResourceType}/{ResourceId}",
@@ -4308,7 +4307,7 @@ func (c *Route53) ListTagsForResource(input *ListTagsForResourceInput) (*ListTag
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+func (c *Route53) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4317,7 +4316,7 @@ func (c *Route53) ListTagsForResourceWithContext(ctx aws.Context, input *ListTag
 
 const opListTagsForResources = "ListTagsForResources"
 
-// ListTagsForResourcesRequest generates a "aws/request.Request" representing the
+// ListTagsForResourcesRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4341,8 +4340,8 @@ const opListTagsForResources = "ListTagsForResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResources
-func (c *Route53) ListTagsForResourcesRequest(input *ListTagsForResourcesInput) (req *request.Request, output *ListTagsForResourcesOutput) {
-	op := &request.Operation{
+func (c *Route53) ListTagsForResourcesRequest(input *ListTagsForResourcesInput) (req *aws.Request, output *ListTagsForResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/tags/{ResourceType}",
@@ -4408,7 +4407,7 @@ func (c *Route53) ListTagsForResources(input *ListTagsForResourcesInput) (*ListT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListTagsForResourcesWithContext(ctx aws.Context, input *ListTagsForResourcesInput, opts ...request.Option) (*ListTagsForResourcesOutput, error) {
+func (c *Route53) ListTagsForResourcesWithContext(ctx aws.Context, input *ListTagsForResourcesInput, opts ...aws.Option) (*ListTagsForResourcesOutput, error) {
 	req, out := c.ListTagsForResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4417,7 +4416,7 @@ func (c *Route53) ListTagsForResourcesWithContext(ctx aws.Context, input *ListTa
 
 const opListTrafficPolicies = "ListTrafficPolicies"
 
-// ListTrafficPoliciesRequest generates a "aws/request.Request" representing the
+// ListTrafficPoliciesRequest generates a "aws.Request" representing the
 // client's request for the ListTrafficPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4441,8 +4440,8 @@ const opListTrafficPolicies = "ListTrafficPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicies
-func (c *Route53) ListTrafficPoliciesRequest(input *ListTrafficPoliciesInput) (req *request.Request, output *ListTrafficPoliciesOutput) {
-	op := &request.Operation{
+func (c *Route53) ListTrafficPoliciesRequest(input *ListTrafficPoliciesInput) (req *aws.Request, output *ListTrafficPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opListTrafficPolicies,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/trafficpolicies",
@@ -4489,7 +4488,7 @@ func (c *Route53) ListTrafficPolicies(input *ListTrafficPoliciesInput) (*ListTra
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListTrafficPoliciesWithContext(ctx aws.Context, input *ListTrafficPoliciesInput, opts ...request.Option) (*ListTrafficPoliciesOutput, error) {
+func (c *Route53) ListTrafficPoliciesWithContext(ctx aws.Context, input *ListTrafficPoliciesInput, opts ...aws.Option) (*ListTrafficPoliciesOutput, error) {
 	req, out := c.ListTrafficPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4498,7 +4497,7 @@ func (c *Route53) ListTrafficPoliciesWithContext(ctx aws.Context, input *ListTra
 
 const opListTrafficPolicyInstances = "ListTrafficPolicyInstances"
 
-// ListTrafficPolicyInstancesRequest generates a "aws/request.Request" representing the
+// ListTrafficPolicyInstancesRequest generates a "aws.Request" representing the
 // client's request for the ListTrafficPolicyInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4522,8 +4521,8 @@ const opListTrafficPolicyInstances = "ListTrafficPolicyInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstances
-func (c *Route53) ListTrafficPolicyInstancesRequest(input *ListTrafficPolicyInstancesInput) (req *request.Request, output *ListTrafficPolicyInstancesOutput) {
-	op := &request.Operation{
+func (c *Route53) ListTrafficPolicyInstancesRequest(input *ListTrafficPolicyInstancesInput) (req *aws.Request, output *ListTrafficPolicyInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opListTrafficPolicyInstances,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/trafficpolicyinstances",
@@ -4581,7 +4580,7 @@ func (c *Route53) ListTrafficPolicyInstances(input *ListTrafficPolicyInstancesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListTrafficPolicyInstancesWithContext(ctx aws.Context, input *ListTrafficPolicyInstancesInput, opts ...request.Option) (*ListTrafficPolicyInstancesOutput, error) {
+func (c *Route53) ListTrafficPolicyInstancesWithContext(ctx aws.Context, input *ListTrafficPolicyInstancesInput, opts ...aws.Option) (*ListTrafficPolicyInstancesOutput, error) {
 	req, out := c.ListTrafficPolicyInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4590,7 +4589,7 @@ func (c *Route53) ListTrafficPolicyInstancesWithContext(ctx aws.Context, input *
 
 const opListTrafficPolicyInstancesByHostedZone = "ListTrafficPolicyInstancesByHostedZone"
 
-// ListTrafficPolicyInstancesByHostedZoneRequest generates a "aws/request.Request" representing the
+// ListTrafficPolicyInstancesByHostedZoneRequest generates a "aws.Request" representing the
 // client's request for the ListTrafficPolicyInstancesByHostedZone operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4614,8 +4613,8 @@ const opListTrafficPolicyInstancesByHostedZone = "ListTrafficPolicyInstancesByHo
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByHostedZone
-func (c *Route53) ListTrafficPolicyInstancesByHostedZoneRequest(input *ListTrafficPolicyInstancesByHostedZoneInput) (req *request.Request, output *ListTrafficPolicyInstancesByHostedZoneOutput) {
-	op := &request.Operation{
+func (c *Route53) ListTrafficPolicyInstancesByHostedZoneRequest(input *ListTrafficPolicyInstancesByHostedZoneInput) (req *aws.Request, output *ListTrafficPolicyInstancesByHostedZoneOutput) {
+	op := &aws.Operation{
 		Name:       opListTrafficPolicyInstancesByHostedZone,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/trafficpolicyinstances/hostedzone",
@@ -4676,7 +4675,7 @@ func (c *Route53) ListTrafficPolicyInstancesByHostedZone(input *ListTrafficPolic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListTrafficPolicyInstancesByHostedZoneWithContext(ctx aws.Context, input *ListTrafficPolicyInstancesByHostedZoneInput, opts ...request.Option) (*ListTrafficPolicyInstancesByHostedZoneOutput, error) {
+func (c *Route53) ListTrafficPolicyInstancesByHostedZoneWithContext(ctx aws.Context, input *ListTrafficPolicyInstancesByHostedZoneInput, opts ...aws.Option) (*ListTrafficPolicyInstancesByHostedZoneOutput, error) {
 	req, out := c.ListTrafficPolicyInstancesByHostedZoneRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4685,7 +4684,7 @@ func (c *Route53) ListTrafficPolicyInstancesByHostedZoneWithContext(ctx aws.Cont
 
 const opListTrafficPolicyInstancesByPolicy = "ListTrafficPolicyInstancesByPolicy"
 
-// ListTrafficPolicyInstancesByPolicyRequest generates a "aws/request.Request" representing the
+// ListTrafficPolicyInstancesByPolicyRequest generates a "aws.Request" representing the
 // client's request for the ListTrafficPolicyInstancesByPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4709,8 +4708,8 @@ const opListTrafficPolicyInstancesByPolicy = "ListTrafficPolicyInstancesByPolicy
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByPolicy
-func (c *Route53) ListTrafficPolicyInstancesByPolicyRequest(input *ListTrafficPolicyInstancesByPolicyInput) (req *request.Request, output *ListTrafficPolicyInstancesByPolicyOutput) {
-	op := &request.Operation{
+func (c *Route53) ListTrafficPolicyInstancesByPolicyRequest(input *ListTrafficPolicyInstancesByPolicyInput) (req *aws.Request, output *ListTrafficPolicyInstancesByPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opListTrafficPolicyInstancesByPolicy,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/trafficpolicyinstances/trafficpolicy",
@@ -4771,7 +4770,7 @@ func (c *Route53) ListTrafficPolicyInstancesByPolicy(input *ListTrafficPolicyIns
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListTrafficPolicyInstancesByPolicyWithContext(ctx aws.Context, input *ListTrafficPolicyInstancesByPolicyInput, opts ...request.Option) (*ListTrafficPolicyInstancesByPolicyOutput, error) {
+func (c *Route53) ListTrafficPolicyInstancesByPolicyWithContext(ctx aws.Context, input *ListTrafficPolicyInstancesByPolicyInput, opts ...aws.Option) (*ListTrafficPolicyInstancesByPolicyOutput, error) {
 	req, out := c.ListTrafficPolicyInstancesByPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4780,7 +4779,7 @@ func (c *Route53) ListTrafficPolicyInstancesByPolicyWithContext(ctx aws.Context,
 
 const opListTrafficPolicyVersions = "ListTrafficPolicyVersions"
 
-// ListTrafficPolicyVersionsRequest generates a "aws/request.Request" representing the
+// ListTrafficPolicyVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListTrafficPolicyVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4804,8 +4803,8 @@ const opListTrafficPolicyVersions = "ListTrafficPolicyVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersions
-func (c *Route53) ListTrafficPolicyVersionsRequest(input *ListTrafficPolicyVersionsInput) (req *request.Request, output *ListTrafficPolicyVersionsOutput) {
-	op := &request.Operation{
+func (c *Route53) ListTrafficPolicyVersionsRequest(input *ListTrafficPolicyVersionsInput) (req *aws.Request, output *ListTrafficPolicyVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListTrafficPolicyVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/trafficpolicies/{Id}/versions",
@@ -4855,7 +4854,7 @@ func (c *Route53) ListTrafficPolicyVersions(input *ListTrafficPolicyVersionsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListTrafficPolicyVersionsWithContext(ctx aws.Context, input *ListTrafficPolicyVersionsInput, opts ...request.Option) (*ListTrafficPolicyVersionsOutput, error) {
+func (c *Route53) ListTrafficPolicyVersionsWithContext(ctx aws.Context, input *ListTrafficPolicyVersionsInput, opts ...aws.Option) (*ListTrafficPolicyVersionsOutput, error) {
 	req, out := c.ListTrafficPolicyVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4864,7 +4863,7 @@ func (c *Route53) ListTrafficPolicyVersionsWithContext(ctx aws.Context, input *L
 
 const opListVPCAssociationAuthorizations = "ListVPCAssociationAuthorizations"
 
-// ListVPCAssociationAuthorizationsRequest generates a "aws/request.Request" representing the
+// ListVPCAssociationAuthorizationsRequest generates a "aws.Request" representing the
 // client's request for the ListVPCAssociationAuthorizations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4888,8 +4887,8 @@ const opListVPCAssociationAuthorizations = "ListVPCAssociationAuthorizations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizations
-func (c *Route53) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociationAuthorizationsInput) (req *request.Request, output *ListVPCAssociationAuthorizationsOutput) {
-	op := &request.Operation{
+func (c *Route53) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociationAuthorizationsInput) (req *aws.Request, output *ListVPCAssociationAuthorizationsOutput) {
+	op := &aws.Operation{
 		Name:       opListVPCAssociationAuthorizations,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}/authorizevpcassociation",
@@ -4946,7 +4945,7 @@ func (c *Route53) ListVPCAssociationAuthorizations(input *ListVPCAssociationAuth
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) ListVPCAssociationAuthorizationsWithContext(ctx aws.Context, input *ListVPCAssociationAuthorizationsInput, opts ...request.Option) (*ListVPCAssociationAuthorizationsOutput, error) {
+func (c *Route53) ListVPCAssociationAuthorizationsWithContext(ctx aws.Context, input *ListVPCAssociationAuthorizationsInput, opts ...aws.Option) (*ListVPCAssociationAuthorizationsOutput, error) {
 	req, out := c.ListVPCAssociationAuthorizationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4955,7 +4954,7 @@ func (c *Route53) ListVPCAssociationAuthorizationsWithContext(ctx aws.Context, i
 
 const opTestDNSAnswer = "TestDNSAnswer"
 
-// TestDNSAnswerRequest generates a "aws/request.Request" representing the
+// TestDNSAnswerRequest generates a "aws.Request" representing the
 // client's request for the TestDNSAnswer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4979,8 +4978,8 @@ const opTestDNSAnswer = "TestDNSAnswer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswer
-func (c *Route53) TestDNSAnswerRequest(input *TestDNSAnswerInput) (req *request.Request, output *TestDNSAnswerOutput) {
-	op := &request.Operation{
+func (c *Route53) TestDNSAnswerRequest(input *TestDNSAnswerInput) (req *aws.Request, output *TestDNSAnswerOutput) {
+	op := &aws.Operation{
 		Name:       opTestDNSAnswer,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-04-01/testdnsanswer",
@@ -5030,7 +5029,7 @@ func (c *Route53) TestDNSAnswer(input *TestDNSAnswerInput) (*TestDNSAnswerOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) TestDNSAnswerWithContext(ctx aws.Context, input *TestDNSAnswerInput, opts ...request.Option) (*TestDNSAnswerOutput, error) {
+func (c *Route53) TestDNSAnswerWithContext(ctx aws.Context, input *TestDNSAnswerInput, opts ...aws.Option) (*TestDNSAnswerOutput, error) {
 	req, out := c.TestDNSAnswerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5039,7 +5038,7 @@ func (c *Route53) TestDNSAnswerWithContext(ctx aws.Context, input *TestDNSAnswer
 
 const opUpdateHealthCheck = "UpdateHealthCheck"
 
-// UpdateHealthCheckRequest generates a "aws/request.Request" representing the
+// UpdateHealthCheckRequest generates a "aws.Request" representing the
 // client's request for the UpdateHealthCheck operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5063,8 +5062,8 @@ const opUpdateHealthCheck = "UpdateHealthCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheck
-func (c *Route53) UpdateHealthCheckRequest(input *UpdateHealthCheckInput) (req *request.Request, output *UpdateHealthCheckOutput) {
-	op := &request.Operation{
+func (c *Route53) UpdateHealthCheckRequest(input *UpdateHealthCheckInput) (req *aws.Request, output *UpdateHealthCheckOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateHealthCheck,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/healthcheck/{HealthCheckId}",
@@ -5121,7 +5120,7 @@ func (c *Route53) UpdateHealthCheck(input *UpdateHealthCheckInput) (*UpdateHealt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) UpdateHealthCheckWithContext(ctx aws.Context, input *UpdateHealthCheckInput, opts ...request.Option) (*UpdateHealthCheckOutput, error) {
+func (c *Route53) UpdateHealthCheckWithContext(ctx aws.Context, input *UpdateHealthCheckInput, opts ...aws.Option) (*UpdateHealthCheckOutput, error) {
 	req, out := c.UpdateHealthCheckRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5130,7 +5129,7 @@ func (c *Route53) UpdateHealthCheckWithContext(ctx aws.Context, input *UpdateHea
 
 const opUpdateHostedZoneComment = "UpdateHostedZoneComment"
 
-// UpdateHostedZoneCommentRequest generates a "aws/request.Request" representing the
+// UpdateHostedZoneCommentRequest generates a "aws.Request" representing the
 // client's request for the UpdateHostedZoneComment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5154,8 +5153,8 @@ const opUpdateHostedZoneComment = "UpdateHostedZoneComment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneComment
-func (c *Route53) UpdateHostedZoneCommentRequest(input *UpdateHostedZoneCommentInput) (req *request.Request, output *UpdateHostedZoneCommentOutput) {
-	op := &request.Operation{
+func (c *Route53) UpdateHostedZoneCommentRequest(input *UpdateHostedZoneCommentInput) (req *aws.Request, output *UpdateHostedZoneCommentOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateHostedZoneComment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/hostedzone/{Id}",
@@ -5203,7 +5202,7 @@ func (c *Route53) UpdateHostedZoneComment(input *UpdateHostedZoneCommentInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) UpdateHostedZoneCommentWithContext(ctx aws.Context, input *UpdateHostedZoneCommentInput, opts ...request.Option) (*UpdateHostedZoneCommentOutput, error) {
+func (c *Route53) UpdateHostedZoneCommentWithContext(ctx aws.Context, input *UpdateHostedZoneCommentInput, opts ...aws.Option) (*UpdateHostedZoneCommentOutput, error) {
 	req, out := c.UpdateHostedZoneCommentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5212,7 +5211,7 @@ func (c *Route53) UpdateHostedZoneCommentWithContext(ctx aws.Context, input *Upd
 
 const opUpdateTrafficPolicyComment = "UpdateTrafficPolicyComment"
 
-// UpdateTrafficPolicyCommentRequest generates a "aws/request.Request" representing the
+// UpdateTrafficPolicyCommentRequest generates a "aws.Request" representing the
 // client's request for the UpdateTrafficPolicyComment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5236,8 +5235,8 @@ const opUpdateTrafficPolicyComment = "UpdateTrafficPolicyComment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyComment
-func (c *Route53) UpdateTrafficPolicyCommentRequest(input *UpdateTrafficPolicyCommentInput) (req *request.Request, output *UpdateTrafficPolicyCommentOutput) {
-	op := &request.Operation{
+func (c *Route53) UpdateTrafficPolicyCommentRequest(input *UpdateTrafficPolicyCommentInput) (req *aws.Request, output *UpdateTrafficPolicyCommentOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTrafficPolicyComment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/trafficpolicy/{Id}/{Version}",
@@ -5289,7 +5288,7 @@ func (c *Route53) UpdateTrafficPolicyComment(input *UpdateTrafficPolicyCommentIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) UpdateTrafficPolicyCommentWithContext(ctx aws.Context, input *UpdateTrafficPolicyCommentInput, opts ...request.Option) (*UpdateTrafficPolicyCommentOutput, error) {
+func (c *Route53) UpdateTrafficPolicyCommentWithContext(ctx aws.Context, input *UpdateTrafficPolicyCommentInput, opts ...aws.Option) (*UpdateTrafficPolicyCommentOutput, error) {
 	req, out := c.UpdateTrafficPolicyCommentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5298,7 +5297,7 @@ func (c *Route53) UpdateTrafficPolicyCommentWithContext(ctx aws.Context, input *
 
 const opUpdateTrafficPolicyInstance = "UpdateTrafficPolicyInstance"
 
-// UpdateTrafficPolicyInstanceRequest generates a "aws/request.Request" representing the
+// UpdateTrafficPolicyInstanceRequest generates a "aws.Request" representing the
 // client's request for the UpdateTrafficPolicyInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5322,8 +5321,8 @@ const opUpdateTrafficPolicyInstance = "UpdateTrafficPolicyInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyInstance
-func (c *Route53) UpdateTrafficPolicyInstanceRequest(input *UpdateTrafficPolicyInstanceInput) (req *request.Request, output *UpdateTrafficPolicyInstanceOutput) {
-	op := &request.Operation{
+func (c *Route53) UpdateTrafficPolicyInstanceRequest(input *UpdateTrafficPolicyInstanceInput) (req *aws.Request, output *UpdateTrafficPolicyInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTrafficPolicyInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-04-01/trafficpolicyinstance/{Id}",
@@ -5404,7 +5403,7 @@ func (c *Route53) UpdateTrafficPolicyInstance(input *UpdateTrafficPolicyInstance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) UpdateTrafficPolicyInstanceWithContext(ctx aws.Context, input *UpdateTrafficPolicyInstanceInput, opts ...request.Option) (*UpdateTrafficPolicyInstanceOutput, error) {
+func (c *Route53) UpdateTrafficPolicyInstanceWithContext(ctx aws.Context, input *UpdateTrafficPolicyInstanceInput, opts ...aws.Option) (*UpdateTrafficPolicyInstanceOutput, error) {
 	req, out := c.UpdateTrafficPolicyInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5448,18 +5447,18 @@ func (s AlarmIdentifier) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AlarmIdentifier) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AlarmIdentifier"}
+	invalidParams := aws.ErrInvalidParams{Context: "AlarmIdentifier"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Region == nil {
-		invalidParams.Add(request.NewErrParamRequired("Region"))
+		invalidParams.Add(aws.NewErrParamRequired("Region"))
 	}
 	if s.Region != nil && len(*s.Region) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Region", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Region", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5687,15 +5686,15 @@ func (s AliasTarget) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AliasTarget) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AliasTarget"}
+	invalidParams := aws.ErrInvalidParams{Context: "AliasTarget"}
 	if s.DNSName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DNSName"))
+		invalidParams.Add(aws.NewErrParamRequired("DNSName"))
 	}
 	if s.EvaluateTargetHealth == nil {
-		invalidParams.Add(request.NewErrParamRequired("EvaluateTargetHealth"))
+		invalidParams.Add(aws.NewErrParamRequired("EvaluateTargetHealth"))
 	}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5759,16 +5758,16 @@ func (s AssociateVPCWithHostedZoneInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateVPCWithHostedZoneInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateVPCWithHostedZoneInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateVPCWithHostedZoneInput"}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 	if s.VPC == nil {
-		invalidParams.Add(request.NewErrParamRequired("VPC"))
+		invalidParams.Add(aws.NewErrParamRequired("VPC"))
 	}
 	if s.VPC != nil {
 		if err := s.VPC.Validate(); err != nil {
-			invalidParams.AddNested("VPC", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VPC", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5902,16 +5901,16 @@ func (s Change) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Change) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Change"}
+	invalidParams := aws.ErrInvalidParams{Context: "Change"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.ResourceRecordSet == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceRecordSet"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceRecordSet"))
 	}
 	if s.ResourceRecordSet != nil {
 		if err := s.ResourceRecordSet.Validate(); err != nil {
-			invalidParams.AddNested("ResourceRecordSet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ResourceRecordSet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5959,12 +5958,12 @@ func (s ChangeBatch) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeBatch) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ChangeBatch"}
+	invalidParams := aws.ErrInvalidParams{Context: "ChangeBatch"}
 	if s.Changes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Changes"))
+		invalidParams.Add(aws.NewErrParamRequired("Changes"))
 	}
 	if s.Changes != nil && len(s.Changes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Changes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Changes", 1))
 	}
 	if s.Changes != nil {
 		for i, v := range s.Changes {
@@ -5972,7 +5971,7 @@ func (s *ChangeBatch) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Changes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Changes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6091,16 +6090,16 @@ func (s ChangeResourceRecordSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeResourceRecordSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ChangeResourceRecordSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ChangeResourceRecordSetsInput"}
 	if s.ChangeBatch == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeBatch"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeBatch"))
 	}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 	if s.ChangeBatch != nil {
 		if err := s.ChangeBatch.Validate(); err != nil {
-			invalidParams.AddNested("ChangeBatch", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ChangeBatch", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6197,18 +6196,18 @@ func (s ChangeTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ChangeTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ChangeTagsForResourceInput"}
 	if s.AddTags != nil && len(s.AddTags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AddTags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AddTags", 1))
 	}
 	if s.RemoveTagKeys != nil && len(s.RemoveTagKeys) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RemoveTagKeys", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RemoveTagKeys", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6417,19 +6416,19 @@ func (s CreateHealthCheckInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHealthCheckInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHealthCheckInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHealthCheckInput"}
 	if s.CallerReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("CallerReference"))
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
 	if s.CallerReference != nil && len(*s.CallerReference) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CallerReference", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CallerReference", 1))
 	}
 	if s.HealthCheckConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("HealthCheckConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("HealthCheckConfig"))
 	}
 	if s.HealthCheckConfig != nil {
 		if err := s.HealthCheckConfig.Validate(); err != nil {
-			invalidParams.AddNested("HealthCheckConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("HealthCheckConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6555,19 +6554,19 @@ func (s CreateHostedZoneInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHostedZoneInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHostedZoneInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHostedZoneInput"}
 	if s.CallerReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("CallerReference"))
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
 	if s.CallerReference != nil && len(*s.CallerReference) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CallerReference", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CallerReference", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.VPC != nil {
 		if err := s.VPC.Validate(); err != nil {
-			invalidParams.AddNested("VPC", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VPC", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6713,12 +6712,12 @@ func (s CreateQueryLoggingConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateQueryLoggingConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateQueryLoggingConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateQueryLoggingConfigInput"}
 	if s.CloudWatchLogsLogGroupArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CloudWatchLogsLogGroupArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLogsLogGroupArn"))
 	}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6808,12 +6807,12 @@ func (s CreateReusableDelegationSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReusableDelegationSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateReusableDelegationSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReusableDelegationSetInput"}
 	if s.CallerReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("CallerReference"))
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
 	if s.CallerReference != nil && len(*s.CallerReference) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CallerReference", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CallerReference", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6904,12 +6903,12 @@ func (s CreateTrafficPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrafficPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTrafficPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTrafficPolicyInput"}
 	if s.Document == nil {
-		invalidParams.Add(request.NewErrParamRequired("Document"))
+		invalidParams.Add(aws.NewErrParamRequired("Document"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6986,27 +6985,27 @@ func (s CreateTrafficPolicyInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrafficPolicyInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTrafficPolicyInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTrafficPolicyInstanceInput"}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.TTL == nil {
-		invalidParams.Add(request.NewErrParamRequired("TTL"))
+		invalidParams.Add(aws.NewErrParamRequired("TTL"))
 	}
 	if s.TrafficPolicyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrafficPolicyId"))
+		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyId"))
 	}
 	if s.TrafficPolicyId != nil && len(*s.TrafficPolicyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TrafficPolicyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyId", 1))
 	}
 	if s.TrafficPolicyVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrafficPolicyVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyVersion"))
 	}
 	if s.TrafficPolicyVersion != nil && *s.TrafficPolicyVersion < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("TrafficPolicyVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("TrafficPolicyVersion", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7158,15 +7157,15 @@ func (s CreateTrafficPolicyVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrafficPolicyVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTrafficPolicyVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTrafficPolicyVersionInput"}
 	if s.Document == nil {
-		invalidParams.Add(request.NewErrParamRequired("Document"))
+		invalidParams.Add(aws.NewErrParamRequired("Document"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7265,16 +7264,16 @@ func (s CreateVPCAssociationAuthorizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVPCAssociationAuthorizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateVPCAssociationAuthorizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateVPCAssociationAuthorizationInput"}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 	if s.VPC == nil {
-		invalidParams.Add(request.NewErrParamRequired("VPC"))
+		invalidParams.Add(aws.NewErrParamRequired("VPC"))
 	}
 	if s.VPC != nil {
 		if err := s.VPC.Validate(); err != nil {
-			invalidParams.AddNested("VPC", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VPC", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7406,9 +7405,9 @@ func (s DeleteHealthCheckInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHealthCheckInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteHealthCheckInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteHealthCheckInput"}
 	if s.HealthCheckId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HealthCheckId"))
+		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7462,9 +7461,9 @@ func (s DeleteHostedZoneInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHostedZoneInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteHostedZoneInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteHostedZoneInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7529,12 +7528,12 @@ func (s DeleteQueryLoggingConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteQueryLoggingConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteQueryLoggingConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteQueryLoggingConfigInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7587,9 +7586,9 @@ func (s DeleteReusableDelegationSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReusableDelegationSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteReusableDelegationSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReusableDelegationSetInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7648,18 +7647,18 @@ func (s DeleteTrafficPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTrafficPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTrafficPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrafficPolicyInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && *s.Version < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7707,12 +7706,12 @@ func (s DeleteTrafficPolicyInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTrafficPolicyInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTrafficPolicyInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrafficPolicyInstanceInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7793,16 +7792,16 @@ func (s DeleteVPCAssociationAuthorizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVPCAssociationAuthorizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteVPCAssociationAuthorizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVPCAssociationAuthorizationInput"}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 	if s.VPC == nil {
-		invalidParams.Add(request.NewErrParamRequired("VPC"))
+		invalidParams.Add(aws.NewErrParamRequired("VPC"))
 	}
 	if s.VPC != nil {
 		if err := s.VPC.Validate(); err != nil {
-			invalidParams.AddNested("VPC", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VPC", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7914,16 +7913,16 @@ func (s DisassociateVPCFromHostedZoneInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateVPCFromHostedZoneInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateVPCFromHostedZoneInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateVPCFromHostedZoneInput"}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 	if s.VPC == nil {
-		invalidParams.Add(request.NewErrParamRequired("VPC"))
+		invalidParams.Add(aws.NewErrParamRequired("VPC"))
 	}
 	if s.VPC != nil {
 		if err := s.VPC.Validate(); err != nil {
-			invalidParams.AddNested("VPC", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VPC", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8013,15 +8012,15 @@ func (s GeoLocation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GeoLocation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GeoLocation"}
+	invalidParams := aws.ErrInvalidParams{Context: "GeoLocation"}
 	if s.ContinentCode != nil && len(*s.ContinentCode) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ContinentCode", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ContinentCode", 2))
 	}
 	if s.CountryCode != nil && len(*s.CountryCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CountryCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CountryCode", 1))
 	}
 	if s.SubdivisionCode != nil && len(*s.SubdivisionCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SubdivisionCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SubdivisionCode", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8146,9 +8145,9 @@ func (s GetChangeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetChangeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetChangeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetChangeInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8275,15 +8274,15 @@ func (s GetGeoLocationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGeoLocationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGeoLocationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGeoLocationInput"}
 	if s.ContinentCode != nil && len(*s.ContinentCode) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ContinentCode", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ContinentCode", 2))
 	}
 	if s.CountryCode != nil && len(*s.CountryCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CountryCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CountryCode", 1))
 	}
 	if s.SubdivisionCode != nil && len(*s.SubdivisionCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SubdivisionCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SubdivisionCode", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8409,9 +8408,9 @@ func (s GetHealthCheckInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHealthCheckInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetHealthCheckInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetHealthCheckInput"}
 	if s.HealthCheckId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HealthCheckId"))
+		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8451,9 +8450,9 @@ func (s GetHealthCheckLastFailureReasonInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHealthCheckLastFailureReasonInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetHealthCheckLastFailureReasonInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetHealthCheckLastFailureReasonInput"}
 	if s.HealthCheckId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HealthCheckId"))
+		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8554,9 +8553,9 @@ func (s GetHealthCheckStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHealthCheckStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetHealthCheckStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetHealthCheckStatusInput"}
 	if s.HealthCheckId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HealthCheckId"))
+		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8667,9 +8666,9 @@ func (s GetHostedZoneInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHostedZoneInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetHostedZoneInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetHostedZoneInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8755,12 +8754,12 @@ func (s GetQueryLoggingConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueryLoggingConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetQueryLoggingConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetQueryLoggingConfigInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8826,9 +8825,9 @@ func (s GetReusableDelegationSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetReusableDelegationSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetReusableDelegationSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetReusableDelegationSetInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8900,18 +8899,18 @@ func (s GetTrafficPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTrafficPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTrafficPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTrafficPolicyInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && *s.Version < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9001,12 +9000,12 @@ func (s GetTrafficPolicyInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTrafficPolicyInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTrafficPolicyInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTrafficPolicyInstanceInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9439,25 +9438,25 @@ func (s HealthCheckConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HealthCheckConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "HealthCheckConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "HealthCheckConfig"}
 	if s.FailureThreshold != nil && *s.FailureThreshold < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("FailureThreshold", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("FailureThreshold", 1))
 	}
 	if s.Port != nil && *s.Port < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Port", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
 	}
 	if s.Regions != nil && len(s.Regions) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Regions", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Regions", 3))
 	}
 	if s.RequestInterval != nil && *s.RequestInterval < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("RequestInterval", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("RequestInterval", 10))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.AlarmIdentifier != nil {
 		if err := s.AlarmIdentifier.Validate(); err != nil {
-			invalidParams.AddNested("AlarmIdentifier", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AlarmIdentifier", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9776,15 +9775,15 @@ func (s ListGeoLocationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGeoLocationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListGeoLocationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListGeoLocationsInput"}
 	if s.StartContinentCode != nil && len(*s.StartContinentCode) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("StartContinentCode", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("StartContinentCode", 2))
 	}
 	if s.StartCountryCode != nil && len(*s.StartCountryCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StartCountryCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StartCountryCode", 1))
 	}
 	if s.StartSubdivisionCode != nil && len(*s.StartSubdivisionCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StartSubdivisionCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StartSubdivisionCode", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10496,12 +10495,12 @@ func (s ListResourceRecordSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourceRecordSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListResourceRecordSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListResourceRecordSetsInput"}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 	if s.StartRecordIdentifier != nil && len(*s.StartRecordIdentifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StartRecordIdentifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StartRecordIdentifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10780,12 +10779,12 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10868,15 +10867,15 @@ func (s ListTagsForResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourcesInput"}
 	if s.ResourceIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceIds"))
 	}
 	if s.ResourceIds != nil && len(s.ResourceIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceIds", 1))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10960,9 +10959,9 @@ func (s ListTrafficPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTrafficPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTrafficPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTrafficPoliciesInput"}
 	if s.TrafficPolicyIdMarker != nil && len(*s.TrafficPolicyIdMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TrafficPolicyIdMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyIdMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11104,9 +11103,9 @@ func (s ListTrafficPolicyInstancesByHostedZoneInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTrafficPolicyInstancesByHostedZoneInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTrafficPolicyInstancesByHostedZoneInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTrafficPolicyInstancesByHostedZoneInput"}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11290,18 +11289,18 @@ func (s ListTrafficPolicyInstancesByPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTrafficPolicyInstancesByPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTrafficPolicyInstancesByPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTrafficPolicyInstancesByPolicyInput"}
 	if s.TrafficPolicyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrafficPolicyId"))
+		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyId"))
 	}
 	if s.TrafficPolicyId != nil && len(*s.TrafficPolicyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TrafficPolicyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyId", 1))
 	}
 	if s.TrafficPolicyVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrafficPolicyVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyVersion"))
 	}
 	if s.TrafficPolicyVersion != nil && *s.TrafficPolicyVersion < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("TrafficPolicyVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("TrafficPolicyVersion", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11648,12 +11647,12 @@ func (s ListTrafficPolicyVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTrafficPolicyVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTrafficPolicyVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTrafficPolicyVersionsInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11787,9 +11786,9 @@ func (s ListVPCAssociationAuthorizationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVPCAssociationAuthorizationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListVPCAssociationAuthorizationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListVPCAssociationAuthorizationsInput"}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11953,9 +11952,9 @@ func (s ResourceRecord) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceRecord) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResourceRecord"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceRecord"}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12378,33 +12377,33 @@ func (s ResourceRecordSet) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceRecordSet) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResourceRecordSet"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceRecordSet"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Region != nil && len(*s.Region) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Region", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Region", 1))
 	}
 	if s.ResourceRecords != nil && len(s.ResourceRecords) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceRecords", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceRecords", 1))
 	}
 	if s.SetIdentifier != nil && len(*s.SetIdentifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SetIdentifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SetIdentifier", 1))
 	}
 	if s.TrafficPolicyInstanceId != nil && len(*s.TrafficPolicyInstanceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TrafficPolicyInstanceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyInstanceId", 1))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.AliasTarget != nil {
 		if err := s.AliasTarget.Validate(); err != nil {
-			invalidParams.AddNested("AliasTarget", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AliasTarget", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.GeoLocation != nil {
 		if err := s.GeoLocation.Validate(); err != nil {
-			invalidParams.AddNested("GeoLocation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("GeoLocation", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ResourceRecords != nil {
@@ -12413,7 +12412,7 @@ func (s *ResourceRecordSet) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceRecords", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceRecords", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12696,15 +12695,15 @@ func (s TestDNSAnswerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestDNSAnswerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TestDNSAnswerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TestDNSAnswerInput"}
 	if s.HostedZoneId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostedZoneId"))
+		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
 	if s.RecordName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RecordName"))
+		invalidParams.Add(aws.NewErrParamRequired("RecordName"))
 	}
 	if s.RecordType == nil {
-		invalidParams.Add(request.NewErrParamRequired("RecordType"))
+		invalidParams.Add(aws.NewErrParamRequired("RecordType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13396,25 +13395,25 @@ func (s UpdateHealthCheckInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateHealthCheckInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateHealthCheckInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateHealthCheckInput"}
 	if s.FailureThreshold != nil && *s.FailureThreshold < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("FailureThreshold", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("FailureThreshold", 1))
 	}
 	if s.HealthCheckId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HealthCheckId"))
+		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
 	if s.HealthCheckVersion != nil && *s.HealthCheckVersion < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("HealthCheckVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("HealthCheckVersion", 1))
 	}
 	if s.Port != nil && *s.Port < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Port", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
 	}
 	if s.Regions != nil && len(s.Regions) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Regions", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Regions", 3))
 	}
 	if s.AlarmIdentifier != nil {
 		if err := s.AlarmIdentifier.Validate(); err != nil {
-			invalidParams.AddNested("AlarmIdentifier", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AlarmIdentifier", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -13574,9 +13573,9 @@ func (s UpdateHostedZoneCommentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateHostedZoneCommentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateHostedZoneCommentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateHostedZoneCommentInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13661,21 +13660,21 @@ func (s UpdateTrafficPolicyCommentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTrafficPolicyCommentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTrafficPolicyCommentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTrafficPolicyCommentInput"}
 	if s.Comment == nil {
-		invalidParams.Add(request.NewErrParamRequired("Comment"))
+		invalidParams.Add(aws.NewErrParamRequired("Comment"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && *s.Version < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13771,27 +13770,27 @@ func (s UpdateTrafficPolicyInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTrafficPolicyInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTrafficPolicyInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTrafficPolicyInstanceInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.TTL == nil {
-		invalidParams.Add(request.NewErrParamRequired("TTL"))
+		invalidParams.Add(aws.NewErrParamRequired("TTL"))
 	}
 	if s.TrafficPolicyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrafficPolicyId"))
+		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyId"))
 	}
 	if s.TrafficPolicyId != nil && len(*s.TrafficPolicyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TrafficPolicyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyId", 1))
 	}
 	if s.TrafficPolicyVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrafficPolicyVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyVersion"))
 	}
 	if s.TrafficPolicyVersion != nil && *s.TrafficPolicyVersion < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("TrafficPolicyVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("TrafficPolicyVersion", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13877,9 +13876,9 @@ func (s VPC) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VPC) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VPC"}
+	invalidParams := aws.ErrInvalidParams{Context: "VPC"}
 	if s.VPCRegion != nil && len(*s.VPCRegion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VPCRegion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VPCRegion", 1))
 	}
 
 	if invalidParams.Len() > 0 {

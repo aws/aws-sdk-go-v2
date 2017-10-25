@@ -3,12 +3,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/url"
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -47,6 +48,11 @@ func (c *client) concatenate(key1, key2, key3 string, uploadID *string) (*string
 	return foo.CopyPartResult.ETag, bar.CopyPartResult.ETag, nil
 }
 
+func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
+	os.Exit(1)
+}
+
 func main() {
 	if len(os.Args) < 4 {
 		log.Println("USAGE ERROR: AWS_REGION=us-east-1 go run concatenateObjects.go <bucket> <key for object 1> <key for object 2> <key for output>")
@@ -57,8 +63,12 @@ func main() {
 	key1 := os.Args[2]
 	key2 := os.Args[3]
 	key3 := os.Args[4]
-	sess := session.New(&aws.Config{})
-	svc := s3.New(sess)
+
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
+	svc := s3.New(cfg)
 
 	c := client{svc, &bucket}
 
@@ -69,14 +79,12 @@ func main() {
 	})
 
 	if err != nil {
-		log.Println("ERROR:", err)
-		return
+		exitErrorf("failed to create upload, %v", err)
 	}
 
 	foo, bar, err := c.concatenate(key1, key2, key3, output.UploadId)
 	if err != nil {
-		log.Println("ERROR:", err)
-		return
+		exitErrorf("failed to concatenate, %v", err)
 	}
 
 	// We finally complete the multipart upload.
@@ -98,7 +106,6 @@ func main() {
 		},
 	})
 	if err != nil {
-		log.Println("ERROR:", err)
-		return
+		exitErrorf("failed to complete CompleteMultipartUpload, %v", err)
 	}
 }

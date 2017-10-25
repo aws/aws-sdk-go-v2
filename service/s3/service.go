@@ -4,9 +4,6 @@ package s3
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
@@ -18,14 +15,14 @@ import (
 // S3 methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type S3 struct {
-	*client.Client
+	*aws.Client
 }
 
 // Used for custom client initialization logic
-var initClient func(*client.Client)
+var initClient func(*aws.Client)
 
 // Used for custom request initialization logic
-var initRequest func(*request.Request)
+var initRequest func(*aws.Request)
 
 // Service information constants
 const (
@@ -33,34 +30,29 @@ const (
 	EndpointsID = ServiceName // Service ID for Regions and Endpoints metadata.
 )
 
-// New creates a new instance of the S3 client with a session.
+// New creates a new instance of the S3 client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a S3 client from just a session.
-//     svc := s3.New(mySession)
+//     // Create a S3 client from just a config.
+//     svc := s3.New(myConfig)
 //
 //     // Create a S3 client with additional configuration
-//     svc := s3.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func New(p client.ConfigProvider, cfgs ...*aws.Config) *S3 {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+//     svc := s3.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func New(config aws.Config) *S3 {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *S3 {
 	svc := &S3{
-		Client: client.New(
-			cfg,
-			metadata.ClientInfo{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2006-03-01",
 			},
-			handlers,
 		),
 	}
 
@@ -81,7 +73,7 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 
 // newRequest creates a new request for a S3 operation and runs any
 // custom request initialization.
-func (c *S3) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *S3) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	// Run custom request initialization if present

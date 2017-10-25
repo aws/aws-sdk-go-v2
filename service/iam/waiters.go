@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilInstanceProfileExists uses the IAM API operation
@@ -25,25 +24,25 @@ func (c *IAM) WaitUntilInstanceProfileExists(input *GetInstanceProfileInput) err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IAM) WaitUntilInstanceProfileExistsWithContext(ctx aws.Context, input *GetInstanceProfileInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *IAM) WaitUntilInstanceProfileExistsWithContext(ctx aws.Context, input *GetInstanceProfileInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilInstanceProfileExists",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(1 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(1 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.StatusWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
 				Expected: 200,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.StatusWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
 				Expected: 404,
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *GetInstanceProfileInput
 			if input != nil {
 				tmp := *input
@@ -76,25 +75,25 @@ func (c *IAM) WaitUntilUserExists(input *GetUserInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IAM) WaitUntilUserExistsWithContext(ctx aws.Context, input *GetUserInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *IAM) WaitUntilUserExistsWithContext(ctx aws.Context, input *GetUserInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilUserExists",
 		MaxAttempts: 20,
-		Delay:       request.ConstantWaiterDelay(1 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(1 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.StatusWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
 				Expected: 200,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "NoSuchEntity",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *GetUserInput
 			if input != nil {
 				tmp := *input

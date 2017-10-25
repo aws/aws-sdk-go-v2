@@ -6,15 +6,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opAuthorizeClusterSecurityGroupIngress = "AuthorizeClusterSecurityGroupIngress"
 
-// AuthorizeClusterSecurityGroupIngressRequest generates a "aws/request.Request" representing the
+// AuthorizeClusterSecurityGroupIngressRequest generates a "aws.Request" representing the
 // client's request for the AuthorizeClusterSecurityGroupIngress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -38,8 +37,8 @@ const opAuthorizeClusterSecurityGroupIngress = "AuthorizeClusterSecurityGroupIng
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeClusterSecurityGroupIngress
-func (c *Redshift) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeClusterSecurityGroupIngressInput) (req *request.Request, output *AuthorizeClusterSecurityGroupIngressOutput) {
-	op := &request.Operation{
+func (c *Redshift) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeClusterSecurityGroupIngressInput) (req *aws.Request, output *AuthorizeClusterSecurityGroupIngressOutput) {
+	op := &aws.Operation{
 		Name:       opAuthorizeClusterSecurityGroupIngress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -114,7 +113,7 @@ func (c *Redshift) AuthorizeClusterSecurityGroupIngress(input *AuthorizeClusterS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) AuthorizeClusterSecurityGroupIngressWithContext(ctx aws.Context, input *AuthorizeClusterSecurityGroupIngressInput, opts ...request.Option) (*AuthorizeClusterSecurityGroupIngressOutput, error) {
+func (c *Redshift) AuthorizeClusterSecurityGroupIngressWithContext(ctx aws.Context, input *AuthorizeClusterSecurityGroupIngressInput, opts ...aws.Option) (*AuthorizeClusterSecurityGroupIngressOutput, error) {
 	req, out := c.AuthorizeClusterSecurityGroupIngressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -123,7 +122,7 @@ func (c *Redshift) AuthorizeClusterSecurityGroupIngressWithContext(ctx aws.Conte
 
 const opAuthorizeSnapshotAccess = "AuthorizeSnapshotAccess"
 
-// AuthorizeSnapshotAccessRequest generates a "aws/request.Request" representing the
+// AuthorizeSnapshotAccessRequest generates a "aws.Request" representing the
 // client's request for the AuthorizeSnapshotAccess operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -147,8 +146,8 @@ const opAuthorizeSnapshotAccess = "AuthorizeSnapshotAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess
-func (c *Redshift) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccessInput) (req *request.Request, output *AuthorizeSnapshotAccessOutput) {
-	op := &request.Operation{
+func (c *Redshift) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccessInput) (req *aws.Request, output *AuthorizeSnapshotAccessOutput) {
+	op := &aws.Operation{
 		Name:       opAuthorizeSnapshotAccess,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -215,7 +214,7 @@ func (c *Redshift) AuthorizeSnapshotAccess(input *AuthorizeSnapshotAccessInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) AuthorizeSnapshotAccessWithContext(ctx aws.Context, input *AuthorizeSnapshotAccessInput, opts ...request.Option) (*AuthorizeSnapshotAccessOutput, error) {
+func (c *Redshift) AuthorizeSnapshotAccessWithContext(ctx aws.Context, input *AuthorizeSnapshotAccessInput, opts ...aws.Option) (*AuthorizeSnapshotAccessOutput, error) {
 	req, out := c.AuthorizeSnapshotAccessRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -224,7 +223,7 @@ func (c *Redshift) AuthorizeSnapshotAccessWithContext(ctx aws.Context, input *Au
 
 const opCopyClusterSnapshot = "CopyClusterSnapshot"
 
-// CopyClusterSnapshotRequest generates a "aws/request.Request" representing the
+// CopyClusterSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CopyClusterSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -248,8 +247,8 @@ const opCopyClusterSnapshot = "CopyClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot
-func (c *Redshift) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) (req *request.Request, output *CopyClusterSnapshotOutput) {
-	op := &request.Operation{
+func (c *Redshift) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) (req *aws.Request, output *CopyClusterSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCopyClusterSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -318,7 +317,7 @@ func (c *Redshift) CopyClusterSnapshot(input *CopyClusterSnapshotInput) (*CopyCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CopyClusterSnapshotWithContext(ctx aws.Context, input *CopyClusterSnapshotInput, opts ...request.Option) (*CopyClusterSnapshotOutput, error) {
+func (c *Redshift) CopyClusterSnapshotWithContext(ctx aws.Context, input *CopyClusterSnapshotInput, opts ...aws.Option) (*CopyClusterSnapshotOutput, error) {
 	req, out := c.CopyClusterSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -327,7 +326,7 @@ func (c *Redshift) CopyClusterSnapshotWithContext(ctx aws.Context, input *CopyCl
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws/request.Request" representing the
+// CreateClusterRequest generates a "aws.Request" representing the
 // client's request for the CreateCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -351,8 +350,8 @@ const opCreateCluster = "CreateCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster
-func (c *Redshift) CreateClusterRequest(input *CreateClusterInput) (req *request.Request, output *CreateClusterOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -467,7 +466,7 @@ func (c *Redshift) CreateCluster(input *CreateClusterInput) (*CreateClusterOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...request.Option) (*CreateClusterOutput, error) {
+func (c *Redshift) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
 	req, out := c.CreateClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -476,7 +475,7 @@ func (c *Redshift) CreateClusterWithContext(ctx aws.Context, input *CreateCluste
 
 const opCreateClusterParameterGroup = "CreateClusterParameterGroup"
 
-// CreateClusterParameterGroupRequest generates a "aws/request.Request" representing the
+// CreateClusterParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateClusterParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -500,8 +499,8 @@ const opCreateClusterParameterGroup = "CreateClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroup
-func (c *Redshift) CreateClusterParameterGroupRequest(input *CreateClusterParameterGroupInput) (req *request.Request, output *CreateClusterParameterGroupOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateClusterParameterGroupRequest(input *CreateClusterParameterGroupInput) (req *aws.Request, output *CreateClusterParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -568,7 +567,7 @@ func (c *Redshift) CreateClusterParameterGroup(input *CreateClusterParameterGrou
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateClusterParameterGroupWithContext(ctx aws.Context, input *CreateClusterParameterGroupInput, opts ...request.Option) (*CreateClusterParameterGroupOutput, error) {
+func (c *Redshift) CreateClusterParameterGroupWithContext(ctx aws.Context, input *CreateClusterParameterGroupInput, opts ...aws.Option) (*CreateClusterParameterGroupOutput, error) {
 	req, out := c.CreateClusterParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -577,7 +576,7 @@ func (c *Redshift) CreateClusterParameterGroupWithContext(ctx aws.Context, input
 
 const opCreateClusterSecurityGroup = "CreateClusterSecurityGroup"
 
-// CreateClusterSecurityGroupRequest generates a "aws/request.Request" representing the
+// CreateClusterSecurityGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateClusterSecurityGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -601,8 +600,8 @@ const opCreateClusterSecurityGroup = "CreateClusterSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSecurityGroup
-func (c *Redshift) CreateClusterSecurityGroupRequest(input *CreateClusterSecurityGroupInput) (req *request.Request, output *CreateClusterSecurityGroupOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateClusterSecurityGroupRequest(input *CreateClusterSecurityGroupInput) (req *aws.Request, output *CreateClusterSecurityGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateClusterSecurityGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -664,7 +663,7 @@ func (c *Redshift) CreateClusterSecurityGroup(input *CreateClusterSecurityGroupI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateClusterSecurityGroupWithContext(ctx aws.Context, input *CreateClusterSecurityGroupInput, opts ...request.Option) (*CreateClusterSecurityGroupOutput, error) {
+func (c *Redshift) CreateClusterSecurityGroupWithContext(ctx aws.Context, input *CreateClusterSecurityGroupInput, opts ...aws.Option) (*CreateClusterSecurityGroupOutput, error) {
 	req, out := c.CreateClusterSecurityGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -673,7 +672,7 @@ func (c *Redshift) CreateClusterSecurityGroupWithContext(ctx aws.Context, input 
 
 const opCreateClusterSnapshot = "CreateClusterSnapshot"
 
-// CreateClusterSnapshotRequest generates a "aws/request.Request" representing the
+// CreateClusterSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CreateClusterSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -697,8 +696,8 @@ const opCreateClusterSnapshot = "CreateClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot
-func (c *Redshift) CreateClusterSnapshotRequest(input *CreateClusterSnapshotInput) (req *request.Request, output *CreateClusterSnapshotOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateClusterSnapshotRequest(input *CreateClusterSnapshotInput) (req *aws.Request, output *CreateClusterSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCreateClusterSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -765,7 +764,7 @@ func (c *Redshift) CreateClusterSnapshot(input *CreateClusterSnapshotInput) (*Cr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateClusterSnapshotWithContext(ctx aws.Context, input *CreateClusterSnapshotInput, opts ...request.Option) (*CreateClusterSnapshotOutput, error) {
+func (c *Redshift) CreateClusterSnapshotWithContext(ctx aws.Context, input *CreateClusterSnapshotInput, opts ...aws.Option) (*CreateClusterSnapshotOutput, error) {
 	req, out := c.CreateClusterSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -774,7 +773,7 @@ func (c *Redshift) CreateClusterSnapshotWithContext(ctx aws.Context, input *Crea
 
 const opCreateClusterSubnetGroup = "CreateClusterSubnetGroup"
 
-// CreateClusterSubnetGroupRequest generates a "aws/request.Request" representing the
+// CreateClusterSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateClusterSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -798,8 +797,8 @@ const opCreateClusterSubnetGroup = "CreateClusterSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroup
-func (c *Redshift) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGroupInput) (req *request.Request, output *CreateClusterSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGroupInput) (req *aws.Request, output *CreateClusterSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateClusterSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -879,7 +878,7 @@ func (c *Redshift) CreateClusterSubnetGroup(input *CreateClusterSubnetGroupInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateClusterSubnetGroupWithContext(ctx aws.Context, input *CreateClusterSubnetGroupInput, opts ...request.Option) (*CreateClusterSubnetGroupOutput, error) {
+func (c *Redshift) CreateClusterSubnetGroupWithContext(ctx aws.Context, input *CreateClusterSubnetGroupInput, opts ...aws.Option) (*CreateClusterSubnetGroupOutput, error) {
 	req, out := c.CreateClusterSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -888,7 +887,7 @@ func (c *Redshift) CreateClusterSubnetGroupWithContext(ctx aws.Context, input *C
 
 const opCreateEventSubscription = "CreateEventSubscription"
 
-// CreateEventSubscriptionRequest generates a "aws/request.Request" representing the
+// CreateEventSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the CreateEventSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -912,8 +911,8 @@ const opCreateEventSubscription = "CreateEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEventSubscription
-func (c *Redshift) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *request.Request, output *CreateEventSubscriptionOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *aws.Request, output *CreateEventSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1019,7 +1018,7 @@ func (c *Redshift) CreateEventSubscription(input *CreateEventSubscriptionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...request.Option) (*CreateEventSubscriptionOutput, error) {
+func (c *Redshift) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...aws.Option) (*CreateEventSubscriptionOutput, error) {
 	req, out := c.CreateEventSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1028,7 +1027,7 @@ func (c *Redshift) CreateEventSubscriptionWithContext(ctx aws.Context, input *Cr
 
 const opCreateHsmClientCertificate = "CreateHsmClientCertificate"
 
-// CreateHsmClientCertificateRequest generates a "aws/request.Request" representing the
+// CreateHsmClientCertificateRequest generates a "aws.Request" representing the
 // client's request for the CreateHsmClientCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1052,8 +1051,8 @@ const opCreateHsmClientCertificate = "CreateHsmClientCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmClientCertificate
-func (c *Redshift) CreateHsmClientCertificateRequest(input *CreateHsmClientCertificateInput) (req *request.Request, output *CreateHsmClientCertificateOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateHsmClientCertificateRequest(input *CreateHsmClientCertificateInput) (req *aws.Request, output *CreateHsmClientCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHsmClientCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1118,7 +1117,7 @@ func (c *Redshift) CreateHsmClientCertificate(input *CreateHsmClientCertificateI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateHsmClientCertificateWithContext(ctx aws.Context, input *CreateHsmClientCertificateInput, opts ...request.Option) (*CreateHsmClientCertificateOutput, error) {
+func (c *Redshift) CreateHsmClientCertificateWithContext(ctx aws.Context, input *CreateHsmClientCertificateInput, opts ...aws.Option) (*CreateHsmClientCertificateOutput, error) {
 	req, out := c.CreateHsmClientCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1127,7 +1126,7 @@ func (c *Redshift) CreateHsmClientCertificateWithContext(ctx aws.Context, input 
 
 const opCreateHsmConfiguration = "CreateHsmConfiguration"
 
-// CreateHsmConfigurationRequest generates a "aws/request.Request" representing the
+// CreateHsmConfigurationRequest generates a "aws.Request" representing the
 // client's request for the CreateHsmConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1151,8 +1150,8 @@ const opCreateHsmConfiguration = "CreateHsmConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmConfiguration
-func (c *Redshift) CreateHsmConfigurationRequest(input *CreateHsmConfigurationInput) (req *request.Request, output *CreateHsmConfigurationOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateHsmConfigurationRequest(input *CreateHsmConfigurationInput) (req *aws.Request, output *CreateHsmConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHsmConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1218,7 +1217,7 @@ func (c *Redshift) CreateHsmConfiguration(input *CreateHsmConfigurationInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateHsmConfigurationWithContext(ctx aws.Context, input *CreateHsmConfigurationInput, opts ...request.Option) (*CreateHsmConfigurationOutput, error) {
+func (c *Redshift) CreateHsmConfigurationWithContext(ctx aws.Context, input *CreateHsmConfigurationInput, opts ...aws.Option) (*CreateHsmConfigurationOutput, error) {
 	req, out := c.CreateHsmConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1227,7 +1226,7 @@ func (c *Redshift) CreateHsmConfigurationWithContext(ctx aws.Context, input *Cre
 
 const opCreateSnapshotCopyGrant = "CreateSnapshotCopyGrant"
 
-// CreateSnapshotCopyGrantRequest generates a "aws/request.Request" representing the
+// CreateSnapshotCopyGrantRequest generates a "aws.Request" representing the
 // client's request for the CreateSnapshotCopyGrant operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1251,8 +1250,8 @@ const opCreateSnapshotCopyGrant = "CreateSnapshotCopyGrant"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrant
-func (c *Redshift) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrantInput) (req *request.Request, output *CreateSnapshotCopyGrantOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrantInput) (req *aws.Request, output *CreateSnapshotCopyGrantOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSnapshotCopyGrant,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1321,7 +1320,7 @@ func (c *Redshift) CreateSnapshotCopyGrant(input *CreateSnapshotCopyGrantInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateSnapshotCopyGrantWithContext(ctx aws.Context, input *CreateSnapshotCopyGrantInput, opts ...request.Option) (*CreateSnapshotCopyGrantOutput, error) {
+func (c *Redshift) CreateSnapshotCopyGrantWithContext(ctx aws.Context, input *CreateSnapshotCopyGrantInput, opts ...aws.Option) (*CreateSnapshotCopyGrantOutput, error) {
 	req, out := c.CreateSnapshotCopyGrantRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1330,7 +1329,7 @@ func (c *Redshift) CreateSnapshotCopyGrantWithContext(ctx aws.Context, input *Cr
 
 const opCreateTags = "CreateTags"
 
-// CreateTagsRequest generates a "aws/request.Request" representing the
+// CreateTagsRequest generates a "aws.Request" representing the
 // client's request for the CreateTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1354,8 +1353,8 @@ const opCreateTags = "CreateTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateTags
-func (c *Redshift) CreateTagsRequest(input *CreateTagsInput) (req *request.Request, output *CreateTagsOutput) {
-	op := &request.Operation{
+func (c *Redshift) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1414,7 +1413,7 @@ func (c *Redshift) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...request.Option) (*CreateTagsOutput, error) {
+func (c *Redshift) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...aws.Option) (*CreateTagsOutput, error) {
 	req, out := c.CreateTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1423,7 +1422,7 @@ func (c *Redshift) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput
 
 const opDeleteCluster = "DeleteCluster"
 
-// DeleteClusterRequest generates a "aws/request.Request" representing the
+// DeleteClusterRequest generates a "aws.Request" representing the
 // client's request for the DeleteCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1447,8 +1446,8 @@ const opDeleteCluster = "DeleteCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster
-func (c *Redshift) DeleteClusterRequest(input *DeleteClusterInput) (req *request.Request, output *DeleteClusterOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request, output *DeleteClusterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1520,7 +1519,7 @@ func (c *Redshift) DeleteCluster(input *DeleteClusterInput) (*DeleteClusterOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...request.Option) (*DeleteClusterOutput, error) {
+func (c *Redshift) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...aws.Option) (*DeleteClusterOutput, error) {
 	req, out := c.DeleteClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1529,7 +1528,7 @@ func (c *Redshift) DeleteClusterWithContext(ctx aws.Context, input *DeleteCluste
 
 const opDeleteClusterParameterGroup = "DeleteClusterParameterGroup"
 
-// DeleteClusterParameterGroupRequest generates a "aws/request.Request" representing the
+// DeleteClusterParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteClusterParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1553,8 +1552,8 @@ const opDeleteClusterParameterGroup = "DeleteClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterParameterGroup
-func (c *Redshift) DeleteClusterParameterGroupRequest(input *DeleteClusterParameterGroupInput) (req *request.Request, output *DeleteClusterParameterGroupOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteClusterParameterGroupRequest(input *DeleteClusterParameterGroupInput) (req *aws.Request, output *DeleteClusterParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1608,7 +1607,7 @@ func (c *Redshift) DeleteClusterParameterGroup(input *DeleteClusterParameterGrou
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteClusterParameterGroupWithContext(ctx aws.Context, input *DeleteClusterParameterGroupInput, opts ...request.Option) (*DeleteClusterParameterGroupOutput, error) {
+func (c *Redshift) DeleteClusterParameterGroupWithContext(ctx aws.Context, input *DeleteClusterParameterGroupInput, opts ...aws.Option) (*DeleteClusterParameterGroupOutput, error) {
 	req, out := c.DeleteClusterParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1617,7 +1616,7 @@ func (c *Redshift) DeleteClusterParameterGroupWithContext(ctx aws.Context, input
 
 const opDeleteClusterSecurityGroup = "DeleteClusterSecurityGroup"
 
-// DeleteClusterSecurityGroupRequest generates a "aws/request.Request" representing the
+// DeleteClusterSecurityGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteClusterSecurityGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1641,8 +1640,8 @@ const opDeleteClusterSecurityGroup = "DeleteClusterSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSecurityGroup
-func (c *Redshift) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurityGroupInput) (req *request.Request, output *DeleteClusterSecurityGroupOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurityGroupInput) (req *aws.Request, output *DeleteClusterSecurityGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteClusterSecurityGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1700,7 +1699,7 @@ func (c *Redshift) DeleteClusterSecurityGroup(input *DeleteClusterSecurityGroupI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteClusterSecurityGroupWithContext(ctx aws.Context, input *DeleteClusterSecurityGroupInput, opts ...request.Option) (*DeleteClusterSecurityGroupOutput, error) {
+func (c *Redshift) DeleteClusterSecurityGroupWithContext(ctx aws.Context, input *DeleteClusterSecurityGroupInput, opts ...aws.Option) (*DeleteClusterSecurityGroupOutput, error) {
 	req, out := c.DeleteClusterSecurityGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1709,7 +1708,7 @@ func (c *Redshift) DeleteClusterSecurityGroupWithContext(ctx aws.Context, input 
 
 const opDeleteClusterSnapshot = "DeleteClusterSnapshot"
 
-// DeleteClusterSnapshotRequest generates a "aws/request.Request" representing the
+// DeleteClusterSnapshotRequest generates a "aws.Request" representing the
 // client's request for the DeleteClusterSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1733,8 +1732,8 @@ const opDeleteClusterSnapshot = "DeleteClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot
-func (c *Redshift) DeleteClusterSnapshotRequest(input *DeleteClusterSnapshotInput) (req *request.Request, output *DeleteClusterSnapshotOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteClusterSnapshotRequest(input *DeleteClusterSnapshotInput) (req *aws.Request, output *DeleteClusterSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteClusterSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1790,7 +1789,7 @@ func (c *Redshift) DeleteClusterSnapshot(input *DeleteClusterSnapshotInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteClusterSnapshotWithContext(ctx aws.Context, input *DeleteClusterSnapshotInput, opts ...request.Option) (*DeleteClusterSnapshotOutput, error) {
+func (c *Redshift) DeleteClusterSnapshotWithContext(ctx aws.Context, input *DeleteClusterSnapshotInput, opts ...aws.Option) (*DeleteClusterSnapshotOutput, error) {
 	req, out := c.DeleteClusterSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1799,7 +1798,7 @@ func (c *Redshift) DeleteClusterSnapshotWithContext(ctx aws.Context, input *Dele
 
 const opDeleteClusterSubnetGroup = "DeleteClusterSubnetGroup"
 
-// DeleteClusterSubnetGroupRequest generates a "aws/request.Request" representing the
+// DeleteClusterSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteClusterSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1823,8 +1822,8 @@ const opDeleteClusterSubnetGroup = "DeleteClusterSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSubnetGroup
-func (c *Redshift) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGroupInput) (req *request.Request, output *DeleteClusterSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGroupInput) (req *aws.Request, output *DeleteClusterSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteClusterSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1878,7 +1877,7 @@ func (c *Redshift) DeleteClusterSubnetGroup(input *DeleteClusterSubnetGroupInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteClusterSubnetGroupWithContext(ctx aws.Context, input *DeleteClusterSubnetGroupInput, opts ...request.Option) (*DeleteClusterSubnetGroupOutput, error) {
+func (c *Redshift) DeleteClusterSubnetGroupWithContext(ctx aws.Context, input *DeleteClusterSubnetGroupInput, opts ...aws.Option) (*DeleteClusterSubnetGroupOutput, error) {
 	req, out := c.DeleteClusterSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1887,7 +1886,7 @@ func (c *Redshift) DeleteClusterSubnetGroupWithContext(ctx aws.Context, input *D
 
 const opDeleteEventSubscription = "DeleteEventSubscription"
 
-// DeleteEventSubscriptionRequest generates a "aws/request.Request" representing the
+// DeleteEventSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the DeleteEventSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1911,8 +1910,8 @@ const opDeleteEventSubscription = "DeleteEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEventSubscription
-func (c *Redshift) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *request.Request, output *DeleteEventSubscriptionOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *aws.Request, output *DeleteEventSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1964,7 +1963,7 @@ func (c *Redshift) DeleteEventSubscription(input *DeleteEventSubscriptionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...request.Option) (*DeleteEventSubscriptionOutput, error) {
+func (c *Redshift) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...aws.Option) (*DeleteEventSubscriptionOutput, error) {
 	req, out := c.DeleteEventSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1973,7 +1972,7 @@ func (c *Redshift) DeleteEventSubscriptionWithContext(ctx aws.Context, input *De
 
 const opDeleteHsmClientCertificate = "DeleteHsmClientCertificate"
 
-// DeleteHsmClientCertificateRequest generates a "aws/request.Request" representing the
+// DeleteHsmClientCertificateRequest generates a "aws.Request" representing the
 // client's request for the DeleteHsmClientCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1997,8 +1996,8 @@ const opDeleteHsmClientCertificate = "DeleteHsmClientCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmClientCertificate
-func (c *Redshift) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCertificateInput) (req *request.Request, output *DeleteHsmClientCertificateOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCertificateInput) (req *aws.Request, output *DeleteHsmClientCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteHsmClientCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2049,7 +2048,7 @@ func (c *Redshift) DeleteHsmClientCertificate(input *DeleteHsmClientCertificateI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteHsmClientCertificateWithContext(ctx aws.Context, input *DeleteHsmClientCertificateInput, opts ...request.Option) (*DeleteHsmClientCertificateOutput, error) {
+func (c *Redshift) DeleteHsmClientCertificateWithContext(ctx aws.Context, input *DeleteHsmClientCertificateInput, opts ...aws.Option) (*DeleteHsmClientCertificateOutput, error) {
 	req, out := c.DeleteHsmClientCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2058,7 +2057,7 @@ func (c *Redshift) DeleteHsmClientCertificateWithContext(ctx aws.Context, input 
 
 const opDeleteHsmConfiguration = "DeleteHsmConfiguration"
 
-// DeleteHsmConfigurationRequest generates a "aws/request.Request" representing the
+// DeleteHsmConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DeleteHsmConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2082,8 +2081,8 @@ const opDeleteHsmConfiguration = "DeleteHsmConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmConfiguration
-func (c *Redshift) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationInput) (req *request.Request, output *DeleteHsmConfigurationOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationInput) (req *aws.Request, output *DeleteHsmConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteHsmConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2134,7 +2133,7 @@ func (c *Redshift) DeleteHsmConfiguration(input *DeleteHsmConfigurationInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteHsmConfigurationWithContext(ctx aws.Context, input *DeleteHsmConfigurationInput, opts ...request.Option) (*DeleteHsmConfigurationOutput, error) {
+func (c *Redshift) DeleteHsmConfigurationWithContext(ctx aws.Context, input *DeleteHsmConfigurationInput, opts ...aws.Option) (*DeleteHsmConfigurationOutput, error) {
 	req, out := c.DeleteHsmConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2143,7 +2142,7 @@ func (c *Redshift) DeleteHsmConfigurationWithContext(ctx aws.Context, input *Del
 
 const opDeleteSnapshotCopyGrant = "DeleteSnapshotCopyGrant"
 
-// DeleteSnapshotCopyGrantRequest generates a "aws/request.Request" representing the
+// DeleteSnapshotCopyGrantRequest generates a "aws.Request" representing the
 // client's request for the DeleteSnapshotCopyGrant operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2167,8 +2166,8 @@ const opDeleteSnapshotCopyGrant = "DeleteSnapshotCopyGrant"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotCopyGrant
-func (c *Redshift) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrantInput) (req *request.Request, output *DeleteSnapshotCopyGrantOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrantInput) (req *aws.Request, output *DeleteSnapshotCopyGrantOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSnapshotCopyGrant,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2220,7 +2219,7 @@ func (c *Redshift) DeleteSnapshotCopyGrant(input *DeleteSnapshotCopyGrantInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteSnapshotCopyGrantWithContext(ctx aws.Context, input *DeleteSnapshotCopyGrantInput, opts ...request.Option) (*DeleteSnapshotCopyGrantOutput, error) {
+func (c *Redshift) DeleteSnapshotCopyGrantWithContext(ctx aws.Context, input *DeleteSnapshotCopyGrantInput, opts ...aws.Option) (*DeleteSnapshotCopyGrantOutput, error) {
 	req, out := c.DeleteSnapshotCopyGrantRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2229,7 +2228,7 @@ func (c *Redshift) DeleteSnapshotCopyGrantWithContext(ctx aws.Context, input *De
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws/request.Request" representing the
+// DeleteTagsRequest generates a "aws.Request" representing the
 // client's request for the DeleteTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2253,8 +2252,8 @@ const opDeleteTags = "DeleteTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteTags
-func (c *Redshift) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Request, output *DeleteTagsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2305,7 +2304,7 @@ func (c *Redshift) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...request.Option) (*DeleteTagsOutput, error) {
+func (c *Redshift) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
 	req, out := c.DeleteTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2314,7 +2313,7 @@ func (c *Redshift) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput
 
 const opDescribeClusterParameterGroups = "DescribeClusterParameterGroups"
 
-// DescribeClusterParameterGroupsRequest generates a "aws/request.Request" representing the
+// DescribeClusterParameterGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusterParameterGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2338,12 +2337,12 @@ const opDescribeClusterParameterGroups = "DescribeClusterParameterGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameterGroups
-func (c *Redshift) DescribeClusterParameterGroupsRequest(input *DescribeClusterParameterGroupsInput) (req *request.Request, output *DescribeClusterParameterGroupsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeClusterParameterGroupsRequest(input *DescribeClusterParameterGroupsInput) (req *aws.Request, output *DescribeClusterParameterGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusterParameterGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2411,7 +2410,7 @@ func (c *Redshift) DescribeClusterParameterGroups(input *DescribeClusterParamete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterParameterGroupsWithContext(ctx aws.Context, input *DescribeClusterParameterGroupsInput, opts ...request.Option) (*DescribeClusterParameterGroupsOutput, error) {
+func (c *Redshift) DescribeClusterParameterGroupsWithContext(ctx aws.Context, input *DescribeClusterParameterGroupsInput, opts ...aws.Option) (*DescribeClusterParameterGroupsOutput, error) {
 	req, out := c.DescribeClusterParameterGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2446,9 +2445,9 @@ func (c *Redshift) DescribeClusterParameterGroupsPages(input *DescribeClusterPar
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterParameterGroupsPagesWithContext(ctx aws.Context, input *DescribeClusterParameterGroupsInput, fn func(*DescribeClusterParameterGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeClusterParameterGroupsPagesWithContext(ctx aws.Context, input *DescribeClusterParameterGroupsInput, fn func(*DescribeClusterParameterGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeClusterParameterGroupsInput
 			if input != nil {
 				tmp := *input
@@ -2470,7 +2469,7 @@ func (c *Redshift) DescribeClusterParameterGroupsPagesWithContext(ctx aws.Contex
 
 const opDescribeClusterParameters = "DescribeClusterParameters"
 
-// DescribeClusterParametersRequest generates a "aws/request.Request" representing the
+// DescribeClusterParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusterParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2494,12 +2493,12 @@ const opDescribeClusterParameters = "DescribeClusterParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameters
-func (c *Redshift) DescribeClusterParametersRequest(input *DescribeClusterParametersInput) (req *request.Request, output *DescribeClusterParametersOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeClusterParametersRequest(input *DescribeClusterParametersInput) (req *aws.Request, output *DescribeClusterParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusterParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2557,7 +2556,7 @@ func (c *Redshift) DescribeClusterParameters(input *DescribeClusterParametersInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterParametersWithContext(ctx aws.Context, input *DescribeClusterParametersInput, opts ...request.Option) (*DescribeClusterParametersOutput, error) {
+func (c *Redshift) DescribeClusterParametersWithContext(ctx aws.Context, input *DescribeClusterParametersInput, opts ...aws.Option) (*DescribeClusterParametersOutput, error) {
 	req, out := c.DescribeClusterParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2592,9 +2591,9 @@ func (c *Redshift) DescribeClusterParametersPages(input *DescribeClusterParamete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterParametersPagesWithContext(ctx aws.Context, input *DescribeClusterParametersInput, fn func(*DescribeClusterParametersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeClusterParametersPagesWithContext(ctx aws.Context, input *DescribeClusterParametersInput, fn func(*DescribeClusterParametersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeClusterParametersInput
 			if input != nil {
 				tmp := *input
@@ -2616,7 +2615,7 @@ func (c *Redshift) DescribeClusterParametersPagesWithContext(ctx aws.Context, in
 
 const opDescribeClusterSecurityGroups = "DescribeClusterSecurityGroups"
 
-// DescribeClusterSecurityGroupsRequest generates a "aws/request.Request" representing the
+// DescribeClusterSecurityGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusterSecurityGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2640,12 +2639,12 @@ const opDescribeClusterSecurityGroups = "DescribeClusterSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSecurityGroups
-func (c *Redshift) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSecurityGroupsInput) (req *request.Request, output *DescribeClusterSecurityGroupsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSecurityGroupsInput) (req *aws.Request, output *DescribeClusterSecurityGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusterSecurityGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2712,7 +2711,7 @@ func (c *Redshift) DescribeClusterSecurityGroups(input *DescribeClusterSecurityG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterSecurityGroupsWithContext(ctx aws.Context, input *DescribeClusterSecurityGroupsInput, opts ...request.Option) (*DescribeClusterSecurityGroupsOutput, error) {
+func (c *Redshift) DescribeClusterSecurityGroupsWithContext(ctx aws.Context, input *DescribeClusterSecurityGroupsInput, opts ...aws.Option) (*DescribeClusterSecurityGroupsOutput, error) {
 	req, out := c.DescribeClusterSecurityGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2747,9 +2746,9 @@ func (c *Redshift) DescribeClusterSecurityGroupsPages(input *DescribeClusterSecu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterSecurityGroupsPagesWithContext(ctx aws.Context, input *DescribeClusterSecurityGroupsInput, fn func(*DescribeClusterSecurityGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeClusterSecurityGroupsPagesWithContext(ctx aws.Context, input *DescribeClusterSecurityGroupsInput, fn func(*DescribeClusterSecurityGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeClusterSecurityGroupsInput
 			if input != nil {
 				tmp := *input
@@ -2771,7 +2770,7 @@ func (c *Redshift) DescribeClusterSecurityGroupsPagesWithContext(ctx aws.Context
 
 const opDescribeClusterSnapshots = "DescribeClusterSnapshots"
 
-// DescribeClusterSnapshotsRequest generates a "aws/request.Request" representing the
+// DescribeClusterSnapshotsRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusterSnapshots operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2795,12 +2794,12 @@ const opDescribeClusterSnapshots = "DescribeClusterSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshots
-func (c *Redshift) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapshotsInput) (req *request.Request, output *DescribeClusterSnapshotsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapshotsInput) (req *aws.Request, output *DescribeClusterSnapshotsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusterSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2864,7 +2863,7 @@ func (c *Redshift) DescribeClusterSnapshots(input *DescribeClusterSnapshotsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterSnapshotsWithContext(ctx aws.Context, input *DescribeClusterSnapshotsInput, opts ...request.Option) (*DescribeClusterSnapshotsOutput, error) {
+func (c *Redshift) DescribeClusterSnapshotsWithContext(ctx aws.Context, input *DescribeClusterSnapshotsInput, opts ...aws.Option) (*DescribeClusterSnapshotsOutput, error) {
 	req, out := c.DescribeClusterSnapshotsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2899,9 +2898,9 @@ func (c *Redshift) DescribeClusterSnapshotsPages(input *DescribeClusterSnapshots
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterSnapshotsPagesWithContext(ctx aws.Context, input *DescribeClusterSnapshotsInput, fn func(*DescribeClusterSnapshotsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeClusterSnapshotsPagesWithContext(ctx aws.Context, input *DescribeClusterSnapshotsInput, fn func(*DescribeClusterSnapshotsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeClusterSnapshotsInput
 			if input != nil {
 				tmp := *input
@@ -2923,7 +2922,7 @@ func (c *Redshift) DescribeClusterSnapshotsPagesWithContext(ctx aws.Context, inp
 
 const opDescribeClusterSubnetGroups = "DescribeClusterSubnetGroups"
 
-// DescribeClusterSubnetGroupsRequest generates a "aws/request.Request" representing the
+// DescribeClusterSubnetGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusterSubnetGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2947,12 +2946,12 @@ const opDescribeClusterSubnetGroups = "DescribeClusterSubnetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSubnetGroups
-func (c *Redshift) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubnetGroupsInput) (req *request.Request, output *DescribeClusterSubnetGroupsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubnetGroupsInput) (req *aws.Request, output *DescribeClusterSubnetGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusterSubnetGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3015,7 +3014,7 @@ func (c *Redshift) DescribeClusterSubnetGroups(input *DescribeClusterSubnetGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterSubnetGroupsWithContext(ctx aws.Context, input *DescribeClusterSubnetGroupsInput, opts ...request.Option) (*DescribeClusterSubnetGroupsOutput, error) {
+func (c *Redshift) DescribeClusterSubnetGroupsWithContext(ctx aws.Context, input *DescribeClusterSubnetGroupsInput, opts ...aws.Option) (*DescribeClusterSubnetGroupsOutput, error) {
 	req, out := c.DescribeClusterSubnetGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3050,9 +3049,9 @@ func (c *Redshift) DescribeClusterSubnetGroupsPages(input *DescribeClusterSubnet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeClusterSubnetGroupsInput, fn func(*DescribeClusterSubnetGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeClusterSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeClusterSubnetGroupsInput, fn func(*DescribeClusterSubnetGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeClusterSubnetGroupsInput
 			if input != nil {
 				tmp := *input
@@ -3074,7 +3073,7 @@ func (c *Redshift) DescribeClusterSubnetGroupsPagesWithContext(ctx aws.Context, 
 
 const opDescribeClusterVersions = "DescribeClusterVersions"
 
-// DescribeClusterVersionsRequest generates a "aws/request.Request" representing the
+// DescribeClusterVersionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusterVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3098,12 +3097,12 @@ const opDescribeClusterVersions = "DescribeClusterVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterVersions
-func (c *Redshift) DescribeClusterVersionsRequest(input *DescribeClusterVersionsInput) (req *request.Request, output *DescribeClusterVersionsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeClusterVersionsRequest(input *DescribeClusterVersionsInput) (req *aws.Request, output *DescribeClusterVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusterVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3149,7 +3148,7 @@ func (c *Redshift) DescribeClusterVersions(input *DescribeClusterVersionsInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterVersionsWithContext(ctx aws.Context, input *DescribeClusterVersionsInput, opts ...request.Option) (*DescribeClusterVersionsOutput, error) {
+func (c *Redshift) DescribeClusterVersionsWithContext(ctx aws.Context, input *DescribeClusterVersionsInput, opts ...aws.Option) (*DescribeClusterVersionsOutput, error) {
 	req, out := c.DescribeClusterVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3184,9 +3183,9 @@ func (c *Redshift) DescribeClusterVersionsPages(input *DescribeClusterVersionsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClusterVersionsPagesWithContext(ctx aws.Context, input *DescribeClusterVersionsInput, fn func(*DescribeClusterVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeClusterVersionsPagesWithContext(ctx aws.Context, input *DescribeClusterVersionsInput, fn func(*DescribeClusterVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeClusterVersionsInput
 			if input != nil {
 				tmp := *input
@@ -3208,7 +3207,7 @@ func (c *Redshift) DescribeClusterVersionsPagesWithContext(ctx aws.Context, inpu
 
 const opDescribeClusters = "DescribeClusters"
 
-// DescribeClustersRequest generates a "aws/request.Request" representing the
+// DescribeClustersRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3232,12 +3231,12 @@ const opDescribeClusters = "DescribeClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters
-func (c *Redshift) DescribeClustersRequest(input *DescribeClustersInput) (req *request.Request, output *DescribeClustersOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Request, output *DescribeClustersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3300,7 +3299,7 @@ func (c *Redshift) DescribeClusters(input *DescribeClustersInput) (*DescribeClus
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...request.Option) (*DescribeClustersOutput, error) {
+func (c *Redshift) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.Option) (*DescribeClustersOutput, error) {
 	req, out := c.DescribeClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3335,9 +3334,9 @@ func (c *Redshift) DescribeClustersPages(input *DescribeClustersInput, fn func(*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeClustersPagesWithContext(ctx aws.Context, input *DescribeClustersInput, fn func(*DescribeClustersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeClustersPagesWithContext(ctx aws.Context, input *DescribeClustersInput, fn func(*DescribeClustersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeClustersInput
 			if input != nil {
 				tmp := *input
@@ -3359,7 +3358,7 @@ func (c *Redshift) DescribeClustersPagesWithContext(ctx aws.Context, input *Desc
 
 const opDescribeDefaultClusterParameters = "DescribeDefaultClusterParameters"
 
-// DescribeDefaultClusterParametersRequest generates a "aws/request.Request" representing the
+// DescribeDefaultClusterParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeDefaultClusterParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3383,12 +3382,12 @@ const opDescribeDefaultClusterParameters = "DescribeDefaultClusterParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDefaultClusterParameters
-func (c *Redshift) DescribeDefaultClusterParametersRequest(input *DescribeDefaultClusterParametersInput) (req *request.Request, output *DescribeDefaultClusterParametersOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeDefaultClusterParametersRequest(input *DescribeDefaultClusterParametersInput) (req *aws.Request, output *DescribeDefaultClusterParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDefaultClusterParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"DefaultClusterParameters.Marker"},
 			LimitToken:      "MaxRecords",
@@ -3434,7 +3433,7 @@ func (c *Redshift) DescribeDefaultClusterParameters(input *DescribeDefaultCluste
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeDefaultClusterParametersWithContext(ctx aws.Context, input *DescribeDefaultClusterParametersInput, opts ...request.Option) (*DescribeDefaultClusterParametersOutput, error) {
+func (c *Redshift) DescribeDefaultClusterParametersWithContext(ctx aws.Context, input *DescribeDefaultClusterParametersInput, opts ...aws.Option) (*DescribeDefaultClusterParametersOutput, error) {
 	req, out := c.DescribeDefaultClusterParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3469,9 +3468,9 @@ func (c *Redshift) DescribeDefaultClusterParametersPages(input *DescribeDefaultC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeDefaultClusterParametersPagesWithContext(ctx aws.Context, input *DescribeDefaultClusterParametersInput, fn func(*DescribeDefaultClusterParametersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeDefaultClusterParametersPagesWithContext(ctx aws.Context, input *DescribeDefaultClusterParametersInput, fn func(*DescribeDefaultClusterParametersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDefaultClusterParametersInput
 			if input != nil {
 				tmp := *input
@@ -3493,7 +3492,7 @@ func (c *Redshift) DescribeDefaultClusterParametersPagesWithContext(ctx aws.Cont
 
 const opDescribeEventCategories = "DescribeEventCategories"
 
-// DescribeEventCategoriesRequest generates a "aws/request.Request" representing the
+// DescribeEventCategoriesRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventCategories operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3517,8 +3516,8 @@ const opDescribeEventCategories = "DescribeEventCategories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventCategories
-func (c *Redshift) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *request.Request, output *DescribeEventCategoriesOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *aws.Request, output *DescribeEventCategoriesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventCategories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3560,7 +3559,7 @@ func (c *Redshift) DescribeEventCategories(input *DescribeEventCategoriesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeEventCategoriesWithContext(ctx aws.Context, input *DescribeEventCategoriesInput, opts ...request.Option) (*DescribeEventCategoriesOutput, error) {
+func (c *Redshift) DescribeEventCategoriesWithContext(ctx aws.Context, input *DescribeEventCategoriesInput, opts ...aws.Option) (*DescribeEventCategoriesOutput, error) {
 	req, out := c.DescribeEventCategoriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3569,7 +3568,7 @@ func (c *Redshift) DescribeEventCategoriesWithContext(ctx aws.Context, input *De
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 
-// DescribeEventSubscriptionsRequest generates a "aws/request.Request" representing the
+// DescribeEventSubscriptionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventSubscriptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3593,12 +3592,12 @@ const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventSubscriptions
-func (c *Redshift) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *request.Request, output *DescribeEventSubscriptionsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *aws.Request, output *DescribeEventSubscriptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventSubscriptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3661,7 +3660,7 @@ func (c *Redshift) DescribeEventSubscriptions(input *DescribeEventSubscriptionsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...request.Option) (*DescribeEventSubscriptionsOutput, error) {
+func (c *Redshift) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...aws.Option) (*DescribeEventSubscriptionsOutput, error) {
 	req, out := c.DescribeEventSubscriptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3696,9 +3695,9 @@ func (c *Redshift) DescribeEventSubscriptionsPages(input *DescribeEventSubscript
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventSubscriptionsInput
 			if input != nil {
 				tmp := *input
@@ -3720,7 +3719,7 @@ func (c *Redshift) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, i
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws/request.Request" representing the
+// DescribeEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3744,12 +3743,12 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEvents
-func (c *Redshift) DescribeEventsRequest(input *DescribeEventsInput) (req *request.Request, output *DescribeEventsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3794,7 +3793,7 @@ func (c *Redshift) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...request.Option) (*DescribeEventsOutput, error) {
+func (c *Redshift) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
 	req, out := c.DescribeEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3829,9 +3828,9 @@ func (c *Redshift) DescribeEventsPages(input *DescribeEventsInput, fn func(*Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventsInput
 			if input != nil {
 				tmp := *input
@@ -3853,7 +3852,7 @@ func (c *Redshift) DescribeEventsPagesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeHsmClientCertificates = "DescribeHsmClientCertificates"
 
-// DescribeHsmClientCertificatesRequest generates a "aws/request.Request" representing the
+// DescribeHsmClientCertificatesRequest generates a "aws.Request" representing the
 // client's request for the DescribeHsmClientCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3877,12 +3876,12 @@ const opDescribeHsmClientCertificates = "DescribeHsmClientCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmClientCertificates
-func (c *Redshift) DescribeHsmClientCertificatesRequest(input *DescribeHsmClientCertificatesInput) (req *request.Request, output *DescribeHsmClientCertificatesOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeHsmClientCertificatesRequest(input *DescribeHsmClientCertificatesInput) (req *aws.Request, output *DescribeHsmClientCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeHsmClientCertificates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3944,7 +3943,7 @@ func (c *Redshift) DescribeHsmClientCertificates(input *DescribeHsmClientCertifi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeHsmClientCertificatesWithContext(ctx aws.Context, input *DescribeHsmClientCertificatesInput, opts ...request.Option) (*DescribeHsmClientCertificatesOutput, error) {
+func (c *Redshift) DescribeHsmClientCertificatesWithContext(ctx aws.Context, input *DescribeHsmClientCertificatesInput, opts ...aws.Option) (*DescribeHsmClientCertificatesOutput, error) {
 	req, out := c.DescribeHsmClientCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3979,9 +3978,9 @@ func (c *Redshift) DescribeHsmClientCertificatesPages(input *DescribeHsmClientCe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeHsmClientCertificatesPagesWithContext(ctx aws.Context, input *DescribeHsmClientCertificatesInput, fn func(*DescribeHsmClientCertificatesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeHsmClientCertificatesPagesWithContext(ctx aws.Context, input *DescribeHsmClientCertificatesInput, fn func(*DescribeHsmClientCertificatesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeHsmClientCertificatesInput
 			if input != nil {
 				tmp := *input
@@ -4003,7 +4002,7 @@ func (c *Redshift) DescribeHsmClientCertificatesPagesWithContext(ctx aws.Context
 
 const opDescribeHsmConfigurations = "DescribeHsmConfigurations"
 
-// DescribeHsmConfigurationsRequest generates a "aws/request.Request" representing the
+// DescribeHsmConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeHsmConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4027,12 +4026,12 @@ const opDescribeHsmConfigurations = "DescribeHsmConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmConfigurations
-func (c *Redshift) DescribeHsmConfigurationsRequest(input *DescribeHsmConfigurationsInput) (req *request.Request, output *DescribeHsmConfigurationsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeHsmConfigurationsRequest(input *DescribeHsmConfigurationsInput) (req *aws.Request, output *DescribeHsmConfigurationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeHsmConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4094,7 +4093,7 @@ func (c *Redshift) DescribeHsmConfigurations(input *DescribeHsmConfigurationsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeHsmConfigurationsWithContext(ctx aws.Context, input *DescribeHsmConfigurationsInput, opts ...request.Option) (*DescribeHsmConfigurationsOutput, error) {
+func (c *Redshift) DescribeHsmConfigurationsWithContext(ctx aws.Context, input *DescribeHsmConfigurationsInput, opts ...aws.Option) (*DescribeHsmConfigurationsOutput, error) {
 	req, out := c.DescribeHsmConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4129,9 +4128,9 @@ func (c *Redshift) DescribeHsmConfigurationsPages(input *DescribeHsmConfiguratio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeHsmConfigurationsPagesWithContext(ctx aws.Context, input *DescribeHsmConfigurationsInput, fn func(*DescribeHsmConfigurationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeHsmConfigurationsPagesWithContext(ctx aws.Context, input *DescribeHsmConfigurationsInput, fn func(*DescribeHsmConfigurationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeHsmConfigurationsInput
 			if input != nil {
 				tmp := *input
@@ -4153,7 +4152,7 @@ func (c *Redshift) DescribeHsmConfigurationsPagesWithContext(ctx aws.Context, in
 
 const opDescribeLoggingStatus = "DescribeLoggingStatus"
 
-// DescribeLoggingStatusRequest generates a "aws/request.Request" representing the
+// DescribeLoggingStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeLoggingStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4177,8 +4176,8 @@ const opDescribeLoggingStatus = "DescribeLoggingStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatus
-func (c *Redshift) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInput) (req *request.Request, output *LoggingStatus) {
-	op := &request.Operation{
+func (c *Redshift) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInput) (req *aws.Request, output *LoggingStatus) {
+	op := &aws.Operation{
 		Name:       opDescribeLoggingStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4224,7 +4223,7 @@ func (c *Redshift) DescribeLoggingStatus(input *DescribeLoggingStatusInput) (*Lo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeLoggingStatusWithContext(ctx aws.Context, input *DescribeLoggingStatusInput, opts ...request.Option) (*LoggingStatus, error) {
+func (c *Redshift) DescribeLoggingStatusWithContext(ctx aws.Context, input *DescribeLoggingStatusInput, opts ...aws.Option) (*LoggingStatus, error) {
 	req, out := c.DescribeLoggingStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4233,7 +4232,7 @@ func (c *Redshift) DescribeLoggingStatusWithContext(ctx aws.Context, input *Desc
 
 const opDescribeOrderableClusterOptions = "DescribeOrderableClusterOptions"
 
-// DescribeOrderableClusterOptionsRequest generates a "aws/request.Request" representing the
+// DescribeOrderableClusterOptionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeOrderableClusterOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4257,12 +4256,12 @@ const opDescribeOrderableClusterOptions = "DescribeOrderableClusterOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeOrderableClusterOptions
-func (c *Redshift) DescribeOrderableClusterOptionsRequest(input *DescribeOrderableClusterOptionsInput) (req *request.Request, output *DescribeOrderableClusterOptionsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeOrderableClusterOptionsRequest(input *DescribeOrderableClusterOptionsInput) (req *aws.Request, output *DescribeOrderableClusterOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeOrderableClusterOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4312,7 +4311,7 @@ func (c *Redshift) DescribeOrderableClusterOptions(input *DescribeOrderableClust
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeOrderableClusterOptionsWithContext(ctx aws.Context, input *DescribeOrderableClusterOptionsInput, opts ...request.Option) (*DescribeOrderableClusterOptionsOutput, error) {
+func (c *Redshift) DescribeOrderableClusterOptionsWithContext(ctx aws.Context, input *DescribeOrderableClusterOptionsInput, opts ...aws.Option) (*DescribeOrderableClusterOptionsOutput, error) {
 	req, out := c.DescribeOrderableClusterOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4347,9 +4346,9 @@ func (c *Redshift) DescribeOrderableClusterOptionsPages(input *DescribeOrderable
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeOrderableClusterOptionsPagesWithContext(ctx aws.Context, input *DescribeOrderableClusterOptionsInput, fn func(*DescribeOrderableClusterOptionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeOrderableClusterOptionsPagesWithContext(ctx aws.Context, input *DescribeOrderableClusterOptionsInput, fn func(*DescribeOrderableClusterOptionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeOrderableClusterOptionsInput
 			if input != nil {
 				tmp := *input
@@ -4371,7 +4370,7 @@ func (c *Redshift) DescribeOrderableClusterOptionsPagesWithContext(ctx aws.Conte
 
 const opDescribeReservedNodeOfferings = "DescribeReservedNodeOfferings"
 
-// DescribeReservedNodeOfferingsRequest generates a "aws/request.Request" representing the
+// DescribeReservedNodeOfferingsRequest generates a "aws.Request" representing the
 // client's request for the DescribeReservedNodeOfferings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4395,12 +4394,12 @@ const opDescribeReservedNodeOfferings = "DescribeReservedNodeOfferings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeOfferings
-func (c *Redshift) DescribeReservedNodeOfferingsRequest(input *DescribeReservedNodeOfferingsInput) (req *request.Request, output *DescribeReservedNodeOfferingsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeReservedNodeOfferingsRequest(input *DescribeReservedNodeOfferingsInput) (req *aws.Request, output *DescribeReservedNodeOfferingsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReservedNodeOfferings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4463,7 +4462,7 @@ func (c *Redshift) DescribeReservedNodeOfferings(input *DescribeReservedNodeOffe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeReservedNodeOfferingsWithContext(ctx aws.Context, input *DescribeReservedNodeOfferingsInput, opts ...request.Option) (*DescribeReservedNodeOfferingsOutput, error) {
+func (c *Redshift) DescribeReservedNodeOfferingsWithContext(ctx aws.Context, input *DescribeReservedNodeOfferingsInput, opts ...aws.Option) (*DescribeReservedNodeOfferingsOutput, error) {
 	req, out := c.DescribeReservedNodeOfferingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4498,9 +4497,9 @@ func (c *Redshift) DescribeReservedNodeOfferingsPages(input *DescribeReservedNod
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeReservedNodeOfferingsPagesWithContext(ctx aws.Context, input *DescribeReservedNodeOfferingsInput, fn func(*DescribeReservedNodeOfferingsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeReservedNodeOfferingsPagesWithContext(ctx aws.Context, input *DescribeReservedNodeOfferingsInput, fn func(*DescribeReservedNodeOfferingsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReservedNodeOfferingsInput
 			if input != nil {
 				tmp := *input
@@ -4522,7 +4521,7 @@ func (c *Redshift) DescribeReservedNodeOfferingsPagesWithContext(ctx aws.Context
 
 const opDescribeReservedNodes = "DescribeReservedNodes"
 
-// DescribeReservedNodesRequest generates a "aws/request.Request" representing the
+// DescribeReservedNodesRequest generates a "aws.Request" representing the
 // client's request for the DescribeReservedNodes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4546,12 +4545,12 @@ const opDescribeReservedNodes = "DescribeReservedNodes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodes
-func (c *Redshift) DescribeReservedNodesRequest(input *DescribeReservedNodesInput) (req *request.Request, output *DescribeReservedNodesOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeReservedNodesRequest(input *DescribeReservedNodesInput) (req *aws.Request, output *DescribeReservedNodesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReservedNodes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4602,7 +4601,7 @@ func (c *Redshift) DescribeReservedNodes(input *DescribeReservedNodesInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeReservedNodesWithContext(ctx aws.Context, input *DescribeReservedNodesInput, opts ...request.Option) (*DescribeReservedNodesOutput, error) {
+func (c *Redshift) DescribeReservedNodesWithContext(ctx aws.Context, input *DescribeReservedNodesInput, opts ...aws.Option) (*DescribeReservedNodesOutput, error) {
 	req, out := c.DescribeReservedNodesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4637,9 +4636,9 @@ func (c *Redshift) DescribeReservedNodesPages(input *DescribeReservedNodesInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeReservedNodesPagesWithContext(ctx aws.Context, input *DescribeReservedNodesInput, fn func(*DescribeReservedNodesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Redshift) DescribeReservedNodesPagesWithContext(ctx aws.Context, input *DescribeReservedNodesInput, fn func(*DescribeReservedNodesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReservedNodesInput
 			if input != nil {
 				tmp := *input
@@ -4661,7 +4660,7 @@ func (c *Redshift) DescribeReservedNodesPagesWithContext(ctx aws.Context, input 
 
 const opDescribeResize = "DescribeResize"
 
-// DescribeResizeRequest generates a "aws/request.Request" representing the
+// DescribeResizeRequest generates a "aws.Request" representing the
 // client's request for the DescribeResize operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4685,8 +4684,8 @@ const opDescribeResize = "DescribeResize"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize
-func (c *Redshift) DescribeResizeRequest(input *DescribeResizeInput) (req *request.Request, output *DescribeResizeOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeResizeRequest(input *DescribeResizeInput) (req *aws.Request, output *DescribeResizeOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeResize,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4740,7 +4739,7 @@ func (c *Redshift) DescribeResize(input *DescribeResizeInput) (*DescribeResizeOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeResizeWithContext(ctx aws.Context, input *DescribeResizeInput, opts ...request.Option) (*DescribeResizeOutput, error) {
+func (c *Redshift) DescribeResizeWithContext(ctx aws.Context, input *DescribeResizeInput, opts ...aws.Option) (*DescribeResizeOutput, error) {
 	req, out := c.DescribeResizeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4749,7 +4748,7 @@ func (c *Redshift) DescribeResizeWithContext(ctx aws.Context, input *DescribeRes
 
 const opDescribeSnapshotCopyGrants = "DescribeSnapshotCopyGrants"
 
-// DescribeSnapshotCopyGrantsRequest generates a "aws/request.Request" representing the
+// DescribeSnapshotCopyGrantsRequest generates a "aws.Request" representing the
 // client's request for the DescribeSnapshotCopyGrants operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4773,8 +4772,8 @@ const opDescribeSnapshotCopyGrants = "DescribeSnapshotCopyGrants"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotCopyGrants
-func (c *Redshift) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopyGrantsInput) (req *request.Request, output *DescribeSnapshotCopyGrantsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopyGrantsInput) (req *aws.Request, output *DescribeSnapshotCopyGrantsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSnapshotCopyGrants,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4828,7 +4827,7 @@ func (c *Redshift) DescribeSnapshotCopyGrants(input *DescribeSnapshotCopyGrantsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeSnapshotCopyGrantsWithContext(ctx aws.Context, input *DescribeSnapshotCopyGrantsInput, opts ...request.Option) (*DescribeSnapshotCopyGrantsOutput, error) {
+func (c *Redshift) DescribeSnapshotCopyGrantsWithContext(ctx aws.Context, input *DescribeSnapshotCopyGrantsInput, opts ...aws.Option) (*DescribeSnapshotCopyGrantsOutput, error) {
 	req, out := c.DescribeSnapshotCopyGrantsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4837,7 +4836,7 @@ func (c *Redshift) DescribeSnapshotCopyGrantsWithContext(ctx aws.Context, input 
 
 const opDescribeTableRestoreStatus = "DescribeTableRestoreStatus"
 
-// DescribeTableRestoreStatusRequest generates a "aws/request.Request" representing the
+// DescribeTableRestoreStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeTableRestoreStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4861,8 +4860,8 @@ const opDescribeTableRestoreStatus = "DescribeTableRestoreStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTableRestoreStatus
-func (c *Redshift) DescribeTableRestoreStatusRequest(input *DescribeTableRestoreStatusInput) (req *request.Request, output *DescribeTableRestoreStatusOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeTableRestoreStatusRequest(input *DescribeTableRestoreStatusInput) (req *aws.Request, output *DescribeTableRestoreStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTableRestoreStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4914,7 +4913,7 @@ func (c *Redshift) DescribeTableRestoreStatus(input *DescribeTableRestoreStatusI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeTableRestoreStatusWithContext(ctx aws.Context, input *DescribeTableRestoreStatusInput, opts ...request.Option) (*DescribeTableRestoreStatusOutput, error) {
+func (c *Redshift) DescribeTableRestoreStatusWithContext(ctx aws.Context, input *DescribeTableRestoreStatusInput, opts ...aws.Option) (*DescribeTableRestoreStatusOutput, error) {
 	req, out := c.DescribeTableRestoreStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4923,7 +4922,7 @@ func (c *Redshift) DescribeTableRestoreStatusWithContext(ctx aws.Context, input 
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws/request.Request" representing the
+// DescribeTagsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4947,8 +4946,8 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTags
-func (c *Redshift) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
-	op := &request.Operation{
+func (c *Redshift) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5018,7 +5017,7 @@ func (c *Redshift) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...request.Option) (*DescribeTagsOutput, error) {
+func (c *Redshift) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
 	req, out := c.DescribeTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5027,7 +5026,7 @@ func (c *Redshift) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsI
 
 const opDisableLogging = "DisableLogging"
 
-// DisableLoggingRequest generates a "aws/request.Request" representing the
+// DisableLoggingRequest generates a "aws.Request" representing the
 // client's request for the DisableLogging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5051,8 +5050,8 @@ const opDisableLogging = "DisableLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLogging
-func (c *Redshift) DisableLoggingRequest(input *DisableLoggingInput) (req *request.Request, output *LoggingStatus) {
-	op := &request.Operation{
+func (c *Redshift) DisableLoggingRequest(input *DisableLoggingInput) (req *aws.Request, output *LoggingStatus) {
+	op := &aws.Operation{
 		Name:       opDisableLogging,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5098,7 +5097,7 @@ func (c *Redshift) DisableLogging(input *DisableLoggingInput) (*LoggingStatus, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DisableLoggingWithContext(ctx aws.Context, input *DisableLoggingInput, opts ...request.Option) (*LoggingStatus, error) {
+func (c *Redshift) DisableLoggingWithContext(ctx aws.Context, input *DisableLoggingInput, opts ...aws.Option) (*LoggingStatus, error) {
 	req, out := c.DisableLoggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5107,7 +5106,7 @@ func (c *Redshift) DisableLoggingWithContext(ctx aws.Context, input *DisableLogg
 
 const opDisableSnapshotCopy = "DisableSnapshotCopy"
 
-// DisableSnapshotCopyRequest generates a "aws/request.Request" representing the
+// DisableSnapshotCopyRequest generates a "aws.Request" representing the
 // client's request for the DisableSnapshotCopy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5131,8 +5130,8 @@ const opDisableSnapshotCopy = "DisableSnapshotCopy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy
-func (c *Redshift) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) (req *request.Request, output *DisableSnapshotCopyOutput) {
-	op := &request.Operation{
+func (c *Redshift) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) (req *aws.Request, output *DisableSnapshotCopyOutput) {
+	op := &aws.Operation{
 		Name:       opDisableSnapshotCopy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5191,7 +5190,7 @@ func (c *Redshift) DisableSnapshotCopy(input *DisableSnapshotCopyInput) (*Disabl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) DisableSnapshotCopyWithContext(ctx aws.Context, input *DisableSnapshotCopyInput, opts ...request.Option) (*DisableSnapshotCopyOutput, error) {
+func (c *Redshift) DisableSnapshotCopyWithContext(ctx aws.Context, input *DisableSnapshotCopyInput, opts ...aws.Option) (*DisableSnapshotCopyOutput, error) {
 	req, out := c.DisableSnapshotCopyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5200,7 +5199,7 @@ func (c *Redshift) DisableSnapshotCopyWithContext(ctx aws.Context, input *Disabl
 
 const opEnableLogging = "EnableLogging"
 
-// EnableLoggingRequest generates a "aws/request.Request" representing the
+// EnableLoggingRequest generates a "aws.Request" representing the
 // client's request for the EnableLogging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5224,8 +5223,8 @@ const opEnableLogging = "EnableLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLogging
-func (c *Redshift) EnableLoggingRequest(input *EnableLoggingInput) (req *request.Request, output *LoggingStatus) {
-	op := &request.Operation{
+func (c *Redshift) EnableLoggingRequest(input *EnableLoggingInput) (req *aws.Request, output *LoggingStatus) {
+	op := &aws.Operation{
 		Name:       opEnableLogging,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5287,7 +5286,7 @@ func (c *Redshift) EnableLogging(input *EnableLoggingInput) (*LoggingStatus, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) EnableLoggingWithContext(ctx aws.Context, input *EnableLoggingInput, opts ...request.Option) (*LoggingStatus, error) {
+func (c *Redshift) EnableLoggingWithContext(ctx aws.Context, input *EnableLoggingInput, opts ...aws.Option) (*LoggingStatus, error) {
 	req, out := c.EnableLoggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5296,7 +5295,7 @@ func (c *Redshift) EnableLoggingWithContext(ctx aws.Context, input *EnableLoggin
 
 const opEnableSnapshotCopy = "EnableSnapshotCopy"
 
-// EnableSnapshotCopyRequest generates a "aws/request.Request" representing the
+// EnableSnapshotCopyRequest generates a "aws.Request" representing the
 // client's request for the EnableSnapshotCopy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5320,8 +5319,8 @@ const opEnableSnapshotCopy = "EnableSnapshotCopy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy
-func (c *Redshift) EnableSnapshotCopyRequest(input *EnableSnapshotCopyInput) (req *request.Request, output *EnableSnapshotCopyOutput) {
-	op := &request.Operation{
+func (c *Redshift) EnableSnapshotCopyRequest(input *EnableSnapshotCopyInput) (req *aws.Request, output *EnableSnapshotCopyOutput) {
+	op := &aws.Operation{
 		Name:       opEnableSnapshotCopy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5396,7 +5395,7 @@ func (c *Redshift) EnableSnapshotCopy(input *EnableSnapshotCopyInput) (*EnableSn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) EnableSnapshotCopyWithContext(ctx aws.Context, input *EnableSnapshotCopyInput, opts ...request.Option) (*EnableSnapshotCopyOutput, error) {
+func (c *Redshift) EnableSnapshotCopyWithContext(ctx aws.Context, input *EnableSnapshotCopyInput, opts ...aws.Option) (*EnableSnapshotCopyOutput, error) {
 	req, out := c.EnableSnapshotCopyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5405,7 +5404,7 @@ func (c *Redshift) EnableSnapshotCopyWithContext(ctx aws.Context, input *EnableS
 
 const opGetClusterCredentials = "GetClusterCredentials"
 
-// GetClusterCredentialsRequest generates a "aws/request.Request" representing the
+// GetClusterCredentialsRequest generates a "aws.Request" representing the
 // client's request for the GetClusterCredentials operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5429,8 +5428,8 @@ const opGetClusterCredentials = "GetClusterCredentials"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentials
-func (c *Redshift) GetClusterCredentialsRequest(input *GetClusterCredentialsInput) (req *request.Request, output *GetClusterCredentialsOutput) {
-	op := &request.Operation{
+func (c *Redshift) GetClusterCredentialsRequest(input *GetClusterCredentialsInput) (req *aws.Request, output *GetClusterCredentialsOutput) {
+	op := &aws.Operation{
 		Name:       opGetClusterCredentials,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5501,7 +5500,7 @@ func (c *Redshift) GetClusterCredentials(input *GetClusterCredentialsInput) (*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) GetClusterCredentialsWithContext(ctx aws.Context, input *GetClusterCredentialsInput, opts ...request.Option) (*GetClusterCredentialsOutput, error) {
+func (c *Redshift) GetClusterCredentialsWithContext(ctx aws.Context, input *GetClusterCredentialsInput, opts ...aws.Option) (*GetClusterCredentialsOutput, error) {
 	req, out := c.GetClusterCredentialsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5510,7 +5509,7 @@ func (c *Redshift) GetClusterCredentialsWithContext(ctx aws.Context, input *GetC
 
 const opModifyCluster = "ModifyCluster"
 
-// ModifyClusterRequest generates a "aws/request.Request" representing the
+// ModifyClusterRequest generates a "aws.Request" representing the
 // client's request for the ModifyCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5534,8 +5533,8 @@ const opModifyCluster = "ModifyCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster
-func (c *Redshift) ModifyClusterRequest(input *ModifyClusterInput) (req *request.Request, output *ModifyClusterOutput) {
-	op := &request.Operation{
+func (c *Redshift) ModifyClusterRequest(input *ModifyClusterInput) (req *aws.Request, output *ModifyClusterOutput) {
+	op := &aws.Operation{
 		Name:       opModifyCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5640,7 +5639,7 @@ func (c *Redshift) ModifyCluster(input *ModifyClusterInput) (*ModifyClusterOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) ModifyClusterWithContext(ctx aws.Context, input *ModifyClusterInput, opts ...request.Option) (*ModifyClusterOutput, error) {
+func (c *Redshift) ModifyClusterWithContext(ctx aws.Context, input *ModifyClusterInput, opts ...aws.Option) (*ModifyClusterOutput, error) {
 	req, out := c.ModifyClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5649,7 +5648,7 @@ func (c *Redshift) ModifyClusterWithContext(ctx aws.Context, input *ModifyCluste
 
 const opModifyClusterIamRoles = "ModifyClusterIamRoles"
 
-// ModifyClusterIamRolesRequest generates a "aws/request.Request" representing the
+// ModifyClusterIamRolesRequest generates a "aws.Request" representing the
 // client's request for the ModifyClusterIamRoles operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5673,8 +5672,8 @@ const opModifyClusterIamRoles = "ModifyClusterIamRoles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles
-func (c *Redshift) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInput) (req *request.Request, output *ModifyClusterIamRolesOutput) {
-	op := &request.Operation{
+func (c *Redshift) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInput) (req *aws.Request, output *ModifyClusterIamRolesOutput) {
+	op := &aws.Operation{
 		Name:       opModifyClusterIamRoles,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5725,7 +5724,7 @@ func (c *Redshift) ModifyClusterIamRoles(input *ModifyClusterIamRolesInput) (*Mo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) ModifyClusterIamRolesWithContext(ctx aws.Context, input *ModifyClusterIamRolesInput, opts ...request.Option) (*ModifyClusterIamRolesOutput, error) {
+func (c *Redshift) ModifyClusterIamRolesWithContext(ctx aws.Context, input *ModifyClusterIamRolesInput, opts ...aws.Option) (*ModifyClusterIamRolesOutput, error) {
 	req, out := c.ModifyClusterIamRolesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5734,7 +5733,7 @@ func (c *Redshift) ModifyClusterIamRolesWithContext(ctx aws.Context, input *Modi
 
 const opModifyClusterParameterGroup = "ModifyClusterParameterGroup"
 
-// ModifyClusterParameterGroupRequest generates a "aws/request.Request" representing the
+// ModifyClusterParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyClusterParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5758,8 +5757,8 @@ const opModifyClusterParameterGroup = "ModifyClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterParameterGroup
-func (c *Redshift) ModifyClusterParameterGroupRequest(input *ModifyClusterParameterGroupInput) (req *request.Request, output *ClusterParameterGroupNameMessage) {
-	op := &request.Operation{
+func (c *Redshift) ModifyClusterParameterGroupRequest(input *ModifyClusterParameterGroupInput) (req *aws.Request, output *ClusterParameterGroupNameMessage) {
+	op := &aws.Operation{
 		Name:       opModifyClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5813,7 +5812,7 @@ func (c *Redshift) ModifyClusterParameterGroup(input *ModifyClusterParameterGrou
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) ModifyClusterParameterGroupWithContext(ctx aws.Context, input *ModifyClusterParameterGroupInput, opts ...request.Option) (*ClusterParameterGroupNameMessage, error) {
+func (c *Redshift) ModifyClusterParameterGroupWithContext(ctx aws.Context, input *ModifyClusterParameterGroupInput, opts ...aws.Option) (*ClusterParameterGroupNameMessage, error) {
 	req, out := c.ModifyClusterParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5822,7 +5821,7 @@ func (c *Redshift) ModifyClusterParameterGroupWithContext(ctx aws.Context, input
 
 const opModifyClusterSubnetGroup = "ModifyClusterSubnetGroup"
 
-// ModifyClusterSubnetGroupRequest generates a "aws/request.Request" representing the
+// ModifyClusterSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyClusterSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5846,8 +5845,8 @@ const opModifyClusterSubnetGroup = "ModifyClusterSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroup
-func (c *Redshift) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGroupInput) (req *request.Request, output *ModifyClusterSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *Redshift) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGroupInput) (req *aws.Request, output *ModifyClusterSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opModifyClusterSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5915,7 +5914,7 @@ func (c *Redshift) ModifyClusterSubnetGroup(input *ModifyClusterSubnetGroupInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) ModifyClusterSubnetGroupWithContext(ctx aws.Context, input *ModifyClusterSubnetGroupInput, opts ...request.Option) (*ModifyClusterSubnetGroupOutput, error) {
+func (c *Redshift) ModifyClusterSubnetGroupWithContext(ctx aws.Context, input *ModifyClusterSubnetGroupInput, opts ...aws.Option) (*ModifyClusterSubnetGroupOutput, error) {
 	req, out := c.ModifyClusterSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5924,7 +5923,7 @@ func (c *Redshift) ModifyClusterSubnetGroupWithContext(ctx aws.Context, input *M
 
 const opModifyEventSubscription = "ModifyEventSubscription"
 
-// ModifyEventSubscriptionRequest generates a "aws/request.Request" representing the
+// ModifyEventSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the ModifyEventSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5948,8 +5947,8 @@ const opModifyEventSubscription = "ModifyEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEventSubscription
-func (c *Redshift) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *request.Request, output *ModifyEventSubscriptionOutput) {
-	op := &request.Operation{
+func (c *Redshift) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *aws.Request, output *ModifyEventSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opModifyEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6026,7 +6025,7 @@ func (c *Redshift) ModifyEventSubscription(input *ModifyEventSubscriptionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...request.Option) (*ModifyEventSubscriptionOutput, error) {
+func (c *Redshift) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...aws.Option) (*ModifyEventSubscriptionOutput, error) {
 	req, out := c.ModifyEventSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6035,7 +6034,7 @@ func (c *Redshift) ModifyEventSubscriptionWithContext(ctx aws.Context, input *Mo
 
 const opModifySnapshotCopyRetentionPeriod = "ModifySnapshotCopyRetentionPeriod"
 
-// ModifySnapshotCopyRetentionPeriodRequest generates a "aws/request.Request" representing the
+// ModifySnapshotCopyRetentionPeriodRequest generates a "aws.Request" representing the
 // client's request for the ModifySnapshotCopyRetentionPeriod operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6059,8 +6058,8 @@ const opModifySnapshotCopyRetentionPeriod = "ModifySnapshotCopyRetentionPeriod"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod
-func (c *Redshift) ModifySnapshotCopyRetentionPeriodRequest(input *ModifySnapshotCopyRetentionPeriodInput) (req *request.Request, output *ModifySnapshotCopyRetentionPeriodOutput) {
-	op := &request.Operation{
+func (c *Redshift) ModifySnapshotCopyRetentionPeriodRequest(input *ModifySnapshotCopyRetentionPeriodInput) (req *aws.Request, output *ModifySnapshotCopyRetentionPeriodOutput) {
+	op := &aws.Operation{
 		Name:       opModifySnapshotCopyRetentionPeriod,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6115,7 +6114,7 @@ func (c *Redshift) ModifySnapshotCopyRetentionPeriod(input *ModifySnapshotCopyRe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) ModifySnapshotCopyRetentionPeriodWithContext(ctx aws.Context, input *ModifySnapshotCopyRetentionPeriodInput, opts ...request.Option) (*ModifySnapshotCopyRetentionPeriodOutput, error) {
+func (c *Redshift) ModifySnapshotCopyRetentionPeriodWithContext(ctx aws.Context, input *ModifySnapshotCopyRetentionPeriodInput, opts ...aws.Option) (*ModifySnapshotCopyRetentionPeriodOutput, error) {
 	req, out := c.ModifySnapshotCopyRetentionPeriodRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6124,7 +6123,7 @@ func (c *Redshift) ModifySnapshotCopyRetentionPeriodWithContext(ctx aws.Context,
 
 const opPurchaseReservedNodeOffering = "PurchaseReservedNodeOffering"
 
-// PurchaseReservedNodeOfferingRequest generates a "aws/request.Request" representing the
+// PurchaseReservedNodeOfferingRequest generates a "aws.Request" representing the
 // client's request for the PurchaseReservedNodeOffering operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6148,8 +6147,8 @@ const opPurchaseReservedNodeOffering = "PurchaseReservedNodeOffering"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOffering
-func (c *Redshift) PurchaseReservedNodeOfferingRequest(input *PurchaseReservedNodeOfferingInput) (req *request.Request, output *PurchaseReservedNodeOfferingOutput) {
-	op := &request.Operation{
+func (c *Redshift) PurchaseReservedNodeOfferingRequest(input *PurchaseReservedNodeOfferingInput) (req *aws.Request, output *PurchaseReservedNodeOfferingOutput) {
+	op := &aws.Operation{
 		Name:       opPurchaseReservedNodeOffering,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6213,7 +6212,7 @@ func (c *Redshift) PurchaseReservedNodeOffering(input *PurchaseReservedNodeOffer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) PurchaseReservedNodeOfferingWithContext(ctx aws.Context, input *PurchaseReservedNodeOfferingInput, opts ...request.Option) (*PurchaseReservedNodeOfferingOutput, error) {
+func (c *Redshift) PurchaseReservedNodeOfferingWithContext(ctx aws.Context, input *PurchaseReservedNodeOfferingInput, opts ...aws.Option) (*PurchaseReservedNodeOfferingOutput, error) {
 	req, out := c.PurchaseReservedNodeOfferingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6222,7 +6221,7 @@ func (c *Redshift) PurchaseReservedNodeOfferingWithContext(ctx aws.Context, inpu
 
 const opRebootCluster = "RebootCluster"
 
-// RebootClusterRequest generates a "aws/request.Request" representing the
+// RebootClusterRequest generates a "aws.Request" representing the
 // client's request for the RebootCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6246,8 +6245,8 @@ const opRebootCluster = "RebootCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster
-func (c *Redshift) RebootClusterRequest(input *RebootClusterInput) (req *request.Request, output *RebootClusterOutput) {
-	op := &request.Operation{
+func (c *Redshift) RebootClusterRequest(input *RebootClusterInput) (req *aws.Request, output *RebootClusterOutput) {
+	op := &aws.Operation{
 		Name:       opRebootCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6301,7 +6300,7 @@ func (c *Redshift) RebootCluster(input *RebootClusterInput) (*RebootClusterOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) RebootClusterWithContext(ctx aws.Context, input *RebootClusterInput, opts ...request.Option) (*RebootClusterOutput, error) {
+func (c *Redshift) RebootClusterWithContext(ctx aws.Context, input *RebootClusterInput, opts ...aws.Option) (*RebootClusterOutput, error) {
 	req, out := c.RebootClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6310,7 +6309,7 @@ func (c *Redshift) RebootClusterWithContext(ctx aws.Context, input *RebootCluste
 
 const opResetClusterParameterGroup = "ResetClusterParameterGroup"
 
-// ResetClusterParameterGroupRequest generates a "aws/request.Request" representing the
+// ResetClusterParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the ResetClusterParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6334,8 +6333,8 @@ const opResetClusterParameterGroup = "ResetClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResetClusterParameterGroup
-func (c *Redshift) ResetClusterParameterGroupRequest(input *ResetClusterParameterGroupInput) (req *request.Request, output *ClusterParameterGroupNameMessage) {
-	op := &request.Operation{
+func (c *Redshift) ResetClusterParameterGroupRequest(input *ResetClusterParameterGroupInput) (req *aws.Request, output *ClusterParameterGroupNameMessage) {
+	op := &aws.Operation{
 		Name:       opResetClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6388,7 +6387,7 @@ func (c *Redshift) ResetClusterParameterGroup(input *ResetClusterParameterGroupI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) ResetClusterParameterGroupWithContext(ctx aws.Context, input *ResetClusterParameterGroupInput, opts ...request.Option) (*ClusterParameterGroupNameMessage, error) {
+func (c *Redshift) ResetClusterParameterGroupWithContext(ctx aws.Context, input *ResetClusterParameterGroupInput, opts ...aws.Option) (*ClusterParameterGroupNameMessage, error) {
 	req, out := c.ResetClusterParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6397,7 +6396,7 @@ func (c *Redshift) ResetClusterParameterGroupWithContext(ctx aws.Context, input 
 
 const opRestoreFromClusterSnapshot = "RestoreFromClusterSnapshot"
 
-// RestoreFromClusterSnapshotRequest generates a "aws/request.Request" representing the
+// RestoreFromClusterSnapshotRequest generates a "aws.Request" representing the
 // client's request for the RestoreFromClusterSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6421,8 +6420,8 @@ const opRestoreFromClusterSnapshot = "RestoreFromClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot
-func (c *Redshift) RestoreFromClusterSnapshotRequest(input *RestoreFromClusterSnapshotInput) (req *request.Request, output *RestoreFromClusterSnapshotOutput) {
-	op := &request.Operation{
+func (c *Redshift) RestoreFromClusterSnapshotRequest(input *RestoreFromClusterSnapshotInput) (req *aws.Request, output *RestoreFromClusterSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opRestoreFromClusterSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6553,7 +6552,7 @@ func (c *Redshift) RestoreFromClusterSnapshot(input *RestoreFromClusterSnapshotI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) RestoreFromClusterSnapshotWithContext(ctx aws.Context, input *RestoreFromClusterSnapshotInput, opts ...request.Option) (*RestoreFromClusterSnapshotOutput, error) {
+func (c *Redshift) RestoreFromClusterSnapshotWithContext(ctx aws.Context, input *RestoreFromClusterSnapshotInput, opts ...aws.Option) (*RestoreFromClusterSnapshotOutput, error) {
 	req, out := c.RestoreFromClusterSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6562,7 +6561,7 @@ func (c *Redshift) RestoreFromClusterSnapshotWithContext(ctx aws.Context, input 
 
 const opRestoreTableFromClusterSnapshot = "RestoreTableFromClusterSnapshot"
 
-// RestoreTableFromClusterSnapshotRequest generates a "aws/request.Request" representing the
+// RestoreTableFromClusterSnapshotRequest generates a "aws.Request" representing the
 // client's request for the RestoreTableFromClusterSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6586,8 +6585,8 @@ const opRestoreTableFromClusterSnapshot = "RestoreTableFromClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshot
-func (c *Redshift) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFromClusterSnapshotInput) (req *request.Request, output *RestoreTableFromClusterSnapshotOutput) {
-	op := &request.Operation{
+func (c *Redshift) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFromClusterSnapshotInput) (req *aws.Request, output *RestoreTableFromClusterSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opRestoreTableFromClusterSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6665,7 +6664,7 @@ func (c *Redshift) RestoreTableFromClusterSnapshot(input *RestoreTableFromCluste
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) RestoreTableFromClusterSnapshotWithContext(ctx aws.Context, input *RestoreTableFromClusterSnapshotInput, opts ...request.Option) (*RestoreTableFromClusterSnapshotOutput, error) {
+func (c *Redshift) RestoreTableFromClusterSnapshotWithContext(ctx aws.Context, input *RestoreTableFromClusterSnapshotInput, opts ...aws.Option) (*RestoreTableFromClusterSnapshotOutput, error) {
 	req, out := c.RestoreTableFromClusterSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6674,7 +6673,7 @@ func (c *Redshift) RestoreTableFromClusterSnapshotWithContext(ctx aws.Context, i
 
 const opRevokeClusterSecurityGroupIngress = "RevokeClusterSecurityGroupIngress"
 
-// RevokeClusterSecurityGroupIngressRequest generates a "aws/request.Request" representing the
+// RevokeClusterSecurityGroupIngressRequest generates a "aws.Request" representing the
 // client's request for the RevokeClusterSecurityGroupIngress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6698,8 +6697,8 @@ const opRevokeClusterSecurityGroupIngress = "RevokeClusterSecurityGroupIngress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngress
-func (c *Redshift) RevokeClusterSecurityGroupIngressRequest(input *RevokeClusterSecurityGroupIngressInput) (req *request.Request, output *RevokeClusterSecurityGroupIngressOutput) {
-	op := &request.Operation{
+func (c *Redshift) RevokeClusterSecurityGroupIngressRequest(input *RevokeClusterSecurityGroupIngressInput) (req *aws.Request, output *RevokeClusterSecurityGroupIngressOutput) {
+	op := &aws.Operation{
 		Name:       opRevokeClusterSecurityGroupIngress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6756,7 +6755,7 @@ func (c *Redshift) RevokeClusterSecurityGroupIngress(input *RevokeClusterSecurit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) RevokeClusterSecurityGroupIngressWithContext(ctx aws.Context, input *RevokeClusterSecurityGroupIngressInput, opts ...request.Option) (*RevokeClusterSecurityGroupIngressOutput, error) {
+func (c *Redshift) RevokeClusterSecurityGroupIngressWithContext(ctx aws.Context, input *RevokeClusterSecurityGroupIngressInput, opts ...aws.Option) (*RevokeClusterSecurityGroupIngressOutput, error) {
 	req, out := c.RevokeClusterSecurityGroupIngressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6765,7 +6764,7 @@ func (c *Redshift) RevokeClusterSecurityGroupIngressWithContext(ctx aws.Context,
 
 const opRevokeSnapshotAccess = "RevokeSnapshotAccess"
 
-// RevokeSnapshotAccessRequest generates a "aws/request.Request" representing the
+// RevokeSnapshotAccessRequest generates a "aws.Request" representing the
 // client's request for the RevokeSnapshotAccess operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6789,8 +6788,8 @@ const opRevokeSnapshotAccess = "RevokeSnapshotAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess
-func (c *Redshift) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput) (req *request.Request, output *RevokeSnapshotAccessOutput) {
-	op := &request.Operation{
+func (c *Redshift) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput) (req *aws.Request, output *RevokeSnapshotAccessOutput) {
+	op := &aws.Operation{
 		Name:       opRevokeSnapshotAccess,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6849,7 +6848,7 @@ func (c *Redshift) RevokeSnapshotAccess(input *RevokeSnapshotAccessInput) (*Revo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) RevokeSnapshotAccessWithContext(ctx aws.Context, input *RevokeSnapshotAccessInput, opts ...request.Option) (*RevokeSnapshotAccessOutput, error) {
+func (c *Redshift) RevokeSnapshotAccessWithContext(ctx aws.Context, input *RevokeSnapshotAccessInput, opts ...aws.Option) (*RevokeSnapshotAccessOutput, error) {
 	req, out := c.RevokeSnapshotAccessRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6858,7 +6857,7 @@ func (c *Redshift) RevokeSnapshotAccessWithContext(ctx aws.Context, input *Revok
 
 const opRotateEncryptionKey = "RotateEncryptionKey"
 
-// RotateEncryptionKeyRequest generates a "aws/request.Request" representing the
+// RotateEncryptionKeyRequest generates a "aws.Request" representing the
 // client's request for the RotateEncryptionKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6882,8 +6881,8 @@ const opRotateEncryptionKey = "RotateEncryptionKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey
-func (c *Redshift) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) (req *request.Request, output *RotateEncryptionKeyOutput) {
-	op := &request.Operation{
+func (c *Redshift) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) (req *aws.Request, output *RotateEncryptionKeyOutput) {
+	op := &aws.Operation{
 		Name:       opRotateEncryptionKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6935,7 +6934,7 @@ func (c *Redshift) RotateEncryptionKey(input *RotateEncryptionKeyInput) (*Rotate
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) RotateEncryptionKeyWithContext(ctx aws.Context, input *RotateEncryptionKeyInput, opts ...request.Option) (*RotateEncryptionKeyOutput, error) {
+func (c *Redshift) RotateEncryptionKeyWithContext(ctx aws.Context, input *RotateEncryptionKeyInput, opts ...aws.Option) (*RotateEncryptionKeyOutput, error) {
 	req, out := c.RotateEncryptionKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7012,9 +7011,9 @@ func (s AuthorizeClusterSecurityGroupIngressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AuthorizeClusterSecurityGroupIngressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AuthorizeClusterSecurityGroupIngressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeClusterSecurityGroupIngressInput"}
 	if s.ClusterSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7106,12 +7105,12 @@ func (s AuthorizeSnapshotAccessInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AuthorizeSnapshotAccessInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AuthorizeSnapshotAccessInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeSnapshotAccessInput"}
 	if s.AccountWithRestoreAccess == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountWithRestoreAccess"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountWithRestoreAccess"))
 	}
 	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8166,12 +8165,12 @@ func (s CopyClusterSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyClusterSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopyClusterSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopyClusterSnapshotInput"}
 	if s.SourceSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotIdentifier"))
 	}
 	if s.TargetSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8506,18 +8505,18 @@ func (s CreateClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if s.MasterUserPassword == nil {
-		invalidParams.Add(request.NewErrParamRequired("MasterUserPassword"))
+		invalidParams.Add(aws.NewErrParamRequired("MasterUserPassword"))
 	}
 	if s.MasterUsername == nil {
-		invalidParams.Add(request.NewErrParamRequired("MasterUsername"))
+		invalidParams.Add(aws.NewErrParamRequired("MasterUsername"))
 	}
 	if s.NodeType == nil {
-		invalidParams.Add(request.NewErrParamRequired("NodeType"))
+		invalidParams.Add(aws.NewErrParamRequired("NodeType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8767,15 +8766,15 @@ func (s CreateClusterParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateClusterParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterParameterGroupInput"}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.ParameterGroupFamily == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupFamily"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupFamily"))
 	}
 	if s.ParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8874,12 +8873,12 @@ func (s CreateClusterSecurityGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterSecurityGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateClusterSecurityGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterSecurityGroupInput"}
 	if s.ClusterSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8973,12 +8972,12 @@ func (s CreateClusterSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateClusterSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterSnapshotInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9076,15 +9075,15 @@ func (s CreateClusterSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateClusterSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterSubnetGroupInput"}
 	if s.ClusterSubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterSubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterSubnetGroupName"))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9220,12 +9219,12 @@ func (s CreateEventSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEventSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
 	if s.SnsTopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnsTopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9332,9 +9331,9 @@ func (s CreateHsmClientCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHsmClientCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHsmClientCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHsmClientCertificateInput"}
 	if s.HsmClientCertificateIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmClientCertificateIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmClientCertificateIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9433,24 +9432,24 @@ func (s CreateHsmConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHsmConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHsmConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHsmConfigurationInput"}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.HsmConfigurationIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmConfigurationIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmConfigurationIdentifier"))
 	}
 	if s.HsmIpAddress == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmIpAddress"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmIpAddress"))
 	}
 	if s.HsmPartitionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmPartitionName"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmPartitionName"))
 	}
 	if s.HsmPartitionPassword == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmPartitionPassword"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmPartitionPassword"))
 	}
 	if s.HsmServerPublicCertificate == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmServerPublicCertificate"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmServerPublicCertificate"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9570,9 +9569,9 @@ func (s CreateSnapshotCopyGrantInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotCopyGrantInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSnapshotCopyGrantInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotCopyGrantInput"}
 	if s.SnapshotCopyGrantName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotCopyGrantName"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotCopyGrantName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9662,12 +9661,12 @@ func (s CreateTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9806,9 +9805,9 @@ func (s DeleteClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9887,9 +9886,9 @@ func (s DeleteClusterParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClusterParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterParameterGroupInput"}
 	if s.ParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9941,9 +9940,9 @@ func (s DeleteClusterSecurityGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterSecurityGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClusterSecurityGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterSecurityGroupInput"}
 	if s.ClusterSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10005,9 +10004,9 @@ func (s DeleteClusterSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClusterSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterSnapshotInput"}
 	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10074,9 +10073,9 @@ func (s DeleteClusterSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClusterSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterSubnetGroupInput"}
 	if s.ClusterSubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterSubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterSubnetGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10128,9 +10127,9 @@ func (s DeleteEventSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10182,9 +10181,9 @@ func (s DeleteHsmClientCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHsmClientCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteHsmClientCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmClientCertificateInput"}
 	if s.HsmClientCertificateIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmClientCertificateIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmClientCertificateIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10236,9 +10235,9 @@ func (s DeleteHsmConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHsmConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteHsmConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmConfigurationInput"}
 	if s.HsmConfigurationIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmConfigurationIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmConfigurationIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10291,9 +10290,9 @@ func (s DeleteSnapshotCopyGrantInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSnapshotCopyGrantInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSnapshotCopyGrantInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotCopyGrantInput"}
 	if s.SnapshotCopyGrantName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotCopyGrantName"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotCopyGrantName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10352,12 +10351,12 @@ func (s DeleteTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10564,9 +10563,9 @@ func (s DescribeClusterParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeClusterParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeClusterParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterParametersInput"}
 	if s.ParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11338,9 +11337,9 @@ func (s DescribeDefaultClusterParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDefaultClusterParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDefaultClusterParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDefaultClusterParametersInput"}
 	if s.ParameterGroupFamily == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupFamily"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupFamily"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11996,9 +11995,9 @@ func (s DescribeLoggingStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoggingStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeLoggingStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoggingStatusInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12328,9 +12327,9 @@ func (s DescribeResizeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeResizeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeResizeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeResizeInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12884,9 +12883,9 @@ func (s DisableLoggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableLoggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableLoggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableLoggingInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12927,9 +12926,9 @@ func (s DisableSnapshotCopyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableSnapshotCopyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableSnapshotCopyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableSnapshotCopyInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13111,12 +13110,12 @@ func (s EnableLoggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableLoggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableLoggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableLoggingInput"}
 	if s.BucketName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BucketName"))
+		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
 	}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13189,12 +13188,12 @@ func (s EnableSnapshotCopyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableSnapshotCopyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableSnapshotCopyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableSnapshotCopyInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if s.DestinationRegion == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationRegion"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationRegion"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13694,12 +13693,12 @@ func (s GetClusterCredentialsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetClusterCredentialsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetClusterCredentialsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetClusterCredentialsInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if s.DbUser == nil {
-		invalidParams.Add(request.NewErrParamRequired("DbUser"))
+		invalidParams.Add(aws.NewErrParamRequired("DbUser"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14097,9 +14096,9 @@ func (s ModifyClusterIamRolesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyClusterIamRolesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyClusterIamRolesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterIamRolesInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14365,9 +14364,9 @@ func (s ModifyClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14542,12 +14541,12 @@ func (s ModifyClusterParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyClusterParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyClusterParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterParameterGroupInput"}
 	if s.ParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
 	if s.Parameters == nil {
-		invalidParams.Add(request.NewErrParamRequired("Parameters"))
+		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14599,12 +14598,12 @@ func (s ModifyClusterSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyClusterSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyClusterSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterSubnetGroupInput"}
 	if s.ClusterSubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterSubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterSubnetGroupName"))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14718,9 +14717,9 @@ func (s ModifyEventSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyEventSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14834,12 +14833,12 @@ func (s ModifySnapshotCopyRetentionPeriodInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifySnapshotCopyRetentionPeriodInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifySnapshotCopyRetentionPeriodInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifySnapshotCopyRetentionPeriodInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if s.RetentionPeriod == nil {
-		invalidParams.Add(request.NewErrParamRequired("RetentionPeriod"))
+		invalidParams.Add(aws.NewErrParamRequired("RetentionPeriod"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15173,9 +15172,9 @@ func (s PurchaseReservedNodeOfferingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseReservedNodeOfferingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PurchaseReservedNodeOfferingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedNodeOfferingInput"}
 	if s.ReservedNodeOfferingId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReservedNodeOfferingId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReservedNodeOfferingId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15243,9 +15242,9 @@ func (s RebootClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebootClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebootClusterInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15583,9 +15582,9 @@ func (s ResetClusterParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetClusterParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResetClusterParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResetClusterParameterGroupInput"}
 	if s.ParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15797,12 +15796,12 @@ func (s RestoreFromClusterSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreFromClusterSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreFromClusterSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreFromClusterSnapshotInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16096,21 +16095,21 @@ func (s RestoreTableFromClusterSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreTableFromClusterSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreTableFromClusterSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreTableFromClusterSnapshotInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if s.NewTableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewTableName"))
+		invalidParams.Add(aws.NewErrParamRequired("NewTableName"))
 	}
 	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
 	if s.SourceDatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceDatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceDatabaseName"))
 	}
 	if s.SourceTableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceTableName"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceTableName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16231,9 +16230,9 @@ func (s RevokeClusterSecurityGroupIngressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeClusterSecurityGroupIngressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RevokeClusterSecurityGroupIngressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RevokeClusterSecurityGroupIngressInput"}
 	if s.ClusterSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16323,12 +16322,12 @@ func (s RevokeSnapshotAccessInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeSnapshotAccessInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RevokeSnapshotAccessInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RevokeSnapshotAccessInput"}
 	if s.AccountWithRestoreAccess == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountWithRestoreAccess"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountWithRestoreAccess"))
 	}
 	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16404,9 +16403,9 @@ func (s RotateEncryptionKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RotateEncryptionKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RotateEncryptionKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RotateEncryptionKeyInput"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {

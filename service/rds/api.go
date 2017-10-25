@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opAddRoleToDBCluster = "AddRoleToDBCluster"
 
-// AddRoleToDBClusterRequest generates a "aws/request.Request" representing the
+// AddRoleToDBClusterRequest generates a "aws.Request" representing the
 // client's request for the AddRoleToDBCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opAddRoleToDBCluster = "AddRoleToDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBCluster
-func (c *RDS) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) (req *request.Request, output *AddRoleToDBClusterOutput) {
-	op := &request.Operation{
+func (c *RDS) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) (req *aws.Request, output *AddRoleToDBClusterOutput) {
+	op := &aws.Operation{
 		Name:       opAddRoleToDBCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -100,7 +99,7 @@ func (c *RDS) AddRoleToDBCluster(input *AddRoleToDBClusterInput) (*AddRoleToDBCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) AddRoleToDBClusterWithContext(ctx aws.Context, input *AddRoleToDBClusterInput, opts ...request.Option) (*AddRoleToDBClusterOutput, error) {
+func (c *RDS) AddRoleToDBClusterWithContext(ctx aws.Context, input *AddRoleToDBClusterInput, opts ...aws.Option) (*AddRoleToDBClusterOutput, error) {
 	req, out := c.AddRoleToDBClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -109,7 +108,7 @@ func (c *RDS) AddRoleToDBClusterWithContext(ctx aws.Context, input *AddRoleToDBC
 
 const opAddSourceIdentifierToSubscription = "AddSourceIdentifierToSubscription"
 
-// AddSourceIdentifierToSubscriptionRequest generates a "aws/request.Request" representing the
+// AddSourceIdentifierToSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the AddSourceIdentifierToSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -133,8 +132,8 @@ const opAddSourceIdentifierToSubscription = "AddSourceIdentifierToSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscription
-func (c *RDS) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdentifierToSubscriptionInput) (req *request.Request, output *AddSourceIdentifierToSubscriptionOutput) {
-	op := &request.Operation{
+func (c *RDS) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdentifierToSubscriptionInput) (req *aws.Request, output *AddSourceIdentifierToSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opAddSourceIdentifierToSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -182,7 +181,7 @@ func (c *RDS) AddSourceIdentifierToSubscription(input *AddSourceIdentifierToSubs
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) AddSourceIdentifierToSubscriptionWithContext(ctx aws.Context, input *AddSourceIdentifierToSubscriptionInput, opts ...request.Option) (*AddSourceIdentifierToSubscriptionOutput, error) {
+func (c *RDS) AddSourceIdentifierToSubscriptionWithContext(ctx aws.Context, input *AddSourceIdentifierToSubscriptionInput, opts ...aws.Option) (*AddSourceIdentifierToSubscriptionOutput, error) {
 	req, out := c.AddSourceIdentifierToSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -191,7 +190,7 @@ func (c *RDS) AddSourceIdentifierToSubscriptionWithContext(ctx aws.Context, inpu
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws/request.Request" representing the
+// AddTagsToResourceRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -215,8 +214,8 @@ const opAddTagsToResource = "AddTagsToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddTagsToResource
-func (c *RDS) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *AddTagsToResourceOutput) {
-	op := &request.Operation{
+func (c *RDS) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -274,7 +273,7 @@ func (c *RDS) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResour
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...request.Option) (*AddTagsToResourceOutput, error) {
+func (c *RDS) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
 	req, out := c.AddTagsToResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -283,7 +282,7 @@ func (c *RDS) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToReso
 
 const opApplyPendingMaintenanceAction = "ApplyPendingMaintenanceAction"
 
-// ApplyPendingMaintenanceActionRequest generates a "aws/request.Request" representing the
+// ApplyPendingMaintenanceActionRequest generates a "aws.Request" representing the
 // client's request for the ApplyPendingMaintenanceAction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -307,8 +306,8 @@ const opApplyPendingMaintenanceAction = "ApplyPendingMaintenanceAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ApplyPendingMaintenanceAction
-func (c *RDS) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintenanceActionInput) (req *request.Request, output *ApplyPendingMaintenanceActionOutput) {
-	op := &request.Operation{
+func (c *RDS) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintenanceActionInput) (req *aws.Request, output *ApplyPendingMaintenanceActionOutput) {
+	op := &aws.Operation{
 		Name:       opApplyPendingMaintenanceAction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -354,7 +353,7 @@ func (c *RDS) ApplyPendingMaintenanceAction(input *ApplyPendingMaintenanceAction
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ApplyPendingMaintenanceActionWithContext(ctx aws.Context, input *ApplyPendingMaintenanceActionInput, opts ...request.Option) (*ApplyPendingMaintenanceActionOutput, error) {
+func (c *RDS) ApplyPendingMaintenanceActionWithContext(ctx aws.Context, input *ApplyPendingMaintenanceActionInput, opts ...aws.Option) (*ApplyPendingMaintenanceActionOutput, error) {
 	req, out := c.ApplyPendingMaintenanceActionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -363,7 +362,7 @@ func (c *RDS) ApplyPendingMaintenanceActionWithContext(ctx aws.Context, input *A
 
 const opAuthorizeDBSecurityGroupIngress = "AuthorizeDBSecurityGroupIngress"
 
-// AuthorizeDBSecurityGroupIngressRequest generates a "aws/request.Request" representing the
+// AuthorizeDBSecurityGroupIngressRequest generates a "aws.Request" representing the
 // client's request for the AuthorizeDBSecurityGroupIngress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -387,8 +386,8 @@ const opAuthorizeDBSecurityGroupIngress = "AuthorizeDBSecurityGroupIngress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizeDBSecurityGroupIngress
-func (c *RDS) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecurityGroupIngressInput) (req *request.Request, output *AuthorizeDBSecurityGroupIngressOutput) {
-	op := &request.Operation{
+func (c *RDS) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecurityGroupIngressInput) (req *aws.Request, output *AuthorizeDBSecurityGroupIngressOutput) {
+	op := &aws.Operation{
 		Name:       opAuthorizeDBSecurityGroupIngress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -455,7 +454,7 @@ func (c *RDS) AuthorizeDBSecurityGroupIngress(input *AuthorizeDBSecurityGroupIng
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) AuthorizeDBSecurityGroupIngressWithContext(ctx aws.Context, input *AuthorizeDBSecurityGroupIngressInput, opts ...request.Option) (*AuthorizeDBSecurityGroupIngressOutput, error) {
+func (c *RDS) AuthorizeDBSecurityGroupIngressWithContext(ctx aws.Context, input *AuthorizeDBSecurityGroupIngressInput, opts ...aws.Option) (*AuthorizeDBSecurityGroupIngressOutput, error) {
 	req, out := c.AuthorizeDBSecurityGroupIngressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -464,7 +463,7 @@ func (c *RDS) AuthorizeDBSecurityGroupIngressWithContext(ctx aws.Context, input 
 
 const opCopyDBClusterParameterGroup = "CopyDBClusterParameterGroup"
 
-// CopyDBClusterParameterGroupRequest generates a "aws/request.Request" representing the
+// CopyDBClusterParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the CopyDBClusterParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -488,8 +487,8 @@ const opCopyDBClusterParameterGroup = "CopyDBClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterParameterGroup
-func (c *RDS) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameterGroupInput) (req *request.Request, output *CopyDBClusterParameterGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameterGroupInput) (req *aws.Request, output *CopyDBClusterParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCopyDBClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -541,7 +540,7 @@ func (c *RDS) CopyDBClusterParameterGroup(input *CopyDBClusterParameterGroupInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CopyDBClusterParameterGroupWithContext(ctx aws.Context, input *CopyDBClusterParameterGroupInput, opts ...request.Option) (*CopyDBClusterParameterGroupOutput, error) {
+func (c *RDS) CopyDBClusterParameterGroupWithContext(ctx aws.Context, input *CopyDBClusterParameterGroupInput, opts ...aws.Option) (*CopyDBClusterParameterGroupOutput, error) {
 	req, out := c.CopyDBClusterParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -550,7 +549,7 @@ func (c *RDS) CopyDBClusterParameterGroupWithContext(ctx aws.Context, input *Cop
 
 const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 
-// CopyDBClusterSnapshotRequest generates a "aws/request.Request" representing the
+// CopyDBClusterSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CopyDBClusterSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -574,8 +573,8 @@ const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot
-func (c *RDS) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) (req *request.Request, output *CopyDBClusterSnapshotOutput) {
-	op := &request.Operation{
+func (c *RDS) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) (req *aws.Request, output *CopyDBClusterSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCopyDBClusterSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -697,7 +696,7 @@ func (c *RDS) CopyDBClusterSnapshot(input *CopyDBClusterSnapshotInput) (*CopyDBC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CopyDBClusterSnapshotWithContext(ctx aws.Context, input *CopyDBClusterSnapshotInput, opts ...request.Option) (*CopyDBClusterSnapshotOutput, error) {
+func (c *RDS) CopyDBClusterSnapshotWithContext(ctx aws.Context, input *CopyDBClusterSnapshotInput, opts ...aws.Option) (*CopyDBClusterSnapshotOutput, error) {
 	req, out := c.CopyDBClusterSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -706,7 +705,7 @@ func (c *RDS) CopyDBClusterSnapshotWithContext(ctx aws.Context, input *CopyDBClu
 
 const opCopyDBParameterGroup = "CopyDBParameterGroup"
 
-// CopyDBParameterGroupRequest generates a "aws/request.Request" representing the
+// CopyDBParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the CopyDBParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -730,8 +729,8 @@ const opCopyDBParameterGroup = "CopyDBParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroup
-func (c *RDS) CopyDBParameterGroupRequest(input *CopyDBParameterGroupInput) (req *request.Request, output *CopyDBParameterGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) CopyDBParameterGroupRequest(input *CopyDBParameterGroupInput) (req *aws.Request, output *CopyDBParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCopyDBParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -783,7 +782,7 @@ func (c *RDS) CopyDBParameterGroup(input *CopyDBParameterGroupInput) (*CopyDBPar
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CopyDBParameterGroupWithContext(ctx aws.Context, input *CopyDBParameterGroupInput, opts ...request.Option) (*CopyDBParameterGroupOutput, error) {
+func (c *RDS) CopyDBParameterGroupWithContext(ctx aws.Context, input *CopyDBParameterGroupInput, opts ...aws.Option) (*CopyDBParameterGroupOutput, error) {
 	req, out := c.CopyDBParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -792,7 +791,7 @@ func (c *RDS) CopyDBParameterGroupWithContext(ctx aws.Context, input *CopyDBPara
 
 const opCopyDBSnapshot = "CopyDBSnapshot"
 
-// CopyDBSnapshotRequest generates a "aws/request.Request" representing the
+// CopyDBSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CopyDBSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -816,8 +815,8 @@ const opCopyDBSnapshot = "CopyDBSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot
-func (c *RDS) CopyDBSnapshotRequest(input *CopyDBSnapshotInput) (req *request.Request, output *CopyDBSnapshotOutput) {
-	op := &request.Operation{
+func (c *RDS) CopyDBSnapshotRequest(input *CopyDBSnapshotInput) (req *aws.Request, output *CopyDBSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCopyDBSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -884,7 +883,7 @@ func (c *RDS) CopyDBSnapshot(input *CopyDBSnapshotInput) (*CopyDBSnapshotOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CopyDBSnapshotWithContext(ctx aws.Context, input *CopyDBSnapshotInput, opts ...request.Option) (*CopyDBSnapshotOutput, error) {
+func (c *RDS) CopyDBSnapshotWithContext(ctx aws.Context, input *CopyDBSnapshotInput, opts ...aws.Option) (*CopyDBSnapshotOutput, error) {
 	req, out := c.CopyDBSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -893,7 +892,7 @@ func (c *RDS) CopyDBSnapshotWithContext(ctx aws.Context, input *CopyDBSnapshotIn
 
 const opCopyOptionGroup = "CopyOptionGroup"
 
-// CopyOptionGroupRequest generates a "aws/request.Request" representing the
+// CopyOptionGroupRequest generates a "aws.Request" representing the
 // client's request for the CopyOptionGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -917,8 +916,8 @@ const opCopyOptionGroup = "CopyOptionGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroup
-func (c *RDS) CopyOptionGroupRequest(input *CopyOptionGroupInput) (req *request.Request, output *CopyOptionGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) CopyOptionGroupRequest(input *CopyOptionGroupInput) (req *aws.Request, output *CopyOptionGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCopyOptionGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -969,7 +968,7 @@ func (c *RDS) CopyOptionGroup(input *CopyOptionGroupInput) (*CopyOptionGroupOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CopyOptionGroupWithContext(ctx aws.Context, input *CopyOptionGroupInput, opts ...request.Option) (*CopyOptionGroupOutput, error) {
+func (c *RDS) CopyOptionGroupWithContext(ctx aws.Context, input *CopyOptionGroupInput, opts ...aws.Option) (*CopyOptionGroupOutput, error) {
 	req, out := c.CopyOptionGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -978,7 +977,7 @@ func (c *RDS) CopyOptionGroupWithContext(ctx aws.Context, input *CopyOptionGroup
 
 const opCreateDBCluster = "CreateDBCluster"
 
-// CreateDBClusterRequest generates a "aws/request.Request" representing the
+// CreateDBClusterRequest generates a "aws.Request" representing the
 // client's request for the CreateDBCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1002,8 +1001,8 @@ const opCreateDBCluster = "CreateDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster
-func (c *RDS) CreateDBClusterRequest(input *CreateDBClusterInput) (req *request.Request, output *CreateDBClusterOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateDBClusterRequest(input *CreateDBClusterInput) (req *aws.Request, output *CreateDBClusterOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDBCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1106,7 +1105,7 @@ func (c *RDS) CreateDBCluster(input *CreateDBClusterInput) (*CreateDBClusterOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateDBClusterWithContext(ctx aws.Context, input *CreateDBClusterInput, opts ...request.Option) (*CreateDBClusterOutput, error) {
+func (c *RDS) CreateDBClusterWithContext(ctx aws.Context, input *CreateDBClusterInput, opts ...aws.Option) (*CreateDBClusterOutput, error) {
 	req, out := c.CreateDBClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1115,7 +1114,7 @@ func (c *RDS) CreateDBClusterWithContext(ctx aws.Context, input *CreateDBCluster
 
 const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
 
-// CreateDBClusterParameterGroupRequest generates a "aws/request.Request" representing the
+// CreateDBClusterParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateDBClusterParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1139,8 +1138,8 @@ const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterParameterGroup
-func (c *RDS) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParameterGroupInput) (req *request.Request, output *CreateDBClusterParameterGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParameterGroupInput) (req *aws.Request, output *CreateDBClusterParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDBClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1216,7 +1215,7 @@ func (c *RDS) CreateDBClusterParameterGroup(input *CreateDBClusterParameterGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateDBClusterParameterGroupWithContext(ctx aws.Context, input *CreateDBClusterParameterGroupInput, opts ...request.Option) (*CreateDBClusterParameterGroupOutput, error) {
+func (c *RDS) CreateDBClusterParameterGroupWithContext(ctx aws.Context, input *CreateDBClusterParameterGroupInput, opts ...aws.Option) (*CreateDBClusterParameterGroupOutput, error) {
 	req, out := c.CreateDBClusterParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1225,7 +1224,7 @@ func (c *RDS) CreateDBClusterParameterGroupWithContext(ctx aws.Context, input *C
 
 const opCreateDBClusterSnapshot = "CreateDBClusterSnapshot"
 
-// CreateDBClusterSnapshotRequest generates a "aws/request.Request" representing the
+// CreateDBClusterSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CreateDBClusterSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1249,8 +1248,8 @@ const opCreateDBClusterSnapshot = "CreateDBClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot
-func (c *RDS) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInput) (req *request.Request, output *CreateDBClusterSnapshotOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInput) (req *aws.Request, output *CreateDBClusterSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDBClusterSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1309,7 +1308,7 @@ func (c *RDS) CreateDBClusterSnapshot(input *CreateDBClusterSnapshotInput) (*Cre
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateDBClusterSnapshotWithContext(ctx aws.Context, input *CreateDBClusterSnapshotInput, opts ...request.Option) (*CreateDBClusterSnapshotOutput, error) {
+func (c *RDS) CreateDBClusterSnapshotWithContext(ctx aws.Context, input *CreateDBClusterSnapshotInput, opts ...aws.Option) (*CreateDBClusterSnapshotOutput, error) {
 	req, out := c.CreateDBClusterSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1318,7 +1317,7 @@ func (c *RDS) CreateDBClusterSnapshotWithContext(ctx aws.Context, input *CreateD
 
 const opCreateDBInstance = "CreateDBInstance"
 
-// CreateDBInstanceRequest generates a "aws/request.Request" representing the
+// CreateDBInstanceRequest generates a "aws.Request" representing the
 // client's request for the CreateDBInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1342,8 +1341,8 @@ const opCreateDBInstance = "CreateDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance
-func (c *RDS) CreateDBInstanceRequest(input *CreateDBInstanceInput) (req *request.Request, output *CreateDBInstanceOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateDBInstanceRequest(input *CreateDBInstanceInput) (req *aws.Request, output *CreateDBInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDBInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1448,7 +1447,7 @@ func (c *RDS) CreateDBInstance(input *CreateDBInstanceInput) (*CreateDBInstanceO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateDBInstanceWithContext(ctx aws.Context, input *CreateDBInstanceInput, opts ...request.Option) (*CreateDBInstanceOutput, error) {
+func (c *RDS) CreateDBInstanceWithContext(ctx aws.Context, input *CreateDBInstanceInput, opts ...aws.Option) (*CreateDBInstanceOutput, error) {
 	req, out := c.CreateDBInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1457,7 +1456,7 @@ func (c *RDS) CreateDBInstanceWithContext(ctx aws.Context, input *CreateDBInstan
 
 const opCreateDBInstanceReadReplica = "CreateDBInstanceReadReplica"
 
-// CreateDBInstanceReadReplicaRequest generates a "aws/request.Request" representing the
+// CreateDBInstanceReadReplicaRequest generates a "aws.Request" representing the
 // client's request for the CreateDBInstanceReadReplica operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1481,8 +1480,8 @@ const opCreateDBInstanceReadReplica = "CreateDBInstanceReadReplica"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica
-func (c *RDS) CreateDBInstanceReadReplicaRequest(input *CreateDBInstanceReadReplicaInput) (req *request.Request, output *CreateDBInstanceReadReplicaOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateDBInstanceReadReplicaRequest(input *CreateDBInstanceReadReplicaInput) (req *aws.Request, output *CreateDBInstanceReadReplicaOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDBInstanceReadReplica,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1600,7 +1599,7 @@ func (c *RDS) CreateDBInstanceReadReplica(input *CreateDBInstanceReadReplicaInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateDBInstanceReadReplicaWithContext(ctx aws.Context, input *CreateDBInstanceReadReplicaInput, opts ...request.Option) (*CreateDBInstanceReadReplicaOutput, error) {
+func (c *RDS) CreateDBInstanceReadReplicaWithContext(ctx aws.Context, input *CreateDBInstanceReadReplicaInput, opts ...aws.Option) (*CreateDBInstanceReadReplicaOutput, error) {
 	req, out := c.CreateDBInstanceReadReplicaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1609,7 +1608,7 @@ func (c *RDS) CreateDBInstanceReadReplicaWithContext(ctx aws.Context, input *Cre
 
 const opCreateDBParameterGroup = "CreateDBParameterGroup"
 
-// CreateDBParameterGroupRequest generates a "aws/request.Request" representing the
+// CreateDBParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateDBParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1633,8 +1632,8 @@ const opCreateDBParameterGroup = "CreateDBParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBParameterGroup
-func (c *RDS) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInput) (req *request.Request, output *CreateDBParameterGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInput) (req *aws.Request, output *CreateDBParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDBParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1703,7 +1702,7 @@ func (c *RDS) CreateDBParameterGroup(input *CreateDBParameterGroupInput) (*Creat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateDBParameterGroupWithContext(ctx aws.Context, input *CreateDBParameterGroupInput, opts ...request.Option) (*CreateDBParameterGroupOutput, error) {
+func (c *RDS) CreateDBParameterGroupWithContext(ctx aws.Context, input *CreateDBParameterGroupInput, opts ...aws.Option) (*CreateDBParameterGroupOutput, error) {
 	req, out := c.CreateDBParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1712,7 +1711,7 @@ func (c *RDS) CreateDBParameterGroupWithContext(ctx aws.Context, input *CreateDB
 
 const opCreateDBSecurityGroup = "CreateDBSecurityGroup"
 
-// CreateDBSecurityGroupRequest generates a "aws/request.Request" representing the
+// CreateDBSecurityGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateDBSecurityGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1736,8 +1735,8 @@ const opCreateDBSecurityGroup = "CreateDBSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroup
-func (c *RDS) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput) (req *request.Request, output *CreateDBSecurityGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput) (req *aws.Request, output *CreateDBSecurityGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDBSecurityGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1791,7 +1790,7 @@ func (c *RDS) CreateDBSecurityGroup(input *CreateDBSecurityGroupInput) (*CreateD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateDBSecurityGroupWithContext(ctx aws.Context, input *CreateDBSecurityGroupInput, opts ...request.Option) (*CreateDBSecurityGroupOutput, error) {
+func (c *RDS) CreateDBSecurityGroupWithContext(ctx aws.Context, input *CreateDBSecurityGroupInput, opts ...aws.Option) (*CreateDBSecurityGroupOutput, error) {
 	req, out := c.CreateDBSecurityGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1800,7 +1799,7 @@ func (c *RDS) CreateDBSecurityGroupWithContext(ctx aws.Context, input *CreateDBS
 
 const opCreateDBSnapshot = "CreateDBSnapshot"
 
-// CreateDBSnapshotRequest generates a "aws/request.Request" representing the
+// CreateDBSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CreateDBSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1824,8 +1823,8 @@ const opCreateDBSnapshot = "CreateDBSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot
-func (c *RDS) CreateDBSnapshotRequest(input *CreateDBSnapshotInput) (req *request.Request, output *CreateDBSnapshotOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateDBSnapshotRequest(input *CreateDBSnapshotInput) (req *aws.Request, output *CreateDBSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDBSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1879,7 +1878,7 @@ func (c *RDS) CreateDBSnapshot(input *CreateDBSnapshotInput) (*CreateDBSnapshotO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateDBSnapshotWithContext(ctx aws.Context, input *CreateDBSnapshotInput, opts ...request.Option) (*CreateDBSnapshotOutput, error) {
+func (c *RDS) CreateDBSnapshotWithContext(ctx aws.Context, input *CreateDBSnapshotInput, opts ...aws.Option) (*CreateDBSnapshotOutput, error) {
 	req, out := c.CreateDBSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1888,7 +1887,7 @@ func (c *RDS) CreateDBSnapshotWithContext(ctx aws.Context, input *CreateDBSnapsh
 
 const opCreateDBSubnetGroup = "CreateDBSubnetGroup"
 
-// CreateDBSubnetGroupRequest generates a "aws/request.Request" representing the
+// CreateDBSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateDBSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1912,8 +1911,8 @@ const opCreateDBSubnetGroup = "CreateDBSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroup
-func (c *RDS) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) (req *request.Request, output *CreateDBSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) (req *aws.Request, output *CreateDBSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDBSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1974,7 +1973,7 @@ func (c *RDS) CreateDBSubnetGroup(input *CreateDBSubnetGroupInput) (*CreateDBSub
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateDBSubnetGroupWithContext(ctx aws.Context, input *CreateDBSubnetGroupInput, opts ...request.Option) (*CreateDBSubnetGroupOutput, error) {
+func (c *RDS) CreateDBSubnetGroupWithContext(ctx aws.Context, input *CreateDBSubnetGroupInput, opts ...aws.Option) (*CreateDBSubnetGroupOutput, error) {
 	req, out := c.CreateDBSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1983,7 +1982,7 @@ func (c *RDS) CreateDBSubnetGroupWithContext(ctx aws.Context, input *CreateDBSub
 
 const opCreateEventSubscription = "CreateEventSubscription"
 
-// CreateEventSubscriptionRequest generates a "aws/request.Request" representing the
+// CreateEventSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the CreateEventSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2007,8 +2006,8 @@ const opCreateEventSubscription = "CreateEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateEventSubscription
-func (c *RDS) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *request.Request, output *CreateEventSubscriptionOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *aws.Request, output *CreateEventSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2088,7 +2087,7 @@ func (c *RDS) CreateEventSubscription(input *CreateEventSubscriptionInput) (*Cre
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...request.Option) (*CreateEventSubscriptionOutput, error) {
+func (c *RDS) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...aws.Option) (*CreateEventSubscriptionOutput, error) {
 	req, out := c.CreateEventSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2097,7 +2096,7 @@ func (c *RDS) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateE
 
 const opCreateOptionGroup = "CreateOptionGroup"
 
-// CreateOptionGroupRequest generates a "aws/request.Request" representing the
+// CreateOptionGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateOptionGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2121,8 +2120,8 @@ const opCreateOptionGroup = "CreateOptionGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroup
-func (c *RDS) CreateOptionGroupRequest(input *CreateOptionGroupInput) (req *request.Request, output *CreateOptionGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) CreateOptionGroupRequest(input *CreateOptionGroupInput) (req *aws.Request, output *CreateOptionGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateOptionGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2170,7 +2169,7 @@ func (c *RDS) CreateOptionGroup(input *CreateOptionGroupInput) (*CreateOptionGro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) CreateOptionGroupWithContext(ctx aws.Context, input *CreateOptionGroupInput, opts ...request.Option) (*CreateOptionGroupOutput, error) {
+func (c *RDS) CreateOptionGroupWithContext(ctx aws.Context, input *CreateOptionGroupInput, opts ...aws.Option) (*CreateOptionGroupOutput, error) {
 	req, out := c.CreateOptionGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2179,7 +2178,7 @@ func (c *RDS) CreateOptionGroupWithContext(ctx aws.Context, input *CreateOptionG
 
 const opDeleteDBCluster = "DeleteDBCluster"
 
-// DeleteDBClusterRequest generates a "aws/request.Request" representing the
+// DeleteDBClusterRequest generates a "aws.Request" representing the
 // client's request for the DeleteDBCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2203,8 +2202,8 @@ const opDeleteDBCluster = "DeleteDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster
-func (c *RDS) DeleteDBClusterRequest(input *DeleteDBClusterInput) (req *request.Request, output *DeleteDBClusterOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteDBClusterRequest(input *DeleteDBClusterInput) (req *aws.Request, output *DeleteDBClusterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDBCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2266,7 +2265,7 @@ func (c *RDS) DeleteDBCluster(input *DeleteDBClusterInput) (*DeleteDBClusterOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteDBClusterWithContext(ctx aws.Context, input *DeleteDBClusterInput, opts ...request.Option) (*DeleteDBClusterOutput, error) {
+func (c *RDS) DeleteDBClusterWithContext(ctx aws.Context, input *DeleteDBClusterInput, opts ...aws.Option) (*DeleteDBClusterOutput, error) {
 	req, out := c.DeleteDBClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2275,7 +2274,7 @@ func (c *RDS) DeleteDBClusterWithContext(ctx aws.Context, input *DeleteDBCluster
 
 const opDeleteDBClusterParameterGroup = "DeleteDBClusterParameterGroup"
 
-// DeleteDBClusterParameterGroupRequest generates a "aws/request.Request" representing the
+// DeleteDBClusterParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteDBClusterParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2299,8 +2298,8 @@ const opDeleteDBClusterParameterGroup = "DeleteDBClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroup
-func (c *RDS) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParameterGroupInput) (req *request.Request, output *DeleteDBClusterParameterGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParameterGroupInput) (req *aws.Request, output *DeleteDBClusterParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDBClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2356,7 +2355,7 @@ func (c *RDS) DeleteDBClusterParameterGroup(input *DeleteDBClusterParameterGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteDBClusterParameterGroupWithContext(ctx aws.Context, input *DeleteDBClusterParameterGroupInput, opts ...request.Option) (*DeleteDBClusterParameterGroupOutput, error) {
+func (c *RDS) DeleteDBClusterParameterGroupWithContext(ctx aws.Context, input *DeleteDBClusterParameterGroupInput, opts ...aws.Option) (*DeleteDBClusterParameterGroupOutput, error) {
 	req, out := c.DeleteDBClusterParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2365,7 +2364,7 @@ func (c *RDS) DeleteDBClusterParameterGroupWithContext(ctx aws.Context, input *D
 
 const opDeleteDBClusterSnapshot = "DeleteDBClusterSnapshot"
 
-// DeleteDBClusterSnapshotRequest generates a "aws/request.Request" representing the
+// DeleteDBClusterSnapshotRequest generates a "aws.Request" representing the
 // client's request for the DeleteDBClusterSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2389,8 +2388,8 @@ const opDeleteDBClusterSnapshot = "DeleteDBClusterSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot
-func (c *RDS) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInput) (req *request.Request, output *DeleteDBClusterSnapshotOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInput) (req *aws.Request, output *DeleteDBClusterSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDBClusterSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2444,7 +2443,7 @@ func (c *RDS) DeleteDBClusterSnapshot(input *DeleteDBClusterSnapshotInput) (*Del
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteDBClusterSnapshotWithContext(ctx aws.Context, input *DeleteDBClusterSnapshotInput, opts ...request.Option) (*DeleteDBClusterSnapshotOutput, error) {
+func (c *RDS) DeleteDBClusterSnapshotWithContext(ctx aws.Context, input *DeleteDBClusterSnapshotInput, opts ...aws.Option) (*DeleteDBClusterSnapshotOutput, error) {
 	req, out := c.DeleteDBClusterSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2453,7 +2452,7 @@ func (c *RDS) DeleteDBClusterSnapshotWithContext(ctx aws.Context, input *DeleteD
 
 const opDeleteDBInstance = "DeleteDBInstance"
 
-// DeleteDBInstanceRequest generates a "aws/request.Request" representing the
+// DeleteDBInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeleteDBInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2477,8 +2476,8 @@ const opDeleteDBInstance = "DeleteDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance
-func (c *RDS) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) (req *request.Request, output *DeleteDBInstanceOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) (req *aws.Request, output *DeleteDBInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDBInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2559,7 +2558,7 @@ func (c *RDS) DeleteDBInstance(input *DeleteDBInstanceInput) (*DeleteDBInstanceO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteDBInstanceWithContext(ctx aws.Context, input *DeleteDBInstanceInput, opts ...request.Option) (*DeleteDBInstanceOutput, error) {
+func (c *RDS) DeleteDBInstanceWithContext(ctx aws.Context, input *DeleteDBInstanceInput, opts ...aws.Option) (*DeleteDBInstanceOutput, error) {
 	req, out := c.DeleteDBInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2568,7 +2567,7 @@ func (c *RDS) DeleteDBInstanceWithContext(ctx aws.Context, input *DeleteDBInstan
 
 const opDeleteDBParameterGroup = "DeleteDBParameterGroup"
 
-// DeleteDBParameterGroupRequest generates a "aws/request.Request" representing the
+// DeleteDBParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteDBParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2592,8 +2591,8 @@ const opDeleteDBParameterGroup = "DeleteDBParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroup
-func (c *RDS) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInput) (req *request.Request, output *DeleteDBParameterGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInput) (req *aws.Request, output *DeleteDBParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDBParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2646,7 +2645,7 @@ func (c *RDS) DeleteDBParameterGroup(input *DeleteDBParameterGroupInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteDBParameterGroupWithContext(ctx aws.Context, input *DeleteDBParameterGroupInput, opts ...request.Option) (*DeleteDBParameterGroupOutput, error) {
+func (c *RDS) DeleteDBParameterGroupWithContext(ctx aws.Context, input *DeleteDBParameterGroupInput, opts ...aws.Option) (*DeleteDBParameterGroupOutput, error) {
 	req, out := c.DeleteDBParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2655,7 +2654,7 @@ func (c *RDS) DeleteDBParameterGroupWithContext(ctx aws.Context, input *DeleteDB
 
 const opDeleteDBSecurityGroup = "DeleteDBSecurityGroup"
 
-// DeleteDBSecurityGroupRequest generates a "aws/request.Request" representing the
+// DeleteDBSecurityGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteDBSecurityGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2679,8 +2678,8 @@ const opDeleteDBSecurityGroup = "DeleteDBSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroup
-func (c *RDS) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput) (req *request.Request, output *DeleteDBSecurityGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput) (req *aws.Request, output *DeleteDBSecurityGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDBSecurityGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2732,7 +2731,7 @@ func (c *RDS) DeleteDBSecurityGroup(input *DeleteDBSecurityGroupInput) (*DeleteD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteDBSecurityGroupWithContext(ctx aws.Context, input *DeleteDBSecurityGroupInput, opts ...request.Option) (*DeleteDBSecurityGroupOutput, error) {
+func (c *RDS) DeleteDBSecurityGroupWithContext(ctx aws.Context, input *DeleteDBSecurityGroupInput, opts ...aws.Option) (*DeleteDBSecurityGroupOutput, error) {
 	req, out := c.DeleteDBSecurityGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2741,7 +2740,7 @@ func (c *RDS) DeleteDBSecurityGroupWithContext(ctx aws.Context, input *DeleteDBS
 
 const opDeleteDBSnapshot = "DeleteDBSnapshot"
 
-// DeleteDBSnapshotRequest generates a "aws/request.Request" representing the
+// DeleteDBSnapshotRequest generates a "aws.Request" representing the
 // client's request for the DeleteDBSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2765,8 +2764,8 @@ const opDeleteDBSnapshot = "DeleteDBSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot
-func (c *RDS) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) (req *request.Request, output *DeleteDBSnapshotOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) (req *aws.Request, output *DeleteDBSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDBSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2817,7 +2816,7 @@ func (c *RDS) DeleteDBSnapshot(input *DeleteDBSnapshotInput) (*DeleteDBSnapshotO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteDBSnapshotWithContext(ctx aws.Context, input *DeleteDBSnapshotInput, opts ...request.Option) (*DeleteDBSnapshotOutput, error) {
+func (c *RDS) DeleteDBSnapshotWithContext(ctx aws.Context, input *DeleteDBSnapshotInput, opts ...aws.Option) (*DeleteDBSnapshotOutput, error) {
 	req, out := c.DeleteDBSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2826,7 +2825,7 @@ func (c *RDS) DeleteDBSnapshotWithContext(ctx aws.Context, input *DeleteDBSnapsh
 
 const opDeleteDBSubnetGroup = "DeleteDBSubnetGroup"
 
-// DeleteDBSubnetGroupRequest generates a "aws/request.Request" representing the
+// DeleteDBSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteDBSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2850,8 +2849,8 @@ const opDeleteDBSubnetGroup = "DeleteDBSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroup
-func (c *RDS) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) (req *request.Request, output *DeleteDBSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) (req *aws.Request, output *DeleteDBSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDBSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2906,7 +2905,7 @@ func (c *RDS) DeleteDBSubnetGroup(input *DeleteDBSubnetGroupInput) (*DeleteDBSub
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteDBSubnetGroupWithContext(ctx aws.Context, input *DeleteDBSubnetGroupInput, opts ...request.Option) (*DeleteDBSubnetGroupOutput, error) {
+func (c *RDS) DeleteDBSubnetGroupWithContext(ctx aws.Context, input *DeleteDBSubnetGroupInput, opts ...aws.Option) (*DeleteDBSubnetGroupOutput, error) {
 	req, out := c.DeleteDBSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2915,7 +2914,7 @@ func (c *RDS) DeleteDBSubnetGroupWithContext(ctx aws.Context, input *DeleteDBSub
 
 const opDeleteEventSubscription = "DeleteEventSubscription"
 
-// DeleteEventSubscriptionRequest generates a "aws/request.Request" representing the
+// DeleteEventSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the DeleteEventSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2939,8 +2938,8 @@ const opDeleteEventSubscription = "DeleteEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteEventSubscription
-func (c *RDS) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *request.Request, output *DeleteEventSubscriptionOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *aws.Request, output *DeleteEventSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2989,7 +2988,7 @@ func (c *RDS) DeleteEventSubscription(input *DeleteEventSubscriptionInput) (*Del
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...request.Option) (*DeleteEventSubscriptionOutput, error) {
+func (c *RDS) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...aws.Option) (*DeleteEventSubscriptionOutput, error) {
 	req, out := c.DeleteEventSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2998,7 +2997,7 @@ func (c *RDS) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteE
 
 const opDeleteOptionGroup = "DeleteOptionGroup"
 
-// DeleteOptionGroupRequest generates a "aws/request.Request" representing the
+// DeleteOptionGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteOptionGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3022,8 +3021,8 @@ const opDeleteOptionGroup = "DeleteOptionGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteOptionGroup
-func (c *RDS) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) (req *request.Request, output *DeleteOptionGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) (req *aws.Request, output *DeleteOptionGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteOptionGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3073,7 +3072,7 @@ func (c *RDS) DeleteOptionGroup(input *DeleteOptionGroupInput) (*DeleteOptionGro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DeleteOptionGroupWithContext(ctx aws.Context, input *DeleteOptionGroupInput, opts ...request.Option) (*DeleteOptionGroupOutput, error) {
+func (c *RDS) DeleteOptionGroupWithContext(ctx aws.Context, input *DeleteOptionGroupInput, opts ...aws.Option) (*DeleteOptionGroupOutput, error) {
 	req, out := c.DeleteOptionGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3082,7 +3081,7 @@ func (c *RDS) DeleteOptionGroupWithContext(ctx aws.Context, input *DeleteOptionG
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
 
-// DescribeAccountAttributesRequest generates a "aws/request.Request" representing the
+// DescribeAccountAttributesRequest generates a "aws.Request" representing the
 // client's request for the DescribeAccountAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3106,8 +3105,8 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributes
-func (c *RDS) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *request.Request, output *DescribeAccountAttributesOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *aws.Request, output *DescribeAccountAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAccountAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3152,7 +3151,7 @@ func (c *RDS) DescribeAccountAttributes(input *DescribeAccountAttributesInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeAccountAttributesWithContext(ctx aws.Context, input *DescribeAccountAttributesInput, opts ...request.Option) (*DescribeAccountAttributesOutput, error) {
+func (c *RDS) DescribeAccountAttributesWithContext(ctx aws.Context, input *DescribeAccountAttributesInput, opts ...aws.Option) (*DescribeAccountAttributesOutput, error) {
 	req, out := c.DescribeAccountAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3161,7 +3160,7 @@ func (c *RDS) DescribeAccountAttributesWithContext(ctx aws.Context, input *Descr
 
 const opDescribeCertificates = "DescribeCertificates"
 
-// DescribeCertificatesRequest generates a "aws/request.Request" representing the
+// DescribeCertificatesRequest generates a "aws.Request" representing the
 // client's request for the DescribeCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3185,8 +3184,8 @@ const opDescribeCertificates = "DescribeCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificates
-func (c *RDS) DescribeCertificatesRequest(input *DescribeCertificatesInput) (req *request.Request, output *DescribeCertificatesOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeCertificatesRequest(input *DescribeCertificatesInput) (req *aws.Request, output *DescribeCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCertificates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3231,7 +3230,7 @@ func (c *RDS) DescribeCertificates(input *DescribeCertificatesInput) (*DescribeC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeCertificatesWithContext(ctx aws.Context, input *DescribeCertificatesInput, opts ...request.Option) (*DescribeCertificatesOutput, error) {
+func (c *RDS) DescribeCertificatesWithContext(ctx aws.Context, input *DescribeCertificatesInput, opts ...aws.Option) (*DescribeCertificatesOutput, error) {
 	req, out := c.DescribeCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3240,7 +3239,7 @@ func (c *RDS) DescribeCertificatesWithContext(ctx aws.Context, input *DescribeCe
 
 const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
 
-// DescribeDBClusterParameterGroupsRequest generates a "aws/request.Request" representing the
+// DescribeDBClusterParameterGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBClusterParameterGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3264,8 +3263,8 @@ const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameterGroups
-func (c *RDS) DescribeDBClusterParameterGroupsRequest(input *DescribeDBClusterParameterGroupsInput) (req *request.Request, output *DescribeDBClusterParameterGroupsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBClusterParameterGroupsRequest(input *DescribeDBClusterParameterGroupsInput) (req *aws.Request, output *DescribeDBClusterParameterGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBClusterParameterGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3315,7 +3314,7 @@ func (c *RDS) DescribeDBClusterParameterGroups(input *DescribeDBClusterParameter
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBClusterParameterGroupsWithContext(ctx aws.Context, input *DescribeDBClusterParameterGroupsInput, opts ...request.Option) (*DescribeDBClusterParameterGroupsOutput, error) {
+func (c *RDS) DescribeDBClusterParameterGroupsWithContext(ctx aws.Context, input *DescribeDBClusterParameterGroupsInput, opts ...aws.Option) (*DescribeDBClusterParameterGroupsOutput, error) {
 	req, out := c.DescribeDBClusterParameterGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3324,7 +3323,7 @@ func (c *RDS) DescribeDBClusterParameterGroupsWithContext(ctx aws.Context, input
 
 const opDescribeDBClusterParameters = "DescribeDBClusterParameters"
 
-// DescribeDBClusterParametersRequest generates a "aws/request.Request" representing the
+// DescribeDBClusterParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBClusterParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3348,8 +3347,8 @@ const opDescribeDBClusterParameters = "DescribeDBClusterParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameters
-func (c *RDS) DescribeDBClusterParametersRequest(input *DescribeDBClusterParametersInput) (req *request.Request, output *DescribeDBClusterParametersOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBClusterParametersRequest(input *DescribeDBClusterParametersInput) (req *aws.Request, output *DescribeDBClusterParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBClusterParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3398,7 +3397,7 @@ func (c *RDS) DescribeDBClusterParameters(input *DescribeDBClusterParametersInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBClusterParametersWithContext(ctx aws.Context, input *DescribeDBClusterParametersInput, opts ...request.Option) (*DescribeDBClusterParametersOutput, error) {
+func (c *RDS) DescribeDBClusterParametersWithContext(ctx aws.Context, input *DescribeDBClusterParametersInput, opts ...aws.Option) (*DescribeDBClusterParametersOutput, error) {
 	req, out := c.DescribeDBClusterParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3407,7 +3406,7 @@ func (c *RDS) DescribeDBClusterParametersWithContext(ctx aws.Context, input *Des
 
 const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttributes"
 
-// DescribeDBClusterSnapshotAttributesRequest generates a "aws/request.Request" representing the
+// DescribeDBClusterSnapshotAttributesRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBClusterSnapshotAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3431,8 +3430,8 @@ const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttribut
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotAttributes
-func (c *RDS) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClusterSnapshotAttributesInput) (req *request.Request, output *DescribeDBClusterSnapshotAttributesOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClusterSnapshotAttributesInput) (req *aws.Request, output *DescribeDBClusterSnapshotAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBClusterSnapshotAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3488,7 +3487,7 @@ func (c *RDS) DescribeDBClusterSnapshotAttributes(input *DescribeDBClusterSnapsh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBClusterSnapshotAttributesWithContext(ctx aws.Context, input *DescribeDBClusterSnapshotAttributesInput, opts ...request.Option) (*DescribeDBClusterSnapshotAttributesOutput, error) {
+func (c *RDS) DescribeDBClusterSnapshotAttributesWithContext(ctx aws.Context, input *DescribeDBClusterSnapshotAttributesInput, opts ...aws.Option) (*DescribeDBClusterSnapshotAttributesOutput, error) {
 	req, out := c.DescribeDBClusterSnapshotAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3497,7 +3496,7 @@ func (c *RDS) DescribeDBClusterSnapshotAttributesWithContext(ctx aws.Context, in
 
 const opDescribeDBClusterSnapshots = "DescribeDBClusterSnapshots"
 
-// DescribeDBClusterSnapshotsRequest generates a "aws/request.Request" representing the
+// DescribeDBClusterSnapshotsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBClusterSnapshots operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3521,8 +3520,8 @@ const opDescribeDBClusterSnapshots = "DescribeDBClusterSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshots
-func (c *RDS) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapshotsInput) (req *request.Request, output *DescribeDBClusterSnapshotsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapshotsInput) (req *aws.Request, output *DescribeDBClusterSnapshotsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBClusterSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3571,7 +3570,7 @@ func (c *RDS) DescribeDBClusterSnapshots(input *DescribeDBClusterSnapshotsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBClusterSnapshotsWithContext(ctx aws.Context, input *DescribeDBClusterSnapshotsInput, opts ...request.Option) (*DescribeDBClusterSnapshotsOutput, error) {
+func (c *RDS) DescribeDBClusterSnapshotsWithContext(ctx aws.Context, input *DescribeDBClusterSnapshotsInput, opts ...aws.Option) (*DescribeDBClusterSnapshotsOutput, error) {
 	req, out := c.DescribeDBClusterSnapshotsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3580,7 +3579,7 @@ func (c *RDS) DescribeDBClusterSnapshotsWithContext(ctx aws.Context, input *Desc
 
 const opDescribeDBClusters = "DescribeDBClusters"
 
-// DescribeDBClustersRequest generates a "aws/request.Request" representing the
+// DescribeDBClustersRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3604,8 +3603,8 @@ const opDescribeDBClusters = "DescribeDBClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters
-func (c *RDS) DescribeDBClustersRequest(input *DescribeDBClustersInput) (req *request.Request, output *DescribeDBClustersOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBClustersRequest(input *DescribeDBClustersInput) (req *aws.Request, output *DescribeDBClustersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3654,7 +3653,7 @@ func (c *RDS) DescribeDBClusters(input *DescribeDBClustersInput) (*DescribeDBClu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBClustersWithContext(ctx aws.Context, input *DescribeDBClustersInput, opts ...request.Option) (*DescribeDBClustersOutput, error) {
+func (c *RDS) DescribeDBClustersWithContext(ctx aws.Context, input *DescribeDBClustersInput, opts ...aws.Option) (*DescribeDBClustersOutput, error) {
 	req, out := c.DescribeDBClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3663,7 +3662,7 @@ func (c *RDS) DescribeDBClustersWithContext(ctx aws.Context, input *DescribeDBCl
 
 const opDescribeDBEngineVersions = "DescribeDBEngineVersions"
 
-// DescribeDBEngineVersionsRequest generates a "aws/request.Request" representing the
+// DescribeDBEngineVersionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBEngineVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3687,12 +3686,12 @@ const opDescribeDBEngineVersions = "DescribeDBEngineVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions
-func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInput) (req *request.Request, output *DescribeDBEngineVersionsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInput) (req *aws.Request, output *DescribeDBEngineVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBEngineVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3734,7 +3733,7 @@ func (c *RDS) DescribeDBEngineVersions(input *DescribeDBEngineVersionsInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBEngineVersionsWithContext(ctx aws.Context, input *DescribeDBEngineVersionsInput, opts ...request.Option) (*DescribeDBEngineVersionsOutput, error) {
+func (c *RDS) DescribeDBEngineVersionsWithContext(ctx aws.Context, input *DescribeDBEngineVersionsInput, opts ...aws.Option) (*DescribeDBEngineVersionsOutput, error) {
 	req, out := c.DescribeDBEngineVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3769,9 +3768,9 @@ func (c *RDS) DescribeDBEngineVersionsPages(input *DescribeDBEngineVersionsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBEngineVersionsPagesWithContext(ctx aws.Context, input *DescribeDBEngineVersionsInput, fn func(*DescribeDBEngineVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeDBEngineVersionsPagesWithContext(ctx aws.Context, input *DescribeDBEngineVersionsInput, fn func(*DescribeDBEngineVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBEngineVersionsInput
 			if input != nil {
 				tmp := *input
@@ -3793,7 +3792,7 @@ func (c *RDS) DescribeDBEngineVersionsPagesWithContext(ctx aws.Context, input *D
 
 const opDescribeDBInstances = "DescribeDBInstances"
 
-// DescribeDBInstancesRequest generates a "aws/request.Request" representing the
+// DescribeDBInstancesRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3817,12 +3816,12 @@ const opDescribeDBInstances = "DescribeDBInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances
-func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) (req *request.Request, output *DescribeDBInstancesOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) (req *aws.Request, output *DescribeDBInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3869,7 +3868,7 @@ func (c *RDS) DescribeDBInstances(input *DescribeDBInstancesInput) (*DescribeDBI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBInstancesWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...request.Option) (*DescribeDBInstancesOutput, error) {
+func (c *RDS) DescribeDBInstancesWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...aws.Option) (*DescribeDBInstancesOutput, error) {
 	req, out := c.DescribeDBInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3904,9 +3903,9 @@ func (c *RDS) DescribeDBInstancesPages(input *DescribeDBInstancesInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBInstancesPagesWithContext(ctx aws.Context, input *DescribeDBInstancesInput, fn func(*DescribeDBInstancesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeDBInstancesPagesWithContext(ctx aws.Context, input *DescribeDBInstancesInput, fn func(*DescribeDBInstancesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBInstancesInput
 			if input != nil {
 				tmp := *input
@@ -3928,7 +3927,7 @@ func (c *RDS) DescribeDBInstancesPagesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeDBLogFiles = "DescribeDBLogFiles"
 
-// DescribeDBLogFilesRequest generates a "aws/request.Request" representing the
+// DescribeDBLogFilesRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBLogFiles operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3952,12 +3951,12 @@ const opDescribeDBLogFiles = "DescribeDBLogFiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFiles
-func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) (req *request.Request, output *DescribeDBLogFilesOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) (req *aws.Request, output *DescribeDBLogFilesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBLogFiles,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4004,7 +4003,7 @@ func (c *RDS) DescribeDBLogFiles(input *DescribeDBLogFilesInput) (*DescribeDBLog
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBLogFilesWithContext(ctx aws.Context, input *DescribeDBLogFilesInput, opts ...request.Option) (*DescribeDBLogFilesOutput, error) {
+func (c *RDS) DescribeDBLogFilesWithContext(ctx aws.Context, input *DescribeDBLogFilesInput, opts ...aws.Option) (*DescribeDBLogFilesOutput, error) {
 	req, out := c.DescribeDBLogFilesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4039,9 +4038,9 @@ func (c *RDS) DescribeDBLogFilesPages(input *DescribeDBLogFilesInput, fn func(*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBLogFilesPagesWithContext(ctx aws.Context, input *DescribeDBLogFilesInput, fn func(*DescribeDBLogFilesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeDBLogFilesPagesWithContext(ctx aws.Context, input *DescribeDBLogFilesInput, fn func(*DescribeDBLogFilesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBLogFilesInput
 			if input != nil {
 				tmp := *input
@@ -4063,7 +4062,7 @@ func (c *RDS) DescribeDBLogFilesPagesWithContext(ctx aws.Context, input *Describ
 
 const opDescribeDBParameterGroups = "DescribeDBParameterGroups"
 
-// DescribeDBParameterGroupsRequest generates a "aws/request.Request" representing the
+// DescribeDBParameterGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBParameterGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4087,12 +4086,12 @@ const opDescribeDBParameterGroups = "DescribeDBParameterGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameterGroups
-func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsInput) (req *request.Request, output *DescribeDBParameterGroupsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsInput) (req *aws.Request, output *DescribeDBParameterGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBParameterGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4141,7 +4140,7 @@ func (c *RDS) DescribeDBParameterGroups(input *DescribeDBParameterGroupsInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBParameterGroupsWithContext(ctx aws.Context, input *DescribeDBParameterGroupsInput, opts ...request.Option) (*DescribeDBParameterGroupsOutput, error) {
+func (c *RDS) DescribeDBParameterGroupsWithContext(ctx aws.Context, input *DescribeDBParameterGroupsInput, opts ...aws.Option) (*DescribeDBParameterGroupsOutput, error) {
 	req, out := c.DescribeDBParameterGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4176,9 +4175,9 @@ func (c *RDS) DescribeDBParameterGroupsPages(input *DescribeDBParameterGroupsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBParameterGroupsPagesWithContext(ctx aws.Context, input *DescribeDBParameterGroupsInput, fn func(*DescribeDBParameterGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeDBParameterGroupsPagesWithContext(ctx aws.Context, input *DescribeDBParameterGroupsInput, fn func(*DescribeDBParameterGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBParameterGroupsInput
 			if input != nil {
 				tmp := *input
@@ -4200,7 +4199,7 @@ func (c *RDS) DescribeDBParameterGroupsPagesWithContext(ctx aws.Context, input *
 
 const opDescribeDBParameters = "DescribeDBParameters"
 
-// DescribeDBParametersRequest generates a "aws/request.Request" representing the
+// DescribeDBParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4224,12 +4223,12 @@ const opDescribeDBParameters = "DescribeDBParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameters
-func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) (req *request.Request, output *DescribeDBParametersOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) (req *aws.Request, output *DescribeDBParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4276,7 +4275,7 @@ func (c *RDS) DescribeDBParameters(input *DescribeDBParametersInput) (*DescribeD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBParametersWithContext(ctx aws.Context, input *DescribeDBParametersInput, opts ...request.Option) (*DescribeDBParametersOutput, error) {
+func (c *RDS) DescribeDBParametersWithContext(ctx aws.Context, input *DescribeDBParametersInput, opts ...aws.Option) (*DescribeDBParametersOutput, error) {
 	req, out := c.DescribeDBParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4311,9 +4310,9 @@ func (c *RDS) DescribeDBParametersPages(input *DescribeDBParametersInput, fn fun
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBParametersPagesWithContext(ctx aws.Context, input *DescribeDBParametersInput, fn func(*DescribeDBParametersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeDBParametersPagesWithContext(ctx aws.Context, input *DescribeDBParametersInput, fn func(*DescribeDBParametersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBParametersInput
 			if input != nil {
 				tmp := *input
@@ -4335,7 +4334,7 @@ func (c *RDS) DescribeDBParametersPagesWithContext(ctx aws.Context, input *Descr
 
 const opDescribeDBSecurityGroups = "DescribeDBSecurityGroups"
 
-// DescribeDBSecurityGroupsRequest generates a "aws/request.Request" representing the
+// DescribeDBSecurityGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBSecurityGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4359,12 +4358,12 @@ const opDescribeDBSecurityGroups = "DescribeDBSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSecurityGroups
-func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInput) (req *request.Request, output *DescribeDBSecurityGroupsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInput) (req *aws.Request, output *DescribeDBSecurityGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBSecurityGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4413,7 +4412,7 @@ func (c *RDS) DescribeDBSecurityGroups(input *DescribeDBSecurityGroupsInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBSecurityGroupsWithContext(ctx aws.Context, input *DescribeDBSecurityGroupsInput, opts ...request.Option) (*DescribeDBSecurityGroupsOutput, error) {
+func (c *RDS) DescribeDBSecurityGroupsWithContext(ctx aws.Context, input *DescribeDBSecurityGroupsInput, opts ...aws.Option) (*DescribeDBSecurityGroupsOutput, error) {
 	req, out := c.DescribeDBSecurityGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4448,9 +4447,9 @@ func (c *RDS) DescribeDBSecurityGroupsPages(input *DescribeDBSecurityGroupsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBSecurityGroupsPagesWithContext(ctx aws.Context, input *DescribeDBSecurityGroupsInput, fn func(*DescribeDBSecurityGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeDBSecurityGroupsPagesWithContext(ctx aws.Context, input *DescribeDBSecurityGroupsInput, fn func(*DescribeDBSecurityGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBSecurityGroupsInput
 			if input != nil {
 				tmp := *input
@@ -4472,7 +4471,7 @@ func (c *RDS) DescribeDBSecurityGroupsPagesWithContext(ctx aws.Context, input *D
 
 const opDescribeDBSnapshotAttributes = "DescribeDBSnapshotAttributes"
 
-// DescribeDBSnapshotAttributesRequest generates a "aws/request.Request" representing the
+// DescribeDBSnapshotAttributesRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBSnapshotAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4496,8 +4495,8 @@ const opDescribeDBSnapshotAttributes = "DescribeDBSnapshotAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotAttributes
-func (c *RDS) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAttributesInput) (req *request.Request, output *DescribeDBSnapshotAttributesOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAttributesInput) (req *aws.Request, output *DescribeDBSnapshotAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBSnapshotAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4553,7 +4552,7 @@ func (c *RDS) DescribeDBSnapshotAttributes(input *DescribeDBSnapshotAttributesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBSnapshotAttributesWithContext(ctx aws.Context, input *DescribeDBSnapshotAttributesInput, opts ...request.Option) (*DescribeDBSnapshotAttributesOutput, error) {
+func (c *RDS) DescribeDBSnapshotAttributesWithContext(ctx aws.Context, input *DescribeDBSnapshotAttributesInput, opts ...aws.Option) (*DescribeDBSnapshotAttributesOutput, error) {
 	req, out := c.DescribeDBSnapshotAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4562,7 +4561,7 @@ func (c *RDS) DescribeDBSnapshotAttributesWithContext(ctx aws.Context, input *De
 
 const opDescribeDBSnapshots = "DescribeDBSnapshots"
 
-// DescribeDBSnapshotsRequest generates a "aws/request.Request" representing the
+// DescribeDBSnapshotsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBSnapshots operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4586,12 +4585,12 @@ const opDescribeDBSnapshots = "DescribeDBSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots
-func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) (req *request.Request, output *DescribeDBSnapshotsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) (req *aws.Request, output *DescribeDBSnapshotsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4638,7 +4637,7 @@ func (c *RDS) DescribeDBSnapshots(input *DescribeDBSnapshotsInput) (*DescribeDBS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBSnapshotsWithContext(ctx aws.Context, input *DescribeDBSnapshotsInput, opts ...request.Option) (*DescribeDBSnapshotsOutput, error) {
+func (c *RDS) DescribeDBSnapshotsWithContext(ctx aws.Context, input *DescribeDBSnapshotsInput, opts ...aws.Option) (*DescribeDBSnapshotsOutput, error) {
 	req, out := c.DescribeDBSnapshotsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4673,9 +4672,9 @@ func (c *RDS) DescribeDBSnapshotsPages(input *DescribeDBSnapshotsInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBSnapshotsPagesWithContext(ctx aws.Context, input *DescribeDBSnapshotsInput, fn func(*DescribeDBSnapshotsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeDBSnapshotsPagesWithContext(ctx aws.Context, input *DescribeDBSnapshotsInput, fn func(*DescribeDBSnapshotsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBSnapshotsInput
 			if input != nil {
 				tmp := *input
@@ -4697,7 +4696,7 @@ func (c *RDS) DescribeDBSnapshotsPagesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeDBSubnetGroups = "DescribeDBSubnetGroups"
 
-// DescribeDBSubnetGroupsRequest generates a "aws/request.Request" representing the
+// DescribeDBSubnetGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDBSubnetGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4721,12 +4720,12 @@ const opDescribeDBSubnetGroups = "DescribeDBSubnetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSubnetGroups
-func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) (req *request.Request, output *DescribeDBSubnetGroupsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) (req *aws.Request, output *DescribeDBSubnetGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDBSubnetGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -4776,7 +4775,7 @@ func (c *RDS) DescribeDBSubnetGroups(input *DescribeDBSubnetGroupsInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBSubnetGroupsWithContext(ctx aws.Context, input *DescribeDBSubnetGroupsInput, opts ...request.Option) (*DescribeDBSubnetGroupsOutput, error) {
+func (c *RDS) DescribeDBSubnetGroupsWithContext(ctx aws.Context, input *DescribeDBSubnetGroupsInput, opts ...aws.Option) (*DescribeDBSubnetGroupsOutput, error) {
 	req, out := c.DescribeDBSubnetGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4811,9 +4810,9 @@ func (c *RDS) DescribeDBSubnetGroupsPages(input *DescribeDBSubnetGroupsInput, fn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeDBSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeDBSubnetGroupsInput, fn func(*DescribeDBSubnetGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeDBSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeDBSubnetGroupsInput, fn func(*DescribeDBSubnetGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBSubnetGroupsInput
 			if input != nil {
 				tmp := *input
@@ -4835,7 +4834,7 @@ func (c *RDS) DescribeDBSubnetGroupsPagesWithContext(ctx aws.Context, input *Des
 
 const opDescribeEngineDefaultClusterParameters = "DescribeEngineDefaultClusterParameters"
 
-// DescribeEngineDefaultClusterParametersRequest generates a "aws/request.Request" representing the
+// DescribeEngineDefaultClusterParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeEngineDefaultClusterParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4859,8 +4858,8 @@ const opDescribeEngineDefaultClusterParameters = "DescribeEngineDefaultClusterPa
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultClusterParameters
-func (c *RDS) DescribeEngineDefaultClusterParametersRequest(input *DescribeEngineDefaultClusterParametersInput) (req *request.Request, output *DescribeEngineDefaultClusterParametersOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeEngineDefaultClusterParametersRequest(input *DescribeEngineDefaultClusterParametersInput) (req *aws.Request, output *DescribeEngineDefaultClusterParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEngineDefaultClusterParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4904,7 +4903,7 @@ func (c *RDS) DescribeEngineDefaultClusterParameters(input *DescribeEngineDefaul
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeEngineDefaultClusterParametersWithContext(ctx aws.Context, input *DescribeEngineDefaultClusterParametersInput, opts ...request.Option) (*DescribeEngineDefaultClusterParametersOutput, error) {
+func (c *RDS) DescribeEngineDefaultClusterParametersWithContext(ctx aws.Context, input *DescribeEngineDefaultClusterParametersInput, opts ...aws.Option) (*DescribeEngineDefaultClusterParametersOutput, error) {
 	req, out := c.DescribeEngineDefaultClusterParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4913,7 +4912,7 @@ func (c *RDS) DescribeEngineDefaultClusterParametersWithContext(ctx aws.Context,
 
 const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 
-// DescribeEngineDefaultParametersRequest generates a "aws/request.Request" representing the
+// DescribeEngineDefaultParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeEngineDefaultParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4937,12 +4936,12 @@ const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParameters
-func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaultParametersInput) (req *request.Request, output *DescribeEngineDefaultParametersOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaultParametersInput) (req *aws.Request, output *DescribeEngineDefaultParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEngineDefaultParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"EngineDefaults.Marker"},
 			LimitToken:      "MaxRecords",
@@ -4985,7 +4984,7 @@ func (c *RDS) DescribeEngineDefaultParameters(input *DescribeEngineDefaultParame
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeEngineDefaultParametersWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, opts ...request.Option) (*DescribeEngineDefaultParametersOutput, error) {
+func (c *RDS) DescribeEngineDefaultParametersWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, opts ...aws.Option) (*DescribeEngineDefaultParametersOutput, error) {
 	req, out := c.DescribeEngineDefaultParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5020,9 +5019,9 @@ func (c *RDS) DescribeEngineDefaultParametersPages(input *DescribeEngineDefaultP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, fn func(*DescribeEngineDefaultParametersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, fn func(*DescribeEngineDefaultParametersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEngineDefaultParametersInput
 			if input != nil {
 				tmp := *input
@@ -5044,7 +5043,7 @@ func (c *RDS) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Context, i
 
 const opDescribeEventCategories = "DescribeEventCategories"
 
-// DescribeEventCategoriesRequest generates a "aws/request.Request" representing the
+// DescribeEventCategoriesRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventCategories operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5068,8 +5067,8 @@ const opDescribeEventCategories = "DescribeEventCategories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventCategories
-func (c *RDS) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *request.Request, output *DescribeEventCategoriesOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *aws.Request, output *DescribeEventCategoriesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventCategories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5112,7 +5111,7 @@ func (c *RDS) DescribeEventCategories(input *DescribeEventCategoriesInput) (*Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeEventCategoriesWithContext(ctx aws.Context, input *DescribeEventCategoriesInput, opts ...request.Option) (*DescribeEventCategoriesOutput, error) {
+func (c *RDS) DescribeEventCategoriesWithContext(ctx aws.Context, input *DescribeEventCategoriesInput, opts ...aws.Option) (*DescribeEventCategoriesOutput, error) {
 	req, out := c.DescribeEventCategoriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5121,7 +5120,7 @@ func (c *RDS) DescribeEventCategoriesWithContext(ctx aws.Context, input *Describ
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 
-// DescribeEventSubscriptionsRequest generates a "aws/request.Request" representing the
+// DescribeEventSubscriptionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventSubscriptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5145,12 +5144,12 @@ const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventSubscriptions
-func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *request.Request, output *DescribeEventSubscriptionsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *aws.Request, output *DescribeEventSubscriptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventSubscriptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -5201,7 +5200,7 @@ func (c *RDS) DescribeEventSubscriptions(input *DescribeEventSubscriptionsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...request.Option) (*DescribeEventSubscriptionsOutput, error) {
+func (c *RDS) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...aws.Option) (*DescribeEventSubscriptionsOutput, error) {
 	req, out := c.DescribeEventSubscriptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5236,9 +5235,9 @@ func (c *RDS) DescribeEventSubscriptionsPages(input *DescribeEventSubscriptionsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventSubscriptionsInput
 			if input != nil {
 				tmp := *input
@@ -5260,7 +5259,7 @@ func (c *RDS) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input 
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws/request.Request" representing the
+// DescribeEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5284,12 +5283,12 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEvents
-func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) (req *request.Request, output *DescribeEventsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -5335,7 +5334,7 @@ func (c *RDS) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...request.Option) (*DescribeEventsOutput, error) {
+func (c *RDS) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
 	req, out := c.DescribeEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5370,9 +5369,9 @@ func (c *RDS) DescribeEventsPages(input *DescribeEventsInput, fn func(*DescribeE
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventsInput
 			if input != nil {
 				tmp := *input
@@ -5394,7 +5393,7 @@ func (c *RDS) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEve
 
 const opDescribeOptionGroupOptions = "DescribeOptionGroupOptions"
 
-// DescribeOptionGroupOptionsRequest generates a "aws/request.Request" representing the
+// DescribeOptionGroupOptionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeOptionGroupOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5418,12 +5417,12 @@ const opDescribeOptionGroupOptions = "DescribeOptionGroupOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptions
-func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOptionsInput) (req *request.Request, output *DescribeOptionGroupOptionsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOptionsInput) (req *aws.Request, output *DescribeOptionGroupOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeOptionGroupOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -5465,7 +5464,7 @@ func (c *RDS) DescribeOptionGroupOptions(input *DescribeOptionGroupOptionsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeOptionGroupOptionsWithContext(ctx aws.Context, input *DescribeOptionGroupOptionsInput, opts ...request.Option) (*DescribeOptionGroupOptionsOutput, error) {
+func (c *RDS) DescribeOptionGroupOptionsWithContext(ctx aws.Context, input *DescribeOptionGroupOptionsInput, opts ...aws.Option) (*DescribeOptionGroupOptionsOutput, error) {
 	req, out := c.DescribeOptionGroupOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5500,9 +5499,9 @@ func (c *RDS) DescribeOptionGroupOptionsPages(input *DescribeOptionGroupOptionsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeOptionGroupOptionsPagesWithContext(ctx aws.Context, input *DescribeOptionGroupOptionsInput, fn func(*DescribeOptionGroupOptionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeOptionGroupOptionsPagesWithContext(ctx aws.Context, input *DescribeOptionGroupOptionsInput, fn func(*DescribeOptionGroupOptionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeOptionGroupOptionsInput
 			if input != nil {
 				tmp := *input
@@ -5524,7 +5523,7 @@ func (c *RDS) DescribeOptionGroupOptionsPagesWithContext(ctx aws.Context, input 
 
 const opDescribeOptionGroups = "DescribeOptionGroups"
 
-// DescribeOptionGroupsRequest generates a "aws/request.Request" representing the
+// DescribeOptionGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeOptionGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5548,12 +5547,12 @@ const opDescribeOptionGroups = "DescribeOptionGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroups
-func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) (req *request.Request, output *DescribeOptionGroupsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) (req *aws.Request, output *DescribeOptionGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeOptionGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -5600,7 +5599,7 @@ func (c *RDS) DescribeOptionGroups(input *DescribeOptionGroupsInput) (*DescribeO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeOptionGroupsWithContext(ctx aws.Context, input *DescribeOptionGroupsInput, opts ...request.Option) (*DescribeOptionGroupsOutput, error) {
+func (c *RDS) DescribeOptionGroupsWithContext(ctx aws.Context, input *DescribeOptionGroupsInput, opts ...aws.Option) (*DescribeOptionGroupsOutput, error) {
 	req, out := c.DescribeOptionGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5635,9 +5634,9 @@ func (c *RDS) DescribeOptionGroupsPages(input *DescribeOptionGroupsInput, fn fun
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeOptionGroupsPagesWithContext(ctx aws.Context, input *DescribeOptionGroupsInput, fn func(*DescribeOptionGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeOptionGroupsPagesWithContext(ctx aws.Context, input *DescribeOptionGroupsInput, fn func(*DescribeOptionGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeOptionGroupsInput
 			if input != nil {
 				tmp := *input
@@ -5659,7 +5658,7 @@ func (c *RDS) DescribeOptionGroupsPagesWithContext(ctx aws.Context, input *Descr
 
 const opDescribeOrderableDBInstanceOptions = "DescribeOrderableDBInstanceOptions"
 
-// DescribeOrderableDBInstanceOptionsRequest generates a "aws/request.Request" representing the
+// DescribeOrderableDBInstanceOptionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeOrderableDBInstanceOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5683,12 +5682,12 @@ const opDescribeOrderableDBInstanceOptions = "DescribeOrderableDBInstanceOptions
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions
-func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderableDBInstanceOptionsInput) (req *request.Request, output *DescribeOrderableDBInstanceOptionsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderableDBInstanceOptionsInput) (req *aws.Request, output *DescribeOrderableDBInstanceOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeOrderableDBInstanceOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -5730,7 +5729,7 @@ func (c *RDS) DescribeOrderableDBInstanceOptions(input *DescribeOrderableDBInsta
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeOrderableDBInstanceOptionsWithContext(ctx aws.Context, input *DescribeOrderableDBInstanceOptionsInput, opts ...request.Option) (*DescribeOrderableDBInstanceOptionsOutput, error) {
+func (c *RDS) DescribeOrderableDBInstanceOptionsWithContext(ctx aws.Context, input *DescribeOrderableDBInstanceOptionsInput, opts ...aws.Option) (*DescribeOrderableDBInstanceOptionsOutput, error) {
 	req, out := c.DescribeOrderableDBInstanceOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5765,9 +5764,9 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsPages(input *DescribeOrderableDB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeOrderableDBInstanceOptionsPagesWithContext(ctx aws.Context, input *DescribeOrderableDBInstanceOptionsInput, fn func(*DescribeOrderableDBInstanceOptionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeOrderableDBInstanceOptionsPagesWithContext(ctx aws.Context, input *DescribeOrderableDBInstanceOptionsInput, fn func(*DescribeOrderableDBInstanceOptionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeOrderableDBInstanceOptionsInput
 			if input != nil {
 				tmp := *input
@@ -5789,7 +5788,7 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsPagesWithContext(ctx aws.Context
 
 const opDescribePendingMaintenanceActions = "DescribePendingMaintenanceActions"
 
-// DescribePendingMaintenanceActionsRequest generates a "aws/request.Request" representing the
+// DescribePendingMaintenanceActionsRequest generates a "aws.Request" representing the
 // client's request for the DescribePendingMaintenanceActions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5813,8 +5812,8 @@ const opDescribePendingMaintenanceActions = "DescribePendingMaintenanceActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribePendingMaintenanceActions
-func (c *RDS) DescribePendingMaintenanceActionsRequest(input *DescribePendingMaintenanceActionsInput) (req *request.Request, output *DescribePendingMaintenanceActionsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribePendingMaintenanceActionsRequest(input *DescribePendingMaintenanceActionsInput) (req *aws.Request, output *DescribePendingMaintenanceActionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePendingMaintenanceActions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5860,7 +5859,7 @@ func (c *RDS) DescribePendingMaintenanceActions(input *DescribePendingMaintenanc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribePendingMaintenanceActionsWithContext(ctx aws.Context, input *DescribePendingMaintenanceActionsInput, opts ...request.Option) (*DescribePendingMaintenanceActionsOutput, error) {
+func (c *RDS) DescribePendingMaintenanceActionsWithContext(ctx aws.Context, input *DescribePendingMaintenanceActionsInput, opts ...aws.Option) (*DescribePendingMaintenanceActionsOutput, error) {
 	req, out := c.DescribePendingMaintenanceActionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5869,7 +5868,7 @@ func (c *RDS) DescribePendingMaintenanceActionsWithContext(ctx aws.Context, inpu
 
 const opDescribeReservedDBInstances = "DescribeReservedDBInstances"
 
-// DescribeReservedDBInstancesRequest generates a "aws/request.Request" representing the
+// DescribeReservedDBInstancesRequest generates a "aws.Request" representing the
 // client's request for the DescribeReservedDBInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5893,12 +5892,12 @@ const opDescribeReservedDBInstances = "DescribeReservedDBInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstances
-func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstancesInput) (req *request.Request, output *DescribeReservedDBInstancesOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstancesInput) (req *aws.Request, output *DescribeReservedDBInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReservedDBInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -5946,7 +5945,7 @@ func (c *RDS) DescribeReservedDBInstances(input *DescribeReservedDBInstancesInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeReservedDBInstancesWithContext(ctx aws.Context, input *DescribeReservedDBInstancesInput, opts ...request.Option) (*DescribeReservedDBInstancesOutput, error) {
+func (c *RDS) DescribeReservedDBInstancesWithContext(ctx aws.Context, input *DescribeReservedDBInstancesInput, opts ...aws.Option) (*DescribeReservedDBInstancesOutput, error) {
 	req, out := c.DescribeReservedDBInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5981,9 +5980,9 @@ func (c *RDS) DescribeReservedDBInstancesPages(input *DescribeReservedDBInstance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeReservedDBInstancesPagesWithContext(ctx aws.Context, input *DescribeReservedDBInstancesInput, fn func(*DescribeReservedDBInstancesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeReservedDBInstancesPagesWithContext(ctx aws.Context, input *DescribeReservedDBInstancesInput, fn func(*DescribeReservedDBInstancesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReservedDBInstancesInput
 			if input != nil {
 				tmp := *input
@@ -6005,7 +6004,7 @@ func (c *RDS) DescribeReservedDBInstancesPagesWithContext(ctx aws.Context, input
 
 const opDescribeReservedDBInstancesOfferings = "DescribeReservedDBInstancesOfferings"
 
-// DescribeReservedDBInstancesOfferingsRequest generates a "aws/request.Request" representing the
+// DescribeReservedDBInstancesOfferingsRequest generates a "aws.Request" representing the
 // client's request for the DescribeReservedDBInstancesOfferings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6029,12 +6028,12 @@ const opDescribeReservedDBInstancesOfferings = "DescribeReservedDBInstancesOffer
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstancesOfferings
-func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReservedDBInstancesOfferingsInput) (req *request.Request, output *DescribeReservedDBInstancesOfferingsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReservedDBInstancesOfferingsInput) (req *aws.Request, output *DescribeReservedDBInstancesOfferingsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReservedDBInstancesOfferings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -6081,7 +6080,7 @@ func (c *RDS) DescribeReservedDBInstancesOfferings(input *DescribeReservedDBInst
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeReservedDBInstancesOfferingsWithContext(ctx aws.Context, input *DescribeReservedDBInstancesOfferingsInput, opts ...request.Option) (*DescribeReservedDBInstancesOfferingsOutput, error) {
+func (c *RDS) DescribeReservedDBInstancesOfferingsWithContext(ctx aws.Context, input *DescribeReservedDBInstancesOfferingsInput, opts ...aws.Option) (*DescribeReservedDBInstancesOfferingsOutput, error) {
 	req, out := c.DescribeReservedDBInstancesOfferingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6116,9 +6115,9 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsPages(input *DescribeReservedD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeReservedDBInstancesOfferingsPagesWithContext(ctx aws.Context, input *DescribeReservedDBInstancesOfferingsInput, fn func(*DescribeReservedDBInstancesOfferingsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DescribeReservedDBInstancesOfferingsPagesWithContext(ctx aws.Context, input *DescribeReservedDBInstancesOfferingsInput, fn func(*DescribeReservedDBInstancesOfferingsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReservedDBInstancesOfferingsInput
 			if input != nil {
 				tmp := *input
@@ -6140,7 +6139,7 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsPagesWithContext(ctx aws.Conte
 
 const opDescribeSourceRegions = "DescribeSourceRegions"
 
-// DescribeSourceRegionsRequest generates a "aws/request.Request" representing the
+// DescribeSourceRegionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeSourceRegions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6164,8 +6163,8 @@ const opDescribeSourceRegions = "DescribeSourceRegions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeSourceRegions
-func (c *RDS) DescribeSourceRegionsRequest(input *DescribeSourceRegionsInput) (req *request.Request, output *DescribeSourceRegionsOutput) {
-	op := &request.Operation{
+func (c *RDS) DescribeSourceRegionsRequest(input *DescribeSourceRegionsInput) (req *aws.Request, output *DescribeSourceRegionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSourceRegions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6207,7 +6206,7 @@ func (c *RDS) DescribeSourceRegions(input *DescribeSourceRegionsInput) (*Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DescribeSourceRegionsWithContext(ctx aws.Context, input *DescribeSourceRegionsInput, opts ...request.Option) (*DescribeSourceRegionsOutput, error) {
+func (c *RDS) DescribeSourceRegionsWithContext(ctx aws.Context, input *DescribeSourceRegionsInput, opts ...aws.Option) (*DescribeSourceRegionsOutput, error) {
 	req, out := c.DescribeSourceRegionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6216,7 +6215,7 @@ func (c *RDS) DescribeSourceRegionsWithContext(ctx aws.Context, input *DescribeS
 
 const opDownloadDBLogFilePortion = "DownloadDBLogFilePortion"
 
-// DownloadDBLogFilePortionRequest generates a "aws/request.Request" representing the
+// DownloadDBLogFilePortionRequest generates a "aws.Request" representing the
 // client's request for the DownloadDBLogFilePortion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6240,12 +6239,12 @@ const opDownloadDBLogFilePortion = "DownloadDBLogFilePortion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DownloadDBLogFilePortion
-func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInput) (req *request.Request, output *DownloadDBLogFilePortionOutput) {
-	op := &request.Operation{
+func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInput) (req *aws.Request, output *DownloadDBLogFilePortionOutput) {
+	op := &aws.Operation{
 		Name:       opDownloadDBLogFilePortion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "NumberOfLines",
@@ -6295,7 +6294,7 @@ func (c *RDS) DownloadDBLogFilePortion(input *DownloadDBLogFilePortionInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DownloadDBLogFilePortionWithContext(ctx aws.Context, input *DownloadDBLogFilePortionInput, opts ...request.Option) (*DownloadDBLogFilePortionOutput, error) {
+func (c *RDS) DownloadDBLogFilePortionWithContext(ctx aws.Context, input *DownloadDBLogFilePortionInput, opts ...aws.Option) (*DownloadDBLogFilePortionOutput, error) {
 	req, out := c.DownloadDBLogFilePortionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6330,9 +6329,9 @@ func (c *RDS) DownloadDBLogFilePortionPages(input *DownloadDBLogFilePortionInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) DownloadDBLogFilePortionPagesWithContext(ctx aws.Context, input *DownloadDBLogFilePortionInput, fn func(*DownloadDBLogFilePortionOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *RDS) DownloadDBLogFilePortionPagesWithContext(ctx aws.Context, input *DownloadDBLogFilePortionInput, fn func(*DownloadDBLogFilePortionOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DownloadDBLogFilePortionInput
 			if input != nil {
 				tmp := *input
@@ -6354,7 +6353,7 @@ func (c *RDS) DownloadDBLogFilePortionPagesWithContext(ctx aws.Context, input *D
 
 const opFailoverDBCluster = "FailoverDBCluster"
 
-// FailoverDBClusterRequest generates a "aws/request.Request" representing the
+// FailoverDBClusterRequest generates a "aws.Request" representing the
 // client's request for the FailoverDBCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6378,8 +6377,8 @@ const opFailoverDBCluster = "FailoverDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster
-func (c *RDS) FailoverDBClusterRequest(input *FailoverDBClusterInput) (req *request.Request, output *FailoverDBClusterOutput) {
-	op := &request.Operation{
+func (c *RDS) FailoverDBClusterRequest(input *FailoverDBClusterInput) (req *aws.Request, output *FailoverDBClusterOutput) {
+	op := &aws.Operation{
 		Name:       opFailoverDBCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6443,7 +6442,7 @@ func (c *RDS) FailoverDBCluster(input *FailoverDBClusterInput) (*FailoverDBClust
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) FailoverDBClusterWithContext(ctx aws.Context, input *FailoverDBClusterInput, opts ...request.Option) (*FailoverDBClusterOutput, error) {
+func (c *RDS) FailoverDBClusterWithContext(ctx aws.Context, input *FailoverDBClusterInput, opts ...aws.Option) (*FailoverDBClusterOutput, error) {
 	req, out := c.FailoverDBClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6452,7 +6451,7 @@ func (c *RDS) FailoverDBClusterWithContext(ctx aws.Context, input *FailoverDBClu
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6476,8 +6475,8 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ListTagsForResource
-func (c *RDS) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *RDS) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6531,7 +6530,7 @@ func (c *RDS) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsFor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+func (c *RDS) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6540,7 +6539,7 @@ func (c *RDS) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsFor
 
 const opModifyDBCluster = "ModifyDBCluster"
 
-// ModifyDBClusterRequest generates a "aws/request.Request" representing the
+// ModifyDBClusterRequest generates a "aws.Request" representing the
 // client's request for the ModifyDBCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6564,8 +6563,8 @@ const opModifyDBCluster = "ModifyDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster
-func (c *RDS) ModifyDBClusterRequest(input *ModifyDBClusterInput) (req *request.Request, output *ModifyDBClusterOutput) {
-	op := &request.Operation{
+func (c *RDS) ModifyDBClusterRequest(input *ModifyDBClusterInput) (req *aws.Request, output *ModifyDBClusterOutput) {
+	op := &aws.Operation{
 		Name:       opModifyDBCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6648,7 +6647,7 @@ func (c *RDS) ModifyDBCluster(input *ModifyDBClusterInput) (*ModifyDBClusterOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyDBClusterWithContext(ctx aws.Context, input *ModifyDBClusterInput, opts ...request.Option) (*ModifyDBClusterOutput, error) {
+func (c *RDS) ModifyDBClusterWithContext(ctx aws.Context, input *ModifyDBClusterInput, opts ...aws.Option) (*ModifyDBClusterOutput, error) {
 	req, out := c.ModifyDBClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6657,7 +6656,7 @@ func (c *RDS) ModifyDBClusterWithContext(ctx aws.Context, input *ModifyDBCluster
 
 const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 
-// ModifyDBClusterParameterGroupRequest generates a "aws/request.Request" representing the
+// ModifyDBClusterParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyDBClusterParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6681,8 +6680,8 @@ const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterParameterGroup
-func (c *RDS) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParameterGroupInput) (req *request.Request, output *DBClusterParameterGroupNameMessage) {
-	op := &request.Operation{
+func (c *RDS) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParameterGroupInput) (req *aws.Request, output *DBClusterParameterGroupNameMessage) {
+	op := &aws.Operation{
 		Name:       opModifyDBClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6752,7 +6751,7 @@ func (c *RDS) ModifyDBClusterParameterGroup(input *ModifyDBClusterParameterGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyDBClusterParameterGroupWithContext(ctx aws.Context, input *ModifyDBClusterParameterGroupInput, opts ...request.Option) (*DBClusterParameterGroupNameMessage, error) {
+func (c *RDS) ModifyDBClusterParameterGroupWithContext(ctx aws.Context, input *ModifyDBClusterParameterGroupInput, opts ...aws.Option) (*DBClusterParameterGroupNameMessage, error) {
 	req, out := c.ModifyDBClusterParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6761,7 +6760,7 @@ func (c *RDS) ModifyDBClusterParameterGroupWithContext(ctx aws.Context, input *M
 
 const opModifyDBClusterSnapshotAttribute = "ModifyDBClusterSnapshotAttribute"
 
-// ModifyDBClusterSnapshotAttributeRequest generates a "aws/request.Request" representing the
+// ModifyDBClusterSnapshotAttributeRequest generates a "aws.Request" representing the
 // client's request for the ModifyDBClusterSnapshotAttribute operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6785,8 +6784,8 @@ const opModifyDBClusterSnapshotAttribute = "ModifyDBClusterSnapshotAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterSnapshotAttribute
-func (c *RDS) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSnapshotAttributeInput) (req *request.Request, output *ModifyDBClusterSnapshotAttributeOutput) {
-	op := &request.Operation{
+func (c *RDS) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSnapshotAttributeInput) (req *aws.Request, output *ModifyDBClusterSnapshotAttributeOutput) {
+	op := &aws.Operation{
 		Name:       opModifyDBClusterSnapshotAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6854,7 +6853,7 @@ func (c *RDS) ModifyDBClusterSnapshotAttribute(input *ModifyDBClusterSnapshotAtt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyDBClusterSnapshotAttributeWithContext(ctx aws.Context, input *ModifyDBClusterSnapshotAttributeInput, opts ...request.Option) (*ModifyDBClusterSnapshotAttributeOutput, error) {
+func (c *RDS) ModifyDBClusterSnapshotAttributeWithContext(ctx aws.Context, input *ModifyDBClusterSnapshotAttributeInput, opts ...aws.Option) (*ModifyDBClusterSnapshotAttributeOutput, error) {
 	req, out := c.ModifyDBClusterSnapshotAttributeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6863,7 +6862,7 @@ func (c *RDS) ModifyDBClusterSnapshotAttributeWithContext(ctx aws.Context, input
 
 const opModifyDBInstance = "ModifyDBInstance"
 
-// ModifyDBInstanceRequest generates a "aws/request.Request" representing the
+// ModifyDBInstanceRequest generates a "aws.Request" representing the
 // client's request for the ModifyDBInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6887,8 +6886,8 @@ const opModifyDBInstance = "ModifyDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance
-func (c *RDS) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) (req *request.Request, output *ModifyDBInstanceOutput) {
-	op := &request.Operation{
+func (c *RDS) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) (req *aws.Request, output *ModifyDBInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opModifyDBInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6987,7 +6986,7 @@ func (c *RDS) ModifyDBInstance(input *ModifyDBInstanceInput) (*ModifyDBInstanceO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyDBInstanceWithContext(ctx aws.Context, input *ModifyDBInstanceInput, opts ...request.Option) (*ModifyDBInstanceOutput, error) {
+func (c *RDS) ModifyDBInstanceWithContext(ctx aws.Context, input *ModifyDBInstanceInput, opts ...aws.Option) (*ModifyDBInstanceOutput, error) {
 	req, out := c.ModifyDBInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6996,7 +6995,7 @@ func (c *RDS) ModifyDBInstanceWithContext(ctx aws.Context, input *ModifyDBInstan
 
 const opModifyDBParameterGroup = "ModifyDBParameterGroup"
 
-// ModifyDBParameterGroupRequest generates a "aws/request.Request" representing the
+// ModifyDBParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyDBParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7020,8 +7019,8 @@ const opModifyDBParameterGroup = "ModifyDBParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroup
-func (c *RDS) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInput) (req *request.Request, output *DBParameterGroupNameMessage) {
-	op := &request.Operation{
+func (c *RDS) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInput) (req *aws.Request, output *DBParameterGroupNameMessage) {
+	op := &aws.Operation{
 		Name:       opModifyDBParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7088,7 +7087,7 @@ func (c *RDS) ModifyDBParameterGroup(input *ModifyDBParameterGroupInput) (*DBPar
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyDBParameterGroupWithContext(ctx aws.Context, input *ModifyDBParameterGroupInput, opts ...request.Option) (*DBParameterGroupNameMessage, error) {
+func (c *RDS) ModifyDBParameterGroupWithContext(ctx aws.Context, input *ModifyDBParameterGroupInput, opts ...aws.Option) (*DBParameterGroupNameMessage, error) {
 	req, out := c.ModifyDBParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7097,7 +7096,7 @@ func (c *RDS) ModifyDBParameterGroupWithContext(ctx aws.Context, input *ModifyDB
 
 const opModifyDBSnapshot = "ModifyDBSnapshot"
 
-// ModifyDBSnapshotRequest generates a "aws/request.Request" representing the
+// ModifyDBSnapshotRequest generates a "aws.Request" representing the
 // client's request for the ModifyDBSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7121,8 +7120,8 @@ const opModifyDBSnapshot = "ModifyDBSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot
-func (c *RDS) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) (req *request.Request, output *ModifyDBSnapshotOutput) {
-	op := &request.Operation{
+func (c *RDS) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) (req *aws.Request, output *ModifyDBSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opModifyDBSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7170,7 +7169,7 @@ func (c *RDS) ModifyDBSnapshot(input *ModifyDBSnapshotInput) (*ModifyDBSnapshotO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyDBSnapshotWithContext(ctx aws.Context, input *ModifyDBSnapshotInput, opts ...request.Option) (*ModifyDBSnapshotOutput, error) {
+func (c *RDS) ModifyDBSnapshotWithContext(ctx aws.Context, input *ModifyDBSnapshotInput, opts ...aws.Option) (*ModifyDBSnapshotOutput, error) {
 	req, out := c.ModifyDBSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7179,7 +7178,7 @@ func (c *RDS) ModifyDBSnapshotWithContext(ctx aws.Context, input *ModifyDBSnapsh
 
 const opModifyDBSnapshotAttribute = "ModifyDBSnapshotAttribute"
 
-// ModifyDBSnapshotAttributeRequest generates a "aws/request.Request" representing the
+// ModifyDBSnapshotAttributeRequest generates a "aws.Request" representing the
 // client's request for the ModifyDBSnapshotAttribute operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7203,8 +7202,8 @@ const opModifyDBSnapshotAttribute = "ModifyDBSnapshotAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotAttribute
-func (c *RDS) ModifyDBSnapshotAttributeRequest(input *ModifyDBSnapshotAttributeInput) (req *request.Request, output *ModifyDBSnapshotAttributeOutput) {
-	op := &request.Operation{
+func (c *RDS) ModifyDBSnapshotAttributeRequest(input *ModifyDBSnapshotAttributeInput) (req *aws.Request, output *ModifyDBSnapshotAttributeOutput) {
+	op := &aws.Operation{
 		Name:       opModifyDBSnapshotAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7272,7 +7271,7 @@ func (c *RDS) ModifyDBSnapshotAttribute(input *ModifyDBSnapshotAttributeInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyDBSnapshotAttributeWithContext(ctx aws.Context, input *ModifyDBSnapshotAttributeInput, opts ...request.Option) (*ModifyDBSnapshotAttributeOutput, error) {
+func (c *RDS) ModifyDBSnapshotAttributeWithContext(ctx aws.Context, input *ModifyDBSnapshotAttributeInput, opts ...aws.Option) (*ModifyDBSnapshotAttributeOutput, error) {
 	req, out := c.ModifyDBSnapshotAttributeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7281,7 +7280,7 @@ func (c *RDS) ModifyDBSnapshotAttributeWithContext(ctx aws.Context, input *Modif
 
 const opModifyDBSubnetGroup = "ModifyDBSubnetGroup"
 
-// ModifyDBSubnetGroupRequest generates a "aws/request.Request" representing the
+// ModifyDBSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyDBSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7305,8 +7304,8 @@ const opModifyDBSubnetGroup = "ModifyDBSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroup
-func (c *RDS) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) (req *request.Request, output *ModifyDBSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) (req *aws.Request, output *ModifyDBSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opModifyDBSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7367,7 +7366,7 @@ func (c *RDS) ModifyDBSubnetGroup(input *ModifyDBSubnetGroupInput) (*ModifyDBSub
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyDBSubnetGroupWithContext(ctx aws.Context, input *ModifyDBSubnetGroupInput, opts ...request.Option) (*ModifyDBSubnetGroupOutput, error) {
+func (c *RDS) ModifyDBSubnetGroupWithContext(ctx aws.Context, input *ModifyDBSubnetGroupInput, opts ...aws.Option) (*ModifyDBSubnetGroupOutput, error) {
 	req, out := c.ModifyDBSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7376,7 +7375,7 @@ func (c *RDS) ModifyDBSubnetGroupWithContext(ctx aws.Context, input *ModifyDBSub
 
 const opModifyEventSubscription = "ModifyEventSubscription"
 
-// ModifyEventSubscriptionRequest generates a "aws/request.Request" representing the
+// ModifyEventSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the ModifyEventSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7400,8 +7399,8 @@ const opModifyEventSubscription = "ModifyEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyEventSubscription
-func (c *RDS) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *request.Request, output *ModifyEventSubscriptionOutput) {
-	op := &request.Operation{
+func (c *RDS) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *aws.Request, output *ModifyEventSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opModifyEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7469,7 +7468,7 @@ func (c *RDS) ModifyEventSubscription(input *ModifyEventSubscriptionInput) (*Mod
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...request.Option) (*ModifyEventSubscriptionOutput, error) {
+func (c *RDS) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...aws.Option) (*ModifyEventSubscriptionOutput, error) {
 	req, out := c.ModifyEventSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7478,7 +7477,7 @@ func (c *RDS) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyE
 
 const opModifyOptionGroup = "ModifyOptionGroup"
 
-// ModifyOptionGroupRequest generates a "aws/request.Request" representing the
+// ModifyOptionGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyOptionGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7502,8 +7501,8 @@ const opModifyOptionGroup = "ModifyOptionGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroup
-func (c *RDS) ModifyOptionGroupRequest(input *ModifyOptionGroupInput) (req *request.Request, output *ModifyOptionGroupOutput) {
-	op := &request.Operation{
+func (c *RDS) ModifyOptionGroupRequest(input *ModifyOptionGroupInput) (req *aws.Request, output *ModifyOptionGroupOutput) {
+	op := &aws.Operation{
 		Name:       opModifyOptionGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7551,7 +7550,7 @@ func (c *RDS) ModifyOptionGroup(input *ModifyOptionGroupInput) (*ModifyOptionGro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ModifyOptionGroupWithContext(ctx aws.Context, input *ModifyOptionGroupInput, opts ...request.Option) (*ModifyOptionGroupOutput, error) {
+func (c *RDS) ModifyOptionGroupWithContext(ctx aws.Context, input *ModifyOptionGroupInput, opts ...aws.Option) (*ModifyOptionGroupOutput, error) {
 	req, out := c.ModifyOptionGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7560,7 +7559,7 @@ func (c *RDS) ModifyOptionGroupWithContext(ctx aws.Context, input *ModifyOptionG
 
 const opPromoteReadReplica = "PromoteReadReplica"
 
-// PromoteReadReplicaRequest generates a "aws/request.Request" representing the
+// PromoteReadReplicaRequest generates a "aws.Request" representing the
 // client's request for the PromoteReadReplica operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7584,8 +7583,8 @@ const opPromoteReadReplica = "PromoteReadReplica"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica
-func (c *RDS) PromoteReadReplicaRequest(input *PromoteReadReplicaInput) (req *request.Request, output *PromoteReadReplicaOutput) {
-	op := &request.Operation{
+func (c *RDS) PromoteReadReplicaRequest(input *PromoteReadReplicaInput) (req *aws.Request, output *PromoteReadReplicaOutput) {
+	op := &aws.Operation{
 		Name:       opPromoteReadReplica,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7638,7 +7637,7 @@ func (c *RDS) PromoteReadReplica(input *PromoteReadReplicaInput) (*PromoteReadRe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) PromoteReadReplicaWithContext(ctx aws.Context, input *PromoteReadReplicaInput, opts ...request.Option) (*PromoteReadReplicaOutput, error) {
+func (c *RDS) PromoteReadReplicaWithContext(ctx aws.Context, input *PromoteReadReplicaInput, opts ...aws.Option) (*PromoteReadReplicaOutput, error) {
 	req, out := c.PromoteReadReplicaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7647,7 +7646,7 @@ func (c *RDS) PromoteReadReplicaWithContext(ctx aws.Context, input *PromoteReadR
 
 const opPromoteReadReplicaDBCluster = "PromoteReadReplicaDBCluster"
 
-// PromoteReadReplicaDBClusterRequest generates a "aws/request.Request" representing the
+// PromoteReadReplicaDBClusterRequest generates a "aws.Request" representing the
 // client's request for the PromoteReadReplicaDBCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7671,8 +7670,8 @@ const opPromoteReadReplicaDBCluster = "PromoteReadReplicaDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster
-func (c *RDS) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBClusterInput) (req *request.Request, output *PromoteReadReplicaDBClusterOutput) {
-	op := &request.Operation{
+func (c *RDS) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBClusterInput) (req *aws.Request, output *PromoteReadReplicaDBClusterOutput) {
+	op := &aws.Operation{
 		Name:       opPromoteReadReplicaDBCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7720,7 +7719,7 @@ func (c *RDS) PromoteReadReplicaDBCluster(input *PromoteReadReplicaDBClusterInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) PromoteReadReplicaDBClusterWithContext(ctx aws.Context, input *PromoteReadReplicaDBClusterInput, opts ...request.Option) (*PromoteReadReplicaDBClusterOutput, error) {
+func (c *RDS) PromoteReadReplicaDBClusterWithContext(ctx aws.Context, input *PromoteReadReplicaDBClusterInput, opts ...aws.Option) (*PromoteReadReplicaDBClusterOutput, error) {
 	req, out := c.PromoteReadReplicaDBClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7729,7 +7728,7 @@ func (c *RDS) PromoteReadReplicaDBClusterWithContext(ctx aws.Context, input *Pro
 
 const opPurchaseReservedDBInstancesOffering = "PurchaseReservedDBInstancesOffering"
 
-// PurchaseReservedDBInstancesOfferingRequest generates a "aws/request.Request" representing the
+// PurchaseReservedDBInstancesOfferingRequest generates a "aws.Request" representing the
 // client's request for the PurchaseReservedDBInstancesOffering operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7753,8 +7752,8 @@ const opPurchaseReservedDBInstancesOffering = "PurchaseReservedDBInstancesOfferi
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOffering
-func (c *RDS) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReservedDBInstancesOfferingInput) (req *request.Request, output *PurchaseReservedDBInstancesOfferingOutput) {
-	op := &request.Operation{
+func (c *RDS) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReservedDBInstancesOfferingInput) (req *aws.Request, output *PurchaseReservedDBInstancesOfferingOutput) {
+	op := &aws.Operation{
 		Name:       opPurchaseReservedDBInstancesOffering,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7805,7 +7804,7 @@ func (c *RDS) PurchaseReservedDBInstancesOffering(input *PurchaseReservedDBInsta
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) PurchaseReservedDBInstancesOfferingWithContext(ctx aws.Context, input *PurchaseReservedDBInstancesOfferingInput, opts ...request.Option) (*PurchaseReservedDBInstancesOfferingOutput, error) {
+func (c *RDS) PurchaseReservedDBInstancesOfferingWithContext(ctx aws.Context, input *PurchaseReservedDBInstancesOfferingInput, opts ...aws.Option) (*PurchaseReservedDBInstancesOfferingOutput, error) {
 	req, out := c.PurchaseReservedDBInstancesOfferingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7814,7 +7813,7 @@ func (c *RDS) PurchaseReservedDBInstancesOfferingWithContext(ctx aws.Context, in
 
 const opRebootDBInstance = "RebootDBInstance"
 
-// RebootDBInstanceRequest generates a "aws/request.Request" representing the
+// RebootDBInstanceRequest generates a "aws.Request" representing the
 // client's request for the RebootDBInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7838,8 +7837,8 @@ const opRebootDBInstance = "RebootDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance
-func (c *RDS) RebootDBInstanceRequest(input *RebootDBInstanceInput) (req *request.Request, output *RebootDBInstanceOutput) {
-	op := &request.Operation{
+func (c *RDS) RebootDBInstanceRequest(input *RebootDBInstanceInput) (req *aws.Request, output *RebootDBInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opRebootDBInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7903,7 +7902,7 @@ func (c *RDS) RebootDBInstance(input *RebootDBInstanceInput) (*RebootDBInstanceO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RebootDBInstanceWithContext(ctx aws.Context, input *RebootDBInstanceInput, opts ...request.Option) (*RebootDBInstanceOutput, error) {
+func (c *RDS) RebootDBInstanceWithContext(ctx aws.Context, input *RebootDBInstanceInput, opts ...aws.Option) (*RebootDBInstanceOutput, error) {
 	req, out := c.RebootDBInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7912,7 +7911,7 @@ func (c *RDS) RebootDBInstanceWithContext(ctx aws.Context, input *RebootDBInstan
 
 const opRemoveRoleFromDBCluster = "RemoveRoleFromDBCluster"
 
-// RemoveRoleFromDBClusterRequest generates a "aws/request.Request" representing the
+// RemoveRoleFromDBClusterRequest generates a "aws.Request" representing the
 // client's request for the RemoveRoleFromDBCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7936,8 +7935,8 @@ const opRemoveRoleFromDBCluster = "RemoveRoleFromDBCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBCluster
-func (c *RDS) RemoveRoleFromDBClusterRequest(input *RemoveRoleFromDBClusterInput) (req *request.Request, output *RemoveRoleFromDBClusterOutput) {
-	op := &request.Operation{
+func (c *RDS) RemoveRoleFromDBClusterRequest(input *RemoveRoleFromDBClusterInput) (req *aws.Request, output *RemoveRoleFromDBClusterOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveRoleFromDBCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7993,7 +7992,7 @@ func (c *RDS) RemoveRoleFromDBCluster(input *RemoveRoleFromDBClusterInput) (*Rem
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RemoveRoleFromDBClusterWithContext(ctx aws.Context, input *RemoveRoleFromDBClusterInput, opts ...request.Option) (*RemoveRoleFromDBClusterOutput, error) {
+func (c *RDS) RemoveRoleFromDBClusterWithContext(ctx aws.Context, input *RemoveRoleFromDBClusterInput, opts ...aws.Option) (*RemoveRoleFromDBClusterOutput, error) {
 	req, out := c.RemoveRoleFromDBClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8002,7 +8001,7 @@ func (c *RDS) RemoveRoleFromDBClusterWithContext(ctx aws.Context, input *RemoveR
 
 const opRemoveSourceIdentifierFromSubscription = "RemoveSourceIdentifierFromSubscription"
 
-// RemoveSourceIdentifierFromSubscriptionRequest generates a "aws/request.Request" representing the
+// RemoveSourceIdentifierFromSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the RemoveSourceIdentifierFromSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8026,8 +8025,8 @@ const opRemoveSourceIdentifierFromSubscription = "RemoveSourceIdentifierFromSubs
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscription
-func (c *RDS) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSourceIdentifierFromSubscriptionInput) (req *request.Request, output *RemoveSourceIdentifierFromSubscriptionOutput) {
-	op := &request.Operation{
+func (c *RDS) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSourceIdentifierFromSubscriptionInput) (req *aws.Request, output *RemoveSourceIdentifierFromSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveSourceIdentifierFromSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8075,7 +8074,7 @@ func (c *RDS) RemoveSourceIdentifierFromSubscription(input *RemoveSourceIdentifi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RemoveSourceIdentifierFromSubscriptionWithContext(ctx aws.Context, input *RemoveSourceIdentifierFromSubscriptionInput, opts ...request.Option) (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
+func (c *RDS) RemoveSourceIdentifierFromSubscriptionWithContext(ctx aws.Context, input *RemoveSourceIdentifierFromSubscriptionInput, opts ...aws.Option) (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
 	req, out := c.RemoveSourceIdentifierFromSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8084,7 +8083,7 @@ func (c *RDS) RemoveSourceIdentifierFromSubscriptionWithContext(ctx aws.Context,
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8108,8 +8107,8 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveTagsFromResource
-func (c *RDS) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *RemoveTagsFromResourceOutput) {
-	op := &request.Operation{
+func (c *RDS) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8165,7 +8164,7 @@ func (c *RDS) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*Remov
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...request.Option) (*RemoveTagsFromResourceOutput, error) {
+func (c *RDS) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
 	req, out := c.RemoveTagsFromResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8174,7 +8173,7 @@ func (c *RDS) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTa
 
 const opResetDBClusterParameterGroup = "ResetDBClusterParameterGroup"
 
-// ResetDBClusterParameterGroupRequest generates a "aws/request.Request" representing the
+// ResetDBClusterParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the ResetDBClusterParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8198,8 +8197,8 @@ const opResetDBClusterParameterGroup = "ResetDBClusterParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBClusterParameterGroup
-func (c *RDS) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParameterGroupInput) (req *request.Request, output *DBClusterParameterGroupNameMessage) {
-	op := &request.Operation{
+func (c *RDS) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParameterGroupInput) (req *aws.Request, output *DBClusterParameterGroupNameMessage) {
+	op := &aws.Operation{
 		Name:       opResetDBClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8261,7 +8260,7 @@ func (c *RDS) ResetDBClusterParameterGroup(input *ResetDBClusterParameterGroupIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ResetDBClusterParameterGroupWithContext(ctx aws.Context, input *ResetDBClusterParameterGroupInput, opts ...request.Option) (*DBClusterParameterGroupNameMessage, error) {
+func (c *RDS) ResetDBClusterParameterGroupWithContext(ctx aws.Context, input *ResetDBClusterParameterGroupInput, opts ...aws.Option) (*DBClusterParameterGroupNameMessage, error) {
 	req, out := c.ResetDBClusterParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8270,7 +8269,7 @@ func (c *RDS) ResetDBClusterParameterGroupWithContext(ctx aws.Context, input *Re
 
 const opResetDBParameterGroup = "ResetDBParameterGroup"
 
-// ResetDBParameterGroupRequest generates a "aws/request.Request" representing the
+// ResetDBParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the ResetDBParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8294,8 +8293,8 @@ const opResetDBParameterGroup = "ResetDBParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBParameterGroup
-func (c *RDS) ResetDBParameterGroupRequest(input *ResetDBParameterGroupInput) (req *request.Request, output *DBParameterGroupNameMessage) {
-	op := &request.Operation{
+func (c *RDS) ResetDBParameterGroupRequest(input *ResetDBParameterGroupInput) (req *aws.Request, output *DBParameterGroupNameMessage) {
+	op := &aws.Operation{
 		Name:       opResetDBParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8351,7 +8350,7 @@ func (c *RDS) ResetDBParameterGroup(input *ResetDBParameterGroupInput) (*DBParam
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) ResetDBParameterGroupWithContext(ctx aws.Context, input *ResetDBParameterGroupInput, opts ...request.Option) (*DBParameterGroupNameMessage, error) {
+func (c *RDS) ResetDBParameterGroupWithContext(ctx aws.Context, input *ResetDBParameterGroupInput, opts ...aws.Option) (*DBParameterGroupNameMessage, error) {
 	req, out := c.ResetDBParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8360,7 +8359,7 @@ func (c *RDS) ResetDBParameterGroupWithContext(ctx aws.Context, input *ResetDBPa
 
 const opRestoreDBClusterFromS3 = "RestoreDBClusterFromS3"
 
-// RestoreDBClusterFromS3Request generates a "aws/request.Request" representing the
+// RestoreDBClusterFromS3Request generates a "aws.Request" representing the
 // client's request for the RestoreDBClusterFromS3 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8384,8 +8383,8 @@ const opRestoreDBClusterFromS3 = "RestoreDBClusterFromS3"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3
-func (c *RDS) RestoreDBClusterFromS3Request(input *RestoreDBClusterFromS3Input) (req *request.Request, output *RestoreDBClusterFromS3Output) {
-	op := &request.Operation{
+func (c *RDS) RestoreDBClusterFromS3Request(input *RestoreDBClusterFromS3Input) (req *aws.Request, output *RestoreDBClusterFromS3Output) {
+	op := &aws.Operation{
 		Name:       opRestoreDBClusterFromS3,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8478,7 +8477,7 @@ func (c *RDS) RestoreDBClusterFromS3(input *RestoreDBClusterFromS3Input) (*Resto
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RestoreDBClusterFromS3WithContext(ctx aws.Context, input *RestoreDBClusterFromS3Input, opts ...request.Option) (*RestoreDBClusterFromS3Output, error) {
+func (c *RDS) RestoreDBClusterFromS3WithContext(ctx aws.Context, input *RestoreDBClusterFromS3Input, opts ...aws.Option) (*RestoreDBClusterFromS3Output, error) {
 	req, out := c.RestoreDBClusterFromS3Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8487,7 +8486,7 @@ func (c *RDS) RestoreDBClusterFromS3WithContext(ctx aws.Context, input *RestoreD
 
 const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
 
-// RestoreDBClusterFromSnapshotRequest generates a "aws/request.Request" representing the
+// RestoreDBClusterFromSnapshotRequest generates a "aws.Request" representing the
 // client's request for the RestoreDBClusterFromSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8511,8 +8510,8 @@ const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot
-func (c *RDS) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromSnapshotInput) (req *request.Request, output *RestoreDBClusterFromSnapshotOutput) {
-	op := &request.Operation{
+func (c *RDS) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromSnapshotInput) (req *aws.Request, output *RestoreDBClusterFromSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opRestoreDBClusterFromSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8623,7 +8622,7 @@ func (c *RDS) RestoreDBClusterFromSnapshot(input *RestoreDBClusterFromSnapshotIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RestoreDBClusterFromSnapshotWithContext(ctx aws.Context, input *RestoreDBClusterFromSnapshotInput, opts ...request.Option) (*RestoreDBClusterFromSnapshotOutput, error) {
+func (c *RDS) RestoreDBClusterFromSnapshotWithContext(ctx aws.Context, input *RestoreDBClusterFromSnapshotInput, opts ...aws.Option) (*RestoreDBClusterFromSnapshotOutput, error) {
 	req, out := c.RestoreDBClusterFromSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8632,7 +8631,7 @@ func (c *RDS) RestoreDBClusterFromSnapshotWithContext(ctx aws.Context, input *Re
 
 const opRestoreDBClusterToPointInTime = "RestoreDBClusterToPointInTime"
 
-// RestoreDBClusterToPointInTimeRequest generates a "aws/request.Request" representing the
+// RestoreDBClusterToPointInTimeRequest generates a "aws.Request" representing the
 // client's request for the RestoreDBClusterToPointInTime operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8656,8 +8655,8 @@ const opRestoreDBClusterToPointInTime = "RestoreDBClusterToPointInTime"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime
-func (c *RDS) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPointInTimeInput) (req *request.Request, output *RestoreDBClusterToPointInTimeOutput) {
-	op := &request.Operation{
+func (c *RDS) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPointInTimeInput) (req *aws.Request, output *RestoreDBClusterToPointInTimeOutput) {
+	op := &aws.Operation{
 		Name:       opRestoreDBClusterToPointInTime,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8767,7 +8766,7 @@ func (c *RDS) RestoreDBClusterToPointInTime(input *RestoreDBClusterToPointInTime
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RestoreDBClusterToPointInTimeWithContext(ctx aws.Context, input *RestoreDBClusterToPointInTimeInput, opts ...request.Option) (*RestoreDBClusterToPointInTimeOutput, error) {
+func (c *RDS) RestoreDBClusterToPointInTimeWithContext(ctx aws.Context, input *RestoreDBClusterToPointInTimeInput, opts ...aws.Option) (*RestoreDBClusterToPointInTimeOutput, error) {
 	req, out := c.RestoreDBClusterToPointInTimeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8776,7 +8775,7 @@ func (c *RDS) RestoreDBClusterToPointInTimeWithContext(ctx aws.Context, input *R
 
 const opRestoreDBInstanceFromDBSnapshot = "RestoreDBInstanceFromDBSnapshot"
 
-// RestoreDBInstanceFromDBSnapshotRequest generates a "aws/request.Request" representing the
+// RestoreDBInstanceFromDBSnapshotRequest generates a "aws.Request" representing the
 // client's request for the RestoreDBInstanceFromDBSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8800,8 +8799,8 @@ const opRestoreDBInstanceFromDBSnapshot = "RestoreDBInstanceFromDBSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot
-func (c *RDS) RestoreDBInstanceFromDBSnapshotRequest(input *RestoreDBInstanceFromDBSnapshotInput) (req *request.Request, output *RestoreDBInstanceFromDBSnapshotOutput) {
-	op := &request.Operation{
+func (c *RDS) RestoreDBInstanceFromDBSnapshotRequest(input *RestoreDBInstanceFromDBSnapshotInput) (req *aws.Request, output *RestoreDBInstanceFromDBSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opRestoreDBInstanceFromDBSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8924,7 +8923,7 @@ func (c *RDS) RestoreDBInstanceFromDBSnapshot(input *RestoreDBInstanceFromDBSnap
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RestoreDBInstanceFromDBSnapshotWithContext(ctx aws.Context, input *RestoreDBInstanceFromDBSnapshotInput, opts ...request.Option) (*RestoreDBInstanceFromDBSnapshotOutput, error) {
+func (c *RDS) RestoreDBInstanceFromDBSnapshotWithContext(ctx aws.Context, input *RestoreDBInstanceFromDBSnapshotInput, opts ...aws.Option) (*RestoreDBInstanceFromDBSnapshotOutput, error) {
 	req, out := c.RestoreDBInstanceFromDBSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8933,7 +8932,7 @@ func (c *RDS) RestoreDBInstanceFromDBSnapshotWithContext(ctx aws.Context, input 
 
 const opRestoreDBInstanceToPointInTime = "RestoreDBInstanceToPointInTime"
 
-// RestoreDBInstanceToPointInTimeRequest generates a "aws/request.Request" representing the
+// RestoreDBInstanceToPointInTimeRequest generates a "aws.Request" representing the
 // client's request for the RestoreDBInstanceToPointInTime operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8957,8 +8956,8 @@ const opRestoreDBInstanceToPointInTime = "RestoreDBInstanceToPointInTime"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime
-func (c *RDS) RestoreDBInstanceToPointInTimeRequest(input *RestoreDBInstanceToPointInTimeInput) (req *request.Request, output *RestoreDBInstanceToPointInTimeOutput) {
-	op := &request.Operation{
+func (c *RDS) RestoreDBInstanceToPointInTimeRequest(input *RestoreDBInstanceToPointInTimeInput) (req *aws.Request, output *RestoreDBInstanceToPointInTimeOutput) {
+	op := &aws.Operation{
 		Name:       opRestoreDBInstanceToPointInTime,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -9078,7 +9077,7 @@ func (c *RDS) RestoreDBInstanceToPointInTime(input *RestoreDBInstanceToPointInTi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RestoreDBInstanceToPointInTimeWithContext(ctx aws.Context, input *RestoreDBInstanceToPointInTimeInput, opts ...request.Option) (*RestoreDBInstanceToPointInTimeOutput, error) {
+func (c *RDS) RestoreDBInstanceToPointInTimeWithContext(ctx aws.Context, input *RestoreDBInstanceToPointInTimeInput, opts ...aws.Option) (*RestoreDBInstanceToPointInTimeOutput, error) {
 	req, out := c.RestoreDBInstanceToPointInTimeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9087,7 +9086,7 @@ func (c *RDS) RestoreDBInstanceToPointInTimeWithContext(ctx aws.Context, input *
 
 const opRevokeDBSecurityGroupIngress = "RevokeDBSecurityGroupIngress"
 
-// RevokeDBSecurityGroupIngressRequest generates a "aws/request.Request" representing the
+// RevokeDBSecurityGroupIngressRequest generates a "aws.Request" representing the
 // client's request for the RevokeDBSecurityGroupIngress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9111,8 +9110,8 @@ const opRevokeDBSecurityGroupIngress = "RevokeDBSecurityGroupIngress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RevokeDBSecurityGroupIngress
-func (c *RDS) RevokeDBSecurityGroupIngressRequest(input *RevokeDBSecurityGroupIngressInput) (req *request.Request, output *RevokeDBSecurityGroupIngressOutput) {
-	op := &request.Operation{
+func (c *RDS) RevokeDBSecurityGroupIngressRequest(input *RevokeDBSecurityGroupIngressInput) (req *aws.Request, output *RevokeDBSecurityGroupIngressOutput) {
+	op := &aws.Operation{
 		Name:       opRevokeDBSecurityGroupIngress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -9170,7 +9169,7 @@ func (c *RDS) RevokeDBSecurityGroupIngress(input *RevokeDBSecurityGroupIngressIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) RevokeDBSecurityGroupIngressWithContext(ctx aws.Context, input *RevokeDBSecurityGroupIngressInput, opts ...request.Option) (*RevokeDBSecurityGroupIngressOutput, error) {
+func (c *RDS) RevokeDBSecurityGroupIngressWithContext(ctx aws.Context, input *RevokeDBSecurityGroupIngressInput, opts ...aws.Option) (*RevokeDBSecurityGroupIngressOutput, error) {
 	req, out := c.RevokeDBSecurityGroupIngressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9179,7 +9178,7 @@ func (c *RDS) RevokeDBSecurityGroupIngressWithContext(ctx aws.Context, input *Re
 
 const opStartDBInstance = "StartDBInstance"
 
-// StartDBInstanceRequest generates a "aws/request.Request" representing the
+// StartDBInstanceRequest generates a "aws.Request" representing the
 // client's request for the StartDBInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9203,8 +9202,8 @@ const opStartDBInstance = "StartDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance
-func (c *RDS) StartDBInstanceRequest(input *StartDBInstanceInput) (req *request.Request, output *StartDBInstanceOutput) {
-	op := &request.Operation{
+func (c *RDS) StartDBInstanceRequest(input *StartDBInstanceInput) (req *aws.Request, output *StartDBInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opStartDBInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -9289,7 +9288,7 @@ func (c *RDS) StartDBInstance(input *StartDBInstanceInput) (*StartDBInstanceOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) StartDBInstanceWithContext(ctx aws.Context, input *StartDBInstanceInput, opts ...request.Option) (*StartDBInstanceOutput, error) {
+func (c *RDS) StartDBInstanceWithContext(ctx aws.Context, input *StartDBInstanceInput, opts ...aws.Option) (*StartDBInstanceOutput, error) {
 	req, out := c.StartDBInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9298,7 +9297,7 @@ func (c *RDS) StartDBInstanceWithContext(ctx aws.Context, input *StartDBInstance
 
 const opStopDBInstance = "StopDBInstance"
 
-// StopDBInstanceRequest generates a "aws/request.Request" representing the
+// StopDBInstanceRequest generates a "aws.Request" representing the
 // client's request for the StopDBInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9322,8 +9321,8 @@ const opStopDBInstance = "StopDBInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance
-func (c *RDS) StopDBInstanceRequest(input *StopDBInstanceInput) (req *request.Request, output *StopDBInstanceOutput) {
-	op := &request.Operation{
+func (c *RDS) StopDBInstanceRequest(input *StopDBInstanceInput) (req *aws.Request, output *StopDBInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opStopDBInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -9384,7 +9383,7 @@ func (c *RDS) StopDBInstance(input *StopDBInstanceInput) (*StopDBInstanceOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) StopDBInstanceWithContext(ctx aws.Context, input *StopDBInstanceInput, opts ...request.Option) (*StopDBInstanceOutput, error) {
+func (c *RDS) StopDBInstanceWithContext(ctx aws.Context, input *StopDBInstanceInput, opts ...aws.Option) (*StopDBInstanceOutput, error) {
 	req, out := c.StopDBInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9463,12 +9462,12 @@ func (s AddRoleToDBClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddRoleToDBClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddRoleToDBClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddRoleToDBClusterInput"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9548,12 +9547,12 @@ func (s AddSourceIdentifierToSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddSourceIdentifierToSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddSourceIdentifierToSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddSourceIdentifierToSubscriptionInput"}
 	if s.SourceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceIdentifier"))
 	}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9628,12 +9627,12 @@ func (s AddTagsToResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9715,15 +9714,15 @@ func (s ApplyPendingMaintenanceActionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplyPendingMaintenanceActionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ApplyPendingMaintenanceActionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ApplyPendingMaintenanceActionInput"}
 	if s.ApplyAction == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplyAction"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplyAction"))
 	}
 	if s.OptInType == nil {
-		invalidParams.Add(request.NewErrParamRequired("OptInType"))
+		invalidParams.Add(aws.NewErrParamRequired("OptInType"))
 	}
 	if s.ResourceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9816,9 +9815,9 @@ func (s AuthorizeDBSecurityGroupIngressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AuthorizeDBSecurityGroupIngressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AuthorizeDBSecurityGroupIngressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeDBSecurityGroupIngressInput"}
 	if s.DBSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10085,15 +10084,15 @@ func (s CopyDBClusterParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyDBClusterParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopyDBClusterParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopyDBClusterParameterGroupInput"}
 	if s.SourceDBClusterParameterGroupIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceDBClusterParameterGroupIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceDBClusterParameterGroupIdentifier"))
 	}
 	if s.TargetDBClusterParameterGroupDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetDBClusterParameterGroupDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetDBClusterParameterGroupDescription"))
 	}
 	if s.TargetDBClusterParameterGroupIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetDBClusterParameterGroupIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetDBClusterParameterGroupIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10285,12 +10284,12 @@ func (s CopyDBClusterSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyDBClusterSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopyDBClusterSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopyDBClusterSnapshotInput"}
 	if s.SourceDBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceDBClusterSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceDBClusterSnapshotIdentifier"))
 	}
 	if s.TargetDBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetDBClusterSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetDBClusterSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10434,15 +10433,15 @@ func (s CopyDBParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyDBParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopyDBParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopyDBParameterGroupInput"}
 	if s.SourceDBParameterGroupIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceDBParameterGroupIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceDBParameterGroupIdentifier"))
 	}
 	if s.TargetDBParameterGroupDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetDBParameterGroupDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetDBParameterGroupDescription"))
 	}
 	if s.TargetDBParameterGroupIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetDBParameterGroupIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetDBParameterGroupIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10649,12 +10648,12 @@ func (s CopyDBSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyDBSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopyDBSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopyDBSnapshotInput"}
 	if s.SourceDBSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceDBSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceDBSnapshotIdentifier"))
 	}
 	if s.TargetDBSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetDBSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetDBSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10806,15 +10805,15 @@ func (s CopyOptionGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyOptionGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopyOptionGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopyOptionGroupInput"}
 	if s.SourceOptionGroupIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceOptionGroupIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceOptionGroupIdentifier"))
 	}
 	if s.TargetOptionGroupDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetOptionGroupDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetOptionGroupDescription"))
 	}
 	if s.TargetOptionGroupIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetOptionGroupIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetOptionGroupIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11105,12 +11104,12 @@ func (s CreateDBClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDBClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDBClusterInput"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if s.Engine == nil {
-		invalidParams.Add(request.NewErrParamRequired("Engine"))
+		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11349,15 +11348,15 @@ func (s CreateDBClusterParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBClusterParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDBClusterParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDBClusterParameterGroupInput"}
 	if s.DBClusterParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
 	if s.DBParameterGroupFamily == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBParameterGroupFamily"))
+		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11471,12 +11470,12 @@ func (s CreateDBClusterSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBClusterSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDBClusterSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDBClusterSnapshotInput"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if s.DBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12314,15 +12313,15 @@ func (s CreateDBInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDBInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDBInstanceInput"}
 	if s.DBInstanceClass == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceClass"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceClass"))
 	}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 	if s.Engine == nil {
-		invalidParams.Add(request.NewErrParamRequired("Engine"))
+		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12872,12 +12871,12 @@ func (s CreateDBInstanceReadReplicaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBInstanceReadReplicaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDBInstanceReadReplicaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDBInstanceReadReplicaInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 	if s.SourceDBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceDBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceDBInstanceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13102,15 +13101,15 @@ func (s CreateDBParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDBParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDBParameterGroupInput"}
 	if s.DBParameterGroupFamily == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBParameterGroupFamily"))
+		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
 	}
 	if s.DBParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13213,12 +13212,12 @@ func (s CreateDBSecurityGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBSecurityGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDBSecurityGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDBSecurityGroupInput"}
 	if s.DBSecurityGroupDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSecurityGroupDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupDescription"))
 	}
 	if s.DBSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13330,12 +13329,12 @@ func (s CreateDBSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDBSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDBSnapshotInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 	if s.DBSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13432,15 +13431,15 @@ func (s CreateDBSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDBSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDBSubnetGroupInput"}
 	if s.DBSubnetGroupDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSubnetGroupDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupDescription"))
 	}
 	if s.DBSubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupName"))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13584,12 +13583,12 @@ func (s CreateEventSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEventSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
 	if s.SnsTopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnsTopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13717,18 +13716,18 @@ func (s CreateOptionGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateOptionGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateOptionGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateOptionGroupInput"}
 	if s.EngineName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EngineName"))
+		invalidParams.Add(aws.NewErrParamRequired("EngineName"))
 	}
 	if s.MajorEngineVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("MajorEngineVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("MajorEngineVersion"))
 	}
 	if s.OptionGroupDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("OptionGroupDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("OptionGroupDescription"))
 	}
 	if s.OptionGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("OptionGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("OptionGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16159,9 +16158,9 @@ func (s DeleteDBClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDBClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterInput"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16256,9 +16255,9 @@ func (s DeleteDBClusterParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBClusterParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDBClusterParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterParameterGroupInput"}
 	if s.DBClusterParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16313,9 +16312,9 @@ func (s DeleteDBClusterSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBClusterSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDBClusterSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterSnapshotInput"}
 	if s.DBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16425,9 +16424,9 @@ func (s DeleteDBInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDBInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBInstanceInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16520,9 +16519,9 @@ func (s DeleteDBParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDBParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBParameterGroupInput"}
 	if s.DBParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16586,9 +16585,9 @@ func (s DeleteDBSecurityGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBSecurityGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDBSecurityGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBSecurityGroupInput"}
 	if s.DBSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16643,9 +16642,9 @@ func (s DeleteDBSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDBSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBSnapshotInput"}
 	if s.DBSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16721,9 +16720,9 @@ func (s DeleteDBSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDBSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBSubnetGroupInput"}
 	if s.DBSubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16775,9 +16774,9 @@ func (s DeleteEventSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16841,9 +16840,9 @@ func (s DeleteOptionGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteOptionGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteOptionGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteOptionGroupInput"}
 	if s.OptionGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("OptionGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("OptionGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16961,14 +16960,14 @@ func (s DescribeCertificatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCertificatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCertificatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificatesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17084,14 +17083,14 @@ func (s DescribeDBClusterParameterGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBClusterParameterGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBClusterParameterGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterParameterGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17213,9 +17212,9 @@ func (s DescribeDBClusterParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBClusterParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBClusterParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterParametersInput"}
 	if s.DBClusterParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -17223,7 +17222,7 @@ func (s *DescribeDBClusterParametersInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17323,9 +17322,9 @@ func (s DescribeDBClusterSnapshotAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBClusterSnapshotAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBClusterSnapshotAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterSnapshotAttributesInput"}
 	if s.DBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17474,14 +17473,14 @@ func (s DescribeDBClusterSnapshotsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBClusterSnapshotsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBClusterSnapshotsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterSnapshotsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17630,14 +17629,14 @@ func (s DescribeDBClustersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBClustersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBClustersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClustersInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17774,14 +17773,14 @@ func (s DescribeDBEngineVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBEngineVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBEngineVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBEngineVersionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17940,14 +17939,14 @@ func (s DescribeDBInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBInstancesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18117,9 +18116,9 @@ func (s DescribeDBLogFilesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBLogFilesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBLogFilesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBLogFilesInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -18127,7 +18126,7 @@ func (s *DescribeDBLogFilesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18259,14 +18258,14 @@ func (s DescribeDBParameterGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBParameterGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBParameterGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBParameterGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18392,9 +18391,9 @@ func (s DescribeDBParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBParametersInput"}
 	if s.DBParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -18402,7 +18401,7 @@ func (s *DescribeDBParametersInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18517,14 +18516,14 @@ func (s DescribeDBSecurityGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBSecurityGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBSecurityGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSecurityGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18618,9 +18617,9 @@ func (s DescribeDBSnapshotAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBSnapshotAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBSnapshotAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSnapshotAttributesInput"}
 	if s.DBSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18768,14 +18767,14 @@ func (s DescribeDBSnapshotsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBSnapshotsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBSnapshotsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSnapshotsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18908,14 +18907,14 @@ func (s DescribeDBSubnetGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBSubnetGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDBSubnetGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSubnetGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -19027,9 +19026,9 @@ func (s DescribeEngineDefaultClusterParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEngineDefaultClusterParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEngineDefaultClusterParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEngineDefaultClusterParametersInput"}
 	if s.DBParameterGroupFamily == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBParameterGroupFamily"))
+		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -19037,7 +19036,7 @@ func (s *DescribeEngineDefaultClusterParametersInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -19136,9 +19135,9 @@ func (s DescribeEngineDefaultParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEngineDefaultParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEngineDefaultParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEngineDefaultParametersInput"}
 	if s.DBParameterGroupFamily == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBParameterGroupFamily"))
+		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -19146,7 +19145,7 @@ func (s *DescribeEngineDefaultParametersInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -19231,14 +19230,14 @@ func (s DescribeEventCategoriesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventCategoriesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventCategoriesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventCategoriesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -19323,14 +19322,14 @@ func (s DescribeEventSubscriptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventSubscriptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventSubscriptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventSubscriptionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -19483,14 +19482,14 @@ func (s DescribeEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -19635,9 +19634,9 @@ func (s DescribeOptionGroupOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeOptionGroupOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeOptionGroupOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeOptionGroupOptionsInput"}
 	if s.EngineName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EngineName"))
+		invalidParams.Add(aws.NewErrParamRequired("EngineName"))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -19645,7 +19644,7 @@ func (s *DescribeOptionGroupOptionsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -19768,14 +19767,14 @@ func (s DescribeOptionGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeOptionGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeOptionGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeOptionGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -19913,9 +19912,9 @@ func (s DescribeOrderableDBInstanceOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeOrderableDBInstanceOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeOrderableDBInstanceOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeOrderableDBInstanceOptionsInput"}
 	if s.Engine == nil {
-		invalidParams.Add(request.NewErrParamRequired("Engine"))
+		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -19923,7 +19922,7 @@ func (s *DescribeOrderableDBInstanceOptionsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20068,14 +20067,14 @@ func (s DescribePendingMaintenanceActionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePendingMaintenanceActionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribePendingMaintenanceActionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribePendingMaintenanceActionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20212,14 +20211,14 @@ func (s DescribeReservedDBInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReservedDBInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeReservedDBInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeReservedDBInstancesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20354,14 +20353,14 @@ func (s DescribeReservedDBInstancesOfferingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReservedDBInstancesOfferingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeReservedDBInstancesOfferingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeReservedDBInstancesOfferingsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20541,14 +20540,14 @@ func (s DescribeSourceRegionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSourceRegionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeSourceRegionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSourceRegionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20740,12 +20739,12 @@ func (s DownloadDBLogFilePortionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DownloadDBLogFilePortionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DownloadDBLogFilePortionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DownloadDBLogFilePortionInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 	if s.LogFileName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogFileName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogFileName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21310,12 +21309,12 @@ func (s Filter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Filter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Filter"}
+	invalidParams := aws.ErrInvalidParams{Context: "Filter"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21399,9 +21398,9 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -21409,7 +21408,7 @@ func (s *ListTagsForResourceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -21600,9 +21599,9 @@ func (s ModifyDBClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyDBClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBClusterInput"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21748,12 +21747,12 @@ func (s ModifyDBClusterParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBClusterParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyDBClusterParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBClusterParameterGroupInput"}
 	if s.DBClusterParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
 	if s.Parameters == nil {
-		invalidParams.Add(request.NewErrParamRequired("Parameters"))
+		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21825,12 +21824,12 @@ func (s ModifyDBClusterSnapshotAttributeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBClusterSnapshotAttributeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyDBClusterSnapshotAttributeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBClusterSnapshotAttributeInput"}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.DBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22430,9 +22429,9 @@ func (s ModifyDBInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyDBInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBInstanceInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22733,12 +22732,12 @@ func (s ModifyDBParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyDBParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBParameterGroupInput"}
 	if s.DBParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
 	if s.Parameters == nil {
-		invalidParams.Add(request.NewErrParamRequired("Parameters"))
+		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22808,12 +22807,12 @@ func (s ModifyDBSnapshotAttributeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBSnapshotAttributeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyDBSnapshotAttributeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBSnapshotAttributeInput"}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.DBSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22923,9 +22922,9 @@ func (s ModifyDBSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyDBSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBSnapshotInput"}
 	if s.DBSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -23017,12 +23016,12 @@ func (s ModifyDBSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyDBSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBSubnetGroupInput"}
 	if s.DBSubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupName"))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -23129,9 +23128,9 @@ func (s ModifyEventSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyEventSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -23232,9 +23231,9 @@ func (s ModifyOptionGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyOptionGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyOptionGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyOptionGroupInput"}
 	if s.OptionGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("OptionGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("OptionGroupName"))
 	}
 	if s.OptionsToInclude != nil {
 		for i, v := range s.OptionsToInclude {
@@ -23242,7 +23241,7 @@ func (s *ModifyOptionGroupInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToInclude", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToInclude", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -23437,9 +23436,9 @@ func (s OptionConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OptionConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "OptionConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "OptionConfiguration"}
 	if s.OptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("OptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("OptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24501,9 +24500,9 @@ func (s PromoteReadReplicaDBClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PromoteReadReplicaDBClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PromoteReadReplicaDBClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PromoteReadReplicaDBClusterInput"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24620,9 +24619,9 @@ func (s PromoteReadReplicaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PromoteReadReplicaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PromoteReadReplicaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PromoteReadReplicaInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24722,9 +24721,9 @@ func (s PurchaseReservedDBInstancesOfferingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseReservedDBInstancesOfferingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PurchaseReservedDBInstancesOfferingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedDBInstancesOfferingInput"}
 	if s.ReservedDBInstancesOfferingId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReservedDBInstancesOfferingId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReservedDBInstancesOfferingId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24818,9 +24817,9 @@ func (s RebootDBInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootDBInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebootDBInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebootDBInstanceInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24940,12 +24939,12 @@ func (s RemoveRoleFromDBClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveRoleFromDBClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveRoleFromDBClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveRoleFromDBClusterInput"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25010,12 +25009,12 @@ func (s RemoveSourceIdentifierFromSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveSourceIdentifierFromSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveSourceIdentifierFromSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveSourceIdentifierFromSubscriptionInput"}
 	if s.SourceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceIdentifier"))
 	}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25090,12 +25089,12 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25422,9 +25421,9 @@ func (s ResetDBClusterParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetDBClusterParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResetDBClusterParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResetDBClusterParameterGroupInput"}
 	if s.DBClusterParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25513,9 +25512,9 @@ func (s ResetDBParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetDBParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResetDBParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResetDBParameterGroupInput"}
 	if s.DBParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25797,30 +25796,30 @@ func (s RestoreDBClusterFromS3Input) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBClusterFromS3Input) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreDBClusterFromS3Input"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBClusterFromS3Input"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if s.Engine == nil {
-		invalidParams.Add(request.NewErrParamRequired("Engine"))
+		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
 	if s.MasterUserPassword == nil {
-		invalidParams.Add(request.NewErrParamRequired("MasterUserPassword"))
+		invalidParams.Add(aws.NewErrParamRequired("MasterUserPassword"))
 	}
 	if s.MasterUsername == nil {
-		invalidParams.Add(request.NewErrParamRequired("MasterUsername"))
+		invalidParams.Add(aws.NewErrParamRequired("MasterUsername"))
 	}
 	if s.S3BucketName == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3BucketName"))
+		invalidParams.Add(aws.NewErrParamRequired("S3BucketName"))
 	}
 	if s.S3IngestionRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3IngestionRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("S3IngestionRoleArn"))
 	}
 	if s.SourceEngine == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceEngine"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceEngine"))
 	}
 	if s.SourceEngineVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceEngineVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceEngineVersion"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -26135,15 +26134,15 @@ func (s RestoreDBClusterFromSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBClusterFromSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreDBClusterFromSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBClusterFromSnapshotInput"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if s.Engine == nil {
-		invalidParams.Add(request.NewErrParamRequired("Engine"))
+		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
 	if s.SnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -26410,12 +26409,12 @@ func (s RestoreDBClusterToPointInTimeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBClusterToPointInTimeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreDBClusterToPointInTimeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBClusterToPointInTimeInput"}
 	if s.DBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if s.SourceDBClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceDBClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceDBClusterIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -26733,12 +26732,12 @@ func (s RestoreDBInstanceFromDBSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBInstanceFromDBSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreDBInstanceFromDBSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBInstanceFromDBSnapshotInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 	if s.DBSnapshotIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSnapshotIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -27128,12 +27127,12 @@ func (s RestoreDBInstanceToPointInTimeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBInstanceToPointInTimeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreDBInstanceToPointInTimeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBInstanceToPointInTimeInput"}
 	if s.SourceDBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceDBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceDBInstanceIdentifier"))
 	}
 	if s.TargetDBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetDBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetDBInstanceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -27366,9 +27365,9 @@ func (s RevokeDBSecurityGroupIngressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeDBSecurityGroupIngressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RevokeDBSecurityGroupIngressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RevokeDBSecurityGroupIngressInput"}
 	if s.DBSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -27508,9 +27507,9 @@ func (s StartDBInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartDBInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartDBInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartDBInstanceInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -27587,9 +27586,9 @@ func (s StopDBInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopDBInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopDBInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopDBInstanceInput"}
 	if s.DBInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("DBInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {

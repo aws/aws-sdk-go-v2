@@ -6,15 +6,14 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opAddPermission = "AddPermission"
 
-// AddPermissionRequest generates a "aws/request.Request" representing the
+// AddPermissionRequest generates a "aws.Request" representing the
 // client's request for the AddPermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -38,8 +37,8 @@ const opAddPermission = "AddPermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermission
-func (c *SQS) AddPermissionRequest(input *AddPermissionInput) (req *request.Request, output *AddPermissionOutput) {
-	op := &request.Operation{
+func (c *SQS) AddPermissionRequest(input *AddPermissionInput) (req *aws.Request, output *AddPermissionOutput) {
+	op := &aws.Operation{
 		Name:       opAddPermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -108,7 +107,7 @@ func (c *SQS) AddPermission(input *AddPermissionInput) (*AddPermissionOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInput, opts ...request.Option) (*AddPermissionOutput, error) {
+func (c *SQS) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInput, opts ...aws.Option) (*AddPermissionOutput, error) {
 	req, out := c.AddPermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -117,7 +116,7 @@ func (c *SQS) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInpu
 
 const opChangeMessageVisibility = "ChangeMessageVisibility"
 
-// ChangeMessageVisibilityRequest generates a "aws/request.Request" representing the
+// ChangeMessageVisibilityRequest generates a "aws.Request" representing the
 // client's request for the ChangeMessageVisibility operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -141,8 +140,8 @@ const opChangeMessageVisibility = "ChangeMessageVisibility"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibility
-func (c *SQS) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityInput) (req *request.Request, output *ChangeMessageVisibilityOutput) {
-	op := &request.Operation{
+func (c *SQS) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityInput) (req *aws.Request, output *ChangeMessageVisibilityOutput) {
+	op := &aws.Operation{
 		Name:       opChangeMessageVisibility,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -227,7 +226,7 @@ func (c *SQS) ChangeMessageVisibility(input *ChangeMessageVisibilityInput) (*Cha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) ChangeMessageVisibilityWithContext(ctx aws.Context, input *ChangeMessageVisibilityInput, opts ...request.Option) (*ChangeMessageVisibilityOutput, error) {
+func (c *SQS) ChangeMessageVisibilityWithContext(ctx aws.Context, input *ChangeMessageVisibilityInput, opts ...aws.Option) (*ChangeMessageVisibilityOutput, error) {
 	req, out := c.ChangeMessageVisibilityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -236,7 +235,7 @@ func (c *SQS) ChangeMessageVisibilityWithContext(ctx aws.Context, input *ChangeM
 
 const opChangeMessageVisibilityBatch = "ChangeMessageVisibilityBatch"
 
-// ChangeMessageVisibilityBatchRequest generates a "aws/request.Request" representing the
+// ChangeMessageVisibilityBatchRequest generates a "aws.Request" representing the
 // client's request for the ChangeMessageVisibilityBatch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -260,8 +259,8 @@ const opChangeMessageVisibilityBatch = "ChangeMessageVisibilityBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatch
-func (c *SQS) ChangeMessageVisibilityBatchRequest(input *ChangeMessageVisibilityBatchInput) (req *request.Request, output *ChangeMessageVisibilityBatchOutput) {
-	op := &request.Operation{
+func (c *SQS) ChangeMessageVisibilityBatchRequest(input *ChangeMessageVisibilityBatchInput) (req *aws.Request, output *ChangeMessageVisibilityBatchOutput) {
+	op := &aws.Operation{
 		Name:       opChangeMessageVisibilityBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -330,7 +329,7 @@ func (c *SQS) ChangeMessageVisibilityBatch(input *ChangeMessageVisibilityBatchIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) ChangeMessageVisibilityBatchWithContext(ctx aws.Context, input *ChangeMessageVisibilityBatchInput, opts ...request.Option) (*ChangeMessageVisibilityBatchOutput, error) {
+func (c *SQS) ChangeMessageVisibilityBatchWithContext(ctx aws.Context, input *ChangeMessageVisibilityBatchInput, opts ...aws.Option) (*ChangeMessageVisibilityBatchOutput, error) {
 	req, out := c.ChangeMessageVisibilityBatchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -339,7 +338,7 @@ func (c *SQS) ChangeMessageVisibilityBatchWithContext(ctx aws.Context, input *Ch
 
 const opCreateQueue = "CreateQueue"
 
-// CreateQueueRequest generates a "aws/request.Request" representing the
+// CreateQueueRequest generates a "aws.Request" representing the
 // client's request for the CreateQueue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -363,8 +362,8 @@ const opCreateQueue = "CreateQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueue
-func (c *SQS) CreateQueueRequest(input *CreateQueueInput) (req *request.Request, output *CreateQueueOutput) {
-	op := &request.Operation{
+func (c *SQS) CreateQueueRequest(input *CreateQueueInput) (req *aws.Request, output *CreateQueueOutput) {
+	op := &aws.Operation{
 		Name:       opCreateQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -454,7 +453,7 @@ func (c *SQS) CreateQueue(input *CreateQueueInput) (*CreateQueueOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) CreateQueueWithContext(ctx aws.Context, input *CreateQueueInput, opts ...request.Option) (*CreateQueueOutput, error) {
+func (c *SQS) CreateQueueWithContext(ctx aws.Context, input *CreateQueueInput, opts ...aws.Option) (*CreateQueueOutput, error) {
 	req, out := c.CreateQueueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -463,7 +462,7 @@ func (c *SQS) CreateQueueWithContext(ctx aws.Context, input *CreateQueueInput, o
 
 const opDeleteMessage = "DeleteMessage"
 
-// DeleteMessageRequest generates a "aws/request.Request" representing the
+// DeleteMessageRequest generates a "aws.Request" representing the
 // client's request for the DeleteMessage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -487,8 +486,8 @@ const opDeleteMessage = "DeleteMessage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessage
-func (c *SQS) DeleteMessageRequest(input *DeleteMessageInput) (req *request.Request, output *DeleteMessageOutput) {
-	op := &request.Operation{
+func (c *SQS) DeleteMessageRequest(input *DeleteMessageInput) (req *aws.Request, output *DeleteMessageOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteMessage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -557,7 +556,7 @@ func (c *SQS) DeleteMessage(input *DeleteMessageInput) (*DeleteMessageOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) DeleteMessageWithContext(ctx aws.Context, input *DeleteMessageInput, opts ...request.Option) (*DeleteMessageOutput, error) {
+func (c *SQS) DeleteMessageWithContext(ctx aws.Context, input *DeleteMessageInput, opts ...aws.Option) (*DeleteMessageOutput, error) {
 	req, out := c.DeleteMessageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -566,7 +565,7 @@ func (c *SQS) DeleteMessageWithContext(ctx aws.Context, input *DeleteMessageInpu
 
 const opDeleteMessageBatch = "DeleteMessageBatch"
 
-// DeleteMessageBatchRequest generates a "aws/request.Request" representing the
+// DeleteMessageBatchRequest generates a "aws.Request" representing the
 // client's request for the DeleteMessageBatch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -590,8 +589,8 @@ const opDeleteMessageBatch = "DeleteMessageBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatch
-func (c *SQS) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) (req *request.Request, output *DeleteMessageBatchOutput) {
-	op := &request.Operation{
+func (c *SQS) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) (req *aws.Request, output *DeleteMessageBatchOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteMessageBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -659,7 +658,7 @@ func (c *SQS) DeleteMessageBatch(input *DeleteMessageBatchInput) (*DeleteMessage
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) DeleteMessageBatchWithContext(ctx aws.Context, input *DeleteMessageBatchInput, opts ...request.Option) (*DeleteMessageBatchOutput, error) {
+func (c *SQS) DeleteMessageBatchWithContext(ctx aws.Context, input *DeleteMessageBatchInput, opts ...aws.Option) (*DeleteMessageBatchOutput, error) {
 	req, out := c.DeleteMessageBatchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -668,7 +667,7 @@ func (c *SQS) DeleteMessageBatchWithContext(ctx aws.Context, input *DeleteMessag
 
 const opDeleteQueue = "DeleteQueue"
 
-// DeleteQueueRequest generates a "aws/request.Request" representing the
+// DeleteQueueRequest generates a "aws.Request" representing the
 // client's request for the DeleteQueue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -692,8 +691,8 @@ const opDeleteQueue = "DeleteQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueue
-func (c *SQS) DeleteQueueRequest(input *DeleteQueueInput) (req *request.Request, output *DeleteQueueOutput) {
-	op := &request.Operation{
+func (c *SQS) DeleteQueueRequest(input *DeleteQueueInput) (req *aws.Request, output *DeleteQueueOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -747,7 +746,7 @@ func (c *SQS) DeleteQueue(input *DeleteQueueInput) (*DeleteQueueOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) DeleteQueueWithContext(ctx aws.Context, input *DeleteQueueInput, opts ...request.Option) (*DeleteQueueOutput, error) {
+func (c *SQS) DeleteQueueWithContext(ctx aws.Context, input *DeleteQueueInput, opts ...aws.Option) (*DeleteQueueOutput, error) {
 	req, out := c.DeleteQueueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -756,7 +755,7 @@ func (c *SQS) DeleteQueueWithContext(ctx aws.Context, input *DeleteQueueInput, o
 
 const opGetQueueAttributes = "GetQueueAttributes"
 
-// GetQueueAttributesRequest generates a "aws/request.Request" representing the
+// GetQueueAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetQueueAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -780,8 +779,8 @@ const opGetQueueAttributes = "GetQueueAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributes
-func (c *SQS) GetQueueAttributesRequest(input *GetQueueAttributesInput) (req *request.Request, output *GetQueueAttributesOutput) {
-	op := &request.Operation{
+func (c *SQS) GetQueueAttributesRequest(input *GetQueueAttributesInput) (req *aws.Request, output *GetQueueAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetQueueAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -837,7 +836,7 @@ func (c *SQS) GetQueueAttributes(input *GetQueueAttributesInput) (*GetQueueAttri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) GetQueueAttributesWithContext(ctx aws.Context, input *GetQueueAttributesInput, opts ...request.Option) (*GetQueueAttributesOutput, error) {
+func (c *SQS) GetQueueAttributesWithContext(ctx aws.Context, input *GetQueueAttributesInput, opts ...aws.Option) (*GetQueueAttributesOutput, error) {
 	req, out := c.GetQueueAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -846,7 +845,7 @@ func (c *SQS) GetQueueAttributesWithContext(ctx aws.Context, input *GetQueueAttr
 
 const opGetQueueUrl = "GetQueueUrl"
 
-// GetQueueUrlRequest generates a "aws/request.Request" representing the
+// GetQueueUrlRequest generates a "aws.Request" representing the
 // client's request for the GetQueueUrl operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -870,8 +869,8 @@ const opGetQueueUrl = "GetQueueUrl"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrl
-func (c *SQS) GetQueueUrlRequest(input *GetQueueUrlInput) (req *request.Request, output *GetQueueUrlOutput) {
-	op := &request.Operation{
+func (c *SQS) GetQueueUrlRequest(input *GetQueueUrlInput) (req *aws.Request, output *GetQueueUrlOutput) {
+	op := &aws.Operation{
 		Name:       opGetQueueUrl,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -923,7 +922,7 @@ func (c *SQS) GetQueueUrl(input *GetQueueUrlInput) (*GetQueueUrlOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) GetQueueUrlWithContext(ctx aws.Context, input *GetQueueUrlInput, opts ...request.Option) (*GetQueueUrlOutput, error) {
+func (c *SQS) GetQueueUrlWithContext(ctx aws.Context, input *GetQueueUrlInput, opts ...aws.Option) (*GetQueueUrlOutput, error) {
 	req, out := c.GetQueueUrlRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -932,7 +931,7 @@ func (c *SQS) GetQueueUrlWithContext(ctx aws.Context, input *GetQueueUrlInput, o
 
 const opListDeadLetterSourceQueues = "ListDeadLetterSourceQueues"
 
-// ListDeadLetterSourceQueuesRequest generates a "aws/request.Request" representing the
+// ListDeadLetterSourceQueuesRequest generates a "aws.Request" representing the
 // client's request for the ListDeadLetterSourceQueues operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -956,8 +955,8 @@ const opListDeadLetterSourceQueues = "ListDeadLetterSourceQueues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueues
-func (c *SQS) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQueuesInput) (req *request.Request, output *ListDeadLetterSourceQueuesOutput) {
-	op := &request.Operation{
+func (c *SQS) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQueuesInput) (req *aws.Request, output *ListDeadLetterSourceQueuesOutput) {
+	op := &aws.Operation{
 		Name:       opListDeadLetterSourceQueues,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1007,7 +1006,7 @@ func (c *SQS) ListDeadLetterSourceQueues(input *ListDeadLetterSourceQueuesInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) ListDeadLetterSourceQueuesWithContext(ctx aws.Context, input *ListDeadLetterSourceQueuesInput, opts ...request.Option) (*ListDeadLetterSourceQueuesOutput, error) {
+func (c *SQS) ListDeadLetterSourceQueuesWithContext(ctx aws.Context, input *ListDeadLetterSourceQueuesInput, opts ...aws.Option) (*ListDeadLetterSourceQueuesOutput, error) {
 	req, out := c.ListDeadLetterSourceQueuesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1016,7 +1015,7 @@ func (c *SQS) ListDeadLetterSourceQueuesWithContext(ctx aws.Context, input *List
 
 const opListQueues = "ListQueues"
 
-// ListQueuesRequest generates a "aws/request.Request" representing the
+// ListQueuesRequest generates a "aws.Request" representing the
 // client's request for the ListQueues operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1040,8 +1039,8 @@ const opListQueues = "ListQueues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueues
-func (c *SQS) ListQueuesRequest(input *ListQueuesInput) (req *request.Request, output *ListQueuesOutput) {
-	op := &request.Operation{
+func (c *SQS) ListQueuesRequest(input *ListQueuesInput) (req *aws.Request, output *ListQueuesOutput) {
+	op := &aws.Operation{
 		Name:       opListQueues,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1083,7 +1082,7 @@ func (c *SQS) ListQueues(input *ListQueuesInput) (*ListQueuesOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) ListQueuesWithContext(ctx aws.Context, input *ListQueuesInput, opts ...request.Option) (*ListQueuesOutput, error) {
+func (c *SQS) ListQueuesWithContext(ctx aws.Context, input *ListQueuesInput, opts ...aws.Option) (*ListQueuesOutput, error) {
 	req, out := c.ListQueuesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1092,7 +1091,7 @@ func (c *SQS) ListQueuesWithContext(ctx aws.Context, input *ListQueuesInput, opt
 
 const opPurgeQueue = "PurgeQueue"
 
-// PurgeQueueRequest generates a "aws/request.Request" representing the
+// PurgeQueueRequest generates a "aws.Request" representing the
 // client's request for the PurgeQueue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1116,8 +1115,8 @@ const opPurgeQueue = "PurgeQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueue
-func (c *SQS) PurgeQueueRequest(input *PurgeQueueInput) (req *request.Request, output *PurgeQueueOutput) {
-	op := &request.Operation{
+func (c *SQS) PurgeQueueRequest(input *PurgeQueueInput) (req *aws.Request, output *PurgeQueueOutput) {
+	op := &aws.Operation{
 		Name:       opPurgeQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1178,7 +1177,7 @@ func (c *SQS) PurgeQueue(input *PurgeQueueInput) (*PurgeQueueOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) PurgeQueueWithContext(ctx aws.Context, input *PurgeQueueInput, opts ...request.Option) (*PurgeQueueOutput, error) {
+func (c *SQS) PurgeQueueWithContext(ctx aws.Context, input *PurgeQueueInput, opts ...aws.Option) (*PurgeQueueOutput, error) {
 	req, out := c.PurgeQueueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1187,7 +1186,7 @@ func (c *SQS) PurgeQueueWithContext(ctx aws.Context, input *PurgeQueueInput, opt
 
 const opReceiveMessage = "ReceiveMessage"
 
-// ReceiveMessageRequest generates a "aws/request.Request" representing the
+// ReceiveMessageRequest generates a "aws.Request" representing the
 // client's request for the ReceiveMessage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1211,8 +1210,8 @@ const opReceiveMessage = "ReceiveMessage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessage
-func (c *SQS) ReceiveMessageRequest(input *ReceiveMessageInput) (req *request.Request, output *ReceiveMessageOutput) {
-	op := &request.Operation{
+func (c *SQS) ReceiveMessageRequest(input *ReceiveMessageInput) (req *aws.Request, output *ReceiveMessageOutput) {
+	op := &aws.Operation{
 		Name:       opReceiveMessage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1306,7 +1305,7 @@ func (c *SQS) ReceiveMessage(input *ReceiveMessageInput) (*ReceiveMessageOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) ReceiveMessageWithContext(ctx aws.Context, input *ReceiveMessageInput, opts ...request.Option) (*ReceiveMessageOutput, error) {
+func (c *SQS) ReceiveMessageWithContext(ctx aws.Context, input *ReceiveMessageInput, opts ...aws.Option) (*ReceiveMessageOutput, error) {
 	req, out := c.ReceiveMessageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1315,7 +1314,7 @@ func (c *SQS) ReceiveMessageWithContext(ctx aws.Context, input *ReceiveMessageIn
 
 const opRemovePermission = "RemovePermission"
 
-// RemovePermissionRequest generates a "aws/request.Request" representing the
+// RemovePermissionRequest generates a "aws.Request" representing the
 // client's request for the RemovePermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1339,8 +1338,8 @@ const opRemovePermission = "RemovePermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RemovePermission
-func (c *SQS) RemovePermissionRequest(input *RemovePermissionInput) (req *request.Request, output *RemovePermissionOutput) {
-	op := &request.Operation{
+func (c *SQS) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Request, output *RemovePermissionOutput) {
+	op := &aws.Operation{
 		Name:       opRemovePermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1383,7 +1382,7 @@ func (c *SQS) RemovePermission(input *RemovePermissionInput) (*RemovePermissionO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...request.Option) (*RemovePermissionOutput, error) {
+func (c *SQS) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...aws.Option) (*RemovePermissionOutput, error) {
 	req, out := c.RemovePermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1392,7 +1391,7 @@ func (c *SQS) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissi
 
 const opSendMessage = "SendMessage"
 
-// SendMessageRequest generates a "aws/request.Request" representing the
+// SendMessageRequest generates a "aws.Request" representing the
 // client's request for the SendMessage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1416,8 +1415,8 @@ const opSendMessage = "SendMessage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessage
-func (c *SQS) SendMessageRequest(input *SendMessageInput) (req *request.Request, output *SendMessageOutput) {
-	op := &request.Operation{
+func (c *SQS) SendMessageRequest(input *SendMessageInput) (req *aws.Request, output *SendMessageOutput) {
+	op := &aws.Operation{
 		Name:       opSendMessage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1473,7 +1472,7 @@ func (c *SQS) SendMessage(input *SendMessageInput) (*SendMessageOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) SendMessageWithContext(ctx aws.Context, input *SendMessageInput, opts ...request.Option) (*SendMessageOutput, error) {
+func (c *SQS) SendMessageWithContext(ctx aws.Context, input *SendMessageInput, opts ...aws.Option) (*SendMessageOutput, error) {
 	req, out := c.SendMessageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1482,7 +1481,7 @@ func (c *SQS) SendMessageWithContext(ctx aws.Context, input *SendMessageInput, o
 
 const opSendMessageBatch = "SendMessageBatch"
 
-// SendMessageBatchRequest generates a "aws/request.Request" representing the
+// SendMessageBatchRequest generates a "aws.Request" representing the
 // client's request for the SendMessageBatch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1506,8 +1505,8 @@ const opSendMessageBatch = "SendMessageBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatch
-func (c *SQS) SendMessageBatchRequest(input *SendMessageBatchInput) (req *request.Request, output *SendMessageBatchOutput) {
-	op := &request.Operation{
+func (c *SQS) SendMessageBatchRequest(input *SendMessageBatchInput) (req *aws.Request, output *SendMessageBatchOutput) {
+	op := &aws.Operation{
 		Name:       opSendMessageBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1597,7 +1596,7 @@ func (c *SQS) SendMessageBatch(input *SendMessageBatchInput) (*SendMessageBatchO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) SendMessageBatchWithContext(ctx aws.Context, input *SendMessageBatchInput, opts ...request.Option) (*SendMessageBatchOutput, error) {
+func (c *SQS) SendMessageBatchWithContext(ctx aws.Context, input *SendMessageBatchInput, opts ...aws.Option) (*SendMessageBatchOutput, error) {
 	req, out := c.SendMessageBatchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1606,7 +1605,7 @@ func (c *SQS) SendMessageBatchWithContext(ctx aws.Context, input *SendMessageBat
 
 const opSetQueueAttributes = "SetQueueAttributes"
 
-// SetQueueAttributesRequest generates a "aws/request.Request" representing the
+// SetQueueAttributesRequest generates a "aws.Request" representing the
 // client's request for the SetQueueAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1630,8 +1629,8 @@ const opSetQueueAttributes = "SetQueueAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SetQueueAttributes
-func (c *SQS) SetQueueAttributesRequest(input *SetQueueAttributesInput) (req *request.Request, output *SetQueueAttributesOutput) {
-	op := &request.Operation{
+func (c *SQS) SetQueueAttributesRequest(input *SetQueueAttributesInput) (req *aws.Request, output *SetQueueAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opSetQueueAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1685,7 +1684,7 @@ func (c *SQS) SetQueueAttributes(input *SetQueueAttributesInput) (*SetQueueAttri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SQS) SetQueueAttributesWithContext(ctx aws.Context, input *SetQueueAttributesInput, opts ...request.Option) (*SetQueueAttributesOutput, error) {
+func (c *SQS) SetQueueAttributesWithContext(ctx aws.Context, input *SetQueueAttributesInput, opts ...aws.Option) (*SetQueueAttributesOutput, error) {
 	req, out := c.SetQueueAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1759,18 +1758,18 @@ func (s AddPermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddPermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddPermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddPermissionInput"}
 	if s.AWSAccountIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("AWSAccountIds"))
+		invalidParams.Add(aws.NewErrParamRequired("AWSAccountIds"))
 	}
 	if s.Actions == nil {
-		invalidParams.Add(request.NewErrParamRequired("Actions"))
+		invalidParams.Add(aws.NewErrParamRequired("Actions"))
 	}
 	if s.Label == nil {
-		invalidParams.Add(request.NewErrParamRequired("Label"))
+		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1907,12 +1906,12 @@ func (s ChangeMessageVisibilityBatchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeMessageVisibilityBatchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ChangeMessageVisibilityBatchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ChangeMessageVisibilityBatchInput"}
 	if s.Entries == nil {
-		invalidParams.Add(request.NewErrParamRequired("Entries"))
+		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 	if s.Entries != nil {
 		for i, v := range s.Entries {
@@ -1920,7 +1919,7 @@ func (s *ChangeMessageVisibilityBatchInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2027,12 +2026,12 @@ func (s ChangeMessageVisibilityBatchRequestEntry) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeMessageVisibilityBatchRequestEntry) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ChangeMessageVisibilityBatchRequestEntry"}
+	invalidParams := aws.ErrInvalidParams{Context: "ChangeMessageVisibilityBatchRequestEntry"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.ReceiptHandle == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReceiptHandle"))
+		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2122,15 +2121,15 @@ func (s ChangeMessageVisibilityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeMessageVisibilityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ChangeMessageVisibilityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ChangeMessageVisibilityInput"}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 	if s.ReceiptHandle == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReceiptHandle"))
+		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
 	}
 	if s.VisibilityTimeout == nil {
-		invalidParams.Add(request.NewErrParamRequired("VisibilityTimeout"))
+		invalidParams.Add(aws.NewErrParamRequired("VisibilityTimeout"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2323,9 +2322,9 @@ func (s CreateQueueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateQueueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateQueueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateQueueInput"}
 	if s.QueueName == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueName"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2400,12 +2399,12 @@ func (s DeleteMessageBatchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMessageBatchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMessageBatchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMessageBatchInput"}
 	if s.Entries == nil {
-		invalidParams.Add(request.NewErrParamRequired("Entries"))
+		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 	if s.Entries != nil {
 		for i, v := range s.Entries {
@@ -2413,7 +2412,7 @@ func (s *DeleteMessageBatchInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2507,12 +2506,12 @@ func (s DeleteMessageBatchRequestEntry) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMessageBatchRequestEntry) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMessageBatchRequestEntry"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMessageBatchRequestEntry"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.ReceiptHandle == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReceiptHandle"))
+		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2589,12 +2588,12 @@ func (s DeleteMessageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMessageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMessageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMessageInput"}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 	if s.ReceiptHandle == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReceiptHandle"))
+		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2654,9 +2653,9 @@ func (s DeleteQueueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteQueueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteQueueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteQueueInput"}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2800,9 +2799,9 @@ func (s GetQueueAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueueAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetQueueAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetQueueAttributesInput"}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2876,9 +2875,9 @@ func (s GetQueueUrlInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueueUrlInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetQueueUrlInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetQueueUrlInput"}
 	if s.QueueName == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueName"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2949,9 +2948,9 @@ func (s ListDeadLetterSourceQueuesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeadLetterSourceQueuesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDeadLetterSourceQueuesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDeadLetterSourceQueuesInput"}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3186,9 +3185,9 @@ func (s MessageAttributeValue) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MessageAttributeValue) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MessageAttributeValue"}
+	invalidParams := aws.ErrInvalidParams{Context: "MessageAttributeValue"}
 	if s.DataType == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataType"))
+		invalidParams.Add(aws.NewErrParamRequired("DataType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3251,9 +3250,9 @@ func (s PurgeQueueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurgeQueueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PurgeQueueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PurgeQueueInput"}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3462,9 +3461,9 @@ func (s ReceiveMessageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReceiveMessageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReceiveMessageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReceiveMessageInput"}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3570,12 +3569,12 @@ func (s RemovePermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemovePermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemovePermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemovePermissionInput"}
 	if s.Label == nil {
-		invalidParams.Add(request.NewErrParamRequired("Label"))
+		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3640,12 +3639,12 @@ func (s SendMessageBatchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendMessageBatchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendMessageBatchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendMessageBatchInput"}
 	if s.Entries == nil {
-		invalidParams.Add(request.NewErrParamRequired("Entries"))
+		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 	if s.Entries != nil {
 		for i, v := range s.Entries {
@@ -3653,7 +3652,7 @@ func (s *SendMessageBatchInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3837,12 +3836,12 @@ func (s SendMessageBatchRequestEntry) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendMessageBatchRequestEntry) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendMessageBatchRequestEntry"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendMessageBatchRequestEntry"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.MessageBody == nil {
-		invalidParams.Add(request.NewErrParamRequired("MessageBody"))
+		invalidParams.Add(aws.NewErrParamRequired("MessageBody"))
 	}
 	if s.MessageAttributes != nil {
 		for i, v := range s.MessageAttributes {
@@ -3850,7 +3849,7 @@ func (s *SendMessageBatchRequestEntry) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4102,12 +4101,12 @@ func (s SendMessageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendMessageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendMessageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendMessageInput"}
 	if s.MessageBody == nil {
-		invalidParams.Add(request.NewErrParamRequired("MessageBody"))
+		invalidParams.Add(aws.NewErrParamRequired("MessageBody"))
 	}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 	if s.MessageAttributes != nil {
 		for i, v := range s.MessageAttributes {
@@ -4115,7 +4114,7 @@ func (s *SendMessageInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MessageAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4366,12 +4365,12 @@ func (s SetQueueAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetQueueAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetQueueAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetQueueAttributesInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 
 	if invalidParams.Len() > 0 {
