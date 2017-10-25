@@ -21,7 +21,7 @@ func TestUnsetHeaders(t *testing.T) {
 	svc := aws.NewClient(
 		cfg,
 		metadata.Metadata{
-			ServiceName:   "testService",
+			ServiceName: "testService",
 		},
 	)
 

@@ -34,7 +34,7 @@ import (
 func GetBucketRegion(ctx aws.Context, cfg aws.Config, bucket, regionHint string, opts ...request.Option) (string, error) {
 	cfg = cfg.Copy()
 	cfg.Region = aws.String(regionHint)
-	
+
 	svc := s3.New(cfg)
 	return GetBucketRegionWithClient(ctx, svc, bucket, opts...)
 }
