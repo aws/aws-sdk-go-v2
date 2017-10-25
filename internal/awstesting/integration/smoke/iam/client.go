@@ -4,13 +4,14 @@
 package iam
 
 import (
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
+	_ "github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 	"github.com/gucumber/gucumber"
 )
 
 func init() {
 	gucumber.Before("@iam", func() {
-		gucumber.World["client"] = iam.New(smoke.Session)
+		gucumber.World["client"] = iam.New(integration.Config())
 	})
 }

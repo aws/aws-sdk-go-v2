@@ -22,7 +22,10 @@ import (
 func TestValidateEndpointHandler(t *testing.T) {
 	os.Clearenv()
 
-	svc := awstesting.NewClient(&aws.Config{Region: aws.String("us-west-2")})
+	cfg := unit.Config()
+	cfg.Region = aws.String("us-west-2")
+
+	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
 	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
 
@@ -37,7 +40,10 @@ func TestValidateEndpointHandler(t *testing.T) {
 func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 	os.Clearenv()
 
-	svc := awstesting.NewClient()
+	cfg := unit.Config()
+	cfg.Region = nil
+
+	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
 	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
 
@@ -70,10 +76,11 @@ func TestAfterRetryRefreshCreds(t *testing.T) {
 	os.Clearenv()
 	credProvider := &mockCredsProvider{}
 
-	svc := awstesting.NewClient(&aws.Config{
-		CredentialsLoader: aws.NewCredentialsLoader(credProvider),
-		Retryer:           aws.DefaultRetryer{NumMaxRetries: 1},
-	})
+	cfg := unit.Config()
+	cfg.CredentialsLoader = aws.NewCredentialsLoader(credProvider)
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 1}
+
+	svc := awstesting.NewClient(cfg)
 
 	svc.Handlers.Clear()
 	svc.Handlers.ValidateResponse.PushBack(func(r *aws.Request) {
@@ -112,7 +119,7 @@ func TestAfterRetryRefreshCreds(t *testing.T) {
 }
 
 func TestAfterRetryWithContextCanceled(t *testing.T) {
-	c := awstesting.NewClient()
+	c := awstesting.NewClient(unit.Config())
 
 	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
@@ -142,7 +149,7 @@ func TestAfterRetryWithContextCanceled(t *testing.T) {
 }
 
 func TestAfterRetryWithContext(t *testing.T) {
-	c := awstesting.NewClient()
+	c := awstesting.NewClient(unit.Config())
 
 	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
@@ -166,11 +173,12 @@ func TestAfterRetryWithContext(t *testing.T) {
 }
 
 func TestSendWithContextCanceled(t *testing.T) {
-	c := awstesting.NewClient(&aws.Config{
-		SleepDelay: func(dur time.Duration) {
-			t.Errorf("SleepDelay should not be called")
-		},
-	})
+	cfg := unit.Config()
+	cfg.SleepDelay = func(dur time.Duration) {
+		t.Errorf("SleepDelay should not be called")
+	}
+
+	c := awstesting.NewClient(cfg)
 
 	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
@@ -206,11 +214,11 @@ func (t *testSendHandlerTransport) RoundTrip(r *http.Request) (*http.Response, e
 }
 
 func TestSendHandlerError(t *testing.T) {
-	svc := awstesting.NewClient(&aws.Config{
-		HTTPClient: &http.Client{
-			Transport: &testSendHandlerTransport{},
-		},
-	})
+	cfg := unit.Config()
+	cfg.HTTPClient = &http.Client{
+		Transport: &testSendHandlerTransport{},
+	}
+	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
 	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
 	r := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
@@ -236,10 +244,11 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 		}
 	}))
 
-	svc := awstesting.NewClient(&aws.Config{
-		DisableSSL:       aws.Bool(true),
-		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
-	})
+	cfg := unit.Config()
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+
+	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
 	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
 
@@ -341,11 +350,12 @@ func setupContentLengthTestServer(t *testing.T, hasContentLength bool, contentLe
 func TestBuildContentLength_ZeroBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, false, 0)
 
-	svc := s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
-		S3ForcePathStyle: aws.Bool(true),
-		DisableSSL:       aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.DisableSSL = aws.Bool(true)
+
+	svc := s3.New(cfg)
 	_, err := svc.GetObject(&s3.GetObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
@@ -359,12 +369,12 @@ func TestBuildContentLength_ZeroBody(t *testing.T) {
 func TestBuildContentLength_NegativeBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, false, 0)
 
-	fmt.Println("unit.Config", unit.Config.EndpointResolver)
-	svc := s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
-		S3ForcePathStyle: aws.Bool(true),
-		DisableSSL:       aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.DisableSSL = aws.Bool(true)
+
+	svc := s3.New(cfg)
 	req, _ := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
@@ -380,11 +390,12 @@ func TestBuildContentLength_NegativeBody(t *testing.T) {
 func TestBuildContentLength_WithBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, true, 1024)
 
-	svc := s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
-		S3ForcePathStyle: aws.Bool(true),
-		DisableSSL:       aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.DisableSSL = aws.Bool(true)
+
+	svc := s3.New(cfg)
 	_, err := svc.PutObject(&s3.PutObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),

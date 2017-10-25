@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 func TestStripExcessHeaders(t *testing.T) {
@@ -219,7 +220,10 @@ func TestSignPrecomputedBodyChecksum(t *testing.T) {
 }
 
 func TestAnonymousCredentials(t *testing.T) {
-	svc := awstesting.NewClient(&aws.Config{CredentialsLoader: aws.AnonymousCredentials})
+	cfg := unit.Config()
+	cfg.CredentialsLoader = aws.AnonymousCredentials
+
+	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
 		&aws.Operation{
 			Name:       "BatchGetItem",
@@ -255,12 +259,13 @@ func TestAnonymousCredentials(t *testing.T) {
 }
 
 func TestIgnoreResignRequestWithValidCreds(t *testing.T) {
-	svc := awstesting.NewClient(&aws.Config{
-		CredentialsLoader: aws.NewCredentialsLoader(
-			aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-		),
-		Region: aws.String("us-west-2"),
-	})
+	cfg := unit.Config()
+	cfg.CredentialsLoader = aws.NewCredentialsLoader(
+		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+	)
+	cfg.Region = aws.String("us-west-2")
+
+	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
 		&aws.Operation{
 			Name:       "BatchGetItem",
@@ -285,12 +290,13 @@ func TestIgnoreResignRequestWithValidCreds(t *testing.T) {
 }
 
 func TestIgnorePreResignRequestWithValidCreds(t *testing.T) {
-	svc := awstesting.NewClient(&aws.Config{
-		CredentialsLoader: aws.NewCredentialsLoader(
-			aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-		),
-		Region: aws.String("us-west-2"),
-	})
+	cfg := unit.Config()
+	cfg.CredentialsLoader = aws.NewCredentialsLoader(
+		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+	)
+	cfg.Region = aws.String("us-west-2")
+
+	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
 		&aws.Operation{
 			Name:       "BatchGetItem",
@@ -319,7 +325,11 @@ func TestResignRequestExpiredCreds(t *testing.T) {
 	creds := aws.NewCredentialsLoader(
 		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
 	)
-	svc := awstesting.NewClient(&aws.Config{CredentialsLoader: creds})
+
+	cfg := unit.Config()
+	cfg.CredentialsLoader = creds
+
+	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
 		&aws.Operation{
 			Name:       "BatchGetItem",
@@ -380,7 +390,11 @@ func TestPreResignRequestExpiredCreds(t *testing.T) {
 	creds := aws.NewCredentialsLoader(
 		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
 	)
-	svc := awstesting.NewClient(&aws.Config{CredentialsLoader: creds})
+
+	cfg := unit.Config()
+	cfg.CredentialsLoader = creds
+
+	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
 		&aws.Operation{
 			Name:       "BatchGetItem",
@@ -425,7 +439,11 @@ func TestResignRequestExpiredRequest(t *testing.T) {
 	creds := aws.NewCredentialsLoader(
 		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
 	)
-	svc := awstesting.NewClient(&aws.Config{CredentialsLoader: creds})
+
+	cfg := unit.Config()
+	cfg.CredentialsLoader = creds
+
+	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
 		&aws.Operation{
 			Name:       "BatchGetItem",

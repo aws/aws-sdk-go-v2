@@ -15,7 +15,7 @@ import (
 
 // Use DynamoDB methods for simplicity
 func TestPaginationQueryPage(t *testing.T) {
-	db := dynamodb.New(unit.Config)
+	db := dynamodb.New(unit.Config())
 	tokens, pages, numPages, gotToEnd := []map[string]*dynamodb.AttributeValue{}, []map[string]*dynamodb.AttributeValue{}, 0, false
 
 	reqNum := 0
@@ -103,7 +103,7 @@ func TestPaginationQueryPage(t *testing.T) {
 
 // Use DynamoDB methods for simplicity
 func TestPagination(t *testing.T) {
-	db := dynamodb.New(unit.Config)
+	db := dynamodb.New(unit.Config())
 	tokens, pages, numPages, gotToEnd := []string{}, []string{}, 0, false
 
 	reqNum := 0
@@ -155,7 +155,7 @@ func TestPagination(t *testing.T) {
 
 // Use DynamoDB methods for simplicity
 func TestPaginationEachPage(t *testing.T) {
-	db := dynamodb.New(unit.Config)
+	db := dynamodb.New(unit.Config())
 	tokens, pages, numPages, gotToEnd := []string{}, []string{}, 0, false
 
 	reqNum := 0
@@ -208,7 +208,7 @@ func TestPaginationEachPage(t *testing.T) {
 
 // Use DynamoDB methods for simplicity
 func TestPaginationEarlyExit(t *testing.T) {
-	db := dynamodb.New(unit.Config)
+	db := dynamodb.New(unit.Config())
 	numPages, gotToEnd := 0, false
 
 	reqNum := 0
@@ -248,7 +248,7 @@ func TestPaginationEarlyExit(t *testing.T) {
 }
 
 func TestSkipPagination(t *testing.T) {
-	client := s3.New(unit.Config)
+	client := s3.New(unit.Config())
 	client.Handlers.Send.Clear() // mock sending
 	client.Handlers.Unmarshal.Clear()
 	client.Handlers.UnmarshalMeta.Clear()
@@ -273,7 +273,7 @@ func TestSkipPagination(t *testing.T) {
 
 // Use S3 for simplicity
 func TestPaginationTruncation(t *testing.T) {
-	client := s3.New(unit.Config)
+	client := s3.New(unit.Config())
 
 	reqNum := 0
 	resps := []*s3.ListObjectsOutput{
@@ -318,7 +318,7 @@ func TestPaginationTruncation(t *testing.T) {
 }
 
 func TestPaginationNilToken(t *testing.T) {
-	client := route53.New(unit.Config)
+	client := route53.New(unit.Config())
 
 	reqNum := 0
 	resps := []*route53.ListResourceRecordSetsOutput{
@@ -385,7 +385,7 @@ func TestPaginationNilInput(t *testing.T) {
 	// other than being run via unit tests in the SDK. This should be fixed
 	// So code generation can be validated independently.
 
-	client := s3.New(unit.Config)
+	client := s3.New(unit.Config())
 	client.Handlers.Validate.Clear()
 	client.Handlers.Send.Clear() // mock sending
 	client.Handlers.Unmarshal.Clear()
@@ -421,7 +421,7 @@ func TestPaginationWithContextNilInput(t *testing.T) {
 	// other than being run via unit tests in the SDK. This should be fixed
 	// So code generation can be validated independently.
 
-	client := s3.New(unit.Config)
+	client := s3.New(unit.Config())
 	client.Handlers.Validate.Clear()
 	client.Handlers.Send.Clear() // mock sending
 	client.Handlers.Unmarshal.Clear()
@@ -473,7 +473,7 @@ func TestPagination_Standalone(t *testing.T) {
 		NextToken: expect[0].PrevToken,
 	}
 
-	c := awstesting.NewClient()
+	c := awstesting.NewClient(unit.Config())
 	i := 0
 	p := aws.Pagination{
 		NewRequest: func() (*aws.Request, error) {
@@ -547,7 +547,7 @@ var benchResps = []*dynamodb.ListTablesOutput{
 }
 
 var benchDb = func() *dynamodb.DynamoDB {
-	db := dynamodb.New(unit.Config)
+	db := dynamodb.New(unit.Config())
 	db.Handlers.Send.Clear() // mock sending
 	db.Handlers.Unmarshal.Clear()
 	db.Handlers.UnmarshalMeta.Clear()

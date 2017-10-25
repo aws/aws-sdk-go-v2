@@ -40,29 +40,22 @@ const (
 //
 //     // Create a CostandUsageReportService client with additional configuration
 //     svc := costandusagereportservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *CostandUsageReportService {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *CostandUsageReportService {
+	var signingName string
+	signingName = "cur"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *CostandUsageReportService {
-	if len(signingName) == 0 {
-		signingName = "cur"
-	}
 	svc := &CostandUsageReportService{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2017-01-06",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "AWSOrigamiServiceGatewayService",
 			},
-			handlers,
 		),
 	}
 

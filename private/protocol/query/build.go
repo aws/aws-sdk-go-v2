@@ -18,7 +18,7 @@ var BuildHandler = request.NamedHandler{Name: "awssdk.query.Build", Fn: Build}
 func Build(r *request.Request) {
 	body := url.Values{
 		"Action":  {r.Operation.Name},
-		"Version": {r.ClientInfo.APIVersion},
+		"Version": {r.Metadata.APIVersion},
 	}
 	if err := queryutil.Parse(body, r.Params, false); err != nil {
 		r.Error = awserr.New("SerializationError", "failed encoding Query request", err)

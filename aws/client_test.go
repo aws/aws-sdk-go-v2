@@ -33,12 +33,8 @@ func TestNewClient_CopyHandlers(t *testing.T) {
 	firstCalled := pushBackTestHandler("first", &handlers.Send)
 	secondCalled := pushBackTestHandler("second", &handlers.Send)
 
-	var clientHandlerCalled *bool
-	c := NewClient(Config{}, ClientInfo{}, handlers,
-		func(c *Client) {
-			clientHandlerCalled = pushFrontTestHandler("client handler", &c.Handlers.Send)
-		},
-	)
+	c := NewClient(Config{Handlers: handlers}, Metadata{})
+	clientHandlerCalled := pushFrontTestHandler("client handler", &c.Handlers.Send)
 
 	if e, a := 2, handlers.Send.Len(); e != a {
 		t.Errorf("expect %d original handlers, got %d", e, a)

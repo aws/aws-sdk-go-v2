@@ -31,7 +31,7 @@ func TestMain(m *testing.M) {
 
 // Create a bucket for testing
 func setup() {
-	svc = s3.New(integration.Session)
+	svc = s3.New(integration.Config())
 	bucketName = aws.String(
 		fmt.Sprintf("aws-sdk-go-integration-%d-%s", time.Now().Unix(), integration.UniqueID()))
 

@@ -40,26 +40,21 @@ const (
 //
 //     // Create a DatabaseMigrationService client with additional configuration
 //     svc := databasemigrationservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *DatabaseMigrationService {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *DatabaseMigrationService {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *DatabaseMigrationService {
 	svc := &DatabaseMigrationService{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2016-01-01",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "AmazonDMSv20160101",
 			},
-			handlers,
 		),
 	}
 

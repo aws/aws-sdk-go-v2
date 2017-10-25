@@ -10,18 +10,19 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 // go version 1.4 and 1.5 do not return an error. Version 1.5 will url encode
 // the uri while 1.4 will not
 func TestRequestInvalidEndpoint(t *testing.T) {
-	endpoint := "http://localhost:90 "
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("http://localhost:90 ")
 
 	r := aws.New(
-		aws.Config{},
-		aws.ClientInfo{Endpoint: endpoint},
-		defaults.Handlers(),
+		cfg,
+		aws.Metadata{},
+		cfg.Handlers,
 		aws.DefaultRetryer{},
 		&aws.Operation{},
 		nil,

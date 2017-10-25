@@ -40,26 +40,21 @@ const (
 //
 //     // Create a Support client with additional configuration
 //     svc := support.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *Support {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *Support {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *Support {
 	svc := &Support{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2013-04-15",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "AWSSupport_20130415",
 			},
-			handlers,
 		),
 	}
 

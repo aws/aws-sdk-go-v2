@@ -11,8 +11,9 @@ import (
 func TestBuildCorrectURI(t *testing.T) {
 	const expectPath = "/2013-04-01/hostedzone/ABCDEFG"
 
-	svc := route53.New(unit.Config)
+	svc := route53.New(unit.Config())
 	svc.Handlers.Validate.Clear()
+
 	req, _ := svc.GetHostedZoneRequest(&route53.GetHostedZoneInput{
 		Id: aws.String("/hostedzone/ABCDEFG"),
 	})

@@ -40,28 +40,21 @@ const (
 //
 //     // Create a Greengrass client with additional configuration
 //     svc := greengrass.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *Greengrass {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *Greengrass {
+	var signingName string
+	signingName = "greengrass"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *Greengrass {
-	if len(signingName) == 0 {
-		signingName = "greengrass"
-	}
 	svc := &Greengrass{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2017-06-07",
 				JSONVersion:   "1.1",
 			},
-			handlers,
 		),
 	}
 

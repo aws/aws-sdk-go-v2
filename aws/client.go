@@ -1,36 +1,58 @@
 package aws
 
-// A ClientConfig provides configuration to a service client instance.
-type ClientConfig struct {
-	Config        *Config
-	Handlers      Handlers
-	Endpoint      string
-	SigningRegion string
-	SigningName   string
-}
+import (
+	"net/http"
+)
 
-// ConfigProvider provides a generic way for a service client to receive
-// the ClientConfig without circular dependencies.
-type ConfigProvider interface {
-	ClientConfig(serviceName string, cfgs ...*Config) ClientConfig
+// Metadata wraps immutable data from the Client structure.
+type Metadata struct {
+	ServiceName string
+	APIVersion  string
+
+	Endpoint      string
+	SigningName   string
+	SigningRegion string
+
+	JSONVersion  string
+	TargetPrefix string
 }
 
 // A Client implements the base client request and response handling
 // used by all service clients.
 type Client struct {
-	Retryer
-	ClientInfo
+	Metadata Metadata
 
-	Config   Config
-	Handlers Handlers
+	Config Config
+
+	Region            string
+	CredentialsLoader *CredentialsLoader
+	EndpointResolver  EndpointResolver
+	Handlers          Handlers
+	Retryer           Retryer
+
+	// TODO replace with value not pointer
+	LogLevel *LogLevelType
+	Logger   Logger
+
+	HTTPClient *http.Client
 }
 
 // NewClient will return a pointer to a new initialized service client.
-func NewClient(cfg Config, info ClientInfo, handlers Handlers, options ...func(*Client)) *Client {
+func NewClient(cfg Config, metadata Metadata) *Client {
 	svc := &Client{
-		Config:     cfg,
-		ClientInfo: info,
-		Handlers:   handlers.Copy(),
+		Metadata: metadata,
+
+		// TODO remove config when request reqfactored
+		Config: cfg,
+
+		Region:            StringValue(cfg.Region),
+		CredentialsLoader: cfg.CredentialsLoader,
+		EndpointResolver:  cfg.EndpointResolver,
+		Handlers:          cfg.Handlers.Copy(),
+		Retryer:           cfg.Retryer,
+
+		LogLevel: cfg.LogLevel,
+		Logger:   cfg.Logger,
 	}
 
 	retryer := cfg.Retryer
@@ -42,17 +64,13 @@ func NewClient(cfg Config, info ClientInfo, handlers Handlers, options ...func(*
 
 	svc.AddDebugHandlers()
 
-	for _, option := range options {
-		option(svc)
-	}
-
 	return svc
 }
 
 // NewRequest returns a new Request pointer for the service API
 // operation and parameters.
 func (c *Client) NewRequest(operation *Operation, params interface{}, data interface{}) *Request {
-	return New(c.Config, c.ClientInfo, c.Handlers, c.Retryer, operation, params, data)
+	return New(c.Config, c.Metadata, c.Handlers, c.Retryer, operation, params, data)
 }
 
 // AddDebugHandlers injects debug logging handlers into the service to log request

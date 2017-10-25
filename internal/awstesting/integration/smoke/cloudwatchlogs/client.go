@@ -4,13 +4,14 @@
 package cloudwatchlogs
 
 import (
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
+	_ "github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
 	"github.com/gucumber/gucumber"
 )
 
 func init() {
 	gucumber.Before("@cloudwatchlogs", func() {
-		gucumber.World["client"] = cloudwatchlogs.New(smoke.Session)
+		gucumber.World["client"] = cloudwatchlogs.New(integration.Config())
 	})
 }

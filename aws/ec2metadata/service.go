@@ -23,22 +23,17 @@ type EC2Metadata struct {
 // New creates a new instance of the EC2Metadata client with a session.
 // This client is safe to use across multiple goroutines.
 //
-//
 // Example:
 //     // Create a EC2Metadata client from just a session.
 //     svc := ec2metadata.New(cfg)
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *EC2Metadata {
-	c := p.ClientConfig(ServiceName, cfgs...)
-
+func New(config aws.Config) *EC2Metadata {
 	svc := &EC2Metadata{
 		Client: aws.NewClient(
-			*c.Config,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName: ServiceName,
-				Endpoint:    c.Endpoint,
 				APIVersion:  "latest",
 			},
-			c.Handlers,
 		),
 	}
 
@@ -85,7 +80,7 @@ func unmarshalError(r *aws.Request) {
 }
 
 func validateEndpointHandler(r *aws.Request) {
-	if r.ClientInfo.Endpoint == "" {
+	if r.Metadata.Endpoint == "" {
 		r.Error = aws.ErrMissingEndpoint
 	}
 }

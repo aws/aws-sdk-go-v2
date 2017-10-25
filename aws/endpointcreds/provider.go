@@ -67,17 +67,12 @@ type Provider struct {
 // New returns a credentials Provider for retrieving AWS credentials
 // from arbitrary endpoint.
 func New(cfg aws.Config) *Provider {
-	// TODO don't ignore error, move endpoint resolver to client.
-	endpoint, _ := cfg.EndpointResolver.EndpointFor("CredentialsEndpoint", "")
-
 	p := &Provider{
 		Client: aws.NewClient(
 			cfg,
-			aws.ClientInfo{
-				ServiceName: "CredentialsEndpoint",
-				Endpoint:    endpoint.URL,
+			aws.Metadata{
+				ServiceName: ProviderName,
 			},
-			cfg.Handlers,
 		),
 	}
 
@@ -147,7 +142,7 @@ func (p *Provider) getCredentials() (*getCredentialsOutput, error) {
 }
 
 func validateEndpointHandler(r *aws.Request) {
-	if len(r.ClientInfo.Endpoint) == 0 {
+	if len(r.Metadata.Endpoint) == 0 {
 		r.Error = aws.ErrMissingEndpoint
 	}
 }

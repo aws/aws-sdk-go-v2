@@ -40,29 +40,22 @@ const (
 //
 //     // Create a ApplicationAutoScaling client with additional configuration
 //     svc := applicationautoscaling.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *ApplicationAutoScaling {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *ApplicationAutoScaling {
+	var signingName string
+	signingName = "application-autoscaling"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *ApplicationAutoScaling {
-	if len(signingName) == 0 {
-		signingName = "application-autoscaling"
-	}
 	svc := &ApplicationAutoScaling{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2016-02-06",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "AnyScaleFrontendService",
 			},
-			handlers,
 		),
 	}
 

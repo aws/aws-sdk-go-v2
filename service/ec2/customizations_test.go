@@ -7,12 +7,17 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 )
 
 func TestCopySnapshotPresignedURL(t *testing.T) {
-	svc := ec2.New(unit.Config, &aws.Config{Region: aws.String("us-west-2")})
+	cfg := unit.Config()
+	cfg.Region = aws.String("us-west-2")
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	svc := ec2.New(cfg)
 
 	func() {
 		defer func() {

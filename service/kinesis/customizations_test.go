@@ -30,9 +30,11 @@ func (r *testReader) Close() error {
 func TestKinesisGetRecordsCustomization(t *testing.T) {
 	readDuration = time.Millisecond
 	retryCount := 0
-	svc := New(unit.Config, &aws.Config{
-		Retryer: aws.DefaultRetryer{NumMaxRetries: 4},
-	})
+
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 4}
+
+	svc := New(cfg)
 	req, _ := svc.GetRecordsRequest(&GetRecordsInput{
 		ShardIterator: aws.String("foo"),
 	})
@@ -65,7 +67,7 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 
 func TestKinesisGetRecordsNoTimeout(t *testing.T) {
 	readDuration = time.Second
-	svc := New(unit.Config)
+	svc := New(unit.Config())
 	req, _ := svc.GetRecordsRequest(&GetRecordsInput{
 		ShardIterator: aws.String("foo"),
 	})

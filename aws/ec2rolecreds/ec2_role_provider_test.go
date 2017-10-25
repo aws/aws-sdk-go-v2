@@ -54,10 +54,11 @@ func TestEC2RoleProvider(t *testing.T) {
 	server := initTestServer("2014-12-16T01:51:37Z", false)
 	defer server.Close()
 
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
+
 	p := &ec2rolecreds.Provider{
-		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
-		}),
+		Client: ec2metadata.New(cfg),
 	}
 
 	creds, err := p.Retrieve()
@@ -72,10 +73,11 @@ func TestEC2RoleProviderFailAssume(t *testing.T) {
 	server := initTestServer("2014-12-16T01:51:37Z", true)
 	defer server.Close()
 
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
+
 	p := &ec2rolecreds.Provider{
-		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
-		}),
+		Client: ec2metadata.New(cfg),
 	}
 
 	creds, err := p.Retrieve()
@@ -95,11 +97,13 @@ func TestEC2RoleProviderIsExpired(t *testing.T) {
 	server := initTestServer("2014-12-16T01:51:37Z", false)
 	defer server.Close()
 
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
+
 	p := &ec2rolecreds.Provider{
-		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
-		}),
+		Client: ec2metadata.New(cfg),
 	}
+
 	p.CurrentTime = func() time.Time {
 		return time.Date(2014, 12, 15, 21, 26, 0, 0, time.UTC)
 	}
@@ -122,12 +126,14 @@ func TestEC2RoleProviderExpiryWindowIsExpired(t *testing.T) {
 	server := initTestServer("2014-12-16T01:51:37Z", false)
 	defer server.Close()
 
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
+
 	p := &ec2rolecreds.Provider{
-		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
-		}),
+		Client:       ec2metadata.New(cfg),
 		ExpiryWindow: time.Hour * 1,
 	}
+
 	p.CurrentTime = func() time.Time {
 		return time.Date(2014, 12, 15, 0, 51, 37, 0, time.UTC)
 	}
@@ -150,10 +156,11 @@ func BenchmarkEC3RoleProvider(b *testing.B) {
 	server := initTestServer("2014-12-16T01:51:37Z", false)
 	defer server.Close()
 
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
+
 	p := &ec2rolecreds.Provider{
-		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
-		}),
+		Client: ec2metadata.New(cfg),
 	}
 	_, err := p.Retrieve()
 	if err != nil {

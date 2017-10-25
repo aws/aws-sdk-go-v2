@@ -61,24 +61,19 @@ type OutputService1ProtocolTest struct {
 //
 //     // Create a OutputService1ProtocolTest client with additional configuration
 //     svc := outputservice1protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService1ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *OutputService1ProtocolTest {
-	c := p.ClientConfig("outputservice1protocoltest", cfgs...)
-	return newOutputService1ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func NewOutputService1ProtocolTest(config aws.Config) *OutputService1ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService1ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *OutputService1ProtocolTest {
 	svc := &OutputService1ProtocolTest{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice1protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -260,24 +255,19 @@ type OutputService2ProtocolTest struct {
 //
 //     // Create a OutputService2ProtocolTest client with additional configuration
 //     svc := outputservice2protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService2ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *OutputService2ProtocolTest {
-	c := p.ClientConfig("outputservice2protocoltest", cfgs...)
-	return newOutputService2ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func NewOutputService2ProtocolTest(config aws.Config) *OutputService2ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService2ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *OutputService2ProtocolTest {
 	svc := &OutputService2ProtocolTest{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice2protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -425,24 +415,19 @@ type OutputService3ProtocolTest struct {
 //
 //     // Create a OutputService3ProtocolTest client with additional configuration
 //     svc := outputservice3protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService3ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *OutputService3ProtocolTest {
-	c := p.ClientConfig("outputservice3protocoltest", cfgs...)
-	return newOutputService3ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func NewOutputService3ProtocolTest(config aws.Config) *OutputService3ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService3ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *OutputService3ProtocolTest {
 	svc := &OutputService3ProtocolTest{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice3protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -588,24 +573,19 @@ type OutputService4ProtocolTest struct {
 //
 //     // Create a OutputService4ProtocolTest client with additional configuration
 //     svc := outputservice4protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService4ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *OutputService4ProtocolTest {
-	c := p.ClientConfig("outputservice4protocoltest", cfgs...)
-	return newOutputService4ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func NewOutputService4ProtocolTest(config aws.Config) *OutputService4ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService4ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *OutputService4ProtocolTest {
 	svc := &OutputService4ProtocolTest{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice4protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -823,24 +803,19 @@ type OutputService5ProtocolTest struct {
 //
 //     // Create a OutputService5ProtocolTest client with additional configuration
 //     svc := outputservice5protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService5ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *OutputService5ProtocolTest {
-	c := p.ClientConfig("outputservice5protocoltest", cfgs...)
-	return newOutputService5ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func NewOutputService5ProtocolTest(config aws.Config) *OutputService5ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService5ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *OutputService5ProtocolTest {
 	svc := &OutputService5ProtocolTest{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice5protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -966,24 +941,19 @@ type OutputService6ProtocolTest struct {
 //
 //     // Create a OutputService6ProtocolTest client with additional configuration
 //     svc := outputservice6protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func NewOutputService6ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *OutputService6ProtocolTest {
-	c := p.ClientConfig("outputservice6protocoltest", cfgs...)
-	return newOutputService6ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func NewOutputService6ProtocolTest(config aws.Config) *OutputService6ProtocolTest {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newOutputService6ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *OutputService6ProtocolTest {
 	svc := &OutputService6ProtocolTest{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   "outputservice6protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "",
 			},
-			handlers,
 		),
 	}
 
@@ -1094,9 +1064,10 @@ func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) SetStrTy
 //
 
 func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
-	svc := NewOutputService1ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService1ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"Str\": \"myname\", \"Num\": 123, \"FalseBool\": false, \"TrueBool\": true, \"Float\": 1.2, \"Double\": 1.3, \"Long\": 200, \"Char\": \"a\"}"))
 	req, out := svc.OutputService1TestCaseOperation1Request(nil)
@@ -1143,9 +1114,10 @@ func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 }
 
 func TestOutputService2ProtocolTestBlobMembersCase1(t *testing.T) {
-	svc := NewOutputService2ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService2ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"BlobMember\": \"aGkh\", \"StructMember\": {\"foo\": \"dGhlcmUh\"}}"))
 	req, out := svc.OutputService2TestCaseOperation1Request(nil)
@@ -1174,9 +1146,10 @@ func TestOutputService2ProtocolTestBlobMembersCase1(t *testing.T) {
 }
 
 func TestOutputService3ProtocolTestTimestampMembersCase1(t *testing.T) {
-	svc := NewOutputService3ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService3ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"TimeMember\": 1398796238, \"StructMember\": {\"foo\": 1398796238}}"))
 	req, out := svc.OutputService3TestCaseOperation1Request(nil)
@@ -1205,9 +1178,10 @@ func TestOutputService3ProtocolTestTimestampMembersCase1(t *testing.T) {
 }
 
 func TestOutputService4ProtocolTestListsCase1(t *testing.T) {
-	svc := NewOutputService4ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService4ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"ListMember\": [\"a\", \"b\"]}"))
 	req, out := svc.OutputService4TestCaseOperation1Request(nil)
@@ -1236,9 +1210,10 @@ func TestOutputService4ProtocolTestListsCase1(t *testing.T) {
 }
 
 func TestOutputService4ProtocolTestListsCase2(t *testing.T) {
-	svc := NewOutputService4ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService4ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"ListMember\": [\"a\", null], \"ListMemberMap\": [{}, null, null, {}], \"ListMemberStruct\": [{}, null, null, {}]}"))
 	req, out := svc.OutputService4TestCaseOperation2Request(nil)
@@ -1279,9 +1254,10 @@ func TestOutputService4ProtocolTestListsCase2(t *testing.T) {
 }
 
 func TestOutputService5ProtocolTestMapsCase1(t *testing.T) {
-	svc := NewOutputService5ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService5ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"MapMember\": {\"a\": [1, 2], \"b\": [3, 4]}}"))
 	req, out := svc.OutputService5TestCaseOperation1Request(nil)
@@ -1316,9 +1292,10 @@ func TestOutputService5ProtocolTestMapsCase1(t *testing.T) {
 }
 
 func TestOutputService6ProtocolTestIgnoresExtraDataCase1(t *testing.T) {
-	svc := NewOutputService6ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService6ProtocolTest(cfg)
 
 	buf := bytes.NewReader([]byte("{\"foo\": \"bar\"}"))
 	req, out := svc.OutputService6TestCaseOperation1Request(nil)

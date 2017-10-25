@@ -20,11 +20,11 @@ import (
 )
 
 func TestDefaultConfigValues(t *testing.T) {
-	cfg := unit.Config.Copy(&aws.Config{
-		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
-		S3ForcePathStyle: aws.Bool(true),
-		Region:           aws.String("us-west-2"),
-	})
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.Region = aws.String("us-west-2")
+
 	svc := kms.New(cfg)
 	handler := s3crypto.NewKMSKeyGenerator(svc, "testid")
 
@@ -47,11 +47,12 @@ func TestPutObject(t *testing.T) {
 	expected := bytes.Repeat([]byte{1}, size)
 	generator := mockGenerator{}
 	cb := mockCipherBuilder{generator}
-	cfg := unit.Config.Copy(&aws.Config{
-		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
-		S3ForcePathStyle: aws.Bool(true),
-		Region:           aws.String("us-west-2"),
-	})
+
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.Region = aws.String("us-west-2")
+
 	c := s3crypto.NewEncryptionClient(cfg, cb)
 	if c == nil {
 		t.Error("expected non-vil client value")
@@ -86,7 +87,7 @@ func TestPutObjectWithContext(t *testing.T) {
 	generator := mockGenerator{}
 	cb := mockCipherBuilder{generator}
 
-	c := s3crypto.NewEncryptionClient(unit.Config, cb)
+	c := s3crypto.NewEncryptionClient(unit.Config(), cb)
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	ctx.Error = fmt.Errorf("context canceled")

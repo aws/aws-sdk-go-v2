@@ -45,7 +45,7 @@ func logRequest(r *Request) {
 	logBody := r.Config.LogLevel.Matches(LogDebugWithHTTPBody)
 	dumpedBody, err := httputil.DumpRequestOut(r.HTTPRequest, logBody)
 	if err != nil {
-		r.Config.Logger.Log(fmt.Sprintf(logReqErrMsg, r.ClientInfo.ServiceName, r.Operation.Name, err))
+		r.Config.Logger.Log(fmt.Sprintf(logReqErrMsg, r.Metadata.ServiceName, r.Operation.Name, err))
 		return
 	}
 
@@ -56,7 +56,7 @@ func logRequest(r *Request) {
 		r.ResetBody()
 	}
 
-	r.Config.Logger.Log(fmt.Sprintf(logReqMsg, r.ClientInfo.ServiceName, r.Operation.Name, string(dumpedBody)))
+	r.Config.Logger.Log(fmt.Sprintf(logReqMsg, r.Metadata.ServiceName, r.Operation.Name, string(dumpedBody)))
 }
 
 const logRespMsg = `DEBUG: Response %s/%s Details:
@@ -79,16 +79,16 @@ func logResponse(r *Request) {
 	handlerFn := func(req *Request) {
 		body, err := httputil.DumpResponse(req.HTTPResponse, false)
 		if err != nil {
-			lw.Logger.Log(fmt.Sprintf(logRespErrMsg, req.ClientInfo.ServiceName, req.Operation.Name, err))
+			lw.Logger.Log(fmt.Sprintf(logRespErrMsg, req.Metadata.ServiceName, req.Operation.Name, err))
 			return
 		}
 
 		b, err := ioutil.ReadAll(lw.buf)
 		if err != nil {
-			lw.Logger.Log(fmt.Sprintf(logRespErrMsg, req.ClientInfo.ServiceName, req.Operation.Name, err))
+			lw.Logger.Log(fmt.Sprintf(logRespErrMsg, req.Metadata.ServiceName, req.Operation.Name, err))
 			return
 		}
-		lw.Logger.Log(fmt.Sprintf(logRespMsg, req.ClientInfo.ServiceName, req.Operation.Name, string(body)))
+		lw.Logger.Log(fmt.Sprintf(logRespMsg, req.Metadata.ServiceName, req.Operation.Name, string(body)))
 		if req.Config.LogLevel.Matches(LogDebugWithHTTPBody) {
 			lw.Logger.Log(string(b))
 		}

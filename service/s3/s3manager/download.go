@@ -9,7 +9,6 @@ import (
 	"sync"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	client "github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -48,6 +47,10 @@ type Downloader struct {
 	// List of request options that will be passed down to individual API
 	// operation requests made by the downloader.
 	RequestOptions []request.Option
+
+	// The retryer that the downloader will use to determine how many times
+	// a part download should retried before it is considered to of failed.
+	Retryer aws.Retryer
 }
 
 // WithDownloaderRequestOptions appends to the Downloader's API request options.
@@ -74,12 +77,17 @@ func WithDownloaderRequestOptions(opts ...request.Option) func(*Downloader) {
 //     downloader := s3manager.NewDownloader(sess, func(d *s3manager.Downloader) {
 //          d.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
-func NewDownloader(c client.ConfigProvider, options ...func(*Downloader)) *Downloader {
+func NewDownloader(cfg aws.Config, options ...func(*Downloader)) *Downloader {
 	d := &Downloader{
-		S3:          s3.New(c),
+		S3:          s3.New(cfg),
 		PartSize:    DefaultDownloadPartSize,
 		Concurrency: DefaultDownloadConcurrency,
+		Retryer:     cfg.Retryer,
 	}
+	if d.Retryer == nil {
+		d.Retryer = aws.DefaultRetryer{NumMaxRetries: 3}
+	}
+
 	for _, option := range options {
 		option(d)
 	}
@@ -107,20 +115,26 @@ func NewDownloader(c client.ConfigProvider, options ...func(*Downloader)) *Downl
 //          d.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
 func NewDownloaderWithClient(svc s3iface.S3API, options ...func(*Downloader)) *Downloader {
+	var retryer aws.Retryer
+
+	if s3Svc, ok := svc.(*s3.S3); ok {
+		retryer = s3Svc.Retryer
+	} else {
+		retryer = aws.DefaultRetryer{NumMaxRetries: 3}
+	}
+
 	d := &Downloader{
 		S3:          svc,
 		PartSize:    DefaultDownloadPartSize,
 		Concurrency: DefaultDownloadConcurrency,
+		Retryer:     retryer,
 	}
+
 	for _, option := range options {
 		option(d)
 	}
 
 	return d
-}
-
-type maxRetrier interface {
-	MaxRetries() int
 }
 
 // Download downloads an object in S3 and writes the payload into w using
@@ -173,8 +187,8 @@ func (d Downloader) DownloadWithContext(ctx aws.Context, w io.WriterAt, input *s
 	}
 	impl.cfg.RequestOptions = append(impl.cfg.RequestOptions, request.WithAppendUserAgent("S3Manager"))
 
-	if s, ok := d.S3.(maxRetrier); ok {
-		impl.partBodyMaxRetries = s.MaxRetries()
+	if d.Retryer != nil {
+		impl.partBodyMaxRetries = d.Retryer.MaxRetries()
 	}
 
 	impl.totalBytes = -1

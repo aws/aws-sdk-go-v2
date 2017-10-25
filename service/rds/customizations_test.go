@@ -11,13 +11,19 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 func TestPresignWithPresignNotSet(t *testing.T) {
 	reqs := map[string]*request.Request{}
-	svc := New(unit.Config, &aws.Config{Region: aws.String("us-west-2")})
+
+	cfg := unit.Config()
+	cfg.Region = aws.String("us-west-2")
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	svc := New(cfg)
 
 	f := func() {
 		// Doesn't panic on nil input
@@ -56,7 +62,11 @@ func TestPresignWithPresignNotSet(t *testing.T) {
 
 func TestPresignWithPresignSet(t *testing.T) {
 	reqs := map[string]*request.Request{}
-	svc := New(unit.Config, &aws.Config{Region: aws.String("us-west-2")})
+
+	cfg := unit.Config()
+	cfg.Region = aws.String("us-west-2")
+
+	svc := New(cfg)
 
 	f := func() {
 		// Doesn't panic on nil input
@@ -96,7 +106,11 @@ func TestPresignWithPresignSet(t *testing.T) {
 
 func TestPresignWithSourceNotSet(t *testing.T) {
 	reqs := map[string]*request.Request{}
-	svc := New(unit.Config, &aws.Config{Region: aws.String("us-west-2")})
+
+	cfg := unit.Config()
+	cfg.Region = aws.String("us-west-2")
+
+	svc := New(cfg)
 
 	f := func() {
 		// Doesn't panic on nil input

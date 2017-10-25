@@ -13,7 +13,7 @@ import (
 	"github.com/gucumber/gucumber"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3crypto"
@@ -131,9 +131,10 @@ func init() {
 			}
 			gucumber.World["Masterkey"] = b64Arn
 
-			handler = s3crypto.NewKMSKeyGenerator(kms.New(session.New(&aws.Config{
-				Region: &v2,
-			})), arn)
+			cfg := integration.Config()
+			cfg.Region = &v2
+
+			handler = s3crypto.NewKMSKeyGenerator(kms.New(cfg), arn)
 			if err != nil {
 				gucumber.T.Errorf("expect nil, got %v", nil)
 			}
@@ -150,10 +151,10 @@ func init() {
 			gucumber.T.Skip()
 		}
 
-		sess := session.New(&aws.Config{
-			Region: aws.String("us-west-2"),
-		})
-		c := s3crypto.NewEncryptionClient(sess, builder, func(c *s3crypto.EncryptionClient) {
+		cfg := integration.Config()
+		cfg.Region = aws.String("us-west-2")
+
+		c := s3crypto.NewEncryptionClient(cfg, builder, func(c *s3crypto.EncryptionClient) {
 		})
 		gucumber.World["encryptionClient"] = c
 		gucumber.World["cek"] = cek
@@ -185,9 +186,11 @@ func init() {
 
 func getAliasInformation(alias, region string) (string, error) {
 	arn := ""
-	svc := kms.New(session.New(&aws.Config{
-		Region: &region,
-	}))
+
+	cfg := integration.Config()
+	cfg.Region = aws.String(region)
+
+	svc := kms.New(cfg)
 
 	truncated := true
 	var marker *string

@@ -68,7 +68,7 @@ func init() {
 	})
 
 	gucumber.When(`^I upload the file$`, func() {
-		svc := s3.New(mock.Session)
+		svc := s3.New(mock.Config())
 		memStatStart := &runtime.MemStats{}
 		runtime.ReadMemStats(memStatStart)
 		gucumber.World["start"] = memStatStart
@@ -81,7 +81,7 @@ func init() {
 	})
 
 	gucumber.And(`then download the file$`, func() {
-		svc := s3.New(mock.Session)
+		svc := s3.New(mock.Config())
 		svc.GetObjectRequest(&s3.GetObjectInput{
 			Bucket: aws.String("bucketmesilly"),
 			Key:    aws.String("testKey"),

@@ -56,7 +56,7 @@ func loggingSvc(ignoreOps []string) (*s3.S3, *[]string, *[]interface{}) {
 	partNum := 0
 	names := []string{}
 	params := []interface{}{}
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
 	svc.Handlers.UnmarshalError.Clear()
@@ -250,7 +250,7 @@ func TestUploadIncreasePartSize(t *testing.T) {
 }
 
 func TestUploadFailIfPartSizeTooSmall(t *testing.T) {
-	mgr := s3manager.NewUploader(unit.Config, func(u *s3manager.Uploader) {
+	mgr := s3manager.NewUploader(unit.Config(), func(u *s3manager.Uploader) {
 		u.PartSize = 5
 	})
 	resp, err := mgr.Upload(&s3manager.UploadInput{
@@ -736,9 +736,12 @@ func TestUploadZeroLenObject(t *testing.T) {
 		requestMade = true
 		w.WriteHeader(http.StatusOK)
 	}))
-	mgr := s3manager.NewUploaderWithClient(s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
-	}))
+
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+
+	mgr := s3manager.NewUploaderWithClient(s3.New(cfg))
+
 	resp, err := mgr.Upload(&s3manager.UploadInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -886,7 +889,7 @@ func (r *fooReaderAt) ReadAt(p []byte, off int64) (n int, err error) {
 }
 
 func TestReaderAt(t *testing.T) {
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
 	svc.Handlers.UnmarshalError.Clear()
@@ -921,7 +924,7 @@ func TestReaderAt(t *testing.T) {
 }
 
 func TestSSE(t *testing.T) {
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
 	svc.Handlers.UnmarshalError.Clear()
@@ -977,7 +980,7 @@ func TestSSE(t *testing.T) {
 }
 
 func TestUploadWithContextCanceled(t *testing.T) {
-	u := s3manager.NewUploader(unit.Config)
+	u := s3manager.NewUploader(unit.Config())
 
 	params := s3manager.UploadInput{
 		Bucket: aws.String("Bucket"),

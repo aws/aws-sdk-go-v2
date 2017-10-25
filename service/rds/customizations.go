@@ -95,9 +95,9 @@ func presignURL(r *request.Request, sourceRegion *string, newParams interface{})
 	cfgCp.EndpointResolver = nil
 	cfgCp.Region = sourceRegion
 
-	clientInfo := r.ClientInfo
+	metadata := r.Metadata
 	resolved, err := r.Config.EndpointResolver.EndpointFor(
-		clientInfo.ServiceName, aws.StringValue(cfgCp.Region),
+		metadata.ServiceName, aws.StringValue(cfgCp.Region),
 		func(opt *endpoints.Options) {
 			opt.DisableSSL = aws.BoolValue(cfgCp.DisableSSL)
 			opt.UseDualStack = aws.BoolValue(cfgCp.UseDualStack)
@@ -109,11 +109,11 @@ func presignURL(r *request.Request, sourceRegion *string, newParams interface{})
 	}
 
 	cfgCp.EndpointResolver = aws.ResolveWithEndpoint(resolved)
-	clientInfo.Endpoint = resolved.URL
-	clientInfo.SigningRegion = resolved.SigningRegion
+	metadata.Endpoint = resolved.URL
+	metadata.SigningRegion = resolved.SigningRegion
 
 	// Presign a request with modified params
-	req := request.New(*cfgCp, clientInfo, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
+	req := request.New(cfgCp, metadata, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
 	req.Operation.HTTPMethod = "GET"
 	uri, err := req.Presign(5 * time.Minute) // 5 minutes should be enough.
 	if err != nil {                          // bubble error back up to original request

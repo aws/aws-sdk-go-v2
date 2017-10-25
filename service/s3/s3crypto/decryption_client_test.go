@@ -29,13 +29,12 @@ func TestGetObjectGCM(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	cfg := unit.Config.Copy(&aws.Config{
-		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
-		EndpointResolver: aws.ResolveWithEndpointURL(ts.URL),
-		DisableSSL:       aws.Bool(true),
-		S3ForcePathStyle: aws.Bool(true),
-		Region:           aws.String("us-west-2"),
-	})
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.Region = aws.String("us-west-2")
 
 	c := s3crypto.NewDecryptionClient(cfg)
 	if c == nil {
@@ -100,13 +99,12 @@ func TestGetObjectCBC(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	cfg := unit.Config.Copy(&aws.Config{
-		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
-		EndpointResolver: aws.ResolveWithEndpointURL(ts.URL),
-		DisableSSL:       aws.Bool(true),
-		S3ForcePathStyle: aws.Bool(true),
-		Region:           aws.String("us-west-2"),
-	})
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.Region = aws.String("us-west-2")
 
 	c := s3crypto.NewDecryptionClient(cfg)
 	if c == nil {
@@ -169,13 +167,12 @@ func TestGetObjectCBC2(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	cfg := unit.Config.Copy(&aws.Config{
-		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
-		EndpointResolver: aws.ResolveWithEndpointURL(ts.URL),
-		DisableSSL:       aws.Bool(true),
-		S3ForcePathStyle: aws.Bool(true),
-		Region:           aws.String("us-west-2"),
-	})
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.Region = aws.String("us-west-2")
 
 	c := s3crypto.NewDecryptionClient(cfg)
 	if c == nil {
@@ -227,7 +224,7 @@ func TestGetObjectCBC2(t *testing.T) {
 }
 
 func TestGetObjectWithContext(t *testing.T) {
-	c := s3crypto.NewDecryptionClient(unit.Config)
+	c := s3crypto.NewDecryptionClient(unit.Config())
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	ctx.Error = fmt.Errorf("context canceled")

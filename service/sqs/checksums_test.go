@@ -15,9 +15,10 @@ import (
 )
 
 var svc = func() *sqs.SQS {
-	s := sqs.New(unit.Config, &aws.Config{
-		DisableParamValidation: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.DisableParamValidation = aws.Bool(true)
+
+	s := sqs.New(cfg)
 	s.Handlers.Send.Clear()
 	return s
 }()
@@ -66,10 +67,11 @@ func TestSendMessageChecksumInvalid(t *testing.T) {
 }
 
 func TestSendMessageChecksumInvalidNoValidation(t *testing.T) {
-	s := sqs.New(unit.Config, &aws.Config{
-		DisableParamValidation:  aws.Bool(true),
-		DisableComputeChecksums: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.DisableComputeChecksums = aws.Bool(true)
+
+	s := sqs.New(cfg)
 	s.Handlers.Send.Clear()
 
 	req, _ := s.SendMessageRequest(&sqs.SendMessageInput{

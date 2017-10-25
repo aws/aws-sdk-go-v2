@@ -34,9 +34,10 @@ func TestUnmarshal(t *testing.T) {
 		w.Write(xmlVal)
 	}))
 
-	cfg := *unit.Config
+	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 	cfg.S3ForcePathStyle = aws.Bool(true)
+
 	svc := s3.New(cfg)
 
 	out, err := svc.GetBucketAcl(&s3.GetBucketAclInput{

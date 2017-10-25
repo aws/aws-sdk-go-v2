@@ -28,7 +28,7 @@ var statusCodeErrorTests = []struct {
 
 func TestStatusCodeError(t *testing.T) {
 	for _, test := range statusCodeErrorTests {
-		s := simpledb.New(unit.Config)
+		s := simpledb.New(unit.Config())
 		s.Handlers.Send.Clear()
 		s.Handlers.Send.PushBack(func(r *request.Request) {
 			body := ioutil.NopCloser(bytes.NewReader([]byte{}))
@@ -99,7 +99,7 @@ var responseErrorTests = []struct {
 
 func TestResponseError(t *testing.T) {
 	for _, test := range responseErrorTests {
-		s := simpledb.New(unit.Config)
+		s := simpledb.New(unit.Config())
 		s.Handlers.Send.Clear()
 		s.Handlers.Send.PushBack(func(r *request.Request) {
 			xml := createXMLResponse(test.requestID, test.errors)

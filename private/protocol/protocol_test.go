@@ -57,7 +57,7 @@ func buildNewRequest(data interface{}) *request.Request {
 		}{
 			"Test",
 		},
-		ClientInfo: metadata.ClientInfo{
+		Metadata: metadata.Metadata{
 			ServiceName:   "test",
 			TargetPrefix:  "test",
 			JSONVersion:   "test",

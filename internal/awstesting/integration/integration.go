@@ -11,14 +11,17 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 )
 
-// Session is a shared session for all integration tests to use.
-var Session = session.Must(session.NewSession())
-
 func init() {
-	logLevel := Session.Config.LogLevel
+	var err error
+	config, err = external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic(err)
+	}
+
+	logLevel := config.LogLevel
 	if os.Getenv("DEBUG") != "" {
 		logLevel = aws.LogLevel(aws.LogDebug)
 	}
@@ -28,11 +31,18 @@ func init() {
 	if os.Getenv("DEBUG_BODY") != "" {
 		logLevel = aws.LogLevel(aws.LogDebugWithSigning | aws.LogDebugWithHTTPBody)
 	}
-	Session.Config.LogLevel = logLevel
+	config.LogLevel = logLevel
 
-	if aws.StringValue(Session.Config.Region) == "" {
+	if aws.StringValue(config.Region) == "" {
 		panic("AWS_REGION must be configured to run integration tests")
 	}
+}
+
+var config aws.Config
+
+// Config returns an initialized configuration
+func Config() aws.Config {
+	return config.Copy()
 }
 
 // UniqueID returns a unique UUID-like identifier for use in generating

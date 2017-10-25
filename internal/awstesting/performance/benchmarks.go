@@ -20,7 +20,9 @@ import (
 func mapCreateClients() {
 	clientFns := []func(){}
 	for _, c := range clients {
-		clientFns = append(clientFns, func() { c.Call([]reflect.Value{reflect.ValueOf(mock.Session)}) })
+		clientFns = append(clientFns, func() {
+			c.Call([]reflect.Value{reflect.ValueOf(mock.Config())})
+		})
 	}
 
 	gucumber.World["services"] = clientFns
@@ -31,7 +33,9 @@ func buildAnArrayOfClients() {
 	params := [][]reflect.Value{}
 
 	for _, c := range clients {
-		method, param, err := findAndGetMethod(c.Call([]reflect.Value{reflect.ValueOf(mock.Session)}))
+		method, param, err := findAndGetMethod(c.Call([]reflect.Value{
+			reflect.ValueOf(mock.Config()),
+		}))
 		if err == nil {
 			methods = append(methods, method)
 			params = append(params, param)

@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
 )
@@ -85,10 +85,10 @@ func newDynamodbOut(table, region string) *dynamodbOut {
 		region: region,
 	}
 
-	out.db = dynamodb.New(
-		unit.Session,
-		&aws.Config{Region: &out.region},
-	)
+	cfg := integration.Config()
+	cfg.Region = &out.region
+
+	out.db = dynamodb.New(cfg)
 	return &out
 }
 

@@ -33,7 +33,7 @@ func TestGetBucketRegion_Exists(t *testing.T) {
 	for i, c := range testGetBucketRegionCases {
 		server := testSetupGetBucketRegionServer(c.RespRegion, c.StatusCode, true)
 
-		cfg := unit.Config.Copy()
+		cfg := unit.Config()
 		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 		cfg.DisableSSL = aws.Bool(true)
 
@@ -51,7 +51,7 @@ func TestGetBucketRegion_Exists(t *testing.T) {
 func TestGetBucketRegion_NotExists(t *testing.T) {
 	server := testSetupGetBucketRegionServer("ignore-region", 404, false)
 
-	cfg := unit.Config.Copy()
+	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 	cfg.DisableSSL = aws.Bool(true)
 
@@ -73,11 +73,12 @@ func TestGetBucketRegionWithClient(t *testing.T) {
 	for i, c := range testGetBucketRegionCases {
 		server := testSetupGetBucketRegionServer(c.RespRegion, c.StatusCode, true)
 
-		svc := s3.New(unit.Config, &aws.Config{
-			Region:           aws.String("region"),
-			EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
-			DisableSSL:       aws.Bool(true),
-		})
+		cfg := unit.Config()
+		cfg.Region = aws.String("region")
+		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+		cfg.DisableSSL = aws.Bool(true)
+
+		svc := s3.New(cfg)
 
 		ctx := aws.BackgroundContext()
 

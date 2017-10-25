@@ -40,29 +40,22 @@ const (
 //
 //     // Create a DynamoDBStreams client with additional configuration
 //     svc := dynamodbstreams.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *DynamoDBStreams {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *DynamoDBStreams {
+	var signingName string
+	signingName = "dynamodb"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *DynamoDBStreams {
-	if len(signingName) == 0 {
-		signingName = "dynamodb"
-	}
 	svc := &DynamoDBStreams{
 		Client: aws.NewClient(
-			cfg,
-			aws.ClientInfo{
+			config,
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2012-08-10",
 				JSONVersion:   "1.0",
 				TargetPrefix:  "DynamoDBStreams_20120810",
 			},
-			handlers,
 		),
 	}
 

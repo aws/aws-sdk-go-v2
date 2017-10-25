@@ -231,9 +231,9 @@ var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: fun
 // appropriate Region and Endpoint set. Will set r.Error if the endpoint or
 // region is not valid.
 var ValidateEndpointHandler = aws.NamedHandler{Name: "core.ValidateEndpointHandler", Fn: func(r *aws.Request) {
-	if r.ClientInfo.SigningRegion == "" && aws.StringValue(r.Config.Region) == "" {
+	if r.Metadata.SigningRegion == "" && aws.StringValue(r.Config.Region) == "" {
 		r.Error = aws.ErrMissingRegion
-	} else if r.ClientInfo.Endpoint == "" {
+	} else if r.Metadata.Endpoint == "" {
 		r.Error = aws.ErrMissingEndpoint
 	}
 }}
