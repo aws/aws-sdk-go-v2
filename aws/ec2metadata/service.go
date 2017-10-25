@@ -30,7 +30,7 @@ func New(config aws.Config) *EC2Metadata {
 	svc := &EC2Metadata{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName: ServiceName,
 				APIVersion:  "latest",
 			},
@@ -80,7 +80,7 @@ func unmarshalError(r *aws.Request) {
 }
 
 func validateEndpointHandler(r *aws.Request) {
-	if r.ClientInfo.Endpoint == "" {
+	if r.Metadata.Endpoint == "" {
 		r.Error = aws.ErrMissingEndpoint
 	}
 }

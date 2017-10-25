@@ -440,7 +440,7 @@ func New(config aws.Config) *{{ .StructName }} {
     svc := &{{ .StructName }}{
     	Client: aws.NewClient(
     		config,
-    		aws.ClientInfo{
+    		aws.Metadata{
 				ServiceName: {{ ServiceNameValue . }},
 				SigningName: signingName,
 				SigningRegion: signingRegion,

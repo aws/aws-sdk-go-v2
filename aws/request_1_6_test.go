@@ -21,7 +21,7 @@ func TestRequestInvalidEndpoint(t *testing.T) {
 
 	r := aws.New(
 		cfg,
-		aws.ClientInfo{},
+		aws.Metadata{},
 		cfg.Handlers,
 		aws.DefaultRetryer{},
 		&aws.Operation{},

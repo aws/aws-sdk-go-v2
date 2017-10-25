@@ -47,7 +47,7 @@ func New(config aws.Config) *Organizations {
 	svc := &Organizations{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

@@ -47,7 +47,7 @@ func New(config aws.Config) *Lightsail {
 	svc := &Lightsail{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

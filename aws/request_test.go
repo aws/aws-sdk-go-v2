@@ -674,7 +674,7 @@ func TestSerializationErrConnectionReset(t *testing.T) {
 		HTTPPath:   "/",
 	}
 
-	meta := aws.ClientInfo{
+	meta := aws.Metadata{
 		ServiceName:   "fooService",
 		SigningName:   "foo",
 		SigningRegion: "foo",

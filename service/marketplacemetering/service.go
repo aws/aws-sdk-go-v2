@@ -48,7 +48,7 @@ func New(config aws.Config) *MarketplaceMetering {
 	svc := &MarketplaceMetering{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

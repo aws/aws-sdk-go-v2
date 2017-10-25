@@ -47,7 +47,7 @@ func New(config aws.Config) *ELBV2 {
 	svc := &ELBV2{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

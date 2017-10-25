@@ -17,7 +17,7 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	req, _ := svc.GetThingShadowRequest(nil)
 	err := req.Build()
 
-	if e, a := "", req.ClientInfo.Endpoint; e != a {
+	if e, a := "", req.Metadata.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err == nil {
@@ -38,7 +38,7 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 	req, _ := svc.GetThingShadowRequest(nil)
 	err := req.Build()
 
-	if e, a := "", req.ClientInfo.Endpoint; e != a {
+	if e, a := "", req.Metadata.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err == nil {
@@ -58,7 +58,7 @@ func TestRequireEndpointUsed(t *testing.T) {
 	req, _ := svc.GetThingShadowRequest(nil)
 	err := req.Build()
 
-	if e, a := "https://endpoint", req.ClientInfo.Endpoint; e != a {
+	if e, a := "https://endpoint", req.Metadata.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err != nil {

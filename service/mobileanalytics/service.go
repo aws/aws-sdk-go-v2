@@ -47,7 +47,7 @@ func New(config aws.Config) *MobileAnalytics {
 	svc := &MobileAnalytics{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

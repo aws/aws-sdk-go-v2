@@ -47,7 +47,7 @@ func New(config aws.Config) *CognitoIdentity {
 	svc := &CognitoIdentity{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

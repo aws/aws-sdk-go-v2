@@ -47,7 +47,7 @@ func New(config aws.Config) *S3 {
 	svc := &S3{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

@@ -4,8 +4,8 @@ import (
 	"net/http"
 )
 
-// ClientInfo wraps immutable data from the Client structure.
-type ClientInfo struct {
+// Metadata wraps immutable data from the Client structure.
+type Metadata struct {
 	ServiceName string
 	APIVersion  string
 
@@ -20,7 +20,7 @@ type ClientInfo struct {
 // A Client implements the base client request and response handling
 // used by all service clients.
 type Client struct {
-	ClientInfo ClientInfo
+	Metadata Metadata
 
 	Config Config
 
@@ -38,9 +38,9 @@ type Client struct {
 }
 
 // NewClient will return a pointer to a new initialized service client.
-func NewClient(cfg Config, info ClientInfo) *Client {
+func NewClient(cfg Config, metadata Metadata) *Client {
 	svc := &Client{
-		ClientInfo: info,
+		Metadata: metadata,
 
 		// TODO remove config when request reqfactored
 		Config: cfg,
@@ -70,7 +70,7 @@ func NewClient(cfg Config, info ClientInfo) *Client {
 // NewRequest returns a new Request pointer for the service API
 // operation and parameters.
 func (c *Client) NewRequest(operation *Operation, params interface{}, data interface{}) *Request {
-	return New(c.Config, c.ClientInfo, c.Handlers, c.Retryer, operation, params, data)
+	return New(c.Config, c.Metadata, c.Handlers, c.Retryer, operation, params, data)
 }
 
 // AddDebugHandlers injects debug logging handlers into the service to log request

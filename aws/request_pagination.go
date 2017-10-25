@@ -196,7 +196,7 @@ func (r *Request) NextPage() *Request {
 	}
 
 	data := reflect.New(reflect.TypeOf(r.Data).Elem()).Interface()
-	nr := New(r.Config, r.ClientInfo, r.Handlers, r.Retryer, r.Operation, awsutil.CopyOf(r.Params), data)
+	nr := New(r.Config, r.Metadata, r.Handlers, r.Retryer, r.Operation, awsutil.CopyOf(r.Params), data)
 	for i, intok := range nr.Operation.InputTokens {
 		awsutil.SetValueAtPath(nr.Params, intok, tokens[i])
 	}

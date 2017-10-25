@@ -430,14 +430,14 @@ func signSDKRequestWithCurrTime(req *aws.Request, curTimeFn func() time.Time, op
 		return
 	}
 
-	region := req.ClientInfo.SigningRegion
+	region := req.Metadata.SigningRegion
 	if region == "" {
 		region = aws.StringValue(req.Config.Region)
 	}
 
-	name := req.ClientInfo.SigningName
+	name := req.Metadata.SigningName
 	if name == "" {
-		name = req.ClientInfo.ServiceName
+		name = req.Metadata.ServiceName
 	}
 
 	v4 := NewSigner(req.Config.CredentialsLoader, func(v4 *Signer) {

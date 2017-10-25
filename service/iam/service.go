@@ -47,7 +47,7 @@ func New(config aws.Config) *IAM {
 	svc := &IAM{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

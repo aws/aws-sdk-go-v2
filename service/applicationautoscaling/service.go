@@ -48,7 +48,7 @@ func New(config aws.Config) *ApplicationAutoScaling {
 	svc := &ApplicationAutoScaling{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

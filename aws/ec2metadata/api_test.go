@@ -72,7 +72,7 @@ func TestEndpoint(t *testing.T) {
 	}
 
 	req := c.NewRequest(op, nil, nil)
-	if e, a := "http://169.254.169.254/latest", req.ClientInfo.Endpoint; e != a {
+	if e, a := "http://169.254.169.254/latest", req.Metadata.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "http://169.254.169.254/latest/meta-data/testpath", req.HTTPRequest.URL.String(); e != a {

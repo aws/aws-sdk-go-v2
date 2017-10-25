@@ -35,9 +35,9 @@ const (
 
 // A Request is the service request to be made.
 type Request struct {
-	Config     Config
-	ClientInfo ClientInfo
-	Handlers   Handlers
+	Config   Config
+	Metadata Metadata
+	Handlers Handlers
 
 	Retryer
 	Time                   time.Time
@@ -86,7 +86,7 @@ type Operation struct {
 // Params is any value of input parameters to be the request payload.
 // Data is pointer value to an object which the request's response
 // payload will be deserialized to.
-func New(cfg Config, clientInfo ClientInfo, handlers Handlers,
+func New(cfg Config, metadata Metadata, handlers Handlers,
 	retryer Retryer, operation *Operation, params interface{}, data interface{}) *Request {
 
 	// TODO improve this experiance for config copy?
@@ -101,7 +101,7 @@ func New(cfg Config, clientInfo ClientInfo, handlers Handlers,
 
 	// TODO need better way of handling this error... NeqRequest should return error.
 	endpoint, err := cfg.EndpointResolver.EndpointFor(
-		clientInfo.ServiceName, StringValue(cfg.Region),
+		metadata.ServiceName, StringValue(cfg.Region),
 		func(opt *endpoints.Options) {
 			// TODO Where should these options go?
 			opt.DisableSSL = BoolValue(cfg.DisableSSL)
@@ -114,12 +114,12 @@ func New(cfg Config, clientInfo ClientInfo, handlers Handlers,
 	)
 	if err == nil {
 		// TODO so ugly
-		clientInfo.Endpoint = endpoint.URL
+		metadata.Endpoint = endpoint.URL
 		if len(endpoint.SigningName) > 0 {
-			clientInfo.SigningName = endpoint.SigningName
+			metadata.SigningName = endpoint.SigningName
 		}
 		if len(endpoint.SigningRegion) > 0 {
-			clientInfo.SigningRegion = endpoint.SigningRegion
+			metadata.SigningRegion = endpoint.SigningRegion
 		}
 
 		httpReq.URL, err = url.Parse(endpoint.URL + operation.HTTPPath)
@@ -130,9 +130,9 @@ func New(cfg Config, clientInfo ClientInfo, handlers Handlers,
 	}
 
 	r := &Request{
-		Config:     cfg,
-		ClientInfo: clientInfo,
-		Handlers:   handlers.Copy(),
+		Config:   cfg,
+		Metadata: metadata,
+		Handlers: handlers.Copy(),
 
 		Retryer:     retryer,
 		Time:        time.Now(),
@@ -323,7 +323,7 @@ func debugLogReqError(r *Request, stage string, retrying bool, err error) {
 	}
 
 	r.Config.Logger.Log(fmt.Sprintf("DEBUG: %s %s/%s failed, %s, error %v",
-		stage, r.ClientInfo.ServiceName, r.Operation.Name, retryStr, err))
+		stage, r.Metadata.ServiceName, r.Operation.Name, retryStr, err))
 }
 
 // Build will build the request's object so it can be signed and sent
@@ -485,7 +485,7 @@ func (r *Request) Send() error {
 		if BoolValue(r.Retryable) {
 			if r.Config.LogLevel.Matches(LogDebugWithRequestRetries) {
 				r.Config.Logger.Log(fmt.Sprintf("DEBUG: Retrying Request %s/%s, attempt %d",
-					r.ClientInfo.ServiceName, r.Operation.Name, r.RetryCount))
+					r.Metadata.ServiceName, r.Operation.Name, r.RetryCount))
 			}
 
 			// The previous http.Request will have a reference to the r.Body

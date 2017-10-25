@@ -34,7 +34,7 @@ func Config() aws.Config { return config.Copy() }
 func NewMockClient(cfg aws.Config) *aws.Client {
 	return aws.NewClient(
 		cfg,
-		aws.ClientInfo{
+		aws.Metadata{
 			ServiceName:   "Mock",
 			SigningRegion: aws.StringValue(cfg.Region),
 			APIVersion:    "2015-12-08",

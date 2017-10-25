@@ -15,7 +15,7 @@ import (
 var testSvc = func() *aws.Client {
 	s := &aws.Client{
 		Config: unit.Config(),
-		ClientInfo: aws.ClientInfo{
+		Metadata: aws.Metadata{
 			ServiceName: "mock-service",
 			APIVersion:  "2015-01-01",
 		},

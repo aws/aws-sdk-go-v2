@@ -68,7 +68,7 @@ func NewInputService1ProtocolTest(config aws.Config) *InputService1ProtocolTest 
 	svc := &InputService1ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice1protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -371,7 +371,7 @@ func NewInputService2ProtocolTest(config aws.Config) *InputService2ProtocolTest 
 	svc := &InputService2ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice2protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -536,7 +536,7 @@ func NewInputService3ProtocolTest(config aws.Config) *InputService3ProtocolTest 
 	svc := &InputService3ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice3protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -780,7 +780,7 @@ func NewInputService4ProtocolTest(config aws.Config) *InputService4ProtocolTest 
 	svc := &InputService4ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice4protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -949,7 +949,7 @@ func NewInputService5ProtocolTest(config aws.Config) *InputService5ProtocolTest 
 	svc := &InputService5ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice5protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1090,7 +1090,7 @@ func NewInputService6ProtocolTest(config aws.Config) *InputService6ProtocolTest 
 	svc := &InputService6ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice6protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1231,7 +1231,7 @@ func NewInputService7ProtocolTest(config aws.Config) *InputService7ProtocolTest 
 	svc := &InputService7ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice7protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1372,7 +1372,7 @@ func NewInputService8ProtocolTest(config aws.Config) *InputService8ProtocolTest 
 	svc := &InputService8ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice8protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1513,7 +1513,7 @@ func NewInputService9ProtocolTest(config aws.Config) *InputService9ProtocolTest 
 	svc := &InputService9ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice9protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1666,7 +1666,7 @@ func NewInputService10ProtocolTest(config aws.Config) *InputService10ProtocolTes
 	svc := &InputService10ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice10protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1828,7 +1828,7 @@ func NewInputService11ProtocolTest(config aws.Config) *InputService11ProtocolTes
 	svc := &InputService11ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice11protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1969,7 +1969,7 @@ func NewInputService12ProtocolTest(config aws.Config) *InputService12ProtocolTes
 	svc := &InputService12ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice12protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2110,7 +2110,7 @@ func NewInputService13ProtocolTest(config aws.Config) *InputService13ProtocolTes
 	svc := &InputService13ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice13protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2259,7 +2259,7 @@ func NewInputService14ProtocolTest(config aws.Config) *InputService14ProtocolTes
 	svc := &InputService14ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice14protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2408,7 +2408,7 @@ func NewInputService15ProtocolTest(config aws.Config) *InputService15ProtocolTes
 	svc := &InputService15ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice15protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2624,7 +2624,7 @@ func NewInputService16ProtocolTest(config aws.Config) *InputService16ProtocolTes
 	svc := &InputService16ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice16protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2765,7 +2765,7 @@ func NewInputService17ProtocolTest(config aws.Config) *InputService17ProtocolTes
 	svc := &InputService17ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice17protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2981,7 +2981,7 @@ func NewInputService18ProtocolTest(config aws.Config) *InputService18ProtocolTes
 	svc := &InputService18ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice18protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -3359,7 +3359,7 @@ func NewInputService19ProtocolTest(config aws.Config) *InputService19ProtocolTes
 	svc := &InputService19ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice19protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -3532,7 +3532,7 @@ func NewInputService20ProtocolTest(config aws.Config) *InputService20ProtocolTes
 	svc := &InputService20ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice20protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -3681,7 +3681,7 @@ func NewInputService21ProtocolTest(config aws.Config) *InputService21ProtocolTes
 	svc := &InputService21ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice21protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -3897,7 +3897,7 @@ func NewInputService22ProtocolTest(config aws.Config) *InputService22ProtocolTes
 	svc := &InputService22ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice22protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -4449,7 +4449,7 @@ func NewInputService23ProtocolTest(config aws.Config) *InputService23ProtocolTes
 	svc := &InputService23ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice23protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -4590,7 +4590,7 @@ func NewInputService24ProtocolTest(config aws.Config) *InputService24ProtocolTes
 	svc := &InputService24ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "inputservice24protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

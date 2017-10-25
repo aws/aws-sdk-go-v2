@@ -47,7 +47,7 @@ func New(config aws.Config) *MigrationHub {
 	svc := &MigrationHub{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

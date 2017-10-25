@@ -48,7 +48,7 @@ func New(config aws.Config) *IoT {
 	svc := &IoT{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

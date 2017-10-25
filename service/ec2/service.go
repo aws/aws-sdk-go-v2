@@ -47,7 +47,7 @@ func New(config aws.Config) *EC2 {
 	svc := &EC2{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

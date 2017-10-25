@@ -68,7 +68,7 @@ func NewOutputService1ProtocolTest(config aws.Config) *OutputService1ProtocolTes
 	svc := &OutputService1ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "outputservice1protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -262,7 +262,7 @@ func NewOutputService2ProtocolTest(config aws.Config) *OutputService2ProtocolTes
 	svc := &OutputService2ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "outputservice2protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -401,7 +401,7 @@ func NewOutputService3ProtocolTest(config aws.Config) *OutputService3ProtocolTes
 	svc := &OutputService3ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "outputservice3protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -539,7 +539,7 @@ func NewOutputService4ProtocolTest(config aws.Config) *OutputService4ProtocolTes
 	svc := &OutputService4ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "outputservice4protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -677,7 +677,7 @@ func NewOutputService5ProtocolTest(config aws.Config) *OutputService5ProtocolTes
 	svc := &OutputService5ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "outputservice5protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -815,7 +815,7 @@ func NewOutputService6ProtocolTest(config aws.Config) *OutputService6ProtocolTes
 	svc := &OutputService6ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "outputservice6protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -965,7 +965,7 @@ func NewOutputService7ProtocolTest(config aws.Config) *OutputService7ProtocolTes
 	svc := &OutputService7ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "outputservice7protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1103,7 +1103,7 @@ func NewOutputService8ProtocolTest(config aws.Config) *OutputService8ProtocolTes
 	svc := &OutputService8ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "outputservice8protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1241,7 +1241,7 @@ func NewOutputService9ProtocolTest(config aws.Config) *OutputService9ProtocolTes
 	svc := &OutputService9ProtocolTest{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   "outputservice9protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

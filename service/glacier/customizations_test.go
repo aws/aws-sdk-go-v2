@@ -35,7 +35,7 @@ func TestCustomizations(t *testing.T) {
 	}
 
 	// Sets API version
-	if e, a := req.ClientInfo.APIVersion, req.HTTPRequest.Header.Get("x-amz-glacier-version"); e != a {
+	if e, a := req.Metadata.APIVersion, req.HTTPRequest.Header.Get("x-amz-glacier-version"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 

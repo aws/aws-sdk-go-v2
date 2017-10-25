@@ -47,7 +47,7 @@ func New(config aws.Config) *ElasticBeanstalk {
 	svc := &ElasticBeanstalk{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

@@ -39,7 +39,7 @@ func BenchmarkTimeoutReadCloser(b *testing.B) {
 		HTTPPath:   "/",
 	}
 
-	meta := aws.ClientInfo{
+	meta := aws.Metadata{
 		ServiceName:   "fooService",
 		SigningName:   "foo",
 		SigningRegion: "foo",

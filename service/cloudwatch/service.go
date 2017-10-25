@@ -47,7 +47,7 @@ func New(config aws.Config) *CloudWatch {
 	svc := &CloudWatch{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

@@ -6,5 +6,5 @@ import (
 
 // NewClient creates and initializes a generic service client for testing.
 func NewClient(cfg aws.Config) *aws.Client {
-	return aws.NewClient(cfg, aws.ClientInfo{ServiceName: "mockService"})
+	return aws.NewClient(cfg, aws.Metadata{ServiceName: "mockService"})
 }

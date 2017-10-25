@@ -47,7 +47,7 @@ func New(config aws.Config) *STS {
 	svc := &STS{
 		Client: aws.NewClient(
 			config,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,

@@ -70,7 +70,7 @@ func New(cfg aws.Config) *Provider {
 	p := &Provider{
 		Client: aws.NewClient(
 			cfg,
-			aws.ClientInfo{
+			aws.Metadata{
 				ServiceName: ProviderName,
 			},
 		),
@@ -142,7 +142,7 @@ func (p *Provider) getCredentials() (*getCredentialsOutput, error) {
 }
 
 func validateEndpointHandler(r *aws.Request) {
-	if len(r.ClientInfo.Endpoint) == 0 {
+	if len(r.Metadata.Endpoint) == 0 {
 		r.Error = aws.ErrMissingEndpoint
 	}
 }
