@@ -67,11 +67,6 @@ func NewClient(cfg Config, info ClientInfo) *Client {
 	return svc
 }
 
-// GetRetryer returns the client's Retryer value.
-func (c *Client) GetRetryer() Retryer {
-	return c.Retryer
-}
-
 // NewRequest returns a new Request pointer for the service API
 // operation and parameters.
 func (c *Client) NewRequest(operation *Operation, params interface{}, data interface{}) *Request {
