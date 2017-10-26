@@ -46,11 +46,11 @@ func (l defaultLogger) Log(args ...interface{}) {
 // existing service client or session.
 func Config() aws.Config {
 	return aws.Config{
-		EndpointResolver:  endpoints.DefaultResolver(),
-		CredentialsLoader: aws.AnonymousCredentials,
-		HTTPClient:        HTTPClient(),
-		Logger:            Logger(),
-		Handlers:          Handlers(),
+		EndpointResolver: endpoints.DefaultResolver(),
+		Credentials:      aws.AnonymousCredentials,
+		HTTPClient:       HTTPClient(),
+		Logger:           Logger(),
+		Handlers:         Handlers(),
 	}
 }
 

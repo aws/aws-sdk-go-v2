@@ -19,7 +19,7 @@ type Config struct {
 	// The credentials object to use when signing requests. Defaults to a
 	// chain of credential providers to search for credentials in environment
 	// variables, shared credential file, and EC2 Instance Roles.
-	CredentialsLoader *CredentialsLoader
+	Credentials CredentialsProvider
 
 	// The resolver to use for looking up endpoints for AWS service clients
 	// to use based on region.

@@ -12,14 +12,23 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/stretchr/testify/assert"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 func TestRetrieveRefreshableCredentials(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		assert.Equal(t, "/path/to/endpoint", r.URL.Path)
-		assert.Equal(t, "application/json", r.Header.Get("Accept"))
-		assert.Equal(t, "else", r.URL.Query().Get("something"))
+		if e, a := "/path/to/endpoint", r.URL.Path; e != a {
+			t.Errorf("expect %v, got %v", e, a)
+		}
+		if e, a := "application/json", r.Header.Get("Accept"); e != a {
+			t.Errorf("expect %v, got %v", e, a)
+		}
+		if e, a := "else", r.URL.Query().Get("something"); e != a {
+			t.Errorf("expect %v, got %v", e, a)
+		}
 
 		encoder := json.NewEncoder(w)
 		err := encoder.Encode(map[string]interface{}{
@@ -37,24 +46,38 @@ func TestRetrieveRefreshableCredentials(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/path/to/endpoint?something=else")
 
-	svc := endpointcreds.New(cfg)
-	creds, err := svc.Retrieve()
+	p := endpointcreds.New(cfg)
+	creds, err := p.Retrieve()
 
-	assert.NoError(t, err)
-
-	assert.Equal(t, "AKID", creds.AccessKeyID)
-	assert.Equal(t, "SECRET", creds.SecretAccessKey)
-	assert.Equal(t, "TOKEN", creds.SessionToken)
-	assert.False(t, svc.IsExpired())
-
-	svc.CurrentTime = func() time.Time {
-		return time.Now().Add(2 * time.Hour)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
 
-	assert.True(t, svc.IsExpired())
+	if e, a := "AKID", creds.AccessKeyID; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "SECRET", creds.SecretAccessKey; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "TOKEN", creds.SessionToken; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if creds.Expired() {
+		t.Errorf("expect not expired")
+	}
+
+	sdk.NowTime = func() time.Time {
+		return time.Now().Add(2 * time.Hour)
+	}
+	if !creds.Expired() {
+		t.Errorf("expect to be expired")
+	}
 }
 
 func TestRetrieveStaticCredentials(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		encoder := json.NewEncoder(w)
 		err := encoder.Encode(map[string]interface{}{
@@ -70,15 +93,30 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
-	client := endpointcreds.New(cfg)
-	creds, err := client.Retrieve()
+	p := endpointcreds.New(cfg)
+	creds, err := p.Retrieve()
 
-	assert.NoError(t, err)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
 
-	assert.Equal(t, "AKID", creds.AccessKeyID)
-	assert.Equal(t, "SECRET", creds.SecretAccessKey)
-	assert.Empty(t, creds.SessionToken)
-	assert.False(t, client.IsExpired())
+	if e, a := "AKID", creds.AccessKeyID; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "SECRET", creds.SecretAccessKey; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if v := creds.SessionToken; len(v) != 0 {
+		t.Errorf("expect empty, got %v", v)
+	}
+
+	sdk.NowTime = func() time.Time {
+		return time.Date(3000, 12, 16, 1, 30, 37, 0, time.UTC)
+	}
+
+	if creds.Expired() {
+		t.Errorf("expect not to be expired")
+	}
 }
 
 func TestFailedRetrieveCredentials(t *testing.T) {
@@ -98,21 +136,39 @@ func TestFailedRetrieveCredentials(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
-	client := endpointcreds.New(cfg)
-	creds, err := client.Retrieve()
+	p := endpointcreds.New(cfg)
+	creds, err := p.Retrieve()
 
-	assert.Error(t, err)
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+
 	aerr := err.(awserr.Error)
-
-	assert.Equal(t, "CredentialsEndpointError", aerr.Code())
-	assert.Equal(t, "failed to load credentials", aerr.Message())
+	if e, a := "CredentialsEndpointError", aerr.Code(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "failed to load credentials", aerr.Message(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 
 	aerr = aerr.OrigErr().(awserr.Error)
-	assert.Equal(t, "Error", aerr.Code())
-	assert.Equal(t, "Message", aerr.Message())
+	if e, a := "Error", aerr.Code(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "Message", aerr.Message(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 
-	assert.Empty(t, creds.AccessKeyID)
-	assert.Empty(t, creds.SecretAccessKey)
-	assert.Empty(t, creds.SessionToken)
-	assert.True(t, client.IsExpired())
+	if v := creds.AccessKeyID; len(v) != 0 {
+		t.Errorf("expect empty, got %v", v)
+	}
+	if v := creds.SecretAccessKey; len(v) != 0 {
+		t.Errorf("expect empty, got %v", v)
+	}
+	if v := creds.SessionToken; len(v) != 0 {
+		t.Errorf("expect empty, got %v", v)
+	}
+	if creds.Expired() {
+		t.Errorf("expect empty creds not to be expired")
+	}
 }

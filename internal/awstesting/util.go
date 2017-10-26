@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/util"
 )
 
@@ -118,4 +119,21 @@ func PopEnv(env []string) {
 		}
 		os.Setenv(k, v)
 	}
+}
+
+// MockCredentialsProvider is a type that can be used to mock out credentials
+// providers
+type MockCredentialsProvider struct {
+	RetrieveFn   func() (aws.Credentials, error)
+	InvalidateFn func()
+}
+
+// Retrieve calls the RetrieveFn
+func (p MockCredentialsProvider) Retrieve() (aws.Credentials, error) {
+	return p.RetrieveFn()
+}
+
+// Invalidate calls the InvalidateFn
+func (p MockCredentialsProvider) Invalidate() {
+	p.InvalidateFn()
 }

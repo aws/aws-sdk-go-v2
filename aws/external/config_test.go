@@ -93,7 +93,7 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 		t.Errorf("expect %v region, got %v", e, a)
 	}
 
-	creds, err := cfg.CredentialsLoader.Get()
+	creds, err := cfg.Credentials.Retrieve()
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

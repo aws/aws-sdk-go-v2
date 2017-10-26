@@ -41,8 +41,7 @@ func (sb signerBuilder) BuildSigner() signer {
 		Request: req,
 		Time:    sb.SignTime,
 
-		CredentialsLoader: aws.NewCredentialsLoader(
-			aws.NewStaticCredentialsProvider("AKID", "SECRET", sb.SessionToken)),
+		Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", sb.SessionToken),
 	}
 
 	if os.Getenv("DEBUG") != "" {
@@ -145,9 +144,7 @@ func TestGet(t *testing.T) {
 	assert := assert.New(t)
 
 	cfg := unit.Config()
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	cfg.Credentials = aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	cfg.Region = aws.String("ap-southeast-2")
 
 	svc := awstesting.NewClient(cfg)
@@ -175,7 +172,7 @@ func TestAnonymousCredentials(t *testing.T) {
 	assert := assert.New(t)
 
 	cfg := unit.Config()
-	cfg.CredentialsLoader = aws.AnonymousCredentials
+	cfg.Credentials = aws.AnonymousCredentials
 	cfg.Region = aws.String("ap-southeast-2")
 
 	svc := awstesting.NewClient(cfg)

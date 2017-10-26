@@ -19,22 +19,15 @@ const ProviderName = "EC2RoleProvider"
 // A Provider retrieves credentials from the EC2 service, and keeps track if
 // those credentials are expired.
 //
-// Example how to configure the Provider with custom http Client, Endpoint
-// or ExpiryWindow
+// The NewProvider function must be used to create the Provider.
 //
-//     p := &ec2rolecreds.Provider{
-//         // Pass in a custom timeout to be used when requesting
-//         // IAM EC2 Role credentials.
-//         Client: ec2metadata.New(sess, aws.Config{
-//             HTTPClient: &http.Client{Timeout: 10 * time.Second},
-//         }),
+//     p := &ec2rolecreds.NewProvider(ec2metadata.New(cfg))
 //
-//         // Do not use early expiry of credentials. If a non zero value is
-//         // specified the credentials will be expired early
-//         ExpiryWindow: 0,
-//     }
+//     // Expire the credentials 10 minutes before IAM states they should. Proactivily
+//     // refreshing the credentials.
+//     p.ExpiryWindow = 10 * time.Minute
 type Provider struct {
-	aws.Expiry
+	aws.SafeCredentialsProvider
 
 	// Required EC2Metadata client to use when connecting to EC2 metadata service.
 	Client *ec2metadata.EC2Metadata
@@ -51,33 +44,48 @@ type Provider struct {
 	ExpiryWindow time.Duration
 }
 
+// NewProvider returns an initialized Provider value configured to retrieve
+// credentials from EC2 Instance Metadata service.
+func NewProvider(client *ec2metadata.EC2Metadata) *Provider {
+	p := &Provider{
+		Client: client,
+	}
+	p.RetrieveFn = p.retrieveFn
+
+	return p
+}
+
 // Retrieve retrieves credentials from the EC2 service.
 // Error will be returned if the request fails, or unable to extract
 // the desired credentials.
-func (m *Provider) Retrieve() (aws.Credentials, error) {
-	credsList, err := requestCredList(m.Client)
+func (p *Provider) retrieveFn() (aws.Credentials, error) {
+	credsList, err := requestCredList(p.Client)
 	if err != nil {
-		return aws.Credentials{Source: ProviderName}, err
+		return aws.Credentials{}, err
 	}
 
 	if len(credsList) == 0 {
-		return aws.Credentials{Source: ProviderName}, awserr.New("EmptyEC2RoleList", "empty EC2 Role list", nil)
+		return aws.Credentials{},
+			awserr.New("EmptyEC2RoleList", "empty EC2 Role list", nil)
 	}
 	credsName := credsList[0]
 
-	roleCreds, err := requestCred(m.Client, credsName)
+	roleCreds, err := requestCred(p.Client, credsName)
 	if err != nil {
-		return aws.Credentials{Source: ProviderName}, err
+		return aws.Credentials{}, err
 	}
 
-	m.SetExpiration(roleCreds.Expiration, m.ExpiryWindow)
-
-	return aws.Credentials{
+	creds := aws.Credentials{
 		AccessKeyID:     roleCreds.AccessKeyID,
 		SecretAccessKey: roleCreds.SecretAccessKey,
 		SessionToken:    roleCreds.Token,
 		Source:          ProviderName,
-	}, nil
+
+		CanExpire: true,
+		Expires:   roleCreds.Expiration.Add(-p.ExpiryWindow),
+	}
+
+	return creds, nil
 }
 
 // A ec2RoleCredRespBody provides the shape for unmarshaling credential

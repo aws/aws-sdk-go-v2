@@ -75,7 +75,7 @@ var ValidateReqSigHandler = aws.NamedHandler{
 	Name: "core.ValidateReqSigHandler",
 	Fn: func(r *aws.Request) {
 		// Unsigned requests are not signed
-		if r.Config.CredentialsLoader == aws.AnonymousCredentials {
+		if r.Config.Credentials == aws.AnonymousCredentials {
 			return
 		}
 
@@ -193,6 +193,10 @@ var ValidateResponseHandler = aws.NamedHandler{Name: "core.ValidateResponseHandl
 	}
 }}
 
+type invalidator interface {
+	Invalidate()
+}
+
 // AfterRetryHandler performs final checks to determine if the request should
 // be retried and how long to delay.
 var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: func(r *aws.Request) {
@@ -218,8 +222,8 @@ var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: fun
 		// when the expired token exception occurs the credentials
 		// need to be expired locally so that the next request to
 		// get credentials will trigger a credentials refresh.
-		if r.IsErrorExpired() {
-			r.Config.CredentialsLoader.Expire()
+		if p, ok := r.Config.Credentials.(invalidator); ok && r.IsErrorExpired() {
+			p.Invalidate()
 		}
 
 		r.RetryCount++

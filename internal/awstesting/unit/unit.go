@@ -10,12 +10,12 @@ func init() {
 	config = defaults.Config()
 	config.Region = aws.String("mock-region")
 	config.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
-	config.CredentialsLoader = aws.NewCredentialsLoader(aws.StaticCredentialsProvider{
+	config.Credentials = aws.StaticCredentialsProvider{
 		Value: aws.Credentials{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
 			Source: "unit test credentials",
 		},
-	})
+	}
 }
 
 var config aws.Config

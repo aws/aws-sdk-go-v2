@@ -43,7 +43,7 @@ const ProviderName = `CredentialsEndpointProvider`
 // Provider satisfies the aws.CredentialsProvider interface, and is a client to
 // retrieve credentials from an arbitrary endpoint.
 type Provider struct {
-	aws.Expiry
+	aws.SafeCredentialsProvider
 
 	// The AWS Client to make HTTP requests to the endpoint with. The endpoint
 	// the request will be made to is provided by the aws.Config's
@@ -60,8 +60,6 @@ type Provider struct {
 	//
 	// If ExpiryWindow is 0 or less it will be ignored.
 	ExpiryWindow time.Duration
-
-	staticCreds bool
 }
 
 // New returns a credentials Provider for retrieving AWS credentials
@@ -75,6 +73,7 @@ func New(cfg aws.Config) *Provider {
 			},
 		),
 	}
+	p.RetrieveFn = p.retrieveFn
 
 	p.Client.Handlers.Unmarshal.PushBack(unmarshalHandler)
 	p.Client.Handlers.UnmarshalError.PushBack(unmarshalError)
@@ -84,36 +83,28 @@ func New(cfg aws.Config) *Provider {
 	return p
 }
 
-// IsExpired returns true if the credentials retrieved are expired, or not yet
-// retrieved.
-func (p *Provider) IsExpired() bool {
-	if p.staticCreds {
-		return false
-	}
-	return p.Expiry.IsExpired()
-}
-
 // Retrieve will attempt to request the credentials from the endpoint the Provider
 // was configured for. And error will be returned if the retrieval fails.
-func (p *Provider) Retrieve() (aws.Credentials, error) {
+func (p *Provider) retrieveFn() (aws.Credentials, error) {
 	resp, err := p.getCredentials()
 	if err != nil {
-		return aws.Credentials{Source: ProviderName},
+		return aws.Credentials{},
 			awserr.New("CredentialsEndpointError", "failed to load credentials", err)
 	}
 
-	if resp.Expiration != nil {
-		p.SetExpiration(*resp.Expiration, p.ExpiryWindow)
-	} else {
-		p.staticCreds = true
-	}
-
-	return aws.Credentials{
+	creds := aws.Credentials{
 		AccessKeyID:     resp.AccessKeyID,
 		SecretAccessKey: resp.SecretAccessKey,
 		SessionToken:    resp.Token,
 		Source:          ProviderName,
-	}, nil
+	}
+
+	if resp.Expiration != nil {
+		creds.CanExpire = true
+		creds.Expires = resp.Expiration.Add(-p.ExpiryWindow)
+	}
+
+	return creds, nil
 }
 
 type getCredentialsOutput struct {

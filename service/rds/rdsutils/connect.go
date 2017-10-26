@@ -36,7 +36,7 @@ import (
 //
 // See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
 // for more information on using IAM database authentication with RDS.
-func BuildAuthToken(endpoint, region, dbUser string, creds *aws.CredentialsLoader) (string, error) {
+func BuildAuthToken(endpoint, region, dbUser string, credProvider aws.CredentialsProvider) (string, error) {
 	// the scheme is arbitrary and is only needed because validation of the URL requires one.
 	if !(strings.HasPrefix(endpoint, "http://") || strings.HasPrefix(endpoint, "https://")) {
 		endpoint = "https://" + endpoint
@@ -52,7 +52,7 @@ func BuildAuthToken(endpoint, region, dbUser string, creds *aws.CredentialsLoade
 	req.URL.RawQuery = values.Encode()
 
 	signer := v4.Signer{
-		CredentialsLoader: creds,
+		Credentials: credProvider,
 	}
 	_, err = signer.Presign(req, nil, "rds-db", region, 15*time.Minute, time.Now())
 	if err != nil {

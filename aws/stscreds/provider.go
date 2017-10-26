@@ -129,7 +129,7 @@ var DefaultDuration = time.Duration(15) * time.Minute
 // to share this value across multiple Credentials, Sessions, or service clients
 // without also sharing the same Credentials instance.
 type AssumeRoleProvider struct {
-	aws.Expiry
+	aws.SafeCredentialsProvider
 
 	// STS client to make assume role request with.
 	Client AssumeRoler
@@ -193,11 +193,22 @@ type AssumeRoleProvider struct {
 	ExpiryWindow time.Duration
 }
 
-// Retrieve generates a new set of temporary credentials using STS.
-func (p *AssumeRoleProvider) Retrieve() (aws.Credentials, error) {
+// NewAssumeRoleProvider constructs and returns a credentials provider that
+// will retrieve credentials by assuming a IAM role using STS.
+func NewAssumeRoleProvider(client AssumeRoler, roleARN string) *AssumeRoleProvider {
+	p := &AssumeRoleProvider{
+		Client:  client,
+		RoleARN: roleARN,
+	}
+	p.RetrieveFn = p.retrieveFn
 
+	return p
+}
+
+// Retrieve generates a new set of temporary credentials using STS.
+func (p *AssumeRoleProvider) retrieveFn() (aws.Credentials, error) {
 	// Apply defaults where parameters are not set.
-	if p.RoleSessionName == "" {
+	if len(p.RoleSessionName) == 0 {
 		// Try to work out a role name that will hopefully end up unique.
 		p.RoleSessionName = fmt.Sprintf("%d", time.Now().UTC().UnixNano())
 	}
@@ -222,28 +233,28 @@ func (p *AssumeRoleProvider) Retrieve() (aws.Credentials, error) {
 			input.SerialNumber = p.SerialNumber
 			code, err := p.TokenProvider()
 			if err != nil {
-				return aws.Credentials{Source: ProviderName}, err
+				return aws.Credentials{}, err
 			}
 			input.TokenCode = aws.String(code)
 		} else {
-			return aws.Credentials{Source: ProviderName},
+			return aws.Credentials{},
 				awserr.New("AssumeRoleTokenNotAvailable",
 					"assume role with MFA enabled, but neither TokenCode nor TokenProvider are set", nil)
 		}
 	}
 
-	roleOutput, err := p.Client.AssumeRole(input)
+	resp, err := p.Client.AssumeRole(input)
 	if err != nil {
 		return aws.Credentials{Source: ProviderName}, err
 	}
 
-	// We will proactively generate new credentials before they expire.
-	p.SetExpiration(*roleOutput.Credentials.Expiration, p.ExpiryWindow)
-
 	return aws.Credentials{
-		AccessKeyID:     *roleOutput.Credentials.AccessKeyId,
-		SecretAccessKey: *roleOutput.Credentials.SecretAccessKey,
-		SessionToken:    *roleOutput.Credentials.SessionToken,
+		AccessKeyID:     *resp.Credentials.AccessKeyId,
+		SecretAccessKey: *resp.Credentials.SecretAccessKey,
+		SessionToken:    *resp.Credentials.SessionToken,
 		Source:          ProviderName,
+
+		CanExpire: true,
+		Expires:   resp.Credentials.Expiration.Add(-p.ExpiryWindow),
 	}, nil
 }

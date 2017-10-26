@@ -24,11 +24,11 @@ type Client struct {
 
 	Config Config
 
-	Region            string
-	CredentialsLoader *CredentialsLoader
-	EndpointResolver  EndpointResolver
-	Handlers          Handlers
-	Retryer           Retryer
+	Region           string
+	Credentials      CredentialsProvider
+	EndpointResolver EndpointResolver
+	Handlers         Handlers
+	Retryer          Retryer
 
 	// TODO replace with value not pointer
 	LogLevel *LogLevelType
@@ -45,11 +45,11 @@ func NewClient(cfg Config, metadata Metadata) *Client {
 		// TODO remove config when request reqfactored
 		Config: cfg,
 
-		Region:            StringValue(cfg.Region),
-		CredentialsLoader: cfg.CredentialsLoader,
-		EndpointResolver:  cfg.EndpointResolver,
-		Handlers:          cfg.Handlers.Copy(),
-		Retryer:           cfg.Retryer,
+		Region:           StringValue(cfg.Region),
+		Credentials:      cfg.Credentials,
+		EndpointResolver: cfg.EndpointResolver,
+		Handlers:         cfg.Handlers.Copy(),
+		Retryer:          cfg.Retryer,
 
 		LogLevel: cfg.LogLevel,
 		Logger:   cfg.Logger,

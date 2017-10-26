@@ -80,8 +80,7 @@ func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
 		return nil
 	}
 
-	provider := aws.StaticCredentialsProvider{Value: v}
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
+	cfg.Credentials = aws.StaticCredentialsProvider{Value: v}
 
 	return nil
 }
@@ -112,7 +111,7 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 	provider := endpointcreds.New(cfgCp)
 	provider.ExpiryWindow = 5 * time.Minute
 
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
+	cfg.Credentials = provider
 
 	return nil
 }
@@ -157,7 +156,7 @@ func ResolveContainerEndpointPathCredentials(cfg *aws.Config, configs Configs) e
 	provider := endpointcreds.New(cfgCp)
 	provider.ExpiryWindow = 5 * time.Minute
 
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
+	cfg.Credentials = provider
 
 	return nil
 }
@@ -179,15 +178,13 @@ func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
 
 	cfgCp := cfg.Copy()
 	// TODO support additional credential providers that are already set?
-	cfgCp.CredentialsLoader = aws.NewCredentialsLoader(
-		aws.StaticCredentialsProvider{Value: v.Source.Credentials},
-	)
+	cfgCp.Credentials = aws.StaticCredentialsProvider{Value: v.Source.Credentials}
 
-	provider := &stscreds.AssumeRoleProvider{
-		Client:          sts.New(cfgCp),
-		RoleARN:         v.RoleARN,
-		RoleSessionName: v.RoleSessionName,
-	}
+	provider := stscreds.NewAssumeRoleProvider(
+		sts.New(cfgCp), v.RoleARN,
+	)
+	provider.RoleSessionName = v.RoleSessionName
+
 	if id := v.ExternalID; len(id) > 0 {
 		provider.ExternalID = aws.String(id)
 	}
@@ -203,7 +200,7 @@ func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
 		provider.TokenProvider = tp
 	}
 
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
+	cfg.Credentials = provider
 
 	return nil
 }
@@ -215,11 +212,10 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 	cfgCp.HTTPClient = shallowCopyHTTPClient(cfgCp.HTTPClient)
 	cfgCp.HTTPClient.Timeout = 5 * time.Second
 
-	provider := &ec2rolecreds.Provider{
-		Client:       ec2metadata.New(cfgCp),
-		ExpiryWindow: 5 * time.Minute,
-	}
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
+	provider := ec2rolecreds.NewProvider(ec2metadata.New(cfgCp))
+	provider.ExpiryWindow = 5 * time.Minute
+
+	cfg.Credentials = provider
 
 	return nil
 }

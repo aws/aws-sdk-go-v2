@@ -39,17 +39,20 @@ import (
 //     svc := ec2.New(cfg)
 //
 type ChainProvider struct {
-	Providers     []CredentialsProvider
-	curr          CredentialsProvider
-	VerboseErrors bool
+	SafeCredentialsProvider
+
+	Providers []CredentialsProvider
 }
 
 // NewChainProvider returns a pointer to a new ChainProvider value wrapping
 // a chain of credentials providers.
 func NewChainProvider(providers []CredentialsProvider) *ChainProvider {
-	return &ChainProvider{
+	p := &ChainProvider{
 		Providers: append([]CredentialsProvider{}, providers...),
 	}
+	p.RetrieveFn = p.retrieveFn
+
+	return p
 }
 
 // Retrieve returns the credentials value or error if no provider returned
@@ -57,28 +60,16 @@ func NewChainProvider(providers []CredentialsProvider) *ChainProvider {
 //
 // If a provider is found it will be cached and any calls to IsExpired()
 // will return the expired state of the cached provider.
-func (c *ChainProvider) Retrieve() (Credentials, error) {
+func (c *ChainProvider) retrieveFn() (Credentials, error) {
 	var errs []error
 	for _, p := range c.Providers {
 		creds, err := p.Retrieve()
 		if err == nil {
-			c.curr = p
 			return creds, nil
 		}
 		errs = append(errs, err)
 	}
-	c.curr = nil
 
 	return Credentials{},
 		awserr.NewBatchError("NoCredentialProviders", "no valid providers in chain", errs)
-}
-
-// IsExpired will returned the expired state of the currently cached provider
-// if there is one.  If there is no current provider, true will be returned.
-func (c *ChainProvider) IsExpired() bool {
-	if c.curr != nil {
-		return c.curr.IsExpired()
-	}
-
-	return true
 }
