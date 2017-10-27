@@ -76,6 +76,8 @@ type CredentialsProvider interface {
 	// Retrieve returns nil if it successfully retrieved the value.
 	// Error is returned if the value were not obtainable, or empty.
 	Retrieve() (Credentials, error)
+
+	// TODO should Retrieve take a context?
 }
 
 // SafeCredentialsProvider provides caching and concurrency safe credentials
