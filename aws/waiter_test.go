@@ -2,6 +2,7 @@ package aws_test
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -14,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -591,6 +593,10 @@ func TestWaiter_AttemptsExpires(t *testing.T) {
 }
 
 func TestWaiterNilInput(t *testing.T) {
+	orig := sdk.SleepWithContext
+	defer func() { sdk.SleepWithContext = orig }()
+	sdk.SleepWithContext = func(context.Context, time.Duration) error { return nil }
+
 	// Code generation doesn't have a great way to verify the code is correct
 	// other than being run via unit tests in the SDK. This should be fixed
 	// So code generation can be validated independently.
@@ -606,7 +612,6 @@ func TestWaiterNilInput(t *testing.T) {
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
 	svc.Handlers.ValidateResponse.Clear()
-	svc.Config.SleepDelay = func(dur time.Duration) {}
 
 	// Ensure waiters do not panic on nil input. It doesn't make sense to
 	// call a waiter without an input, Validation will

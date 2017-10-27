@@ -2,6 +2,7 @@ package defaults_test
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -16,6 +17,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -73,11 +75,14 @@ func (m *mockCredsProvider) Invalidate() {
 }
 
 func TestAfterRetry_RefreshCreds(t *testing.T) {
+	orig := sdk.SleepWithContext
+	defer func() { sdk.SleepWithContext = orig }()
+	sdk.SleepWithContext = func(context.Context, time.Duration) error { return nil }
+
 	credProvider := &mockCredsProvider{}
 
 	cfg := unit.Config()
 	cfg.Credentials = credProvider
-	cfg.SleepDelay = func(dur time.Duration) {}
 
 	svc := awstesting.NewClient(cfg)
 	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
@@ -95,11 +100,14 @@ func TestAfterRetry_RefreshCreds(t *testing.T) {
 }
 
 func TestAfterRetry_NoPanicRefreshStaticCreds(t *testing.T) {
+	orig := sdk.SleepWithContext
+	defer func() { sdk.SleepWithContext = orig }()
+	sdk.SleepWithContext = func(context.Context, time.Duration) error { return nil }
+
 	credProvider := aws.NewStaticCredentialsProvider("AKID", "SECRET", "")
 
 	cfg := unit.Config()
 	cfg.Credentials = credProvider
-	cfg.SleepDelay = func(dur time.Duration) {}
 
 	svc := awstesting.NewClient(cfg)
 	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
@@ -167,12 +175,7 @@ func TestAfterRetryWithContext(t *testing.T) {
 }
 
 func TestSendWithContextCanceled(t *testing.T) {
-	cfg := unit.Config()
-	cfg.SleepDelay = func(dur time.Duration) {
-		t.Errorf("SleepDelay should not be called")
-	}
-
-	c := awstesting.NewClient(cfg)
+	c := awstesting.NewClient(unit.Config())
 
 	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
