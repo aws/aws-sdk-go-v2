@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 func TestStripExcessHeaders(t *testing.T) {
@@ -257,6 +258,11 @@ func TestAnonymousCredentials(t *testing.T) {
 }
 
 func TestIgnoreResignRequestWithValidCreds(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+	mockTime := time.Time{}
+	sdk.NowTime = func() time.Time { return mockTime }
+
 	cfg := unit.Config()
 	cfg.Credentials = aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	cfg.Region = aws.String("us-west-2")
@@ -275,17 +281,19 @@ func TestIgnoreResignRequestWithValidCreds(t *testing.T) {
 	SignSDKRequest(r)
 	sig := r.HTTPRequest.Header.Get("Authorization")
 
-	signSDKRequestWithCurrTime(r, func() time.Time {
-		// Simulate one second has passed so that signature's date changes
-		// when it is resigned.
-		return time.Now().Add(1 * time.Second)
-	})
+	mockTime = mockTime.Add(1 * time.Second)
+	SignSDKRequest(r)
 	if e, a := sig, r.HTTPRequest.Header.Get("Authorization"); e == a {
 		t.Errorf("expect %v to be %v, but was not", e, a)
 	}
 }
 
 func TestIgnorePreResignRequestWithValidCreds(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+	mockTime := time.Time{}
+	sdk.NowTime = func() time.Time { return mockTime }
+
 	cfg := unit.Config()
 	cfg.Credentials = aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	cfg.Region = aws.String("us-west-2")
@@ -305,17 +313,19 @@ func TestIgnorePreResignRequestWithValidCreds(t *testing.T) {
 	SignSDKRequest(r)
 	sig := r.HTTPRequest.URL.Query().Get("X-Amz-Signature")
 
-	signSDKRequestWithCurrTime(r, func() time.Time {
-		// Simulate one second has passed so that signature's date changes
-		// when it is resigned.
-		return time.Now().Add(1 * time.Second)
-	})
+	mockTime = mockTime.Add(1 * time.Second)
+	SignSDKRequest(r)
 	if e, a := sig, r.HTTPRequest.URL.Query().Get("X-Amz-Signature"); e == a {
 		t.Errorf("expect %v to be %v, but was not", e, a)
 	}
 }
 
 func TestResignRequestExpiredCreds(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+	mockTime := time.Time{}
+	sdk.NowTime = func() time.Time { return mockTime }
+
 	creds := func() awstesting.MockCredentialsProvider {
 		creds := aws.Credentials{
 			AccessKeyID:     "expiredKey",
@@ -366,11 +376,8 @@ func TestResignRequestExpiredCreds(t *testing.T) {
 
 	creds.Invalidate()
 
-	signSDKRequestWithCurrTime(r, func() time.Time {
-		// Simulate one second has passed so that signature's date changes
-		// when it is resigned.
-		return time.Now().Add(1 * time.Second)
-	})
+	mockTime = mockTime.Add(1 * time.Second)
+	SignSDKRequest(r)
 	updatedQuerySig := r.HTTPRequest.Header.Get("Authorization")
 	if e, a := querySig, updatedQuerySig; e == a {
 		t.Errorf("expect %v to be %v, was not", e, a)
@@ -395,6 +402,11 @@ func TestResignRequestExpiredCreds(t *testing.T) {
 }
 
 func TestPreResignRequestExpiredCreds(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+	mockTime := time.Time{}
+	sdk.NowTime = func() time.Time { return mockTime }
+
 	creds := func() awstesting.MockCredentialsProvider {
 		creds := aws.Credentials{
 			AccessKeyID:     "expiredKey",
@@ -438,10 +450,9 @@ func TestPreResignRequestExpiredCreds(t *testing.T) {
 
 	creds.Invalidate()
 
-	signSDKRequestWithCurrTime(r, func() time.Time {
-		// Simulate the request occurred 15 minutes in the past
-		return time.Now().Add(-48 * time.Hour)
-	})
+	// Simulate the request occurred 48 hours in the future
+	mockTime = mockTime.Add(-48 * time.Hour)
+	SignSDKRequest(r)
 	if e, a := querySig, r.HTTPRequest.URL.Query().Get("X-Amz-Signature"); e == a {
 		t.Errorf("expect %v to be %v, was not", e, a)
 	}
@@ -458,6 +469,11 @@ func TestPreResignRequestExpiredCreds(t *testing.T) {
 }
 
 func TestResignRequestExpiredRequest(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+	mockTime := time.Time{}
+	sdk.NowTime = func() time.Time { return mockTime }
+
 	creds := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 
 	cfg := unit.Config()
@@ -478,10 +494,9 @@ func TestResignRequestExpiredRequest(t *testing.T) {
 	querySig := r.HTTPRequest.Header.Get("Authorization")
 	origSignedAt := r.LastSignedAt
 
-	signSDKRequestWithCurrTime(r, func() time.Time {
-		// Simulate the request occurred 15 minutes in the past
-		return time.Now().Add(15 * time.Minute)
-	})
+	// Simulate the request occurred 15 minutes in the past
+	mockTime = mockTime.Add(15 * time.Minute)
+	SignSDKRequest(r)
 	if e, a := querySig, r.HTTPRequest.Header.Get("Authorization"); e == a {
 		t.Errorf("expect %v to be %v, was not", e, a)
 	}
