@@ -29,7 +29,7 @@ type signer struct {
 	// Values that must be populated from the request
 	Request           *http.Request
 	Time              time.Time
-	CredentialsLoader *aws.CredentialsLoader
+	Credentials aws.CredentialsProvider
 	Debug             aws.LogLevelType
 	Logger            aws.Logger
 
@@ -52,7 +52,7 @@ var SignRequestHandler = aws.NamedHandler{
 func SignSDKRequest(req *aws.Request) {
 	// If the request does not need to be signed ignore the signing of the
 	// request if the AnonymousCredentials object is used.
-	if req.Config.CredentialsLoader == aws.AnonymousCredentials {
+	if req.Config.Credentials == aws.AnonymousCredentials {
 		return
 	}
 
@@ -65,7 +65,7 @@ func SignSDKRequest(req *aws.Request) {
 	v2 := signer{
 		Request:           req.HTTPRequest,
 		Time:              req.Time,
-		CredentialsLoader: req.Config.CredentialsLoader,
+		Credentials: req.Config.Credentials,
 		Debug:             req.Config.LogLevel.Value(),
 		Logger:            req.Config.Logger,
 	}
@@ -90,7 +90,7 @@ func SignSDKRequest(req *aws.Request) {
 }
 
 func (v2 *signer) Sign() error {
-	credValue, err := v2.CredentialsLoader.Get()
+	credValue, err := v2.Credentials.Retrieve()
 	if err != nil {
 		return err
 	}

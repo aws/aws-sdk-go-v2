@@ -15,7 +15,6 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
@@ -46,11 +45,11 @@ func (l defaultLogger) Log(args ...interface{}) {
 // existing service client or session.
 func Config() aws.Config {
 	return aws.Config{
-		EndpointResolver:  endpoints.DefaultResolver(),
-		CredentialsLoader: aws.AnonymousCredentials,
-		HTTPClient:        HTTPClient(),
-		Logger:            Logger(),
-		Handlers:          Handlers(),
+		EndpointResolver: endpoints.DefaultResolver(),
+		Credentials:      aws.AnonymousCredentials,
+		HTTPClient:       HTTPClient(),
+		Logger:           Logger(),
+		Handlers:         Handlers(),
 	}
 }
 
@@ -71,15 +70,15 @@ func HTTPClient() *http.Client {
 func Handlers() aws.Handlers {
 	var handlers aws.Handlers
 
-	handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
+	handlers.Validate.PushBackNamed(ValidateEndpointHandler)
 	handlers.Validate.AfterEachFn = aws.HandlerListStopOnError
-	handlers.Build.PushBackNamed(corehandlers.SDKVersionUserAgentHandler)
+	handlers.Build.PushBackNamed(SDKVersionUserAgentHandler)
 	handlers.Build.AfterEachFn = aws.HandlerListStopOnError
-	handlers.Sign.PushBackNamed(corehandlers.BuildContentLengthHandler)
-	handlers.Send.PushBackNamed(corehandlers.ValidateReqSigHandler)
-	handlers.Send.PushBackNamed(corehandlers.SendHandler)
-	handlers.AfterRetry.PushBackNamed(corehandlers.AfterRetryHandler)
-	handlers.ValidateResponse.PushBackNamed(corehandlers.ValidateResponseHandler)
+	handlers.Sign.PushBackNamed(BuildContentLengthHandler)
+	handlers.Send.PushBackNamed(ValidateReqSigHandler)
+	handlers.Send.PushBackNamed(SendHandler)
+	handlers.AfterRetry.PushBackNamed(AfterRetryHandler)
+	handlers.ValidateResponse.PushBackNamed(ValidateResponseHandler)
 
 	return handlers
 }

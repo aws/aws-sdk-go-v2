@@ -1,73 +1,187 @@
 package aws
 
 import (
+	"fmt"
+	"math/rand"
+	"sync"
 	"testing"
+	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/stretchr/testify/assert"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 type stubProvider struct {
 	creds   Credentials
-	expired bool
+	expires time.Time
 	err     error
+
+	onInvalidate func(*stubProvider)
 }
 
 func (s *stubProvider) Retrieve() (Credentials, error) {
-	s.expired = false
-	s.creds.Source = "stubProvider"
-	return s.creds, s.err
-}
-func (s *stubProvider) IsExpired() bool {
-	return s.expired
+	creds := s.creds
+	creds.Source = "stubProvider"
+	creds.CanExpire = !s.expires.IsZero()
+	creds.Expires = s.expires
+
+	return creds, s.err
 }
 
-func TestCredentialsGet(t *testing.T) {
-	c := NewCredentialsLoader(&stubProvider{
-		creds: Credentials{
-			AccessKeyID:     "AKID",
-			SecretAccessKey: "SECRET",
-			SessionToken:    "",
+func (s *stubProvider) Invalidate() {
+	s.onInvalidate(s)
+}
+
+func TestSafeCredentialsProvider_Cache(t *testing.T) {
+	expect := Credentials{
+		AccessKeyID:     "key",
+		SecretAccessKey: "secret",
+		CanExpire:       true,
+		Expires:         time.Now().Add(10 * time.Minute),
+	}
+
+	var called bool
+	p := &SafeCredentialsProvider{
+		RetrieveFn: func() (Credentials, error) {
+			if called {
+				t.Fatalf("expect RetrieveFn to only be called once")
+			}
+			called = true
+			return expect, nil
 		},
-		expired: true,
-	})
+	}
 
-	creds, err := c.Get()
-	assert.Nil(t, err, "Expected no error")
-	assert.Equal(t, "AKID", creds.AccessKeyID, "Expect access key ID to match")
-	assert.Equal(t, "SECRET", creds.SecretAccessKey, "Expect secret access key to match")
-	assert.Empty(t, creds.SessionToken, "Expect session token to be empty")
+	for i := 0; i < 2; i++ {
+		creds, err := p.Retrieve()
+		if err != nil {
+			t.Fatalf("expect no error, got %v", err)
+		}
+		if e, a := expect, creds; e != a {
+			t.Errorf("expect %v creds, got %v", e, a)
+		}
+	}
 }
 
-func TestCredentialsGetWithError(t *testing.T) {
-	c := NewCredentialsLoader(&stubProvider{err: awserr.New("provider error", "", nil), expired: true})
+func TestSafeCredentialsProvider_Expires(t *testing.T) {
+	orig := sdk.NowTime
+	defer func() { sdk.NowTime = orig }()
+	var mockTime time.Time
+	sdk.NowTime = func() time.Time { return mockTime }
 
-	_, err := c.Get()
-	assert.Equal(t, "provider error", err.(awserr.Error).Code(), "Expected provider error")
+	cases := []struct {
+		Creds  func() Credentials
+		Called int
+	}{
+		{
+			Called: 2,
+			Creds: func() Credentials {
+				return Credentials{
+					AccessKeyID:     "key",
+					SecretAccessKey: "secret",
+					CanExpire:       true,
+					Expires:         mockTime.Add(5),
+				}
+			},
+		},
+		{
+			Called: 1,
+			Creds: func() Credentials {
+				return Credentials{
+					AccessKeyID:     "key",
+					SecretAccessKey: "secret",
+				}
+			},
+		},
+		{
+			Called: 6,
+			Creds: func() Credentials {
+				return Credentials{
+					AccessKeyID:     "key",
+					SecretAccessKey: "secret",
+					CanExpire:       true,
+					Expires:         mockTime,
+				}
+			},
+		},
+	}
+
+	for _, c := range cases {
+		var called int
+		p := &SafeCredentialsProvider{
+			RetrieveFn: func() (Credentials, error) {
+				called++
+				return c.Creds(), nil
+			},
+		}
+
+		p.Retrieve()
+		p.Retrieve()
+		p.Retrieve()
+
+		mockTime = mockTime.Add(10)
+
+		p.Retrieve()
+		p.Retrieve()
+		p.Retrieve()
+
+		if e, a := c.Called, called; e != a {
+			t.Errorf("expect %v called, got %v", e, a)
+		}
+	}
 }
 
-func TestCredentialsExpire(t *testing.T) {
-	stub := &stubProvider{}
-	c := NewCredentialsLoader(stub)
+func TestSafeCredentialsProvider_Error(t *testing.T) {
+	p := &SafeCredentialsProvider{
+		RetrieveFn: func() (Credentials, error) {
+			return Credentials{}, fmt.Errorf("failed")
+		},
+	}
 
-	stub.expired = false
-	assert.True(t, c.IsExpired(), "Expected to start out expired")
-	c.Expire()
-	assert.True(t, c.IsExpired(), "Expected to be expired")
-
-	c.forceRefresh = false
-	assert.False(t, c.IsExpired(), "Expected not to be expired")
-
-	stub.expired = true
-	assert.True(t, c.IsExpired(), "Expected to be expired")
+	creds, err := p.Retrieve()
+	if err == nil {
+		t.Fatalf("expect error, not none")
+	}
+	if e, a := "failed", err.Error(); e != a {
+		t.Errorf("expect %q, got %q", e, a)
+	}
+	if e, a := (Credentials{}), creds; e != a {
+		t.Errorf("expect empty creds, got %v", a)
+	}
 }
 
-func TestCredentialsGetWithProviderName(t *testing.T) {
-	stub := &stubProvider{}
+func TestSafeCredentialsProvider_Race(t *testing.T) {
+	expect := Credentials{
+		AccessKeyID:     "key",
+		SecretAccessKey: "secret",
+	}
+	var called bool
+	p := &SafeCredentialsProvider{
+		RetrieveFn: func() (Credentials, error) {
+			time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
+			if called {
+				t.Fatalf("expect RetrieveFn only called once")
+			}
+			called = true
+			return expect, nil
+		},
+	}
 
-	c := NewCredentialsLoader(stub)
+	var wg sync.WaitGroup
+	wg.Add(100)
 
-	creds, err := c.Get()
-	assert.Nil(t, err, "Expected no error")
-	assert.Equal(t, creds.Source, "stubProvider", "Expected provider name to match")
+	for i := 0; i < 100; i++ {
+		go func() {
+			time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
+			creds, err := p.Retrieve()
+			if err != nil {
+				t.Errorf("expect no error, got %v", err)
+			}
+			if e, a := expect, creds; e != a {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+
+			wg.Done()
+		}()
+	}
+
+	wg.Wait()
 }

@@ -54,7 +54,7 @@ func (o *Operation) GetSigner() string {
 
 	switch o.AuthType {
 	case "none":
-		buf.WriteString("req.Config.CredentialsLoader = aws.AnonymousCredentials")
+		buf.WriteString("req.Config.Credentials = aws.AnonymousCredentials")
 	case "v4-unsigned-body":
 		buf.WriteString("req.Handlers.Sign.Remove(v4.SignRequestHandler)\n")
 		buf.WriteString("handler := v4.BuildNamedHandler(\"v4.CustomSignerHandler\", v4.WithUnsignedPayload)\n")

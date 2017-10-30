@@ -1,4 +1,4 @@
-package corehandlers_test
+package defaults_test
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -27,7 +27,7 @@ func TestValidateEndpointHandler(t *testing.T) {
 
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
-	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
+	svc.Handlers.Validate.PushBackNamed(defaults.ValidateEndpointHandler)
 
 	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 	err := req.Build()
@@ -45,7 +45,7 @@ func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
-	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
+	svc.Handlers.Validate.PushBackNamed(defaults.ValidateEndpointHandler)
 
 	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 	err := req.Build()
@@ -59,8 +59,8 @@ func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 }
 
 type mockCredsProvider struct {
-	expired        bool
-	retrieveCalled bool
+	retrieveCalled   bool
+	invalidateCalled bool
 }
 
 func (m *mockCredsProvider) Retrieve() (aws.Credentials, error) {
@@ -68,54 +68,48 @@ func (m *mockCredsProvider) Retrieve() (aws.Credentials, error) {
 	return aws.Credentials{Source: "mockCredsProvider"}, nil
 }
 
-func (m *mockCredsProvider) IsExpired() bool {
-	return m.expired
+func (m *mockCredsProvider) Invalidate() {
+	m.invalidateCalled = true
 }
 
-func TestAfterRetryRefreshCreds(t *testing.T) {
-	os.Clearenv()
+func TestAfterRetry_RefreshCreds(t *testing.T) {
 	credProvider := &mockCredsProvider{}
 
 	cfg := unit.Config()
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(credProvider)
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 1}
+	cfg.Credentials = credProvider
+	cfg.SleepDelay = func(dur time.Duration) {}
 
 	svc := awstesting.NewClient(cfg)
-
-	svc.Handlers.Clear()
-	svc.Handlers.ValidateResponse.PushBack(func(r *aws.Request) {
-		r.Error = awserr.New("UnknownError", "", nil)
-		r.HTTPResponse = &http.Response{StatusCode: 400, Body: ioutil.NopCloser(bytes.NewBuffer([]byte{}))}
-	})
-	svc.Handlers.UnmarshalError.PushBack(func(r *aws.Request) {
-		r.Error = awserr.New("ExpiredTokenException", "", nil)
-	})
-	svc.Handlers.AfterRetry.PushBackNamed(corehandlers.AfterRetryHandler)
-
-	if !svc.Config.CredentialsLoader.IsExpired() {
-		t.Errorf("Expect to start out expired")
-	}
-	if credProvider.retrieveCalled {
-		t.Errorf("expect not called")
-	}
-
 	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
-	req.Send()
-
-	if !svc.Config.CredentialsLoader.IsExpired() {
-		t.Errorf("Expect to start out expired")
-	}
-	if credProvider.retrieveCalled {
-		t.Errorf("expect not called")
+	req.Retryable = aws.Bool(true)
+	req.Error = awserr.New("ExpiredTokenException", "", nil)
+	req.HTTPResponse = &http.Response{
+		StatusCode: 403,
 	}
 
-	_, err := svc.Config.CredentialsLoader.Get()
-	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+	defaults.AfterRetryHandler.Fn(req)
+
+	if !credProvider.invalidateCalled {
+		t.Errorf("expect credentials to be invalidated")
 	}
-	if !credProvider.retrieveCalled {
-		t.Errorf("expect not called")
+}
+
+func TestAfterRetry_NoPanicRefreshStaticCreds(t *testing.T) {
+	credProvider := aws.NewStaticCredentialsProvider("AKID", "SECRET", "")
+
+	cfg := unit.Config()
+	cfg.Credentials = credProvider
+	cfg.SleepDelay = func(dur time.Duration) {}
+
+	svc := awstesting.NewClient(cfg)
+	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
+	req.Retryable = aws.Bool(true)
+	req.Error = awserr.New("ExpiredTokenException", "", nil)
+	req.HTTPResponse = &http.Response{
+		StatusCode: 403,
 	}
+
+	defaults.AfterRetryHandler.Fn(req)
 }
 
 func TestAfterRetryWithContextCanceled(t *testing.T) {
@@ -135,7 +129,7 @@ func TestAfterRetryWithContextCanceled(t *testing.T) {
 	close(ctx.DoneCh)
 	ctx.Error = fmt.Errorf("context canceled")
 
-	corehandlers.AfterRetryHandler.Fn(req)
+	defaults.AfterRetryHandler.Fn(req)
 
 	if req.Error == nil {
 		t.Fatalf("expect error but didn't receive one")
@@ -162,7 +156,7 @@ func TestAfterRetryWithContext(t *testing.T) {
 		StatusCode: 500,
 	}
 
-	corehandlers.AfterRetryHandler.Fn(req)
+	defaults.AfterRetryHandler.Fn(req)
 
 	if req.Error != nil {
 		t.Fatalf("expect no error, got %v", req.Error)
@@ -194,7 +188,7 @@ func TestSendWithContextCanceled(t *testing.T) {
 	close(ctx.DoneCh)
 	ctx.Error = fmt.Errorf("context canceled")
 
-	corehandlers.SendHandler.Fn(req)
+	defaults.SendHandler.Fn(req)
 
 	if req.Error == nil {
 		t.Fatalf("expect error but didn't receive one")
@@ -220,7 +214,7 @@ func TestSendHandlerError(t *testing.T) {
 	}
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
-	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
+	svc.Handlers.Send.PushBackNamed(defaults.SendHandler)
 	r := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
 	r.Send()
@@ -250,7 +244,7 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
-	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
+	svc.Handlers.Send.PushBackNamed(defaults.SendHandler)
 
 	r := svc.NewRequest(&aws.Operation{
 		Name:     "Operation",
@@ -274,7 +268,7 @@ func TestValidateReqSigHandler(t *testing.T) {
 	}{
 		{
 			Req: &aws.Request{
-				Config: aws.Config{CredentialsLoader: aws.AnonymousCredentials},
+				Config: aws.Config{Credentials: aws.AnonymousCredentials},
 				Time:   time.Now().Add(-15 * time.Minute),
 			},
 			Resign: false,
@@ -299,7 +293,7 @@ func TestValidateReqSigHandler(t *testing.T) {
 			resigned = true
 		})
 
-		corehandlers.ValidateReqSigHandler.Fn(c.Req)
+		defaults.ValidateReqSigHandler.Fn(c.Req)
 
 		if c.Req.Error != nil {
 			t.Errorf("expect no error, got %v", c.Req.Error)

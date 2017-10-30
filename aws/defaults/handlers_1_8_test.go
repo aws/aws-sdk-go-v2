@@ -1,6 +1,6 @@
 // +build go1.8
 
-package corehandlers_test
+package defaults_test
 
 import (
 	"net/http"

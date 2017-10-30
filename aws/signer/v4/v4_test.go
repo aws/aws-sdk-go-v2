@@ -75,9 +75,7 @@ func buildRequest(serviceName, region, body string) (*http.Request, io.ReadSeeke
 
 func buildSigner() Signer {
 	return Signer{
-		CredentialsLoader: aws.NewCredentialsLoader(
-			aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-		),
+		Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
 	}
 }
 
@@ -221,7 +219,7 @@ func TestSignPrecomputedBodyChecksum(t *testing.T) {
 
 func TestAnonymousCredentials(t *testing.T) {
 	cfg := unit.Config()
-	cfg.CredentialsLoader = aws.AnonymousCredentials
+	cfg.Credentials = aws.AnonymousCredentials
 
 	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
@@ -260,9 +258,7 @@ func TestAnonymousCredentials(t *testing.T) {
 
 func TestIgnoreResignRequestWithValidCreds(t *testing.T) {
 	cfg := unit.Config()
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	cfg.Credentials = aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	cfg.Region = aws.String("us-west-2")
 
 	svc := awstesting.NewClient(cfg)
@@ -291,9 +287,7 @@ func TestIgnoreResignRequestWithValidCreds(t *testing.T) {
 
 func TestIgnorePreResignRequestWithValidCreds(t *testing.T) {
 	cfg := unit.Config()
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	cfg.Credentials = aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	cfg.Region = aws.String("us-west-2")
 
 	svc := awstesting.NewClient(cfg)
@@ -322,12 +316,26 @@ func TestIgnorePreResignRequestWithValidCreds(t *testing.T) {
 }
 
 func TestResignRequestExpiredCreds(t *testing.T) {
-	creds := aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	creds := func() awstesting.MockCredentialsProvider {
+		creds := aws.Credentials{
+			AccessKeyID:     "expiredKey",
+			SecretAccessKey: "expiredSecret",
+		}
+		return awstesting.MockCredentialsProvider{
+			RetrieveFn: func() (aws.Credentials, error) {
+				return creds, nil
+			},
+			InvalidateFn: func() {
+				creds = aws.Credentials{
+					AccessKeyID:     "AKID",
+					SecretAccessKey: "SECRET",
+				}
+			},
+		}
+	}()
 
 	cfg := unit.Config()
-	cfg.CredentialsLoader = creds
+	cfg.Credentials = creds
 
 	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
@@ -356,7 +364,7 @@ func TestResignRequestExpiredCreds(t *testing.T) {
 	}
 	origSignedAt := r.LastSignedAt
 
-	creds.Expire()
+	creds.Invalidate()
 
 	signSDKRequestWithCurrTime(r, func() time.Time {
 		// Simulate one second has passed so that signature's date changes
@@ -387,12 +395,26 @@ func TestResignRequestExpiredCreds(t *testing.T) {
 }
 
 func TestPreResignRequestExpiredCreds(t *testing.T) {
-	creds := aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	creds := func() awstesting.MockCredentialsProvider {
+		creds := aws.Credentials{
+			AccessKeyID:     "expiredKey",
+			SecretAccessKey: "expiredSecret",
+		}
+		return awstesting.MockCredentialsProvider{
+			RetrieveFn: func() (aws.Credentials, error) {
+				return creds, nil
+			},
+			InvalidateFn: func() {
+				creds = aws.Credentials{
+					AccessKeyID:     "AKID",
+					SecretAccessKey: "SECRET",
+				}
+			},
+		}
+	}()
 
 	cfg := unit.Config()
-	cfg.CredentialsLoader = creds
+	cfg.Credentials = creds
 
 	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
@@ -414,7 +436,7 @@ func TestPreResignRequestExpiredCreds(t *testing.T) {
 	}
 	origSignedAt := r.LastSignedAt
 
-	creds.Expire()
+	creds.Invalidate()
 
 	signSDKRequestWithCurrTime(r, func() time.Time {
 		// Simulate the request occurred 15 minutes in the past
@@ -436,12 +458,10 @@ func TestPreResignRequestExpiredCreds(t *testing.T) {
 }
 
 func TestResignRequestExpiredRequest(t *testing.T) {
-	creds := aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	creds := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 
 	cfg := unit.Config()
-	cfg.CredentialsLoader = creds
+	cfg.Credentials = creds
 
 	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
@@ -471,9 +491,7 @@ func TestResignRequestExpiredRequest(t *testing.T) {
 }
 
 func TestSignWithRequestBody(t *testing.T) {
-	creds := aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	creds := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	signer := NewSigner(creds)
 
 	expectBody := []byte("abc123")
@@ -507,9 +525,7 @@ func TestSignWithRequestBody(t *testing.T) {
 }
 
 func TestSignWithRequestBody_Overwrite(t *testing.T) {
-	creds := aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	creds := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	signer := NewSigner(creds)
 
 	var expectBody []byte
@@ -565,9 +581,7 @@ func TestBuildCanonicalRequest(t *testing.T) {
 }
 
 func TestSignWithBody_ReplaceRequestBody(t *testing.T) {
-	creds := aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	creds := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	req, seekerBody := buildRequest("dynamodb", "us-east-1", "{}")
 	req.Body = ioutil.NopCloser(bytes.NewReader([]byte{}))
 
@@ -589,9 +603,7 @@ func TestSignWithBody_ReplaceRequestBody(t *testing.T) {
 }
 
 func TestSignWithBody_NoReplaceRequestBody(t *testing.T) {
-	creds := aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	)
+	creds := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	req, seekerBody := buildRequest("dynamodb", "us-east-1", "{}")
 	req.Body = ioutil.NopCloser(bytes.NewReader([]byte{}))
 

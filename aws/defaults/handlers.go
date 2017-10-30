@@ -1,4 +1,4 @@
-package corehandlers
+package defaults
 
 import (
 	"bytes"
@@ -14,6 +14,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 // Interface for matching types which also have a Len method.
@@ -75,7 +76,7 @@ var ValidateReqSigHandler = aws.NamedHandler{
 	Name: "core.ValidateReqSigHandler",
 	Fn: func(r *aws.Request) {
 		// Unsigned requests are not signed
-		if r.Config.CredentialsLoader == aws.AnonymousCredentials {
+		if r.Config.Credentials == aws.AnonymousCredentials {
 			return
 		}
 
@@ -218,8 +219,8 @@ var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: fun
 		// when the expired token exception occurs the credentials
 		// need to be expired locally so that the next request to
 		// get credentials will trigger a credentials refresh.
-		if r.IsErrorExpired() {
-			r.Config.CredentialsLoader.Expire()
+		if p, ok := r.Config.Credentials.(sdk.Invalidator); ok && r.IsErrorExpired() {
+			p.Invalidate()
 		}
 
 		r.RetryCount++

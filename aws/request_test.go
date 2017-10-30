@@ -16,7 +16,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -228,48 +228,91 @@ func TestRequestExhaustRetries(t *testing.T) {
 		min := expectDelays[i].min * time.Millisecond
 		max := expectDelays[i].max * time.Millisecond
 		if !(min <= v && v <= max) {
-			t.Errorf("Expect delay to be within range, i:%d, v:%s, min:%s, max:%s",
+			t.Errorf("expect delay to be within range, i:%d, v:%s, min:%s, max:%s",
 				i, v, min, max)
 		}
 	}
 }
 
 // test that the request is retried after the credentials are expired.
-func TestRequestRecoverExpiredCreds(t *testing.T) {
+func TestRequest_RecoverExpiredCreds(t *testing.T) {
 	reqNum := 0
 	reqs := []http.Response{
 		{StatusCode: 400, Body: body(`{"__type":"ExpiredTokenException","message":"expired token"}`)},
 		{StatusCode: 200, Body: body(`{"data":"valid"}`)},
 	}
+	expectCreds := []aws.Credentials{
+		{
+			AccessKeyID:     "expiredKey",
+			SecretAccessKey: "expiredSecret",
+		},
+		{
+			AccessKeyID:     "AKID",
+			SecretAccessKey: "SECRET",
+		},
+	}
 
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
-	cfg.CredentialsLoader = aws.NewCredentialsLoader(
-		aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
-	)
+
+	credsInvalidated := false
+	credsProvider := func() aws.CredentialsProvider {
+		creds := expectCreds[0]
+		return awstesting.MockCredentialsProvider{
+			RetrieveFn: func() (aws.Credentials, error) {
+				return creds, nil
+			},
+			InvalidateFn: func() {
+				creds = expectCreds[1]
+				credsInvalidated = true
+			},
+		}
+	}()
+	cfg.Credentials = credsProvider
 
 	s := awstesting.NewClient(cfg)
 
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)
 	s.Handlers.UnmarshalError.PushBack(unmarshalError)
-
-	credExpiredBeforeRetry := false
-	credExpiredAfterRetry := false
+	s.Handlers.Build.PushFront(func(r *aws.Request) {
+		creds, err := r.Config.Credentials.Retrieve()
+		if err != nil {
+			t.Fatalf("expect no error, got %v", err)
+		}
+		if e, a := "expiredKey", creds.AccessKeyID; e != a {
+			t.Errorf("expect %v key, got %v", e, a)
+		}
+		if e, a := "expiredSecret", creds.SecretAccessKey; e != a {
+			t.Errorf("expect %v secret, got %v", e, a)
+		}
+	})
 
 	s.Handlers.AfterRetry.PushBack(func(r *aws.Request) {
-		credExpiredAfterRetry = r.Config.CredentialsLoader.IsExpired()
+		if !credsInvalidated {
+			t.Errorf("expect creds to be invalidated")
+		}
 	})
 
 	s.Handlers.Sign.Clear()
 	s.Handlers.Sign.PushBack(func(r *aws.Request) {
-		r.Config.CredentialsLoader.Get()
+		creds, err := r.Config.Credentials.Retrieve()
+		if err != nil {
+			t.Errorf("expect no error, got %v", err)
+		}
+		if e, a := expectCreds[reqNum].AccessKeyID, creds.AccessKeyID; e != a {
+			t.Errorf("expect %v key, got %v", e, a)
+		}
+		if e, a := expectCreds[reqNum].SecretAccessKey, creds.SecretAccessKey; e != a {
+			t.Errorf("expect %v secret, got %v", e, a)
+		}
 	})
 	s.Handlers.Send.Clear() // mock sending
 	s.Handlers.Send.PushBack(func(r *aws.Request) {
 		r.HTTPResponse = &reqs[reqNum]
 		reqNum++
 	})
+
 	out := &testData{}
 	r := s.NewRequest(&aws.Operation{Name: "Operation"}, nil, out)
 	err := r.Send()
@@ -277,14 +320,12 @@ func TestRequestRecoverExpiredCreds(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	if credExpiredBeforeRetry {
-		t.Errorf("Expect valid creds before retry check")
+	creds, err := r.Config.Credentials.Retrieve()
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
-	if !credExpiredAfterRetry {
-		t.Errorf("Expect expired creds after retry check")
-	}
-	if s.Config.CredentialsLoader.IsExpired() {
-		t.Errorf("Expect valid creds after cred expired recovery")
+	if creds.Expired() {
+		t.Errorf("expect valid creds after cred expired recovery")
 	}
 
 	if e, a := 1, int(r.RetryCount); e != a {
@@ -387,7 +428,7 @@ func TestRequestThrottleRetries(t *testing.T) {
 		min := expectDelays[i].min * time.Millisecond
 		max := expectDelays[i].max * time.Millisecond
 		if !(min <= v && v <= max) {
-			t.Errorf("Expect delay to be within range, i:%d, v:%s, min:%s, max:%s",
+			t.Errorf("expect delay to be within range, i:%d, v:%s, min:%s, max:%s",
 				i, v, min, max)
 		}
 	}
@@ -575,7 +616,7 @@ func TestIsSerializationErrorRetryable(t *testing.T) {
 			Error: c.err,
 		}
 		if r.IsErrorRetryable() != c.expected {
-			t.Errorf("Case %d: Expected %v, but received %v", i+1, c.expected, !c.expected)
+			t.Errorf("Case %d: expected %v, but received %v", i+1, c.expected, !c.expected)
 		}
 	}
 }
@@ -666,7 +707,7 @@ func TestSerializationErrConnectionReset(t *testing.T) {
 	handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
 	handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
 	handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
-	handlers.AfterRetry.PushBackNamed(corehandlers.AfterRetryHandler)
+	handlers.AfterRetry.PushBackNamed(defaults.AfterRetryHandler)
 
 	op := &aws.Operation{
 		Name:       "op",
@@ -702,18 +743,18 @@ func TestSerializationErrConnectionReset(t *testing.T) {
 	req.ApplyOptions(aws.WithResponseReadTimeout(time.Second))
 	err := req.Send()
 	if err == nil {
-		t.Error("Expected rror 'SerializationError', but received nil")
+		t.Error("expected rror 'SerializationError', but received nil")
 	}
 	if aerr, ok := err.(awserr.Error); ok && aerr.Code() != "SerializationError" {
-		t.Errorf("Expected 'SerializationError', but received %q", aerr.Code())
+		t.Errorf("expected 'SerializationError', but received %q", aerr.Code())
 	} else if !ok {
-		t.Errorf("Expected 'awserr.Error', but received %v", reflect.TypeOf(err))
+		t.Errorf("expected 'awserr.Error', but received %v", reflect.TypeOf(err))
 	} else if aerr.OrigErr().Error() != osErr.Error() {
-		t.Errorf("Expected %q, but received %q", osErr.Error(), aerr.OrigErr().Error())
+		t.Errorf("expected %q, but received %q", osErr.Error(), aerr.OrigErr().Error())
 	}
 
 	if count != 6 {
-		t.Errorf("Expected '6', but received %d", count)
+		t.Errorf("expected '6', but received %d", count)
 	}
 }
 
