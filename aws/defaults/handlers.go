@@ -1,4 +1,4 @@
-package corehandlers
+package defaults
 
 import (
 	"bytes"

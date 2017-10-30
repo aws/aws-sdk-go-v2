@@ -4,7 +4,7 @@ package simpledb
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v2"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
@@ -59,7 +59,7 @@ func New(config aws.Config) *SimpleDB {
 
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed(v2.SignRequestHandler)
-	svc.Handlers.Sign.PushBackNamed(corehandlers.BuildContentLengthHandler)
+	svc.Handlers.Sign.PushBackNamed(defaults.BuildContentLengthHandler)
 	svc.Handlers.Build.PushBackNamed(query.BuildHandler)
 	svc.Handlers.Unmarshal.PushBackNamed(query.UnmarshalHandler)
 	svc.Handlers.UnmarshalMeta.PushBackNamed(query.UnmarshalMetaHandler)

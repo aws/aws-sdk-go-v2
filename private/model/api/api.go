@@ -458,7 +458,7 @@ func New(config aws.Config) *{{ .StructName }} {
 	// Handlers
 	svc.Handlers.Sign.PushBackNamed({{if eq .Metadata.SignatureVersion "v2"}}v2{{else}}v4{{end}}.SignRequestHandler)
 	{{- if eq .Metadata.SignatureVersion "v2" }}
-		svc.Handlers.Sign.PushBackNamed(corehandlers.BuildContentLengthHandler)
+		svc.Handlers.Sign.PushBackNamed(defaults.BuildContentLengthHandler)
 	{{- end }}
 	svc.Handlers.Build.PushBackNamed({{ .ProtocolPackage }}.BuildHandler)
 	svc.Handlers.Unmarshal.PushBackNamed({{ .ProtocolPackage }}.UnmarshalHandler)
@@ -511,7 +511,7 @@ func (a *API) ServiceGoCode() string {
 	a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
 	if a.Metadata.SignatureVersion == "v2" {
 		a.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v2"] = true
-		a.imports["github.com/aws/aws-sdk-go-v2/aws/corehandlers"] = true
+		a.imports["github.com/aws/aws-sdk-go-v2/aws/defaults"] = true
 	} else {
 		a.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v4"] = true
 	}

@@ -16,7 +16,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -707,7 +707,7 @@ func TestSerializationErrConnectionReset(t *testing.T) {
 	handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
 	handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
 	handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
-	handlers.AfterRetry.PushBackNamed(corehandlers.AfterRetryHandler)
+	handlers.AfterRetry.PushBackNamed(defaults.AfterRetryHandler)
 
 	op := &aws.Operation{
 		Name:       "op",

@@ -1,4 +1,4 @@
-package corehandlers_test
+package defaults_test
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -27,7 +27,7 @@ func TestValidateEndpointHandler(t *testing.T) {
 
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
-	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
+	svc.Handlers.Validate.PushBackNamed(defaults.ValidateEndpointHandler)
 
 	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 	err := req.Build()
@@ -45,7 +45,7 @@ func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
-	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
+	svc.Handlers.Validate.PushBackNamed(defaults.ValidateEndpointHandler)
 
 	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 	err := req.Build()
@@ -87,7 +87,7 @@ func TestAfterRetry_RefreshCreds(t *testing.T) {
 		StatusCode: 403,
 	}
 
-	corehandlers.AfterRetryHandler.Fn(req)
+	defaults.AfterRetryHandler.Fn(req)
 
 	if !credProvider.invalidateCalled {
 		t.Errorf("expect credentials to be invalidated")
@@ -109,7 +109,7 @@ func TestAfterRetry_NoPanicRefreshStaticCreds(t *testing.T) {
 		StatusCode: 403,
 	}
 
-	corehandlers.AfterRetryHandler.Fn(req)
+	defaults.AfterRetryHandler.Fn(req)
 }
 
 func TestAfterRetryWithContextCanceled(t *testing.T) {
@@ -129,7 +129,7 @@ func TestAfterRetryWithContextCanceled(t *testing.T) {
 	close(ctx.DoneCh)
 	ctx.Error = fmt.Errorf("context canceled")
 
-	corehandlers.AfterRetryHandler.Fn(req)
+	defaults.AfterRetryHandler.Fn(req)
 
 	if req.Error == nil {
 		t.Fatalf("expect error but didn't receive one")
@@ -156,7 +156,7 @@ func TestAfterRetryWithContext(t *testing.T) {
 		StatusCode: 500,
 	}
 
-	corehandlers.AfterRetryHandler.Fn(req)
+	defaults.AfterRetryHandler.Fn(req)
 
 	if req.Error != nil {
 		t.Fatalf("expect no error, got %v", req.Error)
@@ -188,7 +188,7 @@ func TestSendWithContextCanceled(t *testing.T) {
 	close(ctx.DoneCh)
 	ctx.Error = fmt.Errorf("context canceled")
 
-	corehandlers.SendHandler.Fn(req)
+	defaults.SendHandler.Fn(req)
 
 	if req.Error == nil {
 		t.Fatalf("expect error but didn't receive one")
@@ -214,7 +214,7 @@ func TestSendHandlerError(t *testing.T) {
 	}
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
-	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
+	svc.Handlers.Send.PushBackNamed(defaults.SendHandler)
 	r := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
 	r.Send()
@@ -244,7 +244,7 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
-	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
+	svc.Handlers.Send.PushBackNamed(defaults.SendHandler)
 
 	r := svc.NewRequest(&aws.Operation{
 		Name:     "Operation",
@@ -293,7 +293,7 @@ func TestValidateReqSigHandler(t *testing.T) {
 			resigned = true
 		})
 
-		corehandlers.ValidateReqSigHandler.Fn(c.Req)
+		defaults.ValidateReqSigHandler.Fn(c.Req)
 
 		if c.Req.Error != nil {
 			t.Errorf("expect no error, got %v", c.Req.Error)

@@ -1,4 +1,4 @@
-package corehandlers_test
+package defaults_test
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 )
@@ -107,7 +107,7 @@ func TestNoErrors(t *testing.T) {
 	}
 
 	req := testSvc.NewRequest(&aws.Operation{}, input, nil)
-	corehandlers.ValidateParametersHandler.Fn(req)
+	defaults.ValidateParametersHandler.Fn(req)
 	if req.Error != nil {
 		t.Fatalf("expect no error, got %v", req.Error)
 	}
@@ -116,7 +116,7 @@ func TestNoErrors(t *testing.T) {
 func TestMissingRequiredParameters(t *testing.T) {
 	input := &StructShape{}
 	req := testSvc.NewRequest(&aws.Operation{}, input, nil)
-	corehandlers.ValidateParametersHandler.Fn(req)
+	defaults.ValidateParametersHandler.Fn(req)
 
 	if req.Error == nil {
 		t.Fatalf("expect error")
@@ -159,7 +159,7 @@ func TestNestedMissingRequiredParameters(t *testing.T) {
 	}
 
 	req := testSvc.NewRequest(&aws.Operation{}, input, nil)
-	corehandlers.ValidateParametersHandler.Fn(req)
+	defaults.ValidateParametersHandler.Fn(req)
 
 	if req.Error == nil {
 		t.Fatalf("expect error")
@@ -251,7 +251,7 @@ var testsFieldMin = []struct {
 func TestValidateFieldMinParameter(t *testing.T) {
 	for i, c := range testsFieldMin {
 		req := testSvc.NewRequest(&aws.Operation{}, &c.in, nil)
-		corehandlers.ValidateParametersHandler.Fn(req)
+		defaults.ValidateParametersHandler.Fn(req)
 
 		if e, a := c.err, req.Error; !reflect.DeepEqual(e, a) {
 			t.Errorf("%d, expect %v, got %v", i, e, a)
@@ -275,7 +275,7 @@ func BenchmarkValidateAny(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		corehandlers.ValidateParametersHandler.Fn(req)
+		defaults.ValidateParametersHandler.Fn(req)
 		if err := req.Error; err != nil {
 			b.Fatalf("validation failed: %v", err)
 		}
