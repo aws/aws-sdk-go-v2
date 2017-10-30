@@ -42,7 +42,7 @@ const (
 //     svc := firehose.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Firehose {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Firehose{
 		Client: aws.NewClient(

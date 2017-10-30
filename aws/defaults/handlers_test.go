@@ -25,7 +25,7 @@ func TestValidateEndpointHandler(t *testing.T) {
 	os.Clearenv()
 
 	cfg := unit.Config()
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
@@ -43,7 +43,7 @@ func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 	os.Clearenv()
 
 	cfg := unit.Config()
-	cfg.Region = nil
+	cfg.Region = ""
 
 	svc := awstesting.NewClient(cfg)
 	svc.Handlers.Clear()
@@ -242,7 +242,7 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 	}))
 
 	cfg := unit.Config()
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.DisableSSL = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 	svc := awstesting.NewClient(cfg)
@@ -349,8 +349,8 @@ func TestBuildContentLength_ZeroBody(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.S3ForcePathStyle = true
+	cfg.DisableSSL = true
 
 	svc := s3.New(cfg)
 	_, err := svc.GetObject(&s3.GetObjectInput{
@@ -368,8 +368,8 @@ func TestBuildContentLength_NegativeBody(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.S3ForcePathStyle = true
+	cfg.DisableSSL = true
 
 	svc := s3.New(cfg)
 	req, _ := svc.GetObjectRequest(&s3.GetObjectInput{
@@ -389,8 +389,8 @@ func TestBuildContentLength_WithBody(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.S3ForcePathStyle = true
+	cfg.DisableSSL = true
 
 	svc := s3.New(cfg)
 	_, err := svc.PutObject(&s3.PutObjectInput{

@@ -138,7 +138,7 @@ func TestValidateCRC32DoesNotMatch(t *testing.T) {
 func TestValidateCRC32DoesNotMatchNoComputeChecksum(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 2}
-	cfg.DisableComputeChecksums = aws.Bool(true)
+	cfg.DisableComputeChecksums = true
 
 	svc := dynamodb.New(cfg)
 	svc.Handlers.Send.Clear() // mock sending

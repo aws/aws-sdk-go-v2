@@ -4,7 +4,6 @@
 package s3crypto
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3crypto"
@@ -15,7 +14,7 @@ import (
 func init() {
 	gucumber.Before("@s3crypto", func() {
 		cfg := integration.Config()
-		cfg.Region = aws.String("us-west-2")
+		cfg.Region = "us-west-2"
 
 		encryptionClient := s3crypto.NewEncryptionClient(cfg, nil,
 			func(c *s3crypto.EncryptionClient) {},

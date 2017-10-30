@@ -22,8 +22,8 @@ import (
 func TestDefaultConfigValues(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.Region = aws.String("us-west-2")
+	cfg.S3ForcePathStyle = true
+	cfg.Region = "us-west-2"
 
 	svc := kms.New(cfg)
 	handler := s3crypto.NewKMSKeyGenerator(svc, "testid")
@@ -50,8 +50,8 @@ func TestPutObject(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.Region = aws.String("us-west-2")
+	cfg.S3ForcePathStyle = true
+	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewEncryptionClient(cfg, cb)
 	if c == nil {

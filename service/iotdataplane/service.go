@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *IoTDataPlane {
 	var signingName string
 	signingName = "iotdata"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &IoTDataPlane{
 		Client: aws.NewClient(

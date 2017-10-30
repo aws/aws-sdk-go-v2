@@ -42,7 +42,7 @@ const (
 //     svc := dax.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *DAX {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &DAX{
 		Client: aws.NewClient(

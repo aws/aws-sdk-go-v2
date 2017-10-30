@@ -10,7 +10,7 @@ import (
 
 func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.DisableParamValidation = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
 
 	svc := iotdataplane.New(cfg)
@@ -30,7 +30,7 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 
 func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.DisableParamValidation = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
 
 	svc := iotdataplane.New(cfg)
@@ -51,7 +51,7 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 
 func TestRequireEndpointUsed(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.DisableParamValidation = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
 
 	svc := iotdataplane.New(cfg)

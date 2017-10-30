@@ -43,7 +43,7 @@ const (
 //     svc := simpledb.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *SimpleDB {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &SimpleDB{
 		Client: aws.NewClient(

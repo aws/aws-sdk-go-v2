@@ -42,7 +42,7 @@ const (
 //     svc := cognitoidentity.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CognitoIdentity {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &CognitoIdentity{
 		Client: aws.NewClient(

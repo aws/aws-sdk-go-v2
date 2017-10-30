@@ -101,11 +101,11 @@ func New(cfg Config, metadata Metadata, handlers Handlers,
 
 	// TODO need better way of handling this error... NeqRequest should return error.
 	endpoint, err := cfg.EndpointResolver.EndpointFor(
-		metadata.ServiceName, StringValue(cfg.Region),
+		metadata.ServiceName, cfg.Region,
 		func(opt *endpoints.Options) {
 			// TODO Where should these options go?
-			opt.DisableSSL = BoolValue(cfg.DisableSSL)
-			opt.UseDualStack = BoolValue(cfg.UseDualStack)
+			opt.DisableSSL = cfg.DisableSSL
+			opt.UseDualStack = cfg.UseDualStack
 
 			// Support the condition where the service is modeled but its
 			// endpoint metadata is not available.
@@ -191,9 +191,9 @@ func WithGetResponseHeaders(headers *http.Header) Option {
 // log level when the request is made.
 //
 //     svc.PutObjectWithContext(ctx, params, request.WithLogLevel(LogDebugWithHTTPBody)
-func WithLogLevel(l LogLevelType) Option {
+func WithLogLevel(l LogLevel) Option {
 	return func(r *Request) {
-		r.Config.LogLevel = LogLevel(l)
+		r.Config.LogLevel = l
 	}
 }
 

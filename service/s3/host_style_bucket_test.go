@@ -77,7 +77,7 @@ func runTests(t *testing.T, svc *s3.S3, tests []s3BucketTest) {
 
 func TestAccelerateBucketBuild(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3UseAccelerate = aws.Bool(true)
+	cfg.S3UseAccelerate = true
 	cfg.EndpointResolver = endpoints.DefaultResolver()
 
 	s := s3.New(cfg)
@@ -86,8 +86,8 @@ func TestAccelerateBucketBuild(t *testing.T) {
 
 func TestAccelerateNoSSLBucketBuild(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3UseAccelerate = aws.Bool(true)
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.S3UseAccelerate = true
+	cfg.DisableSSL = true
 	cfg.EndpointResolver = endpoints.DefaultResolver()
 
 	s := s3.New(cfg)
@@ -96,8 +96,8 @@ func TestAccelerateNoSSLBucketBuild(t *testing.T) {
 
 func TestAccelerateDualstackBucketBuild(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3UseAccelerate = aws.Bool(true)
-	cfg.UseDualStack = aws.Bool(true)
+	cfg.S3UseAccelerate = true
+	cfg.UseDualStack = true
 	cfg.EndpointResolver = endpoints.DefaultResolver()
 
 	s := s3.New(cfg)
@@ -114,7 +114,7 @@ func TestHostStyleBucketBuild(t *testing.T) {
 
 func TestHostStyleBucketBuildNoSSL(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.DisableSSL = true
 	cfg.EndpointResolver = endpoints.DefaultResolver()
 
 	s := s3.New(cfg)
@@ -123,7 +123,7 @@ func TestHostStyleBucketBuildNoSSL(t *testing.T) {
 
 func TestPathStyleBucketBuild(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.S3ForcePathStyle = true
 	cfg.EndpointResolver = endpoints.DefaultResolver()
 
 	s := s3.New(cfg)

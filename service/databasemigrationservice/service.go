@@ -42,7 +42,7 @@ const (
 //     svc := databasemigrationservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *DatabaseMigrationService {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &DatabaseMigrationService{
 		Client: aws.NewClient(

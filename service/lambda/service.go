@@ -42,7 +42,7 @@ const (
 //     svc := lambda.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Lambda {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Lambda{
 		Client: aws.NewClient(

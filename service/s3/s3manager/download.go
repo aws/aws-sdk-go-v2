@@ -433,7 +433,7 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 	return err
 }
 
-func logMessage(svc s3iface.S3API, level aws.LogLevelType, msg string) {
+func logMessage(svc s3iface.S3API, level aws.LogLevel, msg string) {
 	s, ok := svc.(*s3.S3)
 	if !ok {
 		return

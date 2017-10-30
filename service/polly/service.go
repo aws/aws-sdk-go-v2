@@ -42,7 +42,7 @@ const (
 //     svc := polly.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Polly {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Polly{
 		Client: aws.NewClient(

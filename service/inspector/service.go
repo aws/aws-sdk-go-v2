@@ -42,7 +42,7 @@ const (
 //     svc := inspector.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Inspector {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Inspector{
 		Client: aws.NewClient(

@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *SES {
 	var signingName string
 	signingName = "ses"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &SES{
 		Client: aws.NewClient(

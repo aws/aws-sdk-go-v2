@@ -42,7 +42,7 @@ const (
 //     svc := kinesis.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Kinesis {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Kinesis{
 		Client: aws.NewClient(

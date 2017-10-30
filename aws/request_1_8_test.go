@@ -59,7 +59,7 @@ func TestRequest_FollowPUTRedirects(t *testing.T) {
 	}))
 
 	cfg := unit.Config()
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.DisableSSL = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 	svc := awstesting.NewClient(cfg)

@@ -435,7 +435,7 @@ func New(config aws.Config) *{{ .StructName }} {
 	{{- if .Metadata.SigningName }}
 		signingName = "{{ .Metadata.SigningName }}"
 	{{- end }}
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
     svc := &{{ .StructName }}{
     	Client: aws.NewClient(

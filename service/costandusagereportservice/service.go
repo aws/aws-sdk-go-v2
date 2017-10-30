@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *CostandUsageReportService {
 	var signingName string
 	signingName = "cur"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &CostandUsageReportService{
 		Client: aws.NewClient(

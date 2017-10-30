@@ -13,7 +13,7 @@ type Config struct {
 	//
 	// @see http://docs.aws.amazon.com/general/latest/gr/rande.html
 	//   AWS Regions and Endpoints
-	Region *string
+	Region string
 
 	// The credentials object to use when signing requests. Defaults to a
 	// chain of credential providers to search for credentials in environment
@@ -50,7 +50,7 @@ type Config struct {
 	// An integer value representing the logging level. The default log level
 	// is zero (LogOff), which represents no logging. To enable logging set
 	// to a LogLevel Value.
-	LogLevel *LogLevelType
+	LogLevel LogLevel
 
 	// The logger writer interface to write logging messages to. Defaults to
 	// standard out.
@@ -61,19 +61,19 @@ type Config struct {
 	// This will utilize ShouldRetry method of custom retryers. If EnforceShouldRetryCheck
 	// is not set, then ShouldRetry will only be called if request.Retryable is nil.
 	// Proper handling of the request.Retryable field is important when setting this field.
-	EnforceShouldRetryCheck *bool
+	EnforceShouldRetryCheck bool
 
 	// Set this to `true` to disable SSL when sending requests. Defaults
 	// to `false`.
-	DisableSSL *bool
+	DisableSSL bool
 
 	// Disables semantic parameter validation, which validates input for
 	// missing required fields and/or other semantic request input errors.
-	DisableParamValidation *bool
+	DisableParamValidation bool
 
 	// Disables the computation of request and response checksums, e.g.,
 	// CRC32 checksums in Amazon DynamoDB.
-	DisableComputeChecksums *bool
+	DisableComputeChecksums bool
 
 	// Set this to `true` to force the request to use path-style addressing,
 	// i.e., `http://s3.amazonaws.com/BUCKET/KEY`. By default, the S3 client
@@ -83,7 +83,7 @@ type Config struct {
 	// @note This configuration option is specific to the Amazon S3 service.
 	// @see http://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
 	//   Amazon S3: Virtual Hosting of Buckets
-	S3ForcePathStyle *bool
+	S3ForcePathStyle bool
 
 	// Set this to `true` to disable the SDK adding the `Expect: 100-Continue`
 	// header to PUT requests over 2MB of content. 100-Continue instructs the
@@ -99,7 +99,7 @@ type Config struct {
 	//
 	// You should use this flag to disble 100-Continue if you experience issues
 	// with proxies or third party S3 compatible services.
-	S3Disable100Continue *bool
+	S3Disable100Continue bool
 
 	// Set this to `true` to enable S3 Accelerate feature. For all operations
 	// compatible with S3 Accelerate will use the accelerate endpoint for
@@ -109,24 +109,7 @@ type Config struct {
 	// accelerate enabled. If the bucket is not enabled for accelerate an error
 	// will be returned. The bucket name must be DNS compatible to also work
 	// with accelerate.
-	S3UseAccelerate *bool
-
-	// Set this to `true` to disable the EC2Metadata client from overriding the
-	// default http.Client's Timeout. This is helpful if you do not want the
-	// EC2Metadata client to create a new http.Client. This options is only
-	// meaningful if you're not already using a custom HTTP client with the
-	// SDK. Enabled by default.
-	//
-	// Must be set and provided to the session.NewSession() in order to disable
-	// the EC2Metadata overriding the timeout for default credentials chain.
-	//
-	// Example:
-	//    sess := session.Must(session.NewSession(aws.NewConfig()
-	//       .WithEC2MetadataDiableTimeoutOverride(true)))
-	//
-	//    svc := s3.New(sess)
-	//
-	EC2MetadataDisableTimeoutOverride *bool
+	S3UseAccelerate bool
 
 	// Instructs the endpiont to be generated for a service client to
 	// be the dual stack endpoint. The dual stack endpoint will support
@@ -147,7 +130,7 @@ type Config struct {
 	//     svc := s3.New(sess, &aws.Config{
 	//         UseDualStack: aws.Bool(true),
 	//     })
-	UseDualStack *bool
+	UseDualStack bool
 
 	// DisableRestProtocolURICleaning will not clean the URL path when making rest protocol requests.
 	// Will default to false. This would only be used for empty directory names in s3 requests.
@@ -162,7 +145,7 @@ type Config struct {
 	//    	Bucket: aws.String("bucketname"),
 	//    	Key: aws.String("//foo//bar//moo"),
 	//    })
-	DisableRestProtocolURICleaning *bool
+	DisableRestProtocolURICleaning bool
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder

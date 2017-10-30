@@ -8,7 +8,7 @@ import (
 
 func init() {
 	config = defaults.Config()
-	config.Region = aws.String("mock-region")
+	config.Region = "mock-region"
 	config.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
 	config.Credentials = aws.StaticCredentialsProvider{
 		Value: aws.Credentials{

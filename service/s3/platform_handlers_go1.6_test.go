@@ -31,7 +31,7 @@ func TestAdd100Continue_Added(t *testing.T) {
 
 func TestAdd100Continue_SkipDisabled(t *testing.T) {
 	cfg := unit.Config()
-	cfg.S3Disable100Continue = aws.Bool(true)
+	cfg.S3Disable100Continue = true
 
 	svc := s3.New(cfg)
 	r, _ := svc.PutObjectRequest(&s3.PutObjectInput{

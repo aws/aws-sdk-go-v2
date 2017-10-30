@@ -29,21 +29,21 @@ func fillPresignedURL(r *request.Request) {
 		return
 	}
 
-	origParams.DestinationRegion = r.Config.Region
+	origParams.DestinationRegion = aws.String(r.Config.Region)
 	newParams := awsutil.CopyOf(r.Params).(*CopySnapshotInput)
 
 	// Create a new request based on the existing request. We will use this to
 	// presign the CopySnapshot request against the source region.
 	cfgCp := r.Config.Copy()
 	cfgCp.EndpointResolver = nil
-	cfgCp.Region = origParams.SourceRegion
+	cfgCp.Region = aws.StringValue(origParams.SourceRegion)
 
 	metadata := r.Metadata
 	resolved, err := r.Config.EndpointResolver.EndpointFor(
-		metadata.ServiceName, aws.StringValue(cfgCp.Region),
+		metadata.ServiceName, cfgCp.Region,
 		func(opt *endpoints.Options) {
-			opt.DisableSSL = aws.BoolValue(cfgCp.DisableSSL)
-			opt.UseDualStack = aws.BoolValue(cfgCp.UseDualStack)
+			opt.DisableSSL = cfgCp.DisableSSL
+			opt.UseDualStack = cfgCp.UseDualStack
 		},
 	)
 	if err != nil {

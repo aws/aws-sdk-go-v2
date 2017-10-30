@@ -154,10 +154,10 @@ type Signer struct {
 
 	// Sets the log level the signer should use when reporting information to
 	// the logger. If the logger is nil nothing will be logged. See
-	// aws.LogLevelType for more information on available logging levels
+	// aws.LogLevel for more information on available logging levels
 	//
 	// By default nothing will be logged.
-	Debug aws.LogLevelType
+	Debug aws.LogLevel
 
 	// The logger loging information will be written to. If there the logger
 	// is nil, nothing will be logged.
@@ -419,7 +419,7 @@ func SignSDKRequest(req *aws.Request, opts ...func(*Signer)) {
 
 	region := req.Metadata.SigningRegion
 	if region == "" {
-		region = aws.StringValue(req.Config.Region)
+		region = req.Config.Region
 	}
 
 	name := req.Metadata.SigningName
@@ -428,7 +428,7 @@ func SignSDKRequest(req *aws.Request, opts ...func(*Signer)) {
 	}
 
 	v4 := NewSigner(req.Config.Credentials, func(v4 *Signer) {
-		v4.Debug = req.Config.LogLevel.Value()
+		v4.Debug = req.Config.LogLevel
 		v4.Logger = req.Config.Logger
 		v4.DisableHeaderHoisting = req.NotHoist
 		if name == "s3" {

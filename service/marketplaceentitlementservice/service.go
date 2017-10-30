@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *MarketplaceEntitlementService {
 	var signingName string
 	signingName = "aws-marketplace"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &MarketplaceEntitlementService{
 		Client: aws.NewClient(

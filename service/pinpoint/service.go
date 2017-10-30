@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *Pinpoint {
 	var signingName string
 	signingName = "mobiletargeting"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Pinpoint{
 		Client: aws.NewClient(

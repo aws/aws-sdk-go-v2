@@ -6,7 +6,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
@@ -34,8 +33,8 @@ var accelerateOpBlacklist = operationBlacklist{
 // if possible. This style of bucket is valid for all bucket names which are
 // DNS compatible and do not contain "."
 func updateEndpointForS3Config(r *request.Request) {
-	forceHostStyle := aws.BoolValue(r.Config.S3ForcePathStyle)
-	accelerate := aws.BoolValue(r.Config.S3UseAccelerate)
+	forceHostStyle := r.Config.S3ForcePathStyle
+	accelerate := r.Config.S3UseAccelerate
 
 	if accelerate && accelerateOpBlacklist.Continue(r) {
 		if forceHostStyle {
@@ -98,7 +97,7 @@ func updateEndpointForAccelerate(r *request.Request) {
 		parts[0] = "s3-accelerate"
 	}
 	for i := 1; i+1 < len(parts); i++ {
-		if parts[i] == aws.StringValue(r.Config.Region) {
+		if parts[i] == r.Config.Region {
 			parts = append(parts[:i], parts[i+1:]...)
 			break
 		}

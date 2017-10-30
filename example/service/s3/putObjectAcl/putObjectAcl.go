@@ -61,7 +61,7 @@ func main() {
 	if err != nil {
 		exitErrorf("failed to load config, %v", err)
 	}
-	cfg.Region = regionPtr
+	cfg.Region = *regionPtr
 
 	svc := s3.New(cfg)
 

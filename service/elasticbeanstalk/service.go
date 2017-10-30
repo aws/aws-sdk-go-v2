@@ -42,7 +42,7 @@ const (
 //     svc := elasticbeanstalk.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *ElasticBeanstalk {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &ElasticBeanstalk{
 		Client: aws.NewClient(

@@ -102,9 +102,9 @@ func TestCEKFactory(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.DisableSSL = aws.Bool(true)
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.Region = aws.String("us-west-2")
+	cfg.DisableSSL = true
+	cfg.S3ForcePathStyle = true
+	cfg.Region = "us-west-2"
 
 	c := DecryptionClient{
 		WrapRegistry: map[string]WrapEntry{
@@ -160,9 +160,9 @@ func TestCEKFactoryNoCEK(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.DisableSSL = aws.Bool(true)
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.Region = aws.String("us-west-2")
+	cfg.DisableSSL = true
+	cfg.S3ForcePathStyle = true
+	cfg.Region = "us-west-2"
 
 	c := DecryptionClient{
 		WrapRegistry: map[string]WrapEntry{
@@ -218,9 +218,9 @@ func TestCEKFactoryCustomEntry(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.DisableSSL = aws.Bool(true)
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.Region = aws.String("us-west-2")
+	cfg.DisableSSL = true
+	cfg.S3ForcePathStyle = true
+	cfg.Region = "us-west-2"
 
 	c := DecryptionClient{
 		WrapRegistry: map[string]WrapEntry{

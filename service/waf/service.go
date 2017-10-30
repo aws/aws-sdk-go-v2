@@ -42,7 +42,7 @@ const (
 //     svc := waf.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *WAF {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &WAF{
 		Client: aws.NewClient(

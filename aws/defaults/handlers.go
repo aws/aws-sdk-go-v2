@@ -199,7 +199,7 @@ var ValidateResponseHandler = aws.NamedHandler{Name: "core.ValidateResponseHandl
 var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: func(r *aws.Request) {
 	// If one of the other handlers already set the retry state
 	// we don't want to override it based on the service's state
-	if r.Retryable == nil || aws.BoolValue(r.Config.EnforceShouldRetryCheck) {
+	if r.Retryable == nil || r.Config.EnforceShouldRetryCheck {
 		r.Retryable = aws.Bool(r.ShouldRetry(r))
 	}
 
@@ -229,7 +229,7 @@ var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: fun
 // appropriate Region and Endpoint set. Will set r.Error if the endpoint or
 // region is not valid.
 var ValidateEndpointHandler = aws.NamedHandler{Name: "core.ValidateEndpointHandler", Fn: func(r *aws.Request) {
-	if r.Metadata.SigningRegion == "" && aws.StringValue(r.Config.Region) == "" {
+	if r.Metadata.SigningRegion == "" && r.Config.Region == "" {
 		r.Error = aws.ErrMissingRegion
 	} else if r.Metadata.Endpoint == "" {
 		r.Error = aws.ErrMissingEndpoint

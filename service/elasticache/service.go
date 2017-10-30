@@ -42,7 +42,7 @@ const (
 //     svc := elasticache.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *ElastiCache {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &ElastiCache{
 		Client: aws.NewClient(

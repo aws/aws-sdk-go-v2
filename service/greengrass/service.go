@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *Greengrass {
 	var signingName string
 	signingName = "greengrass"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Greengrass{
 		Client: aws.NewClient(

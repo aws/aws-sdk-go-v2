@@ -113,7 +113,7 @@ func getAccountBuckets(cfg aws.Config, bucketCh chan<- *Bucket, owner string) er
 		}
 
 		cfgCp := cfg.Copy()
-		cfgCp.Region = aws.String(bucket.Region)
+		cfgCp.Region = bucket.Region
 
 		bckSvc := s3.New(cfgCp)
 		bucketDetails(bckSvc, bucket)

@@ -86,7 +86,7 @@ func newDynamodbOut(table, region string) *dynamodbOut {
 	}
 
 	cfg := integration.Config()
-	cfg.Region = &out.region
+	cfg.Region = out.region
 
 	out.db = dynamodb.New(cfg)
 	return &out

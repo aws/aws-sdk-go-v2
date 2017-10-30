@@ -42,7 +42,7 @@ const (
 //     svc := dynamodb.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *DynamoDB {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &DynamoDB{
 		Client: aws.NewClient(

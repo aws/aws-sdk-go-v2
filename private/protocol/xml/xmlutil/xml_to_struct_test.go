@@ -36,7 +36,7 @@ func TestUnmarshal(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)
 

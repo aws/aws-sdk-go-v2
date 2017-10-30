@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *CloudHSMV2 {
 	var signingName string
 	signingName = "cloudhsm"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &CloudHSMV2{
 		Client: aws.NewClient(

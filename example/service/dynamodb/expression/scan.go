@@ -33,7 +33,7 @@ func main() {
 		// The Region for the DynamoDB table. If Config.Region is not set
 		// the region must come from the shared config or AWS_REGION
 		// environment variable.
-		awscfg.Region = aws.String(cfg.Region)
+		awscfg.Region = cfg.Region
 	}
 
 	// Create the DynamoDB service client to make the query request with.
