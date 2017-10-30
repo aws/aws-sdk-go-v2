@@ -206,10 +206,7 @@ var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: fun
 	if r.WillRetry() {
 		r.RetryDelay = r.RetryRules(r)
 
-		if sleepFn := r.Config.SleepDelay; sleepFn != nil {
-			// Support SleepDelay for backwards compatibility and testing
-			sleepFn(r.RetryDelay)
-		} else if err := aws.SleepWithContext(r.Context(), r.RetryDelay); err != nil {
+		if err := sdk.SleepWithContext(r.Context(), r.RetryDelay); err != nil {
 			r.Error = awserr.New(aws.CanceledErrorCode,
 				"request context canceled", err)
 			r.Retryable = aws.Bool(false)

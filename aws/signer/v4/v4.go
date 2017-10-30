@@ -69,6 +69,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
 )
 
@@ -187,11 +188,6 @@ type Signer struct {
 	// values are the same.
 	DisableRequestBodyOverwrite bool
 
-	// currentTimeFn returns the time value which represents the current time.
-	// This value should only be used for testing. If it is nil the default
-	// time.Now will be used.
-	currentTimeFn func() time.Time
-
 	// UnsignedPayload will prevent signing of the payload. This will only
 	// work for services that have support for this.
 	UnsignedPayload bool
@@ -304,11 +300,6 @@ func (v4 Signer) Presign(r *http.Request, body io.ReadSeeker, service, region st
 }
 
 func (v4 Signer) signWithBody(r *http.Request, body io.ReadSeeker, service, region string, exp time.Duration, signTime time.Time) (http.Header, error) {
-	currentTimeFn := v4.currentTimeFn
-	if currentTimeFn == nil {
-		currentTimeFn = time.Now
-	}
-
 	ctx := &signingCtx{
 		Request:                r,
 		Body:                   body,
@@ -327,7 +318,7 @@ func (v4 Signer) signWithBody(r *http.Request, body io.ReadSeeker, service, regi
 	}
 
 	if ctx.isRequestSigned() {
-		ctx.Time = currentTimeFn()
+		ctx.Time = sdk.NowTime()
 		ctx.handlePresignRemoval()
 	}
 
@@ -395,7 +386,17 @@ func (ctx *signingCtx) assignAmzQueryValues() {
 // SignRequestHandler is a named request handler the SDK will use to sign
 // service client request with using the V4 signature.
 var SignRequestHandler = aws.NamedHandler{
-	Name: "v4.SignRequestHandler", Fn: SignSDKRequest,
+	Name: "v4.SignRequestHandler", Fn: func(r *aws.Request) { SignSDKRequest(r) },
+}
+
+// BuildNamedHandler will build a generic handler for signing.
+func BuildNamedHandler(name string, opts ...func(*Signer)) aws.NamedHandler {
+	return aws.NamedHandler{
+		Name: name,
+		Fn: func(req *aws.Request) {
+			SignSDKRequest(req, opts...)
+		},
+	}
 }
 
 // SignSDKRequest signs an AWS request with the V4 signature. This
@@ -409,21 +410,7 @@ var SignRequestHandler = aws.NamedHandler{
 //
 // If the credentials of the request's config are set to
 // aws.AnonymousCredentials the request will not be signed.
-func SignSDKRequest(req *aws.Request) {
-	signSDKRequestWithCurrTime(req, time.Now)
-}
-
-// BuildNamedHandler will build a generic handler for signing.
-func BuildNamedHandler(name string, opts ...func(*Signer)) aws.NamedHandler {
-	return aws.NamedHandler{
-		Name: name,
-		Fn: func(req *aws.Request) {
-			signSDKRequestWithCurrTime(req, time.Now, opts...)
-		},
-	}
-}
-
-func signSDKRequestWithCurrTime(req *aws.Request, curTimeFn func() time.Time, opts ...func(*Signer)) {
+func SignSDKRequest(req *aws.Request, opts ...func(*Signer)) {
 	// If the request does not need to be signed ignore the signing of the
 	// request if the AnonymousCredentials object is used.
 	if req.Config.Credentials == aws.AnonymousCredentials {
@@ -444,7 +431,6 @@ func signSDKRequestWithCurrTime(req *aws.Request, curTimeFn func() time.Time, op
 		v4.Debug = req.Config.LogLevel.Value()
 		v4.Logger = req.Config.Logger
 		v4.DisableHeaderHoisting = req.NotHoist
-		v4.currentTimeFn = curTimeFn
 		if name == "s3" {
 			// S3 service should not have any escaping applied
 			v4.DisableURIPathEscaping = true
@@ -474,7 +460,7 @@ func signSDKRequestWithCurrTime(req *aws.Request, curTimeFn func() time.Time, op
 	}
 
 	req.SignedHeaderVals = signedHeaders
-	req.LastSignedAt = curTimeFn()
+	req.LastSignedAt = sdk.NowTime()
 }
 
 const logSignInfoMsg = `DEBUG: Request Signature:

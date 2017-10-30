@@ -2,6 +2,7 @@ package aws_test
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -20,6 +21,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
 )
@@ -178,9 +180,13 @@ func TestRequest4xxUnretryable(t *testing.T) {
 }
 
 func TestRequestExhaustRetries(t *testing.T) {
+	orig := sdk.SleepWithContext
+	defer func() { sdk.SleepWithContext = orig }()
+
 	delays := []time.Duration{}
-	sleepDelay := func(delay time.Duration) {
-		delays = append(delays, delay)
+	sdk.SleepWithContext = func(ctx context.Context, dur time.Duration) error {
+		delays = append(delays, dur)
+		return nil
 	}
 
 	reqNum := 0
@@ -191,10 +197,7 @@ func TestRequestExhaustRetries(t *testing.T) {
 		{StatusCode: 500, Body: body(`{"__type":"UnknownError","message":"An error occurred."}`)},
 	}
 
-	cfg := unit.Config()
-	cfg.SleepDelay = sleepDelay
-
-	s := awstesting.NewClient(cfg)
+	s := awstesting.NewClient(unit.Config())
 
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)
@@ -378,9 +381,13 @@ func TestRequestUserAgent(t *testing.T) {
 }
 
 func TestRequestThrottleRetries(t *testing.T) {
+	orig := sdk.SleepWithContext
+	defer func() { sdk.SleepWithContext = orig }()
+
 	delays := []time.Duration{}
-	sleepDelay := func(delay time.Duration) {
-		delays = append(delays, delay)
+	sdk.SleepWithContext = func(ctx context.Context, dur time.Duration) error {
+		delays = append(delays, dur)
+		return nil
 	}
 
 	reqNum := 0
@@ -391,10 +398,7 @@ func TestRequestThrottleRetries(t *testing.T) {
 		{StatusCode: 500, Body: body(`{"__type":"Throttling","message":"An error occurred."}`)},
 	}
 
-	cfg := unit.Config()
-	cfg.SleepDelay = sleepDelay
-
-	s := awstesting.NewClient(cfg)
+	s := awstesting.NewClient(unit.Config())
 
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)

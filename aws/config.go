@@ -2,7 +2,6 @@ package aws
 
 import (
 	"net/http"
-	"time"
 )
 
 // A Config provides service configuration for service clients.
@@ -149,17 +148,6 @@ type Config struct {
 	//         UseDualStack: aws.Bool(true),
 	//     })
 	UseDualStack *bool
-
-	// SleepDelay is an override for the func the SDK will call when sleeping
-	// during the lifecycle of a request. Specifically this will be used for
-	// request delays. This value should only be used for testing. To adjust
-	// the delay of a request see the aws/client.DefaultRetryer and
-	// aws/request.Retryer.
-	//
-	// SleepDelay will prevent any Context from being used for canceling retry
-	// delay of an API operation. It is recommended to not use SleepDelay at all
-	// and specify a Retryer instead.
-	SleepDelay func(time.Duration)
 
 	// DisableRestProtocolURICleaning will not clean the URL path when making rest protocol requests.
 	// Will default to false. This would only be used for empty directory names in s3 requests.

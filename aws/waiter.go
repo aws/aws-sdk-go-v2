@@ -6,6 +6,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 // WaiterResourceNotReadyErrorCode is the error code returned by a waiter when
@@ -191,19 +192,8 @@ func (w Waiter) WaitWithContext(ctx Context) error {
 		}
 
 		// Delay to wait before inspecting the resource again
-		delay := w.Delay(attempt)
-		if sleepFn := req.Config.SleepDelay; sleepFn != nil {
-			// Support SleepDelay for backwards compatibility and testing
-			sleepFn(delay)
-		} else {
-			sleepCtxFn := w.SleepWithContext
-			if sleepCtxFn == nil {
-				sleepCtxFn = SleepWithContext
-			}
-
-			if err := sleepCtxFn(ctx, delay); err != nil {
-				return awserr.New(CanceledErrorCode, "waiter context canceled", err)
-			}
+		if err := sdk.SleepWithContext(ctx, w.Delay(attempt)); err != nil {
+			return awserr.New(CanceledErrorCode, "waiter context canceled", err)
 		}
 	}
 
