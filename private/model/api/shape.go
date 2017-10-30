@@ -170,6 +170,11 @@ func (s *ShapeRef) UseIndirection() bool {
 		return false
 	}
 
+	// TODO: Re-enable this later
+	if s.Shape.IsEnum() {
+		return false
+	}
+
 	return true
 }
 
@@ -240,6 +245,21 @@ func (ref *ShapeRef) GoTypeWithPkgName() string {
 // Returns a string version of the Shape's type.
 // If withPkgName is true, the package name will be added as a prefix
 func goType(s *Shape, withPkgName bool) string {
+	if s.IsEnum() {
+		name := s.EnumType()
+		if withPkgName {
+			pkg := s.resolvePkg
+			if pkg != "" {
+				s.API.imports[pkg] = true
+				pkg = path.Base(pkg)
+			} else {
+				pkg = s.API.PackageName()
+			}
+			name = fmt.Sprintf("%s.%s", pkg, name)
+		}
+		return name
+	}
+
 	switch s.Type {
 	case "structure":
 		if withPkgName || s.resolvePkg != "" {
@@ -394,9 +414,6 @@ func (ref *ShapeRef) GoTags(toplevel bool, isRequired bool) string {
 	if isRequired {
 		tags = append(tags, ShapeTag{"required", "true"})
 	}
-	if ref.Shape.IsEnum() {
-		tags = append(tags, ShapeTag{"enum", ref.ShapeName})
-	}
 
 	if toplevel {
 		if ref.Shape.Payload != "" {
@@ -490,6 +507,10 @@ func (s *Shape) EnumName(n int) string {
 	enum = strings.Join(parts, "")
 	enum = strings.ToUpper(enum[0:1]) + enum[1:]
 	return enum
+}
+
+func (s *Shape) EnumType() string {
+	return strings.ToUpper(s.ShapeName[:1]) + s.ShapeName[1:]
 }
 
 // NestedShape returns the shape pointer value for the shape which is nested
@@ -601,14 +622,15 @@ func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $context.GoStructValueT
 
 var enumShapeTmpl = template.Must(template.New("EnumShape").Parse(`
 {{ .Docstring }}
+type {{ $.EnumType }} string
+
+// Enum values for {{ $.EnumType }}
 const (
 	{{ $context := . -}}
 	{{ range $index, $elem := .Enum -}}
 		{{ $name := index $context.EnumConsts $index -}}
-		// {{ $name }} is a {{ $context.ShapeName }} enum value
-		{{ $name }} = "{{ $elem }}"
-
-	{{ end }}
+		{{ $name }} {{ $.EnumType }} = "{{ $elem }}"
+	{{ end -}}
 )
 `))
 

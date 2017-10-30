@@ -166,6 +166,11 @@ func unmarshalHeader(v reflect.Value, header string, tag reflect.StructTag) erro
 		if len(header) == 0 {
 			return nil
 		}
+	} else if v.Kind() == reflect.String {
+		if len(header) > 0 {
+			v.SetString(header)
+		}
+		return nil
 	} else if !v.IsValid() || (header == "" && v.Elem().Kind() != reflect.String) {
 		return nil
 	}

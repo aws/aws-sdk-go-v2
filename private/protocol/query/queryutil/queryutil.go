@@ -214,6 +214,14 @@ func (q *queryParser) parseMap(v url.Values, value reflect.Value, prefix string,
 }
 
 func (q *queryParser) parseScalar(v url.Values, r reflect.Value, name string, tag reflect.StructTag) error {
+	if r.Kind() == reflect.String {
+		val := r.String()
+		if len(val) > 0 {
+			v.Set(name, r.String())
+		}
+		return nil
+	}
+
 	switch value := r.Interface().(type) {
 	case string:
 		v.Set(name, value)

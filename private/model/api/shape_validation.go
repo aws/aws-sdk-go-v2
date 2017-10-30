@@ -79,6 +79,11 @@ var validationGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").
 func (sv ShapeValidation) GoCode() string {
 	var err error
 
+	// TODO: Validate?
+	if sv.Ref.Shape.IsEnum() {
+		return ""
+	}
+
 	w := &bytes.Buffer{}
 	switch sv.Type {
 	case ShapeValidationRequired:

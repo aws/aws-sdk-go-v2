@@ -73,10 +73,12 @@ func (builder defaultExamplesBuilder) BuildList(name, memName string, ref *Shape
 	dataType := ""
 	format := ""
 	isComplex := false
+	isEnum := false
 	passRef := ref
 	isMap := false
 
 	if ref.Shape.MemberRefs[name] != nil {
+		isEnum = ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.IsEnum()
 		t = builder.GoType(&ref.Shape.MemberRefs[name].Shape.MemberRef, false)
 		dataType = ref.Shape.MemberRefs[name].Shape.MemberRef.Shape.Type
 		passRef = ref.Shape.MemberRefs[name]
@@ -86,10 +88,12 @@ func (builder defaultExamplesBuilder) BuildList(name, memName string, ref *Shape
 			isMap = true
 		}
 	} else if ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.MemberRefs[name] != nil {
+		isEnum = ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef.Shape.IsEnum()
 		t = builder.GoType(&ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef, false)
 		dataType = ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef.Shape.Type
 		passRef = &ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.MemberRef
 	} else {
+		isEnum = ref.Shape.MemberRef.Shape.IsEnum()
 		t = builder.GoType(&ref.Shape.MemberRef, false)
 		dataType = ref.Shape.MemberRef.Shape.Type
 		passRef = &ref.Shape.MemberRef
@@ -118,10 +122,13 @@ func (builder defaultExamplesBuilder) BuildList(name, memName string, ref *Shape
 		}
 		isComplex = true
 	}
+
 	ret += fmt.Sprintf("%s: []%s {\n", memName, t)
 	for _, elem := range v {
 		if isComplex {
 			ret += fmt.Sprintf("{\n%s\n},\n", builder.BuildShape(passRef, elem.(map[string]interface{}), isMap))
+		} else if isEnum {
+			ret += fmt.Sprintf("%s(%q),\n", t, elem)
 		} else {
 			if dataType == "integer" || dataType == "int64" || dataType == "long" {
 				elem = int(elem.(float64))
@@ -129,6 +136,7 @@ func (builder defaultExamplesBuilder) BuildList(name, memName string, ref *Shape
 			ret += fmt.Sprintf("%s,\n", getValue(t, fmt.Sprintf(format, elem)))
 		}
 	}
+
 	ret += "},\n"
 	return ret
 }
@@ -139,9 +147,15 @@ func (builder defaultExamplesBuilder) BuildScalar(name, memName string, ref *Sha
 		return ""
 	} else if ref.Shape.MemberRefs[name] == nil {
 		if ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.MemberRefs[name] != nil {
+			if ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.IsEnum() {
+				return fmt.Sprintf("%s: %s(%q),\n", memName, builder.GoType(ref.Shape.MemberRef.Shape.MemberRefs[name], true), shape.(string))
+			}
 			return correctType(memName, ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.Type, shape)
 		}
 		if ref.Shape.Type != "structure" && ref.Shape.Type != "map" {
+			if ref.Shape.IsEnum() {
+				return fmt.Sprintf("%s: %s(%q),\n", memName, builder.GoType(ref, true), shape.(string))
+			}
 			return correctType(memName, ref.Shape.Type, shape)
 		}
 		return ""
@@ -163,6 +177,11 @@ func (builder defaultExamplesBuilder) BuildScalar(name, memName string, ref *Sha
 		return convertToCorrectType(memName, ref.Shape.MemberRefs[name].Shape.Type, fmt.Sprintf("%f", v))
 	case string:
 		t := ref.Shape.MemberRefs[name].Shape.Type
+
+		if ref.Shape.MemberRefs[name].Shape.IsEnum() {
+			return fmt.Sprintf("%s: %s(%q),\n", memName, builder.GoType(ref.Shape.MemberRefs[name], false), shape.(string))
+		}
+
 		switch t {
 		case "timestamp":
 			return parseTimeString(ref, memName, fmt.Sprintf("%s", v))
@@ -227,10 +246,7 @@ func (builder defaultExamplesBuilder) GoType(ref *ShapeRef, elem bool) string {
 
 	name := ref.GoTypeWithPkgName()
 	if elem {
-		name = ref.GoTypeElem()
-		if !strings.Contains(name, ".") {
-			name = strings.Join([]string{ref.API.PackageName(), name}, ".")
-		}
+		name = ref.Shape.GoTypeWithPkgNameElem()
 	}
 
 	if ref.Shape.Type != "structure" && ref.Shape.Type != "list" {

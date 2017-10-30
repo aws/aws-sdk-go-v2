@@ -49,6 +49,9 @@ func (f paramFiller) paramsStructAny(value interface{}, shape *Shape) string {
 		return f.paramsStructMap(vmap, shape)
 	case "string", "character":
 		v := reflect.Indirect(reflect.ValueOf(value))
+		if shape.IsEnum() {
+			return fmt.Sprintf("%s(%#v)", shape.EnumType(), v.Interface())
+		}
 		if v.IsValid() {
 			return fmt.Sprintf("aws.String(%#v)", v.Interface())
 		}

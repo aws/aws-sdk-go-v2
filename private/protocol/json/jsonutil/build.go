@@ -116,6 +116,8 @@ func buildStruct(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag) 
 
 		if (member.Kind() == reflect.Ptr || member.Kind() == reflect.Slice || member.Kind() == reflect.Map) && member.IsNil() {
 			continue // ignore unset fields
+		} else if member.Kind() != reflect.Ptr && !member.IsValid() {
+			continue
 		}
 
 		if first {

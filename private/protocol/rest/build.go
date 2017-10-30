@@ -83,16 +83,14 @@ func buildLocationElements(r *request.Request, v reflect.Value, buildGETQuery bo
 			if name == "" {
 				name = field.Name
 			}
-			if kind := m.Kind(); kind == reflect.Ptr {
-				m = m.Elem()
-			} else if kind == reflect.Interface {
+
+			switch m.Kind() {
+			case reflect.Ptr, reflect.Interface:
 				if !m.Elem().IsValid() {
 					continue
 				}
 			}
-			if !m.IsValid() {
-				continue
-			}
+
 			if field.Tag.Get("ignore") != "" {
 				continue
 			}
@@ -151,7 +149,17 @@ func buildBody(r *request.Request, v reflect.Value) {
 }
 
 func buildHeader(header *http.Header, v reflect.Value, name string, tag reflect.StructTag) error {
-	str, err := convertType(v, tag)
+	var err error
+	str := ""
+
+	if v.Kind() == reflect.String {
+		if v.Len() == 0 {
+			return nil
+		}
+		str = v.String()
+	} else {
+		str, err = convertType(v, tag)
+	}
 	if err == errValueNotSet {
 		return nil
 	} else if err != nil {
@@ -180,7 +188,18 @@ func buildHeaderMap(header *http.Header, v reflect.Value, tag reflect.StructTag)
 }
 
 func buildURI(u *url.URL, v reflect.Value, name string, tag reflect.StructTag) error {
-	value, err := convertType(v, tag)
+	value := ""
+	var err error
+	if v.Kind() == reflect.String {
+		if v.Len() == 0 {
+			return nil
+		}
+
+		value = v.String()
+	} else {
+		value, err = convertType(v, tag)
+	}
+
 	if err == errValueNotSet {
 		return nil
 	} else if err != nil {
@@ -197,6 +216,22 @@ func buildURI(u *url.URL, v reflect.Value, name string, tag reflect.StructTag) e
 }
 
 func buildQueryString(query url.Values, v reflect.Value, name string, tag reflect.StructTag) error {
+	if kind := v.Kind(); kind == reflect.String {
+		if v.Len() > 0 {
+			query.Add(name, v.String())
+		}
+		return nil
+	} else if kind == reflect.Ptr {
+		v = v.Elem()
+	}
+
+	if v.Kind() == reflect.Slice && v.Type().Elem().Kind() == reflect.String {
+		for i := 0; i < v.Len(); i++ {
+			query.Add(name, v.Index(i).String())
+		}
+		return nil
+	}
+
 	switch value := v.Interface().(type) {
 	case []*string:
 		for _, item := range value {
@@ -219,6 +254,7 @@ func buildQueryString(query url.Values, v reflect.Value, name string, tag reflec
 		} else if err != nil {
 			return awserr.New("SerializationError", "failed to encode REST request", err)
 		}
+
 		query.Set(name, str)
 	}
 
