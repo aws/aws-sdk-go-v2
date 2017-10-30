@@ -4,7 +4,6 @@
 package ecs
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	_ "github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
@@ -15,7 +14,7 @@ func init() {
 	gucumber.Before("@ecs", func() {
 		// FIXME remove custom region
 		cfg := integration.Config()
-		cfg.Region = aws.String("us-west-2")
+		cfg.Region = "us-west-2"
 
 		gucumber.World["client"] = ecs.New(cfg)
 	})

@@ -42,7 +42,7 @@ const (
 //     svc := shield.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Shield {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Shield{
 		Client: aws.NewClient(

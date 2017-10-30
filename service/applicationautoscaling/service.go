@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *ApplicationAutoScaling {
 	var signingName string
 	signingName = "application-autoscaling"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &ApplicationAutoScaling{
 		Client: aws.NewClient(

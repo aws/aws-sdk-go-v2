@@ -47,7 +47,7 @@ func copyDBSnapshotPresign(r *request.Request) {
 		return
 	}
 
-	originParams.DestinationRegion = r.Config.Region
+	originParams.DestinationRegion = aws.String(r.Config.Region)
 	newParams := awsutil.CopyOf(r.Params).(*CopyDBSnapshotInput)
 	originParams.PreSignedUrl = presignURL(r, originParams.SourceRegion, newParams)
 }
@@ -59,7 +59,7 @@ func createDBInstanceReadReplicaPresign(r *request.Request) {
 		return
 	}
 
-	originParams.DestinationRegion = r.Config.Region
+	originParams.DestinationRegion = aws.String(r.Config.Region)
 	newParams := awsutil.CopyOf(r.Params).(*CreateDBInstanceReadReplicaInput)
 	originParams.PreSignedUrl = presignURL(r, originParams.SourceRegion, newParams)
 }
@@ -71,7 +71,7 @@ func copyDBClusterSnapshotPresign(r *request.Request) {
 		return
 	}
 
-	originParams.DestinationRegion = r.Config.Region
+	originParams.DestinationRegion = aws.String(r.Config.Region)
 	newParams := awsutil.CopyOf(r.Params).(*CopyDBClusterSnapshotInput)
 	originParams.PreSignedUrl = presignURL(r, originParams.SourceRegion, newParams)
 }
@@ -83,7 +83,7 @@ func createDBClusterPresign(r *request.Request) {
 		return
 	}
 
-	originParams.DestinationRegion = r.Config.Region
+	originParams.DestinationRegion = aws.String(r.Config.Region)
 	newParams := awsutil.CopyOf(r.Params).(*CreateDBClusterInput)
 	originParams.PreSignedUrl = presignURL(r, originParams.SourceRegion, newParams)
 }
@@ -93,14 +93,14 @@ func createDBClusterPresign(r *request.Request) {
 func presignURL(r *request.Request, sourceRegion *string, newParams interface{}) *string {
 	cfgCp := r.Config.Copy()
 	cfgCp.EndpointResolver = nil
-	cfgCp.Region = sourceRegion
+	cfgCp.Region = aws.StringValue(sourceRegion)
 
 	metadata := r.Metadata
 	resolved, err := r.Config.EndpointResolver.EndpointFor(
-		metadata.ServiceName, aws.StringValue(cfgCp.Region),
+		metadata.ServiceName, cfgCp.Region,
 		func(opt *endpoints.Options) {
-			opt.DisableSSL = aws.BoolValue(cfgCp.DisableSSL)
-			opt.UseDualStack = aws.BoolValue(cfgCp.UseDualStack)
+			opt.DisableSSL = cfgCp.DisableSSL
+			opt.UseDualStack = cfgCp.UseDualStack
 		},
 	)
 	if err != nil {

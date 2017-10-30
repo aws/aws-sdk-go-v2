@@ -31,7 +31,7 @@ type Client struct {
 	Retryer          Retryer
 
 	// TODO replace with value not pointer
-	LogLevel *LogLevelType
+	LogLevel LogLevel
 	Logger   Logger
 
 	HTTPClient *http.Client
@@ -45,7 +45,7 @@ func NewClient(cfg Config, metadata Metadata) *Client {
 		// TODO remove config when request reqfactored
 		Config: cfg,
 
-		Region:           StringValue(cfg.Region),
+		Region:           cfg.Region,
 		Credentials:      cfg.Credentials,
 		EndpointResolver: cfg.EndpointResolver,
 		Handlers:         cfg.Handlers.Copy(),

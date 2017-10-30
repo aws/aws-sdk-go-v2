@@ -63,7 +63,7 @@ type InputService1ProtocolTest struct {
 //     svc := inputservice1protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService1ProtocolTest(config aws.Config) *InputService1ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService1ProtocolTest{
 		Client: aws.NewClient(
@@ -366,7 +366,7 @@ type InputService2ProtocolTest struct {
 //     svc := inputservice2protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService2ProtocolTest(config aws.Config) *InputService2ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService2ProtocolTest{
 		Client: aws.NewClient(
@@ -531,7 +531,7 @@ type InputService3ProtocolTest struct {
 //     svc := inputservice3protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService3ProtocolTest(config aws.Config) *InputService3ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService3ProtocolTest{
 		Client: aws.NewClient(
@@ -775,7 +775,7 @@ type InputService4ProtocolTest struct {
 //     svc := inputservice4protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService4ProtocolTest(config aws.Config) *InputService4ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService4ProtocolTest{
 		Client: aws.NewClient(
@@ -944,7 +944,7 @@ type InputService5ProtocolTest struct {
 //     svc := inputservice5protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService5ProtocolTest(config aws.Config) *InputService5ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService5ProtocolTest{
 		Client: aws.NewClient(
@@ -1085,7 +1085,7 @@ type InputService6ProtocolTest struct {
 //     svc := inputservice6protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService6ProtocolTest(config aws.Config) *InputService6ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService6ProtocolTest{
 		Client: aws.NewClient(
@@ -1226,7 +1226,7 @@ type InputService7ProtocolTest struct {
 //     svc := inputservice7protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService7ProtocolTest(config aws.Config) *InputService7ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService7ProtocolTest{
 		Client: aws.NewClient(
@@ -1367,7 +1367,7 @@ type InputService8ProtocolTest struct {
 //     svc := inputservice8protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService8ProtocolTest(config aws.Config) *InputService8ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService8ProtocolTest{
 		Client: aws.NewClient(
@@ -1508,7 +1508,7 @@ type InputService9ProtocolTest struct {
 //     svc := inputservice9protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService9ProtocolTest(config aws.Config) *InputService9ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService9ProtocolTest{
 		Client: aws.NewClient(
@@ -1661,7 +1661,7 @@ type InputService10ProtocolTest struct {
 //     svc := inputservice10protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService10ProtocolTest(config aws.Config) *InputService10ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService10ProtocolTest{
 		Client: aws.NewClient(
@@ -1823,7 +1823,7 @@ type InputService11ProtocolTest struct {
 //     svc := inputservice11protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService11ProtocolTest(config aws.Config) *InputService11ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService11ProtocolTest{
 		Client: aws.NewClient(
@@ -1964,7 +1964,7 @@ type InputService12ProtocolTest struct {
 //     svc := inputservice12protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService12ProtocolTest(config aws.Config) *InputService12ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService12ProtocolTest{
 		Client: aws.NewClient(
@@ -2105,7 +2105,7 @@ type InputService13ProtocolTest struct {
 //     svc := inputservice13protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService13ProtocolTest(config aws.Config) *InputService13ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService13ProtocolTest{
 		Client: aws.NewClient(
@@ -2254,7 +2254,7 @@ type InputService14ProtocolTest struct {
 //     svc := inputservice14protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService14ProtocolTest(config aws.Config) *InputService14ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService14ProtocolTest{
 		Client: aws.NewClient(
@@ -2403,7 +2403,7 @@ type InputService15ProtocolTest struct {
 //     svc := inputservice15protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService15ProtocolTest(config aws.Config) *InputService15ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService15ProtocolTest{
 		Client: aws.NewClient(
@@ -2619,7 +2619,7 @@ type InputService16ProtocolTest struct {
 //     svc := inputservice16protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService16ProtocolTest(config aws.Config) *InputService16ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService16ProtocolTest{
 		Client: aws.NewClient(
@@ -2760,7 +2760,7 @@ type InputService17ProtocolTest struct {
 //     svc := inputservice17protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService17ProtocolTest(config aws.Config) *InputService17ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService17ProtocolTest{
 		Client: aws.NewClient(
@@ -2976,7 +2976,7 @@ type InputService18ProtocolTest struct {
 //     svc := inputservice18protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService18ProtocolTest(config aws.Config) *InputService18ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService18ProtocolTest{
 		Client: aws.NewClient(
@@ -3354,7 +3354,7 @@ type InputService19ProtocolTest struct {
 //     svc := inputservice19protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService19ProtocolTest(config aws.Config) *InputService19ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService19ProtocolTest{
 		Client: aws.NewClient(
@@ -3527,7 +3527,7 @@ type InputService20ProtocolTest struct {
 //     svc := inputservice20protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService20ProtocolTest(config aws.Config) *InputService20ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService20ProtocolTest{
 		Client: aws.NewClient(
@@ -3676,7 +3676,7 @@ type InputService21ProtocolTest struct {
 //     svc := inputservice21protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService21ProtocolTest(config aws.Config) *InputService21ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService21ProtocolTest{
 		Client: aws.NewClient(
@@ -3892,7 +3892,7 @@ type InputService22ProtocolTest struct {
 //     svc := inputservice22protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService22ProtocolTest(config aws.Config) *InputService22ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService22ProtocolTest{
 		Client: aws.NewClient(
@@ -4444,7 +4444,7 @@ type InputService23ProtocolTest struct {
 //     svc := inputservice23protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService23ProtocolTest(config aws.Config) *InputService23ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService23ProtocolTest{
 		Client: aws.NewClient(
@@ -4585,7 +4585,7 @@ type InputService24ProtocolTest struct {
 //     svc := inputservice24protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService24ProtocolTest(config aws.Config) *InputService24ProtocolTest {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &InputService24ProtocolTest{
 		Client: aws.NewClient(

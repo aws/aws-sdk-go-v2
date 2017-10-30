@@ -132,7 +132,7 @@ func init() {
 			gucumber.World["Masterkey"] = b64Arn
 
 			cfg := integration.Config()
-			cfg.Region = &v2
+			cfg.Region = v2
 
 			handler = s3crypto.NewKMSKeyGenerator(kms.New(cfg), arn)
 			if err != nil {
@@ -152,7 +152,7 @@ func init() {
 		}
 
 		cfg := integration.Config()
-		cfg.Region = aws.String("us-west-2")
+		cfg.Region = "us-west-2"
 
 		c := s3crypto.NewEncryptionClient(cfg, builder, func(c *s3crypto.EncryptionClient) {
 		})
@@ -188,7 +188,7 @@ func getAliasInformation(alias, region string) (string, error) {
 	arn := ""
 
 	cfg := integration.Config()
-	cfg.Region = aws.String(region)
+	cfg.Region = region
 
 	svc := kms.New(cfg)
 

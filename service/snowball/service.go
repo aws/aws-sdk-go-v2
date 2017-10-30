@@ -42,7 +42,7 @@ const (
 //     svc := snowball.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Snowball {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Snowball{
 		Client: aws.NewClient(

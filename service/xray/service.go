@@ -42,7 +42,7 @@ const (
 //     svc := xray.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *XRay {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &XRay{
 		Client: aws.NewClient(

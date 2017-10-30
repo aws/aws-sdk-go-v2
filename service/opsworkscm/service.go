@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *OpsWorksCM {
 	var signingName string
 	signingName = "opsworks-cm"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &OpsWorksCM{
 		Client: aws.NewClient(

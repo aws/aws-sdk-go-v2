@@ -42,7 +42,7 @@ const (
 //     svc := opsworks.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *OpsWorks {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &OpsWorks{
 		Client: aws.NewClient(

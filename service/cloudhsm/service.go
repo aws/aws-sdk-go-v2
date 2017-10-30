@@ -42,7 +42,7 @@ const (
 //     svc := cloudhsm.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CloudHSM {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &CloudHSM{
 		Client: aws.NewClient(

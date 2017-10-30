@@ -42,7 +42,7 @@ const (
 //     svc := mobileanalytics.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *MobileAnalytics {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &MobileAnalytics{
 		Client: aws.NewClient(

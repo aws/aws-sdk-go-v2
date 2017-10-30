@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *DynamoDBStreams {
 	var signingName string
 	signingName = "dynamodb"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &DynamoDBStreams{
 		Client: aws.NewClient(

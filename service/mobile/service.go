@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *Mobile {
 	var signingName string
 	signingName = "AWSMobileHubService"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Mobile{
 		Client: aws.NewClient(

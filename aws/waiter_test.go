@@ -426,7 +426,7 @@ func TestWaiter_ApplyOptions(t *testing.T) {
 	}
 	r := aws.Request{}
 	r.ApplyOptions(w.RequestOptions...)
-	if e, a := aws.LogDebug, r.Config.LogLevel.Value(); e != a {
+	if e, a := aws.LogDebug, r.Config.LogLevel; e != a {
 		t.Errorf("expect %v loglevel got %v", e, a)
 	}
 

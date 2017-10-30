@@ -42,7 +42,7 @@ const (
 //     svc := cloudsearch.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CloudSearch {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &CloudSearch{
 		Client: aws.NewClient(

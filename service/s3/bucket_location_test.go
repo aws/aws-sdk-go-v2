@@ -128,7 +128,7 @@ func TestNoPopulateLocationConstraintIfProvided(t *testing.T) {
 
 func TestNoPopulateLocationConstraintIfClassic(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Region = aws.String("us-east-1")
+	cfg.Region = "us-east-1"
 
 	s := s3.New(cfg)
 	req, _ := s.CreateBucketRequest(&s3.CreateBucketInput{

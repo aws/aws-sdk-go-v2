@@ -13,7 +13,7 @@ import (
 
 func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.DisableSSL = true
 	cfg.EndpointResolver = endpoints.DefaultResolver()
 
 	s := s3.New(cfg)
@@ -38,7 +38,7 @@ func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 
 func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.DisableSSL = true
 	cfg.EndpointResolver = endpoints.DefaultResolver()
 
 	s := s3.New(cfg)

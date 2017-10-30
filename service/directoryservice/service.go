@@ -42,7 +42,7 @@ const (
 //     svc := directoryservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *DirectoryService {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &DirectoryService{
 		Client: aws.NewClient(

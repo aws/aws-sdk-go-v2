@@ -48,7 +48,7 @@ func main() {
 		if err != nil {
 			exitErrorf("failed to load config, %v", err)
 		}
-		cfg.Region = aws.String(region)
+		cfg.Region = region
 
 		ec2Svc := ec2.New(cfg)
 		params := &ec2.DescribeInstancesInput{

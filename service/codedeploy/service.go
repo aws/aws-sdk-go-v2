@@ -42,7 +42,7 @@ const (
 //     svc := codedeploy.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CodeDeploy {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &CodeDeploy{
 		Client: aws.NewClient(

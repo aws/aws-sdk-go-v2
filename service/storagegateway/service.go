@@ -42,7 +42,7 @@ const (
 //     svc := storagegateway.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *StorageGateway {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &StorageGateway{
 		Client: aws.NewClient(

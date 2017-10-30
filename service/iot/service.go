@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *IoT {
 	var signingName string
 	signingName = "execute-api"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &IoT{
 		Client: aws.NewClient(

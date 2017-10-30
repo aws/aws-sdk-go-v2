@@ -363,7 +363,7 @@ func TestMakeAddtoUserAgentFreeFormHandler(t *testing.T) {
 
 func TestRequestUserAgent(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Region = aws.String("us-east-1")
+	cfg.Region = "us-east-1"
 
 	s := awstesting.NewClient(cfg)
 
@@ -559,10 +559,10 @@ func TestRequest_NoBody(t *testing.T) {
 		}))
 
 		cfg := unit.Config()
-		cfg.Region = aws.String("mock-region")
+		cfg.Region = "mock-region"
 		cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-		cfg.DisableSSL = aws.Bool(true)
+		cfg.DisableSSL = true
 
 		s := awstesting.NewClient(cfg)
 
@@ -633,7 +633,7 @@ func TestWithLogLevel(t *testing.T) {
 
 	if !r.Config.LogLevel.Matches(aws.LogDebugWithHTTPBody) {
 		t.Errorf("expect log level to be set, but was not, %v",
-			r.Config.LogLevel.Value())
+			r.Config.LogLevel)
 	}
 }
 
@@ -804,12 +804,12 @@ func TestEnforceShouldRetryCheck(t *testing.T) {
 	retryer := &testRetryer{}
 
 	cfg := unit.Config()
-	cfg.Region = aws.String("mock-region")
+	cfg.Region = "mock-region"
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.DisableSSL = true
 	cfg.Retryer = retryer
 	cfg.HTTPClient = client
-	cfg.EnforceShouldRetryCheck = aws.Bool(true)
+	cfg.EnforceShouldRetryCheck = true
 
 	s := awstesting.NewClient(cfg)
 
@@ -881,7 +881,7 @@ func TestRequest_TemporaryRetry(t *testing.T) {
 	cfg.HTTPClient = &http.Client{
 		Timeout: 100 * time.Millisecond,
 	}
-	cfg.DisableSSL = aws.Bool(true)
+	cfg.DisableSSL = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 	svc := awstesting.NewClient(cfg)

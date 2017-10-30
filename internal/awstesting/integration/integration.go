@@ -33,7 +33,7 @@ func init() {
 	}
 	config.LogLevel = logLevel
 
-	if aws.StringValue(config.Region) == "" {
+	if config.Region == "" {
 		panic("AWS_REGION must be configured to run integration tests")
 	}
 }

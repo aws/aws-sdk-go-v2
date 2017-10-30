@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *AppStream {
 	var signingName string
 	signingName = "appstream"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &AppStream{
 		Client: aws.NewClient(

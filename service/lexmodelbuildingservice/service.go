@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *LexModelBuildingService {
 	var signingName string
 	signingName = "lex"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &LexModelBuildingService{
 		Client: aws.NewClient(

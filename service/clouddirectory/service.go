@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *CloudDirectory {
 	var signingName string
 	signingName = "clouddirectory"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &CloudDirectory{
 		Client: aws.NewClient(

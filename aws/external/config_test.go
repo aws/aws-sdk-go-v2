@@ -89,7 +89,7 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	if e, a := "mock-region", aws.StringValue(cfg.Region); e != a {
+	if e, a := "mock-region", cfg.Region; e != a {
 		t.Errorf("expect %v region, got %v", e, a)
 	}
 

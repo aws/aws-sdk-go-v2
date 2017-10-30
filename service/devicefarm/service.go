@@ -42,7 +42,7 @@ const (
 //     svc := devicefarm.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *DeviceFarm {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &DeviceFarm{
 		Client: aws.NewClient(

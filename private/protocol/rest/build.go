@@ -120,7 +120,7 @@ func buildLocationElements(r *request.Request, v reflect.Value, buildGETQuery bo
 	}
 
 	r.HTTPRequest.URL.RawQuery = query.Encode()
-	if !aws.BoolValue(r.Config.DisableRestProtocolURICleaning) {
+	if !r.Config.DisableRestProtocolURICleaning {
 		cleanPath(r.HTTPRequest.URL)
 	}
 }

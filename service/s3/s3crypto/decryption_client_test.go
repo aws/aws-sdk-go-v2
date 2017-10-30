@@ -32,9 +32,9 @@ func TestGetObjectGCM(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.DisableSSL = aws.Bool(true)
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.Region = aws.String("us-west-2")
+	cfg.DisableSSL = true
+	cfg.S3ForcePathStyle = true
+	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
 	if c == nil {
@@ -102,9 +102,9 @@ func TestGetObjectCBC(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.DisableSSL = aws.Bool(true)
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.Region = aws.String("us-west-2")
+	cfg.DisableSSL = true
+	cfg.S3ForcePathStyle = true
+	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
 	if c == nil {
@@ -170,9 +170,9 @@ func TestGetObjectCBC2(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.DisableSSL = aws.Bool(true)
-	cfg.S3ForcePathStyle = aws.Bool(true)
-	cfg.Region = aws.String("us-west-2")
+	cfg.DisableSSL = true
+	cfg.S3ForcePathStyle = true
+	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
 	if c == nil {

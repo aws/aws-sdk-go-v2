@@ -30,7 +30,7 @@ type signer struct {
 	Request           *http.Request
 	Time              time.Time
 	Credentials aws.CredentialsProvider
-	Debug             aws.LogLevelType
+	Debug             aws.LogLevel
 	Logger            aws.Logger
 
 	Query        url.Values
@@ -66,7 +66,7 @@ func SignSDKRequest(req *aws.Request) {
 		Request:           req.HTTPRequest,
 		Time:              req.Time,
 		Credentials: req.Config.Credentials,
-		Debug:             req.Config.LogLevel.Value(),
+		Debug:             req.Config.LogLevel,
 		Logger:            req.Config.Logger,
 	}
 

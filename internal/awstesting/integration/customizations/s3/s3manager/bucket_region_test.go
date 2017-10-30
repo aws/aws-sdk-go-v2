@@ -13,17 +13,15 @@ import (
 func TestGetBucketRegion(t *testing.T) {
 	cfg := integration.Config()
 
-	expectRegion := aws.StringValue(cfg.Region)
-
 	ctx := aws.BackgroundContext()
 	region, err := s3manager.GetBucketRegion(ctx, cfg,
-		aws.StringValue(bucketName), expectRegion)
+		aws.StringValue(bucketName), cfg.Region)
 
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	if e, a := expectRegion, region; e != a {
+	if e, a := cfg.Region, region; e != a {
 		t.Errorf("expect %s bucket region, got %s", e, a)
 	}
 }

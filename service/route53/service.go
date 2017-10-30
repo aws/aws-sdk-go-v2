@@ -42,7 +42,7 @@ const (
 //     svc := route53.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Route53 {
 	var signingName string
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &Route53{
 		Client: aws.NewClient(

@@ -10,8 +10,8 @@ import (
 
 func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Region = aws.String("mock-region")
-	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.Region = "mock-region"
+	cfg.DisableParamValidation = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
 
 	svc := cloudsearchdomain.New(cfg)
@@ -31,7 +31,7 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 
 func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.DisableParamValidation = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
 
 	svc := cloudsearchdomain.New(cfg)
@@ -51,8 +51,8 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 
 func TestRequireEndpointUsed(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Region = aws.String("mock-region")
-	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.Region = "mock-region"
+	cfg.DisableParamValidation = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
 
 	svc := cloudsearchdomain.New(cfg)

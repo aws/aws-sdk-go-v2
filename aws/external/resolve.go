@@ -60,7 +60,7 @@ func ResolveRegion(cfg *aws.Config, configs Configs) error {
 		return nil
 	}
 
-	cfg.Region = aws.String(v)
+	cfg.Region = v
 	return nil
 }
 

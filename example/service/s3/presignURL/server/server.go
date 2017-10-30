@@ -58,7 +58,7 @@ func main() {
 			exitErrorf("failed to get bucket region, %v", err)
 		}
 	}
-	cfg.Region = aws.String(region)
+	cfg.Region = region
 
 	// Create a new S3 service client that will be use by the service to generate
 	// presigned URLs with. Not actual API requests will be made with this client.

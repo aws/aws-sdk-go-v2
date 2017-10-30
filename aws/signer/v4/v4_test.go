@@ -265,7 +265,7 @@ func TestIgnoreResignRequestWithValidCreds(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.Credentials = aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 
 	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
@@ -296,7 +296,7 @@ func TestIgnorePreResignRequestWithValidCreds(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.Credentials = aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 
 	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(

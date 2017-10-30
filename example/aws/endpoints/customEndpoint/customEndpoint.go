@@ -28,7 +28,7 @@ func main() {
 	if err != nil {
 		panic("failed to load config, " + err.Error())
 	}
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 	cfg.EndpointResolver = endpoints.ResolverFunc(s3CustResolverFn)
 
 	// Create the S3 service client with the shared config. This will

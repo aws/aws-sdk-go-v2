@@ -16,7 +16,7 @@ import (
 
 func TestUnsetHeaders(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 
 	svc := aws.NewClient(
 		cfg,

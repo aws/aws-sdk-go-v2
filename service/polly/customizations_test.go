@@ -12,7 +12,7 @@ import (
 
 func TestRestGETStrategy(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 
 	svc := New(cfg)
 	r, _ := svc.SynthesizeSpeechRequest(nil)
@@ -30,7 +30,7 @@ func TestRestGETStrategy(t *testing.T) {
 
 func TestPresign(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 	cfg.EndpointResolver = endpoints.DefaultResolver()
 
 	svc := New(cfg)

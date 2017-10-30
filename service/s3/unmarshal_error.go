@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
@@ -32,7 +31,7 @@ func unmarshalError(r *request.Request) {
 			RequestFailure: awserr.NewRequestFailure(
 				awserr.New("BucketRegionError",
 					fmt.Sprintf("incorrect region, the bucket is not in '%s' region",
-						aws.StringValue(r.Config.Region)),
+						r.Config.Region),
 					nil),
 				r.HTTPResponse.StatusCode,
 				r.RequestID,

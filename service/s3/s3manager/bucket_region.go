@@ -33,7 +33,7 @@ import (
 //
 func GetBucketRegion(ctx aws.Context, cfg aws.Config, bucket, regionHint string, opts ...request.Option) (string, error) {
 	cfg = cfg.Copy()
-	cfg.Region = aws.String(regionHint)
+	cfg.Region = regionHint
 
 	svc := s3.New(cfg)
 	return GetBucketRegionWithClient(ctx, svc, bucket, opts...)
@@ -50,7 +50,7 @@ func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string
 	req, _ := svc.HeadBucketRequest(&s3.HeadBucketInput{
 		Bucket: aws.String(bucket),
 	})
-	req.Config.S3ForcePathStyle = aws.Bool(true)
+	req.Config.S3ForcePathStyle = true
 	req.Config.Credentials = credentials.AnonymousCredentials
 	req.SetContext(ctx)
 

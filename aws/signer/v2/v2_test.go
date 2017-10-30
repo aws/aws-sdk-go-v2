@@ -145,7 +145,7 @@ func TestGet(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.Credentials = aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
-	cfg.Region = aws.String("ap-southeast-2")
+	cfg.Region = "ap-southeast-2"
 
 	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
@@ -173,7 +173,7 @@ func TestAnonymousCredentials(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.Credentials = aws.AnonymousCredentials
-	cfg.Region = aws.String("ap-southeast-2")
+	cfg.Region = "ap-southeast-2"
 
 	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(

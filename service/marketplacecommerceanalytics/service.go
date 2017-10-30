@@ -43,7 +43,7 @@ const (
 func New(config aws.Config) *MarketplaceCommerceAnalytics {
 	var signingName string
 	signingName = "marketplacecommerceanalytics"
-	signingRegion := aws.StringValue(config.Region)
+	signingRegion := config.Region
 
 	svc := &MarketplaceCommerceAnalytics{
 		Client: aws.NewClient(

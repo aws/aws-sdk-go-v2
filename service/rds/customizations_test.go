@@ -20,7 +20,7 @@ func TestPresignWithPresignNotSet(t *testing.T) {
 	reqs := map[string]*request.Request{}
 
 	cfg := unit.Config()
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 	cfg.EndpointResolver = endpoints.DefaultResolver()
 
 	svc := New(cfg)
@@ -64,7 +64,7 @@ func TestPresignWithPresignSet(t *testing.T) {
 	reqs := map[string]*request.Request{}
 
 	cfg := unit.Config()
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 
 	svc := New(cfg)
 
@@ -108,7 +108,7 @@ func TestPresignWithSourceNotSet(t *testing.T) {
 	reqs := map[string]*request.Request{}
 
 	cfg := unit.Config()
-	cfg.Region = aws.String("us-west-2")
+	cfg.Region = "us-west-2"
 
 	svc := New(cfg)
 

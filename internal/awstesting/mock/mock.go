@@ -16,10 +16,10 @@ func init() {
 	}))
 
 	config = defaults.Config()
-	config.Region = aws.String("mock-region")
+	config.Region = "mock-region"
 	config.EndpointResolver = aws.ResolveWithEndpoint(endpoints.ResolvedEndpoint{
 		URL:           server.URL,
-		SigningRegion: aws.StringValue(config.Region),
+		SigningRegion: config.Region,
 	})
 }
 
@@ -36,7 +36,7 @@ func NewMockClient(cfg aws.Config) *aws.Client {
 		cfg,
 		aws.Metadata{
 			ServiceName:   "Mock",
-			SigningRegion: aws.StringValue(cfg.Region),
+			SigningRegion: cfg.Region,
 			APIVersion:    "2015-12-08",
 			JSONVersion:   "1.1",
 			TargetPrefix:  "MockServer",
