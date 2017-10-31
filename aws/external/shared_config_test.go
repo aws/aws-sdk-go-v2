@@ -89,13 +89,6 @@ func TestNewSharedConfig(t *testing.T) {
 		{
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role_invalid_source_profile",
-			//			Expected: SharedConfig{
-			//				Profile: "assume_role_invalid_source_profile",
-			//				AssumeRole: AssumeRoleConfig{
-			//					RoleARN:       "assume_role_invalid_source_profile_role_arn",
-			//					sourceProfile: "profile_not_exist",
-			//				},
-			//			},
 			Err: SharedConfigAssumeRoleError{
 				Profile: "assume_role_invalid_source_profile",
 				RoleARN: "assume_role_invalid_source_profile_role_arn",

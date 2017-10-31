@@ -174,6 +174,10 @@ func LoadSharedConfig(configs Configs) (Config, error) {
 // For example, given two files A and B. Both define credentials. If the order
 // of the files are A then B, B's credential values will be used instead of A's.
 func NewSharedConfig(profile string, filenames []string) (SharedConfig, error) {
+	if len(filenames) == 0 {
+		return SharedConfig{}, fmt.Errorf("no shared config files provided")
+	}
+
 	files, err := loadSharedConfigIniFiles(filenames)
 	if err != nil {
 		return SharedConfig{}, err
