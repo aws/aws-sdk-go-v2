@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"reflect"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -28,8 +29,9 @@ func TestNewSharedConfig(t *testing.T) {
 		Err       error
 	}{
 		{
-			Filenames: []string{"file_not_exists"},
+			Filenames: []string{"file_not_exist"},
 			Profile:   "default",
+			Err:       fmt.Errorf("failed to open shared config file, file_not_exist"),
 		},
 		{
 			Filenames: []string{testConfigFilename},
@@ -87,14 +89,29 @@ func TestNewSharedConfig(t *testing.T) {
 		{
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
 			Profile:   "assume_role_invalid_source_profile",
-			Expected: SharedConfig{
+			//			Expected: SharedConfig{
+			//				Profile: "assume_role_invalid_source_profile",
+			//				AssumeRole: AssumeRoleConfig{
+			//					RoleARN:       "assume_role_invalid_source_profile_role_arn",
+			//					sourceProfile: "profile_not_exist",
+			//				},
+			//			},
+			Err: SharedConfigAssumeRoleError{
 				Profile: "assume_role_invalid_source_profile",
-				AssumeRole: AssumeRoleConfig{
-					RoleARN:       "assume_role_invalid_source_profile_role_arn",
-					sourceProfile: "profile_not_exists",
+				RoleARN: "assume_role_invalid_source_profile_role_arn",
+				Err: SharedConfigNotExistErrors{
+					SharedConfigProfileNotExistError{
+						Profile:  "profile_not_exists",
+						Filename: testConfigOtherFilename,
+						Err:      fmt.Errorf("section 'profile profile_not_exists' does not exist"),
+					},
+					SharedConfigProfileNotExistError{
+						Profile:  "profile_not_exists",
+						Filename: testConfigFilename,
+						Err:      fmt.Errorf("section 'profile profile_not_exists' does not exist"),
+					},
 				},
 			},
-			Err: SharedConfigAssumeRoleError{RoleARN: "assume_role_invalid_source_profile_role_arn"},
 		},
 		{
 			Filenames: []string{testConfigOtherFilename, testConfigFilename},
@@ -132,30 +149,39 @@ func TestNewSharedConfig(t *testing.T) {
 					sourceProfile: "assume_role_wo_creds",
 				},
 			},
-			Err: SharedConfigAssumeRoleError{RoleARN: "assume_role_wo_creds_role_arn"},
+			Err: SharedConfigAssumeRoleError{
+				Profile: "assume_role_wo_creds",
+				RoleARN: "assume_role_wo_creds_role_arn",
+				Err:     fmt.Errorf("source profile has no shared credentials"),
+			},
 		},
 		{
 			Filenames: []string{filepath.Join("testdata", "shared_config_invalid_ini")},
 			Profile:   "profile_name",
-			Err:       SharedConfigLoadError{Filename: filepath.Join("testdata", "shared_config_invalid_ini")},
+			Err: SharedConfigLoadError{
+				Filename: filepath.Join("testdata", "shared_config_invalid_ini"),
+				Err:      fmt.Errorf("unclosed section: [profile_nam"),
+			},
 		},
 	}
 
 	for i, c := range cases {
-		cfg, err := NewSharedConfig(c.Profile, c.Filenames)
-		if c.Err != nil {
-			if e, a := c.Err.Error(), err.Error(); !strings.Contains(a, e) {
-				t.Errorf("expect %q to be in %q", e, a)
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			cfg, err := NewSharedConfig(c.Profile, c.Filenames)
+			if c.Err != nil {
+				if e, a := c.Err.Error(), err.Error(); !strings.Contains(a, e) {
+					t.Errorf("expect %q to be in %q", e, a)
+				}
+				return
 			}
-			continue
-		}
 
-		if err != nil {
-			t.Fatalf("%d, expect no error, got %v", i, err)
-		}
-		if e, a := c.Expected, cfg; !reflect.DeepEqual(e, a) {
-			t.Errorf("%d, expect %v, got %v", i, e, a)
-		}
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if e, a := c.Expected, cfg; !reflect.DeepEqual(e, a) {
+				t.Errorf(" expect %v, got %v", e, a)
+			}
+		})
 	}
 }
 
@@ -244,28 +270,34 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 			},
 		},
 		{
-			Profile: "does_not_exists",
-			Err:     SharedConfigProfileNotExistsError{Profile: "does_not_exists"},
+			Profile: "does_not_exist",
+			Err: SharedConfigProfileNotExistError{
+				Filename: "testdata/shared_config",
+				Profile:  "does_not_exist",
+				Err:      fmt.Errorf("section 'profile does_not_exist' does not exist"),
+			},
 		},
 	}
 
 	for i, c := range cases {
-		cfg := SharedConfig{}
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			cfg := SharedConfig{}
 
-		err := cfg.setFromIniFile(c.Profile, iniFile)
-		if c.Err != nil {
-			if e, a := c.Err.Error(), err.Error(); !strings.Contains(a, e) {
-				t.Errorf("expect %q to be in %q", e, a)
+			err := cfg.setFromIniFile(c.Profile, iniFile)
+			if c.Err != nil {
+				if e, a := c.Err.Error(), err.Error(); !strings.Contains(a, e) {
+					t.Errorf("expect %q to be in %q", e, a)
+				}
+				return
 			}
-			continue
-		}
 
-		if err != nil {
-			t.Fatalf("%d, expect no error, got %v", i, err)
-		}
-		if e, a := c.Expected, cfg; !reflect.DeepEqual(e, a) {
-			t.Errorf("%d, expect %v, got %v", i, e, a)
-		}
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if e, a := c.Expected, cfg; !reflect.DeepEqual(e, a) {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+		})
 	}
 }
 
@@ -275,7 +307,7 @@ func TestLoadSharedConfigIniFiles(t *testing.T) {
 		Expected  []sharedConfigFile
 	}{
 		{
-			Filenames: []string{"not_exists", testConfigFilename},
+			Filenames: []string{"not_exist", testConfigFilename},
 			Expected: []sharedConfigFile{
 				{Filename: testConfigFilename},
 			},
@@ -290,17 +322,19 @@ func TestLoadSharedConfigIniFiles(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		files, err := loadSharedConfigIniFiles(c.Filenames)
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			files, err := loadSharedConfigIniFiles(c.Filenames)
 
-		if err != nil {
-			t.Fatalf("%d, expect no error, got %v", i, err)
-		}
-		if e, a := len(c.Expected), len(files); e != a {
-			t.Errorf("%d, expect %v, got %v", i, e, a)
-		}
-		if e, a := c.Expected, files; !cmpFiles(e, a) {
-			t.Errorf("%d, expect %v, got %v", i, e, a)
-		}
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if e, a := len(c.Expected), len(files); e != a {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+			if e, a := c.Expected, files; !cmpFiles(e, a) {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+		})
 	}
 }
 
@@ -325,6 +359,7 @@ func TestLoadSharedConfig(t *testing.T) {
 		Configs Configs
 		Files   []string
 		Profile string
+		LoadFn  func(Configs) (Config, error)
 		Expect  SharedConfig
 		Err     string
 	}{
@@ -335,6 +370,7 @@ func TestLoadSharedConfig(t *testing.T) {
 			Files: []string{
 				filepath.Join("testdata", "shared_config"),
 			},
+			LoadFn: LoadSharedConfig,
 			Expect: SharedConfig{
 				Profile: "alt_profile_name",
 				Region:  "alt_profile_name_region",
@@ -347,36 +383,88 @@ func TestLoadSharedConfig(t *testing.T) {
 				}),
 			},
 			Profile: "alt_profile_name",
+			LoadFn:  LoadSharedConfig,
 			Expect: SharedConfig{
 				Profile: "alt_profile_name",
 				Region:  "alt_profile_name_region",
 			},
 		},
+		{
+			Configs: Configs{
+				WithSharedConfigProfile("default"),
+			},
+			Files: []string{
+				filepath.Join("file_not_exist"),
+			},
+			LoadFn: LoadSharedConfig,
+			Err:    "failed to open shared config file, file_not_exist",
+		},
+		{
+			Configs: Configs{
+				WithSharedConfigProfile("profile_not_exist"),
+			},
+			Files: []string{
+				filepath.Join("testdata", "shared_config"),
+			},
+			LoadFn: LoadSharedConfig,
+			Err:    "failed to get shared config profile, profile_not_exist",
+		},
+		{
+			Configs: Configs{
+				WithSharedConfigProfile("default"),
+			},
+			Files: []string{
+				filepath.Join("file_not_exist"),
+			},
+			LoadFn: LoadSharedConfigIgnoreNotExist,
+		},
+		{
+			Configs: Configs{
+				WithSharedConfigProfile("assume_role_invalid_source_profile"),
+			},
+			Files: []string{
+				testConfigOtherFilename, testConfigFilename,
+			},
+			LoadFn: LoadSharedConfig,
+			Err:    "section 'profile profile_not_exists' does not exist",
+		},
+		{
+			Configs: Configs{
+				WithSharedConfigProfile("assume_role_invalid_source_profile"),
+			},
+			Files: []string{
+				testConfigOtherFilename, testConfigFilename,
+			},
+			LoadFn: LoadSharedConfigIgnoreNotExist,
+			Err:    "section 'profile profile_not_exists' does not exist",
+		},
 	}
 
 	for i, c := range cases {
-		DefaultSharedConfigProfile = origProf
-		DefaultSharedConfigFiles = origFiles
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			DefaultSharedConfigProfile = origProf
+			DefaultSharedConfigFiles = origFiles
 
-		if len(c.Profile) > 0 {
-			DefaultSharedConfigProfile = c.Profile
-		}
-		if len(c.Files) > 0 {
-			DefaultSharedConfigFiles = c.Files
-		}
-
-		cfg, err := LoadSharedConfig(c.Configs)
-		if len(c.Err) > 0 {
-			if e, a := c.Err, err.Error(); !strings.Contains(a, e) {
-				t.Errorf("%d, expect %q to be in %q", i, e, a)
+			if len(c.Profile) > 0 {
+				DefaultSharedConfigProfile = c.Profile
 			}
-			continue
-		} else if err != nil {
-			t.Fatalf("%d, expect no error, got %v", i, err)
-		}
+			if len(c.Files) > 0 {
+				DefaultSharedConfigFiles = c.Files
+			}
 
-		if e, a := c.Expect, cfg; !reflect.DeepEqual(e, a) {
-			t.Errorf("expect %v got %v", e, a)
-		}
+			cfg, err := c.LoadFn(c.Configs)
+			if len(c.Err) > 0 {
+				if e, a := c.Err, err.Error(); !strings.Contains(a, e) {
+					t.Errorf("expect %q to be in %q", e, a)
+				}
+				return
+			} else if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := c.Expect, cfg; !reflect.DeepEqual(e, a) {
+				t.Errorf("expect %v got %v", e, a)
+			}
+		})
 	}
 }

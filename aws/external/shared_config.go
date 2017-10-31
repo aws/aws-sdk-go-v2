@@ -114,6 +114,21 @@ func (c SharedConfig) GetAssumeRoleConfig() (AssumeRoleConfig, error) {
 	return c.AssumeRole, nil
 }
 
+// LoadSharedConfigIgnoreNotExist is an alias for LoadSharedConfig with the
+// addition of ignoring when none of the files exist or when the profile
+// is not found in any of the files.
+func LoadSharedConfigIgnoreNotExist(configs Configs) (Config, error) {
+	cfg, err := LoadSharedConfig(configs)
+	if err != nil {
+		if _, ok := err.(SharedConfigNotExistErrors); ok {
+			return SharedConfig{}, nil
+		}
+		return nil, err
+	}
+
+	return cfg, nil
+}
+
 // LoadSharedConfig uses the Configs passed in to load the SharedConfig from file
 // The file names and profile name are sourced from the Configs.
 //
@@ -158,17 +173,10 @@ func LoadSharedConfig(configs Configs) (Config, error) {
 //
 // For example, given two files A and B. Both define credentials. If the order
 // of the files are A then B, B's credential values will be used instead of A's.
-//
-// Will ignore files that do not exist or cannot be read.
 func NewSharedConfig(profile string, filenames []string) (SharedConfig, error) {
 	files, err := loadSharedConfigIniFiles(filenames)
 	if err != nil {
 		return SharedConfig{}, err
-	}
-
-	if len(files) == 0 {
-		// TODO should return error if failed to load all files.
-		return SharedConfig{}, nil
 	}
 
 	cfg := SharedConfig{}
@@ -193,15 +201,17 @@ type sharedConfigFile struct {
 func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {
 	files := make([]sharedConfigFile, 0, len(filenames))
 
+	errs := SharedConfigNotExistErrors{}
 	for _, filename := range filenames {
 		b, err := ioutil.ReadFile(filename)
 		if err != nil {
-			// TODO create stronger contract that will return error if none of
-			// the files can be opened. Let the caller determine if it should
-			// continue if the files fail to load.
-
-			// Skip files which can't be opened and read for whatever reason
-			continue
+			if os.IsNotExist(err) {
+				errs = append(errs,
+					SharedConfigFileNotExistError{Filename: filename, Err: err},
+				)
+				continue
+			}
+			return nil, SharedConfigLoadError{Filename: filename, Err: err}
 		}
 
 		f, err := ini.Load(b)
@@ -212,6 +222,10 @@ func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {
 		files = append(files, sharedConfigFile{
 			Filename: filename, IniData: f,
 		})
+	}
+
+	if len(files) == 0 {
+		return nil, errs
 	}
 
 	return files, nil
@@ -227,12 +241,20 @@ func (c *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedCon
 	} else {
 		err := assumeRoleSrc.setFromIniFiles(c.AssumeRole.sourceProfile, files)
 		if err != nil {
-			return err
+			return SharedConfigAssumeRoleError{
+				Profile: c.Profile,
+				RoleARN: c.AssumeRole.RoleARN,
+				Err:     err,
+			}
 		}
 	}
 
 	if len(assumeRoleSrc.Credentials.AccessKeyID) == 0 {
-		return SharedConfigAssumeRoleError{RoleARN: c.AssumeRole.RoleARN}
+		return SharedConfigAssumeRoleError{
+			Profile: c.Profile,
+			RoleARN: c.AssumeRole.RoleARN,
+			Err:     fmt.Errorf("source profile has no shared credentials"),
+		}
 	}
 
 	c.AssumeRole.Source = &assumeRoleSrc
@@ -240,18 +262,24 @@ func (c *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedCon
 	return nil
 }
 
+// Returns an error if all of the files fail to load. If at least one file is
+// successfully loaded and contains the profile, no error will be returned.
 func (c *SharedConfig) setFromIniFiles(profile string, files []sharedConfigFile) error {
 	c.Profile = profile
 
-	// Trim files from the list that don't exist.
+	existErrs := SharedConfigNotExistErrors{}
 	for _, f := range files {
 		if err := c.setFromIniFile(profile, f); err != nil {
-			if _, ok := err.(SharedConfigProfileNotExistsError); ok {
-				// Ignore proviles missings
+			if _, ok := err.(SharedConfigProfileNotExistError); ok {
+				existErrs = append(existErrs, err)
 				continue
 			}
 			return err
 		}
+	}
+
+	if len(existErrs) == len(files) {
+		return existErrs
 	}
 
 	return nil
@@ -271,7 +299,11 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 		// Fallback to to alternate profile name: profile <name>
 		section, err = file.IniData.GetSection(fmt.Sprintf("profile %s", profile))
 		if err != nil {
-			return SharedConfigProfileNotExistsError{Profile: profile, Err: err}
+			return SharedConfigProfileNotExistError{
+				Filename: file.Filename,
+				Profile:  profile,
+				Err:      err,
+			}
 		}
 	}
 
@@ -309,6 +341,18 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 	return nil
 }
 
+// SharedConfigNotExistErrors provides an error type for failure to load shared
+// config because resources do not exist.
+type SharedConfigNotExistErrors []error
+
+func (es SharedConfigNotExistErrors) Error() string {
+	msg := "failed to load shared config\n"
+	for _, e := range es {
+		msg += "\t" + e.Error()
+	}
+	return msg
+}
+
 // SharedConfigLoadError is an error for the shared config file failed to load.
 type SharedConfigLoadError struct {
 	Filename string
@@ -321,30 +365,55 @@ func (e SharedConfigLoadError) Cause() error {
 }
 
 func (e SharedConfigLoadError) Error() string {
-	return fmt.Sprintf("failed to load config file, %s", e.Filename)
+	return fmt.Sprintf("failed to load shared config file, %s, %v", e.Filename, e.Err)
 }
 
-// SharedConfigProfileNotExistsError is an error for the shared config when
+// SharedConfigFileNotExistError is an error for the shared config when
+// the filename does not exist.
+type SharedConfigFileNotExistError struct {
+	Filename string
+	Profile  string
+	Err      error
+}
+
+// Cause is the underlying error that caused the failure.
+func (e SharedConfigFileNotExistError) Cause() error {
+	return e.Err
+}
+
+func (e SharedConfigFileNotExistError) Error() string {
+	return fmt.Sprintf("failed to open shared config file, %s, %v", e.Filename, e.Err)
+}
+
+// SharedConfigProfileNotExistError is an error for the shared config when
 // the profile was not find in the config file.
-type SharedConfigProfileNotExistsError struct {
-	Profile string
-	Err     error
+type SharedConfigProfileNotExistError struct {
+	Filename string
+	Profile  string
+	Err      error
 }
 
-func (e SharedConfigProfileNotExistsError) Error() string {
-	return fmt.Sprintf("failed to get profile, %s", e.Profile)
+// Cause is the underlying error that caused the failure.
+func (e SharedConfigProfileNotExistError) Cause() error {
+	return e.Err
+}
+
+func (e SharedConfigProfileNotExistError) Error() string {
+	return fmt.Sprintf("failed to get shared config profile, %s, in %s, %v", e.Profile, e.Filename, e.Err)
 }
 
 // SharedConfigAssumeRoleError is an error for the shared config when the
 // profile contains assume role information, but that information is invalid
 // or not complete.
 type SharedConfigAssumeRoleError struct {
+	Profile string
 	RoleARN string
+	Err     error
 }
 
 func (e SharedConfigAssumeRoleError) Error() string {
-	return fmt.Sprintf("failed to load assume role for %s, source profile has no shared credentials",
-		e.RoleARN)
+	return fmt.Sprintf("failed to load assume role %s, of profile %s, %v",
+		e.RoleARN, e.Profile, e.Err)
 }
 
 func userHomeDir() string {
