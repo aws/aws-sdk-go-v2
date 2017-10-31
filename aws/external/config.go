@@ -9,7 +9,7 @@ import (
 // using interfaces to extract specific information from the external configuration.
 var DefaultConfigLoaders = []ConfigLoader{
 	LoadEnvConfig,
-	LoadSharedConfig,
+	LoadSharedConfigIgnoreNotExist,
 }
 
 // DefaultAWSConfigResolvers are a slice of functions that will resolve external
