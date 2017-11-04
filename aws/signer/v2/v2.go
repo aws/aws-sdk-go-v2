@@ -27,11 +27,11 @@ const (
 
 type signer struct {
 	// Values that must be populated from the request
-	Request           *http.Request
-	Time              time.Time
+	Request     *http.Request
+	Time        time.Time
 	Credentials aws.CredentialsProvider
-	Debug             aws.LogLevel
-	Logger            aws.Logger
+	Debug       aws.LogLevel
+	Logger      aws.Logger
 
 	Query        url.Values
 	stringToSign string
@@ -63,11 +63,11 @@ func SignSDKRequest(req *aws.Request) {
 	}
 
 	v2 := signer{
-		Request:           req.HTTPRequest,
-		Time:              req.Time,
+		Request:     req.HTTPRequest,
+		Time:        req.Time,
 		Credentials: req.Config.Credentials,
-		Debug:             req.Config.LogLevel,
-		Logger:            req.Config.Logger,
+		Debug:       req.Config.LogLevel,
+		Logger:      req.Config.Logger,
 	}
 
 	req.Error = v2.Sign()

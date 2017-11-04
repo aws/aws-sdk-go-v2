@@ -307,7 +307,7 @@ func TestResolveEndpoint_UnknownRegion(t *testing.T) {
 }
 
 func TestResolveEndpoint_StrictPartitionUnknownEndpoint(t *testing.T) {
-	_, err := testPartitions[0].EndpointFor("service2", "unknownregion", ResolveOptions{StrictMatching:true})
+	_, err := testPartitions[0].EndpointFor("service2", "unknownregion", ResolveOptions{StrictMatching: true})
 
 	assert.Error(t, err)
 
@@ -316,7 +316,7 @@ func TestResolveEndpoint_StrictPartitionUnknownEndpoint(t *testing.T) {
 }
 
 func TestResolveEndpoint_StrictPartitionsUnknownEndpoint(t *testing.T) {
-	_, err := testPartitions.EndpointFor("service2", "us-region-1", ResolveOptions{StrictMatching:true})
+	_, err := testPartitions.EndpointFor("service2", "us-region-1", ResolveOptions{StrictMatching: true})
 
 	assert.Error(t, err)
 

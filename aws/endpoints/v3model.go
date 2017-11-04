@@ -11,7 +11,6 @@ import (
 
 type partitions []partition
 
-
 func (ps partitions) EndpointFor(service, region string, opts ResolveOptions) (aws.Endpoint, error) {
 	for i := 0; i < len(ps); i++ {
 		if !ps[i].canResolveEndpoint(service, region, opts.StrictMatching) {

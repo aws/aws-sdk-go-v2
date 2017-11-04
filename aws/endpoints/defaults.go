@@ -154,7 +154,7 @@ const (
 //
 // Use DefaultPartitions() to get the list of the default partitions.
 func NewDefaultResolver() *Resolver {
-	return &Resolver{partitions:defaultPartitions}
+	return &Resolver{partitions: defaultPartitions}
 }
 
 // DefaultPartitions returns a list of the partitions the SDK is bundled
