@@ -41,8 +41,8 @@ type Resolver struct {
 // otherwise.
 //
 // Searches through the partitions in the order they are defined.
-func (r *Resolver) ResolveEndpoint(prefix, region string) (aws.Endpoint, error) {
-	return r.partitions.EndpointFor(prefix, region, r.ResolveOptions)
+func (r *Resolver) ResolveEndpoint(service, region string) (aws.Endpoint, error) {
+	return r.partitions.EndpointFor(service, region, r.ResolveOptions)
 }
 
 // Partitions returns the partitions that make up the resolver.
@@ -105,7 +105,7 @@ func (p Partition) ID() string { return p.id }
 // See Options for information on configuring how the endpoint is resolved.
 //
 // If the service cannot be found in the metadata the endpoint will be resolved
-// based on the parition's endpoint pattern, and endpoint prefix.
+// based on the parition's endpoint pattern, and service endpoint prefix.
 //
 // When resolving endpoints you can choose to enable StrictMatching. This will
 // require the provided service and region to be known by the partition.
