@@ -127,7 +127,6 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.DisableSSL = true
 
 	svc := s3.New(cfg)
 
@@ -153,7 +152,6 @@ func TestGetObjectMetadataWithUnicode(t *testing.T) {
 	}))
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.DisableSSL = true
 
 	svc := s3.New(cfg)
 

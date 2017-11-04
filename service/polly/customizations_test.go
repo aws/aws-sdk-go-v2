@@ -31,7 +31,7 @@ func TestRestGETStrategy(t *testing.T) {
 func TestPresign(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Region = "us-west-2"
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := New(cfg)
 	r, _ := svc.SynthesizeSpeechRequest(&SynthesizeSpeechInput{

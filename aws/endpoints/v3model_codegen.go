@@ -40,7 +40,7 @@ func CodeGenModel(modelFile io.Reader, outFile io.Writer, optFns ...func(*CodeGe
 	}
 
 	tmpl := template.Must(template.New("tmpl").Funcs(funcMap).Parse(v3Tmpl))
-	if err := tmpl.ExecuteTemplate(outFile, "defaults", resolver); err != nil {
+	if err := tmpl.ExecuteTemplate(outFile, "defaults", resolver.partitions); err != nil {
 		return fmt.Errorf("failed to execute template, %v", err)
 	}
 
@@ -206,12 +206,14 @@ import (
 {{- end }}
 
 {{ define "endpoint resolvers" }}
-	// DefaultResolver returns an Endpoint resolver that will be able
+	// NewDefaultResolver returns an Endpoint resolver that will be able
 	// to resolve endpoints for: {{ ListPartitionNames . }}.
 	//
 	// Use DefaultPartitions() to get the list of the default partitions.
-	func DefaultResolver() Resolver {
-		return defaultPartitions
+	func NewDefaultResolver() *Resolver {
+		return &Resolver{
+			partitions: defaultPartitions,
+		}
 	}
 
 	// DefaultPartitions returns a list of the partitions the SDK is bundled
@@ -221,7 +223,7 @@ import (
 	//    for _, p := range partitions {
 	//        // ... inspect partitions
 	//    }
-	func DefaultPartitions() []Partition {
+	func DefaultPartitions() Partitions {
 		return defaultPartitions.Partitions()
 	}
 
@@ -239,16 +241,6 @@ import (
 		}
 		var {{ PartitionVarName $partition.ID }} = {{ template "gocode Partition" $partition }}
 	{{ end }}
-{{ end }}
-
-{{ define "default partitions" }}
-	func DefaultPartitions() []Partition {
-		return []partition{
-			{{ range $_, $partition := . -}}
-			// {{ ToSymbol $partition.ID}}Partition(),
-			{{ end }}
-		}
-	}
 {{ end }}
 
 {{ define "gocode Partition" -}}

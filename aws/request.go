@@ -12,7 +12,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
 const (
@@ -99,18 +98,18 @@ func New(cfg Config, metadata Metadata, handlers Handlers,
 
 	httpReq, _ := http.NewRequest(method, "", nil)
 
-	// TODO need better way of handling this error... NeqRequest should return error.
-	endpoint, err := cfg.EndpointResolver.EndpointFor(
+	// TODO need better way of handling this error... NewRequest should return error.
+	endpoint, err := cfg.EndpointResolver.ResolveEndpoint(
 		metadata.ServiceName, cfg.Region,
-		func(opt *endpoints.Options) {
-			// TODO Where should these options go?
-			opt.DisableSSL = cfg.DisableSSL
-			opt.UseDualStack = cfg.UseDualStack
+		// func(opt *endpoints.Options) {
+		// 	// TODO Where should these options go?
+		// 	opt.DisableSSL = cfg.DisableSSL
+		// 	opt.UseDualStack = cfg.UseDualStack
 
-			// Support the condition where the service is modeled but its
-			// endpoint metadata is not available.
-			opt.ResolveUnknownService = true
-		},
+		// 	// Support the condition where the service is modeled but its
+		// 	// endpoint metadata is not available.
+		// 	opt.ResolveUnknownService = true
+		// },
 	)
 	if err == nil {
 		// TODO so ugly

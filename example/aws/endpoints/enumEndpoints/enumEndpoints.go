@@ -43,7 +43,7 @@ func main() {
 	flag.BoolVar(&cmdServices, "services", false, "Lists services for a partition. Requires partition ID to be provided. Will filter by a region if '-r' is set.")
 	flag.Parse()
 
-	partitions := endpoints.DefaultResolver().(endpoints.EnumPartitions).Partitions()
+	partitions := endpoints.NewDefaultResolver().Partitions()
 
 	if cmdPartitions {
 		printPartitions(partitions)
@@ -85,7 +85,7 @@ func printRegions(p endpoints.Partition, serviceID string) {
 		es := s.Endpoints()
 		fmt.Printf("Endpoints for %s in %s:\n", serviceID, p.ID())
 		for _, e := range es {
-			r, _ := e.ResolveEndpoint()
+			r, _ := e.Resolve(endpoints.ResolveOptions{})
 			fmt.Printf("%s: %s\n", e.ID(), r.URL)
 		}
 

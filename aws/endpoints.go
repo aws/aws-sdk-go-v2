@@ -1,44 +1,39 @@
 package aws
 
-import "github.com/aws/aws-sdk-go-v2/aws/endpoints"
-
-// EndpointResolver resolves an endpoint for a service and region.
-// TODO need to resolve aws.EndpointResolver and endpoints.Resolver.
+// EndpointResolver resolves an endpoint for a service endpoint id and region.
 type EndpointResolver interface {
-	// TODO move endpoint options into this package.
-	EndpointFor(service, region string, opts ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error)
+	ResolveEndpoint(id, region string) (Endpoint, error)
 }
 
 // EndpointResolverFunc is a helper utility that wraps a function so it satisfies the
 // Resolver interface. This is useful when you want to add additional endpoint
 // resolving logic, or stub out specific endpoints with custom values.
-//
-// TODO need to resolve aws.ResolverFunc and endpoints.ResolverFunc.
-type EndpointResolverFunc func(service, region string, opts ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error)
+type EndpointResolverFunc func(id, region string) (Endpoint, error)
 
-// EndpointFor wraps the ResolverFunc function to satisfy the Resolver interface.
-func (fn EndpointResolverFunc) EndpointFor(service, region string, opts ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error) {
-	return fn(service, region, opts...)
+// ResolveEndpoint calls EndpointResolverFunc returning the endpoint, or error.
+func (fn EndpointResolverFunc) ResolveEndpoint(id, region string) (Endpoint, error) {
+	return fn(id, region)
 }
 
 // ResolveWithEndpoint allows a static Resolved Endpoint to be used as an endpoint resolver
-type ResolveWithEndpoint endpoints.ResolvedEndpoint
+type ResolveWithEndpoint Endpoint
 
 // ResolveWithEndpointURL allows a static URL to be used as a endpoint resolver.
-// TODO is this helper utility funciton needed?
 func ResolveWithEndpointURL(url string) ResolveWithEndpoint {
-	return ResolveWithEndpoint(endpoints.ResolvedEndpoint{URL: url})
+	return ResolveWithEndpoint(Endpoint{URL: url})
 }
 
-// EndpointFor returns the static endpoint.
-func (v ResolveWithEndpoint) EndpointFor(service, region string, opts ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error) {
-	return endpoints.ResolvedEndpoint(v), nil
+// ResolveEndpoint returns the static endpoint.
+func (v ResolveWithEndpoint) ResolveEndpoint(id, region string) (Endpoint, error) {
+	e := Endpoint(v)
+	e.SigningRegion = region
+	return e, nil
 }
 
-// TODO Endpoint should be in aws
-//type Endpoint struct {
-//	URL           string
-//	SigningName   string
-//	SigningRegion string
-//	SigningMethod string
-//}
+// Endpoint represents the endpoint a service client should make requests to.
+type Endpoint struct {
+	URL           string
+	SigningName   string
+	SigningRegion string
+	SigningMethod string
+}

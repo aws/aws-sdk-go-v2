@@ -149,12 +149,12 @@ const (
 	XrayServiceID                         = "xray"                         // Xray.
 )
 
-// DefaultResolver returns an Endpoint resolver that will be able
+// NewDefaultResolver returns an Endpoint resolver that will be able
 // to resolve endpoints for: AWS Standard, AWS China, and AWS GovCloud (US).
 //
 // Use DefaultPartitions() to get the list of the default partitions.
-func DefaultResolver() Resolver {
-	return defaultPartitions
+func NewDefaultResolver() *Resolver {
+	return &Resolver{partitions:defaultPartitions}
 }
 
 // DefaultPartitions returns a list of the partitions the SDK is bundled
@@ -164,7 +164,7 @@ func DefaultResolver() Resolver {
 //    for _, p := range partitions {
 //        // ... inspect partitions
 //    }
-func DefaultPartitions() []Partition {
+func DefaultPartitions() Partitions {
 	return defaultPartitions.Partitions()
 }
 

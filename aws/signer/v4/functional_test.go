@@ -33,7 +33,7 @@ var standaloneSignCases = []struct {
 
 func TestPresignHandler(t *testing.T) {
 	cfg := unit.Config()
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := s3.New(cfg)
 	req, _ := svc.PutObjectRequest(&s3.PutObjectInput{
@@ -86,7 +86,7 @@ func TestPresignHandler(t *testing.T) {
 
 func TestPresignRequest(t *testing.T) {
 	cfg := unit.Config()
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := s3.New(cfg)
 	req, _ := svc.PutObjectRequest(&s3.PutObjectInput{

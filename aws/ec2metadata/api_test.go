@@ -62,7 +62,7 @@ func initTestServer(path string, resp string) *httptest.Server {
 
 func TestEndpoint(t *testing.T) {
 	cfg := unit.Config()
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	c := ec2metadata.New(cfg)
 	op := &aws.Operation{

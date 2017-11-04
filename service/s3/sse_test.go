@@ -13,8 +13,10 @@ import (
 
 func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableSSL = true
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	resolver := endpoints.NewDefaultResolver()
+	resolver.DisableSSL = true
+	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
 	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
@@ -38,8 +40,10 @@ func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 
 func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableSSL = true
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	resolver := endpoints.NewDefaultResolver()
+	resolver.DisableSSL = true
+	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
 	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{

@@ -17,8 +17,8 @@
 // resolving to a single partition, or enumerate regions, services, and endpoints
 // in the partition.
 //
-//     resolver := endpoints.DefaultResolver()
-//     partitions := resolver.(endpoints.EnumPartitions).Partitions()
+//     resolver := endpoints.NewDefaultResolver()
+//     partitions := resolver.Partitions()
 //
 //     for _, p := range partitions {
 //         fmt.Println("Regions for", p.ID())
@@ -44,19 +44,20 @@
 // the session, or service client.
 //
 // In addition the ResolverFunc is a wrapper for a func matching the signature
-// of Resolver.EndpointFor, converting it to a type that satisfies the
+// of Resolver.ResolveEndpoint, converting it to a type that satisfies the
 // Resolver interface.
 //
 //
-//     myCustomResolver := func(service, region string, optFns ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error) {
+//     defaultResolver := endpoints.NewDefaultResolver()
+//     myCustomResolver := func(service, region string) (aws.Endpoint, error) {
 //         if service == endpoints.S3ServiceID {
-//             return endpoints.ResolvedEndpoint{
+//             return aws.Endpoint{
 //                 URL:           "s3.custom.endpoint.com",
 //                 SigningRegion: "custom-signing-region",
 //             }, nil
 //         }
 //
-//         return endpoints.DefaultResolver().EndpointFor(service, region, optFns...)
+//         return defaultResolver.ResolveEndpoint(service, region)
 //     }
 //
 //     sess := session.Must(session.NewSession(&aws.Config{

@@ -21,7 +21,7 @@ func TestPresignWithPresignNotSet(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.Region = "us-west-2"
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := New(cfg)
 

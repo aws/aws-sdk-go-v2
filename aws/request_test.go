@@ -562,7 +562,6 @@ func TestRequest_NoBody(t *testing.T) {
 		cfg.Region = "mock-region"
 		cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-		cfg.DisableSSL = true
 
 		s := awstesting.NewClient(cfg)
 
@@ -806,7 +805,6 @@ func TestEnforceShouldRetryCheck(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Region = "mock-region"
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.DisableSSL = true
 	cfg.Retryer = retryer
 	cfg.HTTPClient = client
 	cfg.EnforceShouldRetryCheck = true
@@ -881,7 +879,6 @@ func TestRequest_TemporaryRetry(t *testing.T) {
 	cfg.HTTPClient = &http.Client{
 		Timeout: 100 * time.Millisecond,
 	}
-	cfg.DisableSSL = true
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 	svc := awstesting.NewClient(cfg)

@@ -5,36 +5,36 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 type partitions []partition
 
-func (ps partitions) EndpointFor(service, region string, opts ...func(*Options)) (ResolvedEndpoint, error) {
-	var opt Options
-	opt.Set(opts...)
 
+func (ps partitions) EndpointFor(service, region string, opts ResolveOptions) (aws.Endpoint, error) {
 	for i := 0; i < len(ps); i++ {
-		if !ps[i].canResolveEndpoint(service, region, opt.StrictMatching) {
+		if !ps[i].canResolveEndpoint(service, region, opts.StrictMatching) {
 			continue
 		}
 
-		return ps[i].EndpointFor(service, region, opts...)
+		return ps[i].EndpointFor(service, region, opts)
 	}
 
 	// If loose matching fallback to first partition format to use
 	// when resolving the endpoint.
-	if !opt.StrictMatching && len(ps) > 0 {
-		return ps[0].EndpointFor(service, region, opts...)
+	if !opts.StrictMatching && len(ps) > 0 {
+		return ps[0].EndpointFor(service, region, opts)
 	}
 
-	return ResolvedEndpoint{}, NewUnknownEndpointError("all partitions", service, region, []string{})
+	return aws.Endpoint{}, NewUnknownEndpointError("all partitions", service, region, []string{})
 }
 
 // Partitions satisfies the EnumPartitions interface and returns a list
 // of Partitions representing each partition represented in the SDK's
 // endpoints model.
-func (ps partitions) Partitions() []Partition {
-	parts := make([]Partition, 0, len(ps))
+func (ps partitions) Partitions() Partitions {
+	parts := make(Partitions, 0, len(ps))
 	for i := 0; i < len(ps); i++ {
 		parts = append(parts, ps[i].Partition())
 	}
@@ -74,24 +74,21 @@ func (p partition) canResolveEndpoint(service, region string, strictMatch bool) 
 	return p.RegionRegex.MatchString(region)
 }
 
-func (p partition) EndpointFor(service, region string, opts ...func(*Options)) (resolved ResolvedEndpoint, err error) {
-	var opt Options
-	opt.Set(opts...)
-
+func (p partition) EndpointFor(service, region string, opts ResolveOptions) (resolved aws.Endpoint, err error) {
 	s, hasService := p.Services[service]
-	if !(hasService || opt.ResolveUnknownService) {
+	if !hasService && opts.StrictMatching {
 		// Only return error if the resolver will not fallback to creating
 		// endpoint based on service endpoint ID passed in.
 		return resolved, NewUnknownServiceError(p.ID, service, serviceList(p.Services))
 	}
 
 	e, hasEndpoint := s.endpointForRegion(region)
-	if !hasEndpoint && opt.StrictMatching {
+	if !hasEndpoint && opts.StrictMatching {
 		return resolved, NewUnknownEndpointError(p.ID, service, region, endpointList(s.Endpoints))
 	}
 
 	defs := []endpoint{p.Defaults, s.Defaults}
-	return e.resolve(service, region, p.DNSSuffix, defs, opt), nil
+	return e.resolve(service, region, p.DNSSuffix, defs, opts), nil
 }
 
 func serviceList(ss services) []string {
@@ -203,7 +200,7 @@ func getByPriority(s []string, p []string, def string) string {
 	return s[0]
 }
 
-func (e endpoint) resolve(service, region, dnsSuffix string, defs []endpoint, opts Options) ResolvedEndpoint {
+func (e endpoint) resolve(service, region, dnsSuffix string, defs []endpoint, opts ResolveOptions) aws.Endpoint {
 	var merged endpoint
 	for _, def := range defs {
 		merged.mergeIn(def)
@@ -238,7 +235,7 @@ func (e endpoint) resolve(service, region, dnsSuffix string, defs []endpoint, op
 		signingName = service
 	}
 
-	return ResolvedEndpoint{
+	return aws.Endpoint{
 		URL:           u,
 		SigningRegion: signingRegion,
 		SigningName:   signingName,

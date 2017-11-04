@@ -35,7 +35,6 @@ func TestGetBucketRegion_Exists(t *testing.T) {
 
 		cfg := unit.Config()
 		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-		cfg.DisableSSL = true
 
 		ctx := aws.BackgroundContext()
 		region, err := GetBucketRegion(ctx, cfg, "bucket", "region")
@@ -53,7 +52,6 @@ func TestGetBucketRegion_NotExists(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.DisableSSL = true
 
 	ctx := aws.BackgroundContext()
 	region, err := GetBucketRegion(ctx, cfg, "bucket", "region")
@@ -76,7 +74,6 @@ func TestGetBucketRegionWithClient(t *testing.T) {
 		cfg := unit.Config()
 		cfg.Region = "region"
 		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-		cfg.DisableSSL = true
 
 		svc := s3.New(cfg)
 

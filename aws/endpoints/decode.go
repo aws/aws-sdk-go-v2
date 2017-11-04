@@ -37,7 +37,7 @@ func (d *DecodeModelOptions) Set(optFns ...func(*DecodeModelOptions)) {
 //    for _, p := range partitions {
 //        // ... inspect partitions
 //    }
-func DecodeModel(r io.Reader, optFns ...func(*DecodeModelOptions)) (Resolver, error) {
+func DecodeModel(r io.Reader, optFns ...func(*DecodeModelOptions)) (*Resolver, error) {
 	var opts DecodeModelOptions
 	opts.Set(optFns...)
 
@@ -63,7 +63,7 @@ func DecodeModel(r io.Reader, optFns ...func(*DecodeModelOptions)) (Resolver, er
 		fmt.Sprintf("endpoints version %s, not supported", version), nil)
 }
 
-func decodeV3Endpoints(modelDef modelDefinition, opts DecodeModelOptions) (Resolver, error) {
+func decodeV3Endpoints(modelDef modelDefinition, opts DecodeModelOptions) (*Resolver, error) {
 	b, ok := modelDef["partitions"]
 	if !ok {
 		return nil, newDecodeModelError("endpoints model missing partitions", nil)
@@ -75,7 +75,7 @@ func decodeV3Endpoints(modelDef modelDefinition, opts DecodeModelOptions) (Resol
 	}
 
 	if opts.SkipCustomizations {
-		return ps, nil
+		return &Resolver{partitions: ps}, nil
 	}
 
 	// Customization
@@ -86,7 +86,7 @@ func decodeV3Endpoints(modelDef modelDefinition, opts DecodeModelOptions) (Resol
 		custSetUnresolveServices(p)
 	}
 
-	return ps, nil
+	return &Resolver{partitions: ps}, nil
 }
 
 func custAddS3DualStack(p *partition) {

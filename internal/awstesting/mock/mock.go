@@ -6,7 +6,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
 func init() {
@@ -17,7 +16,7 @@ func init() {
 
 	config = defaults.Config()
 	config.Region = "mock-region"
-	config.EndpointResolver = aws.ResolveWithEndpoint(endpoints.ResolvedEndpoint{
+	config.EndpointResolver = aws.ResolveWithEndpoint(aws.Endpoint{
 		URL:           server.URL,
 		SigningRegion: config.Region,
 	})

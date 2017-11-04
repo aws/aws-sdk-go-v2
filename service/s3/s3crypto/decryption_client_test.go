@@ -32,7 +32,6 @@ func TestGetObjectGCM(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.DisableSSL = true
 	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
@@ -102,7 +101,6 @@ func TestGetObjectCBC(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.DisableSSL = true
 	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 
@@ -170,7 +168,6 @@ func TestGetObjectCBC2(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
-	cfg.DisableSSL = true
 	cfg.S3ForcePathStyle = true
 	cfg.Region = "us-west-2"
 

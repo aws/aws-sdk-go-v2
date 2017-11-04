@@ -63,10 +63,6 @@ type Config struct {
 	// Proper handling of the request.Retryable field is important when setting this field.
 	EnforceShouldRetryCheck bool
 
-	// Set this to `true` to disable SSL when sending requests. Defaults
-	// to `false`.
-	DisableSSL bool
-
 	// Disables semantic parameter validation, which validates input for
 	// missing required fields and/or other semantic request input errors.
 	DisableParamValidation bool
@@ -110,27 +106,6 @@ type Config struct {
 	// will be returned. The bucket name must be DNS compatible to also work
 	// with accelerate.
 	S3UseAccelerate bool
-
-	// Instructs the endpiont to be generated for a service client to
-	// be the dual stack endpoint. The dual stack endpoint will support
-	// both IPv4 and IPv6 addressing.
-	//
-	// Setting this for a service which does not support dual stack will fail
-	// to make requets. It is not recommended to set this value on the session
-	// as it will apply to all service clients created with the session. Even
-	// services which don't support dual stack endpoints.
-	//
-	// If the Endpoint config value is also provided the UseDualStack flag
-	// will be ignored.
-	//
-	// Only supported with.
-	//
-	//     sess := session.Must(session.NewSession())
-	//
-	//     svc := s3.New(sess, &aws.Config{
-	//         UseDualStack: aws.Bool(true),
-	//     })
-	UseDualStack bool
 
 	// DisableRestProtocolURICleaning will not clean the URL path when making rest protocol requests.
 	// Will default to false. This would only be used for empty directory names in s3 requests.

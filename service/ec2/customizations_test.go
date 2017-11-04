@@ -15,7 +15,7 @@ import (
 func TestCopySnapshotPresignedURL(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Region = "us-west-2"
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := ec2.New(cfg)
 

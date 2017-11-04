@@ -11,7 +11,7 @@ import (
 
 func init() {
 	cfg := unit.Config()
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc = sts.New(cfg)
 }

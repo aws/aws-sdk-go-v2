@@ -5,7 +5,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
@@ -96,13 +95,7 @@ func presignURL(r *request.Request, sourceRegion *string, newParams interface{})
 	cfgCp.Region = aws.StringValue(sourceRegion)
 
 	metadata := r.Metadata
-	resolved, err := r.Config.EndpointResolver.EndpointFor(
-		metadata.ServiceName, cfgCp.Region,
-		func(opt *endpoints.Options) {
-			opt.DisableSSL = cfgCp.DisableSSL
-			opt.UseDualStack = cfgCp.UseDualStack
-		},
-	)
+	resolved, err := r.Config.EndpointResolver.ResolveEndpoint(metadata.ServiceName, cfgCp.Region)
 	if err != nil {
 		r.Error = err
 		return nil
