@@ -1,4 +1,4 @@
-package endpoints
+package modeledendpoints
 
 import (
 	"strings"
@@ -50,7 +50,7 @@ func TestDecodeEndpoints_V3(t *testing.T) {
 		t.Fatalf("expected no error, got %v", err)
 	}
 
-	endpoint, err := resolver.EndpointFor("acm", "ap-northeast-1")
+	endpoint, err := resolver.ResolveEndpoint("acm", "ap-northeast-1")
 	if err != nil {
 		t.Fatalf("failed to resolve endpoint, %v", err)
 	}
@@ -59,7 +59,7 @@ func TestDecodeEndpoints_V3(t *testing.T) {
 		t.Errorf("expected %q URL got %q", e, a)
 	}
 
-	p := resolver.(partitions)[0]
+	p := resolver.partitions[0]
 
 	s3Defaults := p.Services["s3"].Defaults
 	if a, e := s3Defaults.HasDualStack, boxedTrue; a != e {

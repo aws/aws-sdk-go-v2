@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -12,16 +12,16 @@ import (
 )
 
 func main() {
-	defaultResolver := endpoints.DefaultResolver()
-	s3CustResolverFn := func(service, region string, optFns ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error) {
+	defaultResolver := modeledendpoints.NewDefaultResolver()
+	s3CustResolverFn := func(service, region string) (aws.Endpoint, error) {
 		if service == "s3" {
-			return endpoints.ResolvedEndpoint{
+			return aws.Endpoint{
 				URL:           "s3.custom.endpoint.com",
 				SigningRegion: "custom-signing-region",
 			}, nil
 		}
 
-		return defaultResolver.EndpointFor(service, region, optFns...)
+		return defaultResolver.ResolveEndpoint(service, region)
 	}
 
 	cfg, err := external.LoadDefaultAWSConfig()
@@ -29,7 +29,7 @@ func main() {
 		panic("failed to load config, " + err.Error())
 	}
 	cfg.Region = "us-west-2"
-	cfg.EndpointResolver = endpoints.ResolverFunc(s3CustResolverFn)
+	cfg.EndpointResolver = aws.EndpointResolverFunc(s3CustResolverFn)
 
 	// Create the S3 service client with the shared config. This will
 	// automatically use the S3 custom endpoint configured in the custom
@@ -55,15 +55,15 @@ func main() {
 	// resolver that overrides the shared config's. This is useful when
 	// custom endpoints are generated, or multiple endpoints are switched on
 	// by a region value.
-	ddbCustResolverFn := func(service, region string, optFns ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error) {
-		return endpoints.ResolvedEndpoint{
+	ddbCustResolverFn := func(service, region string) (aws.Endpoint, error) {
+		return aws.Endpoint{
 			URL:           "dynamodb.custom.endpoint",
 			SigningRegion: "custom-signing-region",
 		}, nil
 	}
 
 	cfgCp := cfg.Copy()
-	cfgCp.EndpointResolver = endpoints.ResolverFunc(ddbCustResolverFn)
+	cfgCp.EndpointResolver = aws.EndpointResolverFunc(ddbCustResolverFn)
 
 	ddbSvc := dynamodb.New(cfgCp)
 	// Operation calls will be made to the custom endpoint set in the

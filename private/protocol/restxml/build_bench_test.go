@@ -14,7 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	credentials "github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/session"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
@@ -36,7 +36,7 @@ func TestMain(m *testing.M) {
 		Endpoint:         aws.String(server.URL),
 		S3ForcePathStyle: aws.Bool(true),
 		DisableSSL:       aws.Bool(true),
-		Region:           aws.String(endpoints.UsWest2RegionID),
+		Region:           aws.String(modeledendpoints.UsWest2RegionID),
 	}))
 	cloudfrontSvc = cloudfront.New(sess)
 	s3Svc = s3.New(sess)

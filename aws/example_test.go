@@ -1,46 +1,28 @@
-package endpoints_test
+package aws_test
 
 import (
-	"fmt"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 )
 
-func ExampleEnumPartitions() {
-	resolver := endpoints.DefaultResolver()
-	partitions := resolver.(endpoints.EnumPartitions).Partitions()
-
-	for _, p := range partitions {
-		fmt.Println("Regions for", p.ID())
-		for id := range p.Regions() {
-			fmt.Println("*", id)
-		}
-
-		fmt.Println("Services for", p.ID())
-		for id := range p.Services() {
-			fmt.Println("*", id)
-		}
-	}
-}
-
-func ExampleResolverFunc() {
-	myCustomResolver := func(service, region string, optFns ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error) {
-		if service == endpoints.S3ServiceID {
-			return endpoints.ResolvedEndpoint{
+func ExampleEndpointResolverFunc() {
+	defaultResolver := modeledendpoints.NewDefaultResolver()
+	myCustomResolver := func(service, region string) (aws.Endpoint, error) {
+		if service == modeledendpoints.S3ServiceID {
+			return aws.Endpoint{
 				URL:           "s3.custom.endpoint.com",
 				SigningRegion: "custom-signing-region",
 			}, nil
 		}
 
-		return endpoints.DefaultResolver().EndpointFor(service, region, optFns...)
+		return defaultResolver.ResolveEndpoint(service, region)
 	}
 
 	cfg := defaults.Config()
-	cfg.Region = endpoints.UsWest2RegionID
+	cfg.Region = modeledendpoints.UsWest2RegionID
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 
 	// Create the S3 service client with the shared config. This will

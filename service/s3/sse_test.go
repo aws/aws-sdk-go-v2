@@ -6,15 +6,17 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
 func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableSSL = true
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	resolver := modeledendpoints.NewDefaultResolver()
+	resolver.DisableSSL = true
+	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
 	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{
@@ -38,8 +40,10 @@ func TestSSECustomerKeyOverHTTPError(t *testing.T) {
 
 func TestCopySourceSSECustomerKeyOverHTTPError(t *testing.T) {
 	cfg := unit.Config()
-	cfg.DisableSSL = true
-	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	resolver := modeledendpoints.NewDefaultResolver()
+	resolver.DisableSSL = true
+	cfg.EndpointResolver = resolver
 
 	s := s3.New(cfg)
 	req, _ := s.CopyObjectRequest(&s3.CopyObjectInput{

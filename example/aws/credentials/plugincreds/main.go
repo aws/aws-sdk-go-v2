@@ -9,7 +9,7 @@ import (
 	"plugin"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/plugincreds"
 	"github.com/aws/aws-sdk-go-v2/aws/session"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -50,17 +50,19 @@ func main() {
 		exitErrorf("failed to load plugin provider, %v", err)
 	}
 
-	// Example to configure a Session with the newly created credentials that
+	// Example to load the config and set with the newly created credentials that
 	// will be sourced using the plugin's functionality.
-	sess := session.Must(session.NewSession(&aws.Config{
-		Credentials: creds,
-	}))
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
+	cfg.Credentials = creds,
 
 	// If the region is not available attempt to derive the bucket's region
 	// from a query to S3 for the bucket's metadata
 	region := aws.StringValue(sess.Config.Region)
 	if len(region) == 0 {
-		region, err = s3manager.GetBucketRegion(context.Background(), sess, bucket, endpoints.UsEast1RegionID)
+		region, err = s3manager.GetBucketRegion(context.Background(), sess, bucket, modeledendpoints.UsEast1RegionID)
 		if err != nil {
 			exitErrorf("failed to get bucket region, %v", err)
 		}

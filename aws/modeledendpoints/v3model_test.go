@@ -1,4 +1,4 @@
-package endpoints
+package modeledendpoints
 
 import (
 	"encoding/json"
@@ -152,7 +152,7 @@ func TestEndpointResolve(t *testing.T) {
 	}
 
 	resolved := e.resolve("service", "region", "dnsSuffix",
-		defs, Options{},
+		defs, ResolveOptions{},
 	)
 
 	assert.Equal(t, "https://service.region.dnsSuffix", resolved.URL)
@@ -244,7 +244,7 @@ var testPartitions = partitions{
 }
 
 func TestResolveEndpoint(t *testing.T) {
-	resolved, err := testPartitions.EndpointFor("service2", "us-west-2")
+	resolved, err := testPartitions.EndpointFor("service2", "us-west-2", ResolveOptions{})
 
 	assert.NoError(t, err)
 	assert.Equal(t, "https://service2.us-west-2.amazonaws.com", resolved.URL)
@@ -253,7 +253,7 @@ func TestResolveEndpoint(t *testing.T) {
 }
 
 func TestResolveEndpoint_DisableSSL(t *testing.T) {
-	resolved, err := testPartitions.EndpointFor("service2", "us-west-2", DisableSSLOption)
+	resolved, err := testPartitions.EndpointFor("service2", "us-west-2", ResolveOptions{DisableSSL: true})
 
 	assert.NoError(t, err)
 	assert.Equal(t, "http://service2.us-west-2.amazonaws.com", resolved.URL)
@@ -262,7 +262,7 @@ func TestResolveEndpoint_DisableSSL(t *testing.T) {
 }
 
 func TestResolveEndpoint_UseDualStack(t *testing.T) {
-	resolved, err := testPartitions.EndpointFor("service1", "us-west-2", UseDualStackOption)
+	resolved, err := testPartitions.EndpointFor("service1", "us-west-2", ResolveOptions{UseDualStack: true})
 
 	assert.NoError(t, err)
 	assert.Equal(t, "https://service1.dualstack.us-west-2.amazonaws.com", resolved.URL)
@@ -271,7 +271,7 @@ func TestResolveEndpoint_UseDualStack(t *testing.T) {
 }
 
 func TestResolveEndpoint_HTTPProtocol(t *testing.T) {
-	resolved, err := testPartitions.EndpointFor("httpService", "us-west-2")
+	resolved, err := testPartitions.EndpointFor("httpService", "us-west-2", ResolveOptions{})
 
 	assert.NoError(t, err)
 	assert.Equal(t, "http://httpService.us-west-2.amazonaws.com", resolved.URL)
@@ -280,27 +280,16 @@ func TestResolveEndpoint_HTTPProtocol(t *testing.T) {
 }
 
 func TestResolveEndpoint_UnknownService(t *testing.T) {
-	_, err := testPartitions.EndpointFor("unknownservice", "us-west-2")
-
-	assert.Error(t, err)
-
-	_, ok := err.(UnknownServiceError)
-	assert.True(t, ok, "expect error to be UnknownServiceError")
-}
-
-func TestResolveEndpoint_ResolveUnknownService(t *testing.T) {
-	resolved, err := testPartitions.EndpointFor("unknown-service", "us-region-1",
-		ResolveUnknownServiceOption)
+	resolved, err := testPartitions.EndpointFor("unknownservice", "us-west-2", ResolveOptions{})
 
 	assert.NoError(t, err)
-
-	assert.Equal(t, "https://unknown-service.us-region-1.amazonaws.com", resolved.URL)
-	assert.Equal(t, "us-region-1", resolved.SigningRegion)
-	assert.Equal(t, "unknown-service", resolved.SigningName)
+	assert.Equal(t, "https://unknownservice.us-west-2.amazonaws.com", resolved.URL)
+	assert.Equal(t, "us-west-2", resolved.SigningRegion)
+	assert.Equal(t, "unknownservice", resolved.SigningName)
 }
 
 func TestResolveEndpoint_UnknownMatchedRegion(t *testing.T) {
-	resolved, err := testPartitions.EndpointFor("service2", "us-region-1")
+	resolved, err := testPartitions.EndpointFor("service2", "us-region-1", ResolveOptions{})
 
 	assert.NoError(t, err)
 	assert.Equal(t, "https://service2.us-region-1.amazonaws.com", resolved.URL)
@@ -309,7 +298,7 @@ func TestResolveEndpoint_UnknownMatchedRegion(t *testing.T) {
 }
 
 func TestResolveEndpoint_UnknownRegion(t *testing.T) {
-	resolved, err := testPartitions.EndpointFor("service2", "unknownregion")
+	resolved, err := testPartitions.EndpointFor("service2", "unknownregion", ResolveOptions{})
 
 	assert.NoError(t, err)
 	assert.Equal(t, "https://service2.unknownregion.amazonaws.com", resolved.URL)
@@ -318,7 +307,7 @@ func TestResolveEndpoint_UnknownRegion(t *testing.T) {
 }
 
 func TestResolveEndpoint_StrictPartitionUnknownEndpoint(t *testing.T) {
-	_, err := testPartitions[0].EndpointFor("service2", "unknownregion", StrictMatchingOption)
+	_, err := testPartitions[0].EndpointFor("service2", "unknownregion", ResolveOptions{StrictMatching: true})
 
 	assert.Error(t, err)
 
@@ -327,7 +316,7 @@ func TestResolveEndpoint_StrictPartitionUnknownEndpoint(t *testing.T) {
 }
 
 func TestResolveEndpoint_StrictPartitionsUnknownEndpoint(t *testing.T) {
-	_, err := testPartitions.EndpointFor("service2", "us-region-1", StrictMatchingOption)
+	_, err := testPartitions.EndpointFor("service2", "us-region-1", ResolveOptions{StrictMatching: true})
 
 	assert.Error(t, err)
 
@@ -336,7 +325,7 @@ func TestResolveEndpoint_StrictPartitionsUnknownEndpoint(t *testing.T) {
 }
 
 func TestResolveEndpoint_NotRegionalized(t *testing.T) {
-	resolved, err := testPartitions.EndpointFor("globalService", "us-west-2")
+	resolved, err := testPartitions.EndpointFor("globalService", "us-west-2", ResolveOptions{})
 
 	assert.NoError(t, err)
 	assert.Equal(t, "https://globalService.amazonaws.com", resolved.URL)
@@ -345,7 +334,7 @@ func TestResolveEndpoint_NotRegionalized(t *testing.T) {
 }
 
 func TestResolveEndpoint_AwsGlobal(t *testing.T) {
-	resolved, err := testPartitions.EndpointFor("globalService", "aws-global")
+	resolved, err := testPartitions.EndpointFor("globalService", "aws-global", ResolveOptions{})
 
 	assert.NoError(t, err)
 	assert.Equal(t, "https://globalService.amazonaws.com", resolved.URL)

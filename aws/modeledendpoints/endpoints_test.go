@@ -1,16 +1,10 @@
-package endpoints
+package modeledendpoints
 
 import "testing"
 
-func TestEnumDefaultPartitions(t *testing.T) {
-	resolver := DefaultResolver()
-	enum, ok := resolver.(EnumPartitions)
-
-	if ok != true {
-		t.Fatalf("resolver must satisfy EnumPartition interface")
-	}
-
-	ps := enum.Partitions()
+func TestDefaultResolver_Partitions(t *testing.T) {
+	resolver := NewDefaultResolver()
+	ps := resolver.Partitions()
 
 	if a, e := len(ps), len(defaultPartitions); a != e {
 		t.Errorf("expected %d partitions, got %d", e, a)
@@ -74,7 +68,7 @@ func TestEnumRegionServices(t *testing.T) {
 		t.Errorf("expect service1 service to be found, was not")
 	}
 
-	resolved, err := r.ResolveEndpoint("service1")
+	resolved, err := r.Endpoint("service1", ResolveOptions{})
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -121,7 +115,7 @@ func TestEnumServicesEndpoints(t *testing.T) {
 		t.Errorf("expect %q service ID, got %q", e, a)
 	}
 
-	resolved, err := s.ResolveEndpoint("us-west-2")
+	resolved, err := s.Endpoint("us-west-2", ResolveOptions{})
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -151,7 +145,7 @@ func TestEnumEndpoints(t *testing.T) {
 		t.Errorf("expect %q service ID, got %q", e, a)
 	}
 
-	resolved, err := e.ResolveEndpoint()
+	resolved, err := e.Resolve(ResolveOptions{})
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -162,11 +156,11 @@ func TestEnumEndpoints(t *testing.T) {
 }
 
 func TestResolveEndpointForPartition(t *testing.T) {
-	enum := testPartitions.Partitions()[0]
+	p := testPartitions.Partitions()[0]
 
-	expected, err := testPartitions.EndpointFor("service1", "us-east-1")
+	expected, err := testPartitions.EndpointFor("service1", "us-east-1", ResolveOptions{})
 
-	actual, err := enum.EndpointFor("service1", "us-east-1")
+	actual, err := p.Endpoint("service1", "us-east-1", ResolveOptions{})
 	if err != nil {
 		t.Fatalf("unexpected error, %v", err)
 	}
@@ -176,90 +170,7 @@ func TestResolveEndpointForPartition(t *testing.T) {
 	}
 }
 
-func TestAddScheme(t *testing.T) {
-	cases := []struct {
-		In         string
-		Expect     string
-		DisableSSL bool
-	}{
-		{
-			In:     "https://example.com",
-			Expect: "https://example.com",
-		},
-		{
-			In:     "example.com",
-			Expect: "https://example.com",
-		},
-		{
-			In:     "http://example.com",
-			Expect: "http://example.com",
-		},
-		{
-			In:         "example.com",
-			Expect:     "http://example.com",
-			DisableSSL: true,
-		},
-		{
-			In:         "https://example.com",
-			Expect:     "https://example.com",
-			DisableSSL: true,
-		},
-	}
-
-	for i, c := range cases {
-		actual := AddScheme(c.In, c.DisableSSL)
-		if actual != c.Expect {
-			t.Errorf("%d, expect URL to be %q, got %q", i, c.Expect, actual)
-		}
-	}
-}
-
-func TestResolverFunc(t *testing.T) {
-	var resolver Resolver
-
-	resolver = ResolverFunc(func(s, r string, opts ...func(*Options)) (ResolvedEndpoint, error) {
-		return ResolvedEndpoint{
-			URL:           "https://service.region.dnssuffix.com",
-			SigningRegion: "region",
-			SigningName:   "service",
-		}, nil
-	})
-
-	resolved, err := resolver.EndpointFor("service", "region", func(o *Options) {
-		o.DisableSSL = true
-	})
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	if a, e := resolved.URL, "https://service.region.dnssuffix.com"; a != e {
-		t.Errorf("expect %q endpoint URL, got %q", e, a)
-	}
-
-	if a, e := resolved.SigningRegion, "region"; a != e {
-		t.Errorf("expect %q region, got %q", e, a)
-	}
-	if a, e := resolved.SigningName, "service"; a != e {
-		t.Errorf("expect %q signing name, got %q", e, a)
-	}
-}
-
-func TestOptionsSet(t *testing.T) {
-	var actual Options
-	actual.Set(DisableSSLOption, UseDualStackOption, StrictMatchingOption)
-
-	expect := Options{
-		DisableSSL:     true,
-		UseDualStack:   true,
-		StrictMatching: true,
-	}
-
-	if actual != expect {
-		t.Errorf("expect %v options got %v", expect, actual)
-	}
-}
-
-func TestRegionsForService(t *testing.T) {
+func TestPartition_RegionsForService(t *testing.T) {
 	ps := DefaultPartitions()
 
 	var expect map[string]Region
@@ -272,11 +183,15 @@ func TestRegionsForService(t *testing.T) {
 		}
 	}
 
-	actual, ok := RegionsForService(ps, ps[0].ID(), serviceID)
+	p, ok := ps.ForPartition(ps[0].ID())
 	if !ok {
-		t.Fatalf("expect regions to be found, was not")
+		t.Fatalf("expect partition to exist")
 	}
 
+	actual, ok := p.RegionsForService(serviceID)
+	if !ok {
+		t.Fatalf("expect service to exist")
+	}
 	if len(actual) == 0 {
 		t.Fatalf("expect service %s to have regions", serviceID)
 	}
@@ -297,9 +212,14 @@ func TestRegionsForService(t *testing.T) {
 func TestRegionsForService_NotFound(t *testing.T) {
 	ps := testPartitions.Partitions()
 
-	actual, ok := RegionsForService(ps, ps[0].ID(), "service-not-exists")
+	p, ok := ps.ForPartition(ps[0].ID())
+	if !ok {
+		t.Fatalf("expect partition to exist")
+	}
+
+	actual, ok := p.RegionsForService("service-not-exists")
 	if ok {
-		t.Fatalf("expect no regions to be found, but were")
+		t.Fatalf("expect service to not exist")
 	}
 	if len(actual) != 0 {
 		t.Errorf("expect no regions, got %v", actual)
@@ -316,7 +236,7 @@ func TestPartitionForRegion(t *testing.T) {
 		break
 	}
 
-	actual, ok := PartitionForRegion(ps, regionID)
+	actual, ok := ps.ForRegion(regionID)
 	if !ok {
 		t.Fatalf("expect partition to be found")
 	}
@@ -328,7 +248,7 @@ func TestPartitionForRegion(t *testing.T) {
 func TestPartitionForRegion_NotFound(t *testing.T) {
 	ps := DefaultPartitions()
 
-	actual, ok := PartitionForRegion(ps, "regionNotExists")
+	actual, ok := ps.ForRegion("regionNotExists")
 	if ok {
 		t.Errorf("expect no partition to be found, got %v", actual)
 	}

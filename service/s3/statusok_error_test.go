@@ -160,7 +160,6 @@ func newCopyTestSvc(errMsg string) *s3.S3 {
 	}))
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.DisableSSL = true
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
 	cfg.S3ForcePathStyle = true
 

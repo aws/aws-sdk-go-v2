@@ -20,7 +20,6 @@ func TestSendHandler_HEADNoBody(t *testing.T) {
 	cfg := defaults.Config()
 	cfg.Region = "mock-region"
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.DisableSSL = true
 	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)

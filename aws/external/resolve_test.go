@@ -111,7 +111,7 @@ func TestResolveEndpointCredentials(t *testing.T) {
 		t.Errorf("expect client set")
 	}
 
-	endpoint, err := p.Client.EndpointResolver.EndpointFor(endpointcreds.ProviderName, "")
+	endpoint, err := p.Client.EndpointResolver.ResolveEndpoint(endpointcreds.ProviderName, "")
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -174,7 +174,7 @@ func TestResolveContainerEndpointPathCredentials(t *testing.T) {
 		t.Errorf("expect client set")
 	}
 
-	endpoint, err := p.Client.EndpointResolver.EndpointFor(endpointcreds.ProviderName, "")
+	endpoint, err := p.Client.EndpointResolver.ResolveEndpoint(endpointcreds.ProviderName, "")
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
