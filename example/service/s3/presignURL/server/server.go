@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
@@ -53,7 +53,7 @@ func main() {
 	// to look in those partitions instead of AWS.
 	if len(region) == 0 {
 		var err error
-		region, err = s3manager.GetBucketRegion(aws.BackgroundContext(), cfg, bucket, endpoints.UsWest2RegionID)
+		region, err = s3manager.GetBucketRegion(aws.BackgroundContext(), cfg, bucket, modeledendpoints.UsWest2RegionID)
 		if err != nil {
 			exitErrorf("failed to get bucket region, %v", err)
 		}
@@ -62,7 +62,7 @@ func main() {
 
 	// Create a new S3 service client that will be use by the service to generate
 	// presigned URLs with. Not actual API requests will be made with this client.
-	// The credentials loaded when the Session was created above will be used
+	// The credentials loaded when the config was created above will be used
 	// to sign the requests with.
 	s3Svc := s3.New(cfg)
 

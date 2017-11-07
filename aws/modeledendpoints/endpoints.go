@@ -1,4 +1,4 @@
-package endpoints
+package modeledendpoints
 
 import (
 	"fmt"
@@ -79,18 +79,6 @@ func (ps Partitions) ForPartition(id string) (Partition, bool) {
 	return Partition{}, false
 }
 
-// Resolver returns an endpoint resolver for the partitions.
-func (ps Partitions) Resolver() *Resolver {
-	r := &Resolver{
-		partitions: make(partitions, len(ps)),
-	}
-	for i, p := range ps {
-		r.partitions[i] = *p.p
-	}
-
-	return r
-}
-
 // A Partition provides the ability to enumerate the partition's regions
 // and services.
 type Partition struct {
@@ -164,7 +152,8 @@ func (p Partition) Services() map[string]Service {
 	return ss
 }
 
-// Resolver returns an endpoint resolver for the partitions.
+// Resolver returns an endpoint resolver for the partitions. Use this to satisfy
+// the SDK's EndpointResolver.
 func (p Partition) Resolver() *Resolver {
 	return &Resolver{
 		partitions: partitions{*p.p},

@@ -1,13 +1,13 @@
-package endpoints_test
+package modeledendpoints_test
 
 import (
 	"fmt"
 
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 )
 
 func ExampleResolver_Partitions() {
-	partitions := endpoints.NewDefaultResolver().Partitions()
+	partitions := modeledendpoints.NewDefaultResolver().Partitions()
 
 	for _, p := range partitions {
 		fmt.Println("Regions for", p.ID())

@@ -3,15 +3,15 @@ package aws_test
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 )
 
 func ExampleEndpointResolverFunc() {
-	defaultResolver := endpoints.NewDefaultResolver()
+	defaultResolver := modeledendpoints.NewDefaultResolver()
 	myCustomResolver := func(service, region string) (aws.Endpoint, error) {
-		if service == endpoints.S3ServiceID {
+		if service == modeledendpoints.S3ServiceID {
 			return aws.Endpoint{
 				URL:           "s3.custom.endpoint.com",
 				SigningRegion: "custom-signing-region",
@@ -22,7 +22,7 @@ func ExampleEndpointResolverFunc() {
 	}
 
 	cfg := defaults.Config()
-	cfg.Region = endpoints.UsWest2RegionID
+	cfg.Region = modeledendpoints.UsWest2RegionID
 	cfg.EndpointResolver = aws.EndpointResolverFunc(myCustomResolver)
 
 	// Create the S3 service client with the shared config. This will

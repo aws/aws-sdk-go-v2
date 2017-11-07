@@ -15,7 +15,7 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 )
 
 // Logger returns a Logger which will write log messages to stdout, and
@@ -45,7 +45,7 @@ func (l defaultLogger) Log(args ...interface{}) {
 // existing service client or session.
 func Config() aws.Config {
 	return aws.Config{
-		EndpointResolver: endpoints.NewDefaultResolver(),
+		EndpointResolver: modeledendpoints.NewDefaultResolver(),
 		Credentials:      aws.AnonymousCredentials,
 		HTTPClient:       HTTPClient(),
 		Logger:           Logger(),

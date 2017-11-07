@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	defaultResolver := endpoints.NewDefaultResolver()
+	defaultResolver := modeledendpoints.NewDefaultResolver()
 	s3CustResolverFn := func(service, region string) (aws.Endpoint, error) {
 		if service == "s3" {
 			return aws.Endpoint{
