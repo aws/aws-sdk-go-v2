@@ -116,7 +116,7 @@ func ExampleDynamoDBStreams_GetShardIterator_shared00() {
 	svc := dynamodbstreams.New(cfg)
 	input := &dynamodbstreams.GetShardIteratorInput{
 		ShardId:           aws.String("00000001414576573621-f55eea83"),
-		ShardIteratorType: aws.String("TRIM_HORIZON"),
+		ShardIteratorType: dynamodbstreams.ShardIteratorTypeTrimHorizon,
 		StreamArn:         aws.String("arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252"),
 	}
 

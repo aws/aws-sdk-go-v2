@@ -1020,6 +1020,7 @@ func (s CopyCommand) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyCommand) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyCommand"}
+
 	if s.DataTableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataTableName"))
 	}
@@ -1068,7 +1069,7 @@ type CreateDeliveryStreamInput struct {
 	//
 	//    * KinesisStreamAsSource: The delivery stream uses a Kinesis stream as
 	//    a source.
-	DeliveryStreamType *string `type:"string" enum:"DeliveryStreamType"`
+	DeliveryStreamType DeliveryStreamType `type:"string"`
 
 	// The destination in Amazon ES. You can specify only one destination.
 	ElasticsearchDestinationConfiguration *ElasticsearchDestinationConfiguration `type:"structure"`
@@ -1100,6 +1101,7 @@ func (s CreateDeliveryStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeliveryStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDeliveryStreamInput"}
+
 	if s.DeliveryStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
@@ -1145,8 +1147,8 @@ func (s *CreateDeliveryStreamInput) SetDeliveryStreamName(v string) *CreateDeliv
 }
 
 // SetDeliveryStreamType sets the DeliveryStreamType field's value.
-func (s *CreateDeliveryStreamInput) SetDeliveryStreamType(v string) *CreateDeliveryStreamInput {
-	s.DeliveryStreamType = &v
+func (s *CreateDeliveryStreamInput) SetDeliveryStreamType(v DeliveryStreamType) *CreateDeliveryStreamInput {
+	s.DeliveryStreamType = v
 	return s
 }
 
@@ -1227,6 +1229,7 @@ func (s DeleteDeliveryStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeliveryStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeliveryStreamInput"}
+
 	if s.DeliveryStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
@@ -1282,7 +1285,7 @@ type DeliveryStreamDescription struct {
 	// The status of the delivery stream.
 	//
 	// DeliveryStreamStatus is a required field
-	DeliveryStreamStatus *string `type:"string" required:"true" enum:"DeliveryStreamStatus"`
+	DeliveryStreamStatus DeliveryStreamStatus `type:"string" required:"true"`
 
 	// The delivery stream type. This can be one of the following values:
 	//
@@ -1292,7 +1295,7 @@ type DeliveryStreamDescription struct {
 	//    a source.
 	//
 	// DeliveryStreamType is a required field
-	DeliveryStreamType *string `type:"string" required:"true" enum:"DeliveryStreamType"`
+	DeliveryStreamType DeliveryStreamType `type:"string" required:"true"`
 
 	// The destinations.
 	//
@@ -1349,14 +1352,14 @@ func (s *DeliveryStreamDescription) SetDeliveryStreamName(v string) *DeliveryStr
 }
 
 // SetDeliveryStreamStatus sets the DeliveryStreamStatus field's value.
-func (s *DeliveryStreamDescription) SetDeliveryStreamStatus(v string) *DeliveryStreamDescription {
-	s.DeliveryStreamStatus = &v
+func (s *DeliveryStreamDescription) SetDeliveryStreamStatus(v DeliveryStreamStatus) *DeliveryStreamDescription {
+	s.DeliveryStreamStatus = v
 	return s
 }
 
 // SetDeliveryStreamType sets the DeliveryStreamType field's value.
-func (s *DeliveryStreamDescription) SetDeliveryStreamType(v string) *DeliveryStreamDescription {
-	s.DeliveryStreamType = &v
+func (s *DeliveryStreamDescription) SetDeliveryStreamType(v DeliveryStreamType) *DeliveryStreamDescription {
+	s.DeliveryStreamType = v
 	return s
 }
 
@@ -1421,6 +1424,7 @@ func (s DescribeDeliveryStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDeliveryStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDeliveryStreamInput"}
+
 	if s.DeliveryStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
@@ -1632,7 +1636,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// to the IndexName to facilitate the expiration of old data. For more information,
 	// see Index Rotation for Amazon Elasticsearch Service Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
 	// The default value is OneDay.
-	IndexRotationPeriod *string `type:"string" enum:"ElasticsearchIndexRotationPeriod"`
+	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
@@ -1656,7 +1660,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// appended to the prefix. For more information, see Amazon S3 Backup for Amazon
 	// Elasticsearch Service Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup).
 	// Default value is FailedDocumentsOnly.
-	S3BackupMode *string `type:"string" enum:"ElasticsearchS3BackupMode"`
+	S3BackupMode ElasticsearchS3BackupMode `type:"string"`
 
 	// The configuration for the backup Amazon S3 location.
 	//
@@ -1682,27 +1686,32 @@ func (s ElasticsearchDestinationConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchDestinationConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ElasticsearchDestinationConfiguration"}
+
 	if s.DomainARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainARN"))
 	}
 	if s.DomainARN != nil && len(*s.DomainARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainARN", 1))
 	}
+
 	if s.IndexName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
+
 	if s.S3Configuration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Configuration"))
 	}
+
 	if s.TypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
 	}
@@ -1756,8 +1765,8 @@ func (s *ElasticsearchDestinationConfiguration) SetIndexName(v string) *Elastics
 }
 
 // SetIndexRotationPeriod sets the IndexRotationPeriod field's value.
-func (s *ElasticsearchDestinationConfiguration) SetIndexRotationPeriod(v string) *ElasticsearchDestinationConfiguration {
-	s.IndexRotationPeriod = &v
+func (s *ElasticsearchDestinationConfiguration) SetIndexRotationPeriod(v ElasticsearchIndexRotationPeriod) *ElasticsearchDestinationConfiguration {
+	s.IndexRotationPeriod = v
 	return s
 }
 
@@ -1780,8 +1789,8 @@ func (s *ElasticsearchDestinationConfiguration) SetRoleARN(v string) *Elasticsea
 }
 
 // SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ElasticsearchDestinationConfiguration) SetS3BackupMode(v string) *ElasticsearchDestinationConfiguration {
-	s.S3BackupMode = &v
+func (s *ElasticsearchDestinationConfiguration) SetS3BackupMode(v ElasticsearchS3BackupMode) *ElasticsearchDestinationConfiguration {
+	s.S3BackupMode = v
 	return s
 }
 
@@ -1815,7 +1824,7 @@ type ElasticsearchDestinationDescription struct {
 	IndexName *string `min:"1" type:"string"`
 
 	// The Elasticsearch index rotation period
-	IndexRotationPeriod *string `type:"string" enum:"ElasticsearchIndexRotationPeriod"`
+	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
@@ -1827,7 +1836,7 @@ type ElasticsearchDestinationDescription struct {
 	RoleARN *string `min:"1" type:"string"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode *string `type:"string" enum:"ElasticsearchS3BackupMode"`
+	S3BackupMode ElasticsearchS3BackupMode `type:"string"`
 
 	// The Amazon S3 destination.
 	S3DestinationDescription *S3DestinationDescription `type:"structure"`
@@ -1871,8 +1880,8 @@ func (s *ElasticsearchDestinationDescription) SetIndexName(v string) *Elasticsea
 }
 
 // SetIndexRotationPeriod sets the IndexRotationPeriod field's value.
-func (s *ElasticsearchDestinationDescription) SetIndexRotationPeriod(v string) *ElasticsearchDestinationDescription {
-	s.IndexRotationPeriod = &v
+func (s *ElasticsearchDestinationDescription) SetIndexRotationPeriod(v ElasticsearchIndexRotationPeriod) *ElasticsearchDestinationDescription {
+	s.IndexRotationPeriod = v
 	return s
 }
 
@@ -1895,8 +1904,8 @@ func (s *ElasticsearchDestinationDescription) SetRoleARN(v string) *Elasticsearc
 }
 
 // SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ElasticsearchDestinationDescription) SetS3BackupMode(v string) *ElasticsearchDestinationDescription {
-	s.S3BackupMode = &v
+func (s *ElasticsearchDestinationDescription) SetS3BackupMode(v ElasticsearchS3BackupMode) *ElasticsearchDestinationDescription {
+	s.S3BackupMode = v
 	return s
 }
 
@@ -1936,7 +1945,7 @@ type ElasticsearchDestinationUpdate struct {
 	// to IndexName to facilitate the expiration of old data. For more information,
 	// see Index Rotation for Amazon Elasticsearch Service Destination (http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
 	// Default value is OneDay.
-	IndexRotationPeriod *string `type:"string" enum:"ElasticsearchIndexRotationPeriod"`
+	IndexRotationPeriod ElasticsearchIndexRotationPeriod `type:"string"`
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
@@ -2029,8 +2038,8 @@ func (s *ElasticsearchDestinationUpdate) SetIndexName(v string) *ElasticsearchDe
 }
 
 // SetIndexRotationPeriod sets the IndexRotationPeriod field's value.
-func (s *ElasticsearchDestinationUpdate) SetIndexRotationPeriod(v string) *ElasticsearchDestinationUpdate {
-	s.IndexRotationPeriod = &v
+func (s *ElasticsearchDestinationUpdate) SetIndexRotationPeriod(v ElasticsearchIndexRotationPeriod) *ElasticsearchDestinationUpdate {
+	s.IndexRotationPeriod = v
 	return s
 }
 
@@ -2104,7 +2113,7 @@ type EncryptionConfiguration struct {
 
 	// Specifically override existing encryption information to ensure that no encryption
 	// is used.
-	NoEncryptionConfig *string `type:"string" enum:"NoEncryptionConfig"`
+	NoEncryptionConfig NoEncryptionConfig `type:"string"`
 }
 
 // String returns the string representation
@@ -2139,8 +2148,8 @@ func (s *EncryptionConfiguration) SetKMSEncryptionConfig(v *KMSEncryptionConfig)
 }
 
 // SetNoEncryptionConfig sets the NoEncryptionConfig field's value.
-func (s *EncryptionConfiguration) SetNoEncryptionConfig(v string) *EncryptionConfiguration {
-	s.NoEncryptionConfig = &v
+func (s *EncryptionConfiguration) SetNoEncryptionConfig(v NoEncryptionConfig) *EncryptionConfiguration {
+	s.NoEncryptionConfig = v
 	return s
 }
 
@@ -2161,7 +2170,7 @@ type ExtendedS3DestinationConfiguration struct {
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
-	CompressionFormat *string `type:"string" enum:"CompressionFormat"`
+	CompressionFormat CompressionFormat `type:"string"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -2186,7 +2195,7 @@ type ExtendedS3DestinationConfiguration struct {
 	S3BackupConfiguration *S3DestinationConfiguration `type:"structure"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode *string `type:"string" enum:"S3BackupMode"`
+	S3BackupMode S3BackupMode `type:"string"`
 }
 
 // String returns the string representation
@@ -2202,12 +2211,14 @@ func (s ExtendedS3DestinationConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExtendedS3DestinationConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExtendedS3DestinationConfiguration"}
+
 	if s.BucketARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BucketARN"))
 	}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -2260,8 +2271,8 @@ func (s *ExtendedS3DestinationConfiguration) SetCloudWatchLoggingOptions(v *Clou
 }
 
 // SetCompressionFormat sets the CompressionFormat field's value.
-func (s *ExtendedS3DestinationConfiguration) SetCompressionFormat(v string) *ExtendedS3DestinationConfiguration {
-	s.CompressionFormat = &v
+func (s *ExtendedS3DestinationConfiguration) SetCompressionFormat(v CompressionFormat) *ExtendedS3DestinationConfiguration {
+	s.CompressionFormat = v
 	return s
 }
 
@@ -2296,8 +2307,8 @@ func (s *ExtendedS3DestinationConfiguration) SetS3BackupConfiguration(v *S3Desti
 }
 
 // SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ExtendedS3DestinationConfiguration) SetS3BackupMode(v string) *ExtendedS3DestinationConfiguration {
-	s.S3BackupMode = &v
+func (s *ExtendedS3DestinationConfiguration) SetS3BackupMode(v S3BackupMode) *ExtendedS3DestinationConfiguration {
+	s.S3BackupMode = v
 	return s
 }
 
@@ -2322,7 +2333,7 @@ type ExtendedS3DestinationDescription struct {
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
 	//
 	// CompressionFormat is a required field
-	CompressionFormat *string `type:"string" required:"true" enum:"CompressionFormat"`
+	CompressionFormat CompressionFormat `type:"string" required:"true"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -2349,7 +2360,7 @@ type ExtendedS3DestinationDescription struct {
 	S3BackupDescription *S3DestinationDescription `type:"structure"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode *string `type:"string" enum:"S3BackupMode"`
+	S3BackupMode S3BackupMode `type:"string"`
 }
 
 // String returns the string representation
@@ -2381,8 +2392,8 @@ func (s *ExtendedS3DestinationDescription) SetCloudWatchLoggingOptions(v *CloudW
 }
 
 // SetCompressionFormat sets the CompressionFormat field's value.
-func (s *ExtendedS3DestinationDescription) SetCompressionFormat(v string) *ExtendedS3DestinationDescription {
-	s.CompressionFormat = &v
+func (s *ExtendedS3DestinationDescription) SetCompressionFormat(v CompressionFormat) *ExtendedS3DestinationDescription {
+	s.CompressionFormat = v
 	return s
 }
 
@@ -2417,8 +2428,8 @@ func (s *ExtendedS3DestinationDescription) SetS3BackupDescription(v *S3Destinati
 }
 
 // SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ExtendedS3DestinationDescription) SetS3BackupMode(v string) *ExtendedS3DestinationDescription {
-	s.S3BackupMode = &v
+func (s *ExtendedS3DestinationDescription) SetS3BackupMode(v S3BackupMode) *ExtendedS3DestinationDescription {
+	s.S3BackupMode = v
 	return s
 }
 
@@ -2437,7 +2448,7 @@ type ExtendedS3DestinationUpdate struct {
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
-	CompressionFormat *string `type:"string" enum:"CompressionFormat"`
+	CompressionFormat CompressionFormat `type:"string"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -2457,7 +2468,7 @@ type ExtendedS3DestinationUpdate struct {
 	RoleARN *string `min:"1" type:"string"`
 
 	// Enables or disables Amazon S3 backup mode.
-	S3BackupMode *string `type:"string" enum:"S3BackupMode"`
+	S3BackupMode S3BackupMode `type:"string"`
 
 	// The Amazon S3 destination for backup.
 	S3BackupUpdate *S3DestinationUpdate `type:"structure"`
@@ -2528,8 +2539,8 @@ func (s *ExtendedS3DestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchL
 }
 
 // SetCompressionFormat sets the CompressionFormat field's value.
-func (s *ExtendedS3DestinationUpdate) SetCompressionFormat(v string) *ExtendedS3DestinationUpdate {
-	s.CompressionFormat = &v
+func (s *ExtendedS3DestinationUpdate) SetCompressionFormat(v CompressionFormat) *ExtendedS3DestinationUpdate {
+	s.CompressionFormat = v
 	return s
 }
 
@@ -2558,8 +2569,8 @@ func (s *ExtendedS3DestinationUpdate) SetRoleARN(v string) *ExtendedS3Destinatio
 }
 
 // SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ExtendedS3DestinationUpdate) SetS3BackupMode(v string) *ExtendedS3DestinationUpdate {
-	s.S3BackupMode = &v
+func (s *ExtendedS3DestinationUpdate) SetS3BackupMode(v S3BackupMode) *ExtendedS3DestinationUpdate {
+	s.S3BackupMode = v
 	return s
 }
 
@@ -2590,6 +2601,7 @@ func (s GetKinesisStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetKinesisStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetKinesisStreamInput"}
+
 	if s.DeliveryStreamARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamARN"))
 	}
@@ -2665,6 +2677,7 @@ func (s KMSEncryptionConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KMSEncryptionConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KMSEncryptionConfig"}
+
 	if s.AWSKMSKeyARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AWSKMSKeyARN"))
 	}
@@ -2714,12 +2727,14 @@ func (s KinesisStreamSourceConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisStreamSourceConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KinesisStreamSourceConfiguration"}
+
 	if s.KinesisStreamARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KinesisStreamARN"))
 	}
 	if s.KinesisStreamARN != nil && len(*s.KinesisStreamARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KinesisStreamARN", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -2803,7 +2818,7 @@ type ListDeliveryStreamsInput struct {
 	//
 	// This parameter is optional. If this parameter is omitted, delivery streams
 	// of all types are returned.
-	DeliveryStreamType *string `type:"string" enum:"DeliveryStreamType"`
+	DeliveryStreamType DeliveryStreamType `type:"string"`
 
 	// The name of the delivery stream to start the list with.
 	ExclusiveStartDeliveryStreamName *string `min:"1" type:"string"`
@@ -2839,8 +2854,8 @@ func (s *ListDeliveryStreamsInput) Validate() error {
 }
 
 // SetDeliveryStreamType sets the DeliveryStreamType field's value.
-func (s *ListDeliveryStreamsInput) SetDeliveryStreamType(v string) *ListDeliveryStreamsInput {
-	s.DeliveryStreamType = &v
+func (s *ListDeliveryStreamsInput) SetDeliveryStreamType(v DeliveryStreamType) *ListDeliveryStreamsInput {
+	s.DeliveryStreamType = v
 	return s
 }
 
@@ -2958,7 +2973,7 @@ type Processor struct {
 	// The type of processor.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"ProcessorType"`
+	Type ProcessorType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2974,7 +2989,7 @@ func (s Processor) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Processor) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Processor"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Parameters != nil {
@@ -3001,8 +3016,8 @@ func (s *Processor) SetParameters(v []*ProcessorParameter) *Processor {
 }
 
 // SetType sets the Type field's value.
-func (s *Processor) SetType(v string) *Processor {
-	s.Type = &v
+func (s *Processor) SetType(v ProcessorType) *Processor {
+	s.Type = v
 	return s
 }
 
@@ -3014,7 +3029,7 @@ type ProcessorParameter struct {
 	// The name of the parameter.
 	//
 	// ParameterName is a required field
-	ParameterName *string `type:"string" required:"true" enum:"ProcessorParameterName"`
+	ParameterName ProcessorParameterName `type:"string" required:"true"`
 
 	// The parameter value.
 	//
@@ -3035,9 +3050,10 @@ func (s ProcessorParameter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProcessorParameter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ProcessorParameter"}
-	if s.ParameterName == nil {
+	if len(s.ParameterName) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterName"))
 	}
+
 	if s.ParameterValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterValue"))
 	}
@@ -3052,8 +3068,8 @@ func (s *ProcessorParameter) Validate() error {
 }
 
 // SetParameterName sets the ParameterName field's value.
-func (s *ProcessorParameter) SetParameterName(v string) *ProcessorParameter {
-	s.ParameterName = &v
+func (s *ProcessorParameter) SetParameterName(v ProcessorParameterName) *ProcessorParameter {
+	s.ParameterName = v
 	return s
 }
 
@@ -3091,12 +3107,14 @@ func (s PutRecordBatchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordBatchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRecordBatchInput"}
+
 	if s.DeliveryStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
+
 	if s.Records == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Records"))
 	}
@@ -3244,12 +3262,14 @@ func (s PutRecordInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRecordInput"}
+
 	if s.DeliveryStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
+
 	if s.Record == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Record"))
 	}
@@ -3330,6 +3350,7 @@ func (s Record) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Record) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Record"}
+
 	if s.Data == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
@@ -3385,7 +3406,7 @@ type RedshiftDestinationConfiguration struct {
 	S3BackupConfiguration *S3DestinationConfiguration `type:"structure"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode *string `type:"string" enum:"RedshiftS3BackupMode"`
+	S3BackupMode RedshiftS3BackupMode `type:"string"`
 
 	// The configuration for the intermediate Amazon S3 location from which Amazon
 	// Redshift obtains data. Restrictions are described in the topic for CreateDeliveryStream.
@@ -3416,30 +3437,36 @@ func (s RedshiftDestinationConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedshiftDestinationConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RedshiftDestinationConfiguration"}
+
 	if s.ClusterJDBCURL == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterJDBCURL"))
 	}
 	if s.ClusterJDBCURL != nil && len(*s.ClusterJDBCURL) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClusterJDBCURL", 1))
 	}
+
 	if s.CopyCommand == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CopyCommand"))
 	}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 6 {
 		invalidParams.Add(aws.NewErrParamMinLen("Password", 6))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
+
 	if s.S3Configuration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Configuration"))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -3522,8 +3549,8 @@ func (s *RedshiftDestinationConfiguration) SetS3BackupConfiguration(v *S3Destina
 }
 
 // SetS3BackupMode sets the S3BackupMode field's value.
-func (s *RedshiftDestinationConfiguration) SetS3BackupMode(v string) *RedshiftDestinationConfiguration {
-	s.S3BackupMode = &v
+func (s *RedshiftDestinationConfiguration) SetS3BackupMode(v RedshiftS3BackupMode) *RedshiftDestinationConfiguration {
+	s.S3BackupMode = v
 	return s
 }
 
@@ -3573,7 +3600,7 @@ type RedshiftDestinationDescription struct {
 	S3BackupDescription *S3DestinationDescription `type:"structure"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode *string `type:"string" enum:"RedshiftS3BackupMode"`
+	S3BackupMode RedshiftS3BackupMode `type:"string"`
 
 	// The Amazon S3 destination.
 	//
@@ -3639,8 +3666,8 @@ func (s *RedshiftDestinationDescription) SetS3BackupDescription(v *S3Destination
 }
 
 // SetS3BackupMode sets the S3BackupMode field's value.
-func (s *RedshiftDestinationDescription) SetS3BackupMode(v string) *RedshiftDestinationDescription {
-	s.S3BackupMode = &v
+func (s *RedshiftDestinationDescription) SetS3BackupMode(v RedshiftS3BackupMode) *RedshiftDestinationDescription {
+	s.S3BackupMode = v
 	return s
 }
 
@@ -3684,7 +3711,7 @@ type RedshiftDestinationUpdate struct {
 	RoleARN *string `min:"1" type:"string"`
 
 	// The Amazon S3 backup mode.
-	S3BackupMode *string `type:"string" enum:"RedshiftS3BackupMode"`
+	S3BackupMode RedshiftS3BackupMode `type:"string"`
 
 	// The Amazon S3 destination for backup.
 	S3BackupUpdate *S3DestinationUpdate `type:"structure"`
@@ -3795,8 +3822,8 @@ func (s *RedshiftDestinationUpdate) SetRoleARN(v string) *RedshiftDestinationUpd
 }
 
 // SetS3BackupMode sets the S3BackupMode field's value.
-func (s *RedshiftDestinationUpdate) SetS3BackupMode(v string) *RedshiftDestinationUpdate {
-	s.S3BackupMode = &v
+func (s *RedshiftDestinationUpdate) SetS3BackupMode(v RedshiftS3BackupMode) *RedshiftDestinationUpdate {
+	s.S3BackupMode = v
 	return s
 }
 
@@ -3870,7 +3897,7 @@ type S3DestinationConfiguration struct {
 	// The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift
 	// destinations because they are not supported by the Amazon Redshift COPY operation
 	// that reads from the S3 bucket.
-	CompressionFormat *string `type:"string" enum:"CompressionFormat"`
+	CompressionFormat CompressionFormat `type:"string"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -3902,12 +3929,14 @@ func (s S3DestinationConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3DestinationConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "S3DestinationConfiguration"}
+
 	if s.BucketARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BucketARN"))
 	}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -3950,8 +3979,8 @@ func (s *S3DestinationConfiguration) SetCloudWatchLoggingOptions(v *CloudWatchLo
 }
 
 // SetCompressionFormat sets the CompressionFormat field's value.
-func (s *S3DestinationConfiguration) SetCompressionFormat(v string) *S3DestinationConfiguration {
-	s.CompressionFormat = &v
+func (s *S3DestinationConfiguration) SetCompressionFormat(v CompressionFormat) *S3DestinationConfiguration {
+	s.CompressionFormat = v
 	return s
 }
 
@@ -3995,7 +4024,7 @@ type S3DestinationDescription struct {
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
 	//
 	// CompressionFormat is a required field
-	CompressionFormat *string `type:"string" required:"true" enum:"CompressionFormat"`
+	CompressionFormat CompressionFormat `type:"string" required:"true"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -4045,8 +4074,8 @@ func (s *S3DestinationDescription) SetCloudWatchLoggingOptions(v *CloudWatchLogg
 }
 
 // SetCompressionFormat sets the CompressionFormat field's value.
-func (s *S3DestinationDescription) SetCompressionFormat(v string) *S3DestinationDescription {
-	s.CompressionFormat = &v
+func (s *S3DestinationDescription) SetCompressionFormat(v CompressionFormat) *S3DestinationDescription {
+	s.CompressionFormat = v
 	return s
 }
 
@@ -4088,7 +4117,7 @@ type S3DestinationUpdate struct {
 	// The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift
 	// destinations because they are not supported by the Amazon Redshift COPY operation
 	// that reads from the S3 bucket.
-	CompressionFormat *string `type:"string" enum:"CompressionFormat"`
+	CompressionFormat CompressionFormat `type:"string"`
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -4160,8 +4189,8 @@ func (s *S3DestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOp
 }
 
 // SetCompressionFormat sets the CompressionFormat field's value.
-func (s *S3DestinationUpdate) SetCompressionFormat(v string) *S3DestinationUpdate {
-	s.CompressionFormat = &v
+func (s *S3DestinationUpdate) SetCompressionFormat(v CompressionFormat) *S3DestinationUpdate {
+	s.CompressionFormat = v
 	return s
 }
 
@@ -4310,18 +4339,21 @@ func (s UpdateDestinationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDestinationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDestinationInput"}
+
 	if s.CurrentDeliveryStreamVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentDeliveryStreamVersionId"))
 	}
 	if s.CurrentDeliveryStreamVersionId != nil && len(*s.CurrentDeliveryStreamVersionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CurrentDeliveryStreamVersionId", 1))
 	}
+
 	if s.DeliveryStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
+
 	if s.DestinationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationId"))
 	}
@@ -4412,94 +4444,86 @@ func (s UpdateDestinationOutput) GoString() string {
 	return s.String()
 }
 
+type CompressionFormat string
+
+// Enum values for CompressionFormat
 const (
-	// CompressionFormatUncompressed is a CompressionFormat enum value
-	CompressionFormatUncompressed = "UNCOMPRESSED"
-
-	// CompressionFormatGzip is a CompressionFormat enum value
-	CompressionFormatGzip = "GZIP"
-
-	// CompressionFormatZip is a CompressionFormat enum value
-	CompressionFormatZip = "ZIP"
-
-	// CompressionFormatSnappy is a CompressionFormat enum value
-	CompressionFormatSnappy = "Snappy"
+	CompressionFormatUncompressed CompressionFormat = "UNCOMPRESSED"
+	CompressionFormatGzip         CompressionFormat = "GZIP"
+	CompressionFormatZip          CompressionFormat = "ZIP"
+	CompressionFormatSnappy       CompressionFormat = "Snappy"
 )
 
+type DeliveryStreamStatus string
+
+// Enum values for DeliveryStreamStatus
 const (
-	// DeliveryStreamStatusCreating is a DeliveryStreamStatus enum value
-	DeliveryStreamStatusCreating = "CREATING"
-
-	// DeliveryStreamStatusDeleting is a DeliveryStreamStatus enum value
-	DeliveryStreamStatusDeleting = "DELETING"
-
-	// DeliveryStreamStatusActive is a DeliveryStreamStatus enum value
-	DeliveryStreamStatusActive = "ACTIVE"
+	DeliveryStreamStatusCreating DeliveryStreamStatus = "CREATING"
+	DeliveryStreamStatusDeleting DeliveryStreamStatus = "DELETING"
+	DeliveryStreamStatusActive   DeliveryStreamStatus = "ACTIVE"
 )
 
-const (
-	// DeliveryStreamTypeDirectPut is a DeliveryStreamType enum value
-	DeliveryStreamTypeDirectPut = "DirectPut"
+type DeliveryStreamType string
 
-	// DeliveryStreamTypeKinesisStreamAsSource is a DeliveryStreamType enum value
-	DeliveryStreamTypeKinesisStreamAsSource = "KinesisStreamAsSource"
+// Enum values for DeliveryStreamType
+const (
+	DeliveryStreamTypeDirectPut             DeliveryStreamType = "DirectPut"
+	DeliveryStreamTypeKinesisStreamAsSource DeliveryStreamType = "KinesisStreamAsSource"
 )
 
+type ElasticsearchIndexRotationPeriod string
+
+// Enum values for ElasticsearchIndexRotationPeriod
 const (
-	// ElasticsearchIndexRotationPeriodNoRotation is a ElasticsearchIndexRotationPeriod enum value
-	ElasticsearchIndexRotationPeriodNoRotation = "NoRotation"
-
-	// ElasticsearchIndexRotationPeriodOneHour is a ElasticsearchIndexRotationPeriod enum value
-	ElasticsearchIndexRotationPeriodOneHour = "OneHour"
-
-	// ElasticsearchIndexRotationPeriodOneDay is a ElasticsearchIndexRotationPeriod enum value
-	ElasticsearchIndexRotationPeriodOneDay = "OneDay"
-
-	// ElasticsearchIndexRotationPeriodOneWeek is a ElasticsearchIndexRotationPeriod enum value
-	ElasticsearchIndexRotationPeriodOneWeek = "OneWeek"
-
-	// ElasticsearchIndexRotationPeriodOneMonth is a ElasticsearchIndexRotationPeriod enum value
-	ElasticsearchIndexRotationPeriodOneMonth = "OneMonth"
+	ElasticsearchIndexRotationPeriodNoRotation ElasticsearchIndexRotationPeriod = "NoRotation"
+	ElasticsearchIndexRotationPeriodOneHour    ElasticsearchIndexRotationPeriod = "OneHour"
+	ElasticsearchIndexRotationPeriodOneDay     ElasticsearchIndexRotationPeriod = "OneDay"
+	ElasticsearchIndexRotationPeriodOneWeek    ElasticsearchIndexRotationPeriod = "OneWeek"
+	ElasticsearchIndexRotationPeriodOneMonth   ElasticsearchIndexRotationPeriod = "OneMonth"
 )
 
-const (
-	// ElasticsearchS3BackupModeFailedDocumentsOnly is a ElasticsearchS3BackupMode enum value
-	ElasticsearchS3BackupModeFailedDocumentsOnly = "FailedDocumentsOnly"
+type ElasticsearchS3BackupMode string
 
-	// ElasticsearchS3BackupModeAllDocuments is a ElasticsearchS3BackupMode enum value
-	ElasticsearchS3BackupModeAllDocuments = "AllDocuments"
+// Enum values for ElasticsearchS3BackupMode
+const (
+	ElasticsearchS3BackupModeFailedDocumentsOnly ElasticsearchS3BackupMode = "FailedDocumentsOnly"
+	ElasticsearchS3BackupModeAllDocuments        ElasticsearchS3BackupMode = "AllDocuments"
 )
 
+type NoEncryptionConfig string
+
+// Enum values for NoEncryptionConfig
 const (
-	// NoEncryptionConfigNoEncryption is a NoEncryptionConfig enum value
-	NoEncryptionConfigNoEncryption = "NoEncryption"
+	NoEncryptionConfigNoEncryption NoEncryptionConfig = "NoEncryption"
 )
 
-const (
-	// ProcessorParameterNameLambdaArn is a ProcessorParameterName enum value
-	ProcessorParameterNameLambdaArn = "LambdaArn"
+type ProcessorParameterName string
 
-	// ProcessorParameterNameNumberOfRetries is a ProcessorParameterName enum value
-	ProcessorParameterNameNumberOfRetries = "NumberOfRetries"
+// Enum values for ProcessorParameterName
+const (
+	ProcessorParameterNameLambdaArn       ProcessorParameterName = "LambdaArn"
+	ProcessorParameterNameNumberOfRetries ProcessorParameterName = "NumberOfRetries"
 )
 
+type ProcessorType string
+
+// Enum values for ProcessorType
 const (
-	// ProcessorTypeLambda is a ProcessorType enum value
-	ProcessorTypeLambda = "Lambda"
+	ProcessorTypeLambda ProcessorType = "Lambda"
 )
 
-const (
-	// RedshiftS3BackupModeDisabled is a RedshiftS3BackupMode enum value
-	RedshiftS3BackupModeDisabled = "Disabled"
+type RedshiftS3BackupMode string
 
-	// RedshiftS3BackupModeEnabled is a RedshiftS3BackupMode enum value
-	RedshiftS3BackupModeEnabled = "Enabled"
+// Enum values for RedshiftS3BackupMode
+const (
+	RedshiftS3BackupModeDisabled RedshiftS3BackupMode = "Disabled"
+	RedshiftS3BackupModeEnabled  RedshiftS3BackupMode = "Enabled"
 )
 
-const (
-	// S3BackupModeDisabled is a S3BackupMode enum value
-	S3BackupModeDisabled = "Disabled"
+type S3BackupMode string
 
-	// S3BackupModeEnabled is a S3BackupMode enum value
-	S3BackupModeEnabled = "Enabled"
+// Enum values for S3BackupMode
+const (
+	S3BackupModeDisabled S3BackupMode = "Disabled"
+	S3BackupModeEnabled  S3BackupMode = "Enabled"
 )

@@ -1759,15 +1759,19 @@ func (s AddPermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddPermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddPermissionInput"}
+
 	if s.AWSAccountIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AWSAccountIds"))
 	}
+
 	if s.Actions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Actions"))
 	}
+
 	if s.Label == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -1907,9 +1911,11 @@ func (s ChangeMessageVisibilityBatchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeMessageVisibilityBatchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ChangeMessageVisibilityBatchInput"}
+
 	if s.Entries == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -2027,9 +2033,11 @@ func (s ChangeMessageVisibilityBatchRequestEntry) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeMessageVisibilityBatchRequestEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ChangeMessageVisibilityBatchRequestEntry"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.ReceiptHandle == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
 	}
@@ -2122,12 +2130,15 @@ func (s ChangeMessageVisibilityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeMessageVisibilityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ChangeMessageVisibilityInput"}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
+
 	if s.ReceiptHandle == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
 	}
+
 	if s.VisibilityTimeout == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VisibilityTimeout"))
 	}
@@ -2323,6 +2334,7 @@ func (s CreateQueueInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateQueueInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateQueueInput"}
+
 	if s.QueueName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueName"))
 	}
@@ -2400,9 +2412,11 @@ func (s DeleteMessageBatchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMessageBatchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMessageBatchInput"}
+
 	if s.Entries == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -2507,9 +2521,11 @@ func (s DeleteMessageBatchRequestEntry) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMessageBatchRequestEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMessageBatchRequestEntry"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.ReceiptHandle == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
 	}
@@ -2589,9 +2605,11 @@ func (s DeleteMessageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMessageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMessageInput"}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
+
 	if s.ReceiptHandle == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReceiptHandle"))
 	}
@@ -2654,6 +2672,7 @@ func (s DeleteQueueInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteQueueInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteQueueInput"}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -2777,7 +2796,7 @@ type GetQueueAttributesInput struct {
 	//    is enabled for the queue. For more information, see Exactly-Once Processing
 	//    (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
 	//    in the Amazon SQS Developer Guide.
-	AttributeNames []*string `locationNameList:"AttributeName" type:"list" flattened:"true"`
+	AttributeNames []QueueAttributeName `locationNameList:"AttributeName" type:"list" flattened:"true"`
 
 	// The URL of the Amazon SQS queue whose attribute information is retrieved.
 	//
@@ -2800,6 +2819,7 @@ func (s GetQueueAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueueAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetQueueAttributesInput"}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -2811,7 +2831,7 @@ func (s *GetQueueAttributesInput) Validate() error {
 }
 
 // SetAttributeNames sets the AttributeNames field's value.
-func (s *GetQueueAttributesInput) SetAttributeNames(v []*string) *GetQueueAttributesInput {
+func (s *GetQueueAttributesInput) SetAttributeNames(v []QueueAttributeName) *GetQueueAttributesInput {
 	s.AttributeNames = v
 	return s
 }
@@ -2876,6 +2896,7 @@ func (s GetQueueUrlInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueueUrlInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetQueueUrlInput"}
+
 	if s.QueueName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueName"))
 	}
@@ -2949,6 +2970,7 @@ func (s ListDeadLetterSourceQueuesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeadLetterSourceQueuesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDeadLetterSourceQueuesInput"}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -3186,6 +3208,7 @@ func (s MessageAttributeValue) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MessageAttributeValue) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MessageAttributeValue"}
+
 	if s.DataType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataType"))
 	}
@@ -3251,6 +3274,7 @@ func (s PurgeQueueInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurgeQueueInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PurgeQueueInput"}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -3347,7 +3371,7 @@ type ReceiveMessageInput struct {
 	//    * RedrivePolicy
 	//
 	//    * VisibilityTimeout
-	AttributeNames []*string `locationNameList:"AttributeName" type:"list" flattened:"true"`
+	AttributeNames []QueueAttributeName `locationNameList:"AttributeName" type:"list" flattened:"true"`
 
 	// The maximum number of messages to return. Amazon SQS never returns more messages
 	// than this value (however, fewer messages might be returned). Valid values
@@ -3462,6 +3486,7 @@ func (s ReceiveMessageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReceiveMessageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReceiveMessageInput"}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -3473,7 +3498,7 @@ func (s *ReceiveMessageInput) Validate() error {
 }
 
 // SetAttributeNames sets the AttributeNames field's value.
-func (s *ReceiveMessageInput) SetAttributeNames(v []*string) *ReceiveMessageInput {
+func (s *ReceiveMessageInput) SetAttributeNames(v []QueueAttributeName) *ReceiveMessageInput {
 	s.AttributeNames = v
 	return s
 }
@@ -3570,9 +3595,11 @@ func (s RemovePermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemovePermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemovePermissionInput"}
+
 	if s.Label == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -3640,9 +3667,11 @@ func (s SendMessageBatchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendMessageBatchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendMessageBatchInput"}
+
 	if s.Entries == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -3837,9 +3866,11 @@ func (s SendMessageBatchRequestEntry) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendMessageBatchRequestEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendMessageBatchRequestEntry"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.MessageBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MessageBody"))
 	}
@@ -4102,9 +4133,11 @@ func (s SendMessageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendMessageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendMessageInput"}
+
 	if s.MessageBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MessageBody"))
 	}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -4366,9 +4399,11 @@ func (s SetQueueAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetQueueAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetQueueAttributesInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
@@ -4406,81 +4441,39 @@ func (s SetQueueAttributesOutput) GoString() string {
 	return s.String()
 }
 
+type MessageSystemAttributeName string
+
+// Enum values for MessageSystemAttributeName
 const (
-	// MessageSystemAttributeNameSenderId is a MessageSystemAttributeName enum value
-	MessageSystemAttributeNameSenderId = "SenderId"
-
-	// MessageSystemAttributeNameSentTimestamp is a MessageSystemAttributeName enum value
-	MessageSystemAttributeNameSentTimestamp = "SentTimestamp"
-
-	// MessageSystemAttributeNameApproximateReceiveCount is a MessageSystemAttributeName enum value
-	MessageSystemAttributeNameApproximateReceiveCount = "ApproximateReceiveCount"
-
-	// MessageSystemAttributeNameApproximateFirstReceiveTimestamp is a MessageSystemAttributeName enum value
-	MessageSystemAttributeNameApproximateFirstReceiveTimestamp = "ApproximateFirstReceiveTimestamp"
-
-	// MessageSystemAttributeNameSequenceNumber is a MessageSystemAttributeName enum value
-	MessageSystemAttributeNameSequenceNumber = "SequenceNumber"
-
-	// MessageSystemAttributeNameMessageDeduplicationId is a MessageSystemAttributeName enum value
-	MessageSystemAttributeNameMessageDeduplicationId = "MessageDeduplicationId"
-
-	// MessageSystemAttributeNameMessageGroupId is a MessageSystemAttributeName enum value
-	MessageSystemAttributeNameMessageGroupId = "MessageGroupId"
+	MessageSystemAttributeNameSenderId                         MessageSystemAttributeName = "SenderId"
+	MessageSystemAttributeNameSentTimestamp                    MessageSystemAttributeName = "SentTimestamp"
+	MessageSystemAttributeNameApproximateReceiveCount          MessageSystemAttributeName = "ApproximateReceiveCount"
+	MessageSystemAttributeNameApproximateFirstReceiveTimestamp MessageSystemAttributeName = "ApproximateFirstReceiveTimestamp"
+	MessageSystemAttributeNameSequenceNumber                   MessageSystemAttributeName = "SequenceNumber"
+	MessageSystemAttributeNameMessageDeduplicationId           MessageSystemAttributeName = "MessageDeduplicationId"
+	MessageSystemAttributeNameMessageGroupId                   MessageSystemAttributeName = "MessageGroupId"
 )
 
+type QueueAttributeName string
+
+// Enum values for QueueAttributeName
 const (
-	// QueueAttributeNameAll is a QueueAttributeName enum value
-	QueueAttributeNameAll = "All"
-
-	// QueueAttributeNamePolicy is a QueueAttributeName enum value
-	QueueAttributeNamePolicy = "Policy"
-
-	// QueueAttributeNameVisibilityTimeout is a QueueAttributeName enum value
-	QueueAttributeNameVisibilityTimeout = "VisibilityTimeout"
-
-	// QueueAttributeNameMaximumMessageSize is a QueueAttributeName enum value
-	QueueAttributeNameMaximumMessageSize = "MaximumMessageSize"
-
-	// QueueAttributeNameMessageRetentionPeriod is a QueueAttributeName enum value
-	QueueAttributeNameMessageRetentionPeriod = "MessageRetentionPeriod"
-
-	// QueueAttributeNameApproximateNumberOfMessages is a QueueAttributeName enum value
-	QueueAttributeNameApproximateNumberOfMessages = "ApproximateNumberOfMessages"
-
-	// QueueAttributeNameApproximateNumberOfMessagesNotVisible is a QueueAttributeName enum value
-	QueueAttributeNameApproximateNumberOfMessagesNotVisible = "ApproximateNumberOfMessagesNotVisible"
-
-	// QueueAttributeNameCreatedTimestamp is a QueueAttributeName enum value
-	QueueAttributeNameCreatedTimestamp = "CreatedTimestamp"
-
-	// QueueAttributeNameLastModifiedTimestamp is a QueueAttributeName enum value
-	QueueAttributeNameLastModifiedTimestamp = "LastModifiedTimestamp"
-
-	// QueueAttributeNameQueueArn is a QueueAttributeName enum value
-	QueueAttributeNameQueueArn = "QueueArn"
-
-	// QueueAttributeNameApproximateNumberOfMessagesDelayed is a QueueAttributeName enum value
-	QueueAttributeNameApproximateNumberOfMessagesDelayed = "ApproximateNumberOfMessagesDelayed"
-
-	// QueueAttributeNameDelaySeconds is a QueueAttributeName enum value
-	QueueAttributeNameDelaySeconds = "DelaySeconds"
-
-	// QueueAttributeNameReceiveMessageWaitTimeSeconds is a QueueAttributeName enum value
-	QueueAttributeNameReceiveMessageWaitTimeSeconds = "ReceiveMessageWaitTimeSeconds"
-
-	// QueueAttributeNameRedrivePolicy is a QueueAttributeName enum value
-	QueueAttributeNameRedrivePolicy = "RedrivePolicy"
-
-	// QueueAttributeNameFifoQueue is a QueueAttributeName enum value
-	QueueAttributeNameFifoQueue = "FifoQueue"
-
-	// QueueAttributeNameContentBasedDeduplication is a QueueAttributeName enum value
-	QueueAttributeNameContentBasedDeduplication = "ContentBasedDeduplication"
-
-	// QueueAttributeNameKmsMasterKeyId is a QueueAttributeName enum value
-	QueueAttributeNameKmsMasterKeyId = "KmsMasterKeyId"
-
-	// QueueAttributeNameKmsDataKeyReusePeriodSeconds is a QueueAttributeName enum value
-	QueueAttributeNameKmsDataKeyReusePeriodSeconds = "KmsDataKeyReusePeriodSeconds"
+	QueueAttributeNameAll                                   QueueAttributeName = "All"
+	QueueAttributeNamePolicy                                QueueAttributeName = "Policy"
+	QueueAttributeNameVisibilityTimeout                     QueueAttributeName = "VisibilityTimeout"
+	QueueAttributeNameMaximumMessageSize                    QueueAttributeName = "MaximumMessageSize"
+	QueueAttributeNameMessageRetentionPeriod                QueueAttributeName = "MessageRetentionPeriod"
+	QueueAttributeNameApproximateNumberOfMessages           QueueAttributeName = "ApproximateNumberOfMessages"
+	QueueAttributeNameApproximateNumberOfMessagesNotVisible QueueAttributeName = "ApproximateNumberOfMessagesNotVisible"
+	QueueAttributeNameCreatedTimestamp                      QueueAttributeName = "CreatedTimestamp"
+	QueueAttributeNameLastModifiedTimestamp                 QueueAttributeName = "LastModifiedTimestamp"
+	QueueAttributeNameQueueArn                              QueueAttributeName = "QueueArn"
+	QueueAttributeNameApproximateNumberOfMessagesDelayed    QueueAttributeName = "ApproximateNumberOfMessagesDelayed"
+	QueueAttributeNameDelaySeconds                          QueueAttributeName = "DelaySeconds"
+	QueueAttributeNameReceiveMessageWaitTimeSeconds         QueueAttributeName = "ReceiveMessageWaitTimeSeconds"
+	QueueAttributeNameRedrivePolicy                         QueueAttributeName = "RedrivePolicy"
+	QueueAttributeNameFifoQueue                             QueueAttributeName = "FifoQueue"
+	QueueAttributeNameContentBasedDeduplication             QueueAttributeName = "ContentBasedDeduplication"
+	QueueAttributeNameKmsMasterKeyId                        QueueAttributeName = "KmsMasterKeyId"
+	QueueAttributeNameKmsDataKeyReusePeriodSeconds          QueueAttributeName = "KmsDataKeyReusePeriodSeconds"
 )

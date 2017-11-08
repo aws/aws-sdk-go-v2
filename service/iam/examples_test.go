@@ -1848,7 +1848,7 @@ func ExampleIAM_UpdateAccessKey_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.UpdateAccessKeyInput{
 		AccessKeyId: aws.String("AKIAIOSFODNN7EXAMPLE"),
-		Status:      aws.String("Inactive"),
+		Status:      iam.StatusTypeInactive,
 		UserName:    aws.String("Bob"),
 	}
 
@@ -2058,7 +2058,7 @@ func ExampleIAM_UpdateSigningCertificate_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.UpdateSigningCertificateInput{
 		CertificateId: aws.String("TA7SMP42TDN5Z26OBPJE7EXAMPLE"),
-		Status:        aws.String("Inactive"),
+		Status:        iam.StatusTypeInactive,
 		UserName:      aws.String("Bob"),
 	}
 

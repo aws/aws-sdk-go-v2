@@ -92,7 +92,7 @@ func ExampleLambda_CreateFunction_shared00() {
 		MemorySize:   aws.Int64(128),
 		Publish:      aws.Bool(true),
 		Role:         aws.String("arn:aws:iam::123456789012:role/service-role/role-name"),
-		Runtime:      aws.String("nodejs4.3"),
+		Runtime:      lambda.RuntimeNodejs43,
 		Timeout:      aws.Int64(15),
 		VpcConfig:    &lambda.VpcConfig{},
 	}
@@ -500,8 +500,8 @@ func ExampleLambda_Invoke_shared00() {
 	input := &lambda.InvokeInput{
 		ClientContext:  aws.String("MyApp"),
 		FunctionName:   aws.String("MyFunction"),
-		InvocationType: aws.String("Event"),
-		LogType:        aws.String("Tail"),
+		InvocationType: lambda.InvocationTypeEvent,
+		LogType:        lambda.LogTypeTail,
 		Payload:        []byte("fileb://file-path/input.json"),
 		Qualifier:      aws.String("1"),
 	}
@@ -966,7 +966,7 @@ func ExampleLambda_UpdateFunctionConfiguration_shared00() {
 		Handler:      aws.String("index.handler"),
 		MemorySize:   aws.Int64(128),
 		Role:         aws.String("arn:aws:iam::123456789012:role/lambda_basic_execution"),
-		Runtime:      aws.String("python2.7"),
+		Runtime:      lambda.RuntimePython27,
 		Timeout:      aws.Int64(123),
 		VpcConfig:    &lambda.VpcConfig{},
 	}

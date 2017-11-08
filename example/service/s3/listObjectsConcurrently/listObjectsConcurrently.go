@@ -191,10 +191,10 @@ func listBuckets(svc *s3.S3) ([]*Bucket, error) {
 			continue
 		}
 
-		if locRes.LocationConstraint == nil {
+		if len(locRes.LocationConstraint) == 0 {
 			buckets[i].Region = "us-east-1"
 		} else {
-			buckets[i].Region = *locRes.LocationConstraint
+			buckets[i].Region = string(locRes.LocationConstraint)
 		}
 	}
 
@@ -223,9 +223,9 @@ func listBucketObjects(svc *s3.S3, bucket string) ([]Object, []ErrObject, error)
 		}
 
 		obj := Object{Bucket: bucket, Key: *listObj.Key}
-		if objData.ServerSideEncryption != nil {
+		if len(objData.ServerSideEncryption) > 0 {
 			obj.Encrypted = true
-			obj.EncryptionType = *objData.ServerSideEncryption
+			obj.EncryptionType = string(objData.ServerSideEncryption)
 		}
 
 		objs = append(objs, obj)

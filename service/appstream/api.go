@@ -2580,12 +2580,14 @@ func (s AssociateFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateFleetInput"}
+
 	if s.FleetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
 	if s.FleetName != nil && len(*s.FleetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -2650,6 +2652,7 @@ func (s ComputeCapacity) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComputeCapacity) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ComputeCapacity"}
+
 	if s.DesiredInstances == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DesiredInstances"))
 	}
@@ -2754,12 +2757,15 @@ func (s CreateDirectoryConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDirectoryConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectoryConfigInput"}
+
 	if s.DirectoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryName"))
 	}
+
 	if s.OrganizationalUnitDistinguishedNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitDistinguishedNames"))
 	}
+
 	if s.ServiceAccountCredentials == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceAccountCredentials"))
 	}
@@ -2844,7 +2850,7 @@ type CreateFleetInput struct {
 	// Enables or disables default internet access for the fleet.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
 
-	FleetType *string `type:"string" enum:"FleetType"`
+	FleetType FleetType `type:"string"`
 
 	// The name of the image used by the fleet.
 	//
@@ -2923,21 +2929,25 @@ func (s CreateFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateFleetInput"}
+
 	if s.ComputeCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComputeCapacity"))
 	}
+
 	if s.ImageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageName"))
 	}
 	if s.ImageName != nil && len(*s.ImageName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageName", 1))
 	}
+
 	if s.InstanceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2990,8 +3000,8 @@ func (s *CreateFleetInput) SetEnableDefaultInternetAccess(v bool) *CreateFleetIn
 }
 
 // SetFleetType sets the FleetType field's value.
-func (s *CreateFleetInput) SetFleetType(v string) *CreateFleetInput {
-	s.FleetType = &v
+func (s *CreateFleetInput) SetFleetType(v FleetType) *CreateFleetInput {
+	s.FleetType = v
 	return s
 }
 
@@ -3088,18 +3098,21 @@ func (s CreateImageBuilderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateImageBuilderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateImageBuilderInput"}
+
 	if s.ImageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageName"))
 	}
 	if s.ImageName != nil && len(*s.ImageName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageName", 1))
 	}
+
 	if s.InstanceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3204,6 +3217,7 @@ func (s CreateImageBuilderStreamingURLInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateImageBuilderStreamingURLInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateImageBuilderStreamingURLInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3292,6 +3306,7 @@ func (s CreateStackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStackInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3409,6 +3424,7 @@ func (s *CreateStreamingURLInput) Validate() error {
 	if s.ApplicationId != nil && len(*s.ApplicationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationId", 1))
 	}
+
 	if s.FleetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
@@ -3418,12 +3434,14 @@ func (s *CreateStreamingURLInput) Validate() error {
 	if s.SessionContext != nil && len(*s.SessionContext) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SessionContext", 1))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
+
 	if s.UserId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
@@ -3529,6 +3547,7 @@ func (s DeleteDirectoryConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDirectoryConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectoryConfigInput"}
+
 	if s.DirectoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryName"))
 	}
@@ -3583,6 +3602,7 @@ func (s DeleteFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFleetInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3638,6 +3658,7 @@ func (s DeleteImageBuilderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteImageBuilderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteImageBuilderInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3698,6 +3719,7 @@ func (s DeleteImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteImageInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3761,6 +3783,7 @@ func (s DeleteStackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4104,7 +4127,7 @@ type DescribeSessionsInput struct {
 	// The authentication method. Specify API for a user authenticated using a streaming
 	// URL or SAML for a SAML federated user. The default is to authenticate users
 	// using a streaming URL.
-	AuthenticationType *string `type:"string" enum:"AuthenticationType"`
+	AuthenticationType AuthenticationType `type:"string"`
 
 	// The name of the fleet.
 	//
@@ -4141,6 +4164,7 @@ func (s DescribeSessionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSessionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSessionsInput"}
+
 	if s.FleetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
@@ -4150,6 +4174,7 @@ func (s *DescribeSessionsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -4167,8 +4192,8 @@ func (s *DescribeSessionsInput) Validate() error {
 }
 
 // SetAuthenticationType sets the AuthenticationType field's value.
-func (s *DescribeSessionsInput) SetAuthenticationType(v string) *DescribeSessionsInput {
-	s.AuthenticationType = &v
+func (s *DescribeSessionsInput) SetAuthenticationType(v AuthenticationType) *DescribeSessionsInput {
+	s.AuthenticationType = v
 	return s
 }
 
@@ -4400,12 +4425,14 @@ func (s DisassociateFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateFleetInput"}
+
 	if s.FleetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
 	if s.FleetName != nil && len(*s.FleetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -4503,6 +4530,7 @@ func (s ExpireSessionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExpireSessionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExpireSessionInput"}
+
 	if s.SessionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SessionId"))
 	}
@@ -4576,7 +4604,7 @@ type Fleet struct {
 	// The fleet errors.
 	FleetErrors []*FleetError `type:"list"`
 
-	FleetType *string `type:"string" enum:"FleetType"`
+	FleetType FleetType `type:"string"`
 
 	// The image used by the fleet.
 	//
@@ -4600,7 +4628,7 @@ type Fleet struct {
 	// The current state for the fleet.
 	//
 	// State is a required field
-	State *string `type:"string" required:"true" enum:"FleetState"`
+	State FleetState `type:"string" required:"true"`
 
 	// The VPC configuration for the fleet.
 	VpcConfig *VpcConfig `type:"structure"`
@@ -4671,8 +4699,8 @@ func (s *Fleet) SetFleetErrors(v []*FleetError) *Fleet {
 }
 
 // SetFleetType sets the FleetType field's value.
-func (s *Fleet) SetFleetType(v string) *Fleet {
-	s.FleetType = &v
+func (s *Fleet) SetFleetType(v FleetType) *Fleet {
+	s.FleetType = v
 	return s
 }
 
@@ -4701,8 +4729,8 @@ func (s *Fleet) SetName(v string) *Fleet {
 }
 
 // SetState sets the State field's value.
-func (s *Fleet) SetState(v string) *Fleet {
-	s.State = &v
+func (s *Fleet) SetState(v FleetState) *Fleet {
+	s.State = v
 	return s
 }
 
@@ -4718,7 +4746,7 @@ type FleetError struct {
 	_ struct{} `type:"structure"`
 
 	// The error code.
-	ErrorCode *string `type:"string" enum:"FleetErrorCode"`
+	ErrorCode FleetErrorCode `type:"string"`
 
 	// The error message.
 	ErrorMessage *string `min:"1" type:"string"`
@@ -4735,8 +4763,8 @@ func (s FleetError) GoString() string {
 }
 
 // SetErrorCode sets the ErrorCode field's value.
-func (s *FleetError) SetErrorCode(v string) *FleetError {
-	s.ErrorCode = &v
+func (s *FleetError) SetErrorCode(v FleetErrorCode) *FleetError {
+	s.ErrorCode = v
 	return s
 }
 
@@ -4778,7 +4806,7 @@ type Image struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The operating system platform of the image.
-	Platform *string `type:"string" enum:"PlatformType"`
+	Platform PlatformType `type:"string"`
 
 	// The release date of the public base image. For private images, this date
 	// is the release date of the base image from which the image was created.
@@ -4786,13 +4814,13 @@ type Image struct {
 
 	// The image starts in the PENDING state. If image creation succeeds, the state
 	// is AVAILABLE. If image creation fails, the state is FAILED.
-	State *string `type:"string" enum:"ImageState"`
+	State ImageState `type:"string"`
 
 	// The reason why the last state change occurred.
 	StateChangeReason *ImageStateChangeReason `type:"structure"`
 
 	// Indicates whether the image is public or private.
-	Visibility *string `type:"string" enum:"VisibilityType"`
+	Visibility VisibilityType `type:"string"`
 }
 
 // String returns the string representation
@@ -4854,8 +4882,8 @@ func (s *Image) SetName(v string) *Image {
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *Image) SetPlatform(v string) *Image {
-	s.Platform = &v
+func (s *Image) SetPlatform(v PlatformType) *Image {
+	s.Platform = v
 	return s
 }
 
@@ -4866,8 +4894,8 @@ func (s *Image) SetPublicBaseImageReleasedDate(v time.Time) *Image {
 }
 
 // SetState sets the State field's value.
-func (s *Image) SetState(v string) *Image {
-	s.State = &v
+func (s *Image) SetState(v ImageState) *Image {
+	s.State = v
 	return s
 }
 
@@ -4878,8 +4906,8 @@ func (s *Image) SetStateChangeReason(v *ImageStateChangeReason) *Image {
 }
 
 // SetVisibility sets the Visibility field's value.
-func (s *Image) SetVisibility(v string) *Image {
-	s.Visibility = &v
+func (s *Image) SetVisibility(v VisibilityType) *Image {
+	s.Visibility = v
 	return s
 }
 
@@ -4909,9 +4937,9 @@ type ImageBuilder struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	Platform *string `type:"string" enum:"PlatformType"`
+	Platform PlatformType `type:"string"`
 
-	State *string `type:"string" enum:"ImageBuilderState"`
+	State ImageBuilderState `type:"string"`
 
 	StateChangeReason *ImageBuilderStateChangeReason `type:"structure"`
 
@@ -4990,14 +5018,14 @@ func (s *ImageBuilder) SetName(v string) *ImageBuilder {
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *ImageBuilder) SetPlatform(v string) *ImageBuilder {
-	s.Platform = &v
+func (s *ImageBuilder) SetPlatform(v PlatformType) *ImageBuilder {
+	s.Platform = v
 	return s
 }
 
 // SetState sets the State field's value.
-func (s *ImageBuilder) SetState(v string) *ImageBuilder {
-	s.State = &v
+func (s *ImageBuilder) SetState(v ImageBuilderState) *ImageBuilder {
+	s.State = v
 	return s
 }
 
@@ -5017,7 +5045,7 @@ func (s *ImageBuilder) SetVpcConfig(v *VpcConfig) *ImageBuilder {
 type ImageBuilderStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
-	Code *string `type:"string" enum:"ImageBuilderStateChangeReasonCode"`
+	Code ImageBuilderStateChangeReasonCode `type:"string"`
 
 	Message *string `min:"1" type:"string"`
 }
@@ -5033,8 +5061,8 @@ func (s ImageBuilderStateChangeReason) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *ImageBuilderStateChangeReason) SetCode(v string) *ImageBuilderStateChangeReason {
-	s.Code = &v
+func (s *ImageBuilderStateChangeReason) SetCode(v ImageBuilderStateChangeReasonCode) *ImageBuilderStateChangeReason {
+	s.Code = v
 	return s
 }
 
@@ -5050,7 +5078,7 @@ type ImageStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// The state change reason code.
-	Code *string `type:"string" enum:"ImageStateChangeReasonCode"`
+	Code ImageStateChangeReasonCode `type:"string"`
 
 	// The state change reason message.
 	Message *string `min:"1" type:"string"`
@@ -5067,8 +5095,8 @@ func (s ImageStateChangeReason) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *ImageStateChangeReason) SetCode(v string) *ImageStateChangeReason {
-	s.Code = &v
+func (s *ImageStateChangeReason) SetCode(v ImageStateChangeReasonCode) *ImageStateChangeReason {
+	s.Code = v
 	return s
 }
 
@@ -5108,6 +5136,7 @@ func (s *ListAssociatedFleetsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -5194,6 +5223,7 @@ func (s ListAssociatedStacksInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAssociatedStacksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAssociatedStacksInput"}
+
 	if s.FleetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
@@ -5260,7 +5290,7 @@ func (s *ListAssociatedStacksOutput) SetNextToken(v string) *ListAssociatedStack
 type ResourceError struct {
 	_ struct{} `type:"structure"`
 
-	ErrorCode *string `type:"string" enum:"FleetErrorCode"`
+	ErrorCode FleetErrorCode `type:"string"`
 
 	ErrorMessage *string `min:"1" type:"string"`
 
@@ -5278,8 +5308,8 @@ func (s ResourceError) GoString() string {
 }
 
 // SetErrorCode sets the ErrorCode field's value.
-func (s *ResourceError) SetErrorCode(v string) *ResourceError {
-	s.ErrorCode = &v
+func (s *ResourceError) SetErrorCode(v FleetErrorCode) *ResourceError {
+	s.ErrorCode = v
 	return s
 }
 
@@ -5327,12 +5357,14 @@ func (s ServiceAccountCredentials) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ServiceAccountCredentials) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ServiceAccountCredentials"}
+
 	if s.AccountName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountName"))
 	}
 	if s.AccountName != nil && len(*s.AccountName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountName", 1))
 	}
+
 	if s.AccountPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountPassword"))
 	}
@@ -5365,7 +5397,7 @@ type Session struct {
 
 	// The authentication method. The user is authenticated using a streaming URL
 	// (API) or SAML federation (SAML).
-	AuthenticationType *string `type:"string" enum:"AuthenticationType"`
+	AuthenticationType AuthenticationType `type:"string"`
 
 	// The name of the fleet for the streaming session.
 	//
@@ -5385,7 +5417,7 @@ type Session struct {
 	// The current state of the streaming session.
 	//
 	// State is a required field
-	State *string `type:"string" required:"true" enum:"SessionState"`
+	State SessionState `type:"string" required:"true"`
 
 	// The identifier of the user for whom the session was created.
 	//
@@ -5404,8 +5436,8 @@ func (s Session) GoString() string {
 }
 
 // SetAuthenticationType sets the AuthenticationType field's value.
-func (s *Session) SetAuthenticationType(v string) *Session {
-	s.AuthenticationType = &v
+func (s *Session) SetAuthenticationType(v AuthenticationType) *Session {
+	s.AuthenticationType = v
 	return s
 }
 
@@ -5428,8 +5460,8 @@ func (s *Session) SetStackName(v string) *Session {
 }
 
 // SetState sets the State field's value.
-func (s *Session) SetState(v string) *Session {
-	s.State = &v
+func (s *Session) SetState(v SessionState) *Session {
+	s.State = v
 	return s
 }
 
@@ -5526,7 +5558,7 @@ type StackError struct {
 	_ struct{} `type:"structure"`
 
 	// The error code.
-	ErrorCode *string `type:"string" enum:"StackErrorCode"`
+	ErrorCode StackErrorCode `type:"string"`
 
 	// The error message.
 	ErrorMessage *string `min:"1" type:"string"`
@@ -5543,8 +5575,8 @@ func (s StackError) GoString() string {
 }
 
 // SetErrorCode sets the ErrorCode field's value.
-func (s *StackError) SetErrorCode(v string) *StackError {
-	s.ErrorCode = &v
+func (s *StackError) SetErrorCode(v StackErrorCode) *StackError {
+	s.ErrorCode = v
 	return s
 }
 
@@ -5577,6 +5609,7 @@ func (s StartFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartFleetInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5632,6 +5665,7 @@ func (s StartImageBuilderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartImageBuilderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartImageBuilderInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5697,6 +5731,7 @@ func (s StopFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopFleetInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5752,6 +5787,7 @@ func (s StopImageBuilderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopImageBuilderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopImageBuilderInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5802,7 +5838,7 @@ type StorageConnector struct {
 	// The type of storage connector.
 	//
 	// ConnectorType is a required field
-	ConnectorType *string `type:"string" required:"true" enum:"StorageConnectorType"`
+	ConnectorType StorageConnectorType `type:"string" required:"true"`
 
 	// The ARN of the storage connector.
 	ResourceIdentifier *string `min:"1" type:"string"`
@@ -5821,7 +5857,7 @@ func (s StorageConnector) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StorageConnector) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StorageConnector"}
-	if s.ConnectorType == nil {
+	if len(s.ConnectorType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectorType"))
 	}
 	if s.ResourceIdentifier != nil && len(*s.ResourceIdentifier) < 1 {
@@ -5835,8 +5871,8 @@ func (s *StorageConnector) Validate() error {
 }
 
 // SetConnectorType sets the ConnectorType field's value.
-func (s *StorageConnector) SetConnectorType(v string) *StorageConnector {
-	s.ConnectorType = &v
+func (s *StorageConnector) SetConnectorType(v StorageConnectorType) *StorageConnector {
+	s.ConnectorType = v
 	return s
 }
 
@@ -5876,6 +5912,7 @@ func (s UpdateDirectoryConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDirectoryConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDirectoryConfigInput"}
+
 	if s.DirectoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryName"))
 	}
@@ -5938,7 +5975,7 @@ type UpdateFleetInput struct {
 	_ struct{} `type:"structure"`
 
 	// The fleet attributes to delete.
-	AttributesToDelete []*string `type:"list"`
+	AttributesToDelete []FleetAttribute `type:"list"`
 
 	// The desired capacity for the fleet.
 	ComputeCapacity *ComputeCapacity `type:"structure"`
@@ -6043,6 +6080,7 @@ func (s *UpdateFleetInput) Validate() error {
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6062,7 +6100,7 @@ func (s *UpdateFleetInput) Validate() error {
 }
 
 // SetAttributesToDelete sets the AttributesToDelete field's value.
-func (s *UpdateFleetInput) SetAttributesToDelete(v []*string) *UpdateFleetInput {
+func (s *UpdateFleetInput) SetAttributesToDelete(v []FleetAttribute) *UpdateFleetInput {
 	s.AttributesToDelete = v
 	return s
 }
@@ -6198,6 +6236,7 @@ func (s UpdateStackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateStackInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6309,222 +6348,152 @@ func (s *VpcConfig) SetSubnetIds(v []*string) *VpcConfig {
 	return s
 }
 
+type AuthenticationType string
+
+// Enum values for AuthenticationType
 const (
-	// AuthenticationTypeApi is a AuthenticationType enum value
-	AuthenticationTypeApi = "API"
-
-	// AuthenticationTypeSaml is a AuthenticationType enum value
-	AuthenticationTypeSaml = "SAML"
-
-	// AuthenticationTypeUserpool is a AuthenticationType enum value
-	AuthenticationTypeUserpool = "USERPOOL"
+	AuthenticationTypeApi      AuthenticationType = "API"
+	AuthenticationTypeSaml     AuthenticationType = "SAML"
+	AuthenticationTypeUserpool AuthenticationType = "USERPOOL"
 )
 
 // The fleet attribute.
+type FleetAttribute string
+
+// Enum values for FleetAttribute
 const (
-	// FleetAttributeVpcConfiguration is a FleetAttribute enum value
-	FleetAttributeVpcConfiguration = "VPC_CONFIGURATION"
-
-	// FleetAttributeVpcConfigurationSecurityGroupIds is a FleetAttribute enum value
-	FleetAttributeVpcConfigurationSecurityGroupIds = "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
-
-	// FleetAttributeDomainJoinInfo is a FleetAttribute enum value
-	FleetAttributeDomainJoinInfo = "DOMAIN_JOIN_INFO"
+	FleetAttributeVpcConfiguration                 FleetAttribute = "VPC_CONFIGURATION"
+	FleetAttributeVpcConfigurationSecurityGroupIds FleetAttribute = "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
+	FleetAttributeDomainJoinInfo                   FleetAttribute = "DOMAIN_JOIN_INFO"
 )
 
+type FleetErrorCode string
+
+// Enum values for FleetErrorCode
 const (
-	// FleetErrorCodeIamServiceRoleMissingEniDescribeAction is a FleetErrorCode enum value
-	FleetErrorCodeIamServiceRoleMissingEniDescribeAction = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"
-
-	// FleetErrorCodeIamServiceRoleMissingEniCreateAction is a FleetErrorCode enum value
-	FleetErrorCodeIamServiceRoleMissingEniCreateAction = "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"
-
-	// FleetErrorCodeIamServiceRoleMissingEniDeleteAction is a FleetErrorCode enum value
-	FleetErrorCodeIamServiceRoleMissingEniDeleteAction = "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"
-
-	// FleetErrorCodeNetworkInterfaceLimitExceeded is a FleetErrorCode enum value
-	FleetErrorCodeNetworkInterfaceLimitExceeded = "NETWORK_INTERFACE_LIMIT_EXCEEDED"
-
-	// FleetErrorCodeInternalServiceError is a FleetErrorCode enum value
-	FleetErrorCodeInternalServiceError = "INTERNAL_SERVICE_ERROR"
-
-	// FleetErrorCodeIamServiceRoleIsMissing is a FleetErrorCode enum value
-	FleetErrorCodeIamServiceRoleIsMissing = "IAM_SERVICE_ROLE_IS_MISSING"
-
-	// FleetErrorCodeSubnetHasInsufficientIpAddresses is a FleetErrorCode enum value
-	FleetErrorCodeSubnetHasInsufficientIpAddresses = "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
-
-	// FleetErrorCodeIamServiceRoleMissingDescribeSubnetAction is a FleetErrorCode enum value
-	FleetErrorCodeIamServiceRoleMissingDescribeSubnetAction = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
-
-	// FleetErrorCodeSubnetNotFound is a FleetErrorCode enum value
-	FleetErrorCodeSubnetNotFound = "SUBNET_NOT_FOUND"
-
-	// FleetErrorCodeImageNotFound is a FleetErrorCode enum value
-	FleetErrorCodeImageNotFound = "IMAGE_NOT_FOUND"
-
-	// FleetErrorCodeInvalidSubnetConfiguration is a FleetErrorCode enum value
-	FleetErrorCodeInvalidSubnetConfiguration = "INVALID_SUBNET_CONFIGURATION"
-
-	// FleetErrorCodeSecurityGroupsNotFound is a FleetErrorCode enum value
-	FleetErrorCodeSecurityGroupsNotFound = "SECURITY_GROUPS_NOT_FOUND"
-
-	// FleetErrorCodeIgwNotAttached is a FleetErrorCode enum value
-	FleetErrorCodeIgwNotAttached = "IGW_NOT_ATTACHED"
-
-	// FleetErrorCodeIamServiceRoleMissingDescribeSecurityGroupsAction is a FleetErrorCode enum value
-	FleetErrorCodeIamServiceRoleMissingDescribeSecurityGroupsAction = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"
-
-	// FleetErrorCodeDomainJoinErrorFileNotFound is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinErrorFileNotFound = "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"
-
-	// FleetErrorCodeDomainJoinErrorAccessDenied is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinErrorAccessDenied = "DOMAIN_JOIN_ERROR_ACCESS_DENIED"
-
-	// FleetErrorCodeDomainJoinErrorLogonFailure is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinErrorLogonFailure = "DOMAIN_JOIN_ERROR_LOGON_FAILURE"
-
-	// FleetErrorCodeDomainJoinErrorInvalidParameter is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinErrorInvalidParameter = "DOMAIN_JOIN_ERROR_INVALID_PARAMETER"
-
-	// FleetErrorCodeDomainJoinErrorMoreData is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinErrorMoreData = "DOMAIN_JOIN_ERROR_MORE_DATA"
-
-	// FleetErrorCodeDomainJoinErrorNoSuchDomain is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinErrorNoSuchDomain = "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"
-
-	// FleetErrorCodeDomainJoinErrorNotSupported is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinErrorNotSupported = "DOMAIN_JOIN_ERROR_NOT_SUPPORTED"
-
-	// FleetErrorCodeDomainJoinNerrInvalidWorkgroupName is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinNerrInvalidWorkgroupName = "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"
-
-	// FleetErrorCodeDomainJoinNerrWorkstationNotStarted is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinNerrWorkstationNotStarted = "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"
-
-	// FleetErrorCodeDomainJoinErrorDsMachineAccountQuotaExceeded is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinErrorDsMachineAccountQuotaExceeded = "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"
-
-	// FleetErrorCodeDomainJoinNerrPasswordExpired is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinNerrPasswordExpired = "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"
-
-	// FleetErrorCodeDomainJoinInternalServiceError is a FleetErrorCode enum value
-	FleetErrorCodeDomainJoinInternalServiceError = "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+	FleetErrorCodeIamServiceRoleMissingEniDescribeAction            FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"
+	FleetErrorCodeIamServiceRoleMissingEniCreateAction              FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"
+	FleetErrorCodeIamServiceRoleMissingEniDeleteAction              FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"
+	FleetErrorCodeNetworkInterfaceLimitExceeded                     FleetErrorCode = "NETWORK_INTERFACE_LIMIT_EXCEEDED"
+	FleetErrorCodeInternalServiceError                              FleetErrorCode = "INTERNAL_SERVICE_ERROR"
+	FleetErrorCodeIamServiceRoleIsMissing                           FleetErrorCode = "IAM_SERVICE_ROLE_IS_MISSING"
+	FleetErrorCodeSubnetHasInsufficientIpAddresses                  FleetErrorCode = "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
+	FleetErrorCodeIamServiceRoleMissingDescribeSubnetAction         FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
+	FleetErrorCodeSubnetNotFound                                    FleetErrorCode = "SUBNET_NOT_FOUND"
+	FleetErrorCodeImageNotFound                                     FleetErrorCode = "IMAGE_NOT_FOUND"
+	FleetErrorCodeInvalidSubnetConfiguration                        FleetErrorCode = "INVALID_SUBNET_CONFIGURATION"
+	FleetErrorCodeSecurityGroupsNotFound                            FleetErrorCode = "SECURITY_GROUPS_NOT_FOUND"
+	FleetErrorCodeIgwNotAttached                                    FleetErrorCode = "IGW_NOT_ATTACHED"
+	FleetErrorCodeIamServiceRoleMissingDescribeSecurityGroupsAction FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"
+	FleetErrorCodeDomainJoinErrorFileNotFound                       FleetErrorCode = "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"
+	FleetErrorCodeDomainJoinErrorAccessDenied                       FleetErrorCode = "DOMAIN_JOIN_ERROR_ACCESS_DENIED"
+	FleetErrorCodeDomainJoinErrorLogonFailure                       FleetErrorCode = "DOMAIN_JOIN_ERROR_LOGON_FAILURE"
+	FleetErrorCodeDomainJoinErrorInvalidParameter                   FleetErrorCode = "DOMAIN_JOIN_ERROR_INVALID_PARAMETER"
+	FleetErrorCodeDomainJoinErrorMoreData                           FleetErrorCode = "DOMAIN_JOIN_ERROR_MORE_DATA"
+	FleetErrorCodeDomainJoinErrorNoSuchDomain                       FleetErrorCode = "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"
+	FleetErrorCodeDomainJoinErrorNotSupported                       FleetErrorCode = "DOMAIN_JOIN_ERROR_NOT_SUPPORTED"
+	FleetErrorCodeDomainJoinNerrInvalidWorkgroupName                FleetErrorCode = "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"
+	FleetErrorCodeDomainJoinNerrWorkstationNotStarted               FleetErrorCode = "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"
+	FleetErrorCodeDomainJoinErrorDsMachineAccountQuotaExceeded      FleetErrorCode = "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"
+	FleetErrorCodeDomainJoinNerrPasswordExpired                     FleetErrorCode = "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"
+	FleetErrorCodeDomainJoinInternalServiceError                    FleetErrorCode = "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
 )
 
+type FleetState string
+
+// Enum values for FleetState
 const (
-	// FleetStateStarting is a FleetState enum value
-	FleetStateStarting = "STARTING"
-
-	// FleetStateRunning is a FleetState enum value
-	FleetStateRunning = "RUNNING"
-
-	// FleetStateStopping is a FleetState enum value
-	FleetStateStopping = "STOPPING"
-
-	// FleetStateStopped is a FleetState enum value
-	FleetStateStopped = "STOPPED"
+	FleetStateStarting FleetState = "STARTING"
+	FleetStateRunning  FleetState = "RUNNING"
+	FleetStateStopping FleetState = "STOPPING"
+	FleetStateStopped  FleetState = "STOPPED"
 )
 
-const (
-	// FleetTypeAlwaysOn is a FleetType enum value
-	FleetTypeAlwaysOn = "ALWAYS_ON"
+type FleetType string
 
-	// FleetTypeOnDemand is a FleetType enum value
-	FleetTypeOnDemand = "ON_DEMAND"
+// Enum values for FleetType
+const (
+	FleetTypeAlwaysOn FleetType = "ALWAYS_ON"
+	FleetTypeOnDemand FleetType = "ON_DEMAND"
 )
 
+type ImageBuilderState string
+
+// Enum values for ImageBuilderState
 const (
-	// ImageBuilderStatePending is a ImageBuilderState enum value
-	ImageBuilderStatePending = "PENDING"
-
-	// ImageBuilderStateRunning is a ImageBuilderState enum value
-	ImageBuilderStateRunning = "RUNNING"
-
-	// ImageBuilderStateStopping is a ImageBuilderState enum value
-	ImageBuilderStateStopping = "STOPPING"
-
-	// ImageBuilderStateStopped is a ImageBuilderState enum value
-	ImageBuilderStateStopped = "STOPPED"
-
-	// ImageBuilderStateRebooting is a ImageBuilderState enum value
-	ImageBuilderStateRebooting = "REBOOTING"
-
-	// ImageBuilderStateSnapshotting is a ImageBuilderState enum value
-	ImageBuilderStateSnapshotting = "SNAPSHOTTING"
-
-	// ImageBuilderStateDeleting is a ImageBuilderState enum value
-	ImageBuilderStateDeleting = "DELETING"
-
-	// ImageBuilderStateFailed is a ImageBuilderState enum value
-	ImageBuilderStateFailed = "FAILED"
+	ImageBuilderStatePending      ImageBuilderState = "PENDING"
+	ImageBuilderStateRunning      ImageBuilderState = "RUNNING"
+	ImageBuilderStateStopping     ImageBuilderState = "STOPPING"
+	ImageBuilderStateStopped      ImageBuilderState = "STOPPED"
+	ImageBuilderStateRebooting    ImageBuilderState = "REBOOTING"
+	ImageBuilderStateSnapshotting ImageBuilderState = "SNAPSHOTTING"
+	ImageBuilderStateDeleting     ImageBuilderState = "DELETING"
+	ImageBuilderStateFailed       ImageBuilderState = "FAILED"
 )
 
-const (
-	// ImageBuilderStateChangeReasonCodeInternalError is a ImageBuilderStateChangeReasonCode enum value
-	ImageBuilderStateChangeReasonCodeInternalError = "INTERNAL_ERROR"
+type ImageBuilderStateChangeReasonCode string
 
-	// ImageBuilderStateChangeReasonCodeImageUnavailable is a ImageBuilderStateChangeReasonCode enum value
-	ImageBuilderStateChangeReasonCodeImageUnavailable = "IMAGE_UNAVAILABLE"
+// Enum values for ImageBuilderStateChangeReasonCode
+const (
+	ImageBuilderStateChangeReasonCodeInternalError    ImageBuilderStateChangeReasonCode = "INTERNAL_ERROR"
+	ImageBuilderStateChangeReasonCodeImageUnavailable ImageBuilderStateChangeReasonCode = "IMAGE_UNAVAILABLE"
 )
 
+type ImageState string
+
+// Enum values for ImageState
 const (
-	// ImageStatePending is a ImageState enum value
-	ImageStatePending = "PENDING"
-
-	// ImageStateAvailable is a ImageState enum value
-	ImageStateAvailable = "AVAILABLE"
-
-	// ImageStateFailed is a ImageState enum value
-	ImageStateFailed = "FAILED"
-
-	// ImageStateDeleting is a ImageState enum value
-	ImageStateDeleting = "DELETING"
+	ImageStatePending   ImageState = "PENDING"
+	ImageStateAvailable ImageState = "AVAILABLE"
+	ImageStateFailed    ImageState = "FAILED"
+	ImageStateDeleting  ImageState = "DELETING"
 )
 
-const (
-	// ImageStateChangeReasonCodeInternalError is a ImageStateChangeReasonCode enum value
-	ImageStateChangeReasonCodeInternalError = "INTERNAL_ERROR"
+type ImageStateChangeReasonCode string
 
-	// ImageStateChangeReasonCodeImageBuilderNotAvailable is a ImageStateChangeReasonCode enum value
-	ImageStateChangeReasonCodeImageBuilderNotAvailable = "IMAGE_BUILDER_NOT_AVAILABLE"
+// Enum values for ImageStateChangeReasonCode
+const (
+	ImageStateChangeReasonCodeInternalError            ImageStateChangeReasonCode = "INTERNAL_ERROR"
+	ImageStateChangeReasonCodeImageBuilderNotAvailable ImageStateChangeReasonCode = "IMAGE_BUILDER_NOT_AVAILABLE"
 )
 
+type PlatformType string
+
+// Enum values for PlatformType
 const (
-	// PlatformTypeWindows is a PlatformType enum value
-	PlatformTypeWindows = "WINDOWS"
+	PlatformTypeWindows PlatformType = "WINDOWS"
 )
 
 // Possible values for the state of a streaming session.
+type SessionState string
+
+// Enum values for SessionState
 const (
-	// SessionStateActive is a SessionState enum value
-	SessionStateActive = "ACTIVE"
-
-	// SessionStatePending is a SessionState enum value
-	SessionStatePending = "PENDING"
-
-	// SessionStateExpired is a SessionState enum value
-	SessionStateExpired = "EXPIRED"
+	SessionStateActive  SessionState = "ACTIVE"
+	SessionStatePending SessionState = "PENDING"
+	SessionStateExpired SessionState = "EXPIRED"
 )
 
-const (
-	// StackErrorCodeStorageConnectorError is a StackErrorCode enum value
-	StackErrorCodeStorageConnectorError = "STORAGE_CONNECTOR_ERROR"
+type StackErrorCode string
 
-	// StackErrorCodeInternalServiceError is a StackErrorCode enum value
-	StackErrorCodeInternalServiceError = "INTERNAL_SERVICE_ERROR"
+// Enum values for StackErrorCode
+const (
+	StackErrorCodeStorageConnectorError StackErrorCode = "STORAGE_CONNECTOR_ERROR"
+	StackErrorCodeInternalServiceError  StackErrorCode = "INTERNAL_SERVICE_ERROR"
 )
 
 // The type of storage connector.
+type StorageConnectorType string
+
+// Enum values for StorageConnectorType
 const (
-	// StorageConnectorTypeHomefolders is a StorageConnectorType enum value
-	StorageConnectorTypeHomefolders = "HOMEFOLDERS"
+	StorageConnectorTypeHomefolders StorageConnectorType = "HOMEFOLDERS"
 )
 
-const (
-	// VisibilityTypePublic is a VisibilityType enum value
-	VisibilityTypePublic = "PUBLIC"
+type VisibilityType string
 
-	// VisibilityTypePrivate is a VisibilityType enum value
-	VisibilityTypePrivate = "PRIVATE"
+// Enum values for VisibilityType
+const (
+	VisibilityTypePublic  VisibilityType = "PUBLIC"
+	VisibilityTypePrivate VisibilityType = "PRIVATE"
 )

@@ -2379,7 +2379,7 @@ type BillingRecord struct {
 	InvoiceId *string `type:"string"`
 
 	// The operation that you were charged for.
-	Operation *string `type:"string" enum:"OperationType"`
+	Operation OperationType `type:"string"`
 
 	// The price that you were charged for the operation, in US dollars.
 	//
@@ -2416,8 +2416,8 @@ func (s *BillingRecord) SetInvoiceId(v string) *BillingRecord {
 }
 
 // SetOperation sets the Operation field's value.
-func (s *BillingRecord) SetOperation(v string) *BillingRecord {
-	s.Operation = &v
+func (s *BillingRecord) SetOperation(v OperationType) *BillingRecord {
+	s.Operation = v
 	return s
 }
 
@@ -2458,6 +2458,7 @@ func (s CheckDomainAvailabilityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckDomainAvailabilityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CheckDomainAvailabilityInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -2515,7 +2516,7 @@ type CheckDomainAvailabilityOutput struct {
 	// UNAVAILABLE_RESTRICTEDThe domain name is forbidden.
 	//
 	// Availability is a required field
-	Availability *string `type:"string" required:"true" enum:"DomainAvailability"`
+	Availability DomainAvailability `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2529,8 +2530,8 @@ func (s CheckDomainAvailabilityOutput) GoString() string {
 }
 
 // SetAvailability sets the Availability field's value.
-func (s *CheckDomainAvailabilityOutput) SetAvailability(v string) *CheckDomainAvailabilityOutput {
-	s.Availability = &v
+func (s *CheckDomainAvailabilityOutput) SetAvailability(v DomainAvailability) *CheckDomainAvailabilityOutput {
+	s.Availability = v
 	return s
 }
 
@@ -2567,6 +2568,7 @@ func (s CheckDomainTransferabilityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckDomainTransferabilityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CheckDomainTransferabilityInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -2634,10 +2636,10 @@ type ContactDetail struct {
 	// Indicates whether the contact is a person, company, association, or public
 	// organization. If you choose an option other than PERSON, you must enter an
 	// organization name, and you can't enable privacy protection for the contact.
-	ContactType *string `type:"string" enum:"ContactType"`
+	ContactType ContactType `type:"string"`
 
 	// Code for the country of the contact's address.
-	CountryCode *string `type:"string" enum:"CountryCode"`
+	CountryCode CountryCode `type:"string"`
 
 	// Email address of the contact.
 	Email *string `type:"string"`
@@ -2724,14 +2726,14 @@ func (s *ContactDetail) SetCity(v string) *ContactDetail {
 }
 
 // SetContactType sets the ContactType field's value.
-func (s *ContactDetail) SetContactType(v string) *ContactDetail {
-	s.ContactType = &v
+func (s *ContactDetail) SetContactType(v ContactType) *ContactDetail {
+	s.ContactType = v
 	return s
 }
 
 // SetCountryCode sets the CountryCode field's value.
-func (s *ContactDetail) SetCountryCode(v string) *ContactDetail {
-	s.CountryCode = &v
+func (s *ContactDetail) SetCountryCode(v CountryCode) *ContactDetail {
+	s.CountryCode = v
 	return s
 }
 
@@ -2818,9 +2820,11 @@ func (s DeleteTagsForDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsForDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsForDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.TagsToDelete == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagsToDelete"))
 	}
@@ -2881,6 +2885,7 @@ func (s DisableDomainAutoRenewInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableDomainAutoRenewInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableDomainAutoRenewInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -2936,6 +2941,7 @@ func (s DisableDomainTransferLockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableDomainTransferLockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableDomainTransferLockInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3111,7 +3117,7 @@ type DomainTransferability struct {
 	// UNTRANSFERRABLEThe domain name can't be transferred to Amazon Route 53.
 	//
 	// DONT_KNOWReserved for future use.
-	Transferable *string `type:"string" enum:"Transferable"`
+	Transferable Transferable `type:"string"`
 }
 
 // String returns the string representation
@@ -3125,8 +3131,8 @@ func (s DomainTransferability) GoString() string {
 }
 
 // SetTransferable sets the Transferable field's value.
-func (s *DomainTransferability) SetTransferable(v string) *DomainTransferability {
-	s.Transferable = &v
+func (s *DomainTransferability) SetTransferable(v Transferable) *DomainTransferability {
+	s.Transferable = v
 	return s
 }
 
@@ -3153,6 +3159,7 @@ func (s EnableDomainAutoRenewInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableDomainAutoRenewInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableDomainAutoRenewInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3208,6 +3215,7 @@ func (s EnableDomainTransferLockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableDomainTransferLockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableDomainTransferLockInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3260,7 +3268,7 @@ type ExtraParam struct {
 	// Name of the additional parameter required by the top-level domain.
 	//
 	// Name is a required field
-	Name *string `type:"string" required:"true" enum:"ExtraParamName"`
+	Name ExtraParamName `type:"string" required:"true"`
 
 	// Values corresponding to the additional parameter names required by some top-level
 	// domains.
@@ -3282,9 +3290,10 @@ func (s ExtraParam) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExtraParam) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExtraParam"}
-	if s.Name == nil {
+	if len(s.Name) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -3296,8 +3305,8 @@ func (s *ExtraParam) Validate() error {
 }
 
 // SetName sets the Name field's value.
-func (s *ExtraParam) SetName(v string) *ExtraParam {
-	s.Name = &v
+func (s *ExtraParam) SetName(v ExtraParamName) *ExtraParam {
+	s.Name = v
 	return s
 }
 
@@ -3346,7 +3355,7 @@ type GetContactReachabilityStatusOutput struct {
 	// DONEWe sent the email and got confirmation from the registrant contact.
 	//
 	// EXPIREDThe time limit expired before the registrant contact responded.
-	Status *string `locationName:"status" type:"string" enum:"ReachabilityStatus"`
+	Status ReachabilityStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -3366,8 +3375,8 @@ func (s *GetContactReachabilityStatusOutput) SetDomainName(v string) *GetContact
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetContactReachabilityStatusOutput) SetStatus(v string) *GetContactReachabilityStatusOutput {
-	s.Status = &v
+func (s *GetContactReachabilityStatusOutput) SetStatus(v ReachabilityStatus) *GetContactReachabilityStatusOutput {
+	s.Status = v
 	return s
 }
 
@@ -3395,6 +3404,7 @@ func (s GetDomainDetailInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDomainDetailInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDomainDetailInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3697,12 +3707,15 @@ func (s GetDomainSuggestionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDomainSuggestionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDomainSuggestionsInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.OnlyAvailable == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OnlyAvailable"))
 	}
+
 	if s.SuggestionCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SuggestionCount"))
 	}
@@ -3781,6 +3794,7 @@ func (s GetOperationDetailInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOperationDetailInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetOperationDetailInput"}
+
 	if s.OperationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
@@ -3812,13 +3826,13 @@ type GetOperationDetailOutput struct {
 	OperationId *string `type:"string"`
 
 	// The current status of the requested operation in the system.
-	Status *string `type:"string" enum:"OperationStatus"`
+	Status OperationStatus `type:"string"`
 
 	// The date when the request was submitted.
 	SubmittedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The type of operation that was requested.
-	Type *string `type:"string" enum:"OperationType"`
+	Type OperationType `type:"string"`
 }
 
 // String returns the string representation
@@ -3850,8 +3864,8 @@ func (s *GetOperationDetailOutput) SetOperationId(v string) *GetOperationDetailO
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetOperationDetailOutput) SetStatus(v string) *GetOperationDetailOutput {
-	s.Status = &v
+func (s *GetOperationDetailOutput) SetStatus(v OperationStatus) *GetOperationDetailOutput {
+	s.Status = v
 	return s
 }
 
@@ -3862,8 +3876,8 @@ func (s *GetOperationDetailOutput) SetSubmittedDate(v time.Time) *GetOperationDe
 }
 
 // SetType sets the Type field's value.
-func (s *GetOperationDetailOutput) SetType(v string) *GetOperationDetailOutput {
-	s.Type = &v
+func (s *GetOperationDetailOutput) SetType(v OperationType) *GetOperationDetailOutput {
+	s.Type = v
 	return s
 }
 
@@ -4051,6 +4065,7 @@ func (s ListTagsForDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -4128,6 +4143,7 @@ func (s Nameserver) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Nameserver) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Nameserver"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4163,7 +4179,7 @@ type OperationSummary struct {
 	// The current status of the requested operation in the system.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"OperationStatus"`
+	Status OperationStatus `type:"string" required:"true"`
 
 	// The date when the request was submitted.
 	//
@@ -4173,7 +4189,7 @@ type OperationSummary struct {
 	// Type of the action requested.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"OperationType"`
+	Type OperationType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4193,8 +4209,8 @@ func (s *OperationSummary) SetOperationId(v string) *OperationSummary {
 }
 
 // SetStatus sets the Status field's value.
-func (s *OperationSummary) SetStatus(v string) *OperationSummary {
-	s.Status = &v
+func (s *OperationSummary) SetStatus(v OperationStatus) *OperationSummary {
+	s.Status = v
 	return s
 }
 
@@ -4205,8 +4221,8 @@ func (s *OperationSummary) SetSubmittedDate(v time.Time) *OperationSummary {
 }
 
 // SetType sets the Type field's value.
-func (s *OperationSummary) SetType(v string) *OperationSummary {
-	s.Type = &v
+func (s *OperationSummary) SetType(v OperationType) *OperationSummary {
+	s.Type = v
 	return s
 }
 
@@ -4297,21 +4313,26 @@ func (s RegisterDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterDomainInput"}
+
 	if s.AdminContact == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AdminContact"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.DurationInYears == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DurationInYears"))
 	}
 	if s.DurationInYears != nil && *s.DurationInYears < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("DurationInYears", 1))
 	}
+
 	if s.RegistrantContact == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RegistrantContact"))
 	}
+
 	if s.TechContact == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TechContact"))
 	}
@@ -4464,9 +4485,11 @@ func (s RenewDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RenewDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RenewDomainInput"}
+
 	if s.CurrentExpiryYear == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentExpiryYear"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -4620,6 +4643,7 @@ func (s RetrieveDomainAuthCodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetrieveDomainAuthCodeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RetrieveDomainAuthCodeInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -4797,21 +4821,26 @@ func (s TransferDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TransferDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TransferDomainInput"}
+
 	if s.AdminContact == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AdminContact"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.DurationInYears == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DurationInYears"))
 	}
 	if s.DurationInYears != nil && *s.DurationInYears < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("DurationInYears", 1))
 	}
+
 	if s.RegistrantContact == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RegistrantContact"))
 	}
+
 	if s.TechContact == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TechContact"))
 	}
@@ -4980,6 +5009,7 @@ func (s UpdateDomainContactInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainContactInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainContactInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -5099,6 +5129,7 @@ func (s UpdateDomainContactPrivacyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainContactPrivacyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainContactPrivacyInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -5199,9 +5230,11 @@ func (s UpdateDomainNameserversInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainNameserversInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainNameserversInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.Nameservers == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Nameservers"))
 	}
@@ -5296,6 +5329,7 @@ func (s UpdateTagsForDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTagsForDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTagsForDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -5433,894 +5467,338 @@ func (s *ViewBillingOutput) SetNextPageMarker(v string) *ViewBillingOutput {
 	return s
 }
 
+type ContactType string
+
+// Enum values for ContactType
 const (
-	// ContactTypePerson is a ContactType enum value
-	ContactTypePerson = "PERSON"
-
-	// ContactTypeCompany is a ContactType enum value
-	ContactTypeCompany = "COMPANY"
-
-	// ContactTypeAssociation is a ContactType enum value
-	ContactTypeAssociation = "ASSOCIATION"
-
-	// ContactTypePublicBody is a ContactType enum value
-	ContactTypePublicBody = "PUBLIC_BODY"
-
-	// ContactTypeReseller is a ContactType enum value
-	ContactTypeReseller = "RESELLER"
+	ContactTypePerson      ContactType = "PERSON"
+	ContactTypeCompany     ContactType = "COMPANY"
+	ContactTypeAssociation ContactType = "ASSOCIATION"
+	ContactTypePublicBody  ContactType = "PUBLIC_BODY"
+	ContactTypeReseller    ContactType = "RESELLER"
 )
 
+type CountryCode string
+
+// Enum values for CountryCode
 const (
-	// CountryCodeAd is a CountryCode enum value
-	CountryCodeAd = "AD"
-
-	// CountryCodeAe is a CountryCode enum value
-	CountryCodeAe = "AE"
-
-	// CountryCodeAf is a CountryCode enum value
-	CountryCodeAf = "AF"
-
-	// CountryCodeAg is a CountryCode enum value
-	CountryCodeAg = "AG"
-
-	// CountryCodeAi is a CountryCode enum value
-	CountryCodeAi = "AI"
-
-	// CountryCodeAl is a CountryCode enum value
-	CountryCodeAl = "AL"
-
-	// CountryCodeAm is a CountryCode enum value
-	CountryCodeAm = "AM"
-
-	// CountryCodeAn is a CountryCode enum value
-	CountryCodeAn = "AN"
-
-	// CountryCodeAo is a CountryCode enum value
-	CountryCodeAo = "AO"
-
-	// CountryCodeAq is a CountryCode enum value
-	CountryCodeAq = "AQ"
-
-	// CountryCodeAr is a CountryCode enum value
-	CountryCodeAr = "AR"
-
-	// CountryCodeAs is a CountryCode enum value
-	CountryCodeAs = "AS"
-
-	// CountryCodeAt is a CountryCode enum value
-	CountryCodeAt = "AT"
-
-	// CountryCodeAu is a CountryCode enum value
-	CountryCodeAu = "AU"
-
-	// CountryCodeAw is a CountryCode enum value
-	CountryCodeAw = "AW"
-
-	// CountryCodeAz is a CountryCode enum value
-	CountryCodeAz = "AZ"
-
-	// CountryCodeBa is a CountryCode enum value
-	CountryCodeBa = "BA"
-
-	// CountryCodeBb is a CountryCode enum value
-	CountryCodeBb = "BB"
-
-	// CountryCodeBd is a CountryCode enum value
-	CountryCodeBd = "BD"
-
-	// CountryCodeBe is a CountryCode enum value
-	CountryCodeBe = "BE"
-
-	// CountryCodeBf is a CountryCode enum value
-	CountryCodeBf = "BF"
-
-	// CountryCodeBg is a CountryCode enum value
-	CountryCodeBg = "BG"
-
-	// CountryCodeBh is a CountryCode enum value
-	CountryCodeBh = "BH"
-
-	// CountryCodeBi is a CountryCode enum value
-	CountryCodeBi = "BI"
-
-	// CountryCodeBj is a CountryCode enum value
-	CountryCodeBj = "BJ"
-
-	// CountryCodeBl is a CountryCode enum value
-	CountryCodeBl = "BL"
-
-	// CountryCodeBm is a CountryCode enum value
-	CountryCodeBm = "BM"
-
-	// CountryCodeBn is a CountryCode enum value
-	CountryCodeBn = "BN"
-
-	// CountryCodeBo is a CountryCode enum value
-	CountryCodeBo = "BO"
-
-	// CountryCodeBr is a CountryCode enum value
-	CountryCodeBr = "BR"
-
-	// CountryCodeBs is a CountryCode enum value
-	CountryCodeBs = "BS"
-
-	// CountryCodeBt is a CountryCode enum value
-	CountryCodeBt = "BT"
-
-	// CountryCodeBw is a CountryCode enum value
-	CountryCodeBw = "BW"
-
-	// CountryCodeBy is a CountryCode enum value
-	CountryCodeBy = "BY"
-
-	// CountryCodeBz is a CountryCode enum value
-	CountryCodeBz = "BZ"
-
-	// CountryCodeCa is a CountryCode enum value
-	CountryCodeCa = "CA"
-
-	// CountryCodeCc is a CountryCode enum value
-	CountryCodeCc = "CC"
-
-	// CountryCodeCd is a CountryCode enum value
-	CountryCodeCd = "CD"
-
-	// CountryCodeCf is a CountryCode enum value
-	CountryCodeCf = "CF"
-
-	// CountryCodeCg is a CountryCode enum value
-	CountryCodeCg = "CG"
-
-	// CountryCodeCh is a CountryCode enum value
-	CountryCodeCh = "CH"
-
-	// CountryCodeCi is a CountryCode enum value
-	CountryCodeCi = "CI"
-
-	// CountryCodeCk is a CountryCode enum value
-	CountryCodeCk = "CK"
-
-	// CountryCodeCl is a CountryCode enum value
-	CountryCodeCl = "CL"
-
-	// CountryCodeCm is a CountryCode enum value
-	CountryCodeCm = "CM"
-
-	// CountryCodeCn is a CountryCode enum value
-	CountryCodeCn = "CN"
-
-	// CountryCodeCo is a CountryCode enum value
-	CountryCodeCo = "CO"
-
-	// CountryCodeCr is a CountryCode enum value
-	CountryCodeCr = "CR"
-
-	// CountryCodeCu is a CountryCode enum value
-	CountryCodeCu = "CU"
-
-	// CountryCodeCv is a CountryCode enum value
-	CountryCodeCv = "CV"
-
-	// CountryCodeCx is a CountryCode enum value
-	CountryCodeCx = "CX"
-
-	// CountryCodeCy is a CountryCode enum value
-	CountryCodeCy = "CY"
-
-	// CountryCodeCz is a CountryCode enum value
-	CountryCodeCz = "CZ"
-
-	// CountryCodeDe is a CountryCode enum value
-	CountryCodeDe = "DE"
-
-	// CountryCodeDj is a CountryCode enum value
-	CountryCodeDj = "DJ"
-
-	// CountryCodeDk is a CountryCode enum value
-	CountryCodeDk = "DK"
-
-	// CountryCodeDm is a CountryCode enum value
-	CountryCodeDm = "DM"
-
-	// CountryCodeDo is a CountryCode enum value
-	CountryCodeDo = "DO"
-
-	// CountryCodeDz is a CountryCode enum value
-	CountryCodeDz = "DZ"
-
-	// CountryCodeEc is a CountryCode enum value
-	CountryCodeEc = "EC"
-
-	// CountryCodeEe is a CountryCode enum value
-	CountryCodeEe = "EE"
-
-	// CountryCodeEg is a CountryCode enum value
-	CountryCodeEg = "EG"
-
-	// CountryCodeEr is a CountryCode enum value
-	CountryCodeEr = "ER"
-
-	// CountryCodeEs is a CountryCode enum value
-	CountryCodeEs = "ES"
-
-	// CountryCodeEt is a CountryCode enum value
-	CountryCodeEt = "ET"
-
-	// CountryCodeFi is a CountryCode enum value
-	CountryCodeFi = "FI"
-
-	// CountryCodeFj is a CountryCode enum value
-	CountryCodeFj = "FJ"
-
-	// CountryCodeFk is a CountryCode enum value
-	CountryCodeFk = "FK"
-
-	// CountryCodeFm is a CountryCode enum value
-	CountryCodeFm = "FM"
-
-	// CountryCodeFo is a CountryCode enum value
-	CountryCodeFo = "FO"
-
-	// CountryCodeFr is a CountryCode enum value
-	CountryCodeFr = "FR"
-
-	// CountryCodeGa is a CountryCode enum value
-	CountryCodeGa = "GA"
-
-	// CountryCodeGb is a CountryCode enum value
-	CountryCodeGb = "GB"
-
-	// CountryCodeGd is a CountryCode enum value
-	CountryCodeGd = "GD"
-
-	// CountryCodeGe is a CountryCode enum value
-	CountryCodeGe = "GE"
-
-	// CountryCodeGh is a CountryCode enum value
-	CountryCodeGh = "GH"
-
-	// CountryCodeGi is a CountryCode enum value
-	CountryCodeGi = "GI"
-
-	// CountryCodeGl is a CountryCode enum value
-	CountryCodeGl = "GL"
-
-	// CountryCodeGm is a CountryCode enum value
-	CountryCodeGm = "GM"
-
-	// CountryCodeGn is a CountryCode enum value
-	CountryCodeGn = "GN"
-
-	// CountryCodeGq is a CountryCode enum value
-	CountryCodeGq = "GQ"
-
-	// CountryCodeGr is a CountryCode enum value
-	CountryCodeGr = "GR"
-
-	// CountryCodeGt is a CountryCode enum value
-	CountryCodeGt = "GT"
-
-	// CountryCodeGu is a CountryCode enum value
-	CountryCodeGu = "GU"
-
-	// CountryCodeGw is a CountryCode enum value
-	CountryCodeGw = "GW"
-
-	// CountryCodeGy is a CountryCode enum value
-	CountryCodeGy = "GY"
-
-	// CountryCodeHk is a CountryCode enum value
-	CountryCodeHk = "HK"
-
-	// CountryCodeHn is a CountryCode enum value
-	CountryCodeHn = "HN"
-
-	// CountryCodeHr is a CountryCode enum value
-	CountryCodeHr = "HR"
-
-	// CountryCodeHt is a CountryCode enum value
-	CountryCodeHt = "HT"
-
-	// CountryCodeHu is a CountryCode enum value
-	CountryCodeHu = "HU"
-
-	// CountryCodeId is a CountryCode enum value
-	CountryCodeId = "ID"
-
-	// CountryCodeIe is a CountryCode enum value
-	CountryCodeIe = "IE"
-
-	// CountryCodeIl is a CountryCode enum value
-	CountryCodeIl = "IL"
-
-	// CountryCodeIm is a CountryCode enum value
-	CountryCodeIm = "IM"
-
-	// CountryCodeIn is a CountryCode enum value
-	CountryCodeIn = "IN"
-
-	// CountryCodeIq is a CountryCode enum value
-	CountryCodeIq = "IQ"
-
-	// CountryCodeIr is a CountryCode enum value
-	CountryCodeIr = "IR"
-
-	// CountryCodeIs is a CountryCode enum value
-	CountryCodeIs = "IS"
-
-	// CountryCodeIt is a CountryCode enum value
-	CountryCodeIt = "IT"
-
-	// CountryCodeJm is a CountryCode enum value
-	CountryCodeJm = "JM"
-
-	// CountryCodeJo is a CountryCode enum value
-	CountryCodeJo = "JO"
-
-	// CountryCodeJp is a CountryCode enum value
-	CountryCodeJp = "JP"
-
-	// CountryCodeKe is a CountryCode enum value
-	CountryCodeKe = "KE"
-
-	// CountryCodeKg is a CountryCode enum value
-	CountryCodeKg = "KG"
-
-	// CountryCodeKh is a CountryCode enum value
-	CountryCodeKh = "KH"
-
-	// CountryCodeKi is a CountryCode enum value
-	CountryCodeKi = "KI"
-
-	// CountryCodeKm is a CountryCode enum value
-	CountryCodeKm = "KM"
-
-	// CountryCodeKn is a CountryCode enum value
-	CountryCodeKn = "KN"
-
-	// CountryCodeKp is a CountryCode enum value
-	CountryCodeKp = "KP"
-
-	// CountryCodeKr is a CountryCode enum value
-	CountryCodeKr = "KR"
-
-	// CountryCodeKw is a CountryCode enum value
-	CountryCodeKw = "KW"
-
-	// CountryCodeKy is a CountryCode enum value
-	CountryCodeKy = "KY"
-
-	// CountryCodeKz is a CountryCode enum value
-	CountryCodeKz = "KZ"
-
-	// CountryCodeLa is a CountryCode enum value
-	CountryCodeLa = "LA"
-
-	// CountryCodeLb is a CountryCode enum value
-	CountryCodeLb = "LB"
-
-	// CountryCodeLc is a CountryCode enum value
-	CountryCodeLc = "LC"
-
-	// CountryCodeLi is a CountryCode enum value
-	CountryCodeLi = "LI"
-
-	// CountryCodeLk is a CountryCode enum value
-	CountryCodeLk = "LK"
-
-	// CountryCodeLr is a CountryCode enum value
-	CountryCodeLr = "LR"
-
-	// CountryCodeLs is a CountryCode enum value
-	CountryCodeLs = "LS"
-
-	// CountryCodeLt is a CountryCode enum value
-	CountryCodeLt = "LT"
-
-	// CountryCodeLu is a CountryCode enum value
-	CountryCodeLu = "LU"
-
-	// CountryCodeLv is a CountryCode enum value
-	CountryCodeLv = "LV"
-
-	// CountryCodeLy is a CountryCode enum value
-	CountryCodeLy = "LY"
-
-	// CountryCodeMa is a CountryCode enum value
-	CountryCodeMa = "MA"
-
-	// CountryCodeMc is a CountryCode enum value
-	CountryCodeMc = "MC"
-
-	// CountryCodeMd is a CountryCode enum value
-	CountryCodeMd = "MD"
-
-	// CountryCodeMe is a CountryCode enum value
-	CountryCodeMe = "ME"
-
-	// CountryCodeMf is a CountryCode enum value
-	CountryCodeMf = "MF"
-
-	// CountryCodeMg is a CountryCode enum value
-	CountryCodeMg = "MG"
-
-	// CountryCodeMh is a CountryCode enum value
-	CountryCodeMh = "MH"
-
-	// CountryCodeMk is a CountryCode enum value
-	CountryCodeMk = "MK"
-
-	// CountryCodeMl is a CountryCode enum value
-	CountryCodeMl = "ML"
-
-	// CountryCodeMm is a CountryCode enum value
-	CountryCodeMm = "MM"
-
-	// CountryCodeMn is a CountryCode enum value
-	CountryCodeMn = "MN"
-
-	// CountryCodeMo is a CountryCode enum value
-	CountryCodeMo = "MO"
-
-	// CountryCodeMp is a CountryCode enum value
-	CountryCodeMp = "MP"
-
-	// CountryCodeMr is a CountryCode enum value
-	CountryCodeMr = "MR"
-
-	// CountryCodeMs is a CountryCode enum value
-	CountryCodeMs = "MS"
-
-	// CountryCodeMt is a CountryCode enum value
-	CountryCodeMt = "MT"
-
-	// CountryCodeMu is a CountryCode enum value
-	CountryCodeMu = "MU"
-
-	// CountryCodeMv is a CountryCode enum value
-	CountryCodeMv = "MV"
-
-	// CountryCodeMw is a CountryCode enum value
-	CountryCodeMw = "MW"
-
-	// CountryCodeMx is a CountryCode enum value
-	CountryCodeMx = "MX"
-
-	// CountryCodeMy is a CountryCode enum value
-	CountryCodeMy = "MY"
-
-	// CountryCodeMz is a CountryCode enum value
-	CountryCodeMz = "MZ"
-
-	// CountryCodeNa is a CountryCode enum value
-	CountryCodeNa = "NA"
-
-	// CountryCodeNc is a CountryCode enum value
-	CountryCodeNc = "NC"
-
-	// CountryCodeNe is a CountryCode enum value
-	CountryCodeNe = "NE"
-
-	// CountryCodeNg is a CountryCode enum value
-	CountryCodeNg = "NG"
-
-	// CountryCodeNi is a CountryCode enum value
-	CountryCodeNi = "NI"
-
-	// CountryCodeNl is a CountryCode enum value
-	CountryCodeNl = "NL"
-
-	// CountryCodeNo is a CountryCode enum value
-	CountryCodeNo = "NO"
-
-	// CountryCodeNp is a CountryCode enum value
-	CountryCodeNp = "NP"
-
-	// CountryCodeNr is a CountryCode enum value
-	CountryCodeNr = "NR"
-
-	// CountryCodeNu is a CountryCode enum value
-	CountryCodeNu = "NU"
-
-	// CountryCodeNz is a CountryCode enum value
-	CountryCodeNz = "NZ"
-
-	// CountryCodeOm is a CountryCode enum value
-	CountryCodeOm = "OM"
-
-	// CountryCodePa is a CountryCode enum value
-	CountryCodePa = "PA"
-
-	// CountryCodePe is a CountryCode enum value
-	CountryCodePe = "PE"
-
-	// CountryCodePf is a CountryCode enum value
-	CountryCodePf = "PF"
-
-	// CountryCodePg is a CountryCode enum value
-	CountryCodePg = "PG"
-
-	// CountryCodePh is a CountryCode enum value
-	CountryCodePh = "PH"
-
-	// CountryCodePk is a CountryCode enum value
-	CountryCodePk = "PK"
-
-	// CountryCodePl is a CountryCode enum value
-	CountryCodePl = "PL"
-
-	// CountryCodePm is a CountryCode enum value
-	CountryCodePm = "PM"
-
-	// CountryCodePn is a CountryCode enum value
-	CountryCodePn = "PN"
-
-	// CountryCodePr is a CountryCode enum value
-	CountryCodePr = "PR"
-
-	// CountryCodePt is a CountryCode enum value
-	CountryCodePt = "PT"
-
-	// CountryCodePw is a CountryCode enum value
-	CountryCodePw = "PW"
-
-	// CountryCodePy is a CountryCode enum value
-	CountryCodePy = "PY"
-
-	// CountryCodeQa is a CountryCode enum value
-	CountryCodeQa = "QA"
-
-	// CountryCodeRo is a CountryCode enum value
-	CountryCodeRo = "RO"
-
-	// CountryCodeRs is a CountryCode enum value
-	CountryCodeRs = "RS"
-
-	// CountryCodeRu is a CountryCode enum value
-	CountryCodeRu = "RU"
-
-	// CountryCodeRw is a CountryCode enum value
-	CountryCodeRw = "RW"
-
-	// CountryCodeSa is a CountryCode enum value
-	CountryCodeSa = "SA"
-
-	// CountryCodeSb is a CountryCode enum value
-	CountryCodeSb = "SB"
-
-	// CountryCodeSc is a CountryCode enum value
-	CountryCodeSc = "SC"
-
-	// CountryCodeSd is a CountryCode enum value
-	CountryCodeSd = "SD"
-
-	// CountryCodeSe is a CountryCode enum value
-	CountryCodeSe = "SE"
-
-	// CountryCodeSg is a CountryCode enum value
-	CountryCodeSg = "SG"
-
-	// CountryCodeSh is a CountryCode enum value
-	CountryCodeSh = "SH"
-
-	// CountryCodeSi is a CountryCode enum value
-	CountryCodeSi = "SI"
-
-	// CountryCodeSk is a CountryCode enum value
-	CountryCodeSk = "SK"
-
-	// CountryCodeSl is a CountryCode enum value
-	CountryCodeSl = "SL"
-
-	// CountryCodeSm is a CountryCode enum value
-	CountryCodeSm = "SM"
-
-	// CountryCodeSn is a CountryCode enum value
-	CountryCodeSn = "SN"
-
-	// CountryCodeSo is a CountryCode enum value
-	CountryCodeSo = "SO"
-
-	// CountryCodeSr is a CountryCode enum value
-	CountryCodeSr = "SR"
-
-	// CountryCodeSt is a CountryCode enum value
-	CountryCodeSt = "ST"
-
-	// CountryCodeSv is a CountryCode enum value
-	CountryCodeSv = "SV"
-
-	// CountryCodeSy is a CountryCode enum value
-	CountryCodeSy = "SY"
-
-	// CountryCodeSz is a CountryCode enum value
-	CountryCodeSz = "SZ"
-
-	// CountryCodeTc is a CountryCode enum value
-	CountryCodeTc = "TC"
-
-	// CountryCodeTd is a CountryCode enum value
-	CountryCodeTd = "TD"
-
-	// CountryCodeTg is a CountryCode enum value
-	CountryCodeTg = "TG"
-
-	// CountryCodeTh is a CountryCode enum value
-	CountryCodeTh = "TH"
-
-	// CountryCodeTj is a CountryCode enum value
-	CountryCodeTj = "TJ"
-
-	// CountryCodeTk is a CountryCode enum value
-	CountryCodeTk = "TK"
-
-	// CountryCodeTl is a CountryCode enum value
-	CountryCodeTl = "TL"
-
-	// CountryCodeTm is a CountryCode enum value
-	CountryCodeTm = "TM"
-
-	// CountryCodeTn is a CountryCode enum value
-	CountryCodeTn = "TN"
-
-	// CountryCodeTo is a CountryCode enum value
-	CountryCodeTo = "TO"
-
-	// CountryCodeTr is a CountryCode enum value
-	CountryCodeTr = "TR"
-
-	// CountryCodeTt is a CountryCode enum value
-	CountryCodeTt = "TT"
-
-	// CountryCodeTv is a CountryCode enum value
-	CountryCodeTv = "TV"
-
-	// CountryCodeTw is a CountryCode enum value
-	CountryCodeTw = "TW"
-
-	// CountryCodeTz is a CountryCode enum value
-	CountryCodeTz = "TZ"
-
-	// CountryCodeUa is a CountryCode enum value
-	CountryCodeUa = "UA"
-
-	// CountryCodeUg is a CountryCode enum value
-	CountryCodeUg = "UG"
-
-	// CountryCodeUs is a CountryCode enum value
-	CountryCodeUs = "US"
-
-	// CountryCodeUy is a CountryCode enum value
-	CountryCodeUy = "UY"
-
-	// CountryCodeUz is a CountryCode enum value
-	CountryCodeUz = "UZ"
-
-	// CountryCodeVa is a CountryCode enum value
-	CountryCodeVa = "VA"
-
-	// CountryCodeVc is a CountryCode enum value
-	CountryCodeVc = "VC"
-
-	// CountryCodeVe is a CountryCode enum value
-	CountryCodeVe = "VE"
-
-	// CountryCodeVg is a CountryCode enum value
-	CountryCodeVg = "VG"
-
-	// CountryCodeVi is a CountryCode enum value
-	CountryCodeVi = "VI"
-
-	// CountryCodeVn is a CountryCode enum value
-	CountryCodeVn = "VN"
-
-	// CountryCodeVu is a CountryCode enum value
-	CountryCodeVu = "VU"
-
-	// CountryCodeWf is a CountryCode enum value
-	CountryCodeWf = "WF"
-
-	// CountryCodeWs is a CountryCode enum value
-	CountryCodeWs = "WS"
-
-	// CountryCodeYe is a CountryCode enum value
-	CountryCodeYe = "YE"
-
-	// CountryCodeYt is a CountryCode enum value
-	CountryCodeYt = "YT"
-
-	// CountryCodeZa is a CountryCode enum value
-	CountryCodeZa = "ZA"
-
-	// CountryCodeZm is a CountryCode enum value
-	CountryCodeZm = "ZM"
-
-	// CountryCodeZw is a CountryCode enum value
-	CountryCodeZw = "ZW"
+	CountryCodeAd CountryCode = "AD"
+	CountryCodeAe CountryCode = "AE"
+	CountryCodeAf CountryCode = "AF"
+	CountryCodeAg CountryCode = "AG"
+	CountryCodeAi CountryCode = "AI"
+	CountryCodeAl CountryCode = "AL"
+	CountryCodeAm CountryCode = "AM"
+	CountryCodeAn CountryCode = "AN"
+	CountryCodeAo CountryCode = "AO"
+	CountryCodeAq CountryCode = "AQ"
+	CountryCodeAr CountryCode = "AR"
+	CountryCodeAs CountryCode = "AS"
+	CountryCodeAt CountryCode = "AT"
+	CountryCodeAu CountryCode = "AU"
+	CountryCodeAw CountryCode = "AW"
+	CountryCodeAz CountryCode = "AZ"
+	CountryCodeBa CountryCode = "BA"
+	CountryCodeBb CountryCode = "BB"
+	CountryCodeBd CountryCode = "BD"
+	CountryCodeBe CountryCode = "BE"
+	CountryCodeBf CountryCode = "BF"
+	CountryCodeBg CountryCode = "BG"
+	CountryCodeBh CountryCode = "BH"
+	CountryCodeBi CountryCode = "BI"
+	CountryCodeBj CountryCode = "BJ"
+	CountryCodeBl CountryCode = "BL"
+	CountryCodeBm CountryCode = "BM"
+	CountryCodeBn CountryCode = "BN"
+	CountryCodeBo CountryCode = "BO"
+	CountryCodeBr CountryCode = "BR"
+	CountryCodeBs CountryCode = "BS"
+	CountryCodeBt CountryCode = "BT"
+	CountryCodeBw CountryCode = "BW"
+	CountryCodeBy CountryCode = "BY"
+	CountryCodeBz CountryCode = "BZ"
+	CountryCodeCa CountryCode = "CA"
+	CountryCodeCc CountryCode = "CC"
+	CountryCodeCd CountryCode = "CD"
+	CountryCodeCf CountryCode = "CF"
+	CountryCodeCg CountryCode = "CG"
+	CountryCodeCh CountryCode = "CH"
+	CountryCodeCi CountryCode = "CI"
+	CountryCodeCk CountryCode = "CK"
+	CountryCodeCl CountryCode = "CL"
+	CountryCodeCm CountryCode = "CM"
+	CountryCodeCn CountryCode = "CN"
+	CountryCodeCo CountryCode = "CO"
+	CountryCodeCr CountryCode = "CR"
+	CountryCodeCu CountryCode = "CU"
+	CountryCodeCv CountryCode = "CV"
+	CountryCodeCx CountryCode = "CX"
+	CountryCodeCy CountryCode = "CY"
+	CountryCodeCz CountryCode = "CZ"
+	CountryCodeDe CountryCode = "DE"
+	CountryCodeDj CountryCode = "DJ"
+	CountryCodeDk CountryCode = "DK"
+	CountryCodeDm CountryCode = "DM"
+	CountryCodeDo CountryCode = "DO"
+	CountryCodeDz CountryCode = "DZ"
+	CountryCodeEc CountryCode = "EC"
+	CountryCodeEe CountryCode = "EE"
+	CountryCodeEg CountryCode = "EG"
+	CountryCodeEr CountryCode = "ER"
+	CountryCodeEs CountryCode = "ES"
+	CountryCodeEt CountryCode = "ET"
+	CountryCodeFi CountryCode = "FI"
+	CountryCodeFj CountryCode = "FJ"
+	CountryCodeFk CountryCode = "FK"
+	CountryCodeFm CountryCode = "FM"
+	CountryCodeFo CountryCode = "FO"
+	CountryCodeFr CountryCode = "FR"
+	CountryCodeGa CountryCode = "GA"
+	CountryCodeGb CountryCode = "GB"
+	CountryCodeGd CountryCode = "GD"
+	CountryCodeGe CountryCode = "GE"
+	CountryCodeGh CountryCode = "GH"
+	CountryCodeGi CountryCode = "GI"
+	CountryCodeGl CountryCode = "GL"
+	CountryCodeGm CountryCode = "GM"
+	CountryCodeGn CountryCode = "GN"
+	CountryCodeGq CountryCode = "GQ"
+	CountryCodeGr CountryCode = "GR"
+	CountryCodeGt CountryCode = "GT"
+	CountryCodeGu CountryCode = "GU"
+	CountryCodeGw CountryCode = "GW"
+	CountryCodeGy CountryCode = "GY"
+	CountryCodeHk CountryCode = "HK"
+	CountryCodeHn CountryCode = "HN"
+	CountryCodeHr CountryCode = "HR"
+	CountryCodeHt CountryCode = "HT"
+	CountryCodeHu CountryCode = "HU"
+	CountryCodeId CountryCode = "ID"
+	CountryCodeIe CountryCode = "IE"
+	CountryCodeIl CountryCode = "IL"
+	CountryCodeIm CountryCode = "IM"
+	CountryCodeIn CountryCode = "IN"
+	CountryCodeIq CountryCode = "IQ"
+	CountryCodeIr CountryCode = "IR"
+	CountryCodeIs CountryCode = "IS"
+	CountryCodeIt CountryCode = "IT"
+	CountryCodeJm CountryCode = "JM"
+	CountryCodeJo CountryCode = "JO"
+	CountryCodeJp CountryCode = "JP"
+	CountryCodeKe CountryCode = "KE"
+	CountryCodeKg CountryCode = "KG"
+	CountryCodeKh CountryCode = "KH"
+	CountryCodeKi CountryCode = "KI"
+	CountryCodeKm CountryCode = "KM"
+	CountryCodeKn CountryCode = "KN"
+	CountryCodeKp CountryCode = "KP"
+	CountryCodeKr CountryCode = "KR"
+	CountryCodeKw CountryCode = "KW"
+	CountryCodeKy CountryCode = "KY"
+	CountryCodeKz CountryCode = "KZ"
+	CountryCodeLa CountryCode = "LA"
+	CountryCodeLb CountryCode = "LB"
+	CountryCodeLc CountryCode = "LC"
+	CountryCodeLi CountryCode = "LI"
+	CountryCodeLk CountryCode = "LK"
+	CountryCodeLr CountryCode = "LR"
+	CountryCodeLs CountryCode = "LS"
+	CountryCodeLt CountryCode = "LT"
+	CountryCodeLu CountryCode = "LU"
+	CountryCodeLv CountryCode = "LV"
+	CountryCodeLy CountryCode = "LY"
+	CountryCodeMa CountryCode = "MA"
+	CountryCodeMc CountryCode = "MC"
+	CountryCodeMd CountryCode = "MD"
+	CountryCodeMe CountryCode = "ME"
+	CountryCodeMf CountryCode = "MF"
+	CountryCodeMg CountryCode = "MG"
+	CountryCodeMh CountryCode = "MH"
+	CountryCodeMk CountryCode = "MK"
+	CountryCodeMl CountryCode = "ML"
+	CountryCodeMm CountryCode = "MM"
+	CountryCodeMn CountryCode = "MN"
+	CountryCodeMo CountryCode = "MO"
+	CountryCodeMp CountryCode = "MP"
+	CountryCodeMr CountryCode = "MR"
+	CountryCodeMs CountryCode = "MS"
+	CountryCodeMt CountryCode = "MT"
+	CountryCodeMu CountryCode = "MU"
+	CountryCodeMv CountryCode = "MV"
+	CountryCodeMw CountryCode = "MW"
+	CountryCodeMx CountryCode = "MX"
+	CountryCodeMy CountryCode = "MY"
+	CountryCodeMz CountryCode = "MZ"
+	CountryCodeNa CountryCode = "NA"
+	CountryCodeNc CountryCode = "NC"
+	CountryCodeNe CountryCode = "NE"
+	CountryCodeNg CountryCode = "NG"
+	CountryCodeNi CountryCode = "NI"
+	CountryCodeNl CountryCode = "NL"
+	CountryCodeNo CountryCode = "NO"
+	CountryCodeNp CountryCode = "NP"
+	CountryCodeNr CountryCode = "NR"
+	CountryCodeNu CountryCode = "NU"
+	CountryCodeNz CountryCode = "NZ"
+	CountryCodeOm CountryCode = "OM"
+	CountryCodePa CountryCode = "PA"
+	CountryCodePe CountryCode = "PE"
+	CountryCodePf CountryCode = "PF"
+	CountryCodePg CountryCode = "PG"
+	CountryCodePh CountryCode = "PH"
+	CountryCodePk CountryCode = "PK"
+	CountryCodePl CountryCode = "PL"
+	CountryCodePm CountryCode = "PM"
+	CountryCodePn CountryCode = "PN"
+	CountryCodePr CountryCode = "PR"
+	CountryCodePt CountryCode = "PT"
+	CountryCodePw CountryCode = "PW"
+	CountryCodePy CountryCode = "PY"
+	CountryCodeQa CountryCode = "QA"
+	CountryCodeRo CountryCode = "RO"
+	CountryCodeRs CountryCode = "RS"
+	CountryCodeRu CountryCode = "RU"
+	CountryCodeRw CountryCode = "RW"
+	CountryCodeSa CountryCode = "SA"
+	CountryCodeSb CountryCode = "SB"
+	CountryCodeSc CountryCode = "SC"
+	CountryCodeSd CountryCode = "SD"
+	CountryCodeSe CountryCode = "SE"
+	CountryCodeSg CountryCode = "SG"
+	CountryCodeSh CountryCode = "SH"
+	CountryCodeSi CountryCode = "SI"
+	CountryCodeSk CountryCode = "SK"
+	CountryCodeSl CountryCode = "SL"
+	CountryCodeSm CountryCode = "SM"
+	CountryCodeSn CountryCode = "SN"
+	CountryCodeSo CountryCode = "SO"
+	CountryCodeSr CountryCode = "SR"
+	CountryCodeSt CountryCode = "ST"
+	CountryCodeSv CountryCode = "SV"
+	CountryCodeSy CountryCode = "SY"
+	CountryCodeSz CountryCode = "SZ"
+	CountryCodeTc CountryCode = "TC"
+	CountryCodeTd CountryCode = "TD"
+	CountryCodeTg CountryCode = "TG"
+	CountryCodeTh CountryCode = "TH"
+	CountryCodeTj CountryCode = "TJ"
+	CountryCodeTk CountryCode = "TK"
+	CountryCodeTl CountryCode = "TL"
+	CountryCodeTm CountryCode = "TM"
+	CountryCodeTn CountryCode = "TN"
+	CountryCodeTo CountryCode = "TO"
+	CountryCodeTr CountryCode = "TR"
+	CountryCodeTt CountryCode = "TT"
+	CountryCodeTv CountryCode = "TV"
+	CountryCodeTw CountryCode = "TW"
+	CountryCodeTz CountryCode = "TZ"
+	CountryCodeUa CountryCode = "UA"
+	CountryCodeUg CountryCode = "UG"
+	CountryCodeUs CountryCode = "US"
+	CountryCodeUy CountryCode = "UY"
+	CountryCodeUz CountryCode = "UZ"
+	CountryCodeVa CountryCode = "VA"
+	CountryCodeVc CountryCode = "VC"
+	CountryCodeVe CountryCode = "VE"
+	CountryCodeVg CountryCode = "VG"
+	CountryCodeVi CountryCode = "VI"
+	CountryCodeVn CountryCode = "VN"
+	CountryCodeVu CountryCode = "VU"
+	CountryCodeWf CountryCode = "WF"
+	CountryCodeWs CountryCode = "WS"
+	CountryCodeYe CountryCode = "YE"
+	CountryCodeYt CountryCode = "YT"
+	CountryCodeZa CountryCode = "ZA"
+	CountryCodeZm CountryCode = "ZM"
+	CountryCodeZw CountryCode = "ZW"
 )
 
+type DomainAvailability string
+
+// Enum values for DomainAvailability
 const (
-	// DomainAvailabilityAvailable is a DomainAvailability enum value
-	DomainAvailabilityAvailable = "AVAILABLE"
-
-	// DomainAvailabilityAvailableReserved is a DomainAvailability enum value
-	DomainAvailabilityAvailableReserved = "AVAILABLE_RESERVED"
-
-	// DomainAvailabilityAvailablePreorder is a DomainAvailability enum value
-	DomainAvailabilityAvailablePreorder = "AVAILABLE_PREORDER"
-
-	// DomainAvailabilityUnavailable is a DomainAvailability enum value
-	DomainAvailabilityUnavailable = "UNAVAILABLE"
-
-	// DomainAvailabilityUnavailablePremium is a DomainAvailability enum value
-	DomainAvailabilityUnavailablePremium = "UNAVAILABLE_PREMIUM"
-
-	// DomainAvailabilityUnavailableRestricted is a DomainAvailability enum value
-	DomainAvailabilityUnavailableRestricted = "UNAVAILABLE_RESTRICTED"
-
-	// DomainAvailabilityReserved is a DomainAvailability enum value
-	DomainAvailabilityReserved = "RESERVED"
-
-	// DomainAvailabilityDontKnow is a DomainAvailability enum value
-	DomainAvailabilityDontKnow = "DONT_KNOW"
+	DomainAvailabilityAvailable             DomainAvailability = "AVAILABLE"
+	DomainAvailabilityAvailableReserved     DomainAvailability = "AVAILABLE_RESERVED"
+	DomainAvailabilityAvailablePreorder     DomainAvailability = "AVAILABLE_PREORDER"
+	DomainAvailabilityUnavailable           DomainAvailability = "UNAVAILABLE"
+	DomainAvailabilityUnavailablePremium    DomainAvailability = "UNAVAILABLE_PREMIUM"
+	DomainAvailabilityUnavailableRestricted DomainAvailability = "UNAVAILABLE_RESTRICTED"
+	DomainAvailabilityReserved              DomainAvailability = "RESERVED"
+	DomainAvailabilityDontKnow              DomainAvailability = "DONT_KNOW"
 )
 
+type ExtraParamName string
+
+// Enum values for ExtraParamName
 const (
-	// ExtraParamNameDunsNumber is a ExtraParamName enum value
-	ExtraParamNameDunsNumber = "DUNS_NUMBER"
-
-	// ExtraParamNameBrandNumber is a ExtraParamName enum value
-	ExtraParamNameBrandNumber = "BRAND_NUMBER"
-
-	// ExtraParamNameBirthDepartment is a ExtraParamName enum value
-	ExtraParamNameBirthDepartment = "BIRTH_DEPARTMENT"
-
-	// ExtraParamNameBirthDateInYyyyMmDd is a ExtraParamName enum value
-	ExtraParamNameBirthDateInYyyyMmDd = "BIRTH_DATE_IN_YYYY_MM_DD"
-
-	// ExtraParamNameBirthCountry is a ExtraParamName enum value
-	ExtraParamNameBirthCountry = "BIRTH_COUNTRY"
-
-	// ExtraParamNameBirthCity is a ExtraParamName enum value
-	ExtraParamNameBirthCity = "BIRTH_CITY"
-
-	// ExtraParamNameDocumentNumber is a ExtraParamName enum value
-	ExtraParamNameDocumentNumber = "DOCUMENT_NUMBER"
-
-	// ExtraParamNameAuIdNumber is a ExtraParamName enum value
-	ExtraParamNameAuIdNumber = "AU_ID_NUMBER"
-
-	// ExtraParamNameAuIdType is a ExtraParamName enum value
-	ExtraParamNameAuIdType = "AU_ID_TYPE"
-
-	// ExtraParamNameCaLegalType is a ExtraParamName enum value
-	ExtraParamNameCaLegalType = "CA_LEGAL_TYPE"
-
-	// ExtraParamNameCaBusinessEntityType is a ExtraParamName enum value
-	ExtraParamNameCaBusinessEntityType = "CA_BUSINESS_ENTITY_TYPE"
-
-	// ExtraParamNameEsIdentification is a ExtraParamName enum value
-	ExtraParamNameEsIdentification = "ES_IDENTIFICATION"
-
-	// ExtraParamNameEsIdentificationType is a ExtraParamName enum value
-	ExtraParamNameEsIdentificationType = "ES_IDENTIFICATION_TYPE"
-
-	// ExtraParamNameEsLegalForm is a ExtraParamName enum value
-	ExtraParamNameEsLegalForm = "ES_LEGAL_FORM"
-
-	// ExtraParamNameFiBusinessNumber is a ExtraParamName enum value
-	ExtraParamNameFiBusinessNumber = "FI_BUSINESS_NUMBER"
-
-	// ExtraParamNameFiIdNumber is a ExtraParamName enum value
-	ExtraParamNameFiIdNumber = "FI_ID_NUMBER"
-
-	// ExtraParamNameFiNationality is a ExtraParamName enum value
-	ExtraParamNameFiNationality = "FI_NATIONALITY"
-
-	// ExtraParamNameFiOrganizationType is a ExtraParamName enum value
-	ExtraParamNameFiOrganizationType = "FI_ORGANIZATION_TYPE"
-
-	// ExtraParamNameItPin is a ExtraParamName enum value
-	ExtraParamNameItPin = "IT_PIN"
-
-	// ExtraParamNameItRegistrantEntityType is a ExtraParamName enum value
-	ExtraParamNameItRegistrantEntityType = "IT_REGISTRANT_ENTITY_TYPE"
-
-	// ExtraParamNameRuPassportData is a ExtraParamName enum value
-	ExtraParamNameRuPassportData = "RU_PASSPORT_DATA"
-
-	// ExtraParamNameSeIdNumber is a ExtraParamName enum value
-	ExtraParamNameSeIdNumber = "SE_ID_NUMBER"
-
-	// ExtraParamNameSgIdNumber is a ExtraParamName enum value
-	ExtraParamNameSgIdNumber = "SG_ID_NUMBER"
-
-	// ExtraParamNameVatNumber is a ExtraParamName enum value
-	ExtraParamNameVatNumber = "VAT_NUMBER"
-
-	// ExtraParamNameUkContactType is a ExtraParamName enum value
-	ExtraParamNameUkContactType = "UK_CONTACT_TYPE"
-
-	// ExtraParamNameUkCompanyNumber is a ExtraParamName enum value
-	ExtraParamNameUkCompanyNumber = "UK_COMPANY_NUMBER"
+	ExtraParamNameDunsNumber             ExtraParamName = "DUNS_NUMBER"
+	ExtraParamNameBrandNumber            ExtraParamName = "BRAND_NUMBER"
+	ExtraParamNameBirthDepartment        ExtraParamName = "BIRTH_DEPARTMENT"
+	ExtraParamNameBirthDateInYyyyMmDd    ExtraParamName = "BIRTH_DATE_IN_YYYY_MM_DD"
+	ExtraParamNameBirthCountry           ExtraParamName = "BIRTH_COUNTRY"
+	ExtraParamNameBirthCity              ExtraParamName = "BIRTH_CITY"
+	ExtraParamNameDocumentNumber         ExtraParamName = "DOCUMENT_NUMBER"
+	ExtraParamNameAuIdNumber             ExtraParamName = "AU_ID_NUMBER"
+	ExtraParamNameAuIdType               ExtraParamName = "AU_ID_TYPE"
+	ExtraParamNameCaLegalType            ExtraParamName = "CA_LEGAL_TYPE"
+	ExtraParamNameCaBusinessEntityType   ExtraParamName = "CA_BUSINESS_ENTITY_TYPE"
+	ExtraParamNameEsIdentification       ExtraParamName = "ES_IDENTIFICATION"
+	ExtraParamNameEsIdentificationType   ExtraParamName = "ES_IDENTIFICATION_TYPE"
+	ExtraParamNameEsLegalForm            ExtraParamName = "ES_LEGAL_FORM"
+	ExtraParamNameFiBusinessNumber       ExtraParamName = "FI_BUSINESS_NUMBER"
+	ExtraParamNameFiIdNumber             ExtraParamName = "FI_ID_NUMBER"
+	ExtraParamNameFiNationality          ExtraParamName = "FI_NATIONALITY"
+	ExtraParamNameFiOrganizationType     ExtraParamName = "FI_ORGANIZATION_TYPE"
+	ExtraParamNameItPin                  ExtraParamName = "IT_PIN"
+	ExtraParamNameItRegistrantEntityType ExtraParamName = "IT_REGISTRANT_ENTITY_TYPE"
+	ExtraParamNameRuPassportData         ExtraParamName = "RU_PASSPORT_DATA"
+	ExtraParamNameSeIdNumber             ExtraParamName = "SE_ID_NUMBER"
+	ExtraParamNameSgIdNumber             ExtraParamName = "SG_ID_NUMBER"
+	ExtraParamNameVatNumber              ExtraParamName = "VAT_NUMBER"
+	ExtraParamNameUkContactType          ExtraParamName = "UK_CONTACT_TYPE"
+	ExtraParamNameUkCompanyNumber        ExtraParamName = "UK_COMPANY_NUMBER"
 )
 
+type OperationStatus string
+
+// Enum values for OperationStatus
 const (
-	// OperationStatusSubmitted is a OperationStatus enum value
-	OperationStatusSubmitted = "SUBMITTED"
-
-	// OperationStatusInProgress is a OperationStatus enum value
-	OperationStatusInProgress = "IN_PROGRESS"
-
-	// OperationStatusError is a OperationStatus enum value
-	OperationStatusError = "ERROR"
-
-	// OperationStatusSuccessful is a OperationStatus enum value
-	OperationStatusSuccessful = "SUCCESSFUL"
-
-	// OperationStatusFailed is a OperationStatus enum value
-	OperationStatusFailed = "FAILED"
+	OperationStatusSubmitted  OperationStatus = "SUBMITTED"
+	OperationStatusInProgress OperationStatus = "IN_PROGRESS"
+	OperationStatusError      OperationStatus = "ERROR"
+	OperationStatusSuccessful OperationStatus = "SUCCESSFUL"
+	OperationStatusFailed     OperationStatus = "FAILED"
 )
 
+type OperationType string
+
+// Enum values for OperationType
 const (
-	// OperationTypeRegisterDomain is a OperationType enum value
-	OperationTypeRegisterDomain = "REGISTER_DOMAIN"
-
-	// OperationTypeDeleteDomain is a OperationType enum value
-	OperationTypeDeleteDomain = "DELETE_DOMAIN"
-
-	// OperationTypeTransferInDomain is a OperationType enum value
-	OperationTypeTransferInDomain = "TRANSFER_IN_DOMAIN"
-
-	// OperationTypeUpdateDomainContact is a OperationType enum value
-	OperationTypeUpdateDomainContact = "UPDATE_DOMAIN_CONTACT"
-
-	// OperationTypeUpdateNameserver is a OperationType enum value
-	OperationTypeUpdateNameserver = "UPDATE_NAMESERVER"
-
-	// OperationTypeChangePrivacyProtection is a OperationType enum value
-	OperationTypeChangePrivacyProtection = "CHANGE_PRIVACY_PROTECTION"
-
-	// OperationTypeDomainLock is a OperationType enum value
-	OperationTypeDomainLock = "DOMAIN_LOCK"
-
-	// OperationTypeEnableAutorenew is a OperationType enum value
-	OperationTypeEnableAutorenew = "ENABLE_AUTORENEW"
-
-	// OperationTypeDisableAutorenew is a OperationType enum value
-	OperationTypeDisableAutorenew = "DISABLE_AUTORENEW"
-
-	// OperationTypeAddDnssec is a OperationType enum value
-	OperationTypeAddDnssec = "ADD_DNSSEC"
-
-	// OperationTypeRemoveDnssec is a OperationType enum value
-	OperationTypeRemoveDnssec = "REMOVE_DNSSEC"
-
-	// OperationTypeExpireDomain is a OperationType enum value
-	OperationTypeExpireDomain = "EXPIRE_DOMAIN"
-
-	// OperationTypeTransferOutDomain is a OperationType enum value
-	OperationTypeTransferOutDomain = "TRANSFER_OUT_DOMAIN"
-
-	// OperationTypeChangeDomainOwner is a OperationType enum value
-	OperationTypeChangeDomainOwner = "CHANGE_DOMAIN_OWNER"
-
-	// OperationTypeRenewDomain is a OperationType enum value
-	OperationTypeRenewDomain = "RENEW_DOMAIN"
-
-	// OperationTypePushDomain is a OperationType enum value
-	OperationTypePushDomain = "PUSH_DOMAIN"
+	OperationTypeRegisterDomain          OperationType = "REGISTER_DOMAIN"
+	OperationTypeDeleteDomain            OperationType = "DELETE_DOMAIN"
+	OperationTypeTransferInDomain        OperationType = "TRANSFER_IN_DOMAIN"
+	OperationTypeUpdateDomainContact     OperationType = "UPDATE_DOMAIN_CONTACT"
+	OperationTypeUpdateNameserver        OperationType = "UPDATE_NAMESERVER"
+	OperationTypeChangePrivacyProtection OperationType = "CHANGE_PRIVACY_PROTECTION"
+	OperationTypeDomainLock              OperationType = "DOMAIN_LOCK"
+	OperationTypeEnableAutorenew         OperationType = "ENABLE_AUTORENEW"
+	OperationTypeDisableAutorenew        OperationType = "DISABLE_AUTORENEW"
+	OperationTypeAddDnssec               OperationType = "ADD_DNSSEC"
+	OperationTypeRemoveDnssec            OperationType = "REMOVE_DNSSEC"
+	OperationTypeExpireDomain            OperationType = "EXPIRE_DOMAIN"
+	OperationTypeTransferOutDomain       OperationType = "TRANSFER_OUT_DOMAIN"
+	OperationTypeChangeDomainOwner       OperationType = "CHANGE_DOMAIN_OWNER"
+	OperationTypeRenewDomain             OperationType = "RENEW_DOMAIN"
+	OperationTypePushDomain              OperationType = "PUSH_DOMAIN"
 )
 
+type ReachabilityStatus string
+
+// Enum values for ReachabilityStatus
 const (
-	// ReachabilityStatusPending is a ReachabilityStatus enum value
-	ReachabilityStatusPending = "PENDING"
-
-	// ReachabilityStatusDone is a ReachabilityStatus enum value
-	ReachabilityStatusDone = "DONE"
-
-	// ReachabilityStatusExpired is a ReachabilityStatus enum value
-	ReachabilityStatusExpired = "EXPIRED"
+	ReachabilityStatusPending ReachabilityStatus = "PENDING"
+	ReachabilityStatusDone    ReachabilityStatus = "DONE"
+	ReachabilityStatusExpired ReachabilityStatus = "EXPIRED"
 )
 
 // Whether the domain name can be transferred to Amazon Route 53.
@@ -6334,13 +5812,11 @@ const (
 // UNTRANSFERRABLEThe domain name can't be transferred to Amazon Route 53.
 //
 // DONT_KNOWReserved for future use.
+type Transferable string
+
+// Enum values for Transferable
 const (
-	// TransferableTransferable is a Transferable enum value
-	TransferableTransferable = "TRANSFERABLE"
-
-	// TransferableUntransferable is a Transferable enum value
-	TransferableUntransferable = "UNTRANSFERABLE"
-
-	// TransferableDontKnow is a Transferable enum value
-	TransferableDontKnow = "DONT_KNOW"
+	TransferableTransferable   Transferable = "TRANSFERABLE"
+	TransferableUntransferable Transferable = "UNTRANSFERABLE"
+	TransferableDontKnow       Transferable = "DONT_KNOW"
 )

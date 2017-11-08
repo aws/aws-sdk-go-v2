@@ -762,7 +762,7 @@ type AffectedEntity struct {
 
 	// The most recent status of the entity affected by the event. The possible
 	// values are IMPAIRED, UNIMPAIRED, and UNKNOWN.
-	StatusCode *string `locationName:"statusCode" type:"string" enum:"entityStatusCode"`
+	StatusCode EntityStatusCode `locationName:"statusCode" type:"string"`
 
 	// A map of entity tags attached to the affected entity.
 	Tags map[string]*string `locationName:"tags" type:"map"`
@@ -809,8 +809,8 @@ func (s *AffectedEntity) SetLastUpdatedTime(v time.Time) *AffectedEntity {
 }
 
 // SetStatusCode sets the StatusCode field's value.
-func (s *AffectedEntity) SetStatusCode(v string) *AffectedEntity {
-	s.StatusCode = &v
+func (s *AffectedEntity) SetStatusCode(v EntityStatusCode) *AffectedEntity {
+	s.StatusCode = v
 	return s
 }
 
@@ -896,6 +896,7 @@ func (s DescribeAffectedEntitiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAffectedEntitiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAffectedEntitiesInput"}
+
 	if s.Filter == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Filter"))
 	}
@@ -1047,7 +1048,7 @@ type DescribeEventAggregatesInput struct {
 	// The only currently supported value is eventTypeCategory.
 	//
 	// AggregateField is a required field
-	AggregateField *string `locationName:"aggregateField" type:"string" required:"true" enum:"eventAggregateField"`
+	AggregateField EventAggregateField `locationName:"aggregateField" type:"string" required:"true"`
 
 	// Values to narrow the results returned.
 	Filter *EventFilter `locationName:"filter" type:"structure"`
@@ -1076,7 +1077,7 @@ func (s DescribeEventAggregatesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventAggregatesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventAggregatesInput"}
-	if s.AggregateField == nil {
+	if len(s.AggregateField) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("AggregateField"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
@@ -1095,8 +1096,8 @@ func (s *DescribeEventAggregatesInput) Validate() error {
 }
 
 // SetAggregateField sets the AggregateField field's value.
-func (s *DescribeEventAggregatesInput) SetAggregateField(v string) *DescribeEventAggregatesInput {
-	s.AggregateField = &v
+func (s *DescribeEventAggregatesInput) SetAggregateField(v EventAggregateField) *DescribeEventAggregatesInput {
+	s.AggregateField = v
 	return s
 }
 
@@ -1183,6 +1184,7 @@ func (s DescribeEventDetailsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventDetailsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventDetailsInput"}
+
 	if s.EventArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventArns"))
 	}
@@ -1532,7 +1534,7 @@ type EntityFilter struct {
 	LastUpdatedTimes []*DateTimeRange `locationName:"lastUpdatedTimes" min:"1" type:"list"`
 
 	// A list of entity status codes (IMPAIRED, UNIMPAIRED, or UNKNOWN).
-	StatusCodes []*string `locationName:"statusCodes" min:"1" type:"list"`
+	StatusCodes []EntityStatusCode `locationName:"statusCodes" min:"1" type:"list"`
 
 	// A map of entity tags attached to the affected entity.
 	Tags []map[string]*string `locationName:"tags" type:"list"`
@@ -1557,6 +1559,7 @@ func (s *EntityFilter) Validate() error {
 	if s.EntityValues != nil && len(s.EntityValues) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EntityValues", 1))
 	}
+
 	if s.EventArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventArns"))
 	}
@@ -1601,7 +1604,7 @@ func (s *EntityFilter) SetLastUpdatedTimes(v []*DateTimeRange) *EntityFilter {
 }
 
 // SetStatusCodes sets the StatusCodes field's value.
-func (s *EntityFilter) SetStatusCodes(v []*string) *EntityFilter {
+func (s *EntityFilter) SetStatusCodes(v []EntityStatusCode) *EntityFilter {
 	s.StatusCodes = v
 	return s
 }
@@ -1630,7 +1633,7 @@ type Event struct {
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The
-	EventTypeCategory *string `locationName:"eventTypeCategory" min:"3" type:"string" enum:"eventTypeCategory"`
+	EventTypeCategory EventTypeCategory `locationName:"eventTypeCategory" min:"3" type:"string"`
 
 	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION;
 	// for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
@@ -1650,7 +1653,7 @@ type Event struct {
 
 	// The most recent status of the event. Possible values are open, closed, and
 	// upcoming.
-	StatusCode *string `locationName:"statusCode" type:"string" enum:"eventStatusCode"`
+	StatusCode EventStatusCode `locationName:"statusCode" type:"string"`
 }
 
 // String returns the string representation
@@ -1682,8 +1685,8 @@ func (s *Event) SetEndTime(v time.Time) *Event {
 }
 
 // SetEventTypeCategory sets the EventTypeCategory field's value.
-func (s *Event) SetEventTypeCategory(v string) *Event {
-	s.EventTypeCategory = &v
+func (s *Event) SetEventTypeCategory(v EventTypeCategory) *Event {
+	s.EventTypeCategory = v
 	return s
 }
 
@@ -1718,8 +1721,8 @@ func (s *Event) SetStartTime(v time.Time) *Event {
 }
 
 // SetStatusCode sets the StatusCode field's value.
-func (s *Event) SetStatusCode(v string) *Event {
-	s.StatusCode = &v
+func (s *Event) SetStatusCode(v EventStatusCode) *Event {
+	s.StatusCode = v
 	return s
 }
 
@@ -1898,10 +1901,10 @@ type EventFilter struct {
 	EventArns []*string `locationName:"eventArns" min:"1" type:"list"`
 
 	// A list of event status codes.
-	EventStatusCodes []*string `locationName:"eventStatusCodes" min:"1" type:"list"`
+	EventStatusCodes []EventStatusCode `locationName:"eventStatusCodes" min:"1" type:"list"`
 
 	// A list of event type category codes (issue, scheduledChange, or accountNotification).
-	EventTypeCategories []*string `locationName:"eventTypeCategories" min:"1" type:"list"`
+	EventTypeCategories []EventTypeCategory `locationName:"eventTypeCategories" min:"1" type:"list"`
 
 	// A list of unique identifiers for event types. For example, "AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED"
 	EventTypeCodes []*string `locationName:"eventTypeCodes" min:"1" type:"list"`
@@ -2006,13 +2009,13 @@ func (s *EventFilter) SetEventArns(v []*string) *EventFilter {
 }
 
 // SetEventStatusCodes sets the EventStatusCodes field's value.
-func (s *EventFilter) SetEventStatusCodes(v []*string) *EventFilter {
+func (s *EventFilter) SetEventStatusCodes(v []EventStatusCode) *EventFilter {
 	s.EventStatusCodes = v
 	return s
 }
 
 // SetEventTypeCategories sets the EventTypeCategories field's value.
-func (s *EventFilter) SetEventTypeCategories(v []*string) *EventFilter {
+func (s *EventFilter) SetEventTypeCategories(v []EventTypeCategory) *EventFilter {
 	s.EventTypeCategories = v
 	return s
 }
@@ -2061,7 +2064,7 @@ type EventType struct {
 	_ struct{} `type:"structure"`
 
 	// A list of event type category codes (issue, scheduledChange, or accountNotification).
-	Category *string `locationName:"category" min:"3" type:"string" enum:"eventTypeCategory"`
+	Category EventTypeCategory `locationName:"category" min:"3" type:"string"`
 
 	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION;
 	// for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
@@ -2082,8 +2085,8 @@ func (s EventType) GoString() string {
 }
 
 // SetCategory sets the Category field's value.
-func (s *EventType) SetCategory(v string) *EventType {
-	s.Category = &v
+func (s *EventType) SetCategory(v EventTypeCategory) *EventType {
+	s.Category = v
 	return s
 }
 
@@ -2105,7 +2108,7 @@ type EventTypeFilter struct {
 	_ struct{} `type:"structure"`
 
 	// A list of event type category codes (issue, scheduledChange, or accountNotification).
-	EventTypeCategories []*string `locationName:"eventTypeCategories" min:"1" type:"list"`
+	EventTypeCategories []EventTypeCategory `locationName:"eventTypeCategories" min:"1" type:"list"`
 
 	// A list of event type codes.
 	EventTypeCodes []*string `locationName:"eventTypeCodes" min:"1" type:"list"`
@@ -2144,7 +2147,7 @@ func (s *EventTypeFilter) Validate() error {
 }
 
 // SetEventTypeCategories sets the EventTypeCategories field's value.
-func (s *EventTypeFilter) SetEventTypeCategories(v []*string) *EventTypeFilter {
+func (s *EventTypeFilter) SetEventTypeCategories(v []EventTypeCategory) *EventTypeFilter {
 	s.EventTypeCategories = v
 	return s
 }
@@ -2161,40 +2164,36 @@ func (s *EventTypeFilter) SetServices(v []*string) *EventTypeFilter {
 	return s
 }
 
+type EntityStatusCode string
+
+// Enum values for EntityStatusCode
 const (
-	// EntityStatusCodeImpaired is a entityStatusCode enum value
-	EntityStatusCodeImpaired = "IMPAIRED"
-
-	// EntityStatusCodeUnimpaired is a entityStatusCode enum value
-	EntityStatusCodeUnimpaired = "UNIMPAIRED"
-
-	// EntityStatusCodeUnknown is a entityStatusCode enum value
-	EntityStatusCodeUnknown = "UNKNOWN"
+	EntityStatusCodeImpaired   EntityStatusCode = "IMPAIRED"
+	EntityStatusCodeUnimpaired EntityStatusCode = "UNIMPAIRED"
+	EntityStatusCodeUnknown    EntityStatusCode = "UNKNOWN"
 )
 
+type EventAggregateField string
+
+// Enum values for EventAggregateField
 const (
-	// EventAggregateFieldEventTypeCategory is a eventAggregateField enum value
-	EventAggregateFieldEventTypeCategory = "eventTypeCategory"
+	EventAggregateFieldEventTypeCategory EventAggregateField = "eventTypeCategory"
 )
 
+type EventStatusCode string
+
+// Enum values for EventStatusCode
 const (
-	// EventStatusCodeOpen is a eventStatusCode enum value
-	EventStatusCodeOpen = "open"
-
-	// EventStatusCodeClosed is a eventStatusCode enum value
-	EventStatusCodeClosed = "closed"
-
-	// EventStatusCodeUpcoming is a eventStatusCode enum value
-	EventStatusCodeUpcoming = "upcoming"
+	EventStatusCodeOpen     EventStatusCode = "open"
+	EventStatusCodeClosed   EventStatusCode = "closed"
+	EventStatusCodeUpcoming EventStatusCode = "upcoming"
 )
 
+type EventTypeCategory string
+
+// Enum values for EventTypeCategory
 const (
-	// EventTypeCategoryIssue is a eventTypeCategory enum value
-	EventTypeCategoryIssue = "issue"
-
-	// EventTypeCategoryAccountNotification is a eventTypeCategory enum value
-	EventTypeCategoryAccountNotification = "accountNotification"
-
-	// EventTypeCategoryScheduledChange is a eventTypeCategory enum value
-	EventTypeCategoryScheduledChange = "scheduledChange"
+	EventTypeCategoryIssue               EventTypeCategory = "issue"
+	EventTypeCategoryAccountNotification EventTypeCategory = "accountNotification"
+	EventTypeCategoryScheduledChange     EventTypeCategory = "scheduledChange"
 )

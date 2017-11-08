@@ -21,7 +21,7 @@ func TestUnmarshal(t *testing.T) {
 	</Owner>
 	<AccessControlList>
 		<Grant>
-		<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="type">
+		<Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
 			<ID>foo-id</ID>
 			<DisplayName>user</DisplayName>
 		</Grantee>
@@ -52,9 +52,9 @@ func TestUnmarshal(t *testing.T) {
 				Grantee: &s3.Grantee{
 					DisplayName: aws.String("user"),
 					ID:          aws.String("foo-id"),
-					Type:        aws.String("type"),
+					Type:        s3.TypeCanonicalUser,
 				},
-				Permission: aws.String("FULL_CONTROL"),
+				Permission: s3.PermissionFullControl,
 			},
 		},
 
@@ -63,5 +63,7 @@ func TestUnmarshal(t *testing.T) {
 			ID:          aws.String("foo-id"),
 		},
 	}
+	t.Log(expected)
+	t.Log(out)
 	assert.Equal(t, expected, out)
 }

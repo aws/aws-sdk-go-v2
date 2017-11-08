@@ -1169,7 +1169,7 @@ type Budget struct {
 	// The type of a budget. It should be COST, USAGE, or RI_UTILIZATION.
 	//
 	// BudgetType is a required field
-	BudgetType *string `type:"string" required:"true" enum:"BudgetType"`
+	BudgetType BudgetType `type:"string" required:"true"`
 
 	// A structure that holds the actual and forecasted spend for a budget.
 	CalculatedSpend *CalculatedSpend `type:"structure"`
@@ -1190,7 +1190,7 @@ type Budget struct {
 	// The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.
 	//
 	// TimeUnit is a required field
-	TimeUnit *string `type:"string" required:"true" enum:"TimeUnit"`
+	TimeUnit TimeUnit `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1206,22 +1206,26 @@ func (s Budget) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Budget) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Budget"}
+
 	if s.BudgetLimit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetLimit"))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
-	if s.BudgetType == nil {
+	if len(s.BudgetType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetType"))
 	}
+
 	if s.CostTypes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CostTypes"))
 	}
+
 	if s.TimePeriod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimePeriod"))
 	}
-	if s.TimeUnit == nil {
+	if len(s.TimeUnit) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TimeUnit"))
 	}
 	if s.BudgetLimit != nil {
@@ -1264,8 +1268,8 @@ func (s *Budget) SetBudgetName(v string) *Budget {
 }
 
 // SetBudgetType sets the BudgetType field's value.
-func (s *Budget) SetBudgetType(v string) *Budget {
-	s.BudgetType = &v
+func (s *Budget) SetBudgetType(v BudgetType) *Budget {
+	s.BudgetType = v
 	return s
 }
 
@@ -1294,8 +1298,8 @@ func (s *Budget) SetTimePeriod(v *TimePeriod) *Budget {
 }
 
 // SetTimeUnit sets the TimeUnit field's value.
-func (s *Budget) SetTimeUnit(v string) *Budget {
-	s.TimeUnit = &v
+func (s *Budget) SetTimeUnit(v TimeUnit) *Budget {
+	s.TimeUnit = v
 	return s
 }
 
@@ -1327,6 +1331,7 @@ func (s CalculatedSpend) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CalculatedSpend) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CalculatedSpend"}
+
 	if s.ActualSpend == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActualSpend"))
 	}
@@ -1392,12 +1397,15 @@ func (s CostTypes) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CostTypes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CostTypes"}
+
 	if s.IncludeSubscription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IncludeSubscription"))
 	}
+
 	if s.IncludeTax == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IncludeTax"))
 	}
+
 	if s.UseBlended == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UseBlended"))
 	}
@@ -1457,12 +1465,14 @@ func (s CreateBudgetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBudgetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateBudgetInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.Budget == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Budget"))
 	}
@@ -1560,18 +1570,22 @@ func (s CreateNotificationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNotificationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateNotificationInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
+
 	if s.Notification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
+
 	if s.Subscribers == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subscribers"))
 	}
@@ -1679,18 +1693,22 @@ func (s CreateSubscriberInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSubscriberInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSubscriberInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
+
 	if s.Notification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
+
 	if s.Subscriber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subscriber"))
 	}
@@ -1778,12 +1796,14 @@ func (s DeleteBudgetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBudgetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBudgetInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
@@ -1855,15 +1875,18 @@ func (s DeleteNotificationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNotificationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotificationInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
+
 	if s.Notification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
@@ -1952,18 +1975,22 @@ func (s DeleteSubscriberInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSubscriberInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubscriberInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
+
 	if s.Notification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
+
 	if s.Subscriber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subscriber"))
 	}
@@ -2051,12 +2078,14 @@ func (s DescribeBudgetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBudgetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeBudgetInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
@@ -2133,6 +2162,7 @@ func (s DescribeBudgetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBudgetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeBudgetsInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
@@ -2235,12 +2265,14 @@ func (s DescribeNotificationsForBudgetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeNotificationsForBudgetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeNotificationsForBudgetInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
@@ -2352,18 +2384,21 @@ func (s DescribeSubscribersForNotificationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSubscribersForNotificationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSubscribersForNotificationInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Notification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
@@ -2451,12 +2486,12 @@ type Notification struct {
 	// equal to and greater than.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator *string `type:"string" required:"true" enum:"ComparisonOperator"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
 
 	// The type of a notification. It should be ACTUAL or FORECASTED.
 	//
 	// NotificationType is a required field
-	NotificationType *string `type:"string" required:"true" enum:"NotificationType"`
+	NotificationType NotificationType `type:"string" required:"true"`
 
 	// The threshold of a notification. It should be a number between 0 and 1,000,000,000.
 	//
@@ -2464,7 +2499,7 @@ type Notification struct {
 	Threshold *float64 `min:"0.1" type:"double" required:"true"`
 
 	// The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.
-	ThresholdType *string `type:"string" enum:"ThresholdType"`
+	ThresholdType ThresholdType `type:"string"`
 }
 
 // String returns the string representation
@@ -2480,12 +2515,13 @@ func (s Notification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Notification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Notification"}
-	if s.ComparisonOperator == nil {
+	if len(s.ComparisonOperator) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
-	if s.NotificationType == nil {
+	if len(s.NotificationType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("NotificationType"))
 	}
+
 	if s.Threshold == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
 	}
@@ -2500,14 +2536,14 @@ func (s *Notification) Validate() error {
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *Notification) SetComparisonOperator(v string) *Notification {
-	s.ComparisonOperator = &v
+func (s *Notification) SetComparisonOperator(v ComparisonOperator) *Notification {
+	s.ComparisonOperator = v
 	return s
 }
 
 // SetNotificationType sets the NotificationType field's value.
-func (s *Notification) SetNotificationType(v string) *Notification {
-	s.NotificationType = &v
+func (s *Notification) SetNotificationType(v NotificationType) *Notification {
+	s.NotificationType = v
 	return s
 }
 
@@ -2518,8 +2554,8 @@ func (s *Notification) SetThreshold(v float64) *Notification {
 }
 
 // SetThresholdType sets the ThresholdType field's value.
-func (s *Notification) SetThresholdType(v string) *Notification {
-	s.ThresholdType = &v
+func (s *Notification) SetThresholdType(v ThresholdType) *Notification {
+	s.ThresholdType = v
 	return s
 }
 
@@ -2553,9 +2589,11 @@ func (s NotificationWithSubscribers) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotificationWithSubscribers) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NotificationWithSubscribers"}
+
 	if s.Notification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
+
 	if s.Subscribers == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subscribers"))
 	}
@@ -2625,9 +2663,11 @@ func (s Spend) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Spend) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Spend"}
+
 	if s.Amount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Amount"))
 	}
+
 	if s.Unit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Unit"))
 	}
@@ -2666,7 +2706,7 @@ type Subscriber struct {
 	// The subscription type of the subscriber. It can be SMS or EMAIL.
 	//
 	// SubscriptionType is a required field
-	SubscriptionType *string `type:"string" required:"true" enum:"SubscriptionType"`
+	SubscriptionType SubscriptionType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2682,10 +2722,11 @@ func (s Subscriber) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Subscriber) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Subscriber"}
+
 	if s.Address == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Address"))
 	}
-	if s.SubscriptionType == nil {
+	if len(s.SubscriptionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionType"))
 	}
 
@@ -2702,8 +2743,8 @@ func (s *Subscriber) SetAddress(v string) *Subscriber {
 }
 
 // SetSubscriptionType sets the SubscriptionType field's value.
-func (s *Subscriber) SetSubscriptionType(v string) *Subscriber {
-	s.SubscriptionType = &v
+func (s *Subscriber) SetSubscriptionType(v SubscriptionType) *Subscriber {
+	s.SubscriptionType = v
 	return s
 }
 
@@ -2735,9 +2776,11 @@ func (s TimePeriod) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TimePeriod) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TimePeriod"}
+
 	if s.End == nil {
 		invalidParams.Add(aws.NewErrParamRequired("End"))
 	}
+
 	if s.Start == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Start"))
 	}
@@ -2788,12 +2831,14 @@ func (s UpdateBudgetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBudgetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateBudgetInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.NewBudget == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewBudget"))
 	}
@@ -2876,18 +2921,22 @@ func (s UpdateNotificationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNotificationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateNotificationInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
+
 	if s.NewNotification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewNotification"))
 	}
+
 	if s.OldNotification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OldNotification"))
 	}
@@ -2993,21 +3042,26 @@ func (s UpdateSubscriberInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSubscriberInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSubscriberInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
+
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
+
 	if s.NewSubscriber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewSubscriber"))
 	}
+
 	if s.Notification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
+
 	if s.OldSubscriber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OldSubscriber"))
 	}
@@ -3079,68 +3133,60 @@ func (s UpdateSubscriberOutput) GoString() string {
 }
 
 // The type of a budget. It should be COST, USAGE, or RI_UTILIZATION.
+type BudgetType string
+
+// Enum values for BudgetType
 const (
-	// BudgetTypeUsage is a BudgetType enum value
-	BudgetTypeUsage = "USAGE"
-
-	// BudgetTypeCost is a BudgetType enum value
-	BudgetTypeCost = "COST"
-
-	// BudgetTypeRiUtilization is a BudgetType enum value
-	BudgetTypeRiUtilization = "RI_UTILIZATION"
+	BudgetTypeUsage         BudgetType = "USAGE"
+	BudgetTypeCost          BudgetType = "COST"
+	BudgetTypeRiUtilization BudgetType = "RI_UTILIZATION"
 )
 
 // The comparison operator of a notification. Currently we support less than,
 // equal to and greater than.
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
 const (
-	// ComparisonOperatorGreaterThan is a ComparisonOperator enum value
-	ComparisonOperatorGreaterThan = "GREATER_THAN"
-
-	// ComparisonOperatorLessThan is a ComparisonOperator enum value
-	ComparisonOperatorLessThan = "LESS_THAN"
-
-	// ComparisonOperatorEqualTo is a ComparisonOperator enum value
-	ComparisonOperatorEqualTo = "EQUAL_TO"
+	ComparisonOperatorGreaterThan ComparisonOperator = "GREATER_THAN"
+	ComparisonOperatorLessThan    ComparisonOperator = "LESS_THAN"
+	ComparisonOperatorEqualTo     ComparisonOperator = "EQUAL_TO"
 )
 
 // The type of a notification. It should be ACTUAL or FORECASTED.
-const (
-	// NotificationTypeActual is a NotificationType enum value
-	NotificationTypeActual = "ACTUAL"
+type NotificationType string
 
-	// NotificationTypeForecasted is a NotificationType enum value
-	NotificationTypeForecasted = "FORECASTED"
+// Enum values for NotificationType
+const (
+	NotificationTypeActual     NotificationType = "ACTUAL"
+	NotificationTypeForecasted NotificationType = "FORECASTED"
 )
 
 // The subscription type of the subscriber. It can be SMS or EMAIL.
-const (
-	// SubscriptionTypeSns is a SubscriptionType enum value
-	SubscriptionTypeSns = "SNS"
+type SubscriptionType string
 
-	// SubscriptionTypeEmail is a SubscriptionType enum value
-	SubscriptionTypeEmail = "EMAIL"
+// Enum values for SubscriptionType
+const (
+	SubscriptionTypeSns   SubscriptionType = "SNS"
+	SubscriptionTypeEmail SubscriptionType = "EMAIL"
 )
 
 // The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.
-const (
-	// ThresholdTypePercentage is a ThresholdType enum value
-	ThresholdTypePercentage = "PERCENTAGE"
+type ThresholdType string
 
-	// ThresholdTypeAbsoluteValue is a ThresholdType enum value
-	ThresholdTypeAbsoluteValue = "ABSOLUTE_VALUE"
+// Enum values for ThresholdType
+const (
+	ThresholdTypePercentage    ThresholdType = "PERCENTAGE"
+	ThresholdTypeAbsoluteValue ThresholdType = "ABSOLUTE_VALUE"
 )
 
 // The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.
+type TimeUnit string
+
+// Enum values for TimeUnit
 const (
-	// TimeUnitDaily is a TimeUnit enum value
-	TimeUnitDaily = "DAILY"
-
-	// TimeUnitMonthly is a TimeUnit enum value
-	TimeUnitMonthly = "MONTHLY"
-
-	// TimeUnitQuarterly is a TimeUnit enum value
-	TimeUnitQuarterly = "QUARTERLY"
-
-	// TimeUnitAnnually is a TimeUnit enum value
-	TimeUnitAnnually = "ANNUALLY"
+	TimeUnitDaily     TimeUnit = "DAILY"
+	TimeUnitMonthly   TimeUnit = "MONTHLY"
+	TimeUnitQuarterly TimeUnit = "QUARTERLY"
+	TimeUnitAnnually  TimeUnit = "ANNUALLY"
 )

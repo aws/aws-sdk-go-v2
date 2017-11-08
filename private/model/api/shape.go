@@ -170,7 +170,6 @@ func (s *ShapeRef) UseIndirection() bool {
 		return false
 	}
 
-	// TODO: Re-enable this later
 	if s.Shape.IsEnum() {
 		return false
 	}
@@ -242,19 +241,26 @@ func (ref *ShapeRef) GoTypeWithPkgName() string {
 	return ref.Shape.GoTypeWithPkgName()
 }
 
+// Get's the package name of the specific shape
+func getPkgName(s *Shape) string {
+	pkg := s.resolvePkg
+	if pkg != "" {
+		s.API.imports[pkg] = true
+		pkg = path.Base(pkg)
+	} else {
+		pkg = s.API.PackageName()
+	}
+
+	return pkg
+}
+
 // Returns a string version of the Shape's type.
 // If withPkgName is true, the package name will be added as a prefix
 func goType(s *Shape, withPkgName bool) string {
 	if s.IsEnum() {
 		name := s.EnumType()
 		if withPkgName {
-			pkg := s.resolvePkg
-			if pkg != "" {
-				s.API.imports[pkg] = true
-				pkg = path.Base(pkg)
-			} else {
-				pkg = s.API.PackageName()
-			}
+			pkg := getPkgName(s)
 			name = fmt.Sprintf("%s.%s", pkg, name)
 		}
 		return name
@@ -263,13 +269,7 @@ func goType(s *Shape, withPkgName bool) string {
 	switch s.Type {
 	case "structure":
 		if withPkgName || s.resolvePkg != "" {
-			pkg := s.resolvePkg
-			if pkg != "" {
-				s.API.imports[pkg] = true
-				pkg = path.Base(pkg)
-			} else {
-				pkg = s.API.PackageName()
-			}
+			pkg := getPkgName(s)
 			return fmt.Sprintf("*%s.%s", pkg, s.ShapeName)
 		}
 		return "*" + s.ShapeName
@@ -510,7 +510,7 @@ func (s *Shape) EnumName(n int) string {
 }
 
 func (s *Shape) EnumType() string {
-	return strings.ToUpper(s.ShapeName[:1]) + s.ShapeName[1:]
+	return strings.Title(s.ShapeName)
 }
 
 // NestedShape returns the shape pointer value for the shape which is nested

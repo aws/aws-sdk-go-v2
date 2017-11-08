@@ -13351,7 +13351,7 @@ type AccessKey struct {
 	// while Inactive means it is not.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The name of the IAM user that the access key is associated with.
 	//
@@ -13388,8 +13388,8 @@ func (s *AccessKey) SetSecretAccessKey(v string) *AccessKey {
 }
 
 // SetStatus sets the Status field's value.
-func (s *AccessKey) SetStatus(v string) *AccessKey {
-	s.Status = &v
+func (s *AccessKey) SetStatus(v StatusType) *AccessKey {
+	s.Status = v
 	return s
 }
 
@@ -13493,7 +13493,7 @@ type AccessKeyMetadata struct {
 
 	// The status of the access key. Active means the key is valid for API calls;
 	// Inactive means it is not.
-	Status *string `type:"string" enum:"statusType"`
+	Status StatusType `type:"string"`
 
 	// The name of the IAM user that the key is associated with.
 	UserName *string `min:"1" type:"string"`
@@ -13522,8 +13522,8 @@ func (s *AccessKeyMetadata) SetCreateDate(v time.Time) *AccessKeyMetadata {
 }
 
 // SetStatus sets the Status field's value.
-func (s *AccessKeyMetadata) SetStatus(v string) *AccessKeyMetadata {
-	s.Status = &v
+func (s *AccessKeyMetadata) SetStatus(v StatusType) *AccessKeyMetadata {
+	s.Status = v
 	return s
 }
 
@@ -13564,12 +13564,14 @@ func (s AddClientIDToOpenIDConnectProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddClientIDToOpenIDConnectProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddClientIDToOpenIDConnectProviderInput"}
+
 	if s.ClientID == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientID"))
 	}
 	if s.ClientID != nil && len(*s.ClientID) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientID", 1))
 	}
+
 	if s.OpenIDConnectProviderArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
 	}
@@ -13646,12 +13648,14 @@ func (s AddRoleToInstanceProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddRoleToInstanceProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddRoleToInstanceProfileInput"}
+
 	if s.InstanceProfileName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileName"))
 	}
 	if s.InstanceProfileName != nil && len(*s.InstanceProfileName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InstanceProfileName", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -13728,12 +13732,14 @@ func (s AddUserToGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddUserToGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddUserToGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -13810,12 +13816,14 @@ func (s AttachGroupPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachGroupPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachGroupPolicyInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
@@ -13892,12 +13900,14 @@ func (s AttachRolePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachRolePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachRolePolicyInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
 	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -13974,12 +13984,14 @@ func (s AttachUserPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachUserPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachUserPolicyInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
 	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -14105,12 +14117,14 @@ func (s ChangePasswordInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangePasswordInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ChangePasswordInput"}
+
 	if s.NewPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewPassword"))
 	}
 	if s.NewPassword != nil && len(*s.NewPassword) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NewPassword", 1))
 	}
+
 	if s.OldPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OldPassword"))
 	}
@@ -14168,7 +14182,7 @@ type ContextEntry struct {
 
 	// The data type of the value (or values) specified in the ContextKeyValues
 	// parameter.
-	ContextKeyType *string `type:"string" enum:"ContextKeyTypeEnum"`
+	ContextKeyType ContextKeyTypeEnum `type:"string"`
 
 	// The value (or values, if the condition context key supports multiple values)
 	// to provide to the simulation for use when the key is referenced by a Condition
@@ -14206,8 +14220,8 @@ func (s *ContextEntry) SetContextKeyName(v string) *ContextEntry {
 }
 
 // SetContextKeyType sets the ContextKeyType field's value.
-func (s *ContextEntry) SetContextKeyType(v string) *ContextEntry {
-	s.ContextKeyType = &v
+func (s *ContextEntry) SetContextKeyType(v ContextKeyTypeEnum) *ContextEntry {
+	s.ContextKeyType = v
 	return s
 }
 
@@ -14313,6 +14327,7 @@ func (s CreateAccountAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAccountAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAccountAliasInput"}
+
 	if s.AccountAlias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountAlias"))
 	}
@@ -14390,6 +14405,7 @@ func (s CreateGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -14486,6 +14502,7 @@ func (s CreateInstanceProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstanceProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceProfileInput"}
+
 	if s.InstanceProfileName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileName"))
 	}
@@ -14586,12 +14603,14 @@ func (s CreateLoginProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoginProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLoginProfileInput"}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -14717,9 +14736,11 @@ func (s CreateOpenIDConnectProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateOpenIDConnectProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateOpenIDConnectProviderInput"}
+
 	if s.ThumbprintList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThumbprintList"))
 	}
+
 	if s.Url == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Url"))
 	}
@@ -14841,12 +14862,14 @@ func (s CreatePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyInput"}
+
 	if s.PolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
 	if s.PolicyDocument != nil && len(*s.PolicyDocument) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyDocument", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -14961,12 +14984,14 @@ func (s CreatePolicyVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePolicyVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyVersionInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
 	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
 	}
+
 	if s.PolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
@@ -15083,6 +15108,7 @@ func (s CreateRoleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRoleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRoleInput"}
+
 	if s.AssumeRolePolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssumeRolePolicyDocument"))
 	}
@@ -15092,6 +15118,7 @@ func (s *CreateRoleInput) Validate() error {
 	if s.Path != nil && len(*s.Path) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -15195,12 +15222,14 @@ func (s CreateSAMLProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSAMLProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSAMLProviderInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.SAMLMetadataDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SAMLMetadataDocument"))
 	}
@@ -15285,6 +15314,7 @@ func (s CreateServiceLinkedRoleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateServiceLinkedRoleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateServiceLinkedRoleInput"}
+
 	if s.AWSServiceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AWSServiceName"))
 	}
@@ -15379,9 +15409,11 @@ func (s CreateServiceSpecificCredentialInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateServiceSpecificCredentialInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateServiceSpecificCredentialInput"}
+
 	if s.ServiceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -15482,6 +15514,7 @@ func (s *CreateUserInput) Validate() error {
 	if s.Path != nil && len(*s.Path) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -15577,6 +15610,7 @@ func (s *CreateVirtualMFADeviceInput) Validate() error {
 	if s.Path != nil && len(*s.Path) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
 	}
+
 	if s.VirtualMFADeviceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualMFADeviceName"))
 	}
@@ -15666,12 +15700,14 @@ func (s DeactivateMFADeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeactivateMFADeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeactivateMFADeviceInput"}
+
 	if s.SerialNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SerialNumber"))
 	}
 	if s.SerialNumber != nil && len(*s.SerialNumber) < 9 {
 		invalidParams.Add(aws.NewErrParamMinLen("SerialNumber", 9))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -15747,6 +15783,7 @@ func (s DeleteAccessKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAccessKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAccessKeyInput"}
+
 	if s.AccessKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessKeyId"))
 	}
@@ -15818,6 +15855,7 @@ func (s DeleteAccountAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAccountAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAccountAliasInput"}
+
 	if s.AccountAlias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountAlias"))
 	}
@@ -15909,6 +15947,7 @@ func (s DeleteGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -15980,12 +16019,14 @@ func (s DeleteGroupPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGroupPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteGroupPolicyInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -16053,6 +16094,7 @@ func (s DeleteInstanceProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInstanceProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceProfileInput"}
+
 	if s.InstanceProfileName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileName"))
 	}
@@ -16114,6 +16156,7 @@ func (s DeleteLoginProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoginProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoginProfileInput"}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -16173,6 +16216,7 @@ func (s DeleteOpenIDConnectProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteOpenIDConnectProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteOpenIDConnectProviderInput"}
+
 	if s.OpenIDConnectProviderArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
 	}
@@ -16234,6 +16278,7 @@ func (s DeletePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
@@ -16310,12 +16355,14 @@ func (s DeletePolicyVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePolicyVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyVersionInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
 	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
 	}
+
 	if s.VersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
@@ -16380,6 +16427,7 @@ func (s DeleteRoleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRoleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRoleInput"}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -16451,12 +16499,14 @@ func (s DeleteRolePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRolePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRolePolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -16520,6 +16570,7 @@ func (s DeleteSAMLProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSAMLProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSAMLProviderInput"}
+
 	if s.SAMLProviderArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SAMLProviderArn"))
 	}
@@ -16590,12 +16641,14 @@ func (s DeleteSSHPublicKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSSHPublicKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSSHPublicKeyInput"}
+
 	if s.SSHPublicKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SSHPublicKeyId"))
 	}
 	if s.SSHPublicKeyId != nil && len(*s.SSHPublicKeyId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("SSHPublicKeyId", 20))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -16663,6 +16716,7 @@ func (s DeleteServerCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteServerCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteServerCertificateInput"}
+
 	if s.ServerCertificateName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerCertificateName"))
 	}
@@ -16720,6 +16774,7 @@ func (s DeleteServiceLinkedRoleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteServiceLinkedRoleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceLinkedRoleInput"}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -16803,6 +16858,7 @@ func (s DeleteServiceSpecificCredentialInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteServiceSpecificCredentialInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceSpecificCredentialInput"}
+
 	if s.ServiceSpecificCredentialId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceSpecificCredentialId"))
 	}
@@ -16880,6 +16936,7 @@ func (s DeleteSigningCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSigningCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSigningCertificateInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
@@ -16950,6 +17007,7 @@ func (s DeleteUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -17021,12 +17079,14 @@ func (s DeleteUserPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -17095,6 +17155,7 @@ func (s DeleteVirtualMFADeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVirtualMFADeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVirtualMFADeviceInput"}
+
 	if s.SerialNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SerialNumber"))
 	}
@@ -17207,12 +17268,14 @@ func (s DetachGroupPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachGroupPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachGroupPolicyInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
@@ -17289,12 +17352,14 @@ func (s DetachRolePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachRolePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachRolePolicyInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
 	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -17371,12 +17436,14 @@ func (s DetachUserPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachUserPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachUserPolicyInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
 	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -17482,24 +17549,28 @@ func (s EnableMFADeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableMFADeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableMFADeviceInput"}
+
 	if s.AuthenticationCode1 == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthenticationCode1"))
 	}
 	if s.AuthenticationCode1 != nil && len(*s.AuthenticationCode1) < 6 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationCode1", 6))
 	}
+
 	if s.AuthenticationCode2 == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthenticationCode2"))
 	}
 	if s.AuthenticationCode2 != nil && len(*s.AuthenticationCode2) < 6 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationCode2", 6))
 	}
+
 	if s.SerialNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SerialNumber"))
 	}
 	if s.SerialNumber != nil && len(*s.SerialNumber) < 9 {
 		invalidParams.Add(aws.NewErrParamMinLen("SerialNumber", 9))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -17568,7 +17639,7 @@ type EvaluationResult struct {
 	// The result of the simulation.
 	//
 	// EvalDecision is a required field
-	EvalDecision *string `type:"string" required:"true" enum:"PolicyEvaluationDecisionType"`
+	EvalDecision PolicyEvaluationDecisionType `type:"string" required:"true"`
 
 	// Additional details about the results of the evaluation decision. When there
 	// are both IAM policies and resource policies, this parameter explains how
@@ -17576,7 +17647,7 @@ type EvaluationResult struct {
 	// cross-account access to a resource, both the resource-based policy and the
 	// caller's IAM policy must grant access. See How IAM Roles Differ from Resource-based
 	// Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html)
-	EvalDecisionDetails map[string]*string `type:"map"`
+	EvalDecisionDetails map[string]PolicyEvaluationDecisionType `type:"map"`
 
 	// The ARN of the resource that the indicated API action was tested on.
 	EvalResourceName *string `min:"1" type:"string"`
@@ -17624,13 +17695,13 @@ func (s *EvaluationResult) SetEvalActionName(v string) *EvaluationResult {
 }
 
 // SetEvalDecision sets the EvalDecision field's value.
-func (s *EvaluationResult) SetEvalDecision(v string) *EvaluationResult {
-	s.EvalDecision = &v
+func (s *EvaluationResult) SetEvalDecision(v PolicyEvaluationDecisionType) *EvaluationResult {
+	s.EvalDecision = v
 	return s
 }
 
 // SetEvalDecisionDetails sets the EvalDecisionDetails field's value.
-func (s *EvaluationResult) SetEvalDecisionDetails(v map[string]*string) *EvaluationResult {
+func (s *EvaluationResult) SetEvalDecisionDetails(v map[string]PolicyEvaluationDecisionType) *EvaluationResult {
 	s.EvalDecisionDetails = v
 	return s
 }
@@ -17689,7 +17760,7 @@ type GenerateCredentialReportOutput struct {
 	Description *string `type:"string"`
 
 	// Information about the state of the credential report.
-	State *string `type:"string" enum:"ReportStateType"`
+	State ReportStateType `type:"string"`
 }
 
 // String returns the string representation
@@ -17709,8 +17780,8 @@ func (s *GenerateCredentialReportOutput) SetDescription(v string) *GenerateCrede
 }
 
 // SetState sets the State field's value.
-func (s *GenerateCredentialReportOutput) SetState(v string) *GenerateCredentialReportOutput {
-	s.State = &v
+func (s *GenerateCredentialReportOutput) SetState(v ReportStateType) *GenerateCredentialReportOutput {
+	s.State = v
 	return s
 }
 
@@ -17741,6 +17812,7 @@ func (s GetAccessKeyLastUsedInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAccessKeyLastUsedInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAccessKeyLastUsedInput"}
+
 	if s.AccessKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessKeyId"))
 	}
@@ -17807,7 +17879,7 @@ type GetAccountAuthorizationDetailsInput struct {
 	// The format for this parameter is a comma-separated (if more than one) list
 	// of strings. Each string value in the list must be one of the valid values
 	// listed below.
-	Filter []*string `type:"list"`
+	Filter []EntityType `type:"list"`
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
@@ -17854,7 +17926,7 @@ func (s *GetAccountAuthorizationDetailsInput) Validate() error {
 }
 
 // SetFilter sets the Filter field's value.
-func (s *GetAccountAuthorizationDetailsInput) SetFilter(v []*string) *GetAccountAuthorizationDetailsInput {
+func (s *GetAccountAuthorizationDetailsInput) SetFilter(v []EntityType) *GetAccountAuthorizationDetailsInput {
 	s.Filter = v
 	return s
 }
@@ -18062,6 +18134,7 @@ func (s GetContextKeysForCustomPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetContextKeysForCustomPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetContextKeysForCustomPolicyInput"}
+
 	if s.PolicyInputList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyInputList"))
 	}
@@ -18148,6 +18221,7 @@ func (s GetContextKeysForPrincipalPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetContextKeysForPrincipalPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetContextKeysForPrincipalPolicyInput"}
+
 	if s.PolicySourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicySourceArn"))
 	}
@@ -18203,7 +18277,7 @@ type GetCredentialReportOutput struct {
 	GeneratedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The format (MIME type) of the credential report.
-	ReportFormat *string `type:"string" enum:"ReportFormatType"`
+	ReportFormat ReportFormatType `type:"string"`
 }
 
 // String returns the string representation
@@ -18229,8 +18303,8 @@ func (s *GetCredentialReportOutput) SetGeneratedTime(v time.Time) *GetCredential
 }
 
 // SetReportFormat sets the ReportFormat field's value.
-func (s *GetCredentialReportOutput) SetReportFormat(v string) *GetCredentialReportOutput {
-	s.ReportFormat = &v
+func (s *GetCredentialReportOutput) SetReportFormat(v ReportFormatType) *GetCredentialReportOutput {
+	s.ReportFormat = v
 	return s
 }
 
@@ -18278,6 +18352,7 @@ func (s GetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -18413,12 +18488,14 @@ func (s GetGroupPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGroupPolicyInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -18520,6 +18597,7 @@ func (s GetInstanceProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceProfileInput"}
+
 	if s.InstanceProfileName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileName"))
 	}
@@ -18593,6 +18671,7 @@ func (s GetLoginProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetLoginProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetLoginProfileInput"}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -18668,6 +18747,7 @@ func (s GetOpenIDConnectProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOpenIDConnectProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetOpenIDConnectProviderInput"}
+
 	if s.OpenIDConnectProviderArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
 	}
@@ -18771,6 +18851,7 @@ func (s GetPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
@@ -18853,12 +18934,14 @@ func (s GetPolicyVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPolicyVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyVersionInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
 	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
 	}
+
 	if s.VersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
@@ -18933,6 +19016,7 @@ func (s GetRoleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRoleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRoleInput"}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -19015,12 +19099,14 @@ func (s GetRolePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRolePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRolePolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -19123,6 +19209,7 @@ func (s GetSAMLProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSAMLProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSAMLProviderInput"}
+
 	if s.SAMLProviderArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SAMLProviderArn"))
 	}
@@ -19194,7 +19281,7 @@ type GetSSHPublicKeyInput struct {
 	// PEM format, use PEM.
 	//
 	// Encoding is a required field
-	Encoding *string `type:"string" required:"true" enum:"encodingType"`
+	Encoding EncodingType `type:"string" required:"true"`
 
 	// The unique identifier for the SSH public key.
 	//
@@ -19228,15 +19315,17 @@ func (s GetSSHPublicKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSSHPublicKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSSHPublicKeyInput"}
-	if s.Encoding == nil {
+	if len(s.Encoding) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Encoding"))
 	}
+
 	if s.SSHPublicKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SSHPublicKeyId"))
 	}
 	if s.SSHPublicKeyId != nil && len(*s.SSHPublicKeyId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("SSHPublicKeyId", 20))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -19251,8 +19340,8 @@ func (s *GetSSHPublicKeyInput) Validate() error {
 }
 
 // SetEncoding sets the Encoding field's value.
-func (s *GetSSHPublicKeyInput) SetEncoding(v string) *GetSSHPublicKeyInput {
-	s.Encoding = &v
+func (s *GetSSHPublicKeyInput) SetEncoding(v EncodingType) *GetSSHPublicKeyInput {
+	s.Encoding = v
 	return s
 }
 
@@ -19320,6 +19409,7 @@ func (s GetServerCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetServerCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetServerCertificateInput"}
+
 	if s.ServerCertificateName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerCertificateName"))
 	}
@@ -19390,6 +19480,7 @@ func (s GetServiceLinkedRoleDeletionStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetServiceLinkedRoleDeletionStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetServiceLinkedRoleDeletionStatusInput"}
+
 	if s.DeletionTaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeletionTaskId"))
 	}
@@ -19419,7 +19510,7 @@ type GetServiceLinkedRoleDeletionStatusOutput struct {
 	// The status of the deletion.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"DeletionTaskStatusType"`
+	Status DeletionTaskStatusType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -19439,8 +19530,8 @@ func (s *GetServiceLinkedRoleDeletionStatusOutput) SetReason(v *DeletionTaskFail
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetServiceLinkedRoleDeletionStatusOutput) SetStatus(v string) *GetServiceLinkedRoleDeletionStatusOutput {
-	s.Status = &v
+func (s *GetServiceLinkedRoleDeletionStatusOutput) SetStatus(v DeletionTaskStatusType) *GetServiceLinkedRoleDeletionStatusOutput {
+	s.Status = v
 	return s
 }
 
@@ -19549,12 +19640,14 @@ func (s GetUserPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUserPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetUserPolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -20199,6 +20292,7 @@ func (s ListAttachedGroupPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAttachedGroupPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAttachedGroupPoliciesInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -20351,6 +20445,7 @@ func (s *ListAttachedRolePoliciesInput) Validate() error {
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -20497,6 +20592,7 @@ func (s *ListAttachedUserPoliciesInput) Validate() error {
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -20593,7 +20689,7 @@ type ListEntitiesForPolicyInput struct {
 	// to the specified policy are returned. This parameter is optional. If it is
 	// not included, all attached entities (users, groups, and roles) are returned.
 	// The argument for this parameter must be one of the valid values listed below.
-	EntityFilter *string `type:"string" enum:"EntityType"`
+	EntityFilter EntityType `type:"string"`
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
@@ -20654,6 +20750,7 @@ func (s *ListEntitiesForPolicyInput) Validate() error {
 	if s.PathPrefix != nil && len(*s.PathPrefix) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PathPrefix", 1))
 	}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
@@ -20668,8 +20765,8 @@ func (s *ListEntitiesForPolicyInput) Validate() error {
 }
 
 // SetEntityFilter sets the EntityFilter field's value.
-func (s *ListEntitiesForPolicyInput) SetEntityFilter(v string) *ListEntitiesForPolicyInput {
-	s.EntityFilter = &v
+func (s *ListEntitiesForPolicyInput) SetEntityFilter(v EntityType) *ListEntitiesForPolicyInput {
+	s.EntityFilter = v
 	return s
 }
 
@@ -20808,6 +20905,7 @@ func (s ListGroupPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGroupPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListGroupPoliciesInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -20950,6 +21048,7 @@ func (s *ListGroupsForUserInput) Validate() error {
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -21213,6 +21312,7 @@ func (s *ListInstanceProfilesForRoleInput) Validate() error {
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -21638,7 +21738,7 @@ type ListPoliciesInput struct {
 	//
 	// This parameter is optional. If it is not included, or if it is set to All,
 	// all policies are returned.
-	Scope *string `type:"string" enum:"policyScopeType"`
+	Scope PolicyScopeType `type:"string"`
 }
 
 // String returns the string representation
@@ -21692,8 +21792,8 @@ func (s *ListPoliciesInput) SetPathPrefix(v string) *ListPoliciesInput {
 }
 
 // SetScope sets the Scope field's value.
-func (s *ListPoliciesInput) SetScope(v string) *ListPoliciesInput {
-	s.Scope = &v
+func (s *ListPoliciesInput) SetScope(v PolicyScopeType) *ListPoliciesInput {
+	s.Scope = v
 	return s
 }
 
@@ -21796,6 +21896,7 @@ func (s *ListPolicyVersionsInput) Validate() error {
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
@@ -21930,6 +22031,7 @@ func (s *ListRolePoliciesInput) Validate() error {
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -22696,6 +22798,7 @@ func (s *ListUserPoliciesInput) Validate() error {
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -22917,7 +23020,7 @@ type ListVirtualMFADevicesInput struct {
 	// The status (Unassigned or Assigned) of the devices to list. If you do not
 	// specify an AssignmentStatus, the action defaults to Any which lists both
 	// assigned and unassigned virtual MFA devices.
-	AssignmentStatus *string `type:"string" enum:"assignmentStatusType"`
+	AssignmentStatus AssignmentStatusType `type:"string"`
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
@@ -22964,8 +23067,8 @@ func (s *ListVirtualMFADevicesInput) Validate() error {
 }
 
 // SetAssignmentStatus sets the AssignmentStatus field's value.
-func (s *ListVirtualMFADevicesInput) SetAssignmentStatus(v string) *ListVirtualMFADevicesInput {
-	s.AssignmentStatus = &v
+func (s *ListVirtualMFADevicesInput) SetAssignmentStatus(v AssignmentStatusType) *ListVirtualMFADevicesInput {
+	s.AssignmentStatus = v
 	return s
 }
 
@@ -23904,18 +24007,21 @@ func (s PutGroupPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutGroupPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutGroupPolicyInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.PolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
 	if s.PolicyDocument != nil && len(*s.PolicyDocument) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyDocument", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -24010,18 +24116,21 @@ func (s PutRolePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRolePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRolePolicyInput"}
+
 	if s.PolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
 	if s.PolicyDocument != nil && len(*s.PolicyDocument) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyDocument", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -24116,18 +24225,21 @@ func (s PutUserPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutUserPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutUserPolicyInput"}
+
 	if s.PolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
 	if s.PolicyDocument != nil && len(*s.PolicyDocument) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyDocument", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -24209,12 +24321,14 @@ func (s RemoveClientIDFromOpenIDConnectProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveClientIDFromOpenIDConnectProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveClientIDFromOpenIDConnectProviderInput"}
+
 	if s.ClientID == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientID"))
 	}
 	if s.ClientID != nil && len(*s.ClientID) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientID", 1))
 	}
+
 	if s.OpenIDConnectProviderArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
 	}
@@ -24291,12 +24405,14 @@ func (s RemoveRoleFromInstanceProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveRoleFromInstanceProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveRoleFromInstanceProfileInput"}
+
 	if s.InstanceProfileName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileName"))
 	}
 	if s.InstanceProfileName != nil && len(*s.InstanceProfileName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InstanceProfileName", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -24373,12 +24489,14 @@ func (s RemoveUserFromGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveUserFromGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveUserFromGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -24455,6 +24573,7 @@ func (s ResetServiceSpecificCredentialInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetServiceSpecificCredentialInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetServiceSpecificCredentialInput"}
+
 	if s.ServiceSpecificCredentialId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceSpecificCredentialId"))
 	}
@@ -24524,13 +24643,13 @@ type ResourceSpecificResult struct {
 	// each set of policies contributes to the final evaluation decision. When simulating
 	// cross-account access to a resource, both the resource-based policy and the
 	// caller's IAM policy must grant access.
-	EvalDecisionDetails map[string]*string `type:"map"`
+	EvalDecisionDetails map[string]PolicyEvaluationDecisionType `type:"map"`
 
 	// The result of the simulation of the simulated API action on the resource
 	// specified in EvalResourceName.
 	//
 	// EvalResourceDecision is a required field
-	EvalResourceDecision *string `type:"string" required:"true" enum:"PolicyEvaluationDecisionType"`
+	EvalResourceDecision PolicyEvaluationDecisionType `type:"string" required:"true"`
 
 	// The name of the simulated resource, in Amazon Resource Name (ARN) format.
 	//
@@ -24566,14 +24685,14 @@ func (s ResourceSpecificResult) GoString() string {
 }
 
 // SetEvalDecisionDetails sets the EvalDecisionDetails field's value.
-func (s *ResourceSpecificResult) SetEvalDecisionDetails(v map[string]*string) *ResourceSpecificResult {
+func (s *ResourceSpecificResult) SetEvalDecisionDetails(v map[string]PolicyEvaluationDecisionType) *ResourceSpecificResult {
 	s.EvalDecisionDetails = v
 	return s
 }
 
 // SetEvalResourceDecision sets the EvalResourceDecision field's value.
-func (s *ResourceSpecificResult) SetEvalResourceDecision(v string) *ResourceSpecificResult {
-	s.EvalResourceDecision = &v
+func (s *ResourceSpecificResult) SetEvalResourceDecision(v PolicyEvaluationDecisionType) *ResourceSpecificResult {
+	s.EvalResourceDecision = v
 	return s
 }
 
@@ -24645,24 +24764,28 @@ func (s ResyncMFADeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResyncMFADeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResyncMFADeviceInput"}
+
 	if s.AuthenticationCode1 == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthenticationCode1"))
 	}
 	if s.AuthenticationCode1 != nil && len(*s.AuthenticationCode1) < 6 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationCode1", 6))
 	}
+
 	if s.AuthenticationCode2 == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthenticationCode2"))
 	}
 	if s.AuthenticationCode2 != nil && len(*s.AuthenticationCode2) < 6 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationCode2", 6))
 	}
+
 	if s.SerialNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SerialNumber"))
 	}
 	if s.SerialNumber != nil && len(*s.SerialNumber) < 9 {
 		invalidParams.Add(aws.NewErrParamMinLen("SerialNumber", 9))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -25030,7 +25153,7 @@ type SSHPublicKey struct {
 	// with an AWS CodeCommit repository. Inactive means the key cannot be used.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the SSH public key was uploaded.
@@ -25071,8 +25194,8 @@ func (s *SSHPublicKey) SetSSHPublicKeyId(v string) *SSHPublicKey {
 }
 
 // SetStatus sets the Status field's value.
-func (s *SSHPublicKey) SetStatus(v string) *SSHPublicKey {
-	s.Status = &v
+func (s *SSHPublicKey) SetStatus(v StatusType) *SSHPublicKey {
+	s.Status = v
 	return s
 }
 
@@ -25104,7 +25227,7 @@ type SSHPublicKeyMetadata struct {
 	// with an AWS CodeCommit repository. Inactive means the key cannot be used.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the SSH public key was uploaded.
@@ -25135,8 +25258,8 @@ func (s *SSHPublicKeyMetadata) SetSSHPublicKeyId(v string) *SSHPublicKeyMetadata
 }
 
 // SetStatus sets the Status field's value.
-func (s *SSHPublicKeyMetadata) SetStatus(v string) *SSHPublicKeyMetadata {
-	s.Status = &v
+func (s *SSHPublicKeyMetadata) SetStatus(v StatusType) *SSHPublicKeyMetadata {
+	s.Status = v
 	return s
 }
 
@@ -25330,7 +25453,7 @@ type ServiceSpecificCredential struct {
 	// for API calls, while Inactive means it is not.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The name of the IAM user associated with the service-specific credential.
 	//
@@ -25379,8 +25502,8 @@ func (s *ServiceSpecificCredential) SetServiceUserName(v string) *ServiceSpecifi
 }
 
 // SetStatus sets the Status field's value.
-func (s *ServiceSpecificCredential) SetStatus(v string) *ServiceSpecificCredential {
-	s.Status = &v
+func (s *ServiceSpecificCredential) SetStatus(v StatusType) *ServiceSpecificCredential {
+	s.Status = v
 	return s
 }
 
@@ -25420,7 +25543,7 @@ type ServiceSpecificCredentialMetadata struct {
 	// for API calls, while Inactive means it is not.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The name of the IAM user associated with the service-specific credential.
 	//
@@ -25463,8 +25586,8 @@ func (s *ServiceSpecificCredentialMetadata) SetServiceUserName(v string) *Servic
 }
 
 // SetStatus sets the Status field's value.
-func (s *ServiceSpecificCredentialMetadata) SetStatus(v string) *ServiceSpecificCredentialMetadata {
-	s.Status = &v
+func (s *ServiceSpecificCredentialMetadata) SetStatus(v StatusType) *ServiceSpecificCredentialMetadata {
+	s.Status = v
 	return s
 }
 
@@ -25511,12 +25634,14 @@ func (s SetDefaultPolicyVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetDefaultPolicyVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetDefaultPolicyVersionInput"}
+
 	if s.PolicyArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyArn"))
 	}
 	if s.PolicyArn != nil && len(*s.PolicyArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyArn", 20))
 	}
+
 	if s.VersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
@@ -25576,7 +25701,7 @@ type SigningCertificate struct {
 	// API calls, while Inactive means it is not.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The date when the signing certificate was uploaded.
 	UploadDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -25610,8 +25735,8 @@ func (s *SigningCertificate) SetCertificateId(v string) *SigningCertificate {
 }
 
 // SetStatus sets the Status field's value.
-func (s *SigningCertificate) SetStatus(v string) *SigningCertificate {
-	s.Status = &v
+func (s *SigningCertificate) SetStatus(v StatusType) *SigningCertificate {
+	s.Status = v
 	return s
 }
 
@@ -25783,6 +25908,7 @@ func (s SimulateCustomPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SimulateCustomPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SimulateCustomPolicyInput"}
+
 	if s.ActionNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionNames"))
 	}
@@ -25795,6 +25921,7 @@ func (s *SimulateCustomPolicyInput) Validate() error {
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.PolicyInputList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyInputList"))
 	}
@@ -26104,6 +26231,7 @@ func (s SimulatePrincipalPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SimulatePrincipalPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SimulatePrincipalPolicyInput"}
+
 	if s.ActionNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionNames"))
 	}
@@ -26116,6 +26244,7 @@ func (s *SimulatePrincipalPolicyInput) Validate() error {
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.PolicySourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicySourceArn"))
 	}
@@ -26230,7 +26359,7 @@ type Statement struct {
 	SourcePolicyId *string `type:"string"`
 
 	// The type of the policy.
-	SourcePolicyType *string `type:"string" enum:"PolicySourceType"`
+	SourcePolicyType PolicySourceType `type:"string"`
 
 	// The row and column of the beginning of the Statement in an IAM policy.
 	StartPosition *Position `type:"structure"`
@@ -26259,8 +26388,8 @@ func (s *Statement) SetSourcePolicyId(v string) *Statement {
 }
 
 // SetSourcePolicyType sets the SourcePolicyType field's value.
-func (s *Statement) SetSourcePolicyType(v string) *Statement {
-	s.SourcePolicyType = &v
+func (s *Statement) SetSourcePolicyType(v PolicySourceType) *Statement {
+	s.SourcePolicyType = v
 	return s
 }
 
@@ -26288,7 +26417,7 @@ type UpdateAccessKeyInput struct {
 	// be used.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The name of the user whose key you want to update.
 	//
@@ -26311,13 +26440,14 @@ func (s UpdateAccessKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAccessKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAccessKeyInput"}
+
 	if s.AccessKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessKeyId"))
 	}
 	if s.AccessKeyId != nil && len(*s.AccessKeyId) < 16 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccessKeyId", 16))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.UserName != nil && len(*s.UserName) < 1 {
@@ -26337,8 +26467,8 @@ func (s *UpdateAccessKeyInput) SetAccessKeyId(v string) *UpdateAccessKeyInput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *UpdateAccessKeyInput) SetStatus(v string) *UpdateAccessKeyInput {
-	s.Status = &v
+func (s *UpdateAccessKeyInput) SetStatus(v StatusType) *UpdateAccessKeyInput {
+	s.Status = v
 	return s
 }
 
@@ -26562,12 +26692,14 @@ func (s UpdateAssumeRolePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAssumeRolePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAssumeRolePolicyInput"}
+
 	if s.PolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
 	if s.PolicyDocument != nil && len(*s.PolicyDocument) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyDocument", 1))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -26652,6 +26784,7 @@ func (s UpdateGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -26750,6 +26883,7 @@ func (s *UpdateLoginProfileInput) Validate() error {
 	if s.Password != nil && len(*s.Password) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -26831,12 +26965,14 @@ func (s UpdateOpenIDConnectProviderThumbprintInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateOpenIDConnectProviderThumbprintInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateOpenIDConnectProviderThumbprintInput"}
+
 	if s.OpenIDConnectProviderArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OpenIDConnectProviderArn"))
 	}
 	if s.OpenIDConnectProviderArn != nil && len(*s.OpenIDConnectProviderArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("OpenIDConnectProviderArn", 20))
 	}
+
 	if s.ThumbprintList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThumbprintList"))
 	}
@@ -26902,9 +27038,11 @@ func (s UpdateRoleDescriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRoleDescriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRoleDescriptionInput"}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.RoleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
 	}
@@ -26990,12 +27128,14 @@ func (s UpdateSAMLProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSAMLProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSAMLProviderInput"}
+
 	if s.SAMLMetadataDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SAMLMetadataDocument"))
 	}
 	if s.SAMLMetadataDocument != nil && len(*s.SAMLMetadataDocument) < 1000 {
 		invalidParams.Add(aws.NewErrParamMinLen("SAMLMetadataDocument", 1000))
 	}
+
 	if s.SAMLProviderArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SAMLProviderArn"))
 	}
@@ -27064,7 +27204,7 @@ type UpdateSSHPublicKeyInput struct {
 	// key cannot be used.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The name of the IAM user associated with the SSH public key.
 	//
@@ -27089,15 +27229,17 @@ func (s UpdateSSHPublicKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSSHPublicKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSSHPublicKeyInput"}
+
 	if s.SSHPublicKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SSHPublicKeyId"))
 	}
 	if s.SSHPublicKeyId != nil && len(*s.SSHPublicKeyId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("SSHPublicKeyId", 20))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -27118,8 +27260,8 @@ func (s *UpdateSSHPublicKeyInput) SetSSHPublicKeyId(v string) *UpdateSSHPublicKe
 }
 
 // SetStatus sets the Status field's value.
-func (s *UpdateSSHPublicKeyInput) SetStatus(v string) *UpdateSSHPublicKeyInput {
-	s.Status = &v
+func (s *UpdateSSHPublicKeyInput) SetStatus(v StatusType) *UpdateSSHPublicKeyInput {
+	s.Status = v
 	return s
 }
 
@@ -27196,6 +27338,7 @@ func (s *UpdateServerCertificateInput) Validate() error {
 	if s.NewServerCertificateName != nil && len(*s.NewServerCertificateName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NewServerCertificateName", 1))
 	}
+
 	if s.ServerCertificateName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerCertificateName"))
 	}
@@ -27258,7 +27401,7 @@ type UpdateServiceSpecificCredentialInput struct {
 	// The status to be assigned to the service-specific credential.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The name of the IAM user associated with the service-specific credential.
 	// If you do not specify this value, then the operation assumes the user whose
@@ -27283,13 +27426,14 @@ func (s UpdateServiceSpecificCredentialInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateServiceSpecificCredentialInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceSpecificCredentialInput"}
+
 	if s.ServiceSpecificCredentialId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceSpecificCredentialId"))
 	}
 	if s.ServiceSpecificCredentialId != nil && len(*s.ServiceSpecificCredentialId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("ServiceSpecificCredentialId", 20))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.UserName != nil && len(*s.UserName) < 1 {
@@ -27309,8 +27453,8 @@ func (s *UpdateServiceSpecificCredentialInput) SetServiceSpecificCredentialId(v 
 }
 
 // SetStatus sets the Status field's value.
-func (s *UpdateServiceSpecificCredentialInput) SetStatus(v string) *UpdateServiceSpecificCredentialInput {
-	s.Status = &v
+func (s *UpdateServiceSpecificCredentialInput) SetStatus(v StatusType) *UpdateServiceSpecificCredentialInput {
+	s.Status = v
 	return s
 }
 
@@ -27353,7 +27497,7 @@ type UpdateSigningCertificateInput struct {
 	// be used.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"statusType"`
+	Status StatusType `type:"string" required:"true"`
 
 	// The name of the IAM user the signing certificate belongs to.
 	//
@@ -27376,13 +27520,14 @@ func (s UpdateSigningCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSigningCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSigningCertificateInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 24 {
 		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 24))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.UserName != nil && len(*s.UserName) < 1 {
@@ -27402,8 +27547,8 @@ func (s *UpdateSigningCertificateInput) SetCertificateId(v string) *UpdateSignin
 }
 
 // SetStatus sets the Status field's value.
-func (s *UpdateSigningCertificateInput) SetStatus(v string) *UpdateSigningCertificateInput {
-	s.Status = &v
+func (s *UpdateSigningCertificateInput) SetStatus(v StatusType) *UpdateSigningCertificateInput {
+	s.Status = v
 	return s
 }
 
@@ -27480,6 +27625,7 @@ func (s *UpdateUserInput) Validate() error {
 	if s.NewUserName != nil && len(*s.NewUserName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NewUserName", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -27566,12 +27712,14 @@ func (s UploadSSHPublicKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadSSHPublicKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UploadSSHPublicKeyInput"}
+
 	if s.SSHPublicKeyBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SSHPublicKeyBody"))
 	}
 	if s.SSHPublicKeyBody != nil && len(*s.SSHPublicKeyBody) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SSHPublicKeyBody", 1))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -27702,6 +27850,7 @@ func (s UploadServerCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadServerCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UploadServerCertificateInput"}
+
 	if s.CertificateBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateBody"))
 	}
@@ -27714,12 +27863,14 @@ func (s *UploadServerCertificateInput) Validate() error {
 	if s.Path != nil && len(*s.Path) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
 	}
+
 	if s.PrivateKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrivateKey"))
 	}
 	if s.PrivateKey != nil && len(*s.PrivateKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PrivateKey", 1))
 	}
+
 	if s.ServerCertificateName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerCertificateName"))
 	}
@@ -27826,6 +27977,7 @@ func (s UploadSigningCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadSigningCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UploadSigningCertificateInput"}
+
 	if s.CertificateBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateBody"))
 	}
@@ -28166,236 +28318,144 @@ func (s *VirtualMFADevice) SetUser(v *User) *VirtualMFADevice {
 	return s
 }
 
+type ContextKeyTypeEnum string
+
+// Enum values for ContextKeyTypeEnum
 const (
-	// ContextKeyTypeEnumString is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumString = "string"
-
-	// ContextKeyTypeEnumStringList is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumStringList = "stringList"
-
-	// ContextKeyTypeEnumNumeric is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumNumeric = "numeric"
-
-	// ContextKeyTypeEnumNumericList is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumNumericList = "numericList"
-
-	// ContextKeyTypeEnumBoolean is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumBoolean = "boolean"
-
-	// ContextKeyTypeEnumBooleanList is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumBooleanList = "booleanList"
-
-	// ContextKeyTypeEnumIp is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumIp = "ip"
-
-	// ContextKeyTypeEnumIpList is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumIpList = "ipList"
-
-	// ContextKeyTypeEnumBinary is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumBinary = "binary"
-
-	// ContextKeyTypeEnumBinaryList is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumBinaryList = "binaryList"
-
-	// ContextKeyTypeEnumDate is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumDate = "date"
-
-	// ContextKeyTypeEnumDateList is a ContextKeyTypeEnum enum value
-	ContextKeyTypeEnumDateList = "dateList"
+	ContextKeyTypeEnumString      ContextKeyTypeEnum = "string"
+	ContextKeyTypeEnumStringList  ContextKeyTypeEnum = "stringList"
+	ContextKeyTypeEnumNumeric     ContextKeyTypeEnum = "numeric"
+	ContextKeyTypeEnumNumericList ContextKeyTypeEnum = "numericList"
+	ContextKeyTypeEnumBoolean     ContextKeyTypeEnum = "boolean"
+	ContextKeyTypeEnumBooleanList ContextKeyTypeEnum = "booleanList"
+	ContextKeyTypeEnumIp          ContextKeyTypeEnum = "ip"
+	ContextKeyTypeEnumIpList      ContextKeyTypeEnum = "ipList"
+	ContextKeyTypeEnumBinary      ContextKeyTypeEnum = "binary"
+	ContextKeyTypeEnumBinaryList  ContextKeyTypeEnum = "binaryList"
+	ContextKeyTypeEnumDate        ContextKeyTypeEnum = "date"
+	ContextKeyTypeEnumDateList    ContextKeyTypeEnum = "dateList"
 )
 
+type DeletionTaskStatusType string
+
+// Enum values for DeletionTaskStatusType
 const (
-	// DeletionTaskStatusTypeSucceeded is a DeletionTaskStatusType enum value
-	DeletionTaskStatusTypeSucceeded = "SUCCEEDED"
-
-	// DeletionTaskStatusTypeInProgress is a DeletionTaskStatusType enum value
-	DeletionTaskStatusTypeInProgress = "IN_PROGRESS"
-
-	// DeletionTaskStatusTypeFailed is a DeletionTaskStatusType enum value
-	DeletionTaskStatusTypeFailed = "FAILED"
-
-	// DeletionTaskStatusTypeNotStarted is a DeletionTaskStatusType enum value
-	DeletionTaskStatusTypeNotStarted = "NOT_STARTED"
+	DeletionTaskStatusTypeSucceeded  DeletionTaskStatusType = "SUCCEEDED"
+	DeletionTaskStatusTypeInProgress DeletionTaskStatusType = "IN_PROGRESS"
+	DeletionTaskStatusTypeFailed     DeletionTaskStatusType = "FAILED"
+	DeletionTaskStatusTypeNotStarted DeletionTaskStatusType = "NOT_STARTED"
 )
 
+type EntityType string
+
+// Enum values for EntityType
 const (
-	// EntityTypeUser is a EntityType enum value
-	EntityTypeUser = "User"
-
-	// EntityTypeRole is a EntityType enum value
-	EntityTypeRole = "Role"
-
-	// EntityTypeGroup is a EntityType enum value
-	EntityTypeGroup = "Group"
-
-	// EntityTypeLocalManagedPolicy is a EntityType enum value
-	EntityTypeLocalManagedPolicy = "LocalManagedPolicy"
-
-	// EntityTypeAwsmanagedPolicy is a EntityType enum value
-	EntityTypeAwsmanagedPolicy = "AWSManagedPolicy"
+	EntityTypeUser               EntityType = "User"
+	EntityTypeRole               EntityType = "Role"
+	EntityTypeGroup              EntityType = "Group"
+	EntityTypeLocalManagedPolicy EntityType = "LocalManagedPolicy"
+	EntityTypeAwsmanagedPolicy   EntityType = "AWSManagedPolicy"
 )
 
+type PolicyEvaluationDecisionType string
+
+// Enum values for PolicyEvaluationDecisionType
 const (
-	// PolicyEvaluationDecisionTypeAllowed is a PolicyEvaluationDecisionType enum value
-	PolicyEvaluationDecisionTypeAllowed = "allowed"
-
-	// PolicyEvaluationDecisionTypeExplicitDeny is a PolicyEvaluationDecisionType enum value
-	PolicyEvaluationDecisionTypeExplicitDeny = "explicitDeny"
-
-	// PolicyEvaluationDecisionTypeImplicitDeny is a PolicyEvaluationDecisionType enum value
-	PolicyEvaluationDecisionTypeImplicitDeny = "implicitDeny"
+	PolicyEvaluationDecisionTypeAllowed      PolicyEvaluationDecisionType = "allowed"
+	PolicyEvaluationDecisionTypeExplicitDeny PolicyEvaluationDecisionType = "explicitDeny"
+	PolicyEvaluationDecisionTypeImplicitDeny PolicyEvaluationDecisionType = "implicitDeny"
 )
 
+type PolicySourceType string
+
+// Enum values for PolicySourceType
 const (
-	// PolicySourceTypeUser is a PolicySourceType enum value
-	PolicySourceTypeUser = "user"
-
-	// PolicySourceTypeGroup is a PolicySourceType enum value
-	PolicySourceTypeGroup = "group"
-
-	// PolicySourceTypeRole is a PolicySourceType enum value
-	PolicySourceTypeRole = "role"
-
-	// PolicySourceTypeAwsManaged is a PolicySourceType enum value
-	PolicySourceTypeAwsManaged = "aws-managed"
-
-	// PolicySourceTypeUserManaged is a PolicySourceType enum value
-	PolicySourceTypeUserManaged = "user-managed"
-
-	// PolicySourceTypeResource is a PolicySourceType enum value
-	PolicySourceTypeResource = "resource"
-
-	// PolicySourceTypeNone is a PolicySourceType enum value
-	PolicySourceTypeNone = "none"
+	PolicySourceTypeUser        PolicySourceType = "user"
+	PolicySourceTypeGroup       PolicySourceType = "group"
+	PolicySourceTypeRole        PolicySourceType = "role"
+	PolicySourceTypeAwsManaged  PolicySourceType = "aws-managed"
+	PolicySourceTypeUserManaged PolicySourceType = "user-managed"
+	PolicySourceTypeResource    PolicySourceType = "resource"
+	PolicySourceTypeNone        PolicySourceType = "none"
 )
 
+type ReportFormatType string
+
+// Enum values for ReportFormatType
 const (
-	// ReportFormatTypeTextCsv is a ReportFormatType enum value
-	ReportFormatTypeTextCsv = "text/csv"
+	ReportFormatTypeTextCsv ReportFormatType = "text/csv"
 )
 
+type ReportStateType string
+
+// Enum values for ReportStateType
 const (
-	// ReportStateTypeStarted is a ReportStateType enum value
-	ReportStateTypeStarted = "STARTED"
-
-	// ReportStateTypeInprogress is a ReportStateType enum value
-	ReportStateTypeInprogress = "INPROGRESS"
-
-	// ReportStateTypeComplete is a ReportStateType enum value
-	ReportStateTypeComplete = "COMPLETE"
+	ReportStateTypeStarted    ReportStateType = "STARTED"
+	ReportStateTypeInprogress ReportStateType = "INPROGRESS"
+	ReportStateTypeComplete   ReportStateType = "COMPLETE"
 )
 
+type AssignmentStatusType string
+
+// Enum values for AssignmentStatusType
 const (
-	// AssignmentStatusTypeAssigned is a assignmentStatusType enum value
-	AssignmentStatusTypeAssigned = "Assigned"
-
-	// AssignmentStatusTypeUnassigned is a assignmentStatusType enum value
-	AssignmentStatusTypeUnassigned = "Unassigned"
-
-	// AssignmentStatusTypeAny is a assignmentStatusType enum value
-	AssignmentStatusTypeAny = "Any"
+	AssignmentStatusTypeAssigned   AssignmentStatusType = "Assigned"
+	AssignmentStatusTypeUnassigned AssignmentStatusType = "Unassigned"
+	AssignmentStatusTypeAny        AssignmentStatusType = "Any"
 )
 
-const (
-	// EncodingTypeSsh is a encodingType enum value
-	EncodingTypeSsh = "SSH"
+type EncodingType string
 
-	// EncodingTypePem is a encodingType enum value
-	EncodingTypePem = "PEM"
+// Enum values for EncodingType
+const (
+	EncodingTypeSsh EncodingType = "SSH"
+	EncodingTypePem EncodingType = "PEM"
 )
 
+type PolicyScopeType string
+
+// Enum values for PolicyScopeType
 const (
-	// PolicyScopeTypeAll is a policyScopeType enum value
-	PolicyScopeTypeAll = "All"
-
-	// PolicyScopeTypeAws is a policyScopeType enum value
-	PolicyScopeTypeAws = "AWS"
-
-	// PolicyScopeTypeLocal is a policyScopeType enum value
-	PolicyScopeTypeLocal = "Local"
+	PolicyScopeTypeAll   PolicyScopeType = "All"
+	PolicyScopeTypeAws   PolicyScopeType = "AWS"
+	PolicyScopeTypeLocal PolicyScopeType = "Local"
 )
 
-const (
-	// StatusTypeActive is a statusType enum value
-	StatusTypeActive = "Active"
+type StatusType string
 
-	// StatusTypeInactive is a statusType enum value
-	StatusTypeInactive = "Inactive"
+// Enum values for StatusType
+const (
+	StatusTypeActive   StatusType = "Active"
+	StatusTypeInactive StatusType = "Inactive"
 )
 
+type SummaryKeyType string
+
+// Enum values for SummaryKeyType
 const (
-	// SummaryKeyTypeUsers is a summaryKeyType enum value
-	SummaryKeyTypeUsers = "Users"
-
-	// SummaryKeyTypeUsersQuota is a summaryKeyType enum value
-	SummaryKeyTypeUsersQuota = "UsersQuota"
-
-	// SummaryKeyTypeGroups is a summaryKeyType enum value
-	SummaryKeyTypeGroups = "Groups"
-
-	// SummaryKeyTypeGroupsQuota is a summaryKeyType enum value
-	SummaryKeyTypeGroupsQuota = "GroupsQuota"
-
-	// SummaryKeyTypeServerCertificates is a summaryKeyType enum value
-	SummaryKeyTypeServerCertificates = "ServerCertificates"
-
-	// SummaryKeyTypeServerCertificatesQuota is a summaryKeyType enum value
-	SummaryKeyTypeServerCertificatesQuota = "ServerCertificatesQuota"
-
-	// SummaryKeyTypeUserPolicySizeQuota is a summaryKeyType enum value
-	SummaryKeyTypeUserPolicySizeQuota = "UserPolicySizeQuota"
-
-	// SummaryKeyTypeGroupPolicySizeQuota is a summaryKeyType enum value
-	SummaryKeyTypeGroupPolicySizeQuota = "GroupPolicySizeQuota"
-
-	// SummaryKeyTypeGroupsPerUserQuota is a summaryKeyType enum value
-	SummaryKeyTypeGroupsPerUserQuota = "GroupsPerUserQuota"
-
-	// SummaryKeyTypeSigningCertificatesPerUserQuota is a summaryKeyType enum value
-	SummaryKeyTypeSigningCertificatesPerUserQuota = "SigningCertificatesPerUserQuota"
-
-	// SummaryKeyTypeAccessKeysPerUserQuota is a summaryKeyType enum value
-	SummaryKeyTypeAccessKeysPerUserQuota = "AccessKeysPerUserQuota"
-
-	// SummaryKeyTypeMfadevices is a summaryKeyType enum value
-	SummaryKeyTypeMfadevices = "MFADevices"
-
-	// SummaryKeyTypeMfadevicesInUse is a summaryKeyType enum value
-	SummaryKeyTypeMfadevicesInUse = "MFADevicesInUse"
-
-	// SummaryKeyTypeAccountMfaenabled is a summaryKeyType enum value
-	SummaryKeyTypeAccountMfaenabled = "AccountMFAEnabled"
-
-	// SummaryKeyTypeAccountAccessKeysPresent is a summaryKeyType enum value
-	SummaryKeyTypeAccountAccessKeysPresent = "AccountAccessKeysPresent"
-
-	// SummaryKeyTypeAccountSigningCertificatesPresent is a summaryKeyType enum value
-	SummaryKeyTypeAccountSigningCertificatesPresent = "AccountSigningCertificatesPresent"
-
-	// SummaryKeyTypeAttachedPoliciesPerGroupQuota is a summaryKeyType enum value
-	SummaryKeyTypeAttachedPoliciesPerGroupQuota = "AttachedPoliciesPerGroupQuota"
-
-	// SummaryKeyTypeAttachedPoliciesPerRoleQuota is a summaryKeyType enum value
-	SummaryKeyTypeAttachedPoliciesPerRoleQuota = "AttachedPoliciesPerRoleQuota"
-
-	// SummaryKeyTypeAttachedPoliciesPerUserQuota is a summaryKeyType enum value
-	SummaryKeyTypeAttachedPoliciesPerUserQuota = "AttachedPoliciesPerUserQuota"
-
-	// SummaryKeyTypePolicies is a summaryKeyType enum value
-	SummaryKeyTypePolicies = "Policies"
-
-	// SummaryKeyTypePoliciesQuota is a summaryKeyType enum value
-	SummaryKeyTypePoliciesQuota = "PoliciesQuota"
-
-	// SummaryKeyTypePolicySizeQuota is a summaryKeyType enum value
-	SummaryKeyTypePolicySizeQuota = "PolicySizeQuota"
-
-	// SummaryKeyTypePolicyVersionsInUse is a summaryKeyType enum value
-	SummaryKeyTypePolicyVersionsInUse = "PolicyVersionsInUse"
-
-	// SummaryKeyTypePolicyVersionsInUseQuota is a summaryKeyType enum value
-	SummaryKeyTypePolicyVersionsInUseQuota = "PolicyVersionsInUseQuota"
-
-	// SummaryKeyTypeVersionsPerPolicyQuota is a summaryKeyType enum value
-	SummaryKeyTypeVersionsPerPolicyQuota = "VersionsPerPolicyQuota"
+	SummaryKeyTypeUsers                             SummaryKeyType = "Users"
+	SummaryKeyTypeUsersQuota                        SummaryKeyType = "UsersQuota"
+	SummaryKeyTypeGroups                            SummaryKeyType = "Groups"
+	SummaryKeyTypeGroupsQuota                       SummaryKeyType = "GroupsQuota"
+	SummaryKeyTypeServerCertificates                SummaryKeyType = "ServerCertificates"
+	SummaryKeyTypeServerCertificatesQuota           SummaryKeyType = "ServerCertificatesQuota"
+	SummaryKeyTypeUserPolicySizeQuota               SummaryKeyType = "UserPolicySizeQuota"
+	SummaryKeyTypeGroupPolicySizeQuota              SummaryKeyType = "GroupPolicySizeQuota"
+	SummaryKeyTypeGroupsPerUserQuota                SummaryKeyType = "GroupsPerUserQuota"
+	SummaryKeyTypeSigningCertificatesPerUserQuota   SummaryKeyType = "SigningCertificatesPerUserQuota"
+	SummaryKeyTypeAccessKeysPerUserQuota            SummaryKeyType = "AccessKeysPerUserQuota"
+	SummaryKeyTypeMfadevices                        SummaryKeyType = "MFADevices"
+	SummaryKeyTypeMfadevicesInUse                   SummaryKeyType = "MFADevicesInUse"
+	SummaryKeyTypeAccountMfaenabled                 SummaryKeyType = "AccountMFAEnabled"
+	SummaryKeyTypeAccountAccessKeysPresent          SummaryKeyType = "AccountAccessKeysPresent"
+	SummaryKeyTypeAccountSigningCertificatesPresent SummaryKeyType = "AccountSigningCertificatesPresent"
+	SummaryKeyTypeAttachedPoliciesPerGroupQuota     SummaryKeyType = "AttachedPoliciesPerGroupQuota"
+	SummaryKeyTypeAttachedPoliciesPerRoleQuota      SummaryKeyType = "AttachedPoliciesPerRoleQuota"
+	SummaryKeyTypeAttachedPoliciesPerUserQuota      SummaryKeyType = "AttachedPoliciesPerUserQuota"
+	SummaryKeyTypePolicies                          SummaryKeyType = "Policies"
+	SummaryKeyTypePoliciesQuota                     SummaryKeyType = "PoliciesQuota"
+	SummaryKeyTypePolicySizeQuota                   SummaryKeyType = "PolicySizeQuota"
+	SummaryKeyTypePolicyVersionsInUse               SummaryKeyType = "PolicyVersionsInUse"
+	SummaryKeyTypePolicyVersionsInUseQuota          SummaryKeyType = "PolicyVersionsInUseQuota"
+	SummaryKeyTypeVersionsPerPolicyQuota            SummaryKeyType = "VersionsPerPolicyQuota"
 )

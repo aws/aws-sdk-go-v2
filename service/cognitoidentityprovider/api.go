@@ -8903,12 +8903,14 @@ func (s AddCustomAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddCustomAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddCustomAttributesInput"}
+
 	if s.CustomAttributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CustomAttributes"))
 	}
 	if s.CustomAttributes != nil && len(s.CustomAttributes) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CustomAttributes", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -8993,18 +8995,21 @@ func (s AdminAddUserToGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminAddUserToGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminAddUserToGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -9080,12 +9085,14 @@ func (s AdminConfirmSignUpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminConfirmSignUpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminConfirmSignUpInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -9197,7 +9204,7 @@ type AdminCreateUserInput struct {
 	// Specify "EMAIL" if email will be used to send the welcome message. Specify
 	// "SMS" if the phone number will be used. The default value is "SMS". More
 	// than one value can be specified.
-	DesiredDeliveryMediums []*string `type:"list"`
+	DesiredDeliveryMediums []DeliveryMediumType `type:"list"`
 
 	// This parameter is only used if the phone_number_verified or email_verified
 	// attribute is set to True. Otherwise, it is ignored.
@@ -9215,7 +9222,7 @@ type AdminCreateUserInput struct {
 	// Set to "RESEND" to resend the invitation message to a user that already exists
 	// and reset the expiration limit on the user's account. Set to "SUPPRESS" to
 	// suppress sending the message. Only one value can be specified.
-	MessageAction *string `type:"string" enum:"MessageActionType"`
+	MessageAction MessageActionType `type:"string"`
 
 	// The user's temporary password. This password must conform to the password
 	// policy that you specified when you created the user pool.
@@ -9306,12 +9313,14 @@ func (s *AdminCreateUserInput) Validate() error {
 	if s.TemporaryPassword != nil && len(*s.TemporaryPassword) < 6 {
 		invalidParams.Add(aws.NewErrParamMinLen("TemporaryPassword", 6))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -9346,7 +9355,7 @@ func (s *AdminCreateUserInput) Validate() error {
 }
 
 // SetDesiredDeliveryMediums sets the DesiredDeliveryMediums field's value.
-func (s *AdminCreateUserInput) SetDesiredDeliveryMediums(v []*string) *AdminCreateUserInput {
+func (s *AdminCreateUserInput) SetDesiredDeliveryMediums(v []DeliveryMediumType) *AdminCreateUserInput {
 	s.DesiredDeliveryMediums = v
 	return s
 }
@@ -9358,8 +9367,8 @@ func (s *AdminCreateUserInput) SetForceAliasCreation(v bool) *AdminCreateUserInp
 }
 
 // SetMessageAction sets the MessageAction field's value.
-func (s *AdminCreateUserInput) SetMessageAction(v string) *AdminCreateUserInput {
-	s.MessageAction = &v
+func (s *AdminCreateUserInput) SetMessageAction(v MessageActionType) *AdminCreateUserInput {
+	s.MessageAction = v
 	return s
 }
 
@@ -9455,15 +9464,18 @@ func (s AdminDeleteUserAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminDeleteUserAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminDeleteUserAttributesInput"}
+
 	if s.UserAttributeNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserAttributeNames"))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -9541,12 +9553,14 @@ func (s AdminDeleteUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminDeleteUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminDeleteUserInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -9615,9 +9629,11 @@ func (s AdminDisableProviderForUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminDisableProviderForUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminDisableProviderForUserInput"}
+
 	if s.User == nil {
 		invalidParams.Add(aws.NewErrParamRequired("User"))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -9689,12 +9705,14 @@ func (s AdminDisableUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminDisableUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminDisableUserInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -9766,12 +9784,14 @@ func (s AdminEnableUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminEnableUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminEnableUserInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -9848,18 +9868,21 @@ func (s AdminForgetDeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminForgetDeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminForgetDeviceInput"}
+
 	if s.DeviceKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -9940,18 +9963,21 @@ func (s AdminGetDeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminGetDeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminGetDeviceInput"}
+
 	if s.DeviceKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -10040,12 +10066,14 @@ func (s AdminGetUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminGetUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminGetUserInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -10103,7 +10131,7 @@ type AdminGetUserOutput struct {
 	//    * COMPROMISED - User is disabled due to a potential security threat.
 	//
 	//    * UNKNOWN - User status is not known.
-	UserStatus *string `type:"string" enum:"UserStatusType"`
+	UserStatus UserStatusType `type:"string"`
 
 	// The user name of the user about whom you are receiving information.
 	//
@@ -10152,8 +10180,8 @@ func (s *AdminGetUserOutput) SetUserLastModifiedDate(v time.Time) *AdminGetUserO
 }
 
 // SetUserStatus sets the UserStatus field's value.
-func (s *AdminGetUserOutput) SetUserStatus(v string) *AdminGetUserOutput {
-	s.UserStatus = &v
+func (s *AdminGetUserOutput) SetUserStatus(v UserStatusType) *AdminGetUserOutput {
+	s.UserStatus = v
 	return s
 }
 
@@ -10192,7 +10220,7 @@ type AdminInitiateAuthInput struct {
 	//    app client.
 	//
 	// AuthFlow is a required field
-	AuthFlow *string `type:"string" required:"true" enum:"AuthFlowType"`
+	AuthFlow AuthFlowType `type:"string" required:"true"`
 
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you are invoking. The required values depend on the value of AuthFlow:
@@ -10240,15 +10268,17 @@ func (s AdminInitiateAuthInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminInitiateAuthInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminInitiateAuthInput"}
-	if s.AuthFlow == nil {
+	if len(s.AuthFlow) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("AuthFlow"))
 	}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -10263,8 +10293,8 @@ func (s *AdminInitiateAuthInput) Validate() error {
 }
 
 // SetAuthFlow sets the AuthFlow field's value.
-func (s *AdminInitiateAuthInput) SetAuthFlow(v string) *AdminInitiateAuthInput {
-	s.AuthFlow = &v
+func (s *AdminInitiateAuthInput) SetAuthFlow(v AuthFlowType) *AdminInitiateAuthInput {
+	s.AuthFlow = v
 	return s
 }
 
@@ -10331,7 +10361,7 @@ type AdminInitiateAuthOutput struct {
 	//    * NEW_PASSWORD_REQUIRED: For users which are required to change their
 	//    passwords after successful first login. This challenge should be passed
 	//    with NEW_PASSWORD and any other required attributes.
-	ChallengeName *string `type:"string" enum:"ChallengeNameType"`
+	ChallengeName ChallengeNameType `type:"string"`
 
 	// The challenge parameters. These are returned to you in the AdminInitiateAuth
 	// response if you need to pass another challenge. The responses in this parameter
@@ -10370,8 +10400,8 @@ func (s *AdminInitiateAuthOutput) SetAuthenticationResult(v *AuthenticationResul
 }
 
 // SetChallengeName sets the ChallengeName field's value.
-func (s *AdminInitiateAuthOutput) SetChallengeName(v string) *AdminInitiateAuthOutput {
-	s.ChallengeName = &v
+func (s *AdminInitiateAuthOutput) SetChallengeName(v ChallengeNameType) *AdminInitiateAuthOutput {
+	s.ChallengeName = v
 	return s
 }
 
@@ -10443,12 +10473,15 @@ func (s AdminLinkProviderForUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminLinkProviderForUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminLinkProviderForUserInput"}
+
 	if s.DestinationUser == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationUser"))
 	}
+
 	if s.SourceUser == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceUser"))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -10540,12 +10573,14 @@ func (s *AdminListDevicesInput) Validate() error {
 	if s.PaginationToken != nil && len(*s.PaginationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PaginationToken", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -10655,12 +10690,14 @@ func (s *AdminListGroupsForUserInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -10765,18 +10802,21 @@ func (s AdminRemoveUserFromGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminRemoveUserFromGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminRemoveUserFromGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -10852,12 +10892,14 @@ func (s AdminResetUserPasswordInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminResetUserPasswordInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminResetUserPasswordInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -10907,7 +10949,7 @@ type AdminRespondToAuthChallengeInput struct {
 	// The challenge name. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
 	//
 	// ChallengeName is a required field
-	ChallengeName *string `type:"string" required:"true" enum:"ChallengeNameType"`
+	ChallengeName ChallengeNameType `type:"string" required:"true"`
 
 	// The challenge responses. These are inputs corresponding to the value of ChallengeName,
 	// for example:
@@ -10963,9 +11005,10 @@ func (s AdminRespondToAuthChallengeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminRespondToAuthChallengeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminRespondToAuthChallengeInput"}
-	if s.ChallengeName == nil {
+	if len(s.ChallengeName) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ChallengeName"))
 	}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
@@ -10975,6 +11018,7 @@ func (s *AdminRespondToAuthChallengeInput) Validate() error {
 	if s.Session != nil && len(*s.Session) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("Session", 20))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -10989,8 +11033,8 @@ func (s *AdminRespondToAuthChallengeInput) Validate() error {
 }
 
 // SetChallengeName sets the ChallengeName field's value.
-func (s *AdminRespondToAuthChallengeInput) SetChallengeName(v string) *AdminRespondToAuthChallengeInput {
-	s.ChallengeName = &v
+func (s *AdminRespondToAuthChallengeInput) SetChallengeName(v ChallengeNameType) *AdminRespondToAuthChallengeInput {
+	s.ChallengeName = v
 	return s
 }
 
@@ -11027,7 +11071,7 @@ type AdminRespondToAuthChallengeOutput struct {
 	AuthenticationResult *AuthenticationResultType `type:"structure"`
 
 	// The name of the challenge. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
-	ChallengeName *string `type:"string" enum:"ChallengeNameType"`
+	ChallengeName ChallengeNameType `type:"string"`
 
 	// The challenge parameters. For more information, see AdminInitiateAuth (API_AdminInitiateAuth.html).
 	ChallengeParameters map[string]*string `type:"map"`
@@ -11058,8 +11102,8 @@ func (s *AdminRespondToAuthChallengeOutput) SetAuthenticationResult(v *Authentic
 }
 
 // SetChallengeName sets the ChallengeName field's value.
-func (s *AdminRespondToAuthChallengeOutput) SetChallengeName(v string) *AdminRespondToAuthChallengeOutput {
-	s.ChallengeName = &v
+func (s *AdminRespondToAuthChallengeOutput) SetChallengeName(v ChallengeNameType) *AdminRespondToAuthChallengeOutput {
+	s.ChallengeName = v
 	return s
 }
 
@@ -11110,15 +11154,18 @@ func (s AdminSetUserSettingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminSetUserSettingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminSetUserSettingsInput"}
+
 	if s.MFAOptions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MFAOptions"))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -11187,7 +11234,7 @@ type AdminUpdateDeviceStatusInput struct {
 	DeviceKey *string `min:"1" type:"string" required:"true"`
 
 	// The status indicating whether a device has been remembered or not.
-	DeviceRememberedStatus *string `type:"string" enum:"DeviceRememberedStatusType"`
+	DeviceRememberedStatus DeviceRememberedStatusType `type:"string"`
 
 	// The user pool ID.
 	//
@@ -11213,18 +11260,21 @@ func (s AdminUpdateDeviceStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminUpdateDeviceStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminUpdateDeviceStatusInput"}
+
 	if s.DeviceKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -11245,8 +11295,8 @@ func (s *AdminUpdateDeviceStatusInput) SetDeviceKey(v string) *AdminUpdateDevice
 }
 
 // SetDeviceRememberedStatus sets the DeviceRememberedStatus field's value.
-func (s *AdminUpdateDeviceStatusInput) SetDeviceRememberedStatus(v string) *AdminUpdateDeviceStatusInput {
-	s.DeviceRememberedStatus = &v
+func (s *AdminUpdateDeviceStatusInput) SetDeviceRememberedStatus(v DeviceRememberedStatusType) *AdminUpdateDeviceStatusInput {
+	s.DeviceRememberedStatus = v
 	return s
 }
 
@@ -11315,15 +11365,18 @@ func (s AdminUpdateUserAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminUpdateUserAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminUpdateUserAttributesInput"}
+
 	if s.UserAttributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserAttributes"))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -11411,12 +11464,14 @@ func (s AdminUserGlobalSignOutInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminUserGlobalSignOutInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AdminUserGlobalSignOutInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -11485,6 +11540,7 @@ func (s AttributeType) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeType) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttributeType"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -11614,15 +11670,18 @@ func (s ChangePasswordInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangePasswordInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ChangePasswordInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
+
 	if s.PreviousPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PreviousPassword"))
 	}
 	if s.PreviousPassword != nil && len(*s.PreviousPassword) < 6 {
 		invalidParams.Add(aws.NewErrParamMinLen("PreviousPassword", 6))
 	}
+
 	if s.ProposedPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProposedPassword"))
 	}
@@ -11679,7 +11738,7 @@ type CodeDeliveryDetailsType struct {
 	AttributeName *string `min:"1" type:"string"`
 
 	// The delivery medium (email message or phone number).
-	DeliveryMedium *string `type:"string" enum:"DeliveryMediumType"`
+	DeliveryMedium DeliveryMediumType `type:"string"`
 
 	// The destination for the code delivery details.
 	Destination *string `type:"string"`
@@ -11702,8 +11761,8 @@ func (s *CodeDeliveryDetailsType) SetAttributeName(v string) *CodeDeliveryDetail
 }
 
 // SetDeliveryMedium sets the DeliveryMedium field's value.
-func (s *CodeDeliveryDetailsType) SetDeliveryMedium(v string) *CodeDeliveryDetailsType {
-	s.DeliveryMedium = &v
+func (s *CodeDeliveryDetailsType) SetDeliveryMedium(v DeliveryMediumType) *CodeDeliveryDetailsType {
+	s.DeliveryMedium = v
 	return s
 }
 
@@ -11748,9 +11807,11 @@ func (s ConfirmDeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmDeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfirmDeviceInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
+
 	if s.DeviceKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
@@ -11862,18 +11923,21 @@ func (s ConfirmForgotPasswordInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmForgotPasswordInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfirmForgotPasswordInput"}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
+
 	if s.ConfirmationCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfirmationCode"))
 	}
 	if s.ConfirmationCode != nil && len(*s.ConfirmationCode) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConfirmationCode", 1))
 	}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
@@ -11883,6 +11947,7 @@ func (s *ConfirmForgotPasswordInput) Validate() error {
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -11989,12 +12054,14 @@ func (s ConfirmSignUpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmSignUpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfirmSignUpInput"}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
+
 	if s.ConfirmationCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfirmationCode"))
 	}
@@ -12004,6 +12071,7 @@ func (s *ConfirmSignUpInput) Validate() error {
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -12114,6 +12182,7 @@ func (s CreateGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -12123,6 +12192,7 @@ func (s *CreateGroupInput) Validate() error {
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -12214,7 +12284,7 @@ type CreateIdentityProviderInput struct {
 	// The identity provider type.
 	//
 	// ProviderType is a required field
-	ProviderType *string `type:"string" required:"true" enum:"IdentityProviderTypeType"`
+	ProviderType IdentityProviderTypeType `type:"string" required:"true"`
 
 	// The user pool ID.
 	//
@@ -12235,18 +12305,21 @@ func (s CreateIdentityProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIdentityProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateIdentityProviderInput"}
+
 	if s.ProviderDetails == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProviderDetails"))
 	}
+
 	if s.ProviderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
-	if s.ProviderType == nil {
+	if len(s.ProviderType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ProviderType"))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -12285,8 +12358,8 @@ func (s *CreateIdentityProviderInput) SetProviderName(v string) *CreateIdentityP
 }
 
 // SetProviderType sets the ProviderType field's value.
-func (s *CreateIdentityProviderInput) SetProviderType(v string) *CreateIdentityProviderInput {
-	s.ProviderType = &v
+func (s *CreateIdentityProviderInput) SetProviderType(v IdentityProviderTypeType) *CreateIdentityProviderInput {
+	s.ProviderType = v
 	return s
 }
 
@@ -12359,18 +12432,21 @@ func (s CreateResourceServerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateResourceServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceServerInput"}
+
 	if s.Identifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
 	}
 	if s.Identifier != nil && len(*s.Identifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -12478,18 +12554,21 @@ func (s CreateUserImportJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserImportJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUserImportJobInput"}
+
 	if s.CloudWatchLogsRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLogsRoleArn"))
 	}
 	if s.CloudWatchLogsRoleArn != nil && len(*s.CloudWatchLogsRoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("CloudWatchLogsRoleArn", 20))
 	}
+
 	if s.JobName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -12558,7 +12637,7 @@ type CreateUserPoolClientInput struct {
 	//
 	// Set to token to specify that the client should get the access token (and,
 	// optionally, ID token, based on scopes) directly.
-	AllowedOAuthFlows []*string `type:"list"`
+	AllowedOAuthFlows []OAuthFlowType `type:"list"`
 
 	// Set to True if the client is allowed to follow the OAuth protocol when interacting
 	// with Cognito user pools.
@@ -12580,7 +12659,7 @@ type CreateUserPoolClientInput struct {
 	DefaultRedirectURI *string `min:"1" type:"string"`
 
 	// The explicit authentication flows.
-	ExplicitAuthFlows []*string `type:"list"`
+	ExplicitAuthFlows []ExplicitAuthFlowsType `type:"list"`
 
 	// Boolean to specify whether you want to generate a secret for the user pool
 	// client being created.
@@ -12622,6 +12701,7 @@ func (s CreateUserPoolClientInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserPoolClientInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUserPoolClientInput"}
+
 	if s.ClientName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientName"))
 	}
@@ -12631,6 +12711,7 @@ func (s *CreateUserPoolClientInput) Validate() error {
 	if s.DefaultRedirectURI != nil && len(*s.DefaultRedirectURI) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DefaultRedirectURI", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -12645,7 +12726,7 @@ func (s *CreateUserPoolClientInput) Validate() error {
 }
 
 // SetAllowedOAuthFlows sets the AllowedOAuthFlows field's value.
-func (s *CreateUserPoolClientInput) SetAllowedOAuthFlows(v []*string) *CreateUserPoolClientInput {
+func (s *CreateUserPoolClientInput) SetAllowedOAuthFlows(v []OAuthFlowType) *CreateUserPoolClientInput {
 	s.AllowedOAuthFlows = v
 	return s
 }
@@ -12681,7 +12762,7 @@ func (s *CreateUserPoolClientInput) SetDefaultRedirectURI(v string) *CreateUserP
 }
 
 // SetExplicitAuthFlows sets the ExplicitAuthFlows field's value.
-func (s *CreateUserPoolClientInput) SetExplicitAuthFlows(v []*string) *CreateUserPoolClientInput {
+func (s *CreateUserPoolClientInput) SetExplicitAuthFlows(v []ExplicitAuthFlowsType) *CreateUserPoolClientInput {
 	s.ExplicitAuthFlows = v
 	return s
 }
@@ -12781,12 +12862,14 @@ func (s CreateUserPoolDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserPoolDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUserPoolDomainInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -12837,10 +12920,10 @@ type CreateUserPoolInput struct {
 
 	// Attributes supported as an alias for this user pool. Possible values: phone_number,
 	// email, or preferred_username.
-	AliasAttributes []*string `type:"list"`
+	AliasAttributes []AliasAttributeType `type:"list"`
 
 	// The attributes to be auto-verified. Possible values: email, phone_number.
-	AutoVerifiedAttributes []*string `type:"list"`
+	AutoVerifiedAttributes []VerifiedAttributeType `type:"list"`
 
 	// The device configuration.
 	DeviceConfiguration *DeviceConfigurationType `type:"structure"`
@@ -12858,7 +12941,7 @@ type CreateUserPoolInput struct {
 	LambdaConfig *LambdaConfigType `type:"structure"`
 
 	// Specifies MFA configuration details.
-	MfaConfiguration *string `type:"string" enum:"UserPoolMfaType"`
+	MfaConfiguration UserPoolMfaType `type:"string"`
 
 	// The policies associated with the new user pool.
 	Policies *UserPoolPolicyType `type:"structure"`
@@ -12887,7 +12970,7 @@ type CreateUserPoolInput struct {
 
 	// Specifies whether email addresses or phone numbers can be specified as usernames
 	// when a user signs up.
-	UsernameAttributes []*string `type:"list"`
+	UsernameAttributes []UsernameAttributeType `type:"list"`
 
 	// The template for the verification message that the user sees when the app
 	// requests permission to access the user's information.
@@ -12913,6 +12996,7 @@ func (s *CreateUserPoolInput) Validate() error {
 	if s.EmailVerificationSubject != nil && len(*s.EmailVerificationSubject) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EmailVerificationSubject", 1))
 	}
+
 	if s.PoolName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PoolName"))
 	}
@@ -12982,13 +13066,13 @@ func (s *CreateUserPoolInput) SetAdminCreateUserConfig(v *AdminCreateUserConfigT
 }
 
 // SetAliasAttributes sets the AliasAttributes field's value.
-func (s *CreateUserPoolInput) SetAliasAttributes(v []*string) *CreateUserPoolInput {
+func (s *CreateUserPoolInput) SetAliasAttributes(v []AliasAttributeType) *CreateUserPoolInput {
 	s.AliasAttributes = v
 	return s
 }
 
 // SetAutoVerifiedAttributes sets the AutoVerifiedAttributes field's value.
-func (s *CreateUserPoolInput) SetAutoVerifiedAttributes(v []*string) *CreateUserPoolInput {
+func (s *CreateUserPoolInput) SetAutoVerifiedAttributes(v []VerifiedAttributeType) *CreateUserPoolInput {
 	s.AutoVerifiedAttributes = v
 	return s
 }
@@ -13024,8 +13108,8 @@ func (s *CreateUserPoolInput) SetLambdaConfig(v *LambdaConfigType) *CreateUserPo
 }
 
 // SetMfaConfiguration sets the MfaConfiguration field's value.
-func (s *CreateUserPoolInput) SetMfaConfiguration(v string) *CreateUserPoolInput {
-	s.MfaConfiguration = &v
+func (s *CreateUserPoolInput) SetMfaConfiguration(v UserPoolMfaType) *CreateUserPoolInput {
+	s.MfaConfiguration = v
 	return s
 }
 
@@ -13072,7 +13156,7 @@ func (s *CreateUserPoolInput) SetUserPoolTags(v map[string]*string) *CreateUserP
 }
 
 // SetUsernameAttributes sets the UsernameAttributes field's value.
-func (s *CreateUserPoolInput) SetUsernameAttributes(v []*string) *CreateUserPoolInput {
+func (s *CreateUserPoolInput) SetUsernameAttributes(v []UsernameAttributeType) *CreateUserPoolInput {
 	s.UsernameAttributes = v
 	return s
 }
@@ -13137,12 +13221,14 @@ func (s DeleteGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -13211,12 +13297,14 @@ func (s DeleteIdentityProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIdentityProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityProviderInput"}
+
 	if s.ProviderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -13285,12 +13373,14 @@ func (s DeleteResourceServerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteResourceServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceServerInput"}
+
 	if s.Identifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
 	}
 	if s.Identifier != nil && len(*s.Identifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -13363,9 +13453,11 @@ func (s DeleteUserAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserAttributesInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
+
 	if s.UserAttributeNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserAttributeNames"))
 	}
@@ -13428,6 +13520,7 @@ func (s DeleteUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
@@ -13488,12 +13581,14 @@ func (s DeleteUserPoolClientInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserPoolClientInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPoolClientInput"}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -13562,12 +13657,14 @@ func (s DeleteUserPoolDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserPoolDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPoolDomainInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -13632,6 +13729,7 @@ func (s DeleteUserPoolInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserPoolInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPoolInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -13694,12 +13792,14 @@ func (s DescribeIdentityProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeIdentityProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityProviderInput"}
+
 	if s.ProviderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -13779,12 +13879,14 @@ func (s DescribeResourceServerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeResourceServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourceServerInput"}
+
 	if s.Identifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
 	}
 	if s.Identifier != nil && len(*s.Identifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -13865,12 +13967,14 @@ func (s DescribeUserImportJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserImportJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserImportJobInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -13951,12 +14055,14 @@ func (s DescribeUserPoolClientInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserPoolClientInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserPoolClientInput"}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -14031,6 +14137,7 @@ func (s DescribeUserPoolDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserPoolDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserPoolDomainInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -14098,6 +14205,7 @@ func (s DescribeUserPoolInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserPoolInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserPoolInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -14290,7 +14398,7 @@ type DomainDescriptionType struct {
 	S3Bucket *string `min:"3" type:"string"`
 
 	// The domain status.
-	Status *string `type:"string" enum:"DomainStatusType"`
+	Status DomainStatusType `type:"string"`
 
 	// The user pool ID.
 	UserPoolId *string `min:"1" type:"string"`
@@ -14334,8 +14442,8 @@ func (s *DomainDescriptionType) SetS3Bucket(v string) *DomainDescriptionType {
 }
 
 // SetStatus sets the Status field's value.
-func (s *DomainDescriptionType) SetStatus(v string) *DomainDescriptionType {
-	s.Status = &v
+func (s *DomainDescriptionType) SetStatus(v DomainStatusType) *DomainDescriptionType {
+	s.Status = v
 	return s
 }
 
@@ -14425,6 +14533,7 @@ func (s ForgetDeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ForgetDeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ForgetDeviceInput"}
+
 	if s.DeviceKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
@@ -14499,6 +14608,7 @@ func (s ForgotPasswordInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ForgotPasswordInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ForgotPasswordInput"}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
@@ -14508,6 +14618,7 @@ func (s *ForgotPasswordInput) Validate() error {
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -14591,6 +14702,7 @@ func (s GetCSVHeaderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCSVHeaderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCSVHeaderInput"}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -14672,6 +14784,7 @@ func (s GetDeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceInput"}
+
 	if s.DeviceKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
@@ -14752,12 +14865,14 @@ func (s GetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -14835,12 +14950,14 @@ func (s GetIdentityProviderByIdentifierInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityProviderByIdentifierInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityProviderByIdentifierInput"}
+
 	if s.IdpIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdpIdentifier"))
 	}
 	if s.IdpIdentifier != nil && len(*s.IdpIdentifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdpIdentifier", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -14921,6 +15038,7 @@ func (s *GetUICustomizationInput) Validate() error {
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -15003,9 +15121,11 @@ func (s GetUserAttributeVerificationCodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUserAttributeVerificationCodeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetUserAttributeVerificationCodeInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
@@ -15083,6 +15203,7 @@ func (s GetUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetUserInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
@@ -15174,6 +15295,7 @@ func (s GlobalSignOutInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GlobalSignOutInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GlobalSignOutInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
@@ -15323,7 +15445,7 @@ type IdentityProviderType struct {
 	ProviderName *string `min:"1" type:"string"`
 
 	// The identity provider type.
-	ProviderType *string `type:"string" enum:"IdentityProviderTypeType"`
+	ProviderType IdentityProviderTypeType `type:"string"`
 
 	// The user pool ID.
 	UserPoolId *string `min:"1" type:"string"`
@@ -15376,8 +15498,8 @@ func (s *IdentityProviderType) SetProviderName(v string) *IdentityProviderType {
 }
 
 // SetProviderType sets the ProviderType field's value.
-func (s *IdentityProviderType) SetProviderType(v string) *IdentityProviderType {
-	s.ProviderType = &v
+func (s *IdentityProviderType) SetProviderType(v IdentityProviderTypeType) *IdentityProviderType {
+	s.ProviderType = v
 	return s
 }
 
@@ -15414,7 +15536,7 @@ type InitiateAuthInput struct {
 	// ADMIN_NO_SRP_AUTH is not a valid value.
 	//
 	// AuthFlow is a required field
-	AuthFlow *string `type:"string" required:"true" enum:"AuthFlowType"`
+	AuthFlow AuthFlowType `type:"string" required:"true"`
 
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you are invoking. The required values depend on the value of AuthFlow:
@@ -15454,9 +15576,10 @@ func (s InitiateAuthInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateAuthInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InitiateAuthInput"}
-	if s.AuthFlow == nil {
+	if len(s.AuthFlow) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("AuthFlow"))
 	}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
@@ -15471,8 +15594,8 @@ func (s *InitiateAuthInput) Validate() error {
 }
 
 // SetAuthFlow sets the AuthFlow field's value.
-func (s *InitiateAuthInput) SetAuthFlow(v string) *InitiateAuthInput {
-	s.AuthFlow = &v
+func (s *InitiateAuthInput) SetAuthFlow(v AuthFlowType) *InitiateAuthInput {
+	s.AuthFlow = v
 	return s
 }
 
@@ -15532,7 +15655,7 @@ type InitiateAuthOutput struct {
 	//    * NEW_PASSWORD_REQUIRED: For users which are required to change their
 	//    passwords after successful first login. This challenge should be passed
 	//    with NEW_PASSWORD and any other required attributes.
-	ChallengeName *string `type:"string" enum:"ChallengeNameType"`
+	ChallengeName ChallengeNameType `type:"string"`
 
 	// The challenge parameters. These are returned to you in the InitiateAuth response
 	// if you need to pass another challenge. The responses in this parameter should
@@ -15567,8 +15690,8 @@ func (s *InitiateAuthOutput) SetAuthenticationResult(v *AuthenticationResultType
 }
 
 // SetChallengeName sets the ChallengeName field's value.
-func (s *InitiateAuthOutput) SetChallengeName(v string) *InitiateAuthOutput {
-	s.ChallengeName = &v
+func (s *InitiateAuthOutput) SetChallengeName(v ChallengeNameType) *InitiateAuthOutput {
+	s.ChallengeName = v
 	return s
 }
 
@@ -15736,6 +15859,7 @@ func (s ListDevicesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDevicesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDevicesInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
@@ -15834,6 +15958,7 @@ func (s *ListGroupsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -15934,6 +16059,7 @@ func (s *ListIdentityProvidersInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -16035,6 +16161,7 @@ func (s *ListResourceServersInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -16134,6 +16261,7 @@ func (s ListUserImportJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUserImportJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListUserImportJobsInput"}
+
 	if s.MaxResults == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
 	}
@@ -16143,6 +16271,7 @@ func (s *ListUserImportJobsInput) Validate() error {
 	if s.PaginationToken != nil && len(*s.PaginationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PaginationToken", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -16248,6 +16377,7 @@ func (s *ListUserPoolClientsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -16343,6 +16473,7 @@ func (s ListUserPoolsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUserPoolsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListUserPoolsInput"}
+
 	if s.MaxResults == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
 	}
@@ -16441,6 +16572,7 @@ func (s ListUsersInGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUsersInGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -16450,6 +16582,7 @@ func (s *ListUsersInGroupInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -16602,6 +16735,7 @@ func (s *ListUsersInput) Validate() error {
 	if s.PaginationToken != nil && len(*s.PaginationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PaginationToken", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -16689,7 +16823,7 @@ type MFAOptionType struct {
 	AttributeName *string `min:"1" type:"string"`
 
 	// The delivery medium (email message or SMS message) to send the MFA code.
-	DeliveryMedium *string `type:"string" enum:"DeliveryMediumType"`
+	DeliveryMedium DeliveryMediumType `type:"string"`
 }
 
 // String returns the string representation
@@ -16722,8 +16856,8 @@ func (s *MFAOptionType) SetAttributeName(v string) *MFAOptionType {
 }
 
 // SetDeliveryMedium sets the DeliveryMedium field's value.
-func (s *MFAOptionType) SetDeliveryMedium(v string) *MFAOptionType {
-	s.DeliveryMedium = &v
+func (s *MFAOptionType) SetDeliveryMedium(v DeliveryMediumType) *MFAOptionType {
+	s.DeliveryMedium = v
 	return s
 }
 
@@ -16952,7 +17086,7 @@ type ProviderDescription struct {
 	ProviderName *string `min:"1" type:"string"`
 
 	// The identity provider type.
-	ProviderType *string `type:"string" enum:"IdentityProviderTypeType"`
+	ProviderType IdentityProviderTypeType `type:"string"`
 }
 
 // String returns the string representation
@@ -16984,8 +17118,8 @@ func (s *ProviderDescription) SetProviderName(v string) *ProviderDescription {
 }
 
 // SetProviderType sets the ProviderType field's value.
-func (s *ProviderDescription) SetProviderType(v string) *ProviderDescription {
-	s.ProviderType = &v
+func (s *ProviderDescription) SetProviderType(v IdentityProviderTypeType) *ProviderDescription {
+	s.ProviderType = v
 	return s
 }
 
@@ -17078,6 +17212,7 @@ func (s ResendConfirmationCodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResendConfirmationCodeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResendConfirmationCodeInput"}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
@@ -17087,6 +17222,7 @@ func (s *ResendConfirmationCodeInput) Validate() error {
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -17174,12 +17310,14 @@ func (s ResourceServerScopeType) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceServerScopeType) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResourceServerScopeType"}
+
 	if s.ScopeDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScopeDescription"))
 	}
 	if s.ScopeDescription != nil && len(*s.ScopeDescription) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ScopeDescription", 1))
 	}
+
 	if s.ScopeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScopeName"))
 	}
@@ -17267,7 +17405,7 @@ type RespondToAuthChallengeInput struct {
 	// ADMIN_NO_SRP_AUTH is not a valid value.
 	//
 	// ChallengeName is a required field
-	ChallengeName *string `type:"string" required:"true" enum:"ChallengeNameType"`
+	ChallengeName ChallengeNameType `type:"string" required:"true"`
 
 	// The challenge responses. These are inputs corresponding to the value of ChallengeName,
 	// for example:
@@ -17309,9 +17447,10 @@ func (s RespondToAuthChallengeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondToAuthChallengeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RespondToAuthChallengeInput"}
-	if s.ChallengeName == nil {
+	if len(s.ChallengeName) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ChallengeName"))
 	}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
@@ -17329,8 +17468,8 @@ func (s *RespondToAuthChallengeInput) Validate() error {
 }
 
 // SetChallengeName sets the ChallengeName field's value.
-func (s *RespondToAuthChallengeInput) SetChallengeName(v string) *RespondToAuthChallengeInput {
-	s.ChallengeName = &v
+func (s *RespondToAuthChallengeInput) SetChallengeName(v ChallengeNameType) *RespondToAuthChallengeInput {
+	s.ChallengeName = v
 	return s
 }
 
@@ -17362,7 +17501,7 @@ type RespondToAuthChallengeOutput struct {
 	AuthenticationResult *AuthenticationResultType `type:"structure"`
 
 	// The challenge name. For more information, see InitiateAuth (API_InitiateAuth.html).
-	ChallengeName *string `type:"string" enum:"ChallengeNameType"`
+	ChallengeName ChallengeNameType `type:"string"`
 
 	// The challenge parameters. For more information, see InitiateAuth (API_InitiateAuth.html).
 	ChallengeParameters map[string]*string `type:"map"`
@@ -17393,8 +17532,8 @@ func (s *RespondToAuthChallengeOutput) SetAuthenticationResult(v *Authentication
 }
 
 // SetChallengeName sets the ChallengeName field's value.
-func (s *RespondToAuthChallengeOutput) SetChallengeName(v string) *RespondToAuthChallengeOutput {
-	s.ChallengeName = &v
+func (s *RespondToAuthChallengeOutput) SetChallengeName(v ChallengeNameType) *RespondToAuthChallengeOutput {
+	s.ChallengeName = v
 	return s
 }
 
@@ -17416,7 +17555,7 @@ type SchemaAttributeType struct {
 	_ struct{} `type:"structure"`
 
 	// The attribute data type.
-	AttributeDataType *string `type:"string" enum:"AttributeDataType"`
+	AttributeDataType AttributeDataType `type:"string"`
 
 	// Specifies whether the attribute type is developer only.
 	DeveloperOnlyAttribute *bool `type:"boolean"`
@@ -17463,8 +17602,8 @@ func (s *SchemaAttributeType) Validate() error {
 }
 
 // SetAttributeDataType sets the AttributeDataType field's value.
-func (s *SchemaAttributeType) SetAttributeDataType(v string) *SchemaAttributeType {
-	s.AttributeDataType = &v
+func (s *SchemaAttributeType) SetAttributeDataType(v AttributeDataType) *SchemaAttributeType {
+	s.AttributeDataType = v
 	return s
 }
 
@@ -17541,6 +17680,7 @@ func (s *SetUICustomizationInput) Validate() error {
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -17633,9 +17773,11 @@ func (s SetUserSettingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetUserSettingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetUserSettingsInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
+
 	if s.MFAOptions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MFAOptions"))
 	}
@@ -17731,12 +17873,14 @@ func (s SignUpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SignUpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SignUpInput"}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
@@ -17746,6 +17890,7 @@ func (s *SignUpInput) Validate() error {
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -17891,6 +18036,7 @@ func (s SmsConfigurationType) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SmsConfigurationType) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SmsConfigurationType"}
+
 	if s.SnsCallerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnsCallerArn"))
 	}
@@ -17945,12 +18091,14 @@ func (s StartUserImportJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartUserImportJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartUserImportJobInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -18031,12 +18179,14 @@ func (s StopUserImportJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopUserImportJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopUserImportJobInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -18218,7 +18368,7 @@ type UpdateDeviceStatusInput struct {
 	DeviceKey *string `min:"1" type:"string" required:"true"`
 
 	// The status of whether a device is remembered.
-	DeviceRememberedStatus *string `type:"string" enum:"DeviceRememberedStatusType"`
+	DeviceRememberedStatus DeviceRememberedStatusType `type:"string"`
 }
 
 // String returns the string representation
@@ -18234,9 +18384,11 @@ func (s UpdateDeviceStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDeviceStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceStatusInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
+
 	if s.DeviceKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
@@ -18263,8 +18415,8 @@ func (s *UpdateDeviceStatusInput) SetDeviceKey(v string) *UpdateDeviceStatusInpu
 }
 
 // SetDeviceRememberedStatus sets the DeviceRememberedStatus field's value.
-func (s *UpdateDeviceStatusInput) SetDeviceRememberedStatus(v string) *UpdateDeviceStatusInput {
-	s.DeviceRememberedStatus = &v
+func (s *UpdateDeviceStatusInput) SetDeviceRememberedStatus(v DeviceRememberedStatusType) *UpdateDeviceStatusInput {
+	s.DeviceRememberedStatus = v
 	return s
 }
 
@@ -18323,6 +18475,7 @@ func (s UpdateGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -18332,6 +18485,7 @@ func (s *UpdateGroupInput) Validate() error {
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -18436,12 +18590,14 @@ func (s UpdateIdentityProviderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateIdentityProviderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateIdentityProviderInput"}
+
 	if s.ProviderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -18547,18 +18703,21 @@ func (s UpdateResourceServerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateResourceServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateResourceServerInput"}
+
 	if s.Identifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
 	}
 	if s.Identifier != nil && len(*s.Identifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -18664,9 +18823,11 @@ func (s UpdateUserAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserAttributesInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
+
 	if s.UserAttributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserAttributes"))
 	}
@@ -18736,7 +18897,7 @@ type UpdateUserPoolClientInput struct {
 	//
 	// Set to token to specify that the client should get the access token (and,
 	// optionally, ID token, based on scopes) directly.
-	AllowedOAuthFlows []*string `type:"list"`
+	AllowedOAuthFlows []OAuthFlowType `type:"list"`
 
 	// Set to TRUE if the client is allowed to follow the OAuth protocol when interacting
 	// with Cognito user pools.
@@ -18761,7 +18922,7 @@ type UpdateUserPoolClientInput struct {
 	DefaultRedirectURI *string `min:"1" type:"string"`
 
 	// Explicit authentication flows.
-	ExplicitAuthFlows []*string `type:"list"`
+	ExplicitAuthFlows []ExplicitAuthFlowsType `type:"list"`
 
 	// A list of allowed logout URLs for the identity providers.
 	LogoutURLs []*string `type:"list"`
@@ -18800,6 +18961,7 @@ func (s UpdateUserPoolClientInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserPoolClientInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserPoolClientInput"}
+
 	if s.ClientId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
@@ -18812,6 +18974,7 @@ func (s *UpdateUserPoolClientInput) Validate() error {
 	if s.DefaultRedirectURI != nil && len(*s.DefaultRedirectURI) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DefaultRedirectURI", 1))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -18826,7 +18989,7 @@ func (s *UpdateUserPoolClientInput) Validate() error {
 }
 
 // SetAllowedOAuthFlows sets the AllowedOAuthFlows field's value.
-func (s *UpdateUserPoolClientInput) SetAllowedOAuthFlows(v []*string) *UpdateUserPoolClientInput {
+func (s *UpdateUserPoolClientInput) SetAllowedOAuthFlows(v []OAuthFlowType) *UpdateUserPoolClientInput {
 	s.AllowedOAuthFlows = v
 	return s
 }
@@ -18868,7 +19031,7 @@ func (s *UpdateUserPoolClientInput) SetDefaultRedirectURI(v string) *UpdateUserP
 }
 
 // SetExplicitAuthFlows sets the ExplicitAuthFlows field's value.
-func (s *UpdateUserPoolClientInput) SetExplicitAuthFlows(v []*string) *UpdateUserPoolClientInput {
+func (s *UpdateUserPoolClientInput) SetExplicitAuthFlows(v []ExplicitAuthFlowsType) *UpdateUserPoolClientInput {
 	s.ExplicitAuthFlows = v
 	return s
 }
@@ -18946,7 +19109,7 @@ type UpdateUserPoolInput struct {
 
 	// The attributes that are automatically verified when the Amazon Cognito service
 	// makes a request to update user pools.
-	AutoVerifiedAttributes []*string `type:"list"`
+	AutoVerifiedAttributes []VerifiedAttributeType `type:"list"`
 
 	// Device configuration.
 	DeviceConfiguration *DeviceConfigurationType `type:"structure"`
@@ -18973,7 +19136,7 @@ type UpdateUserPoolInput struct {
 	//    specify required when you are initially creating a user pool.
 	//
 	//    * OPTIONAL - Users have the option when registering to create an MFA token.
-	MfaConfiguration *string `type:"string" enum:"UserPoolMfaType"`
+	MfaConfiguration UserPoolMfaType `type:"string"`
 
 	// A container with the policies you wish to update in a user pool.
 	Policies *UserPoolPolicyType `type:"structure"`
@@ -19025,6 +19188,7 @@ func (s *UpdateUserPoolInput) Validate() error {
 	if s.SmsVerificationMessage != nil && len(*s.SmsVerificationMessage) < 6 {
 		invalidParams.Add(aws.NewErrParamMinLen("SmsVerificationMessage", 6))
 	}
+
 	if s.UserPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
@@ -19075,7 +19239,7 @@ func (s *UpdateUserPoolInput) SetAdminCreateUserConfig(v *AdminCreateUserConfigT
 }
 
 // SetAutoVerifiedAttributes sets the AutoVerifiedAttributes field's value.
-func (s *UpdateUserPoolInput) SetAutoVerifiedAttributes(v []*string) *UpdateUserPoolInput {
+func (s *UpdateUserPoolInput) SetAutoVerifiedAttributes(v []VerifiedAttributeType) *UpdateUserPoolInput {
 	s.AutoVerifiedAttributes = v
 	return s
 }
@@ -19111,8 +19275,8 @@ func (s *UpdateUserPoolInput) SetLambdaConfig(v *LambdaConfigType) *UpdateUserPo
 }
 
 // SetMfaConfiguration sets the MfaConfiguration field's value.
-func (s *UpdateUserPoolInput) SetMfaConfiguration(v string) *UpdateUserPoolInput {
-	s.MfaConfiguration = &v
+func (s *UpdateUserPoolInput) SetMfaConfiguration(v UserPoolMfaType) *UpdateUserPoolInput {
+	s.MfaConfiguration = v
 	return s
 }
 
@@ -19237,7 +19401,7 @@ type UserImportJobType struct {
 	//    * Expired - You created a job, but did not start the job within 24-48
 	//    hours. All data associated with the job was deleted, and the job cannot
 	//    be started.
-	Status *string `type:"string" enum:"UserImportJobStatusType"`
+	Status UserImportJobStatusType `type:"string"`
 
 	// The user pool ID for the user pool that the users are being imported into.
 	UserPoolId *string `min:"1" type:"string"`
@@ -19320,8 +19484,8 @@ func (s *UserImportJobType) SetStartDate(v time.Time) *UserImportJobType {
 }
 
 // SetStatus sets the Status field's value.
-func (s *UserImportJobType) SetStatus(v string) *UserImportJobType {
-	s.Status = &v
+func (s *UserImportJobType) SetStatus(v UserImportJobStatusType) *UserImportJobType {
+	s.Status = v
 	return s
 }
 
@@ -19386,7 +19550,7 @@ type UserPoolClientType struct {
 	//
 	// Set to token to specify that the client should get the access token (and,
 	// optionally, ID token, based on scopes) directly.
-	AllowedOAuthFlows []*string `type:"list"`
+	AllowedOAuthFlows []OAuthFlowType `type:"list"`
 
 	// Set to TRUE if the client is allowed to follow the OAuth protocol when interacting
 	// with Cognito user pools.
@@ -19415,7 +19579,7 @@ type UserPoolClientType struct {
 	DefaultRedirectURI *string `min:"1" type:"string"`
 
 	// The explicit authentication flows.
-	ExplicitAuthFlows []*string `type:"list"`
+	ExplicitAuthFlows []ExplicitAuthFlowsType `type:"list"`
 
 	// The date the user pool client was last modified.
 	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -19452,7 +19616,7 @@ func (s UserPoolClientType) GoString() string {
 }
 
 // SetAllowedOAuthFlows sets the AllowedOAuthFlows field's value.
-func (s *UserPoolClientType) SetAllowedOAuthFlows(v []*string) *UserPoolClientType {
+func (s *UserPoolClientType) SetAllowedOAuthFlows(v []OAuthFlowType) *UserPoolClientType {
 	s.AllowedOAuthFlows = v
 	return s
 }
@@ -19506,7 +19670,7 @@ func (s *UserPoolClientType) SetDefaultRedirectURI(v string) *UserPoolClientType
 }
 
 // SetExplicitAuthFlows sets the ExplicitAuthFlows field's value.
-func (s *UserPoolClientType) SetExplicitAuthFlows(v []*string) *UserPoolClientType {
+func (s *UserPoolClientType) SetExplicitAuthFlows(v []ExplicitAuthFlowsType) *UserPoolClientType {
 	s.ExplicitAuthFlows = v
 	return s
 }
@@ -19574,7 +19738,7 @@ type UserPoolDescriptionType struct {
 	Name *string `min:"1" type:"string"`
 
 	// The user pool status in a user pool description.
-	Status *string `type:"string" enum:"StatusType"`
+	Status StatusType `type:"string"`
 }
 
 // String returns the string representation
@@ -19618,8 +19782,8 @@ func (s *UserPoolDescriptionType) SetName(v string) *UserPoolDescriptionType {
 }
 
 // SetStatus sets the Status field's value.
-func (s *UserPoolDescriptionType) SetStatus(v string) *UserPoolDescriptionType {
-	s.Status = &v
+func (s *UserPoolDescriptionType) SetStatus(v StatusType) *UserPoolDescriptionType {
+	s.Status = v
 	return s
 }
 
@@ -19672,10 +19836,10 @@ type UserPoolType struct {
 	AdminCreateUserConfig *AdminCreateUserConfigType `type:"structure"`
 
 	// Specifies the attributes that are aliased in a user pool.
-	AliasAttributes []*string `type:"list"`
+	AliasAttributes []AliasAttributeType `type:"list"`
 
 	// Specifies the attributes that are auto-verified in a user pool.
-	AutoVerifiedAttributes []*string `type:"list"`
+	AutoVerifiedAttributes []VerifiedAttributeType `type:"list"`
 
 	// The date the user pool was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -19716,7 +19880,7 @@ type UserPoolType struct {
 	//    specify required when you are initially creating a user pool.
 	//
 	//    * OPTIONAL - Users have the option when registering to create an MFA token.
-	MfaConfiguration *string `type:"string" enum:"UserPoolMfaType"`
+	MfaConfiguration UserPoolMfaType `type:"string"`
 
 	// The name of the user pool.
 	Name *string `min:"1" type:"string"`
@@ -19740,7 +19904,7 @@ type UserPoolType struct {
 	SmsVerificationMessage *string `min:"6" type:"string"`
 
 	// The status of a user pool.
-	Status *string `type:"string" enum:"StatusType"`
+	Status StatusType `type:"string"`
 
 	// The cost allocation tags for the user pool. For more information, see Adding
 	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
@@ -19748,7 +19912,7 @@ type UserPoolType struct {
 
 	// Specifies whether email addresses or phone numbers can be specified as usernames
 	// when a user signs up.
-	UsernameAttributes []*string `type:"list"`
+	UsernameAttributes []UsernameAttributeType `type:"list"`
 
 	// The template for verification messages.
 	VerificationMessageTemplate *VerificationMessageTemplateType `type:"structure"`
@@ -19771,13 +19935,13 @@ func (s *UserPoolType) SetAdminCreateUserConfig(v *AdminCreateUserConfigType) *U
 }
 
 // SetAliasAttributes sets the AliasAttributes field's value.
-func (s *UserPoolType) SetAliasAttributes(v []*string) *UserPoolType {
+func (s *UserPoolType) SetAliasAttributes(v []AliasAttributeType) *UserPoolType {
 	s.AliasAttributes = v
 	return s
 }
 
 // SetAutoVerifiedAttributes sets the AutoVerifiedAttributes field's value.
-func (s *UserPoolType) SetAutoVerifiedAttributes(v []*string) *UserPoolType {
+func (s *UserPoolType) SetAutoVerifiedAttributes(v []VerifiedAttributeType) *UserPoolType {
 	s.AutoVerifiedAttributes = v
 	return s
 }
@@ -19843,8 +20007,8 @@ func (s *UserPoolType) SetLastModifiedDate(v time.Time) *UserPoolType {
 }
 
 // SetMfaConfiguration sets the MfaConfiguration field's value.
-func (s *UserPoolType) SetMfaConfiguration(v string) *UserPoolType {
-	s.MfaConfiguration = &v
+func (s *UserPoolType) SetMfaConfiguration(v UserPoolMfaType) *UserPoolType {
+	s.MfaConfiguration = v
 	return s
 }
 
@@ -19891,8 +20055,8 @@ func (s *UserPoolType) SetSmsVerificationMessage(v string) *UserPoolType {
 }
 
 // SetStatus sets the Status field's value.
-func (s *UserPoolType) SetStatus(v string) *UserPoolType {
-	s.Status = &v
+func (s *UserPoolType) SetStatus(v StatusType) *UserPoolType {
+	s.Status = v
 	return s
 }
 
@@ -19903,7 +20067,7 @@ func (s *UserPoolType) SetUserPoolTags(v map[string]*string) *UserPoolType {
 }
 
 // SetUsernameAttributes sets the UsernameAttributes field's value.
-func (s *UserPoolType) SetUsernameAttributes(v []*string) *UserPoolType {
+func (s *UserPoolType) SetUsernameAttributes(v []UsernameAttributeType) *UserPoolType {
 	s.UsernameAttributes = v
 	return s
 }
@@ -19945,7 +20109,7 @@ type UserType struct {
 	//    * COMPROMISED - User is disabled due to a potential security threat.
 	//
 	//    * UNKNOWN - User status is not known.
-	UserStatus *string `type:"string" enum:"UserStatusType"`
+	UserStatus UserStatusType `type:"string"`
 
 	// The user name of the user you wish to describe.
 	Username *string `min:"1" type:"string"`
@@ -19992,8 +20156,8 @@ func (s *UserType) SetUserLastModifiedDate(v time.Time) *UserType {
 }
 
 // SetUserStatus sets the UserStatus field's value.
-func (s *UserType) SetUserStatus(v string) *UserType {
-	s.UserStatus = &v
+func (s *UserType) SetUserStatus(v UserStatusType) *UserType {
+	s.UserStatus = v
 	return s
 }
 
@@ -20009,7 +20173,7 @@ type VerificationMessageTemplateType struct {
 	_ struct{} `type:"structure"`
 
 	// The default email option.
-	DefaultEmailOption *string `type:"string" enum:"DefaultEmailOptionType"`
+	DefaultEmailOption DefaultEmailOptionType `type:"string"`
 
 	// The email message template.
 	EmailMessage *string `min:"6" type:"string"`
@@ -20064,8 +20228,8 @@ func (s *VerificationMessageTemplateType) Validate() error {
 }
 
 // SetDefaultEmailOption sets the DefaultEmailOption field's value.
-func (s *VerificationMessageTemplateType) SetDefaultEmailOption(v string) *VerificationMessageTemplateType {
-	s.DefaultEmailOption = &v
+func (s *VerificationMessageTemplateType) SetDefaultEmailOption(v DefaultEmailOptionType) *VerificationMessageTemplateType {
+	s.DefaultEmailOption = v
 	return s
 }
 
@@ -20133,15 +20297,18 @@ func (s VerifyUserAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyUserAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VerifyUserAttributeInput"}
+
 	if s.AccessToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
+
 	if s.Code == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Code"))
 	}
@@ -20190,233 +20357,175 @@ func (s VerifyUserAttributeOutput) GoString() string {
 	return s.String()
 }
 
+type AliasAttributeType string
+
+// Enum values for AliasAttributeType
 const (
-	// AliasAttributeTypePhoneNumber is a AliasAttributeType enum value
-	AliasAttributeTypePhoneNumber = "phone_number"
-
-	// AliasAttributeTypeEmail is a AliasAttributeType enum value
-	AliasAttributeTypeEmail = "email"
-
-	// AliasAttributeTypePreferredUsername is a AliasAttributeType enum value
-	AliasAttributeTypePreferredUsername = "preferred_username"
+	AliasAttributeTypePhoneNumber       AliasAttributeType = "phone_number"
+	AliasAttributeTypeEmail             AliasAttributeType = "email"
+	AliasAttributeTypePreferredUsername AliasAttributeType = "preferred_username"
 )
 
+type AttributeDataType string
+
+// Enum values for AttributeDataType
 const (
-	// AttributeDataTypeString is a AttributeDataType enum value
-	AttributeDataTypeString = "String"
-
-	// AttributeDataTypeNumber is a AttributeDataType enum value
-	AttributeDataTypeNumber = "Number"
-
-	// AttributeDataTypeDateTime is a AttributeDataType enum value
-	AttributeDataTypeDateTime = "DateTime"
-
-	// AttributeDataTypeBoolean is a AttributeDataType enum value
-	AttributeDataTypeBoolean = "Boolean"
+	AttributeDataTypeString   AttributeDataType = "String"
+	AttributeDataTypeNumber   AttributeDataType = "Number"
+	AttributeDataTypeDateTime AttributeDataType = "DateTime"
+	AttributeDataTypeBoolean  AttributeDataType = "Boolean"
 )
 
+type AuthFlowType string
+
+// Enum values for AuthFlowType
 const (
-	// AuthFlowTypeUserSrpAuth is a AuthFlowType enum value
-	AuthFlowTypeUserSrpAuth = "USER_SRP_AUTH"
-
-	// AuthFlowTypeRefreshTokenAuth is a AuthFlowType enum value
-	AuthFlowTypeRefreshTokenAuth = "REFRESH_TOKEN_AUTH"
-
-	// AuthFlowTypeRefreshToken is a AuthFlowType enum value
-	AuthFlowTypeRefreshToken = "REFRESH_TOKEN"
-
-	// AuthFlowTypeCustomAuth is a AuthFlowType enum value
-	AuthFlowTypeCustomAuth = "CUSTOM_AUTH"
-
-	// AuthFlowTypeAdminNoSrpAuth is a AuthFlowType enum value
-	AuthFlowTypeAdminNoSrpAuth = "ADMIN_NO_SRP_AUTH"
+	AuthFlowTypeUserSrpAuth      AuthFlowType = "USER_SRP_AUTH"
+	AuthFlowTypeRefreshTokenAuth AuthFlowType = "REFRESH_TOKEN_AUTH"
+	AuthFlowTypeRefreshToken     AuthFlowType = "REFRESH_TOKEN"
+	AuthFlowTypeCustomAuth       AuthFlowType = "CUSTOM_AUTH"
+	AuthFlowTypeAdminNoSrpAuth   AuthFlowType = "ADMIN_NO_SRP_AUTH"
 )
 
+type ChallengeNameType string
+
+// Enum values for ChallengeNameType
 const (
-	// ChallengeNameTypeSmsMfa is a ChallengeNameType enum value
-	ChallengeNameTypeSmsMfa = "SMS_MFA"
-
-	// ChallengeNameTypePasswordVerifier is a ChallengeNameType enum value
-	ChallengeNameTypePasswordVerifier = "PASSWORD_VERIFIER"
-
-	// ChallengeNameTypeCustomChallenge is a ChallengeNameType enum value
-	ChallengeNameTypeCustomChallenge = "CUSTOM_CHALLENGE"
-
-	// ChallengeNameTypeDeviceSrpAuth is a ChallengeNameType enum value
-	ChallengeNameTypeDeviceSrpAuth = "DEVICE_SRP_AUTH"
-
-	// ChallengeNameTypeDevicePasswordVerifier is a ChallengeNameType enum value
-	ChallengeNameTypeDevicePasswordVerifier = "DEVICE_PASSWORD_VERIFIER"
-
-	// ChallengeNameTypeAdminNoSrpAuth is a ChallengeNameType enum value
-	ChallengeNameTypeAdminNoSrpAuth = "ADMIN_NO_SRP_AUTH"
-
-	// ChallengeNameTypeNewPasswordRequired is a ChallengeNameType enum value
-	ChallengeNameTypeNewPasswordRequired = "NEW_PASSWORD_REQUIRED"
+	ChallengeNameTypeSmsMfa                 ChallengeNameType = "SMS_MFA"
+	ChallengeNameTypePasswordVerifier       ChallengeNameType = "PASSWORD_VERIFIER"
+	ChallengeNameTypeCustomChallenge        ChallengeNameType = "CUSTOM_CHALLENGE"
+	ChallengeNameTypeDeviceSrpAuth          ChallengeNameType = "DEVICE_SRP_AUTH"
+	ChallengeNameTypeDevicePasswordVerifier ChallengeNameType = "DEVICE_PASSWORD_VERIFIER"
+	ChallengeNameTypeAdminNoSrpAuth         ChallengeNameType = "ADMIN_NO_SRP_AUTH"
+	ChallengeNameTypeNewPasswordRequired    ChallengeNameType = "NEW_PASSWORD_REQUIRED"
 )
 
-const (
-	// DefaultEmailOptionTypeConfirmWithLink is a DefaultEmailOptionType enum value
-	DefaultEmailOptionTypeConfirmWithLink = "CONFIRM_WITH_LINK"
+type DefaultEmailOptionType string
 
-	// DefaultEmailOptionTypeConfirmWithCode is a DefaultEmailOptionType enum value
-	DefaultEmailOptionTypeConfirmWithCode = "CONFIRM_WITH_CODE"
+// Enum values for DefaultEmailOptionType
+const (
+	DefaultEmailOptionTypeConfirmWithLink DefaultEmailOptionType = "CONFIRM_WITH_LINK"
+	DefaultEmailOptionTypeConfirmWithCode DefaultEmailOptionType = "CONFIRM_WITH_CODE"
 )
 
-const (
-	// DeliveryMediumTypeSms is a DeliveryMediumType enum value
-	DeliveryMediumTypeSms = "SMS"
+type DeliveryMediumType string
 
-	// DeliveryMediumTypeEmail is a DeliveryMediumType enum value
-	DeliveryMediumTypeEmail = "EMAIL"
+// Enum values for DeliveryMediumType
+const (
+	DeliveryMediumTypeSms   DeliveryMediumType = "SMS"
+	DeliveryMediumTypeEmail DeliveryMediumType = "EMAIL"
 )
 
-const (
-	// DeviceRememberedStatusTypeRemembered is a DeviceRememberedStatusType enum value
-	DeviceRememberedStatusTypeRemembered = "remembered"
+type DeviceRememberedStatusType string
 
-	// DeviceRememberedStatusTypeNotRemembered is a DeviceRememberedStatusType enum value
-	DeviceRememberedStatusTypeNotRemembered = "not_remembered"
+// Enum values for DeviceRememberedStatusType
+const (
+	DeviceRememberedStatusTypeRemembered    DeviceRememberedStatusType = "remembered"
+	DeviceRememberedStatusTypeNotRemembered DeviceRememberedStatusType = "not_remembered"
 )
 
+type DomainStatusType string
+
+// Enum values for DomainStatusType
 const (
-	// DomainStatusTypeCreating is a DomainStatusType enum value
-	DomainStatusTypeCreating = "CREATING"
-
-	// DomainStatusTypeDeleting is a DomainStatusType enum value
-	DomainStatusTypeDeleting = "DELETING"
-
-	// DomainStatusTypeUpdating is a DomainStatusType enum value
-	DomainStatusTypeUpdating = "UPDATING"
-
-	// DomainStatusTypeActive is a DomainStatusType enum value
-	DomainStatusTypeActive = "ACTIVE"
-
-	// DomainStatusTypeFailed is a DomainStatusType enum value
-	DomainStatusTypeFailed = "FAILED"
+	DomainStatusTypeCreating DomainStatusType = "CREATING"
+	DomainStatusTypeDeleting DomainStatusType = "DELETING"
+	DomainStatusTypeUpdating DomainStatusType = "UPDATING"
+	DomainStatusTypeActive   DomainStatusType = "ACTIVE"
+	DomainStatusTypeFailed   DomainStatusType = "FAILED"
 )
 
-const (
-	// ExplicitAuthFlowsTypeAdminNoSrpAuth is a ExplicitAuthFlowsType enum value
-	ExplicitAuthFlowsTypeAdminNoSrpAuth = "ADMIN_NO_SRP_AUTH"
+type ExplicitAuthFlowsType string
 
-	// ExplicitAuthFlowsTypeCustomAuthFlowOnly is a ExplicitAuthFlowsType enum value
-	ExplicitAuthFlowsTypeCustomAuthFlowOnly = "CUSTOM_AUTH_FLOW_ONLY"
+// Enum values for ExplicitAuthFlowsType
+const (
+	ExplicitAuthFlowsTypeAdminNoSrpAuth     ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
+	ExplicitAuthFlowsTypeCustomAuthFlowOnly ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
 )
 
+type IdentityProviderTypeType string
+
+// Enum values for IdentityProviderTypeType
 const (
-	// IdentityProviderTypeTypeSaml is a IdentityProviderTypeType enum value
-	IdentityProviderTypeTypeSaml = "SAML"
-
-	// IdentityProviderTypeTypeFacebook is a IdentityProviderTypeType enum value
-	IdentityProviderTypeTypeFacebook = "Facebook"
-
-	// IdentityProviderTypeTypeGoogle is a IdentityProviderTypeType enum value
-	IdentityProviderTypeTypeGoogle = "Google"
-
-	// IdentityProviderTypeTypeLoginWithAmazon is a IdentityProviderTypeType enum value
-	IdentityProviderTypeTypeLoginWithAmazon = "LoginWithAmazon"
+	IdentityProviderTypeTypeSaml            IdentityProviderTypeType = "SAML"
+	IdentityProviderTypeTypeFacebook        IdentityProviderTypeType = "Facebook"
+	IdentityProviderTypeTypeGoogle          IdentityProviderTypeType = "Google"
+	IdentityProviderTypeTypeLoginWithAmazon IdentityProviderTypeType = "LoginWithAmazon"
 )
 
-const (
-	// MessageActionTypeResend is a MessageActionType enum value
-	MessageActionTypeResend = "RESEND"
+type MessageActionType string
 
-	// MessageActionTypeSuppress is a MessageActionType enum value
-	MessageActionTypeSuppress = "SUPPRESS"
+// Enum values for MessageActionType
+const (
+	MessageActionTypeResend   MessageActionType = "RESEND"
+	MessageActionTypeSuppress MessageActionType = "SUPPRESS"
 )
 
+type OAuthFlowType string
+
+// Enum values for OAuthFlowType
 const (
-	// OAuthFlowTypeCode is a OAuthFlowType enum value
-	OAuthFlowTypeCode = "code"
-
-	// OAuthFlowTypeImplicit is a OAuthFlowType enum value
-	OAuthFlowTypeImplicit = "implicit"
-
-	// OAuthFlowTypeClientCredentials is a OAuthFlowType enum value
-	OAuthFlowTypeClientCredentials = "client_credentials"
+	OAuthFlowTypeCode              OAuthFlowType = "code"
+	OAuthFlowTypeImplicit          OAuthFlowType = "implicit"
+	OAuthFlowTypeClientCredentials OAuthFlowType = "client_credentials"
 )
 
-const (
-	// StatusTypeEnabled is a StatusType enum value
-	StatusTypeEnabled = "Enabled"
+type StatusType string
 
-	// StatusTypeDisabled is a StatusType enum value
-	StatusTypeDisabled = "Disabled"
+// Enum values for StatusType
+const (
+	StatusTypeEnabled  StatusType = "Enabled"
+	StatusTypeDisabled StatusType = "Disabled"
 )
 
+type UserImportJobStatusType string
+
+// Enum values for UserImportJobStatusType
 const (
-	// UserImportJobStatusTypeCreated is a UserImportJobStatusType enum value
-	UserImportJobStatusTypeCreated = "Created"
-
-	// UserImportJobStatusTypePending is a UserImportJobStatusType enum value
-	UserImportJobStatusTypePending = "Pending"
-
-	// UserImportJobStatusTypeInProgress is a UserImportJobStatusType enum value
-	UserImportJobStatusTypeInProgress = "InProgress"
-
-	// UserImportJobStatusTypeStopping is a UserImportJobStatusType enum value
-	UserImportJobStatusTypeStopping = "Stopping"
-
-	// UserImportJobStatusTypeExpired is a UserImportJobStatusType enum value
-	UserImportJobStatusTypeExpired = "Expired"
-
-	// UserImportJobStatusTypeStopped is a UserImportJobStatusType enum value
-	UserImportJobStatusTypeStopped = "Stopped"
-
-	// UserImportJobStatusTypeFailed is a UserImportJobStatusType enum value
-	UserImportJobStatusTypeFailed = "Failed"
-
-	// UserImportJobStatusTypeSucceeded is a UserImportJobStatusType enum value
-	UserImportJobStatusTypeSucceeded = "Succeeded"
+	UserImportJobStatusTypeCreated    UserImportJobStatusType = "Created"
+	UserImportJobStatusTypePending    UserImportJobStatusType = "Pending"
+	UserImportJobStatusTypeInProgress UserImportJobStatusType = "InProgress"
+	UserImportJobStatusTypeStopping   UserImportJobStatusType = "Stopping"
+	UserImportJobStatusTypeExpired    UserImportJobStatusType = "Expired"
+	UserImportJobStatusTypeStopped    UserImportJobStatusType = "Stopped"
+	UserImportJobStatusTypeFailed     UserImportJobStatusType = "Failed"
+	UserImportJobStatusTypeSucceeded  UserImportJobStatusType = "Succeeded"
 )
 
+type UserPoolMfaType string
+
+// Enum values for UserPoolMfaType
 const (
-	// UserPoolMfaTypeOff is a UserPoolMfaType enum value
-	UserPoolMfaTypeOff = "OFF"
-
-	// UserPoolMfaTypeOn is a UserPoolMfaType enum value
-	UserPoolMfaTypeOn = "ON"
-
-	// UserPoolMfaTypeOptional is a UserPoolMfaType enum value
-	UserPoolMfaTypeOptional = "OPTIONAL"
+	UserPoolMfaTypeOff      UserPoolMfaType = "OFF"
+	UserPoolMfaTypeOn       UserPoolMfaType = "ON"
+	UserPoolMfaTypeOptional UserPoolMfaType = "OPTIONAL"
 )
 
+type UserStatusType string
+
+// Enum values for UserStatusType
 const (
-	// UserStatusTypeUnconfirmed is a UserStatusType enum value
-	UserStatusTypeUnconfirmed = "UNCONFIRMED"
-
-	// UserStatusTypeConfirmed is a UserStatusType enum value
-	UserStatusTypeConfirmed = "CONFIRMED"
-
-	// UserStatusTypeArchived is a UserStatusType enum value
-	UserStatusTypeArchived = "ARCHIVED"
-
-	// UserStatusTypeCompromised is a UserStatusType enum value
-	UserStatusTypeCompromised = "COMPROMISED"
-
-	// UserStatusTypeUnknown is a UserStatusType enum value
-	UserStatusTypeUnknown = "UNKNOWN"
-
-	// UserStatusTypeResetRequired is a UserStatusType enum value
-	UserStatusTypeResetRequired = "RESET_REQUIRED"
-
-	// UserStatusTypeForceChangePassword is a UserStatusType enum value
-	UserStatusTypeForceChangePassword = "FORCE_CHANGE_PASSWORD"
+	UserStatusTypeUnconfirmed         UserStatusType = "UNCONFIRMED"
+	UserStatusTypeConfirmed           UserStatusType = "CONFIRMED"
+	UserStatusTypeArchived            UserStatusType = "ARCHIVED"
+	UserStatusTypeCompromised         UserStatusType = "COMPROMISED"
+	UserStatusTypeUnknown             UserStatusType = "UNKNOWN"
+	UserStatusTypeResetRequired       UserStatusType = "RESET_REQUIRED"
+	UserStatusTypeForceChangePassword UserStatusType = "FORCE_CHANGE_PASSWORD"
 )
 
-const (
-	// UsernameAttributeTypePhoneNumber is a UsernameAttributeType enum value
-	UsernameAttributeTypePhoneNumber = "phone_number"
+type UsernameAttributeType string
 
-	// UsernameAttributeTypeEmail is a UsernameAttributeType enum value
-	UsernameAttributeTypeEmail = "email"
+// Enum values for UsernameAttributeType
+const (
+	UsernameAttributeTypePhoneNumber UsernameAttributeType = "phone_number"
+	UsernameAttributeTypeEmail       UsernameAttributeType = "email"
 )
 
-const (
-	// VerifiedAttributeTypePhoneNumber is a VerifiedAttributeType enum value
-	VerifiedAttributeTypePhoneNumber = "phone_number"
+type VerifiedAttributeType string
 
-	// VerifiedAttributeTypeEmail is a VerifiedAttributeType enum value
-	VerifiedAttributeTypeEmail = "email"
+// Enum values for VerifiedAttributeType
+const (
+	VerifiedAttributeTypePhoneNumber VerifiedAttributeType = "phone_number"
+	VerifiedAttributeTypeEmail       VerifiedAttributeType = "email"
 )

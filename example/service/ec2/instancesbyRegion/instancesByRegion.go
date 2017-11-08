@@ -73,7 +73,7 @@ func main() {
 				fmt.Println("printing instance details.....")
 				for _, instance := range reservation.Instances {
 					fmt.Println("instance id " + *instance.InstanceId)
-					fmt.Println("current State " + *instance.State.Name)
+					fmt.Println("current State " + instance.State.Name)
 				}
 			}
 			fmt.Printf("done for region %s **** \n", region)

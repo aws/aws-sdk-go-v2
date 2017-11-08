@@ -20338,6 +20338,7 @@ func (s AcceptReservedInstancesExchangeQuoteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptReservedInstancesExchangeQuoteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AcceptReservedInstancesExchangeQuoteInput"}
+
 	if s.ReservedInstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReservedInstanceIds"))
 	}
@@ -20530,7 +20531,7 @@ type ActiveInstance struct {
 	// The health status of the instance. If the status of either the instance status
 	// check or the system status check is impaired, the health status of the instance
 	// is unhealthy. Otherwise, the health status is healthy.
-	InstanceHealth *string `locationName:"instanceHealth" type:"string" enum:"InstanceHealthStatus"`
+	InstanceHealth InstanceHealthStatus `locationName:"instanceHealth" type:"string"`
 
 	// The ID of the instance.
 	InstanceId *string `locationName:"instanceId" type:"string"`
@@ -20553,8 +20554,8 @@ func (s ActiveInstance) GoString() string {
 }
 
 // SetInstanceHealth sets the InstanceHealth field's value.
-func (s *ActiveInstance) SetInstanceHealth(v string) *ActiveInstance {
-	s.InstanceHealth = &v
+func (s *ActiveInstance) SetInstanceHealth(v InstanceHealthStatus) *ActiveInstance {
+	s.InstanceHealth = v
 	return s
 }
 
@@ -20590,7 +20591,7 @@ type Address struct {
 
 	// Indicates whether this Elastic IP address is for use with instances in EC2-Classic
 	// (standard) or instances in a VPC (vpc).
-	Domain *string `locationName:"domain" type:"string" enum:"DomainType"`
+	Domain DomainType `locationName:"domain" type:"string"`
 
 	// The ID of the instance that the address is associated with (if any).
 	InstanceId *string `locationName:"instanceId" type:"string"`
@@ -20631,8 +20632,8 @@ func (s *Address) SetAssociationId(v string) *Address {
 }
 
 // SetDomain sets the Domain field's value.
-func (s *Address) SetDomain(v string) *Address {
-	s.Domain = &v
+func (s *Address) SetDomain(v DomainType) *Address {
+	s.Domain = v
 	return s
 }
 
@@ -20677,7 +20678,7 @@ type AllocateAddressInput struct {
 	// Set to vpc to allocate the address for use with instances in a VPC.
 	//
 	// Default: The address is for use with instances in EC2-Classic.
-	Domain *string `type:"string" enum:"DomainType"`
+	Domain DomainType `type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -20703,8 +20704,8 @@ func (s *AllocateAddressInput) SetAddress(v string) *AllocateAddressInput {
 }
 
 // SetDomain sets the Domain field's value.
-func (s *AllocateAddressInput) SetDomain(v string) *AllocateAddressInput {
-	s.Domain = &v
+func (s *AllocateAddressInput) SetDomain(v DomainType) *AllocateAddressInput {
+	s.Domain = v
 	return s
 }
 
@@ -20725,7 +20726,7 @@ type AllocateAddressOutput struct {
 
 	// Indicates whether this Elastic IP address is for use with instances in EC2-Classic
 	// (standard) or instances in a VPC (vpc).
-	Domain *string `locationName:"domain" type:"string" enum:"DomainType"`
+	Domain DomainType `locationName:"domain" type:"string"`
 
 	// The Elastic IP address.
 	PublicIp *string `locationName:"publicIp" type:"string"`
@@ -20748,8 +20749,8 @@ func (s *AllocateAddressOutput) SetAllocationId(v string) *AllocateAddressOutput
 }
 
 // SetDomain sets the Domain field's value.
-func (s *AllocateAddressOutput) SetDomain(v string) *AllocateAddressOutput {
-	s.Domain = &v
+func (s *AllocateAddressOutput) SetDomain(v DomainType) *AllocateAddressOutput {
+	s.Domain = v
 	return s
 }
 
@@ -20769,7 +20770,7 @@ type AllocateHostsInput struct {
 	// specifying a host ID.
 	//
 	// Default: Enabled
-	AutoPlacement *string `locationName:"autoPlacement" type:"string" enum:"AutoPlacement"`
+	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string"`
 
 	// The Availability Zone for the Dedicated Hosts.
 	//
@@ -20808,12 +20809,15 @@ func (s AllocateHostsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocateHostsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AllocateHostsInput"}
+
 	if s.AvailabilityZone == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
 	}
+
 	if s.InstanceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -20825,8 +20829,8 @@ func (s *AllocateHostsInput) Validate() error {
 }
 
 // SetAutoPlacement sets the AutoPlacement field's value.
-func (s *AllocateHostsInput) SetAutoPlacement(v string) *AllocateHostsInput {
-	s.AutoPlacement = &v
+func (s *AllocateHostsInput) SetAutoPlacement(v AutoPlacement) *AllocateHostsInput {
+	s.AutoPlacement = v
 	return s
 }
 
@@ -20912,6 +20916,7 @@ func (s AssignIpv6AddressesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssignIpv6AddressesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssignIpv6AddressesInput"}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
@@ -21013,6 +21018,7 @@ func (s AssignPrivateIpAddressesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssignPrivateIpAddressesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssignPrivateIpAddressesInput"}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
@@ -21217,9 +21223,11 @@ func (s AssociateDhcpOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateDhcpOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateDhcpOptionsInput"}
+
 	if s.DhcpOptionsId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DhcpOptionsId"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -21291,9 +21299,11 @@ func (s AssociateIamInstanceProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateIamInstanceProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateIamInstanceProfileInput"}
+
 	if s.IamInstanceProfile == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamInstanceProfile"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -21375,9 +21385,11 @@ func (s AssociateRouteTableInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateRouteTableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateRouteTableInput"}
+
 	if s.RouteTableId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
 	}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
@@ -21459,9 +21471,11 @@ func (s AssociateSubnetCidrBlockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateSubnetCidrBlockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateSubnetCidrBlockInput"}
+
 	if s.Ipv6CidrBlock == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Ipv6CidrBlock"))
 	}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
@@ -21548,6 +21562,7 @@ func (s AssociateVpcCidrBlockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateVpcCidrBlockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateVpcCidrBlockInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -21659,12 +21674,15 @@ func (s AttachClassicLinkVpcInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachClassicLinkVpcInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachClassicLinkVpcInput"}
+
 	if s.Groups == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Groups"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -21759,9 +21777,11 @@ func (s AttachInternetGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachInternetGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachInternetGatewayInput"}
+
 	if s.InternetGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InternetGatewayId"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -21845,12 +21865,15 @@ func (s AttachNetworkInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachNetworkInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachNetworkInterfaceInput"}
+
 	if s.DeviceIndex == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceIndex"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
@@ -21951,12 +21974,15 @@ func (s AttachVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachVolumeInput"}
+
 	if s.Device == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Device"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -22026,9 +22052,11 @@ func (s AttachVpnGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachVpnGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachVpnGatewayInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
+
 	if s.VpnGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpnGatewayId"))
 	}
@@ -22187,6 +22215,7 @@ func (s AuthorizeSecurityGroupEgressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AuthorizeSecurityGroupEgressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeSecurityGroupEgressInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -22427,7 +22456,7 @@ type AvailabilityZone struct {
 	RegionName *string `locationName:"regionName" type:"string"`
 
 	// The state of the Availability Zone.
-	State *string `locationName:"zoneState" type:"string" enum:"AvailabilityZoneState"`
+	State AvailabilityZoneState `locationName:"zoneState" type:"string"`
 
 	// The name of the Availability Zone.
 	ZoneName *string `locationName:"zoneName" type:"string"`
@@ -22456,8 +22485,8 @@ func (s *AvailabilityZone) SetRegionName(v string) *AvailabilityZone {
 }
 
 // SetState sets the State field's value.
-func (s *AvailabilityZone) SetState(v string) *AvailabilityZone {
-	s.State = &v
+func (s *AvailabilityZone) SetState(v AvailabilityZoneState) *AvailabilityZone {
+	s.State = v
 	return s
 }
 
@@ -22656,9 +22685,11 @@ func (s BundleInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BundleInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BundleInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.Storage == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Storage"))
 	}
@@ -22733,7 +22764,7 @@ type BundleTask struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state of the task.
-	State *string `locationName:"state" type:"string" enum:"BundleTaskState"`
+	State BundleTaskState `locationName:"state" type:"string"`
 
 	// The Amazon S3 storage locations.
 	Storage *Storage `locationName:"storage" type:"structure"`
@@ -22783,8 +22814,8 @@ func (s *BundleTask) SetStartTime(v time.Time) *BundleTask {
 }
 
 // SetState sets the State field's value.
-func (s *BundleTask) SetState(v string) *BundleTask {
-	s.State = &v
+func (s *BundleTask) SetState(v BundleTaskState) *BundleTask {
+	s.State = v
 	return s
 }
 
@@ -22864,6 +22895,7 @@ func (s CancelBundleTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelBundleTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelBundleTaskInput"}
+
 	if s.BundleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
@@ -22944,6 +22976,7 @@ func (s CancelConversionTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelConversionTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelConversionTaskInput"}
+
 	if s.ConversionTaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConversionTaskId"))
 	}
@@ -23011,6 +23044,7 @@ func (s CancelExportTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelExportTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelExportTaskInput"}
+
 	if s.ExportTaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExportTaskId"))
 	}
@@ -23155,6 +23189,7 @@ func (s CancelReservedInstancesListingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelReservedInstancesListingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelReservedInstancesListingInput"}
+
 	if s.ReservedInstancesListingId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReservedInstancesListingId"))
 	}
@@ -23204,7 +23239,7 @@ type CancelSpotFleetRequestsError struct {
 	// The error code.
 	//
 	// Code is a required field
-	Code *string `locationName:"code" type:"string" required:"true" enum:"CancelBatchErrorCode"`
+	Code CancelBatchErrorCode `locationName:"code" type:"string" required:"true"`
 
 	// The description for the error code.
 	//
@@ -23223,8 +23258,8 @@ func (s CancelSpotFleetRequestsError) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *CancelSpotFleetRequestsError) SetCode(v string) *CancelSpotFleetRequestsError {
-	s.Code = &v
+func (s *CancelSpotFleetRequestsError) SetCode(v CancelBatchErrorCode) *CancelSpotFleetRequestsError {
+	s.Code = v
 	return s
 }
 
@@ -23308,9 +23343,11 @@ func (s CancelSpotFleetRequestsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelSpotFleetRequestsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelSpotFleetRequestsInput"}
+
 	if s.SpotFleetRequestIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestIds"))
 	}
+
 	if s.TerminateInstances == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TerminateInstances"))
 	}
@@ -23381,12 +23418,12 @@ type CancelSpotFleetRequestsSuccessItem struct {
 	// The current state of the Spot fleet request.
 	//
 	// CurrentSpotFleetRequestState is a required field
-	CurrentSpotFleetRequestState *string `locationName:"currentSpotFleetRequestState" type:"string" required:"true" enum:"BatchState"`
+	CurrentSpotFleetRequestState BatchState `locationName:"currentSpotFleetRequestState" type:"string" required:"true"`
 
 	// The previous state of the Spot fleet request.
 	//
 	// PreviousSpotFleetRequestState is a required field
-	PreviousSpotFleetRequestState *string `locationName:"previousSpotFleetRequestState" type:"string" required:"true" enum:"BatchState"`
+	PreviousSpotFleetRequestState BatchState `locationName:"previousSpotFleetRequestState" type:"string" required:"true"`
 
 	// The ID of the Spot fleet request.
 	//
@@ -23405,14 +23442,14 @@ func (s CancelSpotFleetRequestsSuccessItem) GoString() string {
 }
 
 // SetCurrentSpotFleetRequestState sets the CurrentSpotFleetRequestState field's value.
-func (s *CancelSpotFleetRequestsSuccessItem) SetCurrentSpotFleetRequestState(v string) *CancelSpotFleetRequestsSuccessItem {
-	s.CurrentSpotFleetRequestState = &v
+func (s *CancelSpotFleetRequestsSuccessItem) SetCurrentSpotFleetRequestState(v BatchState) *CancelSpotFleetRequestsSuccessItem {
+	s.CurrentSpotFleetRequestState = v
 	return s
 }
 
 // SetPreviousSpotFleetRequestState sets the PreviousSpotFleetRequestState field's value.
-func (s *CancelSpotFleetRequestsSuccessItem) SetPreviousSpotFleetRequestState(v string) *CancelSpotFleetRequestsSuccessItem {
-	s.PreviousSpotFleetRequestState = &v
+func (s *CancelSpotFleetRequestsSuccessItem) SetPreviousSpotFleetRequestState(v BatchState) *CancelSpotFleetRequestsSuccessItem {
+	s.PreviousSpotFleetRequestState = v
 	return s
 }
 
@@ -23452,6 +23489,7 @@ func (s CancelSpotInstanceRequestsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelSpotInstanceRequestsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelSpotInstanceRequestsInput"}
+
 	if s.SpotInstanceRequestIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotInstanceRequestIds"))
 	}
@@ -23508,7 +23546,7 @@ type CancelledSpotInstanceRequest struct {
 	SpotInstanceRequestId *string `locationName:"spotInstanceRequestId" type:"string"`
 
 	// The state of the Spot instance request.
-	State *string `locationName:"state" type:"string" enum:"CancelSpotInstanceRequestState"`
+	State CancelSpotInstanceRequestState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -23528,8 +23566,8 @@ func (s *CancelledSpotInstanceRequest) SetSpotInstanceRequestId(v string) *Cance
 }
 
 // SetState sets the State field's value.
-func (s *CancelledSpotInstanceRequest) SetState(v string) *CancelledSpotInstanceRequest {
-	s.State = &v
+func (s *CancelledSpotInstanceRequest) SetState(v CancelSpotInstanceRequestState) *CancelledSpotInstanceRequest {
+	s.State = v
 	return s
 }
 
@@ -23731,9 +23769,11 @@ func (s ConfirmProductInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmProductInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfirmProductInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.ProductCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
 	}
@@ -23823,7 +23863,7 @@ type ConversionTask struct {
 	// The state of the conversion task.
 	//
 	// State is a required field
-	State *string `locationName:"state" type:"string" required:"true" enum:"ConversionTaskState"`
+	State ConversionTaskState `locationName:"state" type:"string" required:"true"`
 
 	// The status message related to the conversion task.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -23867,8 +23907,8 @@ func (s *ConversionTask) SetImportVolume(v *ImportVolumeTaskDetails) *Conversion
 }
 
 // SetState sets the State field's value.
-func (s *ConversionTask) SetState(v string) *ConversionTask {
-	s.State = &v
+func (s *ConversionTask) SetState(v ConversionTaskState) *ConversionTask {
+	s.State = v
 	return s
 }
 
@@ -23928,9 +23968,11 @@ func (s CopyFpgaImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyFpgaImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyFpgaImageInput"}
+
 	if s.SourceFpgaImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceFpgaImageId"))
 	}
+
 	if s.SourceRegion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceRegion"))
 	}
@@ -24066,12 +24108,15 @@ func (s CopyImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyImageInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.SourceImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceImageId"))
 	}
+
 	if s.SourceRegion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceRegion"))
 	}
@@ -24236,9 +24281,11 @@ func (s CopySnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopySnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopySnapshotInput"}
+
 	if s.SourceRegion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceRegion"))
 	}
+
 	if s.SourceSnapshotId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotId"))
 	}
@@ -24349,7 +24396,7 @@ type CreateCustomerGatewayInput struct {
 	// The type of VPN connection that this customer gateway supports (ipsec.1).
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"GatewayType"`
+	Type GatewayType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -24365,13 +24412,15 @@ func (s CreateCustomerGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCustomerGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCustomerGatewayInput"}
+
 	if s.BgpAsn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BgpAsn"))
 	}
+
 	if s.PublicIp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PublicIp"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -24400,8 +24449,8 @@ func (s *CreateCustomerGatewayInput) SetPublicIp(v string) *CreateCustomerGatewa
 }
 
 // SetType sets the Type field's value.
-func (s *CreateCustomerGatewayInput) SetType(v string) *CreateCustomerGatewayInput {
-	s.Type = &v
+func (s *CreateCustomerGatewayInput) SetType(v GatewayType) *CreateCustomerGatewayInput {
+	s.Type = v
 	return s
 }
 
@@ -24513,6 +24562,7 @@ func (s CreateDhcpOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDhcpOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDhcpOptionsInput"}
+
 	if s.DhcpConfigurations == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DhcpConfigurations"))
 	}
@@ -24593,6 +24643,7 @@ func (s CreateEgressOnlyInternetGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEgressOnlyInternetGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateEgressOnlyInternetGatewayInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -24685,12 +24736,12 @@ type CreateFlowLogsInput struct {
 	// The type of resource on which to create the flow log.
 	//
 	// ResourceType is a required field
-	ResourceType *string `type:"string" required:"true" enum:"FlowLogsResourceType"`
+	ResourceType FlowLogsResourceType `type:"string" required:"true"`
 
 	// The type of traffic to log.
 	//
 	// TrafficType is a required field
-	TrafficType *string `type:"string" required:"true" enum:"TrafficType"`
+	TrafficType TrafficType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -24706,19 +24757,22 @@ func (s CreateFlowLogsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFlowLogsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateFlowLogsInput"}
+
 	if s.DeliverLogsPermissionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliverLogsPermissionArn"))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
+
 	if s.ResourceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceIds"))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
-	if s.TrafficType == nil {
+	if len(s.TrafficType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TrafficType"))
 	}
 
@@ -24753,14 +24807,14 @@ func (s *CreateFlowLogsInput) SetResourceIds(v []*string) *CreateFlowLogsInput {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *CreateFlowLogsInput) SetResourceType(v string) *CreateFlowLogsInput {
-	s.ResourceType = &v
+func (s *CreateFlowLogsInput) SetResourceType(v FlowLogsResourceType) *CreateFlowLogsInput {
+	s.ResourceType = v
 	return s
 }
 
 // SetTrafficType sets the TrafficType field's value.
-func (s *CreateFlowLogsInput) SetTrafficType(v string) *CreateFlowLogsInput {
-	s.TrafficType = &v
+func (s *CreateFlowLogsInput) SetTrafficType(v TrafficType) *CreateFlowLogsInput {
+	s.TrafficType = v
 	return s
 }
 
@@ -24851,6 +24905,7 @@ func (s CreateFpgaImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFpgaImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateFpgaImageInput"}
+
 	if s.InputStorageLocation == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputStorageLocation"))
 	}
@@ -24981,9 +25036,11 @@ func (s CreateImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateImageInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -25073,7 +25130,7 @@ type CreateInstanceExportTaskInput struct {
 	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// The target virtualization environment.
-	TargetEnvironment *string `locationName:"targetEnvironment" type:"string" enum:"ExportEnvironment"`
+	TargetEnvironment ExportEnvironment `locationName:"targetEnvironment" type:"string"`
 }
 
 // String returns the string representation
@@ -25089,6 +25146,7 @@ func (s CreateInstanceExportTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstanceExportTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceExportTaskInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -25118,8 +25176,8 @@ func (s *CreateInstanceExportTaskInput) SetInstanceId(v string) *CreateInstanceE
 }
 
 // SetTargetEnvironment sets the TargetEnvironment field's value.
-func (s *CreateInstanceExportTaskInput) SetTargetEnvironment(v string) *CreateInstanceExportTaskInput {
-	s.TargetEnvironment = &v
+func (s *CreateInstanceExportTaskInput) SetTargetEnvironment(v ExportEnvironment) *CreateInstanceExportTaskInput {
+	s.TargetEnvironment = v
 	return s
 }
 
@@ -25233,6 +25291,7 @@ func (s CreateKeyPairInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateKeyPairInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateKeyPairInput"}
+
 	if s.KeyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyName"))
 	}
@@ -25335,9 +25394,11 @@ func (s CreateNatGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNatGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateNatGatewayInput"}
+
 	if s.AllocationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AllocationId"))
 	}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
@@ -25450,7 +25511,7 @@ type CreateNetworkAclEntryInput struct {
 	// Indicates whether to allow or deny the traffic that matches the rule.
 	//
 	// RuleAction is a required field
-	RuleAction *string `locationName:"ruleAction" type:"string" required:"true" enum:"RuleAction"`
+	RuleAction RuleAction `locationName:"ruleAction" type:"string" required:"true"`
 
 	// The rule number for the entry (for example, 100). ACL entries are processed
 	// in ascending order by rule number.
@@ -25475,18 +25536,22 @@ func (s CreateNetworkAclEntryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNetworkAclEntryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateNetworkAclEntryInput"}
+
 	if s.Egress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Egress"))
 	}
+
 	if s.NetworkAclId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkAclId"))
 	}
+
 	if s.Protocol == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
-	if s.RuleAction == nil {
+	if len(s.RuleAction) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RuleAction"))
 	}
+
 	if s.RuleNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleNumber"))
 	}
@@ -25546,8 +25611,8 @@ func (s *CreateNetworkAclEntryInput) SetProtocol(v string) *CreateNetworkAclEntr
 }
 
 // SetRuleAction sets the RuleAction field's value.
-func (s *CreateNetworkAclEntryInput) SetRuleAction(v string) *CreateNetworkAclEntryInput {
-	s.RuleAction = &v
+func (s *CreateNetworkAclEntryInput) SetRuleAction(v RuleAction) *CreateNetworkAclEntryInput {
+	s.RuleAction = v
 	return s
 }
 
@@ -25602,6 +25667,7 @@ func (s CreateNetworkAclInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNetworkAclInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateNetworkAclInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -25717,6 +25783,7 @@ func (s CreateNetworkInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNetworkInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateNetworkInterfaceInput"}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
@@ -25841,7 +25908,7 @@ type CreateNetworkInterfacePermissionInput struct {
 	// The type of permission to grant.
 	//
 	// Permission is a required field
-	Permission *string `type:"string" required:"true" enum:"InterfacePermissionType"`
+	Permission InterfacePermissionType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -25857,10 +25924,11 @@ func (s CreateNetworkInterfacePermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNetworkInterfacePermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateNetworkInterfacePermissionInput"}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
-	if s.Permission == nil {
+	if len(s.Permission) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Permission"))
 	}
 
@@ -25895,8 +25963,8 @@ func (s *CreateNetworkInterfacePermissionInput) SetNetworkInterfaceId(v string) 
 }
 
 // SetPermission sets the Permission field's value.
-func (s *CreateNetworkInterfacePermissionInput) SetPermission(v string) *CreateNetworkInterfacePermissionInput {
-	s.Permission = &v
+func (s *CreateNetworkInterfacePermissionInput) SetPermission(v InterfacePermissionType) *CreateNetworkInterfacePermissionInput {
+	s.Permission = v
 	return s
 }
 
@@ -25946,7 +26014,7 @@ type CreatePlacementGroupInput struct {
 	// The placement strategy.
 	//
 	// Strategy is a required field
-	Strategy *string `locationName:"strategy" type:"string" required:"true" enum:"PlacementStrategy"`
+	Strategy PlacementStrategy `locationName:"strategy" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -25962,10 +26030,11 @@ func (s CreatePlacementGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlacementGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePlacementGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
-	if s.Strategy == nil {
+	if len(s.Strategy) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Strategy"))
 	}
 
@@ -25988,8 +26057,8 @@ func (s *CreatePlacementGroupInput) SetGroupName(v string) *CreatePlacementGroup
 }
 
 // SetStrategy sets the Strategy field's value.
-func (s *CreatePlacementGroupInput) SetStrategy(v string) *CreatePlacementGroupInput {
-	s.Strategy = &v
+func (s *CreatePlacementGroupInput) SetStrategy(v PlacementStrategy) *CreatePlacementGroupInput {
+	s.Strategy = v
 	return s
 }
 
@@ -26053,15 +26122,19 @@ func (s CreateReservedInstancesListingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReservedInstancesListingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReservedInstancesListingInput"}
+
 	if s.ClientToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
+
 	if s.InstanceCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))
 	}
+
 	if s.PriceSchedules == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PriceSchedules"))
 	}
+
 	if s.ReservedInstancesId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReservedInstancesId"))
 	}
@@ -26179,6 +26252,7 @@ func (s CreateRouteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRouteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRouteInput"}
+
 	if s.RouteTableId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
 	}
@@ -26304,6 +26378,7 @@ func (s CreateRouteTableInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRouteTableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRouteTableInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -26401,9 +26476,11 @@ func (s CreateSecurityGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSecurityGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSecurityGroupInput"}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -26496,6 +26573,7 @@ func (s CreateSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -26557,6 +26635,7 @@ func (s CreateSpotDatafeedSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSpotDatafeedSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSpotDatafeedSubscriptionInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -26655,9 +26734,11 @@ func (s CreateSubnetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSubnetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSubnetInput"}
+
 	if s.CidrBlock == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CidrBlock"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -26760,9 +26841,11 @@ func (s CreateTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
+
 	if s.Resources == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resources"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -26869,7 +26952,7 @@ type CreateVolumeInput struct {
 	// for Magnetic volumes.
 	//
 	// Default: standard
-	VolumeType *string `type:"string" enum:"VolumeType"`
+	VolumeType VolumeType `type:"string"`
 }
 
 // String returns the string representation
@@ -26885,6 +26968,7 @@ func (s CreateVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVolumeInput"}
+
 	if s.AvailabilityZone == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
 	}
@@ -26944,8 +27028,8 @@ func (s *CreateVolumeInput) SetTagSpecifications(v []*TagSpecification) *CreateV
 }
 
 // SetVolumeType sets the VolumeType field's value.
-func (s *CreateVolumeInput) SetVolumeType(v string) *CreateVolumeInput {
-	s.VolumeType = &v
+func (s *CreateVolumeInput) SetVolumeType(v VolumeType) *CreateVolumeInput {
+	s.VolumeType = v
 	return s
 }
 
@@ -26957,7 +27041,7 @@ type CreateVolumePermission struct {
 
 	// The specific group that is to be added or removed from a volume's list of
 	// create volume permissions.
-	Group *string `locationName:"group" type:"string" enum:"PermissionGroup"`
+	Group PermissionGroup `locationName:"group" type:"string"`
 
 	// The specific AWS account ID that is to be added or removed from a volume's
 	// list of create volume permissions.
@@ -26975,8 +27059,8 @@ func (s CreateVolumePermission) GoString() string {
 }
 
 // SetGroup sets the Group field's value.
-func (s *CreateVolumePermission) SetGroup(v string) *CreateVolumePermission {
-	s.Group = &v
+func (s *CreateVolumePermission) SetGroup(v PermissionGroup) *CreateVolumePermission {
+	s.Group = v
 	return s
 }
 
@@ -27070,9 +27154,11 @@ func (s CreateVpcEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVpcEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcEndpointInput"}
+
 	if s.ServiceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -27185,7 +27271,7 @@ type CreateVpcInput struct {
 	// or dedicated values only.
 	//
 	// Default: default
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
 }
 
 // String returns the string representation
@@ -27201,6 +27287,7 @@ func (s CreateVpcInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVpcInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcInput"}
+
 	if s.CidrBlock == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CidrBlock"))
 	}
@@ -27230,8 +27317,8 @@ func (s *CreateVpcInput) SetDryRun(v bool) *CreateVpcInput {
 }
 
 // SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *CreateVpcInput) SetInstanceTenancy(v string) *CreateVpcInput {
-	s.InstanceTenancy = &v
+func (s *CreateVpcInput) SetInstanceTenancy(v Tenancy) *CreateVpcInput {
+	s.InstanceTenancy = v
 	return s
 }
 
@@ -27385,12 +27472,15 @@ func (s CreateVpnConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVpnConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVpnConnectionInput"}
+
 	if s.CustomerGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CustomerGatewayId"))
 	}
+
 	if s.Type == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
+
 	if s.VpnGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpnGatewayId"))
 	}
@@ -27485,9 +27575,11 @@ func (s CreateVpnConnectionRouteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVpnConnectionRouteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVpnConnectionRouteInput"}
+
 	if s.DestinationCidrBlock == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationCidrBlock"))
 	}
+
 	if s.VpnConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpnConnectionId"))
 	}
@@ -27549,7 +27641,7 @@ type CreateVpnGatewayInput struct {
 	// The type of VPN connection this virtual private gateway supports.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"GatewayType"`
+	Type GatewayType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -27565,7 +27657,7 @@ func (s CreateVpnGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVpnGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVpnGatewayInput"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -27594,8 +27686,8 @@ func (s *CreateVpnGatewayInput) SetDryRun(v bool) *CreateVpnGatewayInput {
 }
 
 // SetType sets the Type field's value.
-func (s *CreateVpnGatewayInput) SetType(v string) *CreateVpnGatewayInput {
-	s.Type = &v
+func (s *CreateVpnGatewayInput) SetType(v GatewayType) *CreateVpnGatewayInput {
+	s.Type = v
 	return s
 }
 
@@ -27726,6 +27818,7 @@ func (s DeleteCustomerGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCustomerGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCustomerGatewayInput"}
+
 	if s.CustomerGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CustomerGatewayId"))
 	}
@@ -27793,6 +27886,7 @@ func (s DeleteDhcpOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDhcpOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDhcpOptionsInput"}
+
 	if s.DhcpOptionsId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DhcpOptionsId"))
 	}
@@ -27859,6 +27953,7 @@ func (s DeleteEgressOnlyInternetGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEgressOnlyInternetGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEgressOnlyInternetGatewayInput"}
+
 	if s.EgressOnlyInternetGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EgressOnlyInternetGatewayId"))
 	}
@@ -27929,6 +28024,7 @@ func (s DeleteFlowLogsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFlowLogsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFlowLogsInput"}
+
 	if s.FlowLogIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FlowLogIds"))
 	}
@@ -27999,6 +28095,7 @@ func (s DeleteFpgaImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFpgaImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFpgaImageInput"}
+
 	if s.FpgaImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FpgaImageId"))
 	}
@@ -28075,6 +28172,7 @@ func (s DeleteInternetGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInternetGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteInternetGatewayInput"}
+
 	if s.InternetGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InternetGatewayId"))
 	}
@@ -28142,6 +28240,7 @@ func (s DeleteKeyPairInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteKeyPairInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteKeyPairInput"}
+
 	if s.KeyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyName"))
 	}
@@ -28203,6 +28302,7 @@ func (s DeleteNatGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNatGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNatGatewayInput"}
+
 	if s.NatGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NatGatewayId"))
 	}
@@ -28284,12 +28384,15 @@ func (s DeleteNetworkAclEntryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNetworkAclEntryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNetworkAclEntryInput"}
+
 	if s.Egress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Egress"))
 	}
+
 	if s.NetworkAclId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkAclId"))
 	}
+
 	if s.RuleNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleNumber"))
 	}
@@ -28369,6 +28472,7 @@ func (s DeleteNetworkAclInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNetworkAclInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNetworkAclInput"}
+
 	if s.NetworkAclId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkAclId"))
 	}
@@ -28436,6 +28540,7 @@ func (s DeleteNetworkInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNetworkInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNetworkInterfaceInput"}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
@@ -28507,6 +28612,7 @@ func (s DeleteNetworkInterfacePermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNetworkInterfacePermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNetworkInterfacePermissionInput"}
+
 	if s.NetworkInterfacePermissionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfacePermissionId"))
 	}
@@ -28590,6 +28696,7 @@ func (s DeletePlacementGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePlacementGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePlacementGroupInput"}
+
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
@@ -28665,6 +28772,7 @@ func (s DeleteRouteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRouteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRouteInput"}
+
 	if s.RouteTableId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
 	}
@@ -28744,6 +28852,7 @@ func (s DeleteRouteTableInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRouteTableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRouteTableInput"}
+
 	if s.RouteTableId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
 	}
@@ -28873,6 +28982,7 @@ func (s DeleteSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotInput"}
+
 	if s.SnapshotId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
@@ -28983,6 +29093,7 @@ func (s DeleteSubnetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSubnetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubnetInput"}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
@@ -29058,6 +29169,7 @@ func (s DeleteTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
+
 	if s.Resources == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resources"))
 	}
@@ -29131,6 +29243,7 @@ func (s DeleteVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVolumeInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -29198,6 +29311,7 @@ func (s DeleteVpcEndpointsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpcEndpointsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcEndpointsInput"}
+
 	if s.VpcEndpointIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcEndpointIds"))
 	}
@@ -29275,6 +29389,7 @@ func (s DeleteVpcInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpcInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -29342,6 +29457,7 @@ func (s DeleteVpcPeeringConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpcPeeringConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcPeeringConnectionInput"}
+
 	if s.VpcPeeringConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcPeeringConnectionId"))
 	}
@@ -29419,6 +29535,7 @@ func (s DeleteVpnConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpnConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpnConnectionInput"}
+
 	if s.VpnConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpnConnectionId"))
 	}
@@ -29485,9 +29602,11 @@ func (s DeleteVpnConnectionRouteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpnConnectionRouteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpnConnectionRouteInput"}
+
 	if s.DestinationCidrBlock == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationCidrBlock"))
 	}
+
 	if s.VpnConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpnConnectionId"))
 	}
@@ -29555,6 +29674,7 @@ func (s DeleteVpnGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpnGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpnGatewayInput"}
+
 	if s.VpnGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpnGatewayId"))
 	}
@@ -29622,6 +29742,7 @@ func (s DeregisterImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterImageInput"}
+
 	if s.ImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
 	}
@@ -29665,7 +29786,7 @@ type DescribeAccountAttributesInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more account attribute names.
-	AttributeNames []*string `locationName:"attributeName" locationNameList:"attributeName" type:"list"`
+	AttributeNames []AccountAttributeName `locationName:"attributeName" locationNameList:"attributeName" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -29685,7 +29806,7 @@ func (s DescribeAccountAttributesInput) GoString() string {
 }
 
 // SetAttributeNames sets the AttributeNames field's value.
-func (s *DescribeAccountAttributesInput) SetAttributeNames(v []*string) *DescribeAccountAttributesInput {
+func (s *DescribeAccountAttributesInput) SetAttributeNames(v []AccountAttributeName) *DescribeAccountAttributesInput {
 	s.AttributeNames = v
 	return s
 }
@@ -30755,7 +30876,7 @@ type DescribeFpgaImageAttributeInput struct {
 	// The AFI attribute.
 	//
 	// Attribute is a required field
-	Attribute *string `type:"string" required:"true" enum:"FpgaImageAttributeName"`
+	Attribute FpgaImageAttributeName `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -30782,9 +30903,10 @@ func (s DescribeFpgaImageAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFpgaImageAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeFpgaImageAttributeInput"}
-	if s.Attribute == nil {
+	if len(s.Attribute) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
+
 	if s.FpgaImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FpgaImageId"))
 	}
@@ -30796,8 +30918,8 @@ func (s *DescribeFpgaImageAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *DescribeFpgaImageAttributeInput) SetAttribute(v string) *DescribeFpgaImageAttributeInput {
-	s.Attribute = &v
+func (s *DescribeFpgaImageAttributeInput) SetAttribute(v FpgaImageAttributeName) *DescribeFpgaImageAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -31500,6 +31622,7 @@ func (s DescribeIdentityIdFormatInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeIdentityIdFormatInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityIdFormatInput"}
+
 	if s.PrincipalArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrincipalArn"))
 	}
@@ -31559,7 +31682,7 @@ type DescribeImageAttributeInput struct {
 	// to get information about the block device mapping for the AMI.
 	//
 	// Attribute is a required field
-	Attribute *string `type:"string" required:"true" enum:"ImageAttributeName"`
+	Attribute ImageAttributeName `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -31586,9 +31709,10 @@ func (s DescribeImageAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeImageAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeImageAttributeInput"}
-	if s.Attribute == nil {
+	if len(s.Attribute) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
+
 	if s.ImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
 	}
@@ -31600,8 +31724,8 @@ func (s *DescribeImageAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *DescribeImageAttributeInput) SetAttribute(v string) *DescribeImageAttributeInput {
-	s.Attribute = &v
+func (s *DescribeImageAttributeInput) SetAttribute(v ImageAttributeName) *DescribeImageAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -32093,7 +32217,7 @@ type DescribeInstanceAttributeInput struct {
 	// Note: The enaSupport attribute is not supported at this time.
 	//
 	// Attribute is a required field
-	Attribute *string `locationName:"attribute" type:"string" required:"true" enum:"InstanceAttributeName"`
+	Attribute InstanceAttributeName `locationName:"attribute" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -32120,9 +32244,10 @@ func (s DescribeInstanceAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstanceAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceAttributeInput"}
-	if s.Attribute == nil {
+	if len(s.Attribute) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -32134,8 +32259,8 @@ func (s *DescribeInstanceAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *DescribeInstanceAttributeInput) SetAttribute(v string) *DescribeInstanceAttributeInput {
-	s.Attribute = &v
+func (s *DescribeInstanceAttributeInput) SetAttribute(v InstanceAttributeName) *DescribeInstanceAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -33331,7 +33456,7 @@ type DescribeNetworkInterfaceAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The attribute of the network interface. This parameter is required.
-	Attribute *string `locationName:"attribute" type:"string" enum:"NetworkInterfaceAttribute"`
+	Attribute NetworkInterfaceAttribute `locationName:"attribute" type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -33358,6 +33483,7 @@ func (s DescribeNetworkInterfaceAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeNetworkInterfaceAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeNetworkInterfaceAttributeInput"}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
@@ -33369,8 +33495,8 @@ func (s *DescribeNetworkInterfaceAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *DescribeNetworkInterfaceAttributeInput) SetAttribute(v string) *DescribeNetworkInterfaceAttributeInput {
-	s.Attribute = &v
+func (s *DescribeNetworkInterfaceAttributeInput) SetAttribute(v NetworkInterfaceAttribute) *DescribeNetworkInterfaceAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -34062,12 +34188,12 @@ type DescribeReservedInstancesInput struct {
 	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// Describes whether the Reserved Instance is Standard or Convertible.
-	OfferingClass *string `type:"string" enum:"OfferingClassType"`
+	OfferingClass OfferingClassType `type:"string"`
 
 	// The Reserved Instance offering type. If you are using tools that predate
 	// the 2011-11-01 API version, you only have access to the Medium Utilization
 	// Reserved Instance offering type.
-	OfferingType *string `locationName:"offeringType" type:"string" enum:"OfferingTypeValues"`
+	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string"`
 
 	// One or more Reserved Instance IDs.
 	//
@@ -34098,14 +34224,14 @@ func (s *DescribeReservedInstancesInput) SetFilters(v []*Filter) *DescribeReserv
 }
 
 // SetOfferingClass sets the OfferingClass field's value.
-func (s *DescribeReservedInstancesInput) SetOfferingClass(v string) *DescribeReservedInstancesInput {
-	s.OfferingClass = &v
+func (s *DescribeReservedInstancesInput) SetOfferingClass(v OfferingClassType) *DescribeReservedInstancesInput {
+	s.OfferingClass = v
 	return s
 }
 
 // SetOfferingType sets the OfferingType field's value.
-func (s *DescribeReservedInstancesInput) SetOfferingType(v string) *DescribeReservedInstancesInput {
-	s.OfferingType = &v
+func (s *DescribeReservedInstancesInput) SetOfferingType(v OfferingTypeValues) *DescribeReservedInstancesInput {
+	s.OfferingType = v
 	return s
 }
 
@@ -34365,12 +34491,12 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// or dedicated values only.
 	//
 	// Default: default
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
 
 	// The instance type that the reservation will cover (for example, m1.small).
 	// For more information, see Instance Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	InstanceType *string `type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `type:"string"`
 
 	// The maximum duration (in seconds) to filter when searching for offerings.
 	//
@@ -34398,16 +34524,16 @@ type DescribeReservedInstancesOfferingsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The offering class of the Reserved Instance. Can be standard or convertible.
-	OfferingClass *string `type:"string" enum:"OfferingClassType"`
+	OfferingClass OfferingClassType `type:"string"`
 
 	// The Reserved Instance offering type. If you are using tools that predate
 	// the 2011-11-01 API version, you only have access to the Medium Utilization
 	// Reserved Instance offering type.
-	OfferingType *string `locationName:"offeringType" type:"string" enum:"OfferingTypeValues"`
+	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string"`
 
 	// The Reserved Instance product platform description. Instances that include
 	// (Amazon VPC) in the description are for use with Amazon VPC.
-	ProductDescription *string `type:"string" enum:"RIProductDescription"`
+	ProductDescription RIProductDescription `type:"string"`
 
 	// One or more Reserved Instances offering IDs.
 	ReservedInstancesOfferingIds []*string `locationName:"ReservedInstancesOfferingId" type:"list"`
@@ -34448,14 +34574,14 @@ func (s *DescribeReservedInstancesOfferingsInput) SetIncludeMarketplace(v bool) 
 }
 
 // SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetInstanceTenancy(v string) *DescribeReservedInstancesOfferingsInput {
-	s.InstanceTenancy = &v
+func (s *DescribeReservedInstancesOfferingsInput) SetInstanceTenancy(v Tenancy) *DescribeReservedInstancesOfferingsInput {
+	s.InstanceTenancy = v
 	return s
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetInstanceType(v string) *DescribeReservedInstancesOfferingsInput {
-	s.InstanceType = &v
+func (s *DescribeReservedInstancesOfferingsInput) SetInstanceType(v InstanceType) *DescribeReservedInstancesOfferingsInput {
+	s.InstanceType = v
 	return s
 }
 
@@ -34490,20 +34616,20 @@ func (s *DescribeReservedInstancesOfferingsInput) SetNextToken(v string) *Descri
 }
 
 // SetOfferingClass sets the OfferingClass field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetOfferingClass(v string) *DescribeReservedInstancesOfferingsInput {
-	s.OfferingClass = &v
+func (s *DescribeReservedInstancesOfferingsInput) SetOfferingClass(v OfferingClassType) *DescribeReservedInstancesOfferingsInput {
+	s.OfferingClass = v
 	return s
 }
 
 // SetOfferingType sets the OfferingType field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetOfferingType(v string) *DescribeReservedInstancesOfferingsInput {
-	s.OfferingType = &v
+func (s *DescribeReservedInstancesOfferingsInput) SetOfferingType(v OfferingTypeValues) *DescribeReservedInstancesOfferingsInput {
+	s.OfferingType = v
 	return s
 }
 
 // SetProductDescription sets the ProductDescription field's value.
-func (s *DescribeReservedInstancesOfferingsInput) SetProductDescription(v string) *DescribeReservedInstancesOfferingsInput {
-	s.ProductDescription = &v
+func (s *DescribeReservedInstancesOfferingsInput) SetProductDescription(v RIProductDescription) *DescribeReservedInstancesOfferingsInput {
+	s.ProductDescription = v
 	return s
 }
 
@@ -34775,9 +34901,11 @@ func (s DescribeScheduledInstanceAvailabilityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeScheduledInstanceAvailabilityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeScheduledInstanceAvailabilityInput"}
+
 	if s.FirstSlotStartTimeRange == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FirstSlotStartTimeRange"))
 	}
+
 	if s.Recurrence == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Recurrence"))
 	}
@@ -35023,6 +35151,7 @@ func (s DescribeSecurityGroupReferencesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSecurityGroupReferencesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSecurityGroupReferencesInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -35208,7 +35337,7 @@ type DescribeSnapshotAttributeInput struct {
 	// The snapshot attribute you would like to view.
 	//
 	// Attribute is a required field
-	Attribute *string `type:"string" required:"true" enum:"SnapshotAttributeName"`
+	Attribute SnapshotAttributeName `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -35235,9 +35364,10 @@ func (s DescribeSnapshotAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSnapshotAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSnapshotAttributeInput"}
-	if s.Attribute == nil {
+	if len(s.Attribute) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
+
 	if s.SnapshotId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
@@ -35249,8 +35379,8 @@ func (s *DescribeSnapshotAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *DescribeSnapshotAttributeInput) SetAttribute(v string) *DescribeSnapshotAttributeInput {
-	s.Attribute = &v
+func (s *DescribeSnapshotAttributeInput) SetAttribute(v SnapshotAttributeName) *DescribeSnapshotAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -35571,6 +35701,7 @@ func (s DescribeSpotFleetInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSpotFleetInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSpotFleetInstancesInput"}
+
 	if s.SpotFleetRequestId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestId"))
 	}
@@ -35666,7 +35797,7 @@ type DescribeSpotFleetRequestHistoryInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The type of events to describe. By default, all events are described.
-	EventType *string `locationName:"eventType" type:"string" enum:"EventType"`
+	EventType EventType `locationName:"eventType" type:"string"`
 
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
@@ -35700,9 +35831,11 @@ func (s DescribeSpotFleetRequestHistoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSpotFleetRequestHistoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSpotFleetRequestHistoryInput"}
+
 	if s.SpotFleetRequestId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestId"))
 	}
+
 	if s.StartTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
@@ -35720,8 +35853,8 @@ func (s *DescribeSpotFleetRequestHistoryInput) SetDryRun(v bool) *DescribeSpotFl
 }
 
 // SetEventType sets the EventType field's value.
-func (s *DescribeSpotFleetRequestHistoryInput) SetEventType(v string) *DescribeSpotFleetRequestHistoryInput {
-	s.EventType = &v
+func (s *DescribeSpotFleetRequestHistoryInput) SetEventType(v EventType) *DescribeSpotFleetRequestHistoryInput {
+	s.EventType = v
 	return s
 }
 
@@ -36135,7 +36268,7 @@ type DescribeSpotPriceHistoryInput struct {
 
 	// Filters the results by the specified instance types. Note that T2 and HS1
 	// instance types are not supported.
-	InstanceTypes []*string `locationName:"InstanceType" type:"list"`
+	InstanceTypes []InstanceType `locationName:"InstanceType" type:"list"`
 
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
@@ -36188,7 +36321,7 @@ func (s *DescribeSpotPriceHistoryInput) SetFilters(v []*Filter) *DescribeSpotPri
 }
 
 // SetInstanceTypes sets the InstanceTypes field's value.
-func (s *DescribeSpotPriceHistoryInput) SetInstanceTypes(v []*string) *DescribeSpotPriceHistoryInput {
+func (s *DescribeSpotPriceHistoryInput) SetInstanceTypes(v []InstanceType) *DescribeSpotPriceHistoryInput {
 	s.InstanceTypes = v
 	return s
 }
@@ -36296,6 +36429,7 @@ func (s *DescribeStaleSecurityGroupsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -36590,7 +36724,7 @@ type DescribeVolumeAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The attribute of the volume. This parameter is required.
-	Attribute *string `type:"string" enum:"VolumeAttributeName"`
+	Attribute VolumeAttributeName `type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -36617,6 +36751,7 @@ func (s DescribeVolumeAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeVolumeAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeVolumeAttributeInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -36628,8 +36763,8 @@ func (s *DescribeVolumeAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *DescribeVolumeAttributeInput) SetAttribute(v string) *DescribeVolumeAttributeInput {
-	s.Attribute = &v
+func (s *DescribeVolumeAttributeInput) SetAttribute(v VolumeAttributeName) *DescribeVolumeAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -37097,7 +37232,7 @@ type DescribeVpcAttributeInput struct {
 	// The VPC attribute.
 	//
 	// Attribute is a required field
-	Attribute *string `type:"string" required:"true" enum:"VpcAttributeName"`
+	Attribute VpcAttributeName `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -37124,9 +37259,10 @@ func (s DescribeVpcAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeVpcAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeVpcAttributeInput"}
-	if s.Attribute == nil {
+	if len(s.Attribute) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -37138,8 +37274,8 @@ func (s *DescribeVpcAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *DescribeVpcAttributeInput) SetAttribute(v string) *DescribeVpcAttributeInput {
-	s.Attribute = &v
+func (s *DescribeVpcAttributeInput) SetAttribute(v VpcAttributeName) *DescribeVpcAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -38080,9 +38216,11 @@ func (s DetachClassicLinkVpcInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachClassicLinkVpcInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachClassicLinkVpcInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -38171,9 +38309,11 @@ func (s DetachInternetGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachInternetGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachInternetGatewayInput"}
+
 	if s.InternetGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InternetGatewayId"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -38250,6 +38390,7 @@ func (s DetachNetworkInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachNetworkInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachNetworkInterfaceInput"}
+
 	if s.AttachmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttachmentId"))
 	}
@@ -38338,6 +38479,7 @@ func (s DetachVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachVolumeInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -38413,9 +38555,11 @@ func (s DetachVpnGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachVpnGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachVpnGatewayInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
+
 	if s.VpnGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpnGatewayId"))
 	}
@@ -38565,9 +38709,11 @@ func (s DisableVgwRoutePropagationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableVgwRoutePropagationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableVgwRoutePropagationInput"}
+
 	if s.GatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayId"))
 	}
+
 	if s.RouteTableId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
 	}
@@ -38685,6 +38831,7 @@ func (s DisableVpcClassicLinkInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableVpcClassicLinkInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableVpcClassicLinkInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -38816,6 +38963,7 @@ func (s DisassociateIamInstanceProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateIamInstanceProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateIamInstanceProfileInput"}
+
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
@@ -38887,6 +39035,7 @@ func (s DisassociateRouteTableInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateRouteTableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateRouteTableInput"}
+
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
@@ -38947,6 +39096,7 @@ func (s DisassociateSubnetCidrBlockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateSubnetCidrBlockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateSubnetCidrBlockInput"}
+
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
@@ -39019,6 +39169,7 @@ func (s DisassociateVpcCidrBlockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateVpcCidrBlockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateVpcCidrBlockInput"}
+
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
@@ -39151,7 +39302,7 @@ type DiskImageDescription struct {
 	// The disk image format.
 	//
 	// Format is a required field
-	Format *string `locationName:"format" type:"string" required:"true" enum:"DiskImageFormat"`
+	Format DiskImageFormat `locationName:"format" type:"string" required:"true"`
 
 	// A presigned URL for the import manifest stored in Amazon S3. For information
 	// about creating a presigned URL for an Amazon S3 object, read the "Query String
@@ -39188,8 +39339,8 @@ func (s *DiskImageDescription) SetChecksum(v string) *DiskImageDescription {
 }
 
 // SetFormat sets the Format field's value.
-func (s *DiskImageDescription) SetFormat(v string) *DiskImageDescription {
-	s.Format = &v
+func (s *DiskImageDescription) SetFormat(v DiskImageFormat) *DiskImageDescription {
+	s.Format = v
 	return s
 }
 
@@ -39218,7 +39369,7 @@ type DiskImageDetail struct {
 	// The disk image format.
 	//
 	// Format is a required field
-	Format *string `locationName:"format" type:"string" required:"true" enum:"DiskImageFormat"`
+	Format DiskImageFormat `locationName:"format" type:"string" required:"true"`
 
 	// A presigned URL for the import manifest stored in Amazon S3 and presented
 	// here as an Amazon S3 presigned URL. For information about creating a presigned
@@ -39246,12 +39397,14 @@ func (s DiskImageDetail) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DiskImageDetail) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DiskImageDetail"}
+
 	if s.Bytes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bytes"))
 	}
-	if s.Format == nil {
+	if len(s.Format) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
+
 	if s.ImportManifestUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImportManifestUrl"))
 	}
@@ -39269,8 +39422,8 @@ func (s *DiskImageDetail) SetBytes(v int64) *DiskImageDetail {
 }
 
 // SetFormat sets the Format field's value.
-func (s *DiskImageDetail) SetFormat(v string) *DiskImageDetail {
-	s.Format = &v
+func (s *DiskImageDetail) SetFormat(v DiskImageFormat) *DiskImageDetail {
+	s.Format = v
 	return s
 }
 
@@ -39361,7 +39514,7 @@ type EbsBlockDevice struct {
 	// The volume type: gp2, io1, st1, sc1, or standard.
 	//
 	// Default: standard
-	VolumeType *string `locationName:"volumeType" type:"string" enum:"VolumeType"`
+	VolumeType VolumeType `locationName:"volumeType" type:"string"`
 }
 
 // String returns the string representation
@@ -39405,8 +39558,8 @@ func (s *EbsBlockDevice) SetVolumeSize(v int64) *EbsBlockDevice {
 }
 
 // SetVolumeType sets the VolumeType field's value.
-func (s *EbsBlockDevice) SetVolumeType(v string) *EbsBlockDevice {
-	s.VolumeType = &v
+func (s *EbsBlockDevice) SetVolumeType(v VolumeType) *EbsBlockDevice {
+	s.VolumeType = v
 	return s
 }
 
@@ -39422,7 +39575,7 @@ type EbsInstanceBlockDevice struct {
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
 
 	// The attachment state.
-	Status *string `locationName:"status" type:"string" enum:"AttachmentStatus"`
+	Status AttachmentStatus `locationName:"status" type:"string"`
 
 	// The ID of the EBS volume.
 	VolumeId *string `locationName:"volumeId" type:"string"`
@@ -39451,8 +39604,8 @@ func (s *EbsInstanceBlockDevice) SetDeleteOnTermination(v bool) *EbsInstanceBloc
 }
 
 // SetStatus sets the Status field's value.
-func (s *EbsInstanceBlockDevice) SetStatus(v string) *EbsInstanceBlockDevice {
-	s.Status = &v
+func (s *EbsInstanceBlockDevice) SetStatus(v AttachmentStatus) *EbsInstanceBlockDevice {
+	s.Status = v
 	return s
 }
 
@@ -39589,7 +39742,7 @@ type ElasticGpuHealth struct {
 	_ struct{} `type:"structure"`
 
 	// The health status.
-	Status *string `locationName:"status" type:"string" enum:"ElasticGpuStatus"`
+	Status ElasticGpuStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -39603,8 +39756,8 @@ func (s ElasticGpuHealth) GoString() string {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ElasticGpuHealth) SetStatus(v string) *ElasticGpuHealth {
-	s.Status = &v
+func (s *ElasticGpuHealth) SetStatus(v ElasticGpuStatus) *ElasticGpuHealth {
+	s.Status = v
 	return s
 }
 
@@ -39632,6 +39785,7 @@ func (s ElasticGpuSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticGpuSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ElasticGpuSpecification"}
+
 	if s.Type == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
@@ -39663,7 +39817,7 @@ type ElasticGpus struct {
 	ElasticGpuId *string `locationName:"elasticGpuId" type:"string"`
 
 	// The state of the Elastic GPU.
-	ElasticGpuState *string `locationName:"elasticGpuState" type:"string" enum:"ElasticGpuState"`
+	ElasticGpuState ElasticGpuState `locationName:"elasticGpuState" type:"string"`
 
 	// The type of Elastic GPU.
 	ElasticGpuType *string `locationName:"elasticGpuType" type:"string"`
@@ -39701,8 +39855,8 @@ func (s *ElasticGpus) SetElasticGpuId(v string) *ElasticGpus {
 }
 
 // SetElasticGpuState sets the ElasticGpuState field's value.
-func (s *ElasticGpus) SetElasticGpuState(v string) *ElasticGpus {
-	s.ElasticGpuState = &v
+func (s *ElasticGpus) SetElasticGpuState(v ElasticGpuState) *ElasticGpus {
+	s.ElasticGpuState = v
 	return s
 }
 
@@ -39747,9 +39901,11 @@ func (s EnableVgwRoutePropagationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableVgwRoutePropagationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableVgwRoutePropagationInput"}
+
 	if s.GatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayId"))
 	}
+
 	if s.RouteTableId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
 	}
@@ -39817,6 +39973,7 @@ func (s EnableVolumeIOInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableVolumeIOInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableVolumeIOInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -39934,6 +40091,7 @@ func (s EnableVpcClassicLinkInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableVpcClassicLinkInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableVpcClassicLinkInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -40094,7 +40252,7 @@ type ExportTask struct {
 	InstanceExportDetails *InstanceExportDetails `locationName:"instanceExport" type:"structure"`
 
 	// The state of the export task.
-	State *string `locationName:"state" type:"string" enum:"ExportTaskState"`
+	State ExportTaskState `locationName:"state" type:"string"`
 
 	// The status message related to the export task.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -40135,8 +40293,8 @@ func (s *ExportTask) SetInstanceExportDetails(v *InstanceExportDetails) *ExportT
 }
 
 // SetState sets the State field's value.
-func (s *ExportTask) SetState(v string) *ExportTask {
-	s.State = &v
+func (s *ExportTask) SetState(v ExportTaskState) *ExportTask {
+	s.State = v
 	return s
 }
 
@@ -40153,10 +40311,10 @@ type ExportToS3Task struct {
 
 	// The container format used to combine disk images with metadata (such as OVF).
 	// If absent, only the disk image is exported.
-	ContainerFormat *string `locationName:"containerFormat" type:"string" enum:"ContainerFormat"`
+	ContainerFormat ContainerFormat `locationName:"containerFormat" type:"string"`
 
 	// The format for the exported image.
-	DiskImageFormat *string `locationName:"diskImageFormat" type:"string" enum:"DiskImageFormat"`
+	DiskImageFormat DiskImageFormat `locationName:"diskImageFormat" type:"string"`
 
 	// The S3 bucket for the destination image. The destination bucket must exist
 	// and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
@@ -40177,14 +40335,14 @@ func (s ExportToS3Task) GoString() string {
 }
 
 // SetContainerFormat sets the ContainerFormat field's value.
-func (s *ExportToS3Task) SetContainerFormat(v string) *ExportToS3Task {
-	s.ContainerFormat = &v
+func (s *ExportToS3Task) SetContainerFormat(v ContainerFormat) *ExportToS3Task {
+	s.ContainerFormat = v
 	return s
 }
 
 // SetDiskImageFormat sets the DiskImageFormat field's value.
-func (s *ExportToS3Task) SetDiskImageFormat(v string) *ExportToS3Task {
-	s.DiskImageFormat = &v
+func (s *ExportToS3Task) SetDiskImageFormat(v DiskImageFormat) *ExportToS3Task {
+	s.DiskImageFormat = v
 	return s
 }
 
@@ -40207,10 +40365,10 @@ type ExportToS3TaskSpecification struct {
 
 	// The container format used to combine disk images with metadata (such as OVF).
 	// If absent, only the disk image is exported.
-	ContainerFormat *string `locationName:"containerFormat" type:"string" enum:"ContainerFormat"`
+	ContainerFormat ContainerFormat `locationName:"containerFormat" type:"string"`
 
 	// The format for the exported image.
-	DiskImageFormat *string `locationName:"diskImageFormat" type:"string" enum:"DiskImageFormat"`
+	DiskImageFormat DiskImageFormat `locationName:"diskImageFormat" type:"string"`
 
 	// The S3 bucket for the destination image. The destination bucket must exist
 	// and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
@@ -40232,14 +40390,14 @@ func (s ExportToS3TaskSpecification) GoString() string {
 }
 
 // SetContainerFormat sets the ContainerFormat field's value.
-func (s *ExportToS3TaskSpecification) SetContainerFormat(v string) *ExportToS3TaskSpecification {
-	s.ContainerFormat = &v
+func (s *ExportToS3TaskSpecification) SetContainerFormat(v ContainerFormat) *ExportToS3TaskSpecification {
+	s.ContainerFormat = v
 	return s
 }
 
 // SetDiskImageFormat sets the DiskImageFormat field's value.
-func (s *ExportToS3TaskSpecification) SetDiskImageFormat(v string) *ExportToS3TaskSpecification {
-	s.DiskImageFormat = &v
+func (s *ExportToS3TaskSpecification) SetDiskImageFormat(v DiskImageFormat) *ExportToS3TaskSpecification {
+	s.DiskImageFormat = v
 	return s
 }
 
@@ -40326,7 +40484,7 @@ type FlowLog struct {
 	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	// The type of traffic captured for the flow log.
-	TrafficType *string `locationName:"trafficType" type:"string" enum:"TrafficType"`
+	TrafficType TrafficType `locationName:"trafficType" type:"string"`
 }
 
 // String returns the string representation
@@ -40388,8 +40546,8 @@ func (s *FlowLog) SetResourceId(v string) *FlowLog {
 }
 
 // SetTrafficType sets the TrafficType field's value.
-func (s *FlowLog) SetTrafficType(v string) *FlowLog {
-	s.TrafficType = &v
+func (s *FlowLog) SetTrafficType(v TrafficType) *FlowLog {
+	s.TrafficType = v
 	return s
 }
 
@@ -40611,7 +40769,7 @@ type FpgaImageState struct {
 	//    * failed - AFI bitstream generation failed.
 	//
 	//    * unavailable - The AFI is no longer available for use.
-	Code *string `locationName:"code" type:"string" enum:"FpgaImageStateCode"`
+	Code FpgaImageStateCode `locationName:"code" type:"string"`
 
 	// If the state is failed, this is the error message.
 	Message *string `locationName:"message" type:"string"`
@@ -40628,8 +40786,8 @@ func (s FpgaImageState) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *FpgaImageState) SetCode(v string) *FpgaImageState {
-	s.Code = &v
+func (s *FpgaImageState) SetCode(v FpgaImageStateCode) *FpgaImageState {
+	s.Code = v
 	return s
 }
 
@@ -40669,6 +40827,7 @@ func (s GetConsoleOutputInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetConsoleOutputInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetConsoleOutputInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -40769,6 +40928,7 @@ func (s GetConsoleScreenshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetConsoleScreenshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetConsoleScreenshotInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -40860,9 +41020,11 @@ func (s GetHostReservationPurchasePreviewInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHostReservationPurchasePreviewInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetHostReservationPurchasePreviewInput"}
+
 	if s.HostIdSet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostIdSet"))
 	}
+
 	if s.OfferingId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OfferingId"))
 	}
@@ -40891,7 +41053,7 @@ type GetHostReservationPurchasePreviewOutput struct {
 
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts
 	// are specified. At this time, the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// The purchase information of the Dedicated Host Reservation and the Dedicated
 	// Hosts associated with it.
@@ -40915,8 +41077,8 @@ func (s GetHostReservationPurchasePreviewOutput) GoString() string {
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *GetHostReservationPurchasePreviewOutput) SetCurrencyCode(v string) *GetHostReservationPurchasePreviewOutput {
-	s.CurrencyCode = &v
+func (s *GetHostReservationPurchasePreviewOutput) SetCurrencyCode(v CurrencyCodeValues) *GetHostReservationPurchasePreviewOutput {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -40968,6 +41130,7 @@ func (s GetPasswordDataInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPasswordDataInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPasswordDataInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -41068,6 +41231,7 @@ func (s GetReservedInstancesExchangeQuoteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetReservedInstancesExchangeQuoteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetReservedInstancesExchangeQuoteInput"}
+
 	if s.ReservedInstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReservedInstanceIds"))
 	}
@@ -41257,7 +41421,7 @@ type HistoryRecord struct {
 	//    * instanceChange - Indicates that an instance was launched or terminated.
 	//
 	// EventType is a required field
-	EventType *string `locationName:"eventType" type:"string" required:"true" enum:"EventType"`
+	EventType EventType `locationName:"eventType" type:"string" required:"true"`
 
 	// The date and time of the event, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	//
@@ -41282,8 +41446,8 @@ func (s *HistoryRecord) SetEventInformation(v *EventInformation) *HistoryRecord 
 }
 
 // SetEventType sets the EventType field's value.
-func (s *HistoryRecord) SetEventType(v string) *HistoryRecord {
-	s.EventType = &v
+func (s *HistoryRecord) SetEventType(v EventType) *HistoryRecord {
+	s.EventType = v
 	return s
 }
 
@@ -41299,7 +41463,7 @@ type Host struct {
 	_ struct{} `type:"structure"`
 
 	// Whether auto-placement is on or off.
-	AutoPlacement *string `locationName:"autoPlacement" type:"string" enum:"AutoPlacement"`
+	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string"`
 
 	// The Availability Zone of the Dedicated Host.
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
@@ -41326,7 +41490,7 @@ type Host struct {
 	Instances []*HostInstance `locationName:"instances" locationNameList:"item" type:"list"`
 
 	// The Dedicated Host's state.
-	State *string `locationName:"state" type:"string" enum:"AllocationState"`
+	State AllocationState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -41340,8 +41504,8 @@ func (s Host) GoString() string {
 }
 
 // SetAutoPlacement sets the AutoPlacement field's value.
-func (s *Host) SetAutoPlacement(v string) *Host {
-	s.AutoPlacement = &v
+func (s *Host) SetAutoPlacement(v AutoPlacement) *Host {
+	s.AutoPlacement = v
 	return s
 }
 
@@ -41388,8 +41552,8 @@ func (s *Host) SetInstances(v []*HostInstance) *Host {
 }
 
 // SetState sets the State field's value.
-func (s *Host) SetState(v string) *Host {
-	s.State = &v
+func (s *Host) SetState(v AllocationState) *Host {
+	s.State = v
 	return s
 }
 
@@ -41433,7 +41597,7 @@ type HostOffering struct {
 	_ struct{} `type:"structure"`
 
 	// The currency of the offering.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// The duration of the offering (in seconds).
 	Duration *int64 `locationName:"duration" type:"integer"`
@@ -41448,7 +41612,7 @@ type HostOffering struct {
 	OfferingId *string `locationName:"offeringId" type:"string"`
 
 	// The available payment option.
-	PaymentOption *string `locationName:"paymentOption" type:"string" enum:"PaymentOption"`
+	PaymentOption PaymentOption `locationName:"paymentOption" type:"string"`
 
 	// The upfront price of the offering. Does not apply to No Upfront offerings.
 	UpfrontPrice *string `locationName:"upfrontPrice" type:"string"`
@@ -41465,8 +41629,8 @@ func (s HostOffering) GoString() string {
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *HostOffering) SetCurrencyCode(v string) *HostOffering {
-	s.CurrencyCode = &v
+func (s *HostOffering) SetCurrencyCode(v CurrencyCodeValues) *HostOffering {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -41495,8 +41659,8 @@ func (s *HostOffering) SetOfferingId(v string) *HostOffering {
 }
 
 // SetPaymentOption sets the PaymentOption field's value.
-func (s *HostOffering) SetPaymentOption(v string) *HostOffering {
-	s.PaymentOption = &v
+func (s *HostOffering) SetPaymentOption(v PaymentOption) *HostOffering {
+	s.PaymentOption = v
 	return s
 }
 
@@ -41568,7 +41732,7 @@ type HostReservation struct {
 
 	// The currency in which the upfrontPrice and hourlyPrice amounts are specified.
 	// At this time, the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// The length of the reservation's term, specified in seconds. Can be 31536000
 	// (1 year) | 94608000 (3 years).
@@ -41596,13 +41760,13 @@ type HostReservation struct {
 	OfferingId *string `locationName:"offeringId" type:"string"`
 
 	// The payment option selected for this reservation.
-	PaymentOption *string `locationName:"paymentOption" type:"string" enum:"PaymentOption"`
+	PaymentOption PaymentOption `locationName:"paymentOption" type:"string"`
 
 	// The date and time that the reservation started.
 	Start *time.Time `locationName:"start" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state of the reservation.
-	State *string `locationName:"state" type:"string" enum:"ReservationState"`
+	State ReservationState `locationName:"state" type:"string"`
 
 	// The upfront price of the reservation.
 	UpfrontPrice *string `locationName:"upfrontPrice" type:"string"`
@@ -41625,8 +41789,8 @@ func (s *HostReservation) SetCount(v int64) *HostReservation {
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *HostReservation) SetCurrencyCode(v string) *HostReservation {
-	s.CurrencyCode = &v
+func (s *HostReservation) SetCurrencyCode(v CurrencyCodeValues) *HostReservation {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -41673,8 +41837,8 @@ func (s *HostReservation) SetOfferingId(v string) *HostReservation {
 }
 
 // SetPaymentOption sets the PaymentOption field's value.
-func (s *HostReservation) SetPaymentOption(v string) *HostReservation {
-	s.PaymentOption = &v
+func (s *HostReservation) SetPaymentOption(v PaymentOption) *HostReservation {
+	s.PaymentOption = v
 	return s
 }
 
@@ -41685,8 +41849,8 @@ func (s *HostReservation) SetStart(v time.Time) *HostReservation {
 }
 
 // SetState sets the State field's value.
-func (s *HostReservation) SetState(v string) *HostReservation {
-	s.State = &v
+func (s *HostReservation) SetState(v ReservationState) *HostReservation {
+	s.State = v
 	return s
 }
 
@@ -41745,7 +41909,7 @@ type IamInstanceProfileAssociation struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The state of the association.
-	State *string `locationName:"state" type:"string" enum:"IamInstanceProfileAssociationState"`
+	State IamInstanceProfileAssociationState `locationName:"state" type:"string"`
 
 	// The time the IAM instance profile was associated with the instance.
 	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"iso8601"`
@@ -41780,8 +41944,8 @@ func (s *IamInstanceProfileAssociation) SetInstanceId(v string) *IamInstanceProf
 }
 
 // SetState sets the State field's value.
-func (s *IamInstanceProfileAssociation) SetState(v string) *IamInstanceProfileAssociation {
-	s.State = &v
+func (s *IamInstanceProfileAssociation) SetState(v IamInstanceProfileAssociationState) *IamInstanceProfileAssociation {
+	s.State = v
 	return s
 }
 
@@ -41910,7 +42074,7 @@ type Image struct {
 	_ struct{} `type:"structure"`
 
 	// The architecture of the image.
-	Architecture *string `locationName:"architecture" type:"string" enum:"ArchitectureValues"`
+	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
 
 	// Any block device mapping entries.
 	BlockDeviceMappings []*BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
@@ -41925,7 +42089,7 @@ type Image struct {
 	EnaSupport *bool `locationName:"enaSupport" type:"boolean"`
 
 	// The hypervisor type of the image.
-	Hypervisor *string `locationName:"hypervisor" type:"string" enum:"HypervisorType"`
+	Hypervisor HypervisorType `locationName:"hypervisor" type:"string"`
 
 	// The ID of the AMI.
 	ImageId *string `locationName:"imageId" type:"string"`
@@ -41938,7 +42102,7 @@ type Image struct {
 	ImageOwnerAlias *string `locationName:"imageOwnerAlias" type:"string"`
 
 	// The type of image.
-	ImageType *string `locationName:"imageType" type:"string" enum:"ImageTypeValues"`
+	ImageType ImageTypeValues `locationName:"imageType" type:"string"`
 
 	// The kernel associated with the image, if any. Only applicable for machine
 	// images.
@@ -41951,7 +42115,7 @@ type Image struct {
 	OwnerId *string `locationName:"imageOwnerId" type:"string"`
 
 	// The value is Windows for Windows AMIs; otherwise blank.
-	Platform *string `locationName:"platform" type:"string" enum:"PlatformValues"`
+	Platform PlatformValues `locationName:"platform" type:"string"`
 
 	// Any product codes associated with the AMI.
 	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
@@ -41970,7 +42134,7 @@ type Image struct {
 
 	// The type of root device used by the AMI. The AMI can use an EBS volume or
 	// an instance store volume.
-	RootDeviceType *string `locationName:"rootDeviceType" type:"string" enum:"DeviceType"`
+	RootDeviceType DeviceType `locationName:"rootDeviceType" type:"string"`
 
 	// Specifies whether enhanced networking with the Intel 82599 Virtual Function
 	// interface is enabled.
@@ -41978,7 +42142,7 @@ type Image struct {
 
 	// The current state of the AMI. If the state is available, the image is successfully
 	// registered and can be used to launch an instance.
-	State *string `locationName:"imageState" type:"string" enum:"ImageState"`
+	State ImageState `locationName:"imageState" type:"string"`
 
 	// The reason for the state change.
 	StateReason *StateReason `locationName:"stateReason" type:"structure"`
@@ -41987,7 +42151,7 @@ type Image struct {
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of virtualization of the AMI.
-	VirtualizationType *string `locationName:"virtualizationType" type:"string" enum:"VirtualizationType"`
+	VirtualizationType VirtualizationType `locationName:"virtualizationType" type:"string"`
 }
 
 // String returns the string representation
@@ -42001,8 +42165,8 @@ func (s Image) GoString() string {
 }
 
 // SetArchitecture sets the Architecture field's value.
-func (s *Image) SetArchitecture(v string) *Image {
-	s.Architecture = &v
+func (s *Image) SetArchitecture(v ArchitectureValues) *Image {
+	s.Architecture = v
 	return s
 }
 
@@ -42031,8 +42195,8 @@ func (s *Image) SetEnaSupport(v bool) *Image {
 }
 
 // SetHypervisor sets the Hypervisor field's value.
-func (s *Image) SetHypervisor(v string) *Image {
-	s.Hypervisor = &v
+func (s *Image) SetHypervisor(v HypervisorType) *Image {
+	s.Hypervisor = v
 	return s
 }
 
@@ -42055,8 +42219,8 @@ func (s *Image) SetImageOwnerAlias(v string) *Image {
 }
 
 // SetImageType sets the ImageType field's value.
-func (s *Image) SetImageType(v string) *Image {
-	s.ImageType = &v
+func (s *Image) SetImageType(v ImageTypeValues) *Image {
+	s.ImageType = v
 	return s
 }
 
@@ -42079,8 +42243,8 @@ func (s *Image) SetOwnerId(v string) *Image {
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *Image) SetPlatform(v string) *Image {
-	s.Platform = &v
+func (s *Image) SetPlatform(v PlatformValues) *Image {
+	s.Platform = v
 	return s
 }
 
@@ -42109,8 +42273,8 @@ func (s *Image) SetRootDeviceName(v string) *Image {
 }
 
 // SetRootDeviceType sets the RootDeviceType field's value.
-func (s *Image) SetRootDeviceType(v string) *Image {
-	s.RootDeviceType = &v
+func (s *Image) SetRootDeviceType(v DeviceType) *Image {
+	s.RootDeviceType = v
 	return s
 }
 
@@ -42121,8 +42285,8 @@ func (s *Image) SetSriovNetSupport(v string) *Image {
 }
 
 // SetState sets the State field's value.
-func (s *Image) SetState(v string) *Image {
-	s.State = &v
+func (s *Image) SetState(v ImageState) *Image {
+	s.State = v
 	return s
 }
 
@@ -42139,8 +42303,8 @@ func (s *Image) SetTags(v []*Tag) *Image {
 }
 
 // SetVirtualizationType sets the VirtualizationType field's value.
-func (s *Image) SetVirtualizationType(v string) *Image {
-	s.VirtualizationType = &v
+func (s *Image) SetVirtualizationType(v VirtualizationType) *Image {
+	s.VirtualizationType = v
 	return s
 }
 
@@ -42596,7 +42760,7 @@ type ImportInstanceInput struct {
 	// The instance operating system.
 	//
 	// Platform is a required field
-	Platform *string `locationName:"platform" type:"string" required:"true" enum:"PlatformValues"`
+	Platform PlatformValues `locationName:"platform" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -42612,7 +42776,7 @@ func (s ImportInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportInstanceInput"}
-	if s.Platform == nil {
+	if len(s.Platform) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Platform"))
 	}
 	if s.DiskImages != nil {
@@ -42657,8 +42821,8 @@ func (s *ImportInstanceInput) SetLaunchSpecification(v *ImportInstanceLaunchSpec
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *ImportInstanceInput) SetPlatform(v string) *ImportInstanceInput {
-	s.Platform = &v
+func (s *ImportInstanceInput) SetPlatform(v PlatformValues) *ImportInstanceInput {
+	s.Platform = v
 	return s
 }
 
@@ -42671,7 +42835,7 @@ type ImportInstanceLaunchSpecification struct {
 	AdditionalInfo *string `locationName:"additionalInfo" type:"string"`
 
 	// The architecture of the instance.
-	Architecture *string `locationName:"architecture" type:"string" enum:"ArchitectureValues"`
+	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
 
 	// One or more security group IDs.
 	GroupIds []*string `locationName:"GroupId" locationNameList:"SecurityGroupId" type:"list"`
@@ -42681,12 +42845,12 @@ type ImportInstanceLaunchSpecification struct {
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
-	InstanceInitiatedShutdownBehavior *string `locationName:"instanceInitiatedShutdownBehavior" type:"string" enum:"ShutdownBehavior"`
+	InstanceInitiatedShutdownBehavior ShutdownBehavior `locationName:"instanceInitiatedShutdownBehavior" type:"string"`
 
 	// The instance type. For more information about the instance types that you
 	// can import, see Instance Types (http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#vmimport-instance-types)
 	// in the VM Import/Export User Guide.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// Indicates whether monitoring is enabled.
 	Monitoring *bool `locationName:"monitoring" type:"boolean"`
@@ -42723,8 +42887,8 @@ func (s *ImportInstanceLaunchSpecification) SetAdditionalInfo(v string) *ImportI
 }
 
 // SetArchitecture sets the Architecture field's value.
-func (s *ImportInstanceLaunchSpecification) SetArchitecture(v string) *ImportInstanceLaunchSpecification {
-	s.Architecture = &v
+func (s *ImportInstanceLaunchSpecification) SetArchitecture(v ArchitectureValues) *ImportInstanceLaunchSpecification {
+	s.Architecture = v
 	return s
 }
 
@@ -42741,14 +42905,14 @@ func (s *ImportInstanceLaunchSpecification) SetGroupNames(v []*string) *ImportIn
 }
 
 // SetInstanceInitiatedShutdownBehavior sets the InstanceInitiatedShutdownBehavior field's value.
-func (s *ImportInstanceLaunchSpecification) SetInstanceInitiatedShutdownBehavior(v string) *ImportInstanceLaunchSpecification {
-	s.InstanceInitiatedShutdownBehavior = &v
+func (s *ImportInstanceLaunchSpecification) SetInstanceInitiatedShutdownBehavior(v ShutdownBehavior) *ImportInstanceLaunchSpecification {
+	s.InstanceInitiatedShutdownBehavior = v
 	return s
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *ImportInstanceLaunchSpecification) SetInstanceType(v string) *ImportInstanceLaunchSpecification {
-	s.InstanceType = &v
+func (s *ImportInstanceLaunchSpecification) SetInstanceType(v InstanceType) *ImportInstanceLaunchSpecification {
+	s.InstanceType = v
 	return s
 }
 
@@ -42819,7 +42983,7 @@ type ImportInstanceTaskDetails struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The instance operating system.
-	Platform *string `locationName:"platform" type:"string" enum:"PlatformValues"`
+	Platform PlatformValues `locationName:"platform" type:"string"`
 
 	// One or more volumes.
 	//
@@ -42850,8 +43014,8 @@ func (s *ImportInstanceTaskDetails) SetInstanceId(v string) *ImportInstanceTaskD
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *ImportInstanceTaskDetails) SetPlatform(v string) *ImportInstanceTaskDetails {
-	s.Platform = &v
+func (s *ImportInstanceTaskDetails) SetPlatform(v PlatformValues) *ImportInstanceTaskDetails {
+	s.Platform = v
 	return s
 }
 
@@ -42988,9 +43152,11 @@ func (s ImportKeyPairInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportKeyPairInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportKeyPairInput"}
+
 	if s.KeyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyName"))
 	}
+
 	if s.PublicKeyMaterial == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PublicKeyMaterial"))
 	}
@@ -43255,12 +43421,15 @@ func (s ImportVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportVolumeInput"}
+
 	if s.AvailabilityZone == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
 	}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
+
 	if s.Volume == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Volume"))
 	}
@@ -43415,7 +43584,7 @@ type Instance struct {
 	AmiLaunchIndex *int64 `locationName:"amiLaunchIndex" type:"integer"`
 
 	// The architecture of the image.
-	Architecture *string `locationName:"architecture" type:"string" enum:"ArchitectureValues"`
+	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
 
 	// Any block device mapping entries for the instance.
 	BlockDeviceMappings []*InstanceBlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
@@ -43437,7 +43606,7 @@ type Instance struct {
 	EnaSupport *bool `locationName:"enaSupport" type:"boolean"`
 
 	// The hypervisor type of the instance.
-	Hypervisor *string `locationName:"hypervisor" type:"string" enum:"HypervisorType"`
+	Hypervisor HypervisorType `locationName:"hypervisor" type:"string"`
 
 	// The IAM instance profile associated with the instance, if applicable.
 	IamInstanceProfile *IamInstanceProfile `locationName:"iamInstanceProfile" type:"structure"`
@@ -43449,10 +43618,10 @@ type Instance struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// Indicates whether this is a Spot Instance or a Scheduled Instance.
-	InstanceLifecycle *string `locationName:"instanceLifecycle" type:"string" enum:"InstanceLifecycleType"`
+	InstanceLifecycle InstanceLifecycleType `locationName:"instanceLifecycle" type:"string"`
 
 	// The instance type.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// The kernel associated with this instance, if applicable.
 	KernelId *string `locationName:"kernelId" type:"string"`
@@ -43474,7 +43643,7 @@ type Instance struct {
 	Placement *Placement `locationName:"placement" type:"structure"`
 
 	// The value is Windows for Windows instances; otherwise blank.
-	Platform *string `locationName:"platform" type:"string" enum:"PlatformValues"`
+	Platform PlatformValues `locationName:"platform" type:"string"`
 
 	// (IPv4 only) The private DNS hostname name assigned to the instance. This
 	// DNS hostname can only be used inside the Amazon EC2 network. This name is
@@ -43508,7 +43677,7 @@ type Instance struct {
 
 	// The root device type used by the AMI. The AMI can use an EBS volume or an
 	// instance store volume.
-	RootDeviceType *string `locationName:"rootDeviceType" type:"string" enum:"DeviceType"`
+	RootDeviceType DeviceType `locationName:"rootDeviceType" type:"string"`
 
 	// One or more security groups for the instance.
 	SecurityGroups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
@@ -43544,7 +43713,7 @@ type Instance struct {
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The virtualization type of the instance.
-	VirtualizationType *string `locationName:"virtualizationType" type:"string" enum:"VirtualizationType"`
+	VirtualizationType VirtualizationType `locationName:"virtualizationType" type:"string"`
 
 	// [EC2-VPC] The ID of the VPC in which the instance is running.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -43567,8 +43736,8 @@ func (s *Instance) SetAmiLaunchIndex(v int64) *Instance {
 }
 
 // SetArchitecture sets the Architecture field's value.
-func (s *Instance) SetArchitecture(v string) *Instance {
-	s.Architecture = &v
+func (s *Instance) SetArchitecture(v ArchitectureValues) *Instance {
+	s.Architecture = v
 	return s
 }
 
@@ -43603,8 +43772,8 @@ func (s *Instance) SetEnaSupport(v bool) *Instance {
 }
 
 // SetHypervisor sets the Hypervisor field's value.
-func (s *Instance) SetHypervisor(v string) *Instance {
-	s.Hypervisor = &v
+func (s *Instance) SetHypervisor(v HypervisorType) *Instance {
+	s.Hypervisor = v
 	return s
 }
 
@@ -43627,14 +43796,14 @@ func (s *Instance) SetInstanceId(v string) *Instance {
 }
 
 // SetInstanceLifecycle sets the InstanceLifecycle field's value.
-func (s *Instance) SetInstanceLifecycle(v string) *Instance {
-	s.InstanceLifecycle = &v
+func (s *Instance) SetInstanceLifecycle(v InstanceLifecycleType) *Instance {
+	s.InstanceLifecycle = v
 	return s
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *Instance) SetInstanceType(v string) *Instance {
-	s.InstanceType = &v
+func (s *Instance) SetInstanceType(v InstanceType) *Instance {
+	s.InstanceType = v
 	return s
 }
 
@@ -43675,8 +43844,8 @@ func (s *Instance) SetPlacement(v *Placement) *Instance {
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *Instance) SetPlatform(v string) *Instance {
-	s.Platform = &v
+func (s *Instance) SetPlatform(v PlatformValues) *Instance {
+	s.Platform = v
 	return s
 }
 
@@ -43723,8 +43892,8 @@ func (s *Instance) SetRootDeviceName(v string) *Instance {
 }
 
 // SetRootDeviceType sets the RootDeviceType field's value.
-func (s *Instance) SetRootDeviceType(v string) *Instance {
-	s.RootDeviceType = &v
+func (s *Instance) SetRootDeviceType(v DeviceType) *Instance {
+	s.RootDeviceType = v
 	return s
 }
 
@@ -43783,8 +43952,8 @@ func (s *Instance) SetTags(v []*Tag) *Instance {
 }
 
 // SetVirtualizationType sets the VirtualizationType field's value.
-func (s *Instance) SetVirtualizationType(v string) *Instance {
-	s.VirtualizationType = &v
+func (s *Instance) SetVirtualizationType(v VirtualizationType) *Instance {
+	s.VirtualizationType = v
 	return s
 }
 
@@ -43934,7 +44103,7 @@ type InstanceCount struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// The states of the listed Reserved Instances.
-	State *string `locationName:"state" type:"string" enum:"ListingState"`
+	State ListingState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -43954,8 +44123,8 @@ func (s *InstanceCount) SetInstanceCount(v int64) *InstanceCount {
 }
 
 // SetState sets the State field's value.
-func (s *InstanceCount) SetState(v string) *InstanceCount {
-	s.State = &v
+func (s *InstanceCount) SetState(v ListingState) *InstanceCount {
+	s.State = v
 	return s
 }
 
@@ -43968,7 +44137,7 @@ type InstanceExportDetails struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The target virtualization environment.
-	TargetEnvironment *string `locationName:"targetEnvironment" type:"string" enum:"ExportEnvironment"`
+	TargetEnvironment ExportEnvironment `locationName:"targetEnvironment" type:"string"`
 }
 
 // String returns the string representation
@@ -43988,8 +44157,8 @@ func (s *InstanceExportDetails) SetInstanceId(v string) *InstanceExportDetails {
 }
 
 // SetTargetEnvironment sets the TargetEnvironment field's value.
-func (s *InstanceExportDetails) SetTargetEnvironment(v string) *InstanceExportDetails {
-	s.TargetEnvironment = &v
+func (s *InstanceExportDetails) SetTargetEnvironment(v ExportEnvironment) *InstanceExportDetails {
+	s.TargetEnvironment = v
 	return s
 }
 
@@ -44095,7 +44264,7 @@ type InstanceNetworkInterface struct {
 	SourceDestCheck *bool `locationName:"sourceDestCheck" type:"boolean"`
 
 	// The status of the network interface.
-	Status *string `locationName:"status" type:"string" enum:"NetworkInterfaceStatus"`
+	Status NetworkInterfaceStatus `locationName:"status" type:"string"`
 
 	// The ID of the subnet.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -44187,8 +44356,8 @@ func (s *InstanceNetworkInterface) SetSourceDestCheck(v bool) *InstanceNetworkIn
 }
 
 // SetStatus sets the Status field's value.
-func (s *InstanceNetworkInterface) SetStatus(v string) *InstanceNetworkInterface {
-	s.Status = &v
+func (s *InstanceNetworkInterface) SetStatus(v NetworkInterfaceStatus) *InstanceNetworkInterface {
+	s.Status = v
 	return s
 }
 
@@ -44265,7 +44434,7 @@ type InstanceNetworkInterfaceAttachment struct {
 	DeviceIndex *int64 `locationName:"deviceIndex" type:"integer"`
 
 	// The attachment state.
-	Status *string `locationName:"status" type:"string" enum:"AttachmentStatus"`
+	Status AttachmentStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -44303,8 +44472,8 @@ func (s *InstanceNetworkInterfaceAttachment) SetDeviceIndex(v int64) *InstanceNe
 }
 
 // SetStatus sets the Status field's value.
-func (s *InstanceNetworkInterfaceAttachment) SetStatus(v string) *InstanceNetworkInterfaceAttachment {
-	s.Status = &v
+func (s *InstanceNetworkInterfaceAttachment) SetStatus(v AttachmentStatus) *InstanceNetworkInterfaceAttachment {
+	s.Status = v
 	return s
 }
 
@@ -44553,7 +44722,7 @@ type InstanceState struct {
 	Code *int64 `locationName:"code" type:"integer"`
 
 	// The current state of the instance.
-	Name *string `locationName:"name" type:"string" enum:"InstanceStateName"`
+	Name InstanceStateName `locationName:"name" type:"string"`
 }
 
 // String returns the string representation
@@ -44573,8 +44742,8 @@ func (s *InstanceState) SetCode(v int64) *InstanceState {
 }
 
 // SetName sets the Name field's value.
-func (s *InstanceState) SetName(v string) *InstanceState {
-	s.Name = &v
+func (s *InstanceState) SetName(v InstanceStateName) *InstanceState {
+	s.Name = v
 	return s
 }
 
@@ -44705,10 +44874,10 @@ type InstanceStatusDetails struct {
 	ImpairedSince *time.Time `locationName:"impairedSince" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The type of instance status.
-	Name *string `locationName:"name" type:"string" enum:"StatusName"`
+	Name StatusName `locationName:"name" type:"string"`
 
 	// The status.
-	Status *string `locationName:"status" type:"string" enum:"StatusType"`
+	Status StatusType `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -44728,14 +44897,14 @@ func (s *InstanceStatusDetails) SetImpairedSince(v time.Time) *InstanceStatusDet
 }
 
 // SetName sets the Name field's value.
-func (s *InstanceStatusDetails) SetName(v string) *InstanceStatusDetails {
-	s.Name = &v
+func (s *InstanceStatusDetails) SetName(v StatusName) *InstanceStatusDetails {
+	s.Name = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *InstanceStatusDetails) SetStatus(v string) *InstanceStatusDetails {
-	s.Status = &v
+func (s *InstanceStatusDetails) SetStatus(v StatusType) *InstanceStatusDetails {
+	s.Status = v
 	return s
 }
 
@@ -44745,7 +44914,7 @@ type InstanceStatusEvent struct {
 	_ struct{} `type:"structure"`
 
 	// The event code.
-	Code *string `locationName:"code" type:"string" enum:"EventCode"`
+	Code EventCode `locationName:"code" type:"string"`
 
 	// A description of the event.
 	//
@@ -44772,8 +44941,8 @@ func (s InstanceStatusEvent) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *InstanceStatusEvent) SetCode(v string) *InstanceStatusEvent {
-	s.Code = &v
+func (s *InstanceStatusEvent) SetCode(v EventCode) *InstanceStatusEvent {
+	s.Code = v
 	return s
 }
 
@@ -44804,7 +44973,7 @@ type InstanceStatusSummary struct {
 	Details []*InstanceStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
 
 	// The status.
-	Status *string `locationName:"status" type:"string" enum:"SummaryStatus"`
+	Status SummaryStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -44824,8 +44993,8 @@ func (s *InstanceStatusSummary) SetDetails(v []*InstanceStatusDetails) *Instance
 }
 
 // SetStatus sets the Status field's value.
-func (s *InstanceStatusSummary) SetStatus(v string) *InstanceStatusSummary {
-	s.Status = &v
+func (s *InstanceStatusSummary) SetStatus(v SummaryStatus) *InstanceStatusSummary {
+	s.Status = v
 	return s
 }
 
@@ -44879,7 +45048,7 @@ type InternetGatewayAttachment struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the attachment.
-	State *string `locationName:"state" type:"string" enum:"AttachmentStatus"`
+	State AttachmentStatus `locationName:"state" type:"string"`
 
 	// The ID of the VPC.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -44896,8 +45065,8 @@ func (s InternetGatewayAttachment) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *InternetGatewayAttachment) SetState(v string) *InternetGatewayAttachment {
-	s.State = &v
+func (s *InternetGatewayAttachment) SetState(v AttachmentStatus) *InternetGatewayAttachment {
+	s.State = v
 	return s
 }
 
@@ -45146,7 +45315,7 @@ type LaunchPermission struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the group.
-	Group *string `locationName:"group" type:"string" enum:"PermissionGroup"`
+	Group PermissionGroup `locationName:"group" type:"string"`
 
 	// The AWS account ID.
 	UserId *string `locationName:"userId" type:"string"`
@@ -45163,8 +45332,8 @@ func (s LaunchPermission) GoString() string {
 }
 
 // SetGroup sets the Group field's value.
-func (s *LaunchPermission) SetGroup(v string) *LaunchPermission {
-	s.Group = &v
+func (s *LaunchPermission) SetGroup(v PermissionGroup) *LaunchPermission {
+	s.Group = v
 	return s
 }
 
@@ -45239,7 +45408,7 @@ type LaunchSpecification struct {
 	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The instance type.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// The ID of the kernel.
 	KernelId *string `locationName:"kernelId" type:"string"`
@@ -45315,8 +45484,8 @@ func (s *LaunchSpecification) SetImageId(v string) *LaunchSpecification {
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *LaunchSpecification) SetInstanceType(v string) *LaunchSpecification {
-	s.InstanceType = &v
+func (s *LaunchSpecification) SetInstanceType(v InstanceType) *LaunchSpecification {
+	s.InstanceType = v
 	return s
 }
 
@@ -45380,7 +45549,7 @@ type LoadPermission struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the group.
-	Group *string `locationName:"group" type:"string" enum:"PermissionGroup"`
+	Group PermissionGroup `locationName:"group" type:"string"`
 
 	// The AWS account ID.
 	UserId *string `locationName:"userId" type:"string"`
@@ -45397,8 +45566,8 @@ func (s LoadPermission) GoString() string {
 }
 
 // SetGroup sets the Group field's value.
-func (s *LoadPermission) SetGroup(v string) *LoadPermission {
-	s.Group = &v
+func (s *LoadPermission) SetGroup(v PermissionGroup) *LoadPermission {
+	s.Group = v
 	return s
 }
 
@@ -45448,7 +45617,7 @@ type LoadPermissionRequest struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the group.
-	Group *string `type:"string" enum:"PermissionGroup"`
+	Group PermissionGroup `type:"string"`
 
 	// The AWS account ID.
 	UserId *string `type:"string"`
@@ -45465,8 +45634,8 @@ func (s LoadPermissionRequest) GoString() string {
 }
 
 // SetGroup sets the Group field's value.
-func (s *LoadPermissionRequest) SetGroup(v string) *LoadPermissionRequest {
-	s.Group = &v
+func (s *LoadPermissionRequest) SetGroup(v PermissionGroup) *LoadPermissionRequest {
+	s.Group = v
 	return s
 }
 
@@ -45481,7 +45650,7 @@ type ModifyFpgaImageAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the attribute.
-	Attribute *string `type:"string" enum:"FpgaImageAttributeName"`
+	Attribute FpgaImageAttributeName `type:"string"`
 
 	// A description for the AFI.
 	Description *string `type:"string"`
@@ -45504,7 +45673,7 @@ type ModifyFpgaImageAttributeInput struct {
 	Name *string `type:"string"`
 
 	// The operation type.
-	OperationType *string `type:"string" enum:"OperationType"`
+	OperationType OperationType `type:"string"`
 
 	// One or more product codes. After you add a product code to an AFI, it can't
 	// be removed. This parameter is valid only when modifying the productCodes
@@ -45533,6 +45702,7 @@ func (s ModifyFpgaImageAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyFpgaImageAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyFpgaImageAttributeInput"}
+
 	if s.FpgaImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FpgaImageId"))
 	}
@@ -45544,8 +45714,8 @@ func (s *ModifyFpgaImageAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *ModifyFpgaImageAttributeInput) SetAttribute(v string) *ModifyFpgaImageAttributeInput {
-	s.Attribute = &v
+func (s *ModifyFpgaImageAttributeInput) SetAttribute(v FpgaImageAttributeName) *ModifyFpgaImageAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -45580,8 +45750,8 @@ func (s *ModifyFpgaImageAttributeInput) SetName(v string) *ModifyFpgaImageAttrib
 }
 
 // SetOperationType sets the OperationType field's value.
-func (s *ModifyFpgaImageAttributeInput) SetOperationType(v string) *ModifyFpgaImageAttributeInput {
-	s.OperationType = &v
+func (s *ModifyFpgaImageAttributeInput) SetOperationType(v OperationType) *ModifyFpgaImageAttributeInput {
+	s.OperationType = v
 	return s
 }
 
@@ -45635,7 +45805,7 @@ type ModifyHostsInput struct {
 	// Specify whether to enable or disable auto-placement.
 	//
 	// AutoPlacement is a required field
-	AutoPlacement *string `locationName:"autoPlacement" type:"string" required:"true" enum:"AutoPlacement"`
+	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string" required:"true"`
 
 	// The host IDs of the Dedicated Hosts you want to modify.
 	//
@@ -45656,9 +45826,10 @@ func (s ModifyHostsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyHostsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyHostsInput"}
-	if s.AutoPlacement == nil {
+	if len(s.AutoPlacement) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("AutoPlacement"))
 	}
+
 	if s.HostIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostIds"))
 	}
@@ -45670,8 +45841,8 @@ func (s *ModifyHostsInput) Validate() error {
 }
 
 // SetAutoPlacement sets the AutoPlacement field's value.
-func (s *ModifyHostsInput) SetAutoPlacement(v string) *ModifyHostsInput {
-	s.AutoPlacement = &v
+func (s *ModifyHostsInput) SetAutoPlacement(v AutoPlacement) *ModifyHostsInput {
+	s.AutoPlacement = v
 	return s
 }
 
@@ -45745,9 +45916,11 @@ func (s ModifyIdFormatInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyIdFormatInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyIdFormatInput"}
+
 	if s.Resource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
+
 	if s.UseLongIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UseLongIds"))
 	}
@@ -45821,12 +45994,15 @@ func (s ModifyIdentityIdFormatInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyIdentityIdFormatInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyIdentityIdFormatInput"}
+
 	if s.PrincipalArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrincipalArn"))
 	}
+
 	if s.Resource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
+
 	if s.UseLongIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UseLongIds"))
 	}
@@ -45898,7 +46074,7 @@ type ModifyImageAttributeInput struct {
 
 	// The operation type. This parameter can be used only when the Attribute parameter
 	// is launchPermission.
-	OperationType *string `type:"string" enum:"OperationType"`
+	OperationType OperationType `type:"string"`
 
 	// One or more DevPay product codes. After you add a product code to an AMI,
 	// it can't be removed.
@@ -45930,6 +46106,7 @@ func (s ModifyImageAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyImageAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyImageAttributeInput"}
+
 	if s.ImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
 	}
@@ -45971,8 +46148,8 @@ func (s *ModifyImageAttributeInput) SetLaunchPermission(v *LaunchPermissionModif
 }
 
 // SetOperationType sets the OperationType field's value.
-func (s *ModifyImageAttributeInput) SetOperationType(v string) *ModifyImageAttributeInput {
-	s.OperationType = &v
+func (s *ModifyImageAttributeInput) SetOperationType(v OperationType) *ModifyImageAttributeInput {
+	s.OperationType = v
 	return s
 }
 
@@ -46021,7 +46198,7 @@ type ModifyInstanceAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the attribute.
-	Attribute *string `locationName:"attribute" type:"string" enum:"InstanceAttributeName"`
+	Attribute InstanceAttributeName `locationName:"attribute" type:"string"`
 
 	// Modifies the DeleteOnTermination attribute for volumes that are currently
 	// attached. The volume must be owned by the caller. If no value is specified
@@ -46126,6 +46303,7 @@ func (s ModifyInstanceAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyInstanceAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstanceAttributeInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -46137,8 +46315,8 @@ func (s *ModifyInstanceAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *ModifyInstanceAttributeInput) SetAttribute(v string) *ModifyInstanceAttributeInput {
-	s.Attribute = &v
+func (s *ModifyInstanceAttributeInput) SetAttribute(v InstanceAttributeName) *ModifyInstanceAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -46253,7 +46431,7 @@ type ModifyInstancePlacementInput struct {
 	_ struct{} `type:"structure"`
 
 	// The new affinity setting for the instance.
-	Affinity *string `locationName:"affinity" type:"string" enum:"Affinity"`
+	Affinity Affinity `locationName:"affinity" type:"string"`
 
 	// The ID of the Dedicated Host that the instance will have affinity with.
 	HostId *string `locationName:"hostId" type:"string"`
@@ -46264,7 +46442,7 @@ type ModifyInstancePlacementInput struct {
 	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// The tenancy of the instance that you are modifying.
-	Tenancy *string `locationName:"tenancy" type:"string" enum:"HostTenancy"`
+	Tenancy HostTenancy `locationName:"tenancy" type:"string"`
 }
 
 // String returns the string representation
@@ -46280,6 +46458,7 @@ func (s ModifyInstancePlacementInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyInstancePlacementInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstancePlacementInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -46291,8 +46470,8 @@ func (s *ModifyInstancePlacementInput) Validate() error {
 }
 
 // SetAffinity sets the Affinity field's value.
-func (s *ModifyInstancePlacementInput) SetAffinity(v string) *ModifyInstancePlacementInput {
-	s.Affinity = &v
+func (s *ModifyInstancePlacementInput) SetAffinity(v Affinity) *ModifyInstancePlacementInput {
+	s.Affinity = v
 	return s
 }
 
@@ -46309,8 +46488,8 @@ func (s *ModifyInstancePlacementInput) SetInstanceId(v string) *ModifyInstancePl
 }
 
 // SetTenancy sets the Tenancy field's value.
-func (s *ModifyInstancePlacementInput) SetTenancy(v string) *ModifyInstancePlacementInput {
-	s.Tenancy = &v
+func (s *ModifyInstancePlacementInput) SetTenancy(v HostTenancy) *ModifyInstancePlacementInput {
+	s.Tenancy = v
 	return s
 }
 
@@ -46389,6 +46568,7 @@ func (s ModifyNetworkInterfaceAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyNetworkInterfaceAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyNetworkInterfaceAttributeInput"}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
@@ -46483,9 +46663,11 @@ func (s ModifyReservedInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyReservedInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyReservedInstancesInput"}
+
 	if s.ReservedInstancesIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReservedInstancesIds"))
 	}
+
 	if s.TargetConfigurations == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetConfigurations"))
 	}
@@ -46547,7 +46729,7 @@ type ModifySnapshotAttributeInput struct {
 	// The snapshot attribute to modify.
 	//
 	// Only volume creation permissions may be modified at the customer level.
-	Attribute *string `type:"string" enum:"SnapshotAttributeName"`
+	Attribute SnapshotAttributeName `type:"string"`
 
 	// A JSON representation of the snapshot attribute modification.
 	CreateVolumePermission *CreateVolumePermissionModifications `type:"structure"`
@@ -46562,7 +46744,7 @@ type ModifySnapshotAttributeInput struct {
 	GroupNames []*string `locationName:"UserGroup" locationNameList:"GroupName" type:"list"`
 
 	// The type of operation to perform to the attribute.
-	OperationType *string `type:"string" enum:"OperationType"`
+	OperationType OperationType `type:"string"`
 
 	// The ID of the snapshot.
 	//
@@ -46586,6 +46768,7 @@ func (s ModifySnapshotAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifySnapshotAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifySnapshotAttributeInput"}
+
 	if s.SnapshotId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
@@ -46597,8 +46780,8 @@ func (s *ModifySnapshotAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *ModifySnapshotAttributeInput) SetAttribute(v string) *ModifySnapshotAttributeInput {
-	s.Attribute = &v
+func (s *ModifySnapshotAttributeInput) SetAttribute(v SnapshotAttributeName) *ModifySnapshotAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -46621,8 +46804,8 @@ func (s *ModifySnapshotAttributeInput) SetGroupNames(v []*string) *ModifySnapsho
 }
 
 // SetOperationType sets the OperationType field's value.
-func (s *ModifySnapshotAttributeInput) SetOperationType(v string) *ModifySnapshotAttributeInput {
-	s.OperationType = &v
+func (s *ModifySnapshotAttributeInput) SetOperationType(v OperationType) *ModifySnapshotAttributeInput {
+	s.OperationType = v
 	return s
 }
 
@@ -46661,7 +46844,7 @@ type ModifySpotFleetRequestInput struct {
 	// Indicates whether running Spot instances should be terminated if the target
 	// capacity of the Spot fleet request is decreased below the current size of
 	// the Spot fleet.
-	ExcessCapacityTerminationPolicy *string `locationName:"excessCapacityTerminationPolicy" type:"string" enum:"ExcessCapacityTerminationPolicy"`
+	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string"`
 
 	// The ID of the Spot fleet request.
 	//
@@ -46685,6 +46868,7 @@ func (s ModifySpotFleetRequestInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifySpotFleetRequestInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifySpotFleetRequestInput"}
+
 	if s.SpotFleetRequestId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestId"))
 	}
@@ -46696,8 +46880,8 @@ func (s *ModifySpotFleetRequestInput) Validate() error {
 }
 
 // SetExcessCapacityTerminationPolicy sets the ExcessCapacityTerminationPolicy field's value.
-func (s *ModifySpotFleetRequestInput) SetExcessCapacityTerminationPolicy(v string) *ModifySpotFleetRequestInput {
-	s.ExcessCapacityTerminationPolicy = &v
+func (s *ModifySpotFleetRequestInput) SetExcessCapacityTerminationPolicy(v ExcessCapacityTerminationPolicy) *ModifySpotFleetRequestInput {
+	s.ExcessCapacityTerminationPolicy = v
 	return s
 }
 
@@ -46778,6 +46962,7 @@ func (s ModifySubnetAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifySubnetAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifySubnetAttributeInput"}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
@@ -46854,6 +47039,7 @@ func (s ModifyVolumeAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyVolumeAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyVolumeAttributeInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -46933,7 +47119,7 @@ type ModifyVolumeInput struct {
 	// cannot change the type of a volume to standard.
 	//
 	// Default: If no type is specified, the existing type is retained.
-	VolumeType *string `type:"string" enum:"VolumeType"`
+	VolumeType VolumeType `type:"string"`
 }
 
 // String returns the string representation
@@ -46949,6 +47135,7 @@ func (s ModifyVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyVolumeInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -46984,8 +47171,8 @@ func (s *ModifyVolumeInput) SetVolumeId(v string) *ModifyVolumeInput {
 }
 
 // SetVolumeType sets the VolumeType field's value.
-func (s *ModifyVolumeInput) SetVolumeType(v string) *ModifyVolumeInput {
-	s.VolumeType = &v
+func (s *ModifyVolumeInput) SetVolumeType(v VolumeType) *ModifyVolumeInput {
+	s.VolumeType = v
 	return s
 }
 
@@ -47055,6 +47242,7 @@ func (s ModifyVpcAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyVpcAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpcAttributeInput"}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -47142,6 +47330,7 @@ func (s ModifyVpcEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyVpcEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpcEndpointInput"}
+
 	if s.VpcEndpointId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcEndpointId"))
 	}
@@ -47248,6 +47437,7 @@ func (s ModifyVpcPeeringConnectionOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyVpcPeeringConnectionOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyVpcPeeringConnectionOptionsInput"}
+
 	if s.VpcPeeringConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcPeeringConnectionId"))
 	}
@@ -47345,6 +47535,7 @@ func (s MonitorInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MonitorInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MonitorInstancesInput"}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
@@ -47399,7 +47590,7 @@ type Monitoring struct {
 
 	// Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring
 	// is enabled.
-	State *string `locationName:"state" type:"string" enum:"MonitoringState"`
+	State MonitoringState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -47413,8 +47604,8 @@ func (s Monitoring) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *Monitoring) SetState(v string) *Monitoring {
-	s.State = &v
+func (s *Monitoring) SetState(v MonitoringState) *Monitoring {
+	s.State = v
 	return s
 }
 
@@ -47448,6 +47639,7 @@ func (s MoveAddressToVpcInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MoveAddressToVpcInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MoveAddressToVpcInput"}
+
 	if s.PublicIp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PublicIp"))
 	}
@@ -47479,7 +47671,7 @@ type MoveAddressToVpcOutput struct {
 	AllocationId *string `locationName:"allocationId" type:"string"`
 
 	// The status of the move of the IP address.
-	Status *string `locationName:"status" type:"string" enum:"Status"`
+	Status Status `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -47499,8 +47691,8 @@ func (s *MoveAddressToVpcOutput) SetAllocationId(v string) *MoveAddressToVpcOutp
 }
 
 // SetStatus sets the Status field's value.
-func (s *MoveAddressToVpcOutput) SetStatus(v string) *MoveAddressToVpcOutput {
-	s.Status = &v
+func (s *MoveAddressToVpcOutput) SetStatus(v Status) *MoveAddressToVpcOutput {
+	s.Status = v
 	return s
 }
 
@@ -47511,7 +47703,7 @@ type MovingAddressStatus struct {
 
 	// The status of the Elastic IP address that's being moved to the EC2-VPC platform,
 	// or restored to the EC2-Classic platform.
-	MoveStatus *string `locationName:"moveStatus" type:"string" enum:"MoveStatus"`
+	MoveStatus MoveStatus `locationName:"moveStatus" type:"string"`
 
 	// The Elastic IP address.
 	PublicIp *string `locationName:"publicIp" type:"string"`
@@ -47528,8 +47720,8 @@ func (s MovingAddressStatus) GoString() string {
 }
 
 // SetMoveStatus sets the MoveStatus field's value.
-func (s *MovingAddressStatus) SetMoveStatus(v string) *MovingAddressStatus {
-	s.MoveStatus = &v
+func (s *MovingAddressStatus) SetMoveStatus(v MoveStatus) *MovingAddressStatus {
+	s.MoveStatus = v
 	return s
 }
 
@@ -47606,7 +47798,7 @@ type NatGateway struct {
 	//
 	//    * deleted: The NAT gateway has been terminated and is no longer processing
 	//    traffic.
-	State *string `locationName:"state" type:"string" enum:"NatGatewayState"`
+	State NatGatewayState `locationName:"state" type:"string"`
 
 	// The ID of the subnet in which the NAT gateway is located.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -47671,8 +47863,8 @@ func (s *NatGateway) SetProvisionedBandwidth(v *ProvisionedBandwidth) *NatGatewa
 }
 
 // SetState sets the State field's value.
-func (s *NatGateway) SetState(v string) *NatGateway {
-	s.State = &v
+func (s *NatGateway) SetState(v NatGatewayState) *NatGateway {
+	s.State = v
 	return s
 }
 
@@ -47885,7 +48077,7 @@ type NetworkAclEntry struct {
 	Protocol *string `locationName:"protocol" type:"string"`
 
 	// Indicates whether to allow or deny the traffic that matches the rule.
-	RuleAction *string `locationName:"ruleAction" type:"string" enum:"RuleAction"`
+	RuleAction RuleAction `locationName:"ruleAction" type:"string"`
 
 	// The rule number for the entry. ACL entries are processed in ascending order
 	// by rule number.
@@ -47939,8 +48131,8 @@ func (s *NetworkAclEntry) SetProtocol(v string) *NetworkAclEntry {
 }
 
 // SetRuleAction sets the RuleAction field's value.
-func (s *NetworkAclEntry) SetRuleAction(v string) *NetworkAclEntry {
-	s.RuleAction = &v
+func (s *NetworkAclEntry) SetRuleAction(v RuleAction) *NetworkAclEntry {
+	s.RuleAction = v
 	return s
 }
 
@@ -47972,7 +48164,7 @@ type NetworkInterface struct {
 	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The type of interface.
-	InterfaceType *string `locationName:"interfaceType" type:"string" enum:"NetworkInterfaceType"`
+	InterfaceType NetworkInterfaceType `locationName:"interfaceType" type:"string"`
 
 	// The IPv6 addresses associated with the network interface.
 	Ipv6Addresses []*NetworkInterfaceIpv6Address `locationName:"ipv6AddressesSet" locationNameList:"item" type:"list"`
@@ -48006,7 +48198,7 @@ type NetworkInterface struct {
 	SourceDestCheck *bool `locationName:"sourceDestCheck" type:"boolean"`
 
 	// The status of the network interface.
-	Status *string `locationName:"status" type:"string" enum:"NetworkInterfaceStatus"`
+	Status NetworkInterfaceStatus `locationName:"status" type:"string"`
 
 	// The ID of the subnet.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -48059,8 +48251,8 @@ func (s *NetworkInterface) SetGroups(v []*GroupIdentifier) *NetworkInterface {
 }
 
 // SetInterfaceType sets the InterfaceType field's value.
-func (s *NetworkInterface) SetInterfaceType(v string) *NetworkInterface {
-	s.InterfaceType = &v
+func (s *NetworkInterface) SetInterfaceType(v NetworkInterfaceType) *NetworkInterface {
+	s.InterfaceType = v
 	return s
 }
 
@@ -48125,8 +48317,8 @@ func (s *NetworkInterface) SetSourceDestCheck(v bool) *NetworkInterface {
 }
 
 // SetStatus sets the Status field's value.
-func (s *NetworkInterface) SetStatus(v string) *NetworkInterface {
-	s.Status = &v
+func (s *NetworkInterface) SetStatus(v NetworkInterfaceStatus) *NetworkInterface {
+	s.Status = v
 	return s
 }
 
@@ -48233,7 +48425,7 @@ type NetworkInterfaceAttachment struct {
 	InstanceOwnerId *string `locationName:"instanceOwnerId" type:"string"`
 
 	// The attachment state.
-	Status *string `locationName:"status" type:"string" enum:"AttachmentStatus"`
+	Status AttachmentStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -48283,8 +48475,8 @@ func (s *NetworkInterfaceAttachment) SetInstanceOwnerId(v string) *NetworkInterf
 }
 
 // SetStatus sets the Status field's value.
-func (s *NetworkInterfaceAttachment) SetStatus(v string) *NetworkInterfaceAttachment {
-	s.Status = &v
+func (s *NetworkInterfaceAttachment) SetStatus(v AttachmentStatus) *NetworkInterfaceAttachment {
+	s.Status = v
 	return s
 }
 
@@ -48365,7 +48557,7 @@ type NetworkInterfacePermission struct {
 	NetworkInterfacePermissionId *string `locationName:"networkInterfacePermissionId" type:"string"`
 
 	// The type of permission.
-	Permission *string `locationName:"permission" type:"string" enum:"InterfacePermissionType"`
+	Permission InterfacePermissionType `locationName:"permission" type:"string"`
 
 	// Information about the state of the permission.
 	PermissionState *NetworkInterfacePermissionState `locationName:"permissionState" type:"structure"`
@@ -48406,8 +48598,8 @@ func (s *NetworkInterfacePermission) SetNetworkInterfacePermissionId(v string) *
 }
 
 // SetPermission sets the Permission field's value.
-func (s *NetworkInterfacePermission) SetPermission(v string) *NetworkInterfacePermission {
-	s.Permission = &v
+func (s *NetworkInterfacePermission) SetPermission(v InterfacePermissionType) *NetworkInterfacePermission {
+	s.Permission = v
 	return s
 }
 
@@ -48423,7 +48615,7 @@ type NetworkInterfacePermissionState struct {
 	_ struct{} `type:"structure"`
 
 	// The state of the permission.
-	State *string `locationName:"state" type:"string" enum:"NetworkInterfacePermissionStateCode"`
+	State NetworkInterfacePermissionStateCode `locationName:"state" type:"string"`
 
 	// A status message, if applicable.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -48440,8 +48632,8 @@ func (s NetworkInterfacePermissionState) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *NetworkInterfacePermissionState) SetState(v string) *NetworkInterfacePermissionState {
-	s.State = &v
+func (s *NetworkInterfacePermissionState) SetState(v NetworkInterfacePermissionStateCode) *NetworkInterfacePermissionState {
+	s.State = v
 	return s
 }
 
@@ -48706,7 +48898,7 @@ type Placement struct {
 	// The tenancy of the instance (if the instance is running in a VPC). An instance
 	// with a tenancy of dedicated runs on single-tenant hardware. The host tenancy
 	// is not supported for the ImportInstance command.
-	Tenancy *string `locationName:"tenancy" type:"string" enum:"Tenancy"`
+	Tenancy Tenancy `locationName:"tenancy" type:"string"`
 }
 
 // String returns the string representation
@@ -48750,8 +48942,8 @@ func (s *Placement) SetSpreadDomain(v string) *Placement {
 }
 
 // SetTenancy sets the Tenancy field's value.
-func (s *Placement) SetTenancy(v string) *Placement {
-	s.Tenancy = &v
+func (s *Placement) SetTenancy(v Tenancy) *Placement {
+	s.Tenancy = v
 	return s
 }
 
@@ -48764,10 +48956,10 @@ type PlacementGroup struct {
 	GroupName *string `locationName:"groupName" type:"string"`
 
 	// The state of the placement group.
-	State *string `locationName:"state" type:"string" enum:"PlacementGroupState"`
+	State PlacementGroupState `locationName:"state" type:"string"`
 
 	// The placement strategy.
-	Strategy *string `locationName:"strategy" type:"string" enum:"PlacementStrategy"`
+	Strategy PlacementStrategy `locationName:"strategy" type:"string"`
 }
 
 // String returns the string representation
@@ -48787,14 +48979,14 @@ func (s *PlacementGroup) SetGroupName(v string) *PlacementGroup {
 }
 
 // SetState sets the State field's value.
-func (s *PlacementGroup) SetState(v string) *PlacementGroup {
-	s.State = &v
+func (s *PlacementGroup) SetState(v PlacementGroupState) *PlacementGroup {
+	s.State = v
 	return s
 }
 
 // SetStrategy sets the Strategy field's value.
-func (s *PlacementGroup) SetStrategy(v string) *PlacementGroup {
-	s.Strategy = &v
+func (s *PlacementGroup) SetStrategy(v PlacementStrategy) *PlacementGroup {
+	s.Strategy = v
 	return s
 }
 
@@ -48932,7 +49124,7 @@ type PriceSchedule struct {
 
 	// The currency for transacting the Reserved Instance resale. At this time,
 	// the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// The fixed price for the term.
 	Price *float64 `locationName:"price" type:"double"`
@@ -48959,8 +49151,8 @@ func (s *PriceSchedule) SetActive(v bool) *PriceSchedule {
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *PriceSchedule) SetCurrencyCode(v string) *PriceSchedule {
-	s.CurrencyCode = &v
+func (s *PriceSchedule) SetCurrencyCode(v CurrencyCodeValues) *PriceSchedule {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -48983,7 +49175,7 @@ type PriceScheduleSpecification struct {
 
 	// The currency for transacting the Reserved Instance resale. At this time,
 	// the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// The fixed price for the term.
 	Price *float64 `locationName:"price" type:"double"`
@@ -49004,8 +49196,8 @@ func (s PriceScheduleSpecification) GoString() string {
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *PriceScheduleSpecification) SetCurrencyCode(v string) *PriceScheduleSpecification {
-	s.CurrencyCode = &v
+func (s *PriceScheduleSpecification) SetCurrencyCode(v CurrencyCodeValues) *PriceScheduleSpecification {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -49083,6 +49275,7 @@ func (s PrivateIpAddressSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PrivateIpAddressSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PrivateIpAddressSpecification"}
+
 	if s.PrivateIpAddress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrivateIpAddress"))
 	}
@@ -49114,7 +49307,7 @@ type ProductCode struct {
 	ProductCodeId *string `locationName:"productCode" type:"string"`
 
 	// The type of product code.
-	ProductCodeType *string `locationName:"type" type:"string" enum:"ProductCodeValues"`
+	ProductCodeType ProductCodeValues `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -49134,8 +49327,8 @@ func (s *ProductCode) SetProductCodeId(v string) *ProductCode {
 }
 
 // SetProductCodeType sets the ProductCodeType field's value.
-func (s *ProductCode) SetProductCodeType(v string) *ProductCode {
-	s.ProductCodeType = &v
+func (s *ProductCode) SetProductCodeType(v ProductCodeValues) *ProductCode {
+	s.ProductCodeType = v
 	return s
 }
 
@@ -49244,7 +49437,7 @@ type Purchase struct {
 
 	// The currency in which the UpfrontPrice and HourlyPrice amounts are specified.
 	// At this time, the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// The duration of the reservation's term in seconds.
 	Duration *int64 `locationName:"duration" type:"integer"`
@@ -49263,7 +49456,7 @@ type Purchase struct {
 	InstanceFamily *string `locationName:"instanceFamily" type:"string"`
 
 	// The payment option for the reservation.
-	PaymentOption *string `locationName:"paymentOption" type:"string" enum:"PaymentOption"`
+	PaymentOption PaymentOption `locationName:"paymentOption" type:"string"`
 
 	// The upfront price of the reservation.
 	UpfrontPrice *string `locationName:"upfrontPrice" type:"string"`
@@ -49280,8 +49473,8 @@ func (s Purchase) GoString() string {
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *Purchase) SetCurrencyCode(v string) *Purchase {
-	s.CurrencyCode = &v
+func (s *Purchase) SetCurrencyCode(v CurrencyCodeValues) *Purchase {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -49316,8 +49509,8 @@ func (s *Purchase) SetInstanceFamily(v string) *Purchase {
 }
 
 // SetPaymentOption sets the PaymentOption field's value.
-func (s *Purchase) SetPaymentOption(v string) *Purchase {
-	s.PaymentOption = &v
+func (s *Purchase) SetPaymentOption(v PaymentOption) *Purchase {
+	s.PaymentOption = v
 	return s
 }
 
@@ -49338,7 +49531,7 @@ type PurchaseHostReservationInput struct {
 
 	// The currency in which the totalUpfrontPrice, LimitPrice, and totalHourlyPrice
 	// amounts are specified. At this time, the only supported currency is USD.
-	CurrencyCode *string `type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `type:"string"`
 
 	// The ID/s of the Dedicated Host/s that the reservation will be associated
 	// with.
@@ -49374,9 +49567,11 @@ func (s PurchaseHostReservationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseHostReservationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PurchaseHostReservationInput"}
+
 	if s.HostIdSet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostIdSet"))
 	}
+
 	if s.OfferingId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OfferingId"))
 	}
@@ -49394,8 +49589,8 @@ func (s *PurchaseHostReservationInput) SetClientToken(v string) *PurchaseHostRes
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *PurchaseHostReservationInput) SetCurrencyCode(v string) *PurchaseHostReservationInput {
-	s.CurrencyCode = &v
+func (s *PurchaseHostReservationInput) SetCurrencyCode(v CurrencyCodeValues) *PurchaseHostReservationInput {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -49428,7 +49623,7 @@ type PurchaseHostReservationOutput struct {
 
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts
 	// are specified. At this time, the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// Describes the details of the purchase.
 	Purchase []*Purchase `locationName:"purchase" locationNameList:"item" type:"list"`
@@ -49458,8 +49653,8 @@ func (s *PurchaseHostReservationOutput) SetClientToken(v string) *PurchaseHostRe
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *PurchaseHostReservationOutput) SetCurrencyCode(v string) *PurchaseHostReservationOutput {
-	s.CurrencyCode = &v
+func (s *PurchaseHostReservationOutput) SetCurrencyCode(v CurrencyCodeValues) *PurchaseHostReservationOutput {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -49510,9 +49705,11 @@ func (s PurchaseRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PurchaseRequest"}
+
 	if s.InstanceCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))
 	}
+
 	if s.PurchaseToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PurchaseToken"))
 	}
@@ -49575,9 +49772,11 @@ func (s PurchaseReservedInstancesOfferingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseReservedInstancesOfferingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedInstancesOfferingInput"}
+
 	if s.InstanceCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))
 	}
+
 	if s.ReservedInstancesOfferingId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReservedInstancesOfferingId"))
 	}
@@ -49671,6 +49870,7 @@ func (s PurchaseScheduledInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseScheduledInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PurchaseScheduledInstancesInput"}
+
 	if s.PurchaseRequests == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PurchaseRequests"))
 	}
@@ -49767,6 +49967,7 @@ func (s RebootInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebootInstancesInput"}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
@@ -49813,7 +50014,7 @@ type RecurringCharge struct {
 	Amount *float64 `locationName:"amount" type:"double"`
 
 	// The frequency of the recurring charge.
-	Frequency *string `locationName:"frequency" type:"string" enum:"RecurringChargeFrequency"`
+	Frequency RecurringChargeFrequency `locationName:"frequency" type:"string"`
 }
 
 // String returns the string representation
@@ -49833,8 +50034,8 @@ func (s *RecurringCharge) SetAmount(v float64) *RecurringCharge {
 }
 
 // SetFrequency sets the Frequency field's value.
-func (s *RecurringCharge) SetFrequency(v string) *RecurringCharge {
-	s.Frequency = &v
+func (s *RecurringCharge) SetFrequency(v RecurringChargeFrequency) *RecurringCharge {
+	s.Frequency = v
 	return s
 }
 
@@ -49881,7 +50082,7 @@ type RegisterImageInput struct {
 	//
 	// Default: For Amazon EBS-backed AMIs, i386. For instance store-backed AMIs,
 	// the architecture specified in the manifest file.
-	Architecture *string `locationName:"architecture" type:"string" enum:"ArchitectureValues"`
+	Architecture ArchitectureValues `locationName:"architecture" type:"string"`
 
 	// The billing product codes. Your account must be authorized to specify billing
 	// product codes. Otherwise, you can use the AWS Marketplace to bill for the
@@ -49957,6 +50158,7 @@ func (s RegisterImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterImageInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -49968,8 +50170,8 @@ func (s *RegisterImageInput) Validate() error {
 }
 
 // SetArchitecture sets the Architecture field's value.
-func (s *RegisterImageInput) SetArchitecture(v string) *RegisterImageInput {
-	s.Architecture = &v
+func (s *RegisterImageInput) SetArchitecture(v ArchitectureValues) *RegisterImageInput {
+	s.Architecture = v
 	return s
 }
 
@@ -50100,6 +50302,7 @@ func (s RejectVpcPeeringConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RejectVpcPeeringConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RejectVpcPeeringConnectionInput"}
+
 	if s.VpcPeeringConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcPeeringConnectionId"))
 	}
@@ -50232,6 +50435,7 @@ func (s ReleaseHostsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReleaseHostsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReleaseHostsInput"}
+
 	if s.HostIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostIds"))
 	}
@@ -50311,9 +50515,11 @@ func (s ReplaceIamInstanceProfileAssociationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceIamInstanceProfileAssociationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplaceIamInstanceProfileAssociationInput"}
+
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
+
 	if s.IamInstanceProfile == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamInstanceProfile"))
 	}
@@ -50396,9 +50602,11 @@ func (s ReplaceNetworkAclAssociationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceNetworkAclAssociationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplaceNetworkAclAssociationInput"}
+
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
+
 	if s.NetworkAclId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkAclId"))
 	}
@@ -50503,7 +50711,7 @@ type ReplaceNetworkAclEntryInput struct {
 	// Indicates whether to allow or deny the traffic that matches the rule.
 	//
 	// RuleAction is a required field
-	RuleAction *string `locationName:"ruleAction" type:"string" required:"true" enum:"RuleAction"`
+	RuleAction RuleAction `locationName:"ruleAction" type:"string" required:"true"`
 
 	// The rule number of the entry to replace.
 	//
@@ -50524,18 +50732,22 @@ func (s ReplaceNetworkAclEntryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceNetworkAclEntryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplaceNetworkAclEntryInput"}
+
 	if s.Egress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Egress"))
 	}
+
 	if s.NetworkAclId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkAclId"))
 	}
+
 	if s.Protocol == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
-	if s.RuleAction == nil {
+	if len(s.RuleAction) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RuleAction"))
 	}
+
 	if s.RuleNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleNumber"))
 	}
@@ -50595,8 +50807,8 @@ func (s *ReplaceNetworkAclEntryInput) SetProtocol(v string) *ReplaceNetworkAclEn
 }
 
 // SetRuleAction sets the RuleAction field's value.
-func (s *ReplaceNetworkAclEntryInput) SetRuleAction(v string) *ReplaceNetworkAclEntryInput {
-	s.RuleAction = &v
+func (s *ReplaceNetworkAclEntryInput) SetRuleAction(v RuleAction) *ReplaceNetworkAclEntryInput {
+	s.RuleAction = v
 	return s
 }
 
@@ -50677,6 +50889,7 @@ func (s ReplaceRouteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceRouteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplaceRouteInput"}
+
 	if s.RouteTableId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
 	}
@@ -50797,9 +51010,11 @@ func (s ReplaceRouteTableAssociationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceRouteTableAssociationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplaceRouteTableAssociationInput"}
+
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
+
 	if s.RouteTableId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RouteTableId"))
 	}
@@ -50899,7 +51114,7 @@ type ReportInstanceStatusInput struct {
 	//    * other: [explain using the description parameter]
 	//
 	// ReasonCodes is a required field
-	ReasonCodes []*string `locationName:"reasonCode" locationNameList:"item" type:"list" required:"true"`
+	ReasonCodes []ReportInstanceReasonCodes `locationName:"reasonCode" locationNameList:"item" type:"list" required:"true"`
 
 	// The time at which the reported instance health state began.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
@@ -50907,7 +51122,7 @@ type ReportInstanceStatusInput struct {
 	// The status of all instances listed.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"ReportStatusType"`
+	Status ReportStatusType `locationName:"status" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -50923,13 +51138,15 @@ func (s ReportInstanceStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReportInstanceStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReportInstanceStatusInput"}
+
 	if s.Instances == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Instances"))
 	}
+
 	if s.ReasonCodes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReasonCodes"))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
@@ -50964,7 +51181,7 @@ func (s *ReportInstanceStatusInput) SetInstances(v []*string) *ReportInstanceSta
 }
 
 // SetReasonCodes sets the ReasonCodes field's value.
-func (s *ReportInstanceStatusInput) SetReasonCodes(v []*string) *ReportInstanceStatusInput {
+func (s *ReportInstanceStatusInput) SetReasonCodes(v []ReportInstanceReasonCodes) *ReportInstanceStatusInput {
 	s.ReasonCodes = v
 	return s
 }
@@ -50976,8 +51193,8 @@ func (s *ReportInstanceStatusInput) SetStartTime(v time.Time) *ReportInstanceSta
 }
 
 // SetStatus sets the Status field's value.
-func (s *ReportInstanceStatusInput) SetStatus(v string) *ReportInstanceStatusInput {
-	s.Status = &v
+func (s *ReportInstanceStatusInput) SetStatus(v ReportStatusType) *ReportInstanceStatusInput {
+	s.Status = v
 	return s
 }
 
@@ -51026,6 +51243,7 @@ func (s RequestSpotFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestSpotFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RequestSpotFleetInput"}
+
 	if s.SpotFleetRequestConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestConfig"))
 	}
@@ -51136,7 +51354,7 @@ type RequestSpotInstancesInput struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// Indicates whether a Spot instance stops or terminates when it is interrupted.
-	InstanceInterruptionBehavior *string `type:"string" enum:"InstanceInterruptionBehavior"`
+	InstanceInterruptionBehavior InstanceInterruptionBehavior `type:"string"`
 
 	// The instance launch group. Launch groups are Spot instances that launch together
 	// and terminate together.
@@ -51156,7 +51374,7 @@ type RequestSpotInstancesInput struct {
 	// The Spot instance request type.
 	//
 	// Default: one-time
-	Type *string `locationName:"type" type:"string" enum:"SpotInstanceType"`
+	Type SpotInstanceType `locationName:"type" type:"string"`
 
 	// The start date of the request. If this is a one-time request, the request
 	// becomes active at this date and time and remains active until all instances
@@ -51189,6 +51407,7 @@ func (s RequestSpotInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestSpotInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RequestSpotInstancesInput"}
+
 	if s.SpotPrice == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotPrice"))
 	}
@@ -51235,8 +51454,8 @@ func (s *RequestSpotInstancesInput) SetInstanceCount(v int64) *RequestSpotInstan
 }
 
 // SetInstanceInterruptionBehavior sets the InstanceInterruptionBehavior field's value.
-func (s *RequestSpotInstancesInput) SetInstanceInterruptionBehavior(v string) *RequestSpotInstancesInput {
-	s.InstanceInterruptionBehavior = &v
+func (s *RequestSpotInstancesInput) SetInstanceInterruptionBehavior(v InstanceInterruptionBehavior) *RequestSpotInstancesInput {
+	s.InstanceInterruptionBehavior = v
 	return s
 }
 
@@ -51259,8 +51478,8 @@ func (s *RequestSpotInstancesInput) SetSpotPrice(v string) *RequestSpotInstances
 }
 
 // SetType sets the Type field's value.
-func (s *RequestSpotInstancesInput) SetType(v string) *RequestSpotInstancesInput {
-	s.Type = &v
+func (s *RequestSpotInstancesInput) SetType(v SpotInstanceType) *RequestSpotInstancesInput {
+	s.Type = v
 	return s
 }
 
@@ -51331,7 +51550,7 @@ type RequestSpotLaunchSpecification struct {
 	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The instance type.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// The ID of the kernel.
 	KernelId *string `locationName:"kernelId" type:"string"`
@@ -51437,8 +51656,8 @@ func (s *RequestSpotLaunchSpecification) SetImageId(v string) *RequestSpotLaunch
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *RequestSpotLaunchSpecification) SetInstanceType(v string) *RequestSpotLaunchSpecification {
-	s.InstanceType = &v
+func (s *RequestSpotLaunchSpecification) SetInstanceType(v InstanceType) *RequestSpotLaunchSpecification {
+	s.InstanceType = v
 	return s
 }
 
@@ -51619,7 +51838,7 @@ type ReservedInstanceLimitPrice struct {
 
 	// The currency in which the limitPrice amount is specified. At this time, the
 	// only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 }
 
 // String returns the string representation
@@ -51639,8 +51858,8 @@ func (s *ReservedInstanceLimitPrice) SetAmount(v float64) *ReservedInstanceLimit
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *ReservedInstanceLimitPrice) SetCurrencyCode(v string) *ReservedInstanceLimitPrice {
-	s.CurrencyCode = &v
+func (s *ReservedInstanceLimitPrice) SetCurrencyCode(v CurrencyCodeValues) *ReservedInstanceLimitPrice {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -51688,7 +51907,7 @@ type ReservedInstances struct {
 
 	// The currency of the Reserved Instance. It's specified using ISO 4217 standard
 	// currency codes. At this time, the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// The duration of the Reserved Instance, in seconds.
 	Duration *int64 `locationName:"duration" type:"long"`
@@ -51703,19 +51922,19 @@ type ReservedInstances struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// The tenancy of the instance.
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
 
 	// The instance type on which the Reserved Instance can be used.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// The offering class of the Reserved Instance.
-	OfferingClass *string `locationName:"offeringClass" type:"string" enum:"OfferingClassType"`
+	OfferingClass OfferingClassType `locationName:"offeringClass" type:"string"`
 
 	// The Reserved Instance offering type.
-	OfferingType *string `locationName:"offeringType" type:"string" enum:"OfferingTypeValues"`
+	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string"`
 
 	// The Reserved Instance product platform description.
-	ProductDescription *string `locationName:"productDescription" type:"string" enum:"RIProductDescription"`
+	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
 
 	// The recurring charge tag assigned to the resource.
 	RecurringCharges []*RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
@@ -51724,13 +51943,13 @@ type ReservedInstances struct {
 	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
 
 	// The scope of the Reserved Instance.
-	Scope *string `locationName:"scope" type:"string" enum:"scope"`
+	Scope Scope `locationName:"scope" type:"string"`
 
 	// The date and time the Reserved Instance started.
 	Start *time.Time `locationName:"start" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state of the Reserved Instance purchase.
-	State *string `locationName:"state" type:"string" enum:"ReservedInstanceState"`
+	State ReservedInstanceState `locationName:"state" type:"string"`
 
 	// Any tags assigned to the resource.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
@@ -51756,8 +51975,8 @@ func (s *ReservedInstances) SetAvailabilityZone(v string) *ReservedInstances {
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *ReservedInstances) SetCurrencyCode(v string) *ReservedInstances {
-	s.CurrencyCode = &v
+func (s *ReservedInstances) SetCurrencyCode(v CurrencyCodeValues) *ReservedInstances {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -51786,32 +52005,32 @@ func (s *ReservedInstances) SetInstanceCount(v int64) *ReservedInstances {
 }
 
 // SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *ReservedInstances) SetInstanceTenancy(v string) *ReservedInstances {
-	s.InstanceTenancy = &v
+func (s *ReservedInstances) SetInstanceTenancy(v Tenancy) *ReservedInstances {
+	s.InstanceTenancy = v
 	return s
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *ReservedInstances) SetInstanceType(v string) *ReservedInstances {
-	s.InstanceType = &v
+func (s *ReservedInstances) SetInstanceType(v InstanceType) *ReservedInstances {
+	s.InstanceType = v
 	return s
 }
 
 // SetOfferingClass sets the OfferingClass field's value.
-func (s *ReservedInstances) SetOfferingClass(v string) *ReservedInstances {
-	s.OfferingClass = &v
+func (s *ReservedInstances) SetOfferingClass(v OfferingClassType) *ReservedInstances {
+	s.OfferingClass = v
 	return s
 }
 
 // SetOfferingType sets the OfferingType field's value.
-func (s *ReservedInstances) SetOfferingType(v string) *ReservedInstances {
-	s.OfferingType = &v
+func (s *ReservedInstances) SetOfferingType(v OfferingTypeValues) *ReservedInstances {
+	s.OfferingType = v
 	return s
 }
 
 // SetProductDescription sets the ProductDescription field's value.
-func (s *ReservedInstances) SetProductDescription(v string) *ReservedInstances {
-	s.ProductDescription = &v
+func (s *ReservedInstances) SetProductDescription(v RIProductDescription) *ReservedInstances {
+	s.ProductDescription = v
 	return s
 }
 
@@ -51828,8 +52047,8 @@ func (s *ReservedInstances) SetReservedInstancesId(v string) *ReservedInstances 
 }
 
 // SetScope sets the Scope field's value.
-func (s *ReservedInstances) SetScope(v string) *ReservedInstances {
-	s.Scope = &v
+func (s *ReservedInstances) SetScope(v Scope) *ReservedInstances {
+	s.Scope = v
 	return s
 }
 
@@ -51840,8 +52059,8 @@ func (s *ReservedInstances) SetStart(v time.Time) *ReservedInstances {
 }
 
 // SetState sets the State field's value.
-func (s *ReservedInstances) SetState(v string) *ReservedInstances {
-	s.State = &v
+func (s *ReservedInstances) SetState(v ReservedInstanceState) *ReservedInstances {
+	s.State = v
 	return s
 }
 
@@ -51869,7 +52088,7 @@ type ReservedInstancesConfiguration struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// The instance type for the modified Reserved Instances.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// The network platform of the modified Reserved Instances, which is either
 	// EC2-Classic or EC2-VPC.
@@ -51877,7 +52096,7 @@ type ReservedInstancesConfiguration struct {
 
 	// Whether the Reserved Instance is applied to instances in a region or instances
 	// in a specific Availability Zone.
-	Scope *string `locationName:"scope" type:"string" enum:"scope"`
+	Scope Scope `locationName:"scope" type:"string"`
 }
 
 // String returns the string representation
@@ -51903,8 +52122,8 @@ func (s *ReservedInstancesConfiguration) SetInstanceCount(v int64) *ReservedInst
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *ReservedInstancesConfiguration) SetInstanceType(v string) *ReservedInstancesConfiguration {
-	s.InstanceType = &v
+func (s *ReservedInstancesConfiguration) SetInstanceType(v InstanceType) *ReservedInstancesConfiguration {
+	s.InstanceType = v
 	return s
 }
 
@@ -51915,8 +52134,8 @@ func (s *ReservedInstancesConfiguration) SetPlatform(v string) *ReservedInstance
 }
 
 // SetScope sets the Scope field's value.
-func (s *ReservedInstancesConfiguration) SetScope(v string) *ReservedInstancesConfiguration {
-	s.Scope = &v
+func (s *ReservedInstancesConfiguration) SetScope(v Scope) *ReservedInstancesConfiguration {
+	s.Scope = v
 	return s
 }
 
@@ -51970,7 +52189,7 @@ type ReservedInstancesListing struct {
 	ReservedInstancesListingId *string `locationName:"reservedInstancesListingId" type:"string"`
 
 	// The status of the Reserved Instance listing.
-	Status *string `locationName:"status" type:"string" enum:"ListingStatus"`
+	Status ListingStatus `locationName:"status" type:"string"`
 
 	// The reason for the current status of the Reserved Instance listing. The response
 	// can be blank.
@@ -52030,8 +52249,8 @@ func (s *ReservedInstancesListing) SetReservedInstancesListingId(v string) *Rese
 }
 
 // SetStatus sets the Status field's value.
-func (s *ReservedInstancesListing) SetStatus(v string) *ReservedInstancesListing {
-	s.Status = &v
+func (s *ReservedInstancesListing) SetStatus(v ListingStatus) *ReservedInstancesListing {
+	s.Status = v
 	return s
 }
 
@@ -52199,7 +52418,7 @@ type ReservedInstancesOffering struct {
 	// The currency of the Reserved Instance offering you are purchasing. It's specified
 	// using ISO 4217 standard currency codes. At this time, the only supported
 	// currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
+	CurrencyCode CurrencyCodeValues `locationName:"currencyCode" type:"string"`
 
 	// The duration of the Reserved Instance, in seconds.
 	Duration *int64 `locationName:"duration" type:"long"`
@@ -52208,10 +52427,10 @@ type ReservedInstancesOffering struct {
 	FixedPrice *float64 `locationName:"fixedPrice" type:"float"`
 
 	// The tenancy of the instance.
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
 
 	// The instance type on which the Reserved Instance can be used.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// Indicates whether the offering is available through the Reserved Instance
 	// Marketplace (resale) or AWS. If it's a Reserved Instance Marketplace offering,
@@ -52221,16 +52440,16 @@ type ReservedInstancesOffering struct {
 	// If convertible it can be exchanged for Reserved Instances of the same or
 	// higher monetary value, with different configurations. If standard, it is
 	// not possible to perform an exchange.
-	OfferingClass *string `locationName:"offeringClass" type:"string" enum:"OfferingClassType"`
+	OfferingClass OfferingClassType `locationName:"offeringClass" type:"string"`
 
 	// The Reserved Instance offering type.
-	OfferingType *string `locationName:"offeringType" type:"string" enum:"OfferingTypeValues"`
+	OfferingType OfferingTypeValues `locationName:"offeringType" type:"string"`
 
 	// The pricing details of the Reserved Instance offering.
 	PricingDetails []*PricingDetail `locationName:"pricingDetailsSet" locationNameList:"item" type:"list"`
 
 	// The Reserved Instance product platform description.
-	ProductDescription *string `locationName:"productDescription" type:"string" enum:"RIProductDescription"`
+	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
 
 	// The recurring charge tag assigned to the resource.
 	RecurringCharges []*RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
@@ -52241,7 +52460,7 @@ type ReservedInstancesOffering struct {
 
 	// Whether the Reserved Instance is applied to instances in a region or an Availability
 	// Zone.
-	Scope *string `locationName:"scope" type:"string" enum:"scope"`
+	Scope Scope `locationName:"scope" type:"string"`
 
 	// The usage price of the Reserved Instance, per hour.
 	UsagePrice *float64 `locationName:"usagePrice" type:"float"`
@@ -52264,8 +52483,8 @@ func (s *ReservedInstancesOffering) SetAvailabilityZone(v string) *ReservedInsta
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *ReservedInstancesOffering) SetCurrencyCode(v string) *ReservedInstancesOffering {
-	s.CurrencyCode = &v
+func (s *ReservedInstancesOffering) SetCurrencyCode(v CurrencyCodeValues) *ReservedInstancesOffering {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -52282,14 +52501,14 @@ func (s *ReservedInstancesOffering) SetFixedPrice(v float64) *ReservedInstancesO
 }
 
 // SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *ReservedInstancesOffering) SetInstanceTenancy(v string) *ReservedInstancesOffering {
-	s.InstanceTenancy = &v
+func (s *ReservedInstancesOffering) SetInstanceTenancy(v Tenancy) *ReservedInstancesOffering {
+	s.InstanceTenancy = v
 	return s
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *ReservedInstancesOffering) SetInstanceType(v string) *ReservedInstancesOffering {
-	s.InstanceType = &v
+func (s *ReservedInstancesOffering) SetInstanceType(v InstanceType) *ReservedInstancesOffering {
+	s.InstanceType = v
 	return s
 }
 
@@ -52300,14 +52519,14 @@ func (s *ReservedInstancesOffering) SetMarketplace(v bool) *ReservedInstancesOff
 }
 
 // SetOfferingClass sets the OfferingClass field's value.
-func (s *ReservedInstancesOffering) SetOfferingClass(v string) *ReservedInstancesOffering {
-	s.OfferingClass = &v
+func (s *ReservedInstancesOffering) SetOfferingClass(v OfferingClassType) *ReservedInstancesOffering {
+	s.OfferingClass = v
 	return s
 }
 
 // SetOfferingType sets the OfferingType field's value.
-func (s *ReservedInstancesOffering) SetOfferingType(v string) *ReservedInstancesOffering {
-	s.OfferingType = &v
+func (s *ReservedInstancesOffering) SetOfferingType(v OfferingTypeValues) *ReservedInstancesOffering {
+	s.OfferingType = v
 	return s
 }
 
@@ -52318,8 +52537,8 @@ func (s *ReservedInstancesOffering) SetPricingDetails(v []*PricingDetail) *Reser
 }
 
 // SetProductDescription sets the ProductDescription field's value.
-func (s *ReservedInstancesOffering) SetProductDescription(v string) *ReservedInstancesOffering {
-	s.ProductDescription = &v
+func (s *ReservedInstancesOffering) SetProductDescription(v RIProductDescription) *ReservedInstancesOffering {
+	s.ProductDescription = v
 	return s
 }
 
@@ -52336,8 +52555,8 @@ func (s *ReservedInstancesOffering) SetReservedInstancesOfferingId(v string) *Re
 }
 
 // SetScope sets the Scope field's value.
-func (s *ReservedInstancesOffering) SetScope(v string) *ReservedInstancesOffering {
-	s.Scope = &v
+func (s *ReservedInstancesOffering) SetScope(v Scope) *ReservedInstancesOffering {
+	s.Scope = v
 	return s
 }
 
@@ -52352,7 +52571,7 @@ type ResetFpgaImageAttributeInput struct {
 	_ struct{} `type:"structure"`
 
 	// The attribute.
-	Attribute *string `type:"string" enum:"ResetFpgaImageAttributeName"`
+	Attribute ResetFpgaImageAttributeName `type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -52379,6 +52598,7 @@ func (s ResetFpgaImageAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetFpgaImageAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetFpgaImageAttributeInput"}
+
 	if s.FpgaImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FpgaImageId"))
 	}
@@ -52390,8 +52610,8 @@ func (s *ResetFpgaImageAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *ResetFpgaImageAttributeInput) SetAttribute(v string) *ResetFpgaImageAttributeInput {
-	s.Attribute = &v
+func (s *ResetFpgaImageAttributeInput) SetAttribute(v ResetFpgaImageAttributeName) *ResetFpgaImageAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -52440,7 +52660,7 @@ type ResetImageAttributeInput struct {
 	// attribute).
 	//
 	// Attribute is a required field
-	Attribute *string `type:"string" required:"true" enum:"ResetImageAttributeName"`
+	Attribute ResetImageAttributeName `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -52467,9 +52687,10 @@ func (s ResetImageAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetImageAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetImageAttributeInput"}
-	if s.Attribute == nil {
+	if len(s.Attribute) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
+
 	if s.ImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
 	}
@@ -52481,8 +52702,8 @@ func (s *ResetImageAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *ResetImageAttributeInput) SetAttribute(v string) *ResetImageAttributeInput {
-	s.Attribute = &v
+func (s *ResetImageAttributeInput) SetAttribute(v ResetImageAttributeName) *ResetImageAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -52524,7 +52745,7 @@ type ResetInstanceAttributeInput struct {
 	// To change an instance attribute, use ModifyInstanceAttribute.
 	//
 	// Attribute is a required field
-	Attribute *string `locationName:"attribute" type:"string" required:"true" enum:"InstanceAttributeName"`
+	Attribute InstanceAttributeName `locationName:"attribute" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -52551,9 +52772,10 @@ func (s ResetInstanceAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetInstanceAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetInstanceAttributeInput"}
-	if s.Attribute == nil {
+	if len(s.Attribute) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -52565,8 +52787,8 @@ func (s *ResetInstanceAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *ResetInstanceAttributeInput) SetAttribute(v string) *ResetInstanceAttributeInput {
-	s.Attribute = &v
+func (s *ResetInstanceAttributeInput) SetAttribute(v InstanceAttributeName) *ResetInstanceAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -52630,6 +52852,7 @@ func (s ResetNetworkInterfaceAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetNetworkInterfaceAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetNetworkInterfaceAttributeInput"}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
@@ -52682,7 +52905,7 @@ type ResetSnapshotAttributeInput struct {
 	// volumes can be reset.
 	//
 	// Attribute is a required field
-	Attribute *string `type:"string" required:"true" enum:"SnapshotAttributeName"`
+	Attribute SnapshotAttributeName `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -52709,9 +52932,10 @@ func (s ResetSnapshotAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetSnapshotAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetSnapshotAttributeInput"}
-	if s.Attribute == nil {
+	if len(s.Attribute) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
+
 	if s.SnapshotId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
@@ -52723,8 +52947,8 @@ func (s *ResetSnapshotAttributeInput) Validate() error {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *ResetSnapshotAttributeInput) SetAttribute(v string) *ResetSnapshotAttributeInput {
-	s.Attribute = &v
+func (s *ResetSnapshotAttributeInput) SetAttribute(v SnapshotAttributeName) *ResetSnapshotAttributeInput {
+	s.Attribute = v
 	return s
 }
 
@@ -52785,6 +53009,7 @@ func (s RestoreAddressToClassicInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreAddressToClassicInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreAddressToClassicInput"}
+
 	if s.PublicIp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PublicIp"))
 	}
@@ -52816,7 +53041,7 @@ type RestoreAddressToClassicOutput struct {
 	PublicIp *string `locationName:"publicIp" type:"string"`
 
 	// The move status for the IP address.
-	Status *string `locationName:"status" type:"string" enum:"Status"`
+	Status Status `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -52836,8 +53061,8 @@ func (s *RestoreAddressToClassicOutput) SetPublicIp(v string) *RestoreAddressToC
 }
 
 // SetStatus sets the Status field's value.
-func (s *RestoreAddressToClassicOutput) SetStatus(v string) *RestoreAddressToClassicOutput {
-	s.Status = &v
+func (s *RestoreAddressToClassicOutput) SetStatus(v Status) *RestoreAddressToClassicOutput {
+	s.Status = v
 	return s
 }
 
@@ -52896,6 +53121,7 @@ func (s RevokeSecurityGroupEgressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeSecurityGroupEgressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RevokeSecurityGroupEgressInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -53157,12 +53383,12 @@ type Route struct {
 	//    * CreateRoute - The route was manually added to the route table.
 	//
 	//    * EnableVgwRoutePropagation - The route was propagated by route propagation.
-	Origin *string `locationName:"origin" type:"string" enum:"RouteOrigin"`
+	Origin RouteOrigin `locationName:"origin" type:"string"`
 
 	// The state of the route. The blackhole state indicates that the route's target
 	// isn't available (for example, the specified gateway isn't attached to the
 	// VPC, or the specified NAT instance has been terminated).
-	State *string `locationName:"state" type:"string" enum:"RouteState"`
+	State RouteState `locationName:"state" type:"string"`
 
 	// The ID of the VPC peering connection.
 	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
@@ -53233,14 +53459,14 @@ func (s *Route) SetNetworkInterfaceId(v string) *Route {
 }
 
 // SetOrigin sets the Origin field's value.
-func (s *Route) SetOrigin(v string) *Route {
-	s.Origin = &v
+func (s *Route) SetOrigin(v RouteOrigin) *Route {
+	s.Origin = v
 	return s
 }
 
 // SetState sets the State field's value.
-func (s *Route) SetState(v string) *Route {
-	s.State = &v
+func (s *Route) SetState(v RouteState) *Route {
+	s.State = v
 	return s
 }
 
@@ -53434,13 +53660,13 @@ type RunInstancesInput struct {
 	// from the instance (using the operating system command for system shutdown).
 	//
 	// Default: stop
-	InstanceInitiatedShutdownBehavior *string `locationName:"instanceInitiatedShutdownBehavior" type:"string" enum:"ShutdownBehavior"`
+	InstanceInitiatedShutdownBehavior ShutdownBehavior `locationName:"instanceInitiatedShutdownBehavior" type:"string"`
 
 	// The instance type. For more information, see Instance Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	//
 	// Default: m1.small
-	InstanceType *string `type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `type:"string"`
 
 	// [EC2-VPC] A number of IPv6 addresses to associate with the primary network
 	// interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
@@ -53560,12 +53786,15 @@ func (s RunInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RunInstancesInput"}
+
 	if s.ImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
 	}
+
 	if s.MaxCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxCount"))
 	}
+
 	if s.MinCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinCount"))
 	}
@@ -53656,14 +53885,14 @@ func (s *RunInstancesInput) SetImageId(v string) *RunInstancesInput {
 }
 
 // SetInstanceInitiatedShutdownBehavior sets the InstanceInitiatedShutdownBehavior field's value.
-func (s *RunInstancesInput) SetInstanceInitiatedShutdownBehavior(v string) *RunInstancesInput {
-	s.InstanceInitiatedShutdownBehavior = &v
+func (s *RunInstancesInput) SetInstanceInitiatedShutdownBehavior(v ShutdownBehavior) *RunInstancesInput {
+	s.InstanceInitiatedShutdownBehavior = v
 	return s
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *RunInstancesInput) SetInstanceType(v string) *RunInstancesInput {
-	s.InstanceType = &v
+func (s *RunInstancesInput) SetInstanceType(v InstanceType) *RunInstancesInput {
+	s.InstanceType = v
 	return s
 }
 
@@ -53788,6 +54017,7 @@ func (s RunInstancesMonitoringEnabled) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunInstancesMonitoringEnabled) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RunInstancesMonitoringEnabled"}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
@@ -53849,9 +54079,11 @@ func (s RunScheduledInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunScheduledInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RunScheduledInstancesInput"}
+
 	if s.LaunchSpecification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LaunchSpecification"))
 	}
+
 	if s.ScheduledInstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScheduledInstanceId"))
 	}
@@ -54693,6 +54925,7 @@ func (s ScheduledInstancesLaunchSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduledInstancesLaunchSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScheduledInstancesLaunchSpecification"}
+
 	if s.ImageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageId"))
 	}
@@ -55177,9 +55410,11 @@ func (s SlotDateTimeRangeRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SlotDateTimeRangeRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SlotDateTimeRangeRequest"}
+
 	if s.EarliestTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EarliestTime"))
 	}
+
 	if s.LatestTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LatestTime"))
 	}
@@ -55279,7 +55514,7 @@ type Snapshot struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The snapshot state.
-	State *string `locationName:"status" type:"string" enum:"SnapshotState"`
+	State SnapshotState `locationName:"status" type:"string"`
 
 	// Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy
 	// operation fails (for example, if the proper AWS Key Management Service (AWS
@@ -55365,8 +55600,8 @@ func (s *Snapshot) SetStartTime(v time.Time) *Snapshot {
 }
 
 // SetState sets the State field's value.
-func (s *Snapshot) SetState(v string) *Snapshot {
-	s.State = &v
+func (s *Snapshot) SetState(v SnapshotState) *Snapshot {
+	s.State = v
 	return s
 }
 
@@ -55670,7 +55905,7 @@ type SpotDatafeedSubscription struct {
 	Prefix *string `locationName:"prefix" type:"string"`
 
 	// The state of the Spot instance data feed subscription.
-	State *string `locationName:"state" type:"string" enum:"DatafeedSubscriptionState"`
+	State DatafeedSubscriptionState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -55708,8 +55943,8 @@ func (s *SpotDatafeedSubscription) SetPrefix(v string) *SpotDatafeedSubscription
 }
 
 // SetState sets the State field's value.
-func (s *SpotDatafeedSubscription) SetState(v string) *SpotDatafeedSubscription {
-	s.State = &v
+func (s *SpotDatafeedSubscription) SetState(v DatafeedSubscriptionState) *SpotDatafeedSubscription {
+	s.State = v
 	return s
 }
 
@@ -55740,7 +55975,7 @@ type SpotFleetLaunchSpecification struct {
 	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The instance type. Note that T2 and HS1 instance types are not supported.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// The ID of the kernel.
 	KernelId *string `locationName:"kernelId" type:"string"`
@@ -55855,8 +56090,8 @@ func (s *SpotFleetLaunchSpecification) SetImageId(v string) *SpotFleetLaunchSpec
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *SpotFleetLaunchSpecification) SetInstanceType(v string) *SpotFleetLaunchSpecification {
-	s.InstanceType = &v
+func (s *SpotFleetLaunchSpecification) SetInstanceType(v InstanceType) *SpotFleetLaunchSpecification {
+	s.InstanceType = v
 	return s
 }
 
@@ -55969,7 +56204,7 @@ type SpotFleetRequestConfig struct {
 	// the size of the fleet is equal to or greater than its target capacity, the
 	// status is fulfilled. If the size of the fleet is decreased, the status is
 	// pending_termination while Spot instances are terminating.
-	ActivityStatus *string `locationName:"activityStatus" type:"string" enum:"ActivityStatus"`
+	ActivityStatus ActivityStatus `locationName:"activityStatus" type:"string"`
 
 	// The creation date and time of the request.
 	//
@@ -55989,7 +56224,7 @@ type SpotFleetRequestConfig struct {
 	// The state of the Spot fleet request.
 	//
 	// SpotFleetRequestState is a required field
-	SpotFleetRequestState *string `locationName:"spotFleetRequestState" type:"string" required:"true" enum:"BatchState"`
+	SpotFleetRequestState BatchState `locationName:"spotFleetRequestState" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -56003,8 +56238,8 @@ func (s SpotFleetRequestConfig) GoString() string {
 }
 
 // SetActivityStatus sets the ActivityStatus field's value.
-func (s *SpotFleetRequestConfig) SetActivityStatus(v string) *SpotFleetRequestConfig {
-	s.ActivityStatus = &v
+func (s *SpotFleetRequestConfig) SetActivityStatus(v ActivityStatus) *SpotFleetRequestConfig {
+	s.ActivityStatus = v
 	return s
 }
 
@@ -56027,8 +56262,8 @@ func (s *SpotFleetRequestConfig) SetSpotFleetRequestId(v string) *SpotFleetReque
 }
 
 // SetSpotFleetRequestState sets the SpotFleetRequestState field's value.
-func (s *SpotFleetRequestConfig) SetSpotFleetRequestState(v string) *SpotFleetRequestConfig {
-	s.SpotFleetRequestState = &v
+func (s *SpotFleetRequestConfig) SetSpotFleetRequestState(v BatchState) *SpotFleetRequestConfig {
+	s.SpotFleetRequestState = v
 	return s
 }
 
@@ -56039,7 +56274,7 @@ type SpotFleetRequestConfigData struct {
 
 	// Indicates how to allocate the target capacity across the Spot pools specified
 	// by the Spot fleet request. The default is lowestPrice.
-	AllocationStrategy *string `locationName:"allocationStrategy" type:"string" enum:"AllocationStrategy"`
+	AllocationStrategy AllocationStrategy `locationName:"allocationStrategy" type:"string"`
 
 	// A unique, case-sensitive identifier you provide to ensure idempotency of
 	// your listings. This helps avoid duplicate listings. For more information,
@@ -56049,7 +56284,7 @@ type SpotFleetRequestConfigData struct {
 	// Indicates whether running Spot instances should be terminated if the target
 	// capacity of the Spot fleet request is decreased below the current size of
 	// the Spot fleet.
-	ExcessCapacityTerminationPolicy *string `locationName:"excessCapacityTerminationPolicy" type:"string" enum:"ExcessCapacityTerminationPolicy"`
+	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string"`
 
 	// The number of units fulfilled by this request compared to the set target
 	// capacity.
@@ -56063,7 +56298,7 @@ type SpotFleetRequestConfigData struct {
 	IamFleetRole *string `locationName:"iamFleetRole" type:"string" required:"true"`
 
 	// Indicates whether a Spot instance stops or terminates when it is interrupted.
-	InstanceInterruptionBehavior *string `locationName:"instanceInterruptionBehavior" type:"string" enum:"InstanceInterruptionBehavior"`
+	InstanceInterruptionBehavior InstanceInterruptionBehavior `locationName:"instanceInterruptionBehavior" type:"string"`
 
 	// Information about the launch specifications for the Spot fleet request.
 	//
@@ -56097,7 +56332,7 @@ type SpotFleetRequestConfigData struct {
 	// to maintain a certain target capacity, fleet will place the required bids
 	// to meet this target capacity. It will also automatically replenish any interrupted
 	// instances. Default: maintain.
-	Type *string `locationName:"type" type:"string" enum:"FleetType"`
+	Type FleetType `locationName:"type" type:"string"`
 
 	// The start date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	// The default is to start fulfilling the request immediately.
@@ -56122,18 +56357,22 @@ func (s SpotFleetRequestConfigData) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SpotFleetRequestConfigData) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SpotFleetRequestConfigData"}
+
 	if s.IamFleetRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamFleetRole"))
 	}
+
 	if s.LaunchSpecifications == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LaunchSpecifications"))
 	}
 	if s.LaunchSpecifications != nil && len(s.LaunchSpecifications) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LaunchSpecifications", 1))
 	}
+
 	if s.SpotPrice == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotPrice"))
 	}
+
 	if s.TargetCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetCapacity"))
 	}
@@ -56155,8 +56394,8 @@ func (s *SpotFleetRequestConfigData) Validate() error {
 }
 
 // SetAllocationStrategy sets the AllocationStrategy field's value.
-func (s *SpotFleetRequestConfigData) SetAllocationStrategy(v string) *SpotFleetRequestConfigData {
-	s.AllocationStrategy = &v
+func (s *SpotFleetRequestConfigData) SetAllocationStrategy(v AllocationStrategy) *SpotFleetRequestConfigData {
+	s.AllocationStrategy = v
 	return s
 }
 
@@ -56167,8 +56406,8 @@ func (s *SpotFleetRequestConfigData) SetClientToken(v string) *SpotFleetRequestC
 }
 
 // SetExcessCapacityTerminationPolicy sets the ExcessCapacityTerminationPolicy field's value.
-func (s *SpotFleetRequestConfigData) SetExcessCapacityTerminationPolicy(v string) *SpotFleetRequestConfigData {
-	s.ExcessCapacityTerminationPolicy = &v
+func (s *SpotFleetRequestConfigData) SetExcessCapacityTerminationPolicy(v ExcessCapacityTerminationPolicy) *SpotFleetRequestConfigData {
+	s.ExcessCapacityTerminationPolicy = v
 	return s
 }
 
@@ -56185,8 +56424,8 @@ func (s *SpotFleetRequestConfigData) SetIamFleetRole(v string) *SpotFleetRequest
 }
 
 // SetInstanceInterruptionBehavior sets the InstanceInterruptionBehavior field's value.
-func (s *SpotFleetRequestConfigData) SetInstanceInterruptionBehavior(v string) *SpotFleetRequestConfigData {
-	s.InstanceInterruptionBehavior = &v
+func (s *SpotFleetRequestConfigData) SetInstanceInterruptionBehavior(v InstanceInterruptionBehavior) *SpotFleetRequestConfigData {
+	s.InstanceInterruptionBehavior = v
 	return s
 }
 
@@ -56221,8 +56460,8 @@ func (s *SpotFleetRequestConfigData) SetTerminateInstancesWithExpiration(v bool)
 }
 
 // SetType sets the Type field's value.
-func (s *SpotFleetRequestConfigData) SetType(v string) *SpotFleetRequestConfigData {
-	s.Type = &v
+func (s *SpotFleetRequestConfigData) SetType(v FleetType) *SpotFleetRequestConfigData {
+	s.Type = v
 	return s
 }
 
@@ -56245,7 +56484,7 @@ type SpotFleetTagSpecification struct {
 
 	// The type of resource. Currently, the only resource type that is supported
 	// is instance.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The tags.
 	Tags []*Tag `locationName:"tag" locationNameList:"item" type:"list"`
@@ -56262,8 +56501,8 @@ func (s SpotFleetTagSpecification) GoString() string {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *SpotFleetTagSpecification) SetResourceType(v string) *SpotFleetTagSpecification {
-	s.ResourceType = &v
+func (s *SpotFleetTagSpecification) SetResourceType(v ResourceType) *SpotFleetTagSpecification {
+	s.ResourceType = v
 	return s
 }
 
@@ -56302,7 +56541,7 @@ type SpotInstanceRequest struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// Indicates whether a Spot instance stops or terminates when it is interrupted.
-	InstanceInterruptionBehavior *string `locationName:"instanceInterruptionBehavior" type:"string" enum:"InstanceInterruptionBehavior"`
+	InstanceInterruptionBehavior InstanceInterruptionBehavior `locationName:"instanceInterruptionBehavior" type:"string"`
 
 	// The instance launch group. Launch groups are Spot instances that launch together
 	// and terminate together.
@@ -56315,7 +56554,7 @@ type SpotInstanceRequest struct {
 	LaunchedAvailabilityZone *string `locationName:"launchedAvailabilityZone" type:"string"`
 
 	// The product description associated with the Spot instance.
-	ProductDescription *string `locationName:"productDescription" type:"string" enum:"RIProductDescription"`
+	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
 
 	// The ID of the Spot instance request.
 	SpotInstanceRequestId *string `locationName:"spotInstanceRequestId" type:"string"`
@@ -56328,7 +56567,7 @@ type SpotInstanceRequest struct {
 	// you track your Spot instance requests. For more information, see Spot Bid
 	// Status (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	State *string `locationName:"state" type:"string" enum:"SpotInstanceState"`
+	State SpotInstanceState `locationName:"state" type:"string"`
 
 	// The status code and status message describing the Spot instance request.
 	Status *SpotInstanceStatus `locationName:"status" type:"structure"`
@@ -56337,7 +56576,7 @@ type SpotInstanceRequest struct {
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The Spot instance request type.
-	Type *string `locationName:"type" type:"string" enum:"SpotInstanceType"`
+	Type SpotInstanceType `locationName:"type" type:"string"`
 
 	// The start date of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	// The request becomes active at this date and time.
@@ -56397,8 +56636,8 @@ func (s *SpotInstanceRequest) SetInstanceId(v string) *SpotInstanceRequest {
 }
 
 // SetInstanceInterruptionBehavior sets the InstanceInterruptionBehavior field's value.
-func (s *SpotInstanceRequest) SetInstanceInterruptionBehavior(v string) *SpotInstanceRequest {
-	s.InstanceInterruptionBehavior = &v
+func (s *SpotInstanceRequest) SetInstanceInterruptionBehavior(v InstanceInterruptionBehavior) *SpotInstanceRequest {
+	s.InstanceInterruptionBehavior = v
 	return s
 }
 
@@ -56421,8 +56660,8 @@ func (s *SpotInstanceRequest) SetLaunchedAvailabilityZone(v string) *SpotInstanc
 }
 
 // SetProductDescription sets the ProductDescription field's value.
-func (s *SpotInstanceRequest) SetProductDescription(v string) *SpotInstanceRequest {
-	s.ProductDescription = &v
+func (s *SpotInstanceRequest) SetProductDescription(v RIProductDescription) *SpotInstanceRequest {
+	s.ProductDescription = v
 	return s
 }
 
@@ -56439,8 +56678,8 @@ func (s *SpotInstanceRequest) SetSpotPrice(v string) *SpotInstanceRequest {
 }
 
 // SetState sets the State field's value.
-func (s *SpotInstanceRequest) SetState(v string) *SpotInstanceRequest {
-	s.State = &v
+func (s *SpotInstanceRequest) SetState(v SpotInstanceState) *SpotInstanceRequest {
+	s.State = v
 	return s
 }
 
@@ -56457,8 +56696,8 @@ func (s *SpotInstanceRequest) SetTags(v []*Tag) *SpotInstanceRequest {
 }
 
 // SetType sets the Type field's value.
-func (s *SpotInstanceRequest) SetType(v string) *SpotInstanceRequest {
-	s.Type = &v
+func (s *SpotInstanceRequest) SetType(v SpotInstanceType) *SpotInstanceRequest {
+	s.Type = v
 	return s
 }
 
@@ -56570,7 +56809,7 @@ type SpotPlacement struct {
 	// The tenancy of the instance (if the instance is running in a VPC). An instance
 	// with a tenancy of dedicated runs on single-tenant hardware. The host tenancy
 	// is not supported for Spot instances.
-	Tenancy *string `locationName:"tenancy" type:"string" enum:"Tenancy"`
+	Tenancy Tenancy `locationName:"tenancy" type:"string"`
 }
 
 // String returns the string representation
@@ -56596,8 +56835,8 @@ func (s *SpotPlacement) SetGroupName(v string) *SpotPlacement {
 }
 
 // SetTenancy sets the Tenancy field's value.
-func (s *SpotPlacement) SetTenancy(v string) *SpotPlacement {
-	s.Tenancy = &v
+func (s *SpotPlacement) SetTenancy(v Tenancy) *SpotPlacement {
+	s.Tenancy = v
 	return s
 }
 
@@ -56611,10 +56850,10 @@ type SpotPrice struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The instance type. Note that T2 and HS1 instance types are not supported.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// A general description of the AMI.
-	ProductDescription *string `locationName:"productDescription" type:"string" enum:"RIProductDescription"`
+	ProductDescription RIProductDescription `locationName:"productDescription" type:"string"`
 
 	// The maximum price (bid) that you are willing to pay for a Spot instance.
 	SpotPrice *string `locationName:"spotPrice" type:"string"`
@@ -56640,14 +56879,14 @@ func (s *SpotPrice) SetAvailabilityZone(v string) *SpotPrice {
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *SpotPrice) SetInstanceType(v string) *SpotPrice {
-	s.InstanceType = &v
+func (s *SpotPrice) SetInstanceType(v InstanceType) *SpotPrice {
+	s.InstanceType = v
 	return s
 }
 
 // SetProductDescription sets the ProductDescription field's value.
-func (s *SpotPrice) SetProductDescription(v string) *SpotPrice {
-	s.ProductDescription = &v
+func (s *SpotPrice) SetProductDescription(v RIProductDescription) *SpotPrice {
+	s.ProductDescription = v
 	return s
 }
 
@@ -56843,6 +57082,7 @@ func (s StartInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartInstancesInput"}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
@@ -56997,6 +57237,7 @@ func (s StopInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopInstancesInput"}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
@@ -57139,7 +57380,7 @@ type Subnet struct {
 	MapPublicIpOnLaunch *bool `locationName:"mapPublicIpOnLaunch" type:"boolean"`
 
 	// The current state of the subnet.
-	State *string `locationName:"state" type:"string" enum:"SubnetState"`
+	State SubnetState `locationName:"state" type:"string"`
 
 	// The ID of the subnet.
 	SubnetId *string `locationName:"subnetId" type:"string"`
@@ -57204,8 +57445,8 @@ func (s *Subnet) SetMapPublicIpOnLaunch(v bool) *Subnet {
 }
 
 // SetState sets the State field's value.
-func (s *Subnet) SetState(v string) *Subnet {
-	s.State = &v
+func (s *Subnet) SetState(v SubnetState) *Subnet {
+	s.State = v
 	return s
 }
 
@@ -57233,7 +57474,7 @@ type SubnetCidrBlockState struct {
 	_ struct{} `type:"structure"`
 
 	// The state of a CIDR block.
-	State *string `locationName:"state" type:"string" enum:"SubnetCidrBlockStateCode"`
+	State SubnetCidrBlockStateCode `locationName:"state" type:"string"`
 
 	// A message about the status of the CIDR block, if applicable.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -57250,8 +57491,8 @@ func (s SubnetCidrBlockState) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *SubnetCidrBlockState) SetState(v string) *SubnetCidrBlockState {
-	s.State = &v
+func (s *SubnetCidrBlockState) SetState(v SubnetCidrBlockStateCode) *SubnetCidrBlockState {
+	s.State = v
 	return s
 }
 
@@ -57356,7 +57597,7 @@ type TagDescription struct {
 	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	// The resource type.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The tag value.
 	Value *string `locationName:"value" type:"string"`
@@ -57385,8 +57626,8 @@ func (s *TagDescription) SetResourceId(v string) *TagDescription {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *TagDescription) SetResourceType(v string) *TagDescription {
-	s.ResourceType = &v
+func (s *TagDescription) SetResourceType(v ResourceType) *TagDescription {
+	s.ResourceType = v
 	return s
 }
 
@@ -57403,7 +57644,7 @@ type TagSpecification struct {
 
 	// The type of resource to tag. Currently, the resource types that support tagging
 	// on creation are instance and volume.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The tags to apply to the resource.
 	Tags []*Tag `locationName:"Tag" locationNameList:"item" type:"list"`
@@ -57420,8 +57661,8 @@ func (s TagSpecification) GoString() string {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *TagSpecification) SetResourceType(v string) *TagSpecification {
-	s.ResourceType = &v
+func (s *TagSpecification) SetResourceType(v ResourceType) *TagSpecification {
+	s.ResourceType = v
 	return s
 }
 
@@ -57494,6 +57735,7 @@ func (s TargetConfigurationRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TargetConfigurationRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TargetConfigurationRequest"}
+
 	if s.OfferingId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OfferingId"))
 	}
@@ -57586,6 +57828,7 @@ func (s TerminateInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TerminateInstancesInput"}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
@@ -57661,9 +57904,11 @@ func (s UnassignIpv6AddressesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnassignIpv6AddressesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnassignIpv6AddressesInput"}
+
 	if s.Ipv6Addresses == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Ipv6Addresses"))
 	}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
@@ -57749,9 +57994,11 @@ func (s UnassignPrivateIpAddressesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnassignPrivateIpAddressesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnassignPrivateIpAddressesInput"}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
+
 	if s.PrivateIpAddresses == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrivateIpAddresses"))
 	}
@@ -57819,6 +58066,7 @@ func (s UnmonitorInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnmonitorInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnmonitorInstancesInput"}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
@@ -57980,6 +58228,7 @@ func (s UpdateSecurityGroupRuleDescriptionsEgressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSecurityGroupRuleDescriptionsEgressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSecurityGroupRuleDescriptionsEgressInput"}
+
 	if s.IpPermissions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IpPermissions"))
 	}
@@ -58078,6 +58327,7 @@ func (s UpdateSecurityGroupRuleDescriptionsIngressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSecurityGroupRuleDescriptionsIngressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSecurityGroupRuleDescriptionsIngressInput"}
+
 	if s.IpPermissions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IpPermissions"))
 	}
@@ -58337,7 +58587,7 @@ type VgwTelemetry struct {
 	OutsideIpAddress *string `locationName:"outsideIpAddress" type:"string"`
 
 	// The status of the VPN tunnel.
-	Status *string `locationName:"status" type:"string" enum:"TelemetryStatus"`
+	Status TelemetryStatus `locationName:"status" type:"string"`
 
 	// If an error occurs, a description of the error.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -58372,8 +58622,8 @@ func (s *VgwTelemetry) SetOutsideIpAddress(v string) *VgwTelemetry {
 }
 
 // SetStatus sets the Status field's value.
-func (s *VgwTelemetry) SetStatus(v string) *VgwTelemetry {
-	s.Status = &v
+func (s *VgwTelemetry) SetStatus(v TelemetryStatus) *VgwTelemetry {
+	s.Status = v
 	return s
 }
 
@@ -58426,7 +58676,7 @@ type Volume struct {
 	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	// The volume state.
-	State *string `locationName:"status" type:"string" enum:"VolumeState"`
+	State VolumeState `locationName:"status" type:"string"`
 
 	// Any tags assigned to the volume.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
@@ -58437,7 +58687,7 @@ type Volume struct {
 	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
 	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard
 	// for Magnetic volumes.
-	VolumeType *string `locationName:"volumeType" type:"string" enum:"VolumeType"`
+	VolumeType VolumeType `locationName:"volumeType" type:"string"`
 }
 
 // String returns the string representation
@@ -58499,8 +58749,8 @@ func (s *Volume) SetSnapshotId(v string) *Volume {
 }
 
 // SetState sets the State field's value.
-func (s *Volume) SetState(v string) *Volume {
-	s.State = &v
+func (s *Volume) SetState(v VolumeState) *Volume {
+	s.State = v
 	return s
 }
 
@@ -58517,8 +58767,8 @@ func (s *Volume) SetVolumeId(v string) *Volume {
 }
 
 // SetVolumeType sets the VolumeType field's value.
-func (s *Volume) SetVolumeType(v string) *Volume {
-	s.VolumeType = &v
+func (s *Volume) SetVolumeType(v VolumeType) *Volume {
+	s.VolumeType = v
 	return s
 }
 
@@ -58540,7 +58790,7 @@ type VolumeAttachment struct {
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The attachment state of the volume.
-	State *string `locationName:"status" type:"string" enum:"VolumeAttachmentState"`
+	State VolumeAttachmentState `locationName:"status" type:"string"`
 
 	// The ID of the volume.
 	VolumeId *string `locationName:"volumeId" type:"string"`
@@ -58581,8 +58831,8 @@ func (s *VolumeAttachment) SetInstanceId(v string) *VolumeAttachment {
 }
 
 // SetState sets the State field's value.
-func (s *VolumeAttachment) SetState(v string) *VolumeAttachment {
-	s.State = &v
+func (s *VolumeAttachment) SetState(v VolumeAttachmentState) *VolumeAttachment {
+	s.State = v
 	return s
 }
 
@@ -58616,6 +58866,7 @@ func (s VolumeDetail) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VolumeDetail) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VolumeDetail"}
+
 	if s.Size == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Size"))
 	}
@@ -58644,7 +58895,7 @@ type VolumeModification struct {
 
 	// Current state of modification. Modification state is null for unmodified
 	// volumes.
-	ModificationState *string `locationName:"modificationState" type:"string" enum:"VolumeModificationState"`
+	ModificationState VolumeModificationState `locationName:"modificationState" type:"string"`
 
 	// Original IOPS rate of the volume being modified.
 	OriginalIops *int64 `locationName:"originalIops" type:"integer"`
@@ -58653,7 +58904,7 @@ type VolumeModification struct {
 	OriginalSize *int64 `locationName:"originalSize" type:"integer"`
 
 	// Original EBS volume type of the volume being modified.
-	OriginalVolumeType *string `locationName:"originalVolumeType" type:"string" enum:"VolumeType"`
+	OriginalVolumeType VolumeType `locationName:"originalVolumeType" type:"string"`
 
 	// Modification progress from 0 to 100%.
 	Progress *int64 `locationName:"progress" type:"long"`
@@ -58671,7 +58922,7 @@ type VolumeModification struct {
 	TargetSize *int64 `locationName:"targetSize" type:"integer"`
 
 	// Target EBS volume type of the volume being modified.
-	TargetVolumeType *string `locationName:"targetVolumeType" type:"string" enum:"VolumeType"`
+	TargetVolumeType VolumeType `locationName:"targetVolumeType" type:"string"`
 
 	// ID of the volume being modified.
 	VolumeId *string `locationName:"volumeId" type:"string"`
@@ -58694,8 +58945,8 @@ func (s *VolumeModification) SetEndTime(v time.Time) *VolumeModification {
 }
 
 // SetModificationState sets the ModificationState field's value.
-func (s *VolumeModification) SetModificationState(v string) *VolumeModification {
-	s.ModificationState = &v
+func (s *VolumeModification) SetModificationState(v VolumeModificationState) *VolumeModification {
+	s.ModificationState = v
 	return s
 }
 
@@ -58712,8 +58963,8 @@ func (s *VolumeModification) SetOriginalSize(v int64) *VolumeModification {
 }
 
 // SetOriginalVolumeType sets the OriginalVolumeType field's value.
-func (s *VolumeModification) SetOriginalVolumeType(v string) *VolumeModification {
-	s.OriginalVolumeType = &v
+func (s *VolumeModification) SetOriginalVolumeType(v VolumeType) *VolumeModification {
+	s.OriginalVolumeType = v
 	return s
 }
 
@@ -58748,8 +58999,8 @@ func (s *VolumeModification) SetTargetSize(v int64) *VolumeModification {
 }
 
 // SetTargetVolumeType sets the TargetVolumeType field's value.
-func (s *VolumeModification) SetTargetVolumeType(v string) *VolumeModification {
-	s.TargetVolumeType = &v
+func (s *VolumeModification) SetTargetVolumeType(v VolumeType) *VolumeModification {
+	s.TargetVolumeType = v
 	return s
 }
 
@@ -58817,7 +59068,7 @@ type VolumeStatusDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the volume status.
-	Name *string `locationName:"name" type:"string" enum:"VolumeStatusName"`
+	Name VolumeStatusName `locationName:"name" type:"string"`
 
 	// The intended status of the volume status.
 	Status *string `locationName:"status" type:"string"`
@@ -58834,8 +59085,8 @@ func (s VolumeStatusDetails) GoString() string {
 }
 
 // SetName sets the Name field's value.
-func (s *VolumeStatusDetails) SetName(v string) *VolumeStatusDetails {
-	s.Name = &v
+func (s *VolumeStatusDetails) SetName(v VolumeStatusName) *VolumeStatusDetails {
+	s.Name = v
 	return s
 }
 
@@ -58915,7 +59166,7 @@ type VolumeStatusInfo struct {
 	Details []*VolumeStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
 
 	// The status of the volume.
-	Status *string `locationName:"status" type:"string" enum:"VolumeStatusInfoStatus"`
+	Status VolumeStatusInfoStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -58935,8 +59186,8 @@ func (s *VolumeStatusInfo) SetDetails(v []*VolumeStatusDetails) *VolumeStatusInf
 }
 
 // SetStatus sets the Status field's value.
-func (s *VolumeStatusInfo) SetStatus(v string) *VolumeStatusInfo {
-	s.Status = &v
+func (s *VolumeStatusInfo) SetStatus(v VolumeStatusInfoStatus) *VolumeStatusInfo {
+	s.Status = v
 	return s
 }
 
@@ -59017,7 +59268,7 @@ type Vpc struct {
 	DhcpOptionsId *string `locationName:"dhcpOptionsId" type:"string"`
 
 	// The allowed tenancy of instances launched into the VPC.
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
+	InstanceTenancy Tenancy `locationName:"instanceTenancy" type:"string"`
 
 	// Information about the IPv6 CIDR blocks associated with the VPC.
 	Ipv6CidrBlockAssociationSet []*VpcIpv6CidrBlockAssociation `locationName:"ipv6CidrBlockAssociationSet" locationNameList:"item" type:"list"`
@@ -59026,7 +59277,7 @@ type Vpc struct {
 	IsDefault *bool `locationName:"isDefault" type:"boolean"`
 
 	// The current state of the VPC.
-	State *string `locationName:"state" type:"string" enum:"VpcState"`
+	State VpcState `locationName:"state" type:"string"`
 
 	// Any tags assigned to the VPC.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
@@ -59064,8 +59315,8 @@ func (s *Vpc) SetDhcpOptionsId(v string) *Vpc {
 }
 
 // SetInstanceTenancy sets the InstanceTenancy field's value.
-func (s *Vpc) SetInstanceTenancy(v string) *Vpc {
-	s.InstanceTenancy = &v
+func (s *Vpc) SetInstanceTenancy(v Tenancy) *Vpc {
+	s.InstanceTenancy = v
 	return s
 }
 
@@ -59082,8 +59333,8 @@ func (s *Vpc) SetIsDefault(v bool) *Vpc {
 }
 
 // SetState sets the State field's value.
-func (s *Vpc) SetState(v string) *Vpc {
-	s.State = &v
+func (s *Vpc) SetState(v VpcState) *Vpc {
+	s.State = v
 	return s
 }
 
@@ -59105,7 +59356,7 @@ type VpcAttachment struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the attachment.
-	State *string `locationName:"state" type:"string" enum:"AttachmentStatus"`
+	State AttachmentStatus `locationName:"state" type:"string"`
 
 	// The ID of the VPC.
 	VpcId *string `locationName:"vpcId" type:"string"`
@@ -59122,8 +59373,8 @@ func (s VpcAttachment) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *VpcAttachment) SetState(v string) *VpcAttachment {
-	s.State = &v
+func (s *VpcAttachment) SetState(v AttachmentStatus) *VpcAttachment {
+	s.State = v
 	return s
 }
 
@@ -59182,7 +59433,7 @@ type VpcCidrBlockState struct {
 	_ struct{} `type:"structure"`
 
 	// The state of the CIDR block.
-	State *string `locationName:"state" type:"string" enum:"VpcCidrBlockStateCode"`
+	State VpcCidrBlockStateCode `locationName:"state" type:"string"`
 
 	// A message about the status of the CIDR block, if applicable.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -59199,8 +59450,8 @@ func (s VpcCidrBlockState) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *VpcCidrBlockState) SetState(v string) *VpcCidrBlockState {
-	s.State = &v
+func (s *VpcCidrBlockState) SetState(v VpcCidrBlockStateCode) *VpcCidrBlockState {
+	s.State = v
 	return s
 }
 
@@ -59271,7 +59522,7 @@ type VpcEndpoint struct {
 	ServiceName *string `locationName:"serviceName" type:"string"`
 
 	// The state of the VPC endpoint.
-	State *string `locationName:"state" type:"string" enum:"State"`
+	State State `locationName:"state" type:"string"`
 
 	// The ID of the VPC endpoint.
 	VpcEndpointId *string `locationName:"vpcEndpointId" type:"string"`
@@ -59315,8 +59566,8 @@ func (s *VpcEndpoint) SetServiceName(v string) *VpcEndpoint {
 }
 
 // SetState sets the State field's value.
-func (s *VpcEndpoint) SetState(v string) *VpcEndpoint {
-	s.State = &v
+func (s *VpcEndpoint) SetState(v State) *VpcEndpoint {
+	s.State = v
 	return s
 }
 
@@ -59499,7 +59750,7 @@ type VpcPeeringConnectionStateReason struct {
 	_ struct{} `type:"structure"`
 
 	// The status of the VPC peering connection.
-	Code *string `locationName:"code" type:"string" enum:"VpcPeeringConnectionStateReasonCode"`
+	Code VpcPeeringConnectionStateReasonCode `locationName:"code" type:"string"`
 
 	// A message that provides more information about the status, if applicable.
 	Message *string `locationName:"message" type:"string"`
@@ -59516,8 +59767,8 @@ func (s VpcPeeringConnectionStateReason) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *VpcPeeringConnectionStateReason) SetCode(v string) *VpcPeeringConnectionStateReason {
-	s.Code = &v
+func (s *VpcPeeringConnectionStateReason) SetCode(v VpcPeeringConnectionStateReasonCode) *VpcPeeringConnectionStateReason {
+	s.Code = v
 	return s
 }
 
@@ -59625,13 +59876,13 @@ type VpnConnection struct {
 	Routes []*VpnStaticRoute `locationName:"routes" locationNameList:"item" type:"list"`
 
 	// The current state of the VPN connection.
-	State *string `locationName:"state" type:"string" enum:"VpnState"`
+	State VpnState `locationName:"state" type:"string"`
 
 	// Any tags assigned to the VPN connection.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of VPN connection.
-	Type *string `locationName:"type" type:"string" enum:"GatewayType"`
+	Type GatewayType `locationName:"type" type:"string"`
 
 	// Information about the VPN tunnel.
 	VgwTelemetry []*VgwTelemetry `locationName:"vgwTelemetry" locationNameList:"item" type:"list"`
@@ -59684,8 +59935,8 @@ func (s *VpnConnection) SetRoutes(v []*VpnStaticRoute) *VpnConnection {
 }
 
 // SetState sets the State field's value.
-func (s *VpnConnection) SetState(v string) *VpnConnection {
-	s.State = &v
+func (s *VpnConnection) SetState(v VpnState) *VpnConnection {
+	s.State = v
 	return s
 }
 
@@ -59696,8 +59947,8 @@ func (s *VpnConnection) SetTags(v []*Tag) *VpnConnection {
 }
 
 // SetType sets the Type field's value.
-func (s *VpnConnection) SetType(v string) *VpnConnection {
-	s.Type = &v
+func (s *VpnConnection) SetType(v GatewayType) *VpnConnection {
+	s.Type = v
 	return s
 }
 
@@ -59796,13 +60047,13 @@ type VpnGateway struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The current state of the virtual private gateway.
-	State *string `locationName:"state" type:"string" enum:"VpnState"`
+	State VpnState `locationName:"state" type:"string"`
 
 	// Any tags assigned to the virtual private gateway.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of VPN connection the virtual private gateway supports.
-	Type *string `locationName:"type" type:"string" enum:"GatewayType"`
+	Type GatewayType `locationName:"type" type:"string"`
 
 	// Any VPCs attached to the virtual private gateway.
 	VpcAttachments []*VpcAttachment `locationName:"attachments" locationNameList:"item" type:"list"`
@@ -59834,8 +60085,8 @@ func (s *VpnGateway) SetAvailabilityZone(v string) *VpnGateway {
 }
 
 // SetState sets the State field's value.
-func (s *VpnGateway) SetState(v string) *VpnGateway {
-	s.State = &v
+func (s *VpnGateway) SetState(v VpnState) *VpnGateway {
+	s.State = v
 	return s
 }
 
@@ -59846,8 +60097,8 @@ func (s *VpnGateway) SetTags(v []*Tag) *VpnGateway {
 }
 
 // SetType sets the Type field's value.
-func (s *VpnGateway) SetType(v string) *VpnGateway {
-	s.Type = &v
+func (s *VpnGateway) SetType(v GatewayType) *VpnGateway {
+	s.Type = v
 	return s
 }
 
@@ -59872,10 +60123,10 @@ type VpnStaticRoute struct {
 	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string"`
 
 	// Indicates how the routes were provided.
-	Source *string `locationName:"source" type:"string" enum:"VpnStaticRouteSource"`
+	Source VpnStaticRouteSource `locationName:"source" type:"string"`
 
 	// The current state of the static route.
-	State *string `locationName:"state" type:"string" enum:"VpnState"`
+	State VpnState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -59895,14 +60146,14 @@ func (s *VpnStaticRoute) SetDestinationCidrBlock(v string) *VpnStaticRoute {
 }
 
 // SetSource sets the Source field's value.
-func (s *VpnStaticRoute) SetSource(v string) *VpnStaticRoute {
-	s.Source = &v
+func (s *VpnStaticRoute) SetSource(v VpnStaticRouteSource) *VpnStaticRoute {
+	s.Source = v
 	return s
 }
 
 // SetState sets the State field's value.
-func (s *VpnStaticRoute) SetState(v string) *VpnStaticRoute {
-	s.State = &v
+func (s *VpnStaticRoute) SetState(v VpnState) *VpnStaticRoute {
+	s.State = v
 	return s
 }
 
@@ -59963,1529 +60214,1071 @@ func (s *VpnTunnelOptionsSpecification) SetTunnelInsideCidr(v string) *VpnTunnel
 	return s
 }
 
-const (
-	// AccountAttributeNameSupportedPlatforms is a AccountAttributeName enum value
-	AccountAttributeNameSupportedPlatforms = "supported-platforms"
-
-	// AccountAttributeNameDefaultVpc is a AccountAttributeName enum value
-	AccountAttributeNameDefaultVpc = "default-vpc"
-)
+type AccountAttributeName string
 
+// Enum values for AccountAttributeName
 const (
-	// ActivityStatusError is a ActivityStatus enum value
-	ActivityStatusError = "error"
-
-	// ActivityStatusPendingFulfillment is a ActivityStatus enum value
-	ActivityStatusPendingFulfillment = "pending_fulfillment"
-
-	// ActivityStatusPendingTermination is a ActivityStatus enum value
-	ActivityStatusPendingTermination = "pending_termination"
-
-	// ActivityStatusFulfilled is a ActivityStatus enum value
-	ActivityStatusFulfilled = "fulfilled"
+	AccountAttributeNameSupportedPlatforms AccountAttributeName = "supported-platforms"
+	AccountAttributeNameDefaultVpc         AccountAttributeName = "default-vpc"
 )
 
-const (
-	// AffinityDefault is a Affinity enum value
-	AffinityDefault = "default"
-
-	// AffinityHost is a Affinity enum value
-	AffinityHost = "host"
-)
+type ActivityStatus string
 
+// Enum values for ActivityStatus
 const (
-	// AllocationStateAvailable is a AllocationState enum value
-	AllocationStateAvailable = "available"
-
-	// AllocationStateUnderAssessment is a AllocationState enum value
-	AllocationStateUnderAssessment = "under-assessment"
-
-	// AllocationStatePermanentFailure is a AllocationState enum value
-	AllocationStatePermanentFailure = "permanent-failure"
-
-	// AllocationStateReleased is a AllocationState enum value
-	AllocationStateReleased = "released"
-
-	// AllocationStateReleasedPermanentFailure is a AllocationState enum value
-	AllocationStateReleasedPermanentFailure = "released-permanent-failure"
+	ActivityStatusError              ActivityStatus = "error"
+	ActivityStatusPendingFulfillment ActivityStatus = "pending_fulfillment"
+	ActivityStatusPendingTermination ActivityStatus = "pending_termination"
+	ActivityStatusFulfilled          ActivityStatus = "fulfilled"
 )
 
-const (
-	// AllocationStrategyLowestPrice is a AllocationStrategy enum value
-	AllocationStrategyLowestPrice = "lowestPrice"
-
-	// AllocationStrategyDiversified is a AllocationStrategy enum value
-	AllocationStrategyDiversified = "diversified"
-)
+type Affinity string
 
+// Enum values for Affinity
 const (
-	// ArchitectureValuesI386 is a ArchitectureValues enum value
-	ArchitectureValuesI386 = "i386"
-
-	// ArchitectureValuesX8664 is a ArchitectureValues enum value
-	ArchitectureValuesX8664 = "x86_64"
+	AffinityDefault Affinity = "default"
+	AffinityHost    Affinity = "host"
 )
-
-const (
-	// AttachmentStatusAttaching is a AttachmentStatus enum value
-	AttachmentStatusAttaching = "attaching"
-
-	// AttachmentStatusAttached is a AttachmentStatus enum value
-	AttachmentStatusAttached = "attached"
 
-	// AttachmentStatusDetaching is a AttachmentStatus enum value
-	AttachmentStatusDetaching = "detaching"
+type AllocationState string
 
-	// AttachmentStatusDetached is a AttachmentStatus enum value
-	AttachmentStatusDetached = "detached"
-)
-
+// Enum values for AllocationState
 const (
-	// AutoPlacementOn is a AutoPlacement enum value
-	AutoPlacementOn = "on"
-
-	// AutoPlacementOff is a AutoPlacement enum value
-	AutoPlacementOff = "off"
+	AllocationStateAvailable                AllocationState = "available"
+	AllocationStateUnderAssessment          AllocationState = "under-assessment"
+	AllocationStatePermanentFailure         AllocationState = "permanent-failure"
+	AllocationStateReleased                 AllocationState = "released"
+	AllocationStateReleasedPermanentFailure AllocationState = "released-permanent-failure"
 )
-
-const (
-	// AvailabilityZoneStateAvailable is a AvailabilityZoneState enum value
-	AvailabilityZoneStateAvailable = "available"
-
-	// AvailabilityZoneStateInformation is a AvailabilityZoneState enum value
-	AvailabilityZoneStateInformation = "information"
-
-	// AvailabilityZoneStateImpaired is a AvailabilityZoneState enum value
-	AvailabilityZoneStateImpaired = "impaired"
 
-	// AvailabilityZoneStateUnavailable is a AvailabilityZoneState enum value
-	AvailabilityZoneStateUnavailable = "unavailable"
-)
+type AllocationStrategy string
 
+// Enum values for AllocationStrategy
 const (
-	// BatchStateSubmitted is a BatchState enum value
-	BatchStateSubmitted = "submitted"
-
-	// BatchStateActive is a BatchState enum value
-	BatchStateActive = "active"
-
-	// BatchStateCancelled is a BatchState enum value
-	BatchStateCancelled = "cancelled"
-
-	// BatchStateFailed is a BatchState enum value
-	BatchStateFailed = "failed"
-
-	// BatchStateCancelledRunning is a BatchState enum value
-	BatchStateCancelledRunning = "cancelled_running"
-
-	// BatchStateCancelledTerminating is a BatchState enum value
-	BatchStateCancelledTerminating = "cancelled_terminating"
-
-	// BatchStateModifying is a BatchState enum value
-	BatchStateModifying = "modifying"
+	AllocationStrategyLowestPrice AllocationStrategy = "lowestPrice"
+	AllocationStrategyDiversified AllocationStrategy = "diversified"
 )
-
-const (
-	// BundleTaskStatePending is a BundleTaskState enum value
-	BundleTaskStatePending = "pending"
-
-	// BundleTaskStateWaitingForShutdown is a BundleTaskState enum value
-	BundleTaskStateWaitingForShutdown = "waiting-for-shutdown"
-
-	// BundleTaskStateBundling is a BundleTaskState enum value
-	BundleTaskStateBundling = "bundling"
-
-	// BundleTaskStateStoring is a BundleTaskState enum value
-	BundleTaskStateStoring = "storing"
-
-	// BundleTaskStateCancelling is a BundleTaskState enum value
-	BundleTaskStateCancelling = "cancelling"
 
-	// BundleTaskStateComplete is a BundleTaskState enum value
-	BundleTaskStateComplete = "complete"
+type ArchitectureValues string
 
-	// BundleTaskStateFailed is a BundleTaskState enum value
-	BundleTaskStateFailed = "failed"
-)
-
+// Enum values for ArchitectureValues
 const (
-	// CancelBatchErrorCodeFleetRequestIdDoesNotExist is a CancelBatchErrorCode enum value
-	CancelBatchErrorCodeFleetRequestIdDoesNotExist = "fleetRequestIdDoesNotExist"
-
-	// CancelBatchErrorCodeFleetRequestIdMalformed is a CancelBatchErrorCode enum value
-	CancelBatchErrorCodeFleetRequestIdMalformed = "fleetRequestIdMalformed"
-
-	// CancelBatchErrorCodeFleetRequestNotInCancellableState is a CancelBatchErrorCode enum value
-	CancelBatchErrorCodeFleetRequestNotInCancellableState = "fleetRequestNotInCancellableState"
-
-	// CancelBatchErrorCodeUnexpectedError is a CancelBatchErrorCode enum value
-	CancelBatchErrorCodeUnexpectedError = "unexpectedError"
+	ArchitectureValuesI386  ArchitectureValues = "i386"
+	ArchitectureValuesX8664 ArchitectureValues = "x86_64"
 )
-
-const (
-	// CancelSpotInstanceRequestStateActive is a CancelSpotInstanceRequestState enum value
-	CancelSpotInstanceRequestStateActive = "active"
 
-	// CancelSpotInstanceRequestStateOpen is a CancelSpotInstanceRequestState enum value
-	CancelSpotInstanceRequestStateOpen = "open"
+type AttachmentStatus string
 
-	// CancelSpotInstanceRequestStateClosed is a CancelSpotInstanceRequestState enum value
-	CancelSpotInstanceRequestStateClosed = "closed"
-
-	// CancelSpotInstanceRequestStateCancelled is a CancelSpotInstanceRequestState enum value
-	CancelSpotInstanceRequestStateCancelled = "cancelled"
-
-	// CancelSpotInstanceRequestStateCompleted is a CancelSpotInstanceRequestState enum value
-	CancelSpotInstanceRequestStateCompleted = "completed"
-)
-
+// Enum values for AttachmentStatus
 const (
-	// ContainerFormatOva is a ContainerFormat enum value
-	ContainerFormatOva = "ova"
+	AttachmentStatusAttaching AttachmentStatus = "attaching"
+	AttachmentStatusAttached  AttachmentStatus = "attached"
+	AttachmentStatusDetaching AttachmentStatus = "detaching"
+	AttachmentStatusDetached  AttachmentStatus = "detached"
 )
-
-const (
-	// ConversionTaskStateActive is a ConversionTaskState enum value
-	ConversionTaskStateActive = "active"
-
-	// ConversionTaskStateCancelling is a ConversionTaskState enum value
-	ConversionTaskStateCancelling = "cancelling"
 
-	// ConversionTaskStateCancelled is a ConversionTaskState enum value
-	ConversionTaskStateCancelled = "cancelled"
+type AutoPlacement string
 
-	// ConversionTaskStateCompleted is a ConversionTaskState enum value
-	ConversionTaskStateCompleted = "completed"
-)
-
+// Enum values for AutoPlacement
 const (
-	// CurrencyCodeValuesUsd is a CurrencyCodeValues enum value
-	CurrencyCodeValuesUsd = "USD"
+	AutoPlacementOn  AutoPlacement = "on"
+	AutoPlacementOff AutoPlacement = "off"
 )
-
-const (
-	// DatafeedSubscriptionStateActive is a DatafeedSubscriptionState enum value
-	DatafeedSubscriptionStateActive = "Active"
 
-	// DatafeedSubscriptionStateInactive is a DatafeedSubscriptionState enum value
-	DatafeedSubscriptionStateInactive = "Inactive"
-)
+type AvailabilityZoneState string
 
+// Enum values for AvailabilityZoneState
 const (
-	// DeviceTypeEbs is a DeviceType enum value
-	DeviceTypeEbs = "ebs"
-
-	// DeviceTypeInstanceStore is a DeviceType enum value
-	DeviceTypeInstanceStore = "instance-store"
+	AvailabilityZoneStateAvailable   AvailabilityZoneState = "available"
+	AvailabilityZoneStateInformation AvailabilityZoneState = "information"
+	AvailabilityZoneStateImpaired    AvailabilityZoneState = "impaired"
+	AvailabilityZoneStateUnavailable AvailabilityZoneState = "unavailable"
 )
 
-const (
-	// DiskImageFormatVmdk is a DiskImageFormat enum value
-	DiskImageFormatVmdk = "VMDK"
-
-	// DiskImageFormatRaw is a DiskImageFormat enum value
-	DiskImageFormatRaw = "RAW"
-
-	// DiskImageFormatVhd is a DiskImageFormat enum value
-	DiskImageFormatVhd = "VHD"
-)
+type BatchState string
 
+// Enum values for BatchState
 const (
-	// DomainTypeVpc is a DomainType enum value
-	DomainTypeVpc = "vpc"
-
-	// DomainTypeStandard is a DomainType enum value
-	DomainTypeStandard = "standard"
+	BatchStateSubmitted            BatchState = "submitted"
+	BatchStateActive               BatchState = "active"
+	BatchStateCancelled            BatchState = "cancelled"
+	BatchStateFailed               BatchState = "failed"
+	BatchStateCancelledRunning     BatchState = "cancelled_running"
+	BatchStateCancelledTerminating BatchState = "cancelled_terminating"
+	BatchStateModifying            BatchState = "modifying"
 )
 
-const (
-	// ElasticGpuStateAttached is a ElasticGpuState enum value
-	ElasticGpuStateAttached = "ATTACHED"
-)
+type BundleTaskState string
 
+// Enum values for BundleTaskState
 const (
-	// ElasticGpuStatusOk is a ElasticGpuStatus enum value
-	ElasticGpuStatusOk = "OK"
-
-	// ElasticGpuStatusImpaired is a ElasticGpuStatus enum value
-	ElasticGpuStatusImpaired = "IMPAIRED"
+	BundleTaskStatePending            BundleTaskState = "pending"
+	BundleTaskStateWaitingForShutdown BundleTaskState = "waiting-for-shutdown"
+	BundleTaskStateBundling           BundleTaskState = "bundling"
+	BundleTaskStateStoring            BundleTaskState = "storing"
+	BundleTaskStateCancelling         BundleTaskState = "cancelling"
+	BundleTaskStateComplete           BundleTaskState = "complete"
+	BundleTaskStateFailed             BundleTaskState = "failed"
 )
-
-const (
-	// EventCodeInstanceReboot is a EventCode enum value
-	EventCodeInstanceReboot = "instance-reboot"
 
-	// EventCodeSystemReboot is a EventCode enum value
-	EventCodeSystemReboot = "system-reboot"
-
-	// EventCodeSystemMaintenance is a EventCode enum value
-	EventCodeSystemMaintenance = "system-maintenance"
-
-	// EventCodeInstanceRetirement is a EventCode enum value
-	EventCodeInstanceRetirement = "instance-retirement"
-
-	// EventCodeInstanceStop is a EventCode enum value
-	EventCodeInstanceStop = "instance-stop"
-)
+type CancelBatchErrorCode string
 
+// Enum values for CancelBatchErrorCode
 const (
-	// EventTypeInstanceChange is a EventType enum value
-	EventTypeInstanceChange = "instanceChange"
-
-	// EventTypeFleetRequestChange is a EventType enum value
-	EventTypeFleetRequestChange = "fleetRequestChange"
-
-	// EventTypeError is a EventType enum value
-	EventTypeError = "error"
+	CancelBatchErrorCodeFleetRequestIdDoesNotExist        CancelBatchErrorCode = "fleetRequestIdDoesNotExist"
+	CancelBatchErrorCodeFleetRequestIdMalformed           CancelBatchErrorCode = "fleetRequestIdMalformed"
+	CancelBatchErrorCodeFleetRequestNotInCancellableState CancelBatchErrorCode = "fleetRequestNotInCancellableState"
+	CancelBatchErrorCodeUnexpectedError                   CancelBatchErrorCode = "unexpectedError"
 )
-
-const (
-	// ExcessCapacityTerminationPolicyNoTermination is a ExcessCapacityTerminationPolicy enum value
-	ExcessCapacityTerminationPolicyNoTermination = "noTermination"
 
-	// ExcessCapacityTerminationPolicyDefault is a ExcessCapacityTerminationPolicy enum value
-	ExcessCapacityTerminationPolicyDefault = "default"
-)
+type CancelSpotInstanceRequestState string
 
+// Enum values for CancelSpotInstanceRequestState
 const (
-	// ExportEnvironmentCitrix is a ExportEnvironment enum value
-	ExportEnvironmentCitrix = "citrix"
-
-	// ExportEnvironmentVmware is a ExportEnvironment enum value
-	ExportEnvironmentVmware = "vmware"
-
-	// ExportEnvironmentMicrosoft is a ExportEnvironment enum value
-	ExportEnvironmentMicrosoft = "microsoft"
+	CancelSpotInstanceRequestStateActive    CancelSpotInstanceRequestState = "active"
+	CancelSpotInstanceRequestStateOpen      CancelSpotInstanceRequestState = "open"
+	CancelSpotInstanceRequestStateClosed    CancelSpotInstanceRequestState = "closed"
+	CancelSpotInstanceRequestStateCancelled CancelSpotInstanceRequestState = "cancelled"
+	CancelSpotInstanceRequestStateCompleted CancelSpotInstanceRequestState = "completed"
 )
 
-const (
-	// ExportTaskStateActive is a ExportTaskState enum value
-	ExportTaskStateActive = "active"
-
-	// ExportTaskStateCancelling is a ExportTaskState enum value
-	ExportTaskStateCancelling = "cancelling"
-
-	// ExportTaskStateCancelled is a ExportTaskState enum value
-	ExportTaskStateCancelled = "cancelled"
+type ContainerFormat string
 
-	// ExportTaskStateCompleted is a ExportTaskState enum value
-	ExportTaskStateCompleted = "completed"
-)
-
+// Enum values for ContainerFormat
 const (
-	// FleetTypeRequest is a FleetType enum value
-	FleetTypeRequest = "request"
-
-	// FleetTypeMaintain is a FleetType enum value
-	FleetTypeMaintain = "maintain"
+	ContainerFormatOva ContainerFormat = "ova"
 )
-
-const (
-	// FlowLogsResourceTypeVpc is a FlowLogsResourceType enum value
-	FlowLogsResourceTypeVpc = "VPC"
 
-	// FlowLogsResourceTypeSubnet is a FlowLogsResourceType enum value
-	FlowLogsResourceTypeSubnet = "Subnet"
-
-	// FlowLogsResourceTypeNetworkInterface is a FlowLogsResourceType enum value
-	FlowLogsResourceTypeNetworkInterface = "NetworkInterface"
-)
+type ConversionTaskState string
 
+// Enum values for ConversionTaskState
 const (
-	// FpgaImageAttributeNameDescription is a FpgaImageAttributeName enum value
-	FpgaImageAttributeNameDescription = "description"
-
-	// FpgaImageAttributeNameName is a FpgaImageAttributeName enum value
-	FpgaImageAttributeNameName = "name"
-
-	// FpgaImageAttributeNameLoadPermission is a FpgaImageAttributeName enum value
-	FpgaImageAttributeNameLoadPermission = "loadPermission"
-
-	// FpgaImageAttributeNameProductCodes is a FpgaImageAttributeName enum value
-	FpgaImageAttributeNameProductCodes = "productCodes"
+	ConversionTaskStateActive     ConversionTaskState = "active"
+	ConversionTaskStateCancelling ConversionTaskState = "cancelling"
+	ConversionTaskStateCancelled  ConversionTaskState = "cancelled"
+	ConversionTaskStateCompleted  ConversionTaskState = "completed"
 )
-
-const (
-	// FpgaImageStateCodePending is a FpgaImageStateCode enum value
-	FpgaImageStateCodePending = "pending"
-
-	// FpgaImageStateCodeFailed is a FpgaImageStateCode enum value
-	FpgaImageStateCodeFailed = "failed"
-
-	// FpgaImageStateCodeAvailable is a FpgaImageStateCode enum value
-	FpgaImageStateCodeAvailable = "available"
 
-	// FpgaImageStateCodeUnavailable is a FpgaImageStateCode enum value
-	FpgaImageStateCodeUnavailable = "unavailable"
-)
+type CurrencyCodeValues string
 
+// Enum values for CurrencyCodeValues
 const (
-	// GatewayTypeIpsec1 is a GatewayType enum value
-	GatewayTypeIpsec1 = "ipsec.1"
+	CurrencyCodeValuesUsd CurrencyCodeValues = "USD"
 )
-
-const (
-	// HostTenancyDedicated is a HostTenancy enum value
-	HostTenancyDedicated = "dedicated"
 
-	// HostTenancyHost is a HostTenancy enum value
-	HostTenancyHost = "host"
-)
+type DatafeedSubscriptionState string
 
+// Enum values for DatafeedSubscriptionState
 const (
-	// HypervisorTypeOvm is a HypervisorType enum value
-	HypervisorTypeOvm = "ovm"
-
-	// HypervisorTypeXen is a HypervisorType enum value
-	HypervisorTypeXen = "xen"
+	DatafeedSubscriptionStateActive   DatafeedSubscriptionState = "Active"
+	DatafeedSubscriptionStateInactive DatafeedSubscriptionState = "Inactive"
 )
-
-const (
-	// IamInstanceProfileAssociationStateAssociating is a IamInstanceProfileAssociationState enum value
-	IamInstanceProfileAssociationStateAssociating = "associating"
 
-	// IamInstanceProfileAssociationStateAssociated is a IamInstanceProfileAssociationState enum value
-	IamInstanceProfileAssociationStateAssociated = "associated"
+type DeviceType string
 
-	// IamInstanceProfileAssociationStateDisassociating is a IamInstanceProfileAssociationState enum value
-	IamInstanceProfileAssociationStateDisassociating = "disassociating"
-
-	// IamInstanceProfileAssociationStateDisassociated is a IamInstanceProfileAssociationState enum value
-	IamInstanceProfileAssociationStateDisassociated = "disassociated"
-)
-
+// Enum values for DeviceType
 const (
-	// ImageAttributeNameDescription is a ImageAttributeName enum value
-	ImageAttributeNameDescription = "description"
-
-	// ImageAttributeNameKernel is a ImageAttributeName enum value
-	ImageAttributeNameKernel = "kernel"
-
-	// ImageAttributeNameRamdisk is a ImageAttributeName enum value
-	ImageAttributeNameRamdisk = "ramdisk"
-
-	// ImageAttributeNameLaunchPermission is a ImageAttributeName enum value
-	ImageAttributeNameLaunchPermission = "launchPermission"
-
-	// ImageAttributeNameProductCodes is a ImageAttributeName enum value
-	ImageAttributeNameProductCodes = "productCodes"
-
-	// ImageAttributeNameBlockDeviceMapping is a ImageAttributeName enum value
-	ImageAttributeNameBlockDeviceMapping = "blockDeviceMapping"
-
-	// ImageAttributeNameSriovNetSupport is a ImageAttributeName enum value
-	ImageAttributeNameSriovNetSupport = "sriovNetSupport"
+	DeviceTypeEbs           DeviceType = "ebs"
+	DeviceTypeInstanceStore DeviceType = "instance-store"
 )
-
-const (
-	// ImageStatePending is a ImageState enum value
-	ImageStatePending = "pending"
-
-	// ImageStateAvailable is a ImageState enum value
-	ImageStateAvailable = "available"
-
-	// ImageStateInvalid is a ImageState enum value
-	ImageStateInvalid = "invalid"
 
-	// ImageStateDeregistered is a ImageState enum value
-	ImageStateDeregistered = "deregistered"
-
-	// ImageStateTransient is a ImageState enum value
-	ImageStateTransient = "transient"
-
-	// ImageStateFailed is a ImageState enum value
-	ImageStateFailed = "failed"
-
-	// ImageStateError is a ImageState enum value
-	ImageStateError = "error"
-)
+type DiskImageFormat string
 
+// Enum values for DiskImageFormat
 const (
-	// ImageTypeValuesMachine is a ImageTypeValues enum value
-	ImageTypeValuesMachine = "machine"
-
-	// ImageTypeValuesKernel is a ImageTypeValues enum value
-	ImageTypeValuesKernel = "kernel"
-
-	// ImageTypeValuesRamdisk is a ImageTypeValues enum value
-	ImageTypeValuesRamdisk = "ramdisk"
+	DiskImageFormatVmdk DiskImageFormat = "VMDK"
+	DiskImageFormatRaw  DiskImageFormat = "RAW"
+	DiskImageFormatVhd  DiskImageFormat = "VHD"
 )
-
-const (
-	// InstanceAttributeNameInstanceType is a InstanceAttributeName enum value
-	InstanceAttributeNameInstanceType = "instanceType"
-
-	// InstanceAttributeNameKernel is a InstanceAttributeName enum value
-	InstanceAttributeNameKernel = "kernel"
-
-	// InstanceAttributeNameRamdisk is a InstanceAttributeName enum value
-	InstanceAttributeNameRamdisk = "ramdisk"
-
-	// InstanceAttributeNameUserData is a InstanceAttributeName enum value
-	InstanceAttributeNameUserData = "userData"
-
-	// InstanceAttributeNameDisableApiTermination is a InstanceAttributeName enum value
-	InstanceAttributeNameDisableApiTermination = "disableApiTermination"
-
-	// InstanceAttributeNameInstanceInitiatedShutdownBehavior is a InstanceAttributeName enum value
-	InstanceAttributeNameInstanceInitiatedShutdownBehavior = "instanceInitiatedShutdownBehavior"
-
-	// InstanceAttributeNameRootDeviceName is a InstanceAttributeName enum value
-	InstanceAttributeNameRootDeviceName = "rootDeviceName"
-
-	// InstanceAttributeNameBlockDeviceMapping is a InstanceAttributeName enum value
-	InstanceAttributeNameBlockDeviceMapping = "blockDeviceMapping"
-
-	// InstanceAttributeNameProductCodes is a InstanceAttributeName enum value
-	InstanceAttributeNameProductCodes = "productCodes"
-
-	// InstanceAttributeNameSourceDestCheck is a InstanceAttributeName enum value
-	InstanceAttributeNameSourceDestCheck = "sourceDestCheck"
-
-	// InstanceAttributeNameGroupSet is a InstanceAttributeName enum value
-	InstanceAttributeNameGroupSet = "groupSet"
 
-	// InstanceAttributeNameEbsOptimized is a InstanceAttributeName enum value
-	InstanceAttributeNameEbsOptimized = "ebsOptimized"
+type DomainType string
 
-	// InstanceAttributeNameSriovNetSupport is a InstanceAttributeName enum value
-	InstanceAttributeNameSriovNetSupport = "sriovNetSupport"
-
-	// InstanceAttributeNameEnaSupport is a InstanceAttributeName enum value
-	InstanceAttributeNameEnaSupport = "enaSupport"
-)
-
+// Enum values for DomainType
 const (
-	// InstanceHealthStatusHealthy is a InstanceHealthStatus enum value
-	InstanceHealthStatusHealthy = "healthy"
-
-	// InstanceHealthStatusUnhealthy is a InstanceHealthStatus enum value
-	InstanceHealthStatusUnhealthy = "unhealthy"
+	DomainTypeVpc      DomainType = "vpc"
+	DomainTypeStandard DomainType = "standard"
 )
-
-const (
-	// InstanceInterruptionBehaviorStop is a InstanceInterruptionBehavior enum value
-	InstanceInterruptionBehaviorStop = "stop"
 
-	// InstanceInterruptionBehaviorTerminate is a InstanceInterruptionBehavior enum value
-	InstanceInterruptionBehaviorTerminate = "terminate"
-)
+type ElasticGpuState string
 
+// Enum values for ElasticGpuState
 const (
-	// InstanceLifecycleTypeSpot is a InstanceLifecycleType enum value
-	InstanceLifecycleTypeSpot = "spot"
-
-	// InstanceLifecycleTypeScheduled is a InstanceLifecycleType enum value
-	InstanceLifecycleTypeScheduled = "scheduled"
+	ElasticGpuStateAttached ElasticGpuState = "ATTACHED"
 )
-
-const (
-	// InstanceStateNamePending is a InstanceStateName enum value
-	InstanceStateNamePending = "pending"
-
-	// InstanceStateNameRunning is a InstanceStateName enum value
-	InstanceStateNameRunning = "running"
-
-	// InstanceStateNameShuttingDown is a InstanceStateName enum value
-	InstanceStateNameShuttingDown = "shutting-down"
-
-	// InstanceStateNameTerminated is a InstanceStateName enum value
-	InstanceStateNameTerminated = "terminated"
-
-	// InstanceStateNameStopping is a InstanceStateName enum value
-	InstanceStateNameStopping = "stopping"
 
-	// InstanceStateNameStopped is a InstanceStateName enum value
-	InstanceStateNameStopped = "stopped"
-)
+type ElasticGpuStatus string
 
+// Enum values for ElasticGpuStatus
 const (
-	// InstanceTypeT1Micro is a InstanceType enum value
-	InstanceTypeT1Micro = "t1.micro"
-
-	// InstanceTypeT2Nano is a InstanceType enum value
-	InstanceTypeT2Nano = "t2.nano"
-
-	// InstanceTypeT2Micro is a InstanceType enum value
-	InstanceTypeT2Micro = "t2.micro"
-
-	// InstanceTypeT2Small is a InstanceType enum value
-	InstanceTypeT2Small = "t2.small"
-
-	// InstanceTypeT2Medium is a InstanceType enum value
-	InstanceTypeT2Medium = "t2.medium"
-
-	// InstanceTypeT2Large is a InstanceType enum value
-	InstanceTypeT2Large = "t2.large"
-
-	// InstanceTypeT2Xlarge is a InstanceType enum value
-	InstanceTypeT2Xlarge = "t2.xlarge"
-
-	// InstanceTypeT22xlarge is a InstanceType enum value
-	InstanceTypeT22xlarge = "t2.2xlarge"
-
-	// InstanceTypeM1Small is a InstanceType enum value
-	InstanceTypeM1Small = "m1.small"
-
-	// InstanceTypeM1Medium is a InstanceType enum value
-	InstanceTypeM1Medium = "m1.medium"
-
-	// InstanceTypeM1Large is a InstanceType enum value
-	InstanceTypeM1Large = "m1.large"
-
-	// InstanceTypeM1Xlarge is a InstanceType enum value
-	InstanceTypeM1Xlarge = "m1.xlarge"
-
-	// InstanceTypeM3Medium is a InstanceType enum value
-	InstanceTypeM3Medium = "m3.medium"
-
-	// InstanceTypeM3Large is a InstanceType enum value
-	InstanceTypeM3Large = "m3.large"
-
-	// InstanceTypeM3Xlarge is a InstanceType enum value
-	InstanceTypeM3Xlarge = "m3.xlarge"
-
-	// InstanceTypeM32xlarge is a InstanceType enum value
-	InstanceTypeM32xlarge = "m3.2xlarge"
-
-	// InstanceTypeM4Large is a InstanceType enum value
-	InstanceTypeM4Large = "m4.large"
-
-	// InstanceTypeM4Xlarge is a InstanceType enum value
-	InstanceTypeM4Xlarge = "m4.xlarge"
-
-	// InstanceTypeM42xlarge is a InstanceType enum value
-	InstanceTypeM42xlarge = "m4.2xlarge"
-
-	// InstanceTypeM44xlarge is a InstanceType enum value
-	InstanceTypeM44xlarge = "m4.4xlarge"
-
-	// InstanceTypeM410xlarge is a InstanceType enum value
-	InstanceTypeM410xlarge = "m4.10xlarge"
-
-	// InstanceTypeM416xlarge is a InstanceType enum value
-	InstanceTypeM416xlarge = "m4.16xlarge"
-
-	// InstanceTypeM2Xlarge is a InstanceType enum value
-	InstanceTypeM2Xlarge = "m2.xlarge"
-
-	// InstanceTypeM22xlarge is a InstanceType enum value
-	InstanceTypeM22xlarge = "m2.2xlarge"
-
-	// InstanceTypeM24xlarge is a InstanceType enum value
-	InstanceTypeM24xlarge = "m2.4xlarge"
-
-	// InstanceTypeCr18xlarge is a InstanceType enum value
-	InstanceTypeCr18xlarge = "cr1.8xlarge"
-
-	// InstanceTypeR3Large is a InstanceType enum value
-	InstanceTypeR3Large = "r3.large"
-
-	// InstanceTypeR3Xlarge is a InstanceType enum value
-	InstanceTypeR3Xlarge = "r3.xlarge"
-
-	// InstanceTypeR32xlarge is a InstanceType enum value
-	InstanceTypeR32xlarge = "r3.2xlarge"
-
-	// InstanceTypeR34xlarge is a InstanceType enum value
-	InstanceTypeR34xlarge = "r3.4xlarge"
-
-	// InstanceTypeR38xlarge is a InstanceType enum value
-	InstanceTypeR38xlarge = "r3.8xlarge"
-
-	// InstanceTypeR4Large is a InstanceType enum value
-	InstanceTypeR4Large = "r4.large"
-
-	// InstanceTypeR4Xlarge is a InstanceType enum value
-	InstanceTypeR4Xlarge = "r4.xlarge"
-
-	// InstanceTypeR42xlarge is a InstanceType enum value
-	InstanceTypeR42xlarge = "r4.2xlarge"
-
-	// InstanceTypeR44xlarge is a InstanceType enum value
-	InstanceTypeR44xlarge = "r4.4xlarge"
-
-	// InstanceTypeR48xlarge is a InstanceType enum value
-	InstanceTypeR48xlarge = "r4.8xlarge"
-
-	// InstanceTypeR416xlarge is a InstanceType enum value
-	InstanceTypeR416xlarge = "r4.16xlarge"
-
-	// InstanceTypeX116xlarge is a InstanceType enum value
-	InstanceTypeX116xlarge = "x1.16xlarge"
-
-	// InstanceTypeX132xlarge is a InstanceType enum value
-	InstanceTypeX132xlarge = "x1.32xlarge"
-
-	// InstanceTypeX1e32xlarge is a InstanceType enum value
-	InstanceTypeX1e32xlarge = "x1e.32xlarge"
-
-	// InstanceTypeI2Xlarge is a InstanceType enum value
-	InstanceTypeI2Xlarge = "i2.xlarge"
-
-	// InstanceTypeI22xlarge is a InstanceType enum value
-	InstanceTypeI22xlarge = "i2.2xlarge"
-
-	// InstanceTypeI24xlarge is a InstanceType enum value
-	InstanceTypeI24xlarge = "i2.4xlarge"
-
-	// InstanceTypeI28xlarge is a InstanceType enum value
-	InstanceTypeI28xlarge = "i2.8xlarge"
-
-	// InstanceTypeI3Large is a InstanceType enum value
-	InstanceTypeI3Large = "i3.large"
-
-	// InstanceTypeI3Xlarge is a InstanceType enum value
-	InstanceTypeI3Xlarge = "i3.xlarge"
-
-	// InstanceTypeI32xlarge is a InstanceType enum value
-	InstanceTypeI32xlarge = "i3.2xlarge"
-
-	// InstanceTypeI34xlarge is a InstanceType enum value
-	InstanceTypeI34xlarge = "i3.4xlarge"
-
-	// InstanceTypeI38xlarge is a InstanceType enum value
-	InstanceTypeI38xlarge = "i3.8xlarge"
-
-	// InstanceTypeI316xlarge is a InstanceType enum value
-	InstanceTypeI316xlarge = "i3.16xlarge"
-
-	// InstanceTypeHi14xlarge is a InstanceType enum value
-	InstanceTypeHi14xlarge = "hi1.4xlarge"
-
-	// InstanceTypeHs18xlarge is a InstanceType enum value
-	InstanceTypeHs18xlarge = "hs1.8xlarge"
-
-	// InstanceTypeC1Medium is a InstanceType enum value
-	InstanceTypeC1Medium = "c1.medium"
-
-	// InstanceTypeC1Xlarge is a InstanceType enum value
-	InstanceTypeC1Xlarge = "c1.xlarge"
-
-	// InstanceTypeC3Large is a InstanceType enum value
-	InstanceTypeC3Large = "c3.large"
-
-	// InstanceTypeC3Xlarge is a InstanceType enum value
-	InstanceTypeC3Xlarge = "c3.xlarge"
-
-	// InstanceTypeC32xlarge is a InstanceType enum value
-	InstanceTypeC32xlarge = "c3.2xlarge"
-
-	// InstanceTypeC34xlarge is a InstanceType enum value
-	InstanceTypeC34xlarge = "c3.4xlarge"
-
-	// InstanceTypeC38xlarge is a InstanceType enum value
-	InstanceTypeC38xlarge = "c3.8xlarge"
-
-	// InstanceTypeC4Large is a InstanceType enum value
-	InstanceTypeC4Large = "c4.large"
-
-	// InstanceTypeC4Xlarge is a InstanceType enum value
-	InstanceTypeC4Xlarge = "c4.xlarge"
-
-	// InstanceTypeC42xlarge is a InstanceType enum value
-	InstanceTypeC42xlarge = "c4.2xlarge"
-
-	// InstanceTypeC44xlarge is a InstanceType enum value
-	InstanceTypeC44xlarge = "c4.4xlarge"
-
-	// InstanceTypeC48xlarge is a InstanceType enum value
-	InstanceTypeC48xlarge = "c4.8xlarge"
-
-	// InstanceTypeCc14xlarge is a InstanceType enum value
-	InstanceTypeCc14xlarge = "cc1.4xlarge"
-
-	// InstanceTypeCc28xlarge is a InstanceType enum value
-	InstanceTypeCc28xlarge = "cc2.8xlarge"
-
-	// InstanceTypeG22xlarge is a InstanceType enum value
-	InstanceTypeG22xlarge = "g2.2xlarge"
-
-	// InstanceTypeG28xlarge is a InstanceType enum value
-	InstanceTypeG28xlarge = "g2.8xlarge"
-
-	// InstanceTypeG34xlarge is a InstanceType enum value
-	InstanceTypeG34xlarge = "g3.4xlarge"
-
-	// InstanceTypeG38xlarge is a InstanceType enum value
-	InstanceTypeG38xlarge = "g3.8xlarge"
-
-	// InstanceTypeG316xlarge is a InstanceType enum value
-	InstanceTypeG316xlarge = "g3.16xlarge"
-
-	// InstanceTypeCg14xlarge is a InstanceType enum value
-	InstanceTypeCg14xlarge = "cg1.4xlarge"
-
-	// InstanceTypeP2Xlarge is a InstanceType enum value
-	InstanceTypeP2Xlarge = "p2.xlarge"
-
-	// InstanceTypeP28xlarge is a InstanceType enum value
-	InstanceTypeP28xlarge = "p2.8xlarge"
-
-	// InstanceTypeP216xlarge is a InstanceType enum value
-	InstanceTypeP216xlarge = "p2.16xlarge"
-
-	// InstanceTypeD2Xlarge is a InstanceType enum value
-	InstanceTypeD2Xlarge = "d2.xlarge"
-
-	// InstanceTypeD22xlarge is a InstanceType enum value
-	InstanceTypeD22xlarge = "d2.2xlarge"
-
-	// InstanceTypeD24xlarge is a InstanceType enum value
-	InstanceTypeD24xlarge = "d2.4xlarge"
-
-	// InstanceTypeD28xlarge is a InstanceType enum value
-	InstanceTypeD28xlarge = "d2.8xlarge"
-
-	// InstanceTypeF12xlarge is a InstanceType enum value
-	InstanceTypeF12xlarge = "f1.2xlarge"
-
-	// InstanceTypeF116xlarge is a InstanceType enum value
-	InstanceTypeF116xlarge = "f1.16xlarge"
+	ElasticGpuStatusOk       ElasticGpuStatus = "OK"
+	ElasticGpuStatusImpaired ElasticGpuStatus = "IMPAIRED"
 )
-
-const (
-	// InterfacePermissionTypeInstanceAttach is a InterfacePermissionType enum value
-	InterfacePermissionTypeInstanceAttach = "INSTANCE-ATTACH"
 
-	// InterfacePermissionTypeEipAssociate is a InterfacePermissionType enum value
-	InterfacePermissionTypeEipAssociate = "EIP-ASSOCIATE"
-)
+type EventCode string
 
+// Enum values for EventCode
 const (
-	// ListingStateAvailable is a ListingState enum value
-	ListingStateAvailable = "available"
-
-	// ListingStateSold is a ListingState enum value
-	ListingStateSold = "sold"
-
-	// ListingStateCancelled is a ListingState enum value
-	ListingStateCancelled = "cancelled"
-
-	// ListingStatePending is a ListingState enum value
-	ListingStatePending = "pending"
+	EventCodeInstanceReboot     EventCode = "instance-reboot"
+	EventCodeSystemReboot       EventCode = "system-reboot"
+	EventCodeSystemMaintenance  EventCode = "system-maintenance"
+	EventCodeInstanceRetirement EventCode = "instance-retirement"
+	EventCodeInstanceStop       EventCode = "instance-stop"
 )
-
-const (
-	// ListingStatusActive is a ListingStatus enum value
-	ListingStatusActive = "active"
 
-	// ListingStatusPending is a ListingStatus enum value
-	ListingStatusPending = "pending"
+type EventType string
 
-	// ListingStatusCancelled is a ListingStatus enum value
-	ListingStatusCancelled = "cancelled"
-
-	// ListingStatusClosed is a ListingStatus enum value
-	ListingStatusClosed = "closed"
-)
-
+// Enum values for EventType
 const (
-	// MonitoringStateDisabled is a MonitoringState enum value
-	MonitoringStateDisabled = "disabled"
-
-	// MonitoringStateDisabling is a MonitoringState enum value
-	MonitoringStateDisabling = "disabling"
-
-	// MonitoringStateEnabled is a MonitoringState enum value
-	MonitoringStateEnabled = "enabled"
-
-	// MonitoringStatePending is a MonitoringState enum value
-	MonitoringStatePending = "pending"
+	EventTypeInstanceChange     EventType = "instanceChange"
+	EventTypeFleetRequestChange EventType = "fleetRequestChange"
+	EventTypeError              EventType = "error"
 )
-
-const (
-	// MoveStatusMovingToVpc is a MoveStatus enum value
-	MoveStatusMovingToVpc = "movingToVpc"
 
-	// MoveStatusRestoringToClassic is a MoveStatus enum value
-	MoveStatusRestoringToClassic = "restoringToClassic"
-)
+type ExcessCapacityTerminationPolicy string
 
+// Enum values for ExcessCapacityTerminationPolicy
 const (
-	// NatGatewayStatePending is a NatGatewayState enum value
-	NatGatewayStatePending = "pending"
-
-	// NatGatewayStateFailed is a NatGatewayState enum value
-	NatGatewayStateFailed = "failed"
-
-	// NatGatewayStateAvailable is a NatGatewayState enum value
-	NatGatewayStateAvailable = "available"
-
-	// NatGatewayStateDeleting is a NatGatewayState enum value
-	NatGatewayStateDeleting = "deleting"
-
-	// NatGatewayStateDeleted is a NatGatewayState enum value
-	NatGatewayStateDeleted = "deleted"
+	ExcessCapacityTerminationPolicyNoTermination ExcessCapacityTerminationPolicy = "noTermination"
+	ExcessCapacityTerminationPolicyDefault       ExcessCapacityTerminationPolicy = "default"
 )
-
-const (
-	// NetworkInterfaceAttributeDescription is a NetworkInterfaceAttribute enum value
-	NetworkInterfaceAttributeDescription = "description"
-
-	// NetworkInterfaceAttributeGroupSet is a NetworkInterfaceAttribute enum value
-	NetworkInterfaceAttributeGroupSet = "groupSet"
-
-	// NetworkInterfaceAttributeSourceDestCheck is a NetworkInterfaceAttribute enum value
-	NetworkInterfaceAttributeSourceDestCheck = "sourceDestCheck"
 
-	// NetworkInterfaceAttributeAttachment is a NetworkInterfaceAttribute enum value
-	NetworkInterfaceAttributeAttachment = "attachment"
-)
+type ExportEnvironment string
 
+// Enum values for ExportEnvironment
 const (
-	// NetworkInterfacePermissionStateCodePending is a NetworkInterfacePermissionStateCode enum value
-	NetworkInterfacePermissionStateCodePending = "pending"
-
-	// NetworkInterfacePermissionStateCodeGranted is a NetworkInterfacePermissionStateCode enum value
-	NetworkInterfacePermissionStateCodeGranted = "granted"
-
-	// NetworkInterfacePermissionStateCodeRevoking is a NetworkInterfacePermissionStateCode enum value
-	NetworkInterfacePermissionStateCodeRevoking = "revoking"
-
-	// NetworkInterfacePermissionStateCodeRevoked is a NetworkInterfacePermissionStateCode enum value
-	NetworkInterfacePermissionStateCodeRevoked = "revoked"
+	ExportEnvironmentCitrix    ExportEnvironment = "citrix"
+	ExportEnvironmentVmware    ExportEnvironment = "vmware"
+	ExportEnvironmentMicrosoft ExportEnvironment = "microsoft"
 )
 
-const (
-	// NetworkInterfaceStatusAvailable is a NetworkInterfaceStatus enum value
-	NetworkInterfaceStatusAvailable = "available"
-
-	// NetworkInterfaceStatusAttaching is a NetworkInterfaceStatus enum value
-	NetworkInterfaceStatusAttaching = "attaching"
-
-	// NetworkInterfaceStatusInUse is a NetworkInterfaceStatus enum value
-	NetworkInterfaceStatusInUse = "in-use"
+type ExportTaskState string
 
-	// NetworkInterfaceStatusDetaching is a NetworkInterfaceStatus enum value
-	NetworkInterfaceStatusDetaching = "detaching"
-)
-
+// Enum values for ExportTaskState
 const (
-	// NetworkInterfaceTypeInterface is a NetworkInterfaceType enum value
-	NetworkInterfaceTypeInterface = "interface"
-
-	// NetworkInterfaceTypeNatGateway is a NetworkInterfaceType enum value
-	NetworkInterfaceTypeNatGateway = "natGateway"
+	ExportTaskStateActive     ExportTaskState = "active"
+	ExportTaskStateCancelling ExportTaskState = "cancelling"
+	ExportTaskStateCancelled  ExportTaskState = "cancelled"
+	ExportTaskStateCompleted  ExportTaskState = "completed"
 )
-
-const (
-	// OfferingClassTypeStandard is a OfferingClassType enum value
-	OfferingClassTypeStandard = "standard"
 
-	// OfferingClassTypeConvertible is a OfferingClassType enum value
-	OfferingClassTypeConvertible = "convertible"
-)
+type FleetType string
 
+// Enum values for FleetType
 const (
-	// OfferingTypeValuesHeavyUtilization is a OfferingTypeValues enum value
-	OfferingTypeValuesHeavyUtilization = "Heavy Utilization"
-
-	// OfferingTypeValuesMediumUtilization is a OfferingTypeValues enum value
-	OfferingTypeValuesMediumUtilization = "Medium Utilization"
-
-	// OfferingTypeValuesLightUtilization is a OfferingTypeValues enum value
-	OfferingTypeValuesLightUtilization = "Light Utilization"
-
-	// OfferingTypeValuesNoUpfront is a OfferingTypeValues enum value
-	OfferingTypeValuesNoUpfront = "No Upfront"
-
-	// OfferingTypeValuesPartialUpfront is a OfferingTypeValues enum value
-	OfferingTypeValuesPartialUpfront = "Partial Upfront"
-
-	// OfferingTypeValuesAllUpfront is a OfferingTypeValues enum value
-	OfferingTypeValuesAllUpfront = "All Upfront"
+	FleetTypeRequest  FleetType = "request"
+	FleetTypeMaintain FleetType = "maintain"
 )
 
-const (
-	// OperationTypeAdd is a OperationType enum value
-	OperationTypeAdd = "add"
-
-	// OperationTypeRemove is a OperationType enum value
-	OperationTypeRemove = "remove"
-)
+type FlowLogsResourceType string
 
+// Enum values for FlowLogsResourceType
 const (
-	// PaymentOptionAllUpfront is a PaymentOption enum value
-	PaymentOptionAllUpfront = "AllUpfront"
-
-	// PaymentOptionPartialUpfront is a PaymentOption enum value
-	PaymentOptionPartialUpfront = "PartialUpfront"
-
-	// PaymentOptionNoUpfront is a PaymentOption enum value
-	PaymentOptionNoUpfront = "NoUpfront"
+	FlowLogsResourceTypeVpc              FlowLogsResourceType = "VPC"
+	FlowLogsResourceTypeSubnet           FlowLogsResourceType = "Subnet"
+	FlowLogsResourceTypeNetworkInterface FlowLogsResourceType = "NetworkInterface"
 )
 
-const (
-	// PermissionGroupAll is a PermissionGroup enum value
-	PermissionGroupAll = "all"
-)
+type FpgaImageAttributeName string
 
+// Enum values for FpgaImageAttributeName
 const (
-	// PlacementGroupStatePending is a PlacementGroupState enum value
-	PlacementGroupStatePending = "pending"
-
-	// PlacementGroupStateAvailable is a PlacementGroupState enum value
-	PlacementGroupStateAvailable = "available"
-
-	// PlacementGroupStateDeleting is a PlacementGroupState enum value
-	PlacementGroupStateDeleting = "deleting"
-
-	// PlacementGroupStateDeleted is a PlacementGroupState enum value
-	PlacementGroupStateDeleted = "deleted"
+	FpgaImageAttributeNameDescription    FpgaImageAttributeName = "description"
+	FpgaImageAttributeNameName           FpgaImageAttributeName = "name"
+	FpgaImageAttributeNameLoadPermission FpgaImageAttributeName = "loadPermission"
+	FpgaImageAttributeNameProductCodes   FpgaImageAttributeName = "productCodes"
 )
 
-const (
-	// PlacementStrategyCluster is a PlacementStrategy enum value
-	PlacementStrategyCluster = "cluster"
-)
+type FpgaImageStateCode string
 
+// Enum values for FpgaImageStateCode
 const (
-	// PlatformValuesWindows is a PlatformValues enum value
-	PlatformValuesWindows = "Windows"
+	FpgaImageStateCodePending     FpgaImageStateCode = "pending"
+	FpgaImageStateCodeFailed      FpgaImageStateCode = "failed"
+	FpgaImageStateCodeAvailable   FpgaImageStateCode = "available"
+	FpgaImageStateCodeUnavailable FpgaImageStateCode = "unavailable"
 )
-
-const (
-	// ProductCodeValuesDevpay is a ProductCodeValues enum value
-	ProductCodeValuesDevpay = "devpay"
 
-	// ProductCodeValuesMarketplace is a ProductCodeValues enum value
-	ProductCodeValuesMarketplace = "marketplace"
-)
+type GatewayType string
 
+// Enum values for GatewayType
 const (
-	// RIProductDescriptionLinuxUnix is a RIProductDescription enum value
-	RIProductDescriptionLinuxUnix = "Linux/UNIX"
-
-	// RIProductDescriptionLinuxUnixamazonVpc is a RIProductDescription enum value
-	RIProductDescriptionLinuxUnixamazonVpc = "Linux/UNIX (Amazon VPC)"
-
-	// RIProductDescriptionWindows is a RIProductDescription enum value
-	RIProductDescriptionWindows = "Windows"
-
-	// RIProductDescriptionWindowsAmazonVpc is a RIProductDescription enum value
-	RIProductDescriptionWindowsAmazonVpc = "Windows (Amazon VPC)"
+	GatewayTypeIpsec1 GatewayType = "ipsec.1"
 )
 
-const (
-	// RecurringChargeFrequencyHourly is a RecurringChargeFrequency enum value
-	RecurringChargeFrequencyHourly = "Hourly"
-)
+type HostTenancy string
 
+// Enum values for HostTenancy
 const (
-	// ReportInstanceReasonCodesInstanceStuckInState is a ReportInstanceReasonCodes enum value
-	ReportInstanceReasonCodesInstanceStuckInState = "instance-stuck-in-state"
-
-	// ReportInstanceReasonCodesUnresponsive is a ReportInstanceReasonCodes enum value
-	ReportInstanceReasonCodesUnresponsive = "unresponsive"
-
-	// ReportInstanceReasonCodesNotAcceptingCredentials is a ReportInstanceReasonCodes enum value
-	ReportInstanceReasonCodesNotAcceptingCredentials = "not-accepting-credentials"
-
-	// ReportInstanceReasonCodesPasswordNotAvailable is a ReportInstanceReasonCodes enum value
-	ReportInstanceReasonCodesPasswordNotAvailable = "password-not-available"
-
-	// ReportInstanceReasonCodesPerformanceNetwork is a ReportInstanceReasonCodes enum value
-	ReportInstanceReasonCodesPerformanceNetwork = "performance-network"
-
-	// ReportInstanceReasonCodesPerformanceInstanceStore is a ReportInstanceReasonCodes enum value
-	ReportInstanceReasonCodesPerformanceInstanceStore = "performance-instance-store"
-
-	// ReportInstanceReasonCodesPerformanceEbsVolume is a ReportInstanceReasonCodes enum value
-	ReportInstanceReasonCodesPerformanceEbsVolume = "performance-ebs-volume"
-
-	// ReportInstanceReasonCodesPerformanceOther is a ReportInstanceReasonCodes enum value
-	ReportInstanceReasonCodesPerformanceOther = "performance-other"
-
-	// ReportInstanceReasonCodesOther is a ReportInstanceReasonCodes enum value
-	ReportInstanceReasonCodesOther = "other"
+	HostTenancyDedicated HostTenancy = "dedicated"
+	HostTenancyHost      HostTenancy = "host"
 )
-
-const (
-	// ReportStatusTypeOk is a ReportStatusType enum value
-	ReportStatusTypeOk = "ok"
 
-	// ReportStatusTypeImpaired is a ReportStatusType enum value
-	ReportStatusTypeImpaired = "impaired"
-)
+type HypervisorType string
 
+// Enum values for HypervisorType
 const (
-	// ReservationStatePaymentPending is a ReservationState enum value
-	ReservationStatePaymentPending = "payment-pending"
-
-	// ReservationStatePaymentFailed is a ReservationState enum value
-	ReservationStatePaymentFailed = "payment-failed"
-
-	// ReservationStateActive is a ReservationState enum value
-	ReservationStateActive = "active"
-
-	// ReservationStateRetired is a ReservationState enum value
-	ReservationStateRetired = "retired"
+	HypervisorTypeOvm HypervisorType = "ovm"
+	HypervisorTypeXen HypervisorType = "xen"
 )
 
-const (
-	// ReservedInstanceStatePaymentPending is a ReservedInstanceState enum value
-	ReservedInstanceStatePaymentPending = "payment-pending"
-
-	// ReservedInstanceStateActive is a ReservedInstanceState enum value
-	ReservedInstanceStateActive = "active"
-
-	// ReservedInstanceStatePaymentFailed is a ReservedInstanceState enum value
-	ReservedInstanceStatePaymentFailed = "payment-failed"
+type IamInstanceProfileAssociationState string
 
-	// ReservedInstanceStateRetired is a ReservedInstanceState enum value
-	ReservedInstanceStateRetired = "retired"
-)
-
+// Enum values for IamInstanceProfileAssociationState
 const (
-	// ResetFpgaImageAttributeNameLoadPermission is a ResetFpgaImageAttributeName enum value
-	ResetFpgaImageAttributeNameLoadPermission = "loadPermission"
+	IamInstanceProfileAssociationStateAssociating    IamInstanceProfileAssociationState = "associating"
+	IamInstanceProfileAssociationStateAssociated     IamInstanceProfileAssociationState = "associated"
+	IamInstanceProfileAssociationStateDisassociating IamInstanceProfileAssociationState = "disassociating"
+	IamInstanceProfileAssociationStateDisassociated  IamInstanceProfileAssociationState = "disassociated"
 )
 
+type ImageAttributeName string
+
+// Enum values for ImageAttributeName
 const (
-	// ResetImageAttributeNameLaunchPermission is a ResetImageAttributeName enum value
-	ResetImageAttributeNameLaunchPermission = "launchPermission"
+	ImageAttributeNameDescription        ImageAttributeName = "description"
+	ImageAttributeNameKernel             ImageAttributeName = "kernel"
+	ImageAttributeNameRamdisk            ImageAttributeName = "ramdisk"
+	ImageAttributeNameLaunchPermission   ImageAttributeName = "launchPermission"
+	ImageAttributeNameProductCodes       ImageAttributeName = "productCodes"
+	ImageAttributeNameBlockDeviceMapping ImageAttributeName = "blockDeviceMapping"
+	ImageAttributeNameSriovNetSupport    ImageAttributeName = "sriovNetSupport"
 )
+
+type ImageState string
 
+// Enum values for ImageState
 const (
-	// ResourceTypeCustomerGateway is a ResourceType enum value
-	ResourceTypeCustomerGateway = "customer-gateway"
+	ImageStatePending      ImageState = "pending"
+	ImageStateAvailable    ImageState = "available"
+	ImageStateInvalid      ImageState = "invalid"
+	ImageStateDeregistered ImageState = "deregistered"
+	ImageStateTransient    ImageState = "transient"
+	ImageStateFailed       ImageState = "failed"
+	ImageStateError        ImageState = "error"
+)
 
-	// ResourceTypeDhcpOptions is a ResourceType enum value
-	ResourceTypeDhcpOptions = "dhcp-options"
+type ImageTypeValues string
 
-	// ResourceTypeImage is a ResourceType enum value
-	ResourceTypeImage = "image"
+// Enum values for ImageTypeValues
+const (
+	ImageTypeValuesMachine ImageTypeValues = "machine"
+	ImageTypeValuesKernel  ImageTypeValues = "kernel"
+	ImageTypeValuesRamdisk ImageTypeValues = "ramdisk"
+)
 
-	// ResourceTypeInstance is a ResourceType enum value
-	ResourceTypeInstance = "instance"
+type InstanceAttributeName string
 
-	// ResourceTypeInternetGateway is a ResourceType enum value
-	ResourceTypeInternetGateway = "internet-gateway"
+// Enum values for InstanceAttributeName
+const (
+	InstanceAttributeNameInstanceType                      InstanceAttributeName = "instanceType"
+	InstanceAttributeNameKernel                            InstanceAttributeName = "kernel"
+	InstanceAttributeNameRamdisk                           InstanceAttributeName = "ramdisk"
+	InstanceAttributeNameUserData                          InstanceAttributeName = "userData"
+	InstanceAttributeNameDisableApiTermination             InstanceAttributeName = "disableApiTermination"
+	InstanceAttributeNameInstanceInitiatedShutdownBehavior InstanceAttributeName = "instanceInitiatedShutdownBehavior"
+	InstanceAttributeNameRootDeviceName                    InstanceAttributeName = "rootDeviceName"
+	InstanceAttributeNameBlockDeviceMapping                InstanceAttributeName = "blockDeviceMapping"
+	InstanceAttributeNameProductCodes                      InstanceAttributeName = "productCodes"
+	InstanceAttributeNameSourceDestCheck                   InstanceAttributeName = "sourceDestCheck"
+	InstanceAttributeNameGroupSet                          InstanceAttributeName = "groupSet"
+	InstanceAttributeNameEbsOptimized                      InstanceAttributeName = "ebsOptimized"
+	InstanceAttributeNameSriovNetSupport                   InstanceAttributeName = "sriovNetSupport"
+	InstanceAttributeNameEnaSupport                        InstanceAttributeName = "enaSupport"
+)
 
-	// ResourceTypeNetworkAcl is a ResourceType enum value
-	ResourceTypeNetworkAcl = "network-acl"
+type InstanceHealthStatus string
 
-	// ResourceTypeNetworkInterface is a ResourceType enum value
-	ResourceTypeNetworkInterface = "network-interface"
+// Enum values for InstanceHealthStatus
+const (
+	InstanceHealthStatusHealthy   InstanceHealthStatus = "healthy"
+	InstanceHealthStatusUnhealthy InstanceHealthStatus = "unhealthy"
+)
 
-	// ResourceTypeReservedInstances is a ResourceType enum value
-	ResourceTypeReservedInstances = "reserved-instances"
+type InstanceInterruptionBehavior string
 
-	// ResourceTypeRouteTable is a ResourceType enum value
-	ResourceTypeRouteTable = "route-table"
+// Enum values for InstanceInterruptionBehavior
+const (
+	InstanceInterruptionBehaviorStop      InstanceInterruptionBehavior = "stop"
+	InstanceInterruptionBehaviorTerminate InstanceInterruptionBehavior = "terminate"
+)
 
-	// ResourceTypeSnapshot is a ResourceType enum value
-	ResourceTypeSnapshot = "snapshot"
+type InstanceLifecycleType string
 
-	// ResourceTypeSpotInstancesRequest is a ResourceType enum value
-	ResourceTypeSpotInstancesRequest = "spot-instances-request"
+// Enum values for InstanceLifecycleType
+const (
+	InstanceLifecycleTypeSpot      InstanceLifecycleType = "spot"
+	InstanceLifecycleTypeScheduled InstanceLifecycleType = "scheduled"
+)
 
-	// ResourceTypeSubnet is a ResourceType enum value
-	ResourceTypeSubnet = "subnet"
+type InstanceStateName string
 
-	// ResourceTypeSecurityGroup is a ResourceType enum value
-	ResourceTypeSecurityGroup = "security-group"
+// Enum values for InstanceStateName
+const (
+	InstanceStateNamePending      InstanceStateName = "pending"
+	InstanceStateNameRunning      InstanceStateName = "running"
+	InstanceStateNameShuttingDown InstanceStateName = "shutting-down"
+	InstanceStateNameTerminated   InstanceStateName = "terminated"
+	InstanceStateNameStopping     InstanceStateName = "stopping"
+	InstanceStateNameStopped      InstanceStateName = "stopped"
+)
 
-	// ResourceTypeVolume is a ResourceType enum value
-	ResourceTypeVolume = "volume"
+type InstanceType string
 
-	// ResourceTypeVpc is a ResourceType enum value
-	ResourceTypeVpc = "vpc"
+// Enum values for InstanceType
+const (
+	InstanceTypeT1Micro     InstanceType = "t1.micro"
+	InstanceTypeT2Nano      InstanceType = "t2.nano"
+	InstanceTypeT2Micro     InstanceType = "t2.micro"
+	InstanceTypeT2Small     InstanceType = "t2.small"
+	InstanceTypeT2Medium    InstanceType = "t2.medium"
+	InstanceTypeT2Large     InstanceType = "t2.large"
+	InstanceTypeT2Xlarge    InstanceType = "t2.xlarge"
+	InstanceTypeT22xlarge   InstanceType = "t2.2xlarge"
+	InstanceTypeM1Small     InstanceType = "m1.small"
+	InstanceTypeM1Medium    InstanceType = "m1.medium"
+	InstanceTypeM1Large     InstanceType = "m1.large"
+	InstanceTypeM1Xlarge    InstanceType = "m1.xlarge"
+	InstanceTypeM3Medium    InstanceType = "m3.medium"
+	InstanceTypeM3Large     InstanceType = "m3.large"
+	InstanceTypeM3Xlarge    InstanceType = "m3.xlarge"
+	InstanceTypeM32xlarge   InstanceType = "m3.2xlarge"
+	InstanceTypeM4Large     InstanceType = "m4.large"
+	InstanceTypeM4Xlarge    InstanceType = "m4.xlarge"
+	InstanceTypeM42xlarge   InstanceType = "m4.2xlarge"
+	InstanceTypeM44xlarge   InstanceType = "m4.4xlarge"
+	InstanceTypeM410xlarge  InstanceType = "m4.10xlarge"
+	InstanceTypeM416xlarge  InstanceType = "m4.16xlarge"
+	InstanceTypeM2Xlarge    InstanceType = "m2.xlarge"
+	InstanceTypeM22xlarge   InstanceType = "m2.2xlarge"
+	InstanceTypeM24xlarge   InstanceType = "m2.4xlarge"
+	InstanceTypeCr18xlarge  InstanceType = "cr1.8xlarge"
+	InstanceTypeR3Large     InstanceType = "r3.large"
+	InstanceTypeR3Xlarge    InstanceType = "r3.xlarge"
+	InstanceTypeR32xlarge   InstanceType = "r3.2xlarge"
+	InstanceTypeR34xlarge   InstanceType = "r3.4xlarge"
+	InstanceTypeR38xlarge   InstanceType = "r3.8xlarge"
+	InstanceTypeR4Large     InstanceType = "r4.large"
+	InstanceTypeR4Xlarge    InstanceType = "r4.xlarge"
+	InstanceTypeR42xlarge   InstanceType = "r4.2xlarge"
+	InstanceTypeR44xlarge   InstanceType = "r4.4xlarge"
+	InstanceTypeR48xlarge   InstanceType = "r4.8xlarge"
+	InstanceTypeR416xlarge  InstanceType = "r4.16xlarge"
+	InstanceTypeX116xlarge  InstanceType = "x1.16xlarge"
+	InstanceTypeX132xlarge  InstanceType = "x1.32xlarge"
+	InstanceTypeX1e32xlarge InstanceType = "x1e.32xlarge"
+	InstanceTypeI2Xlarge    InstanceType = "i2.xlarge"
+	InstanceTypeI22xlarge   InstanceType = "i2.2xlarge"
+	InstanceTypeI24xlarge   InstanceType = "i2.4xlarge"
+	InstanceTypeI28xlarge   InstanceType = "i2.8xlarge"
+	InstanceTypeI3Large     InstanceType = "i3.large"
+	InstanceTypeI3Xlarge    InstanceType = "i3.xlarge"
+	InstanceTypeI32xlarge   InstanceType = "i3.2xlarge"
+	InstanceTypeI34xlarge   InstanceType = "i3.4xlarge"
+	InstanceTypeI38xlarge   InstanceType = "i3.8xlarge"
+	InstanceTypeI316xlarge  InstanceType = "i3.16xlarge"
+	InstanceTypeHi14xlarge  InstanceType = "hi1.4xlarge"
+	InstanceTypeHs18xlarge  InstanceType = "hs1.8xlarge"
+	InstanceTypeC1Medium    InstanceType = "c1.medium"
+	InstanceTypeC1Xlarge    InstanceType = "c1.xlarge"
+	InstanceTypeC3Large     InstanceType = "c3.large"
+	InstanceTypeC3Xlarge    InstanceType = "c3.xlarge"
+	InstanceTypeC32xlarge   InstanceType = "c3.2xlarge"
+	InstanceTypeC34xlarge   InstanceType = "c3.4xlarge"
+	InstanceTypeC38xlarge   InstanceType = "c3.8xlarge"
+	InstanceTypeC4Large     InstanceType = "c4.large"
+	InstanceTypeC4Xlarge    InstanceType = "c4.xlarge"
+	InstanceTypeC42xlarge   InstanceType = "c4.2xlarge"
+	InstanceTypeC44xlarge   InstanceType = "c4.4xlarge"
+	InstanceTypeC48xlarge   InstanceType = "c4.8xlarge"
+	InstanceTypeCc14xlarge  InstanceType = "cc1.4xlarge"
+	InstanceTypeCc28xlarge  InstanceType = "cc2.8xlarge"
+	InstanceTypeG22xlarge   InstanceType = "g2.2xlarge"
+	InstanceTypeG28xlarge   InstanceType = "g2.8xlarge"
+	InstanceTypeG34xlarge   InstanceType = "g3.4xlarge"
+	InstanceTypeG38xlarge   InstanceType = "g3.8xlarge"
+	InstanceTypeG316xlarge  InstanceType = "g3.16xlarge"
+	InstanceTypeCg14xlarge  InstanceType = "cg1.4xlarge"
+	InstanceTypeP2Xlarge    InstanceType = "p2.xlarge"
+	InstanceTypeP28xlarge   InstanceType = "p2.8xlarge"
+	InstanceTypeP216xlarge  InstanceType = "p2.16xlarge"
+	InstanceTypeD2Xlarge    InstanceType = "d2.xlarge"
+	InstanceTypeD22xlarge   InstanceType = "d2.2xlarge"
+	InstanceTypeD24xlarge   InstanceType = "d2.4xlarge"
+	InstanceTypeD28xlarge   InstanceType = "d2.8xlarge"
+	InstanceTypeF12xlarge   InstanceType = "f1.2xlarge"
+	InstanceTypeF116xlarge  InstanceType = "f1.16xlarge"
+)
 
-	// ResourceTypeVpnConnection is a ResourceType enum value
-	ResourceTypeVpnConnection = "vpn-connection"
+type InterfacePermissionType string
 
-	// ResourceTypeVpnGateway is a ResourceType enum value
-	ResourceTypeVpnGateway = "vpn-gateway"
+// Enum values for InterfacePermissionType
+const (
+	InterfacePermissionTypeInstanceAttach InterfacePermissionType = "INSTANCE-ATTACH"
+	InterfacePermissionTypeEipAssociate   InterfacePermissionType = "EIP-ASSOCIATE"
 )
+
+type ListingState string
 
+// Enum values for ListingState
 const (
-	// RouteOriginCreateRouteTable is a RouteOrigin enum value
-	RouteOriginCreateRouteTable = "CreateRouteTable"
+	ListingStateAvailable ListingState = "available"
+	ListingStateSold      ListingState = "sold"
+	ListingStateCancelled ListingState = "cancelled"
+	ListingStatePending   ListingState = "pending"
+)
 
-	// RouteOriginCreateRoute is a RouteOrigin enum value
-	RouteOriginCreateRoute = "CreateRoute"
+type ListingStatus string
 
-	// RouteOriginEnableVgwRoutePropagation is a RouteOrigin enum value
-	RouteOriginEnableVgwRoutePropagation = "EnableVgwRoutePropagation"
+// Enum values for ListingStatus
+const (
+	ListingStatusActive    ListingStatus = "active"
+	ListingStatusPending   ListingStatus = "pending"
+	ListingStatusCancelled ListingStatus = "cancelled"
+	ListingStatusClosed    ListingStatus = "closed"
 )
 
-const (
-	// RouteStateActive is a RouteState enum value
-	RouteStateActive = "active"
+type MonitoringState string
 
-	// RouteStateBlackhole is a RouteState enum value
-	RouteStateBlackhole = "blackhole"
+// Enum values for MonitoringState
+const (
+	MonitoringStateDisabled  MonitoringState = "disabled"
+	MonitoringStateDisabling MonitoringState = "disabling"
+	MonitoringStateEnabled   MonitoringState = "enabled"
+	MonitoringStatePending   MonitoringState = "pending"
 )
 
-const (
-	// RuleActionAllow is a RuleAction enum value
-	RuleActionAllow = "allow"
+type MoveStatus string
 
-	// RuleActionDeny is a RuleAction enum value
-	RuleActionDeny = "deny"
+// Enum values for MoveStatus
+const (
+	MoveStatusMovingToVpc        MoveStatus = "movingToVpc"
+	MoveStatusRestoringToClassic MoveStatus = "restoringToClassic"
 )
 
-const (
-	// ShutdownBehaviorStop is a ShutdownBehavior enum value
-	ShutdownBehaviorStop = "stop"
+type NatGatewayState string
 
-	// ShutdownBehaviorTerminate is a ShutdownBehavior enum value
-	ShutdownBehaviorTerminate = "terminate"
+// Enum values for NatGatewayState
+const (
+	NatGatewayStatePending   NatGatewayState = "pending"
+	NatGatewayStateFailed    NatGatewayState = "failed"
+	NatGatewayStateAvailable NatGatewayState = "available"
+	NatGatewayStateDeleting  NatGatewayState = "deleting"
+	NatGatewayStateDeleted   NatGatewayState = "deleted"
 )
 
-const (
-	// SnapshotAttributeNameProductCodes is a SnapshotAttributeName enum value
-	SnapshotAttributeNameProductCodes = "productCodes"
+type NetworkInterfaceAttribute string
 
-	// SnapshotAttributeNameCreateVolumePermission is a SnapshotAttributeName enum value
-	SnapshotAttributeNameCreateVolumePermission = "createVolumePermission"
+// Enum values for NetworkInterfaceAttribute
+const (
+	NetworkInterfaceAttributeDescription     NetworkInterfaceAttribute = "description"
+	NetworkInterfaceAttributeGroupSet        NetworkInterfaceAttribute = "groupSet"
+	NetworkInterfaceAttributeSourceDestCheck NetworkInterfaceAttribute = "sourceDestCheck"
+	NetworkInterfaceAttributeAttachment      NetworkInterfaceAttribute = "attachment"
 )
 
+type NetworkInterfacePermissionStateCode string
+
+// Enum values for NetworkInterfacePermissionStateCode
 const (
-	// SnapshotStatePending is a SnapshotState enum value
-	SnapshotStatePending = "pending"
+	NetworkInterfacePermissionStateCodePending  NetworkInterfacePermissionStateCode = "pending"
+	NetworkInterfacePermissionStateCodeGranted  NetworkInterfacePermissionStateCode = "granted"
+	NetworkInterfacePermissionStateCodeRevoking NetworkInterfacePermissionStateCode = "revoking"
+	NetworkInterfacePermissionStateCodeRevoked  NetworkInterfacePermissionStateCode = "revoked"
+)
 
-	// SnapshotStateCompleted is a SnapshotState enum value
-	SnapshotStateCompleted = "completed"
+type NetworkInterfaceStatus string
 
-	// SnapshotStateError is a SnapshotState enum value
-	SnapshotStateError = "error"
+// Enum values for NetworkInterfaceStatus
+const (
+	NetworkInterfaceStatusAvailable NetworkInterfaceStatus = "available"
+	NetworkInterfaceStatusAttaching NetworkInterfaceStatus = "attaching"
+	NetworkInterfaceStatusInUse     NetworkInterfaceStatus = "in-use"
+	NetworkInterfaceStatusDetaching NetworkInterfaceStatus = "detaching"
 )
 
+type NetworkInterfaceType string
+
+// Enum values for NetworkInterfaceType
 const (
-	// SpotInstanceStateOpen is a SpotInstanceState enum value
-	SpotInstanceStateOpen = "open"
+	NetworkInterfaceTypeInterface  NetworkInterfaceType = "interface"
+	NetworkInterfaceTypeNatGateway NetworkInterfaceType = "natGateway"
+)
 
-	// SpotInstanceStateActive is a SpotInstanceState enum value
-	SpotInstanceStateActive = "active"
+type OfferingClassType string
 
-	// SpotInstanceStateClosed is a SpotInstanceState enum value
-	SpotInstanceStateClosed = "closed"
+// Enum values for OfferingClassType
+const (
+	OfferingClassTypeStandard    OfferingClassType = "standard"
+	OfferingClassTypeConvertible OfferingClassType = "convertible"
+)
 
-	// SpotInstanceStateCancelled is a SpotInstanceState enum value
-	SpotInstanceStateCancelled = "cancelled"
+type OfferingTypeValues string
 
-	// SpotInstanceStateFailed is a SpotInstanceState enum value
-	SpotInstanceStateFailed = "failed"
+// Enum values for OfferingTypeValues
+const (
+	OfferingTypeValuesHeavyUtilization  OfferingTypeValues = "Heavy Utilization"
+	OfferingTypeValuesMediumUtilization OfferingTypeValues = "Medium Utilization"
+	OfferingTypeValuesLightUtilization  OfferingTypeValues = "Light Utilization"
+	OfferingTypeValuesNoUpfront         OfferingTypeValues = "No Upfront"
+	OfferingTypeValuesPartialUpfront    OfferingTypeValues = "Partial Upfront"
+	OfferingTypeValuesAllUpfront        OfferingTypeValues = "All Upfront"
 )
 
-const (
-	// SpotInstanceTypeOneTime is a SpotInstanceType enum value
-	SpotInstanceTypeOneTime = "one-time"
+type OperationType string
 
-	// SpotInstanceTypePersistent is a SpotInstanceType enum value
-	SpotInstanceTypePersistent = "persistent"
+// Enum values for OperationType
+const (
+	OperationTypeAdd    OperationType = "add"
+	OperationTypeRemove OperationType = "remove"
 )
 
-const (
-	// StatePending is a State enum value
-	StatePending = "Pending"
+type PaymentOption string
 
-	// StateAvailable is a State enum value
-	StateAvailable = "Available"
+// Enum values for PaymentOption
+const (
+	PaymentOptionAllUpfront     PaymentOption = "AllUpfront"
+	PaymentOptionPartialUpfront PaymentOption = "PartialUpfront"
+	PaymentOptionNoUpfront      PaymentOption = "NoUpfront"
+)
 
-	// StateDeleting is a State enum value
-	StateDeleting = "Deleting"
+type PermissionGroup string
 
-	// StateDeleted is a State enum value
-	StateDeleted = "Deleted"
+// Enum values for PermissionGroup
+const (
+	PermissionGroupAll PermissionGroup = "all"
 )
 
+type PlacementGroupState string
+
+// Enum values for PlacementGroupState
 const (
-	// StatusMoveInProgress is a Status enum value
-	StatusMoveInProgress = "MoveInProgress"
+	PlacementGroupStatePending   PlacementGroupState = "pending"
+	PlacementGroupStateAvailable PlacementGroupState = "available"
+	PlacementGroupStateDeleting  PlacementGroupState = "deleting"
+	PlacementGroupStateDeleted   PlacementGroupState = "deleted"
+)
 
-	// StatusInVpc is a Status enum value
-	StatusInVpc = "InVpc"
+type PlacementStrategy string
 
-	// StatusInClassic is a Status enum value
-	StatusInClassic = "InClassic"
+// Enum values for PlacementStrategy
+const (
+	PlacementStrategyCluster PlacementStrategy = "cluster"
 )
 
+type PlatformValues string
+
+// Enum values for PlatformValues
 const (
-	// StatusNameReachability is a StatusName enum value
-	StatusNameReachability = "reachability"
+	PlatformValuesWindows PlatformValues = "Windows"
 )
 
-const (
-	// StatusTypePassed is a StatusType enum value
-	StatusTypePassed = "passed"
+type ProductCodeValues string
 
-	// StatusTypeFailed is a StatusType enum value
-	StatusTypeFailed = "failed"
+// Enum values for ProductCodeValues
+const (
+	ProductCodeValuesDevpay      ProductCodeValues = "devpay"
+	ProductCodeValuesMarketplace ProductCodeValues = "marketplace"
+)
 
-	// StatusTypeInsufficientData is a StatusType enum value
-	StatusTypeInsufficientData = "insufficient-data"
+type RIProductDescription string
 
-	// StatusTypeInitializing is a StatusType enum value
-	StatusTypeInitializing = "initializing"
+// Enum values for RIProductDescription
+const (
+	RIProductDescriptionLinuxUnix          RIProductDescription = "Linux/UNIX"
+	RIProductDescriptionLinuxUnixamazonVpc RIProductDescription = "Linux/UNIX (Amazon VPC)"
+	RIProductDescriptionWindows            RIProductDescription = "Windows"
+	RIProductDescriptionWindowsAmazonVpc   RIProductDescription = "Windows (Amazon VPC)"
 )
 
-const (
-	// SubnetCidrBlockStateCodeAssociating is a SubnetCidrBlockStateCode enum value
-	SubnetCidrBlockStateCodeAssociating = "associating"
+type RecurringChargeFrequency string
 
-	// SubnetCidrBlockStateCodeAssociated is a SubnetCidrBlockStateCode enum value
-	SubnetCidrBlockStateCodeAssociated = "associated"
+// Enum values for RecurringChargeFrequency
+const (
+	RecurringChargeFrequencyHourly RecurringChargeFrequency = "Hourly"
+)
 
-	// SubnetCidrBlockStateCodeDisassociating is a SubnetCidrBlockStateCode enum value
-	SubnetCidrBlockStateCodeDisassociating = "disassociating"
+type ReportInstanceReasonCodes string
 
-	// SubnetCidrBlockStateCodeDisassociated is a SubnetCidrBlockStateCode enum value
-	SubnetCidrBlockStateCodeDisassociated = "disassociated"
+// Enum values for ReportInstanceReasonCodes
+const (
+	ReportInstanceReasonCodesInstanceStuckInState     ReportInstanceReasonCodes = "instance-stuck-in-state"
+	ReportInstanceReasonCodesUnresponsive             ReportInstanceReasonCodes = "unresponsive"
+	ReportInstanceReasonCodesNotAcceptingCredentials  ReportInstanceReasonCodes = "not-accepting-credentials"
+	ReportInstanceReasonCodesPasswordNotAvailable     ReportInstanceReasonCodes = "password-not-available"
+	ReportInstanceReasonCodesPerformanceNetwork       ReportInstanceReasonCodes = "performance-network"
+	ReportInstanceReasonCodesPerformanceInstanceStore ReportInstanceReasonCodes = "performance-instance-store"
+	ReportInstanceReasonCodesPerformanceEbsVolume     ReportInstanceReasonCodes = "performance-ebs-volume"
+	ReportInstanceReasonCodesPerformanceOther         ReportInstanceReasonCodes = "performance-other"
+	ReportInstanceReasonCodesOther                    ReportInstanceReasonCodes = "other"
+)
 
-	// SubnetCidrBlockStateCodeFailing is a SubnetCidrBlockStateCode enum value
-	SubnetCidrBlockStateCodeFailing = "failing"
+type ReportStatusType string
 
-	// SubnetCidrBlockStateCodeFailed is a SubnetCidrBlockStateCode enum value
-	SubnetCidrBlockStateCodeFailed = "failed"
+// Enum values for ReportStatusType
+const (
+	ReportStatusTypeOk       ReportStatusType = "ok"
+	ReportStatusTypeImpaired ReportStatusType = "impaired"
 )
 
-const (
-	// SubnetStatePending is a SubnetState enum value
-	SubnetStatePending = "pending"
+type ReservationState string
 
-	// SubnetStateAvailable is a SubnetState enum value
-	SubnetStateAvailable = "available"
+// Enum values for ReservationState
+const (
+	ReservationStatePaymentPending ReservationState = "payment-pending"
+	ReservationStatePaymentFailed  ReservationState = "payment-failed"
+	ReservationStateActive         ReservationState = "active"
+	ReservationStateRetired        ReservationState = "retired"
 )
+
+type ReservedInstanceState string
 
+// Enum values for ReservedInstanceState
 const (
-	// SummaryStatusOk is a SummaryStatus enum value
-	SummaryStatusOk = "ok"
+	ReservedInstanceStatePaymentPending ReservedInstanceState = "payment-pending"
+	ReservedInstanceStateActive         ReservedInstanceState = "active"
+	ReservedInstanceStatePaymentFailed  ReservedInstanceState = "payment-failed"
+	ReservedInstanceStateRetired        ReservedInstanceState = "retired"
+)
 
-	// SummaryStatusImpaired is a SummaryStatus enum value
-	SummaryStatusImpaired = "impaired"
+type ResetFpgaImageAttributeName string
 
-	// SummaryStatusInsufficientData is a SummaryStatus enum value
-	SummaryStatusInsufficientData = "insufficient-data"
+// Enum values for ResetFpgaImageAttributeName
+const (
+	ResetFpgaImageAttributeNameLoadPermission ResetFpgaImageAttributeName = "loadPermission"
+)
 
-	// SummaryStatusNotApplicable is a SummaryStatus enum value
-	SummaryStatusNotApplicable = "not-applicable"
+type ResetImageAttributeName string
 
-	// SummaryStatusInitializing is a SummaryStatus enum value
-	SummaryStatusInitializing = "initializing"
+// Enum values for ResetImageAttributeName
+const (
+	ResetImageAttributeNameLaunchPermission ResetImageAttributeName = "launchPermission"
 )
 
-const (
-	// TelemetryStatusUp is a TelemetryStatus enum value
-	TelemetryStatusUp = "UP"
+type ResourceType string
 
-	// TelemetryStatusDown is a TelemetryStatus enum value
-	TelemetryStatusDown = "DOWN"
+// Enum values for ResourceType
+const (
+	ResourceTypeCustomerGateway      ResourceType = "customer-gateway"
+	ResourceTypeDhcpOptions          ResourceType = "dhcp-options"
+	ResourceTypeImage                ResourceType = "image"
+	ResourceTypeInstance             ResourceType = "instance"
+	ResourceTypeInternetGateway      ResourceType = "internet-gateway"
+	ResourceTypeNetworkAcl           ResourceType = "network-acl"
+	ResourceTypeNetworkInterface     ResourceType = "network-interface"
+	ResourceTypeReservedInstances    ResourceType = "reserved-instances"
+	ResourceTypeRouteTable           ResourceType = "route-table"
+	ResourceTypeSnapshot             ResourceType = "snapshot"
+	ResourceTypeSpotInstancesRequest ResourceType = "spot-instances-request"
+	ResourceTypeSubnet               ResourceType = "subnet"
+	ResourceTypeSecurityGroup        ResourceType = "security-group"
+	ResourceTypeVolume               ResourceType = "volume"
+	ResourceTypeVpc                  ResourceType = "vpc"
+	ResourceTypeVpnConnection        ResourceType = "vpn-connection"
+	ResourceTypeVpnGateway           ResourceType = "vpn-gateway"
 )
+
+type RouteOrigin string
 
+// Enum values for RouteOrigin
 const (
-	// TenancyDefault is a Tenancy enum value
-	TenancyDefault = "default"
+	RouteOriginCreateRouteTable          RouteOrigin = "CreateRouteTable"
+	RouteOriginCreateRoute               RouteOrigin = "CreateRoute"
+	RouteOriginEnableVgwRoutePropagation RouteOrigin = "EnableVgwRoutePropagation"
+)
 
-	// TenancyDedicated is a Tenancy enum value
-	TenancyDedicated = "dedicated"
+type RouteState string
 
-	// TenancyHost is a Tenancy enum value
-	TenancyHost = "host"
+// Enum values for RouteState
+const (
+	RouteStateActive    RouteState = "active"
+	RouteStateBlackhole RouteState = "blackhole"
 )
 
+type RuleAction string
+
+// Enum values for RuleAction
 const (
-	// TrafficTypeAccept is a TrafficType enum value
-	TrafficTypeAccept = "ACCEPT"
+	RuleActionAllow RuleAction = "allow"
+	RuleActionDeny  RuleAction = "deny"
+)
 
-	// TrafficTypeReject is a TrafficType enum value
-	TrafficTypeReject = "REJECT"
+type ShutdownBehavior string
 
-	// TrafficTypeAll is a TrafficType enum value
-	TrafficTypeAll = "ALL"
+// Enum values for ShutdownBehavior
+const (
+	ShutdownBehaviorStop      ShutdownBehavior = "stop"
+	ShutdownBehaviorTerminate ShutdownBehavior = "terminate"
 )
 
-const (
-	// VirtualizationTypeHvm is a VirtualizationType enum value
-	VirtualizationTypeHvm = "hvm"
+type SnapshotAttributeName string
 
-	// VirtualizationTypeParavirtual is a VirtualizationType enum value
-	VirtualizationTypeParavirtual = "paravirtual"
+// Enum values for SnapshotAttributeName
+const (
+	SnapshotAttributeNameProductCodes           SnapshotAttributeName = "productCodes"
+	SnapshotAttributeNameCreateVolumePermission SnapshotAttributeName = "createVolumePermission"
 )
 
-const (
-	// VolumeAttachmentStateAttaching is a VolumeAttachmentState enum value
-	VolumeAttachmentStateAttaching = "attaching"
+type SnapshotState string
 
-	// VolumeAttachmentStateAttached is a VolumeAttachmentState enum value
-	VolumeAttachmentStateAttached = "attached"
+// Enum values for SnapshotState
+const (
+	SnapshotStatePending   SnapshotState = "pending"
+	SnapshotStateCompleted SnapshotState = "completed"
+	SnapshotStateError     SnapshotState = "error"
+)
 
-	// VolumeAttachmentStateDetaching is a VolumeAttachmentState enum value
-	VolumeAttachmentStateDetaching = "detaching"
+type SpotInstanceState string
 
-	// VolumeAttachmentStateDetached is a VolumeAttachmentState enum value
-	VolumeAttachmentStateDetached = "detached"
+// Enum values for SpotInstanceState
+const (
+	SpotInstanceStateOpen      SpotInstanceState = "open"
+	SpotInstanceStateActive    SpotInstanceState = "active"
+	SpotInstanceStateClosed    SpotInstanceState = "closed"
+	SpotInstanceStateCancelled SpotInstanceState = "cancelled"
+	SpotInstanceStateFailed    SpotInstanceState = "failed"
 )
 
-const (
-	// VolumeAttributeNameAutoEnableIo is a VolumeAttributeName enum value
-	VolumeAttributeNameAutoEnableIo = "autoEnableIO"
+type SpotInstanceType string
 
-	// VolumeAttributeNameProductCodes is a VolumeAttributeName enum value
-	VolumeAttributeNameProductCodes = "productCodes"
+// Enum values for SpotInstanceType
+const (
+	SpotInstanceTypeOneTime    SpotInstanceType = "one-time"
+	SpotInstanceTypePersistent SpotInstanceType = "persistent"
 )
 
-const (
-	// VolumeModificationStateModifying is a VolumeModificationState enum value
-	VolumeModificationStateModifying = "modifying"
+type State string
 
-	// VolumeModificationStateOptimizing is a VolumeModificationState enum value
-	VolumeModificationStateOptimizing = "optimizing"
+// Enum values for State
+const (
+	StatePending   State = "Pending"
+	StateAvailable State = "Available"
+	StateDeleting  State = "Deleting"
+	StateDeleted   State = "Deleted"
+)
 
-	// VolumeModificationStateCompleted is a VolumeModificationState enum value
-	VolumeModificationStateCompleted = "completed"
+type Status string
 
-	// VolumeModificationStateFailed is a VolumeModificationState enum value
-	VolumeModificationStateFailed = "failed"
+// Enum values for Status
+const (
+	StatusMoveInProgress Status = "MoveInProgress"
+	StatusInVpc          Status = "InVpc"
+	StatusInClassic      Status = "InClassic"
 )
 
-const (
-	// VolumeStateCreating is a VolumeState enum value
-	VolumeStateCreating = "creating"
+type StatusName string
 
-	// VolumeStateAvailable is a VolumeState enum value
-	VolumeStateAvailable = "available"
+// Enum values for StatusName
+const (
+	StatusNameReachability StatusName = "reachability"
+)
 
-	// VolumeStateInUse is a VolumeState enum value
-	VolumeStateInUse = "in-use"
+type StatusType string
 
-	// VolumeStateDeleting is a VolumeState enum value
-	VolumeStateDeleting = "deleting"
+// Enum values for StatusType
+const (
+	StatusTypePassed           StatusType = "passed"
+	StatusTypeFailed           StatusType = "failed"
+	StatusTypeInsufficientData StatusType = "insufficient-data"
+	StatusTypeInitializing     StatusType = "initializing"
+)
 
-	// VolumeStateDeleted is a VolumeState enum value
-	VolumeStateDeleted = "deleted"
+type SubnetCidrBlockStateCode string
 
-	// VolumeStateError is a VolumeState enum value
-	VolumeStateError = "error"
+// Enum values for SubnetCidrBlockStateCode
+const (
+	SubnetCidrBlockStateCodeAssociating    SubnetCidrBlockStateCode = "associating"
+	SubnetCidrBlockStateCodeAssociated     SubnetCidrBlockStateCode = "associated"
+	SubnetCidrBlockStateCodeDisassociating SubnetCidrBlockStateCode = "disassociating"
+	SubnetCidrBlockStateCodeDisassociated  SubnetCidrBlockStateCode = "disassociated"
+	SubnetCidrBlockStateCodeFailing        SubnetCidrBlockStateCode = "failing"
+	SubnetCidrBlockStateCodeFailed         SubnetCidrBlockStateCode = "failed"
 )
+
+type SubnetState string
 
+// Enum values for SubnetState
 const (
-	// VolumeStatusInfoStatusOk is a VolumeStatusInfoStatus enum value
-	VolumeStatusInfoStatusOk = "ok"
+	SubnetStatePending   SubnetState = "pending"
+	SubnetStateAvailable SubnetState = "available"
+)
 
-	// VolumeStatusInfoStatusImpaired is a VolumeStatusInfoStatus enum value
-	VolumeStatusInfoStatusImpaired = "impaired"
+type SummaryStatus string
 
-	// VolumeStatusInfoStatusInsufficientData is a VolumeStatusInfoStatus enum value
-	VolumeStatusInfoStatusInsufficientData = "insufficient-data"
+// Enum values for SummaryStatus
+const (
+	SummaryStatusOk               SummaryStatus = "ok"
+	SummaryStatusImpaired         SummaryStatus = "impaired"
+	SummaryStatusInsufficientData SummaryStatus = "insufficient-data"
+	SummaryStatusNotApplicable    SummaryStatus = "not-applicable"
+	SummaryStatusInitializing     SummaryStatus = "initializing"
 )
 
-const (
-	// VolumeStatusNameIoEnabled is a VolumeStatusName enum value
-	VolumeStatusNameIoEnabled = "io-enabled"
+type TelemetryStatus string
 
-	// VolumeStatusNameIoPerformance is a VolumeStatusName enum value
-	VolumeStatusNameIoPerformance = "io-performance"
+// Enum values for TelemetryStatus
+const (
+	TelemetryStatusUp   TelemetryStatus = "UP"
+	TelemetryStatusDown TelemetryStatus = "DOWN"
 )
+
+type Tenancy string
 
+// Enum values for Tenancy
 const (
-	// VolumeTypeStandard is a VolumeType enum value
-	VolumeTypeStandard = "standard"
+	TenancyDefault   Tenancy = "default"
+	TenancyDedicated Tenancy = "dedicated"
+	TenancyHost      Tenancy = "host"
+)
 
-	// VolumeTypeIo1 is a VolumeType enum value
-	VolumeTypeIo1 = "io1"
+type TrafficType string
 
-	// VolumeTypeGp2 is a VolumeType enum value
-	VolumeTypeGp2 = "gp2"
+// Enum values for TrafficType
+const (
+	TrafficTypeAccept TrafficType = "ACCEPT"
+	TrafficTypeReject TrafficType = "REJECT"
+	TrafficTypeAll    TrafficType = "ALL"
+)
 
-	// VolumeTypeSc1 is a VolumeType enum value
-	VolumeTypeSc1 = "sc1"
+type VirtualizationType string
 
-	// VolumeTypeSt1 is a VolumeType enum value
-	VolumeTypeSt1 = "st1"
+// Enum values for VirtualizationType
+const (
+	VirtualizationTypeHvm         VirtualizationType = "hvm"
+	VirtualizationTypeParavirtual VirtualizationType = "paravirtual"
 )
 
-const (
-	// VpcAttributeNameEnableDnsSupport is a VpcAttributeName enum value
-	VpcAttributeNameEnableDnsSupport = "enableDnsSupport"
+type VolumeAttachmentState string
 
-	// VpcAttributeNameEnableDnsHostnames is a VpcAttributeName enum value
-	VpcAttributeNameEnableDnsHostnames = "enableDnsHostnames"
+// Enum values for VolumeAttachmentState
+const (
+	VolumeAttachmentStateAttaching VolumeAttachmentState = "attaching"
+	VolumeAttachmentStateAttached  VolumeAttachmentState = "attached"
+	VolumeAttachmentStateDetaching VolumeAttachmentState = "detaching"
+	VolumeAttachmentStateDetached  VolumeAttachmentState = "detached"
 )
 
-const (
-	// VpcCidrBlockStateCodeAssociating is a VpcCidrBlockStateCode enum value
-	VpcCidrBlockStateCodeAssociating = "associating"
+type VolumeAttributeName string
 
-	// VpcCidrBlockStateCodeAssociated is a VpcCidrBlockStateCode enum value
-	VpcCidrBlockStateCodeAssociated = "associated"
+// Enum values for VolumeAttributeName
+const (
+	VolumeAttributeNameAutoEnableIo VolumeAttributeName = "autoEnableIO"
+	VolumeAttributeNameProductCodes VolumeAttributeName = "productCodes"
+)
 
-	// VpcCidrBlockStateCodeDisassociating is a VpcCidrBlockStateCode enum value
-	VpcCidrBlockStateCodeDisassociating = "disassociating"
+type VolumeModificationState string
 
-	// VpcCidrBlockStateCodeDisassociated is a VpcCidrBlockStateCode enum value
-	VpcCidrBlockStateCodeDisassociated = "disassociated"
+// Enum values for VolumeModificationState
+const (
+	VolumeModificationStateModifying  VolumeModificationState = "modifying"
+	VolumeModificationStateOptimizing VolumeModificationState = "optimizing"
+	VolumeModificationStateCompleted  VolumeModificationState = "completed"
+	VolumeModificationStateFailed     VolumeModificationState = "failed"
+)
 
-	// VpcCidrBlockStateCodeFailing is a VpcCidrBlockStateCode enum value
-	VpcCidrBlockStateCodeFailing = "failing"
+type VolumeState string
 
-	// VpcCidrBlockStateCodeFailed is a VpcCidrBlockStateCode enum value
-	VpcCidrBlockStateCodeFailed = "failed"
+// Enum values for VolumeState
+const (
+	VolumeStateCreating  VolumeState = "creating"
+	VolumeStateAvailable VolumeState = "available"
+	VolumeStateInUse     VolumeState = "in-use"
+	VolumeStateDeleting  VolumeState = "deleting"
+	VolumeStateDeleted   VolumeState = "deleted"
+	VolumeStateError     VolumeState = "error"
 )
 
+type VolumeStatusInfoStatus string
+
+// Enum values for VolumeStatusInfoStatus
 const (
-	// VpcPeeringConnectionStateReasonCodeInitiatingRequest is a VpcPeeringConnectionStateReasonCode enum value
-	VpcPeeringConnectionStateReasonCodeInitiatingRequest = "initiating-request"
+	VolumeStatusInfoStatusOk               VolumeStatusInfoStatus = "ok"
+	VolumeStatusInfoStatusImpaired         VolumeStatusInfoStatus = "impaired"
+	VolumeStatusInfoStatusInsufficientData VolumeStatusInfoStatus = "insufficient-data"
+)
 
-	// VpcPeeringConnectionStateReasonCodePendingAcceptance is a VpcPeeringConnectionStateReasonCode enum value
-	VpcPeeringConnectionStateReasonCodePendingAcceptance = "pending-acceptance"
+type VolumeStatusName string
 
-	// VpcPeeringConnectionStateReasonCodeActive is a VpcPeeringConnectionStateReasonCode enum value
-	VpcPeeringConnectionStateReasonCodeActive = "active"
+// Enum values for VolumeStatusName
+const (
+	VolumeStatusNameIoEnabled     VolumeStatusName = "io-enabled"
+	VolumeStatusNameIoPerformance VolumeStatusName = "io-performance"
+)
 
-	// VpcPeeringConnectionStateReasonCodeDeleted is a VpcPeeringConnectionStateReasonCode enum value
-	VpcPeeringConnectionStateReasonCodeDeleted = "deleted"
+type VolumeType string
 
-	// VpcPeeringConnectionStateReasonCodeRejected is a VpcPeeringConnectionStateReasonCode enum value
-	VpcPeeringConnectionStateReasonCodeRejected = "rejected"
+// Enum values for VolumeType
+const (
+	VolumeTypeStandard VolumeType = "standard"
+	VolumeTypeIo1      VolumeType = "io1"
+	VolumeTypeGp2      VolumeType = "gp2"
+	VolumeTypeSc1      VolumeType = "sc1"
+	VolumeTypeSt1      VolumeType = "st1"
+)
 
-	// VpcPeeringConnectionStateReasonCodeFailed is a VpcPeeringConnectionStateReasonCode enum value
-	VpcPeeringConnectionStateReasonCodeFailed = "failed"
+type VpcAttributeName string
 
-	// VpcPeeringConnectionStateReasonCodeExpired is a VpcPeeringConnectionStateReasonCode enum value
-	VpcPeeringConnectionStateReasonCodeExpired = "expired"
+// Enum values for VpcAttributeName
+const (
+	VpcAttributeNameEnableDnsSupport   VpcAttributeName = "enableDnsSupport"
+	VpcAttributeNameEnableDnsHostnames VpcAttributeName = "enableDnsHostnames"
+)
 
-	// VpcPeeringConnectionStateReasonCodeProvisioning is a VpcPeeringConnectionStateReasonCode enum value
-	VpcPeeringConnectionStateReasonCodeProvisioning = "provisioning"
+type VpcCidrBlockStateCode string
 
-	// VpcPeeringConnectionStateReasonCodeDeleting is a VpcPeeringConnectionStateReasonCode enum value
-	VpcPeeringConnectionStateReasonCodeDeleting = "deleting"
+// Enum values for VpcCidrBlockStateCode
+const (
+	VpcCidrBlockStateCodeAssociating    VpcCidrBlockStateCode = "associating"
+	VpcCidrBlockStateCodeAssociated     VpcCidrBlockStateCode = "associated"
+	VpcCidrBlockStateCodeDisassociating VpcCidrBlockStateCode = "disassociating"
+	VpcCidrBlockStateCodeDisassociated  VpcCidrBlockStateCode = "disassociated"
+	VpcCidrBlockStateCodeFailing        VpcCidrBlockStateCode = "failing"
+	VpcCidrBlockStateCodeFailed         VpcCidrBlockStateCode = "failed"
 )
 
-const (
-	// VpcStatePending is a VpcState enum value
-	VpcStatePending = "pending"
+type VpcPeeringConnectionStateReasonCode string
 
-	// VpcStateAvailable is a VpcState enum value
-	VpcStateAvailable = "available"
+// Enum values for VpcPeeringConnectionStateReasonCode
+const (
+	VpcPeeringConnectionStateReasonCodeInitiatingRequest VpcPeeringConnectionStateReasonCode = "initiating-request"
+	VpcPeeringConnectionStateReasonCodePendingAcceptance VpcPeeringConnectionStateReasonCode = "pending-acceptance"
+	VpcPeeringConnectionStateReasonCodeActive            VpcPeeringConnectionStateReasonCode = "active"
+	VpcPeeringConnectionStateReasonCodeDeleted           VpcPeeringConnectionStateReasonCode = "deleted"
+	VpcPeeringConnectionStateReasonCodeRejected          VpcPeeringConnectionStateReasonCode = "rejected"
+	VpcPeeringConnectionStateReasonCodeFailed            VpcPeeringConnectionStateReasonCode = "failed"
+	VpcPeeringConnectionStateReasonCodeExpired           VpcPeeringConnectionStateReasonCode = "expired"
+	VpcPeeringConnectionStateReasonCodeProvisioning      VpcPeeringConnectionStateReasonCode = "provisioning"
+	VpcPeeringConnectionStateReasonCodeDeleting          VpcPeeringConnectionStateReasonCode = "deleting"
 )
 
-const (
-	// VpnStatePending is a VpnState enum value
-	VpnStatePending = "pending"
+type VpcState string
 
-	// VpnStateAvailable is a VpnState enum value
-	VpnStateAvailable = "available"
+// Enum values for VpcState
+const (
+	VpcStatePending   VpcState = "pending"
+	VpcStateAvailable VpcState = "available"
+)
 
-	// VpnStateDeleting is a VpnState enum value
-	VpnStateDeleting = "deleting"
+type VpnState string
 
-	// VpnStateDeleted is a VpnState enum value
-	VpnStateDeleted = "deleted"
+// Enum values for VpnState
+const (
+	VpnStatePending   VpnState = "pending"
+	VpnStateAvailable VpnState = "available"
+	VpnStateDeleting  VpnState = "deleting"
+	VpnStateDeleted   VpnState = "deleted"
 )
+
+type VpnStaticRouteSource string
 
+// Enum values for VpnStaticRouteSource
 const (
-	// VpnStaticRouteSourceStatic is a VpnStaticRouteSource enum value
-	VpnStaticRouteSourceStatic = "Static"
+	VpnStaticRouteSourceStatic VpnStaticRouteSource = "Static"
 )
 
-const (
-	// ScopeAvailabilityZone is a scope enum value
-	ScopeAvailabilityZone = "Availability Zone"
+type Scope string
 
-	// ScopeRegion is a scope enum value
-	ScopeRegion = "Region"
+// Enum values for Scope
+const (
+	ScopeAvailabilityZone Scope = "Availability Zone"
+	ScopeRegion           Scope = "Region"
 )

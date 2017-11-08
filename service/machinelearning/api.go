@@ -2752,7 +2752,7 @@ type AddTagsInput struct {
 	// The type of the ML object to tag.
 	//
 	// ResourceType is a required field
-	ResourceType *string `type:"string" required:"true" enum:"TaggableResourceType"`
+	ResourceType TaggableResourceType `type:"string" required:"true"`
 
 	// The key-value pairs to use to create tags. If you specify a key without specifying
 	// a value, Amazon ML creates a tag with the specified key and a value of null.
@@ -2774,15 +2774,17 @@ func (s AddTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -2810,8 +2812,8 @@ func (s *AddTagsInput) SetResourceId(v string) *AddTagsInput {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *AddTagsInput) SetResourceType(v string) *AddTagsInput {
-	s.ResourceType = &v
+func (s *AddTagsInput) SetResourceType(v TaggableResourceType) *AddTagsInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -2829,7 +2831,7 @@ type AddTagsOutput struct {
 	ResourceId *string `min:"1" type:"string"`
 
 	// The type of the ML object that was tagged.
-	ResourceType *string `type:"string" enum:"TaggableResourceType"`
+	ResourceType TaggableResourceType `type:"string"`
 }
 
 // String returns the string representation
@@ -2849,8 +2851,8 @@ func (s *AddTagsOutput) SetResourceId(v string) *AddTagsOutput {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *AddTagsOutput) SetResourceType(v string) *AddTagsOutput {
-	s.ResourceType = &v
+func (s *AddTagsOutput) SetResourceType(v TaggableResourceType) *AddTagsOutput {
+	s.ResourceType = v
 	return s
 }
 
@@ -2923,7 +2925,7 @@ type BatchPrediction struct {
 	//    It is not usable.
 	//    * COMPLETED - The batch prediction process completed successfully.
 	//    * DELETED - The BatchPrediction is marked as deleted. It is not usable.
-	Status *string `type:"string" enum:"EntityStatus"`
+	Status EntityStatus `type:"string"`
 
 	// Long integer type that is a 64-bit signed number.
 	TotalRecordCount *int64 `type:"long"`
@@ -3024,8 +3026,8 @@ func (s *BatchPrediction) SetStartedAt(v time.Time) *BatchPrediction {
 }
 
 // SetStatus sets the Status field's value.
-func (s *BatchPrediction) SetStatus(v string) *BatchPrediction {
-	s.Status = &v
+func (s *BatchPrediction) SetStatus(v EntityStatus) *BatchPrediction {
+	s.Status = v
 	return s
 }
 
@@ -3082,24 +3084,28 @@ func (s CreateBatchPredictionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBatchPredictionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateBatchPredictionInput"}
+
 	if s.BatchPredictionDataSourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionDataSourceId"))
 	}
 	if s.BatchPredictionDataSourceId != nil && len(*s.BatchPredictionDataSourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionDataSourceId", 1))
 	}
+
 	if s.BatchPredictionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
 	}
 	if s.BatchPredictionId != nil && len(*s.BatchPredictionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionId", 1))
 	}
+
 	if s.MLModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
+
 	if s.OutputUri == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OutputUri"))
 	}
@@ -3214,15 +3220,18 @@ func (s CreateDataSourceFromRDSInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDataSourceFromRDSInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDataSourceFromRDSInput"}
+
 	if s.DataSourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
+
 	if s.RDSData == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RDSData"))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -3376,15 +3385,18 @@ func (s CreateDataSourceFromRedshiftInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDataSourceFromRedshiftInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDataSourceFromRedshiftInput"}
+
 	if s.DataSourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
+
 	if s.DataSpec == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSpec"))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -3511,12 +3523,14 @@ func (s CreateDataSourceFromS3Input) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDataSourceFromS3Input) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDataSourceFromS3Input"}
+
 	if s.DataSourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
+
 	if s.DataSpec == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSpec"))
 	}
@@ -3624,18 +3638,21 @@ func (s CreateEvaluationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEvaluationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateEvaluationInput"}
+
 	if s.EvaluationDataSourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EvaluationDataSourceId"))
 	}
 	if s.EvaluationDataSourceId != nil && len(*s.EvaluationDataSourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EvaluationDataSourceId", 1))
 	}
+
 	if s.EvaluationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
 	}
 	if s.EvaluationId != nil && len(*s.EvaluationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EvaluationId", 1))
 	}
+
 	if s.MLModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
@@ -3724,7 +3741,7 @@ type CreateMLModelInput struct {
 	// For more information, see the Amazon Machine Learning Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
 	//
 	// MLModelType is a required field
-	MLModelType *string `type:"string" required:"true" enum:"MLModelType"`
+	MLModelType MLModelType `type:"string" required:"true"`
 
 	// A list of the training parameters in the MLModel. The list is implemented
 	// as a map of key-value pairs.
@@ -3795,15 +3812,17 @@ func (s CreateMLModelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMLModelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateMLModelInput"}
+
 	if s.MLModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
-	if s.MLModelType == nil {
+	if len(s.MLModelType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelType"))
 	}
+
 	if s.TrainingDataSourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrainingDataSourceId"))
 	}
@@ -3830,8 +3849,8 @@ func (s *CreateMLModelInput) SetMLModelName(v string) *CreateMLModelInput {
 }
 
 // SetMLModelType sets the MLModelType field's value.
-func (s *CreateMLModelInput) SetMLModelType(v string) *CreateMLModelInput {
-	s.MLModelType = &v
+func (s *CreateMLModelInput) SetMLModelType(v MLModelType) *CreateMLModelInput {
+	s.MLModelType = v
 	return s
 }
 
@@ -3910,6 +3929,7 @@ func (s CreateRealtimeEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRealtimeEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRealtimeEndpointInput"}
+
 	if s.MLModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
@@ -4045,7 +4065,7 @@ type DataSource struct {
 	//    It is not usable.
 	//    * COMPLETED - The creation process completed successfully.
 	//    * DELETED - The DataSource is marked as deleted. It is not usable.
-	Status *string `type:"string" enum:"EntityStatus"`
+	Status EntityStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -4161,8 +4181,8 @@ func (s *DataSource) SetStartedAt(v time.Time) *DataSource {
 }
 
 // SetStatus sets the Status field's value.
-func (s *DataSource) SetStatus(v string) *DataSource {
-	s.Status = &v
+func (s *DataSource) SetStatus(v EntityStatus) *DataSource {
+	s.Status = v
 	return s
 }
 
@@ -4188,6 +4208,7 @@ func (s DeleteBatchPredictionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBatchPredictionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBatchPredictionInput"}
+
 	if s.BatchPredictionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
 	}
@@ -4257,6 +4278,7 @@ func (s DeleteDataSourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDataSourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDataSourceInput"}
+
 	if s.DataSourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
@@ -4323,6 +4345,7 @@ func (s DeleteEvaluationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEvaluationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEvaluationInput"}
+
 	if s.EvaluationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
 	}
@@ -4393,6 +4416,7 @@ func (s DeleteMLModelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMLModelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMLModelInput"}
+
 	if s.MLModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
@@ -4462,6 +4486,7 @@ func (s DeleteRealtimeEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRealtimeEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRealtimeEndpointInput"}
+
 	if s.MLModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
@@ -4528,7 +4553,7 @@ type DeleteTagsInput struct {
 	// The type of the tagged ML object.
 	//
 	// ResourceType is a required field
-	ResourceType *string `type:"string" required:"true" enum:"TaggableResourceType"`
+	ResourceType TaggableResourceType `type:"string" required:"true"`
 
 	// One or more tags to delete.
 	//
@@ -4549,15 +4574,17 @@ func (s DeleteTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -4575,8 +4602,8 @@ func (s *DeleteTagsInput) SetResourceId(v string) *DeleteTagsInput {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *DeleteTagsInput) SetResourceType(v string) *DeleteTagsInput {
-	s.ResourceType = &v
+func (s *DeleteTagsInput) SetResourceType(v TaggableResourceType) *DeleteTagsInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -4594,7 +4621,7 @@ type DeleteTagsOutput struct {
 	ResourceId *string `min:"1" type:"string"`
 
 	// The type of the ML object from which tags were deleted.
-	ResourceType *string `type:"string" enum:"TaggableResourceType"`
+	ResourceType TaggableResourceType `type:"string"`
 }
 
 // String returns the string representation
@@ -4614,8 +4641,8 @@ func (s *DeleteTagsOutput) SetResourceId(v string) *DeleteTagsOutput {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *DeleteTagsOutput) SetResourceType(v string) *DeleteTagsOutput {
-	s.ResourceType = &v
+func (s *DeleteTagsOutput) SetResourceType(v TaggableResourceType) *DeleteTagsOutput {
+	s.ResourceType = v
 	return s
 }
 
@@ -4642,7 +4669,7 @@ type DescribeBatchPredictionsInput struct {
 	//    * DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
 	//    The URL can identify either a file or an Amazon Simple Storage Solution
 	//    (Amazon S3) bucket or directory.
-	FilterVariable *string `type:"string" enum:"BatchPredictionFilterVariable"`
+	FilterVariable BatchPredictionFilterVariable `type:"string"`
 
 	// The greater than or equal to operator. The BatchPrediction results will have
 	// FilterVariable values that are greater than or equal to the value specified
@@ -4692,7 +4719,7 @@ type DescribeBatchPredictionsInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder *string `type:"string" enum:"SortOrder"`
+	SortOrder SortOrder `type:"string"`
 }
 
 // String returns the string representation
@@ -4725,8 +4752,8 @@ func (s *DescribeBatchPredictionsInput) SetEQ(v string) *DescribeBatchPrediction
 }
 
 // SetFilterVariable sets the FilterVariable field's value.
-func (s *DescribeBatchPredictionsInput) SetFilterVariable(v string) *DescribeBatchPredictionsInput {
-	s.FilterVariable = &v
+func (s *DescribeBatchPredictionsInput) SetFilterVariable(v BatchPredictionFilterVariable) *DescribeBatchPredictionsInput {
+	s.FilterVariable = v
 	return s
 }
 
@@ -4779,8 +4806,8 @@ func (s *DescribeBatchPredictionsInput) SetPrefix(v string) *DescribeBatchPredic
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *DescribeBatchPredictionsInput) SetSortOrder(v string) *DescribeBatchPredictionsInput {
-	s.SortOrder = &v
+func (s *DescribeBatchPredictionsInput) SetSortOrder(v SortOrder) *DescribeBatchPredictionsInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -4836,7 +4863,7 @@ type DescribeDataSourcesInput struct {
 	//    Simple Storage Service (Amazon S3) bucket or directory.
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    the DataSource creation.
-	FilterVariable *string `type:"string" enum:"DataSourceFilterVariable"`
+	FilterVariable DataSourceFilterVariable `type:"string"`
 
 	// The greater than or equal to operator. The DataSource results will have FilterVariable
 	// values that are greater than or equal to the value specified with GE.
@@ -4883,7 +4910,7 @@ type DescribeDataSourcesInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder *string `type:"string" enum:"SortOrder"`
+	SortOrder SortOrder `type:"string"`
 }
 
 // String returns the string representation
@@ -4916,8 +4943,8 @@ func (s *DescribeDataSourcesInput) SetEQ(v string) *DescribeDataSourcesInput {
 }
 
 // SetFilterVariable sets the FilterVariable field's value.
-func (s *DescribeDataSourcesInput) SetFilterVariable(v string) *DescribeDataSourcesInput {
-	s.FilterVariable = &v
+func (s *DescribeDataSourcesInput) SetFilterVariable(v DataSourceFilterVariable) *DescribeDataSourcesInput {
+	s.FilterVariable = v
 	return s
 }
 
@@ -4970,8 +4997,8 @@ func (s *DescribeDataSourcesInput) SetPrefix(v string) *DescribeDataSourcesInput
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *DescribeDataSourcesInput) SetSortOrder(v string) *DescribeDataSourcesInput {
-	s.SortOrder = &v
+func (s *DescribeDataSourcesInput) SetSortOrder(v SortOrder) *DescribeDataSourcesInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -5032,7 +5059,7 @@ type DescribeEvaluationsInput struct {
 	//    * DataUri - Sets the search criteria to the data file(s) used in Evaluation.
 	//    The URL can identify either a file or an Amazon Simple Storage Solution
 	//    (Amazon S3) bucket or directory.
-	FilterVariable *string `type:"string" enum:"EvaluationFilterVariable"`
+	FilterVariable EvaluationFilterVariable `type:"string"`
 
 	// The greater than or equal to operator. The Evaluation results will have FilterVariable
 	// values that are greater than or equal to the value specified with GE.
@@ -5079,7 +5106,7 @@ type DescribeEvaluationsInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder *string `type:"string" enum:"SortOrder"`
+	SortOrder SortOrder `type:"string"`
 }
 
 // String returns the string representation
@@ -5112,8 +5139,8 @@ func (s *DescribeEvaluationsInput) SetEQ(v string) *DescribeEvaluationsInput {
 }
 
 // SetFilterVariable sets the FilterVariable field's value.
-func (s *DescribeEvaluationsInput) SetFilterVariable(v string) *DescribeEvaluationsInput {
-	s.FilterVariable = &v
+func (s *DescribeEvaluationsInput) SetFilterVariable(v EvaluationFilterVariable) *DescribeEvaluationsInput {
+	s.FilterVariable = v
 	return s
 }
 
@@ -5166,8 +5193,8 @@ func (s *DescribeEvaluationsInput) SetPrefix(v string) *DescribeEvaluationsInput
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *DescribeEvaluationsInput) SetSortOrder(v string) *DescribeEvaluationsInput {
-	s.SortOrder = &v
+func (s *DescribeEvaluationsInput) SetSortOrder(v SortOrder) *DescribeEvaluationsInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -5231,7 +5258,7 @@ type DescribeMLModelsInput struct {
 	//    * TrainingDataURI - Sets the search criteria to the data file(s) used
 	//    in training a MLModel. The URL can identify either a file or an Amazon
 	//    Simple Storage Service (Amazon S3) bucket or directory.
-	FilterVariable *string `type:"string" enum:"MLModelFilterVariable"`
+	FilterVariable MLModelFilterVariable `type:"string"`
 
 	// The greater than or equal to operator. The MLModel results will have FilterVariable
 	// values that are greater than or equal to the value specified with GE.
@@ -5279,7 +5306,7 @@ type DescribeMLModelsInput struct {
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
 	// Results are sorted by FilterVariable.
-	SortOrder *string `type:"string" enum:"SortOrder"`
+	SortOrder SortOrder `type:"string"`
 }
 
 // String returns the string representation
@@ -5312,8 +5339,8 @@ func (s *DescribeMLModelsInput) SetEQ(v string) *DescribeMLModelsInput {
 }
 
 // SetFilterVariable sets the FilterVariable field's value.
-func (s *DescribeMLModelsInput) SetFilterVariable(v string) *DescribeMLModelsInput {
-	s.FilterVariable = &v
+func (s *DescribeMLModelsInput) SetFilterVariable(v MLModelFilterVariable) *DescribeMLModelsInput {
+	s.FilterVariable = v
 	return s
 }
 
@@ -5366,8 +5393,8 @@ func (s *DescribeMLModelsInput) SetPrefix(v string) *DescribeMLModelsInput {
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *DescribeMLModelsInput) SetSortOrder(v string) *DescribeMLModelsInput {
-	s.SortOrder = &v
+func (s *DescribeMLModelsInput) SetSortOrder(v SortOrder) *DescribeMLModelsInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -5417,7 +5444,7 @@ type DescribeTagsInput struct {
 	// The type of the ML object.
 	//
 	// ResourceType is a required field
-	ResourceType *string `type:"string" required:"true" enum:"TaggableResourceType"`
+	ResourceType TaggableResourceType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5433,13 +5460,14 @@ func (s DescribeTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
@@ -5456,8 +5484,8 @@ func (s *DescribeTagsInput) SetResourceId(v string) *DescribeTagsInput {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *DescribeTagsInput) SetResourceType(v string) *DescribeTagsInput {
-	s.ResourceType = &v
+func (s *DescribeTagsInput) SetResourceType(v TaggableResourceType) *DescribeTagsInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -5469,7 +5497,7 @@ type DescribeTagsOutput struct {
 	ResourceId *string `min:"1" type:"string"`
 
 	// The type of the tagged ML object.
-	ResourceType *string `type:"string" enum:"TaggableResourceType"`
+	ResourceType TaggableResourceType `type:"string"`
 
 	// A list of tags associated with the ML object.
 	Tags []*Tag `type:"list"`
@@ -5492,8 +5520,8 @@ func (s *DescribeTagsOutput) SetResourceId(v string) *DescribeTagsOutput {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *DescribeTagsOutput) SetResourceType(v string) *DescribeTagsOutput {
-	s.ResourceType = &v
+func (s *DescribeTagsOutput) SetResourceType(v TaggableResourceType) *DescribeTagsOutput {
+	s.ResourceType = v
 	return s
 }
 
@@ -5579,7 +5607,7 @@ type Evaluation struct {
 	//    It is not usable.
 	//    * COMPLETED - The evaluation process completed successfully.
 	//    * DELETED - The Evaluation is marked as deleted. It is not usable.
-	Status *string `type:"string" enum:"EntityStatus"`
+	Status EntityStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -5671,8 +5699,8 @@ func (s *Evaluation) SetStartedAt(v time.Time) *Evaluation {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Evaluation) SetStatus(v string) *Evaluation {
-	s.Status = &v
+func (s *Evaluation) SetStatus(v EntityStatus) *Evaluation {
+	s.Status = v
 	return s
 }
 
@@ -5698,6 +5726,7 @@ func (s GetBatchPredictionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBatchPredictionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBatchPredictionInput"}
+
 	if s.BatchPredictionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
 	}
@@ -5792,7 +5821,7 @@ type GetBatchPredictionOutput struct {
 	//    It is not usable.
 	//    * COMPLETED - The batch prediction process completed successfully.
 	//    * DELETED - The BatchPrediction is marked as deleted. It is not usable.
-	Status *string `type:"string" enum:"EntityStatus"`
+	Status EntityStatus `type:"string"`
 
 	// The number of total records that Amazon Machine Learning saw while processing
 	// the BatchPrediction.
@@ -5900,8 +5929,8 @@ func (s *GetBatchPredictionOutput) SetStartedAt(v time.Time) *GetBatchPrediction
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetBatchPredictionOutput) SetStatus(v string) *GetBatchPredictionOutput {
-	s.Status = &v
+func (s *GetBatchPredictionOutput) SetStatus(v EntityStatus) *GetBatchPredictionOutput {
+	s.Status = v
 	return s
 }
 
@@ -5940,6 +5969,7 @@ func (s GetDataSourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDataSourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDataSourceInput"}
+
 	if s.DataSourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
@@ -6053,7 +6083,7 @@ type GetDataSourceOutput struct {
 	//    It is not usable.
 	//    * COMPLETED - The creation process completed successfully.
 	//    * DELETED - The DataSource is marked as deleted. It is not usable.
-	Status *string `type:"string" enum:"EntityStatus"`
+	Status EntityStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -6181,8 +6211,8 @@ func (s *GetDataSourceOutput) SetStartedAt(v time.Time) *GetDataSourceOutput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetDataSourceOutput) SetStatus(v string) *GetDataSourceOutput {
-	s.Status = &v
+func (s *GetDataSourceOutput) SetStatus(v EntityStatus) *GetDataSourceOutput {
+	s.Status = v
 	return s
 }
 
@@ -6209,6 +6239,7 @@ func (s GetEvaluationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEvaluationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetEvaluationInput"}
+
 	if s.EvaluationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
 	}
@@ -6309,7 +6340,7 @@ type GetEvaluationOutput struct {
 	//    It is not usable.
 	//    * COMPLETED - The evaluation process completed successfully.
 	//    * DELETED - The Evaluation is marked as deleted. It is not usable.
-	Status *string `type:"string" enum:"EntityStatus"`
+	Status EntityStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -6407,8 +6438,8 @@ func (s *GetEvaluationOutput) SetStartedAt(v time.Time) *GetEvaluationOutput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetEvaluationOutput) SetStatus(v string) *GetEvaluationOutput {
-	s.Status = &v
+func (s *GetEvaluationOutput) SetStatus(v EntityStatus) *GetEvaluationOutput {
+	s.Status = v
 	return s
 }
 
@@ -6441,6 +6472,7 @@ func (s GetMLModelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMLModelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMLModelInput"}
+
 	if s.MLModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
@@ -6514,7 +6546,7 @@ type GetMLModelOutput struct {
 	//    an e-commerce website?"
 	//    * MULTICLASS -- Produces one of several possible results. For example,
 	//    "Is this a HIGH, LOW or MEDIUM risk trade?"
-	MLModelType *string `type:"string" enum:"MLModelType"`
+	MLModelType MLModelType `type:"string"`
 
 	// A description of the most recent details about accessing the MLModel.
 	Message *string `type:"string"`
@@ -6563,7 +6595,7 @@ type GetMLModelOutput struct {
 	//
 	//    * COMPLETED - The request completed successfully.
 	//    * DELETED - The MLModel is marked as deleted. It isn't usable.
-	Status *string `type:"string" enum:"EntityStatus"`
+	Status EntityStatus `type:"string"`
 
 	// The ID of the training DataSource.
 	TrainingDataSourceId *string `min:"1" type:"string"`
@@ -6674,8 +6706,8 @@ func (s *GetMLModelOutput) SetMLModelId(v string) *GetMLModelOutput {
 }
 
 // SetMLModelType sets the MLModelType field's value.
-func (s *GetMLModelOutput) SetMLModelType(v string) *GetMLModelOutput {
-	s.MLModelType = &v
+func (s *GetMLModelOutput) SetMLModelType(v MLModelType) *GetMLModelOutput {
+	s.MLModelType = v
 	return s
 }
 
@@ -6728,8 +6760,8 @@ func (s *GetMLModelOutput) SetStartedAt(v time.Time) *GetMLModelOutput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetMLModelOutput) SetStatus(v string) *GetMLModelOutput {
-	s.Status = &v
+func (s *GetMLModelOutput) SetStatus(v EntityStatus) *GetMLModelOutput {
+	s.Status = v
 	return s
 }
 
@@ -6756,7 +6788,7 @@ type MLModel struct {
 	//
 	//    * SGD -- Stochastic gradient descent. The goal of SGD is to minimize the
 	//    gradient of the loss function.
-	Algorithm *string `type:"string" enum:"Algorithm"`
+	Algorithm Algorithm `type:"string"`
 
 	// Long integer type that is a 64-bit signed number.
 	ComputeTime *int64 `type:"long"`
@@ -6794,7 +6826,7 @@ type MLModel struct {
 	//    a child-friendly web site?".
 	//    * MULTICLASS - Produces one of several possible results. For example,
 	//    "Is this a HIGH-, LOW-, or MEDIUM-risk trade?".
-	MLModelType *string `type:"string" enum:"MLModelType"`
+	MLModelType MLModelType `type:"string"`
 
 	// A description of the most recent details about accessing the MLModel.
 	Message *string `type:"string"`
@@ -6824,7 +6856,7 @@ type MLModel struct {
 	//    The model isn't usable.
 	//    * COMPLETED - The creation process completed successfully.
 	//    * DELETED - The MLModel is marked as deleted. It isn't usable.
-	Status *string `type:"string" enum:"EntityStatus"`
+	Status EntityStatus `type:"string"`
 
 	// The ID of the training DataSource. The CreateMLModel operation uses the TrainingDataSourceId.
 	TrainingDataSourceId *string `min:"1" type:"string"`
@@ -6881,8 +6913,8 @@ func (s MLModel) GoString() string {
 }
 
 // SetAlgorithm sets the Algorithm field's value.
-func (s *MLModel) SetAlgorithm(v string) *MLModel {
-	s.Algorithm = &v
+func (s *MLModel) SetAlgorithm(v Algorithm) *MLModel {
+	s.Algorithm = v
 	return s
 }
 
@@ -6935,8 +6967,8 @@ func (s *MLModel) SetMLModelId(v string) *MLModel {
 }
 
 // SetMLModelType sets the MLModelType field's value.
-func (s *MLModel) SetMLModelType(v string) *MLModel {
-	s.MLModelType = &v
+func (s *MLModel) SetMLModelType(v MLModelType) *MLModel {
+	s.MLModelType = v
 	return s
 }
 
@@ -6977,8 +7009,8 @@ func (s *MLModel) SetStartedAt(v time.Time) *MLModel {
 }
 
 // SetStatus sets the Status field's value.
-func (s *MLModel) SetStatus(v string) *MLModel {
-	s.Status = &v
+func (s *MLModel) SetStatus(v EntityStatus) *MLModel {
+	s.Status = v
 	return s
 }
 
@@ -7061,15 +7093,18 @@ func (s PredictInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PredictInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PredictInput"}
+
 	if s.MLModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
+
 	if s.PredictEndpoint == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PredictEndpoint"))
 	}
+
 	if s.Record == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Record"))
 	}
@@ -7384,36 +7419,44 @@ func (s RDSDataSpec) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RDSDataSpec) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RDSDataSpec"}
+
 	if s.DatabaseCredentials == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseCredentials"))
 	}
+
 	if s.DatabaseInformation == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseInformation"))
 	}
+
 	if s.ResourceRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceRole"))
 	}
 	if s.ResourceRole != nil && len(*s.ResourceRole) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceRole", 1))
 	}
+
 	if s.S3StagingLocation == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3StagingLocation"))
 	}
+
 	if s.SecurityGroupIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
 	}
+
 	if s.SelectSqlQuery == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SelectSqlQuery"))
 	}
 	if s.SelectSqlQuery != nil && len(*s.SelectSqlQuery) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SelectSqlQuery", 1))
 	}
+
 	if s.ServiceRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceRole"))
 	}
 	if s.ServiceRole != nil && len(*s.ServiceRole) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ServiceRole", 1))
 	}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
@@ -7531,12 +7574,14 @@ func (s RDSDatabase) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RDSDatabase) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RDSDatabase"}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.InstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIdentifier"))
 	}
@@ -7594,12 +7639,14 @@ func (s RDSDatabaseCredentials) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RDSDatabaseCredentials) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RDSDatabaseCredentials"}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 8 {
 		invalidParams.Add(aws.NewErrParamMinLen("Password", 8))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -7719,7 +7766,7 @@ type RealtimeEndpointInfo struct {
 	//    * NONE - Endpoint does not exist or was previously deleted.
 	//    * READY - Endpoint is ready to be used for real-time predictions.
 	//    * UPDATING - Updating/creating the endpoint.
-	EndpointStatus *string `type:"string" enum:"RealtimeEndpointStatus"`
+	EndpointStatus RealtimeEndpointStatus `type:"string"`
 
 	// The URI that specifies where to send real-time prediction requests for the
 	// MLModel.
@@ -7750,8 +7797,8 @@ func (s *RealtimeEndpointInfo) SetCreatedAt(v time.Time) *RealtimeEndpointInfo {
 }
 
 // SetEndpointStatus sets the EndpointStatus field's value.
-func (s *RealtimeEndpointInfo) SetEndpointStatus(v string) *RealtimeEndpointInfo {
-	s.EndpointStatus = &v
+func (s *RealtimeEndpointInfo) SetEndpointStatus(v RealtimeEndpointStatus) *RealtimeEndpointInfo {
+	s.EndpointStatus = v
 	return s
 }
 
@@ -7926,15 +7973,19 @@ func (s RedshiftDataSpec) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedshiftDataSpec) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RedshiftDataSpec"}
+
 	if s.DatabaseCredentials == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseCredentials"))
 	}
+
 	if s.DatabaseInformation == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseInformation"))
 	}
+
 	if s.S3StagingLocation == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3StagingLocation"))
 	}
+
 	if s.SelectSqlQuery == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SelectSqlQuery"))
 	}
@@ -8029,12 +8080,14 @@ func (s RedshiftDatabase) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedshiftDatabase) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RedshiftDatabase"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if s.ClusterIdentifier != nil && len(*s.ClusterIdentifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClusterIdentifier", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
@@ -8095,12 +8148,14 @@ func (s RedshiftDatabaseCredentials) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedshiftDatabaseCredentials) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RedshiftDatabaseCredentials"}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 8 {
 		invalidParams.Add(aws.NewErrParamMinLen("Password", 8))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -8317,6 +8372,7 @@ func (s S3DataSpec) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3DataSpec) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "S3DataSpec"}
+
 	if s.DataLocationS3 == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataLocationS3"))
 	}
@@ -8426,12 +8482,14 @@ func (s UpdateBatchPredictionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBatchPredictionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateBatchPredictionInput"}
+
 	if s.BatchPredictionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
 	}
 	if s.BatchPredictionId != nil && len(*s.BatchPredictionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionId", 1))
 	}
+
 	if s.BatchPredictionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionName"))
 	}
@@ -8509,12 +8567,14 @@ func (s UpdateDataSourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDataSourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDataSourceInput"}
+
 	if s.DataSourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
+
 	if s.DataSourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSourceName"))
 	}
@@ -8592,12 +8652,14 @@ func (s UpdateEvaluationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEvaluationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateEvaluationInput"}
+
 	if s.EvaluationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
 	}
 	if s.EvaluationId != nil && len(*s.EvaluationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EvaluationId", 1))
 	}
+
 	if s.EvaluationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EvaluationName"))
 	}
@@ -8680,6 +8742,7 @@ func (s UpdateMLModelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMLModelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateMLModelInput"}
+
 	if s.MLModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
@@ -8743,9 +8806,11 @@ func (s *UpdateMLModelOutput) SetMLModelId(v string) *UpdateMLModelOutput {
 //
 //    * SGD - Stochastic Gradient Descent.
 //    * RandomForest - Random forest of decision trees.
+type Algorithm string
+
+// Enum values for Algorithm
 const (
-	// AlgorithmSgd is a Algorithm enum value
-	AlgorithmSgd = "sgd"
+	AlgorithmSgd Algorithm = "sgd"
 )
 
 // A list of the variables to use in searching or filtering BatchPrediction.
@@ -8764,30 +8829,18 @@ const (
 //    * DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
 //    The URL can identify either a file or an Amazon Simple Storage Service
 //    (Amazon S3) bucket or directory.
+type BatchPredictionFilterVariable string
+
+// Enum values for BatchPredictionFilterVariable
 const (
-	// BatchPredictionFilterVariableCreatedAt is a BatchPredictionFilterVariable enum value
-	BatchPredictionFilterVariableCreatedAt = "CreatedAt"
-
-	// BatchPredictionFilterVariableLastUpdatedAt is a BatchPredictionFilterVariable enum value
-	BatchPredictionFilterVariableLastUpdatedAt = "LastUpdatedAt"
-
-	// BatchPredictionFilterVariableStatus is a BatchPredictionFilterVariable enum value
-	BatchPredictionFilterVariableStatus = "Status"
-
-	// BatchPredictionFilterVariableName is a BatchPredictionFilterVariable enum value
-	BatchPredictionFilterVariableName = "Name"
-
-	// BatchPredictionFilterVariableIamuser is a BatchPredictionFilterVariable enum value
-	BatchPredictionFilterVariableIamuser = "IAMUser"
-
-	// BatchPredictionFilterVariableMlmodelId is a BatchPredictionFilterVariable enum value
-	BatchPredictionFilterVariableMlmodelId = "MLModelId"
-
-	// BatchPredictionFilterVariableDataSourceId is a BatchPredictionFilterVariable enum value
-	BatchPredictionFilterVariableDataSourceId = "DataSourceId"
-
-	// BatchPredictionFilterVariableDataUri is a BatchPredictionFilterVariable enum value
-	BatchPredictionFilterVariableDataUri = "DataURI"
+	BatchPredictionFilterVariableCreatedAt     BatchPredictionFilterVariable = "CreatedAt"
+	BatchPredictionFilterVariableLastUpdatedAt BatchPredictionFilterVariable = "LastUpdatedAt"
+	BatchPredictionFilterVariableStatus        BatchPredictionFilterVariable = "Status"
+	BatchPredictionFilterVariableName          BatchPredictionFilterVariable = "Name"
+	BatchPredictionFilterVariableIamuser       BatchPredictionFilterVariable = "IAMUser"
+	BatchPredictionFilterVariableMlmodelId     BatchPredictionFilterVariable = "MLModelId"
+	BatchPredictionFilterVariableDataSourceId  BatchPredictionFilterVariable = "DataSourceId"
+	BatchPredictionFilterVariableDataUri       BatchPredictionFilterVariable = "DataURI"
 )
 
 // A list of the variables to use in searching or filtering DataSource.
@@ -8801,33 +8854,25 @@ const (
 //    * IAMUser - Sets the search criteria to the user account that invoked
 //    the DataSource creation.
 // NoteThe variable names should match the variable names in the DataSource.
+type DataSourceFilterVariable string
+
+// Enum values for DataSourceFilterVariable
 const (
-	// DataSourceFilterVariableCreatedAt is a DataSourceFilterVariable enum value
-	DataSourceFilterVariableCreatedAt = "CreatedAt"
-
-	// DataSourceFilterVariableLastUpdatedAt is a DataSourceFilterVariable enum value
-	DataSourceFilterVariableLastUpdatedAt = "LastUpdatedAt"
-
-	// DataSourceFilterVariableStatus is a DataSourceFilterVariable enum value
-	DataSourceFilterVariableStatus = "Status"
-
-	// DataSourceFilterVariableName is a DataSourceFilterVariable enum value
-	DataSourceFilterVariableName = "Name"
-
-	// DataSourceFilterVariableDataLocationS3 is a DataSourceFilterVariable enum value
-	DataSourceFilterVariableDataLocationS3 = "DataLocationS3"
-
-	// DataSourceFilterVariableIamuser is a DataSourceFilterVariable enum value
-	DataSourceFilterVariableIamuser = "IAMUser"
+	DataSourceFilterVariableCreatedAt      DataSourceFilterVariable = "CreatedAt"
+	DataSourceFilterVariableLastUpdatedAt  DataSourceFilterVariable = "LastUpdatedAt"
+	DataSourceFilterVariableStatus         DataSourceFilterVariable = "Status"
+	DataSourceFilterVariableName           DataSourceFilterVariable = "Name"
+	DataSourceFilterVariableDataLocationS3 DataSourceFilterVariable = "DataLocationS3"
+	DataSourceFilterVariableIamuser        DataSourceFilterVariable = "IAMUser"
 )
 
 // Contains the key values of DetailsMap: PredictiveModelType- Indicates the type of the MLModel. Algorithm- Indicates the algorithm that was used for the MLModel
-const (
-	// DetailsAttributesPredictiveModelType is a DetailsAttributes enum value
-	DetailsAttributesPredictiveModelType = "PredictiveModelType"
+type DetailsAttributes string
 
-	// DetailsAttributesAlgorithm is a DetailsAttributes enum value
-	DetailsAttributesAlgorithm = "Algorithm"
+// Enum values for DetailsAttributes
+const (
+	DetailsAttributesPredictiveModelType DetailsAttributes = "PredictiveModelType"
+	DetailsAttributesAlgorithm           DetailsAttributes = "Algorithm"
 )
 
 // Object status with the following possible values:
@@ -8837,21 +8882,15 @@ const (
 //    * FAILED
 //    * COMPLETED
 //    * DELETED
+type EntityStatus string
+
+// Enum values for EntityStatus
 const (
-	// EntityStatusPending is a EntityStatus enum value
-	EntityStatusPending = "PENDING"
-
-	// EntityStatusInprogress is a EntityStatus enum value
-	EntityStatusInprogress = "INPROGRESS"
-
-	// EntityStatusFailed is a EntityStatus enum value
-	EntityStatusFailed = "FAILED"
-
-	// EntityStatusCompleted is a EntityStatus enum value
-	EntityStatusCompleted = "COMPLETED"
-
-	// EntityStatusDeleted is a EntityStatus enum value
-	EntityStatusDeleted = "DELETED"
+	EntityStatusPending    EntityStatus = "PENDING"
+	EntityStatusInprogress EntityStatus = "INPROGRESS"
+	EntityStatusFailed     EntityStatus = "FAILED"
+	EntityStatusCompleted  EntityStatus = "COMPLETED"
+	EntityStatusDeleted    EntityStatus = "DELETED"
 )
 
 // A list of the variables to use in searching or filtering Evaluation.
@@ -8868,87 +8907,53 @@ const (
 //    * DataUri - Sets the search criteria to the data file(s) used in evaluation.
 //    The URL can identify either a file or an Amazon Simple Storage Service
 //    (Amazon S3) bucket or directory.
+type EvaluationFilterVariable string
+
+// Enum values for EvaluationFilterVariable
 const (
-	// EvaluationFilterVariableCreatedAt is a EvaluationFilterVariable enum value
-	EvaluationFilterVariableCreatedAt = "CreatedAt"
-
-	// EvaluationFilterVariableLastUpdatedAt is a EvaluationFilterVariable enum value
-	EvaluationFilterVariableLastUpdatedAt = "LastUpdatedAt"
-
-	// EvaluationFilterVariableStatus is a EvaluationFilterVariable enum value
-	EvaluationFilterVariableStatus = "Status"
-
-	// EvaluationFilterVariableName is a EvaluationFilterVariable enum value
-	EvaluationFilterVariableName = "Name"
-
-	// EvaluationFilterVariableIamuser is a EvaluationFilterVariable enum value
-	EvaluationFilterVariableIamuser = "IAMUser"
-
-	// EvaluationFilterVariableMlmodelId is a EvaluationFilterVariable enum value
-	EvaluationFilterVariableMlmodelId = "MLModelId"
-
-	// EvaluationFilterVariableDataSourceId is a EvaluationFilterVariable enum value
-	EvaluationFilterVariableDataSourceId = "DataSourceId"
-
-	// EvaluationFilterVariableDataUri is a EvaluationFilterVariable enum value
-	EvaluationFilterVariableDataUri = "DataURI"
+	EvaluationFilterVariableCreatedAt     EvaluationFilterVariable = "CreatedAt"
+	EvaluationFilterVariableLastUpdatedAt EvaluationFilterVariable = "LastUpdatedAt"
+	EvaluationFilterVariableStatus        EvaluationFilterVariable = "Status"
+	EvaluationFilterVariableName          EvaluationFilterVariable = "Name"
+	EvaluationFilterVariableIamuser       EvaluationFilterVariable = "IAMUser"
+	EvaluationFilterVariableMlmodelId     EvaluationFilterVariable = "MLModelId"
+	EvaluationFilterVariableDataSourceId  EvaluationFilterVariable = "DataSourceId"
+	EvaluationFilterVariableDataUri       EvaluationFilterVariable = "DataURI"
 )
 
+type MLModelFilterVariable string
+
+// Enum values for MLModelFilterVariable
 const (
-	// MLModelFilterVariableCreatedAt is a MLModelFilterVariable enum value
-	MLModelFilterVariableCreatedAt = "CreatedAt"
-
-	// MLModelFilterVariableLastUpdatedAt is a MLModelFilterVariable enum value
-	MLModelFilterVariableLastUpdatedAt = "LastUpdatedAt"
-
-	// MLModelFilterVariableStatus is a MLModelFilterVariable enum value
-	MLModelFilterVariableStatus = "Status"
-
-	// MLModelFilterVariableName is a MLModelFilterVariable enum value
-	MLModelFilterVariableName = "Name"
-
-	// MLModelFilterVariableIamuser is a MLModelFilterVariable enum value
-	MLModelFilterVariableIamuser = "IAMUser"
-
-	// MLModelFilterVariableTrainingDataSourceId is a MLModelFilterVariable enum value
-	MLModelFilterVariableTrainingDataSourceId = "TrainingDataSourceId"
-
-	// MLModelFilterVariableRealtimeEndpointStatus is a MLModelFilterVariable enum value
-	MLModelFilterVariableRealtimeEndpointStatus = "RealtimeEndpointStatus"
-
-	// MLModelFilterVariableMlmodelType is a MLModelFilterVariable enum value
-	MLModelFilterVariableMlmodelType = "MLModelType"
-
-	// MLModelFilterVariableAlgorithm is a MLModelFilterVariable enum value
-	MLModelFilterVariableAlgorithm = "Algorithm"
-
-	// MLModelFilterVariableTrainingDataUri is a MLModelFilterVariable enum value
-	MLModelFilterVariableTrainingDataUri = "TrainingDataURI"
+	MLModelFilterVariableCreatedAt              MLModelFilterVariable = "CreatedAt"
+	MLModelFilterVariableLastUpdatedAt          MLModelFilterVariable = "LastUpdatedAt"
+	MLModelFilterVariableStatus                 MLModelFilterVariable = "Status"
+	MLModelFilterVariableName                   MLModelFilterVariable = "Name"
+	MLModelFilterVariableIamuser                MLModelFilterVariable = "IAMUser"
+	MLModelFilterVariableTrainingDataSourceId   MLModelFilterVariable = "TrainingDataSourceId"
+	MLModelFilterVariableRealtimeEndpointStatus MLModelFilterVariable = "RealtimeEndpointStatus"
+	MLModelFilterVariableMlmodelType            MLModelFilterVariable = "MLModelType"
+	MLModelFilterVariableAlgorithm              MLModelFilterVariable = "Algorithm"
+	MLModelFilterVariableTrainingDataUri        MLModelFilterVariable = "TrainingDataURI"
 )
 
+type MLModelType string
+
+// Enum values for MLModelType
 const (
-	// MLModelTypeRegression is a MLModelType enum value
-	MLModelTypeRegression = "REGRESSION"
-
-	// MLModelTypeBinary is a MLModelType enum value
-	MLModelTypeBinary = "BINARY"
-
-	// MLModelTypeMulticlass is a MLModelType enum value
-	MLModelTypeMulticlass = "MULTICLASS"
+	MLModelTypeRegression MLModelType = "REGRESSION"
+	MLModelTypeBinary     MLModelType = "BINARY"
+	MLModelTypeMulticlass MLModelType = "MULTICLASS"
 )
 
+type RealtimeEndpointStatus string
+
+// Enum values for RealtimeEndpointStatus
 const (
-	// RealtimeEndpointStatusNone is a RealtimeEndpointStatus enum value
-	RealtimeEndpointStatusNone = "NONE"
-
-	// RealtimeEndpointStatusReady is a RealtimeEndpointStatus enum value
-	RealtimeEndpointStatusReady = "READY"
-
-	// RealtimeEndpointStatusUpdating is a RealtimeEndpointStatus enum value
-	RealtimeEndpointStatusUpdating = "UPDATING"
-
-	// RealtimeEndpointStatusFailed is a RealtimeEndpointStatus enum value
-	RealtimeEndpointStatusFailed = "FAILED"
+	RealtimeEndpointStatusNone     RealtimeEndpointStatus = "NONE"
+	RealtimeEndpointStatusReady    RealtimeEndpointStatus = "READY"
+	RealtimeEndpointStatusUpdating RealtimeEndpointStatus = "UPDATING"
+	RealtimeEndpointStatusFailed   RealtimeEndpointStatus = "FAILED"
 )
 
 // The sort order specified in a listing condition. Possible values include
@@ -8956,24 +8961,20 @@ const (
 //
 //    * asc - Present the information in ascending order (from A-Z).
 //    * dsc - Present the information in descending order (from Z-A).
-const (
-	// SortOrderAsc is a SortOrder enum value
-	SortOrderAsc = "asc"
+type SortOrder string
 
-	// SortOrderDsc is a SortOrder enum value
-	SortOrderDsc = "dsc"
+// Enum values for SortOrder
+const (
+	SortOrderAsc SortOrder = "asc"
+	SortOrderDsc SortOrder = "dsc"
 )
 
+type TaggableResourceType string
+
+// Enum values for TaggableResourceType
 const (
-	// TaggableResourceTypeBatchPrediction is a TaggableResourceType enum value
-	TaggableResourceTypeBatchPrediction = "BatchPrediction"
-
-	// TaggableResourceTypeDataSource is a TaggableResourceType enum value
-	TaggableResourceTypeDataSource = "DataSource"
-
-	// TaggableResourceTypeEvaluation is a TaggableResourceType enum value
-	TaggableResourceTypeEvaluation = "Evaluation"
-
-	// TaggableResourceTypeMlmodel is a TaggableResourceType enum value
-	TaggableResourceTypeMlmodel = "MLModel"
+	TaggableResourceTypeBatchPrediction TaggableResourceType = "BatchPrediction"
+	TaggableResourceTypeDataSource      TaggableResourceType = "DataSource"
+	TaggableResourceTypeEvaluation      TaggableResourceType = "Evaluation"
+	TaggableResourceTypeMlmodel         TaggableResourceType = "MLModel"
 )

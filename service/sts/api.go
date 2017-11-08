@@ -1171,12 +1171,14 @@ func (s *AssumeRoleInput) Validate() error {
 	if s.Policy != nil && len(*s.Policy) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
+
 	if s.RoleSessionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleSessionName"))
 	}
@@ -1378,18 +1380,21 @@ func (s *AssumeRoleWithSAMLInput) Validate() error {
 	if s.Policy != nil && len(*s.Policy) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
+
 	if s.PrincipalArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrincipalArn"))
 	}
 	if s.PrincipalArn != nil && len(*s.PrincipalArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PrincipalArn", 20))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
+
 	if s.SAMLAssertion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SAMLAssertion"))
 	}
@@ -1647,18 +1652,21 @@ func (s *AssumeRoleWithWebIdentityInput) Validate() error {
 	if s.ProviderId != nil && len(*s.ProviderId) < 4 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProviderId", 4))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
+
 	if s.RoleSessionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleSessionName"))
 	}
 	if s.RoleSessionName != nil && len(*s.RoleSessionName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleSessionName", 2))
 	}
+
 	if s.WebIdentityToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WebIdentityToken"))
 	}
@@ -1928,6 +1936,7 @@ func (s DecodeAuthorizationMessageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DecodeAuthorizationMessageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DecodeAuthorizationMessageInput"}
+
 	if s.EncodedMessage == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EncodedMessage"))
 	}
@@ -2152,6 +2161,7 @@ func (s *GetFederationTokenInput) Validate() error {
 	if s.DurationSeconds != nil && *s.DurationSeconds < 900 {
 		invalidParams.Add(aws.NewErrParamMinValue("DurationSeconds", 900))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}

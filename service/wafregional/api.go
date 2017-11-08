@@ -6130,12 +6130,14 @@ func (s AssociateWebACLInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateWebACLInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateWebACLInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
+
 	if s.WebACLId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
@@ -6200,6 +6202,7 @@ func (s DisassociateWebACLInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateWebACLInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateWebACLInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -6257,6 +6260,7 @@ func (s GetWebACLForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetWebACLForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetWebACLForResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -6325,6 +6329,7 @@ func (s ListResourcesForWebACLInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourcesForWebACLInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesForWebACLInput"}
+
 	if s.WebACLId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
@@ -6370,190 +6375,134 @@ func (s *ListResourcesForWebACLOutput) SetResourceArns(v []*string) *ListResourc
 	return s
 }
 
-const (
-	// ChangeActionInsert is a ChangeAction enum value
-	ChangeActionInsert = "INSERT"
+type ChangeAction string
 
-	// ChangeActionDelete is a ChangeAction enum value
-	ChangeActionDelete = "DELETE"
+// Enum values for ChangeAction
+const (
+	ChangeActionInsert ChangeAction = "INSERT"
+	ChangeActionDelete ChangeAction = "DELETE"
 )
 
+type ChangeTokenStatus string
+
+// Enum values for ChangeTokenStatus
 const (
-	// ChangeTokenStatusProvisioned is a ChangeTokenStatus enum value
-	ChangeTokenStatusProvisioned = "PROVISIONED"
-
-	// ChangeTokenStatusPending is a ChangeTokenStatus enum value
-	ChangeTokenStatusPending = "PENDING"
-
-	// ChangeTokenStatusInsync is a ChangeTokenStatus enum value
-	ChangeTokenStatusInsync = "INSYNC"
+	ChangeTokenStatusProvisioned ChangeTokenStatus = "PROVISIONED"
+	ChangeTokenStatusPending     ChangeTokenStatus = "PENDING"
+	ChangeTokenStatusInsync      ChangeTokenStatus = "INSYNC"
 )
 
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
 const (
-	// ComparisonOperatorEq is a ComparisonOperator enum value
-	ComparisonOperatorEq = "EQ"
-
-	// ComparisonOperatorNe is a ComparisonOperator enum value
-	ComparisonOperatorNe = "NE"
-
-	// ComparisonOperatorLe is a ComparisonOperator enum value
-	ComparisonOperatorLe = "LE"
-
-	// ComparisonOperatorLt is a ComparisonOperator enum value
-	ComparisonOperatorLt = "LT"
-
-	// ComparisonOperatorGe is a ComparisonOperator enum value
-	ComparisonOperatorGe = "GE"
-
-	// ComparisonOperatorGt is a ComparisonOperator enum value
-	ComparisonOperatorGt = "GT"
+	ComparisonOperatorEq ComparisonOperator = "EQ"
+	ComparisonOperatorNe ComparisonOperator = "NE"
+	ComparisonOperatorLe ComparisonOperator = "LE"
+	ComparisonOperatorLt ComparisonOperator = "LT"
+	ComparisonOperatorGe ComparisonOperator = "GE"
+	ComparisonOperatorGt ComparisonOperator = "GT"
 )
 
-const (
-	// IPSetDescriptorTypeIpv4 is a IPSetDescriptorType enum value
-	IPSetDescriptorTypeIpv4 = "IPV4"
+type IPSetDescriptorType string
 
-	// IPSetDescriptorTypeIpv6 is a IPSetDescriptorType enum value
-	IPSetDescriptorTypeIpv6 = "IPV6"
+// Enum values for IPSetDescriptorType
+const (
+	IPSetDescriptorTypeIpv4 IPSetDescriptorType = "IPV4"
+	IPSetDescriptorTypeIpv6 IPSetDescriptorType = "IPV6"
 )
 
+type MatchFieldType string
+
+// Enum values for MatchFieldType
 const (
-	// MatchFieldTypeUri is a MatchFieldType enum value
-	MatchFieldTypeUri = "URI"
-
-	// MatchFieldTypeQueryString is a MatchFieldType enum value
-	MatchFieldTypeQueryString = "QUERY_STRING"
-
-	// MatchFieldTypeHeader is a MatchFieldType enum value
-	MatchFieldTypeHeader = "HEADER"
-
-	// MatchFieldTypeMethod is a MatchFieldType enum value
-	MatchFieldTypeMethod = "METHOD"
-
-	// MatchFieldTypeBody is a MatchFieldType enum value
-	MatchFieldTypeBody = "BODY"
+	MatchFieldTypeUri         MatchFieldType = "URI"
+	MatchFieldTypeQueryString MatchFieldType = "QUERY_STRING"
+	MatchFieldTypeHeader      MatchFieldType = "HEADER"
+	MatchFieldTypeMethod      MatchFieldType = "METHOD"
+	MatchFieldTypeBody        MatchFieldType = "BODY"
 )
 
+type ParameterExceptionField string
+
+// Enum values for ParameterExceptionField
 const (
-	// ParameterExceptionFieldChangeAction is a ParameterExceptionField enum value
-	ParameterExceptionFieldChangeAction = "CHANGE_ACTION"
-
-	// ParameterExceptionFieldWafAction is a ParameterExceptionField enum value
-	ParameterExceptionFieldWafAction = "WAF_ACTION"
-
-	// ParameterExceptionFieldPredicateType is a ParameterExceptionField enum value
-	ParameterExceptionFieldPredicateType = "PREDICATE_TYPE"
-
-	// ParameterExceptionFieldIpsetType is a ParameterExceptionField enum value
-	ParameterExceptionFieldIpsetType = "IPSET_TYPE"
-
-	// ParameterExceptionFieldByteMatchFieldType is a ParameterExceptionField enum value
-	ParameterExceptionFieldByteMatchFieldType = "BYTE_MATCH_FIELD_TYPE"
-
-	// ParameterExceptionFieldSqlInjectionMatchFieldType is a ParameterExceptionField enum value
-	ParameterExceptionFieldSqlInjectionMatchFieldType = "SQL_INJECTION_MATCH_FIELD_TYPE"
-
-	// ParameterExceptionFieldByteMatchTextTransformation is a ParameterExceptionField enum value
-	ParameterExceptionFieldByteMatchTextTransformation = "BYTE_MATCH_TEXT_TRANSFORMATION"
-
-	// ParameterExceptionFieldByteMatchPositionalConstraint is a ParameterExceptionField enum value
-	ParameterExceptionFieldByteMatchPositionalConstraint = "BYTE_MATCH_POSITIONAL_CONSTRAINT"
-
-	// ParameterExceptionFieldSizeConstraintComparisonOperator is a ParameterExceptionField enum value
-	ParameterExceptionFieldSizeConstraintComparisonOperator = "SIZE_CONSTRAINT_COMPARISON_OPERATOR"
-
-	// ParameterExceptionFieldRateKey is a ParameterExceptionField enum value
-	ParameterExceptionFieldRateKey = "RATE_KEY"
-
-	// ParameterExceptionFieldRuleType is a ParameterExceptionField enum value
-	ParameterExceptionFieldRuleType = "RULE_TYPE"
-
-	// ParameterExceptionFieldNextMarker is a ParameterExceptionField enum value
-	ParameterExceptionFieldNextMarker = "NEXT_MARKER"
+	ParameterExceptionFieldChangeAction                     ParameterExceptionField = "CHANGE_ACTION"
+	ParameterExceptionFieldWafAction                        ParameterExceptionField = "WAF_ACTION"
+	ParameterExceptionFieldPredicateType                    ParameterExceptionField = "PREDICATE_TYPE"
+	ParameterExceptionFieldIpsetType                        ParameterExceptionField = "IPSET_TYPE"
+	ParameterExceptionFieldByteMatchFieldType               ParameterExceptionField = "BYTE_MATCH_FIELD_TYPE"
+	ParameterExceptionFieldSqlInjectionMatchFieldType       ParameterExceptionField = "SQL_INJECTION_MATCH_FIELD_TYPE"
+	ParameterExceptionFieldByteMatchTextTransformation      ParameterExceptionField = "BYTE_MATCH_TEXT_TRANSFORMATION"
+	ParameterExceptionFieldByteMatchPositionalConstraint    ParameterExceptionField = "BYTE_MATCH_POSITIONAL_CONSTRAINT"
+	ParameterExceptionFieldSizeConstraintComparisonOperator ParameterExceptionField = "SIZE_CONSTRAINT_COMPARISON_OPERATOR"
+	ParameterExceptionFieldRateKey                          ParameterExceptionField = "RATE_KEY"
+	ParameterExceptionFieldRuleType                         ParameterExceptionField = "RULE_TYPE"
+	ParameterExceptionFieldNextMarker                       ParameterExceptionField = "NEXT_MARKER"
 )
 
-const (
-	// ParameterExceptionReasonInvalidOption is a ParameterExceptionReason enum value
-	ParameterExceptionReasonInvalidOption = "INVALID_OPTION"
+type ParameterExceptionReason string
 
-	// ParameterExceptionReasonIllegalCombination is a ParameterExceptionReason enum value
-	ParameterExceptionReasonIllegalCombination = "ILLEGAL_COMBINATION"
+// Enum values for ParameterExceptionReason
+const (
+	ParameterExceptionReasonInvalidOption      ParameterExceptionReason = "INVALID_OPTION"
+	ParameterExceptionReasonIllegalCombination ParameterExceptionReason = "ILLEGAL_COMBINATION"
 )
 
+type PositionalConstraint string
+
+// Enum values for PositionalConstraint
 const (
-	// PositionalConstraintExactly is a PositionalConstraint enum value
-	PositionalConstraintExactly = "EXACTLY"
-
-	// PositionalConstraintStartsWith is a PositionalConstraint enum value
-	PositionalConstraintStartsWith = "STARTS_WITH"
-
-	// PositionalConstraintEndsWith is a PositionalConstraint enum value
-	PositionalConstraintEndsWith = "ENDS_WITH"
-
-	// PositionalConstraintContains is a PositionalConstraint enum value
-	PositionalConstraintContains = "CONTAINS"
-
-	// PositionalConstraintContainsWord is a PositionalConstraint enum value
-	PositionalConstraintContainsWord = "CONTAINS_WORD"
+	PositionalConstraintExactly      PositionalConstraint = "EXACTLY"
+	PositionalConstraintStartsWith   PositionalConstraint = "STARTS_WITH"
+	PositionalConstraintEndsWith     PositionalConstraint = "ENDS_WITH"
+	PositionalConstraintContains     PositionalConstraint = "CONTAINS"
+	PositionalConstraintContainsWord PositionalConstraint = "CONTAINS_WORD"
 )
 
+type PredicateType string
+
+// Enum values for PredicateType
 const (
-	// PredicateTypeIpmatch is a PredicateType enum value
-	PredicateTypeIpmatch = "IPMatch"
-
-	// PredicateTypeByteMatch is a PredicateType enum value
-	PredicateTypeByteMatch = "ByteMatch"
-
-	// PredicateTypeSqlInjectionMatch is a PredicateType enum value
-	PredicateTypeSqlInjectionMatch = "SqlInjectionMatch"
-
-	// PredicateTypeSizeConstraint is a PredicateType enum value
-	PredicateTypeSizeConstraint = "SizeConstraint"
-
-	// PredicateTypeXssMatch is a PredicateType enum value
-	PredicateTypeXssMatch = "XssMatch"
+	PredicateTypeIpmatch           PredicateType = "IPMatch"
+	PredicateTypeByteMatch         PredicateType = "ByteMatch"
+	PredicateTypeSqlInjectionMatch PredicateType = "SqlInjectionMatch"
+	PredicateTypeSizeConstraint    PredicateType = "SizeConstraint"
+	PredicateTypeXssMatch          PredicateType = "XssMatch"
 )
 
+type RateKey string
+
+// Enum values for RateKey
 const (
-	// RateKeyIp is a RateKey enum value
-	RateKeyIp = "IP"
+	RateKeyIp RateKey = "IP"
 )
 
+type TextTransformation string
+
+// Enum values for TextTransformation
 const (
-	// TextTransformationNone is a TextTransformation enum value
-	TextTransformationNone = "NONE"
-
-	// TextTransformationCompressWhiteSpace is a TextTransformation enum value
-	TextTransformationCompressWhiteSpace = "COMPRESS_WHITE_SPACE"
-
-	// TextTransformationHtmlEntityDecode is a TextTransformation enum value
-	TextTransformationHtmlEntityDecode = "HTML_ENTITY_DECODE"
-
-	// TextTransformationLowercase is a TextTransformation enum value
-	TextTransformationLowercase = "LOWERCASE"
-
-	// TextTransformationCmdLine is a TextTransformation enum value
-	TextTransformationCmdLine = "CMD_LINE"
-
-	// TextTransformationUrlDecode is a TextTransformation enum value
-	TextTransformationUrlDecode = "URL_DECODE"
+	TextTransformationNone               TextTransformation = "NONE"
+	TextTransformationCompressWhiteSpace TextTransformation = "COMPRESS_WHITE_SPACE"
+	TextTransformationHtmlEntityDecode   TextTransformation = "HTML_ENTITY_DECODE"
+	TextTransformationLowercase          TextTransformation = "LOWERCASE"
+	TextTransformationCmdLine            TextTransformation = "CMD_LINE"
+	TextTransformationUrlDecode          TextTransformation = "URL_DECODE"
 )
 
+type WafActionType string
+
+// Enum values for WafActionType
 const (
-	// WafActionTypeBlock is a WafActionType enum value
-	WafActionTypeBlock = "BLOCK"
-
-	// WafActionTypeAllow is a WafActionType enum value
-	WafActionTypeAllow = "ALLOW"
-
-	// WafActionTypeCount is a WafActionType enum value
-	WafActionTypeCount = "COUNT"
+	WafActionTypeBlock WafActionType = "BLOCK"
+	WafActionTypeAllow WafActionType = "ALLOW"
+	WafActionTypeCount WafActionType = "COUNT"
 )
 
-const (
-	// WafRuleTypeRegular is a WafRuleType enum value
-	WafRuleTypeRegular = "REGULAR"
+type WafRuleType string
 
-	// WafRuleTypeRateBased is a WafRuleType enum value
-	WafRuleTypeRateBased = "RATE_BASED"
+// Enum values for WafRuleType
+const (
+	WafRuleTypeRegular   WafRuleType = "REGULAR"
+	WafRuleTypeRateBased WafRuleType = "RATE_BASED"
 )

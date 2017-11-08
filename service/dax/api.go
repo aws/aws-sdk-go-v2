@@ -2220,15 +2220,19 @@ func (s CreateClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterInput"}
+
 	if s.ClusterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
+
 	if s.IamRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamRoleArn"))
 	}
+
 	if s.NodeType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NodeType"))
 	}
+
 	if s.ReplicationFactor == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationFactor"))
 	}
@@ -2362,6 +2366,7 @@ func (s CreateParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateParameterGroupInput"}
+
 	if s.ParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
@@ -2439,9 +2444,11 @@ func (s CreateSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSubnetGroupInput"}
+
 	if s.SubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetGroupName"))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
@@ -2528,9 +2535,11 @@ func (s DecreaseReplicationFactorInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DecreaseReplicationFactorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DecreaseReplicationFactorInput"}
+
 	if s.ClusterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
+
 	if s.NewReplicationFactor == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewReplicationFactor"))
 	}
@@ -2613,6 +2622,7 @@ func (s DeleteClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
+
 	if s.ClusterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
@@ -2676,6 +2686,7 @@ func (s DeleteParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteParameterGroupInput"}
+
 	if s.ParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
@@ -2740,6 +2751,7 @@ func (s DeleteSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubnetGroupInput"}
+
 	if s.SubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetGroupName"))
 	}
@@ -2964,7 +2976,7 @@ type DescribeEventsInput struct {
 
 	// The event source to retrieve events for. If no value is specified, all events
 	// are returned.
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format.
@@ -3012,8 +3024,8 @@ func (s *DescribeEventsInput) SetSourceName(v string) *DescribeEventsInput {
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *DescribeEventsInput) SetSourceType(v string) *DescribeEventsInput {
-	s.SourceType = &v
+func (s *DescribeEventsInput) SetSourceType(v SourceType) *DescribeEventsInput {
+	s.SourceType = v
 	return s
 }
 
@@ -3177,6 +3189,7 @@ func (s DescribeParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeParametersInput"}
+
 	if s.ParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
@@ -3382,7 +3395,7 @@ type Event struct {
 
 	// Specifies the origin of this event - a cluster, a parameter group, a node
 	// ID, etc.
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 }
 
 // String returns the string representation
@@ -3414,8 +3427,8 @@ func (s *Event) SetSourceName(v string) *Event {
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *Event) SetSourceType(v string) *Event {
-	s.SourceType = &v
+func (s *Event) SetSourceType(v SourceType) *Event {
+	s.SourceType = v
 	return s
 }
 
@@ -3452,9 +3465,11 @@ func (s IncreaseReplicationFactorInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IncreaseReplicationFactorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IncreaseReplicationFactorInput"}
+
 	if s.ClusterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
+
 	if s.NewReplicationFactor == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewReplicationFactor"))
 	}
@@ -3535,6 +3550,7 @@ func (s ListTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
@@ -3746,7 +3762,7 @@ type Parameter struct {
 	// The conditions under which changes to this parameter can be applied. For
 	// example, requires-reboot indicates that a new value for this parameter will
 	// only take effect if a node is rebooted.
-	ChangeType *string `type:"string" enum:"ChangeType"`
+	ChangeType ChangeType `type:"string"`
 
 	// The data type of the parameter. For example, integer:
 	DataType *string `type:"string"`
@@ -3755,7 +3771,7 @@ type Parameter struct {
 	Description *string `type:"string"`
 
 	// Whether the customer is allowed to modify the parameter.
-	IsModifiable *string `type:"string" enum:"IsModifiable"`
+	IsModifiable IsModifiable `type:"string"`
 
 	// A list of node types, and specific parameter values for each node.
 	NodeTypeSpecificValues []*NodeTypeSpecificValue `type:"list"`
@@ -3765,7 +3781,7 @@ type Parameter struct {
 
 	// Determines whether the parameter can be applied to any nodes, or only nodes
 	// of a particular type.
-	ParameterType *string `type:"string" enum:"ParameterType"`
+	ParameterType ParameterType `type:"string"`
 
 	// The value for the parameter.
 	ParameterValue *string `type:"string"`
@@ -3792,8 +3808,8 @@ func (s *Parameter) SetAllowedValues(v string) *Parameter {
 }
 
 // SetChangeType sets the ChangeType field's value.
-func (s *Parameter) SetChangeType(v string) *Parameter {
-	s.ChangeType = &v
+func (s *Parameter) SetChangeType(v ChangeType) *Parameter {
+	s.ChangeType = v
 	return s
 }
 
@@ -3810,8 +3826,8 @@ func (s *Parameter) SetDescription(v string) *Parameter {
 }
 
 // SetIsModifiable sets the IsModifiable field's value.
-func (s *Parameter) SetIsModifiable(v string) *Parameter {
-	s.IsModifiable = &v
+func (s *Parameter) SetIsModifiable(v IsModifiable) *Parameter {
+	s.IsModifiable = v
 	return s
 }
 
@@ -3828,8 +3844,8 @@ func (s *Parameter) SetParameterName(v string) *Parameter {
 }
 
 // SetParameterType sets the ParameterType field's value.
-func (s *Parameter) SetParameterType(v string) *Parameter {
-	s.ParameterType = &v
+func (s *Parameter) SetParameterType(v ParameterType) *Parameter {
+	s.ParameterType = v
 	return s
 }
 
@@ -3984,9 +4000,11 @@ func (s RebootNodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootNodeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebootNodeInput"}
+
 	if s.ClusterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
+
 	if s.NodeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NodeId"))
 	}
@@ -4230,9 +4248,11 @@ func (s TagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -4308,9 +4328,11 @@ func (s UntagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -4402,6 +4424,7 @@ func (s UpdateClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateClusterInput"}
+
 	if s.ClusterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
@@ -4507,9 +4530,11 @@ func (s UpdateParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateParameterGroupInput"}
+
 	if s.ParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
+
 	if s.ParameterNameValues == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterNameValues"))
 	}
@@ -4585,6 +4610,7 @@ func (s UpdateSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSubnetGroupInput"}
+
 	if s.SubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetGroupName"))
 	}
@@ -4637,40 +4663,36 @@ func (s *UpdateSubnetGroupOutput) SetSubnetGroup(v *SubnetGroup) *UpdateSubnetGr
 	return s
 }
 
-const (
-	// ChangeTypeImmediate is a ChangeType enum value
-	ChangeTypeImmediate = "IMMEDIATE"
+type ChangeType string
 
-	// ChangeTypeRequiresReboot is a ChangeType enum value
-	ChangeTypeRequiresReboot = "REQUIRES_REBOOT"
+// Enum values for ChangeType
+const (
+	ChangeTypeImmediate      ChangeType = "IMMEDIATE"
+	ChangeTypeRequiresReboot ChangeType = "REQUIRES_REBOOT"
 )
 
+type IsModifiable string
+
+// Enum values for IsModifiable
 const (
-	// IsModifiableTrue is a IsModifiable enum value
-	IsModifiableTrue = "TRUE"
-
-	// IsModifiableFalse is a IsModifiable enum value
-	IsModifiableFalse = "FALSE"
-
-	// IsModifiableConditional is a IsModifiable enum value
-	IsModifiableConditional = "CONDITIONAL"
+	IsModifiableTrue        IsModifiable = "TRUE"
+	IsModifiableFalse       IsModifiable = "FALSE"
+	IsModifiableConditional IsModifiable = "CONDITIONAL"
 )
 
-const (
-	// ParameterTypeDefault is a ParameterType enum value
-	ParameterTypeDefault = "DEFAULT"
+type ParameterType string
 
-	// ParameterTypeNodeTypeSpecific is a ParameterType enum value
-	ParameterTypeNodeTypeSpecific = "NODE_TYPE_SPECIFIC"
+// Enum values for ParameterType
+const (
+	ParameterTypeDefault          ParameterType = "DEFAULT"
+	ParameterTypeNodeTypeSpecific ParameterType = "NODE_TYPE_SPECIFIC"
 )
 
+type SourceType string
+
+// Enum values for SourceType
 const (
-	// SourceTypeCluster is a SourceType enum value
-	SourceTypeCluster = "CLUSTER"
-
-	// SourceTypeParameterGroup is a SourceType enum value
-	SourceTypeParameterGroup = "PARAMETER_GROUP"
-
-	// SourceTypeSubnetGroup is a SourceType enum value
-	SourceTypeSubnetGroup = "SUBNET_GROUP"
+	SourceTypeCluster        SourceType = "CLUSTER"
+	SourceTypeParameterGroup SourceType = "PARAMETER_GROUP"
+	SourceTypeSubnetGroup    SourceType = "SUBNET_GROUP"
 )

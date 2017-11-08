@@ -1352,6 +1352,160 @@ func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) SetFoo(v
 	return s
 }
 
+// OutputService10ProtocolTest provides the API operation methods for making requests to
+// . See this package's package overview docs
+// for details on the service.
+//
+// OutputService10ProtocolTest methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type OutputService10ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the OutputService10ProtocolTest client with a config.
+// If additional configuration is needed for the client instance use the optional
+// aws.Config parameter to add your extra config.
+//
+// Example:
+//     // Create a OutputService10ProtocolTest client from just a config.
+//     svc := outputservice10protocoltest.New(myConfig)
+//
+//     // Create a OutputService10ProtocolTest client with additional configuration
+//     svc := outputservice10protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewOutputService10ProtocolTest(config aws.Config) *OutputService10ProtocolTest {
+	var signingName string
+	signingRegion := config.Region
+
+	svc := &OutputService10ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "outputservice10protocoltest",
+				SigningName:   signingName,
+				SigningRegion: signingRegion,
+				APIVersion:    "",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(ec2query.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(ec2query.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(ec2query.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(ec2query.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a OutputService10ProtocolTest operation and runs any
+// custom request initialization.
+func (c *OutputService10ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+const opOutputService10TestCaseOperation1 = "OperationName"
+
+// OutputService10TestCaseOperation1Request generates a "aws.Request" representing the
+// client's request for the OutputService10TestCaseOperation1 operation. The "output" return
+// value will be populated with the request's response once the request complets
+// successfuly.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See OutputService10TestCaseOperation1 for more information on using the OutputService10TestCaseOperation1
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//
+//    // Example sending a request using the OutputService10TestCaseOperation1Request method.
+//    req, resp := client.OutputService10TestCaseOperation1Request(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+func (c *OutputService10ProtocolTest) OutputService10TestCaseOperation1Request(input *OutputService10TestShapeOutputService10TestCaseOperation1Input) (req *aws.Request, output *OutputService10TestShapeOutputService10TestCaseOperation1Output) {
+	op := &aws.Operation{
+		Name:     opOutputService10TestCaseOperation1,
+		HTTPPath: "/",
+	}
+
+	if input == nil {
+		input = &OutputService10TestShapeOutputService10TestCaseOperation1Input{}
+	}
+
+	output = &OutputService10TestShapeOutputService10TestCaseOperation1Output{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// OutputService10TestCaseOperation1 API operation for .
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for 's
+// API operation OutputService10TestCaseOperation1 for usage and error information.
+func (c *OutputService10ProtocolTest) OutputService10TestCaseOperation1(input *OutputService10TestShapeOutputService10TestCaseOperation1Input) (*OutputService10TestShapeOutputService10TestCaseOperation1Output, error) {
+	req, out := c.OutputService10TestCaseOperation1Request(input)
+	return out, req.Send()
+}
+
+// OutputService10TestCaseOperation1WithContext is the same as OutputService10TestCaseOperation1 with the addition of
+// the ability to pass a context and additional request options.
+//
+// See OutputService10TestCaseOperation1 for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *OutputService10ProtocolTest) OutputService10TestCaseOperation1WithContext(ctx aws.Context, input *OutputService10TestShapeOutputService10TestCaseOperation1Input, opts ...aws.Option) (*OutputService10TestShapeOutputService10TestCaseOperation1Output, error) {
+	req, out := c.OutputService10TestCaseOperation1Request(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+type OutputService10TestShapeOutputService10TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+}
+
+type OutputService10TestShapeOutputService10TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	FooEnum OutputService10TestShapeEC2EnumType `type:"string"`
+
+	ListEnums []OutputService10TestShapeEC2EnumType `type:"list"`
+}
+
+// SetFooEnum sets the FooEnum field's value.
+func (s *OutputService10TestShapeOutputService10TestCaseOperation1Output) SetFooEnum(v OutputService10TestShapeEC2EnumType) *OutputService10TestShapeOutputService10TestCaseOperation1Output {
+	s.FooEnum = v
+	return s
+}
+
+// SetListEnums sets the ListEnums field's value.
+func (s *OutputService10TestShapeOutputService10TestCaseOperation1Output) SetListEnums(v []OutputService10TestShapeEC2EnumType) *OutputService10TestShapeOutputService10TestCaseOperation1Output {
+	s.ListEnums = v
+	return s
+}
+
+type OutputService10TestShapeEC2EnumType string
+
+// Enum values for OutputService10TestShapeEC2EnumType
+const (
+	EC2EnumTypeFoo OutputService10TestShapeEC2EnumType = "foo"
+	EC2EnumTypeBar OutputService10TestShapeEC2EnumType = "bar"
+)
+
 //
 // Tests begin here
 //
@@ -1651,6 +1805,41 @@ func TestOutputService9ProtocolTestEmptyStringCase1(t *testing.T) {
 		t.Errorf("expect not to be nil")
 	}
 	if e, a := "", *out.Foo; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+
+}
+
+func TestOutputService10ProtocolTestEnumOutputCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService10ProtocolTest(cfg)
+
+	buf := bytes.NewReader([]byte("<OperationNameResponse><FooEnum>foo</FooEnum><ListEnums><member>foo</member><member>bar</member></ListEnums></OperationNameResponse>"))
+	req, out := svc.OutputService10TestCaseOperation1Request(nil)
+	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
+
+	// set headers
+
+	// unmarshal response
+	ec2query.UnmarshalMeta(req)
+	ec2query.Unmarshal(req)
+	if req.Error != nil {
+		t.Errorf("expect not error, got %v", req.Error)
+	}
+
+	// assert response
+	if out == nil {
+		t.Errorf("expect not to be nil")
+	}
+	if e, a := OutputService10TestShapeEC2EnumType("foo"), out.FooEnum; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService10TestShapeEC2EnumType("foo"), out.ListEnums[0]; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService10TestShapeEC2EnumType("bar"), out.ListEnums[1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 

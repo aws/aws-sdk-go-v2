@@ -1858,7 +1858,7 @@ type AgentInfo struct {
 	ConnectorId *string `locationName:"connectorId" type:"string"`
 
 	// The health of the agent or connector.
-	Health *string `locationName:"health" type:"string" enum:"AgentStatus"`
+	Health AgentStatus `locationName:"health" type:"string"`
 
 	// The name of the host where the agent or connector resides. The host can be
 	// a server or virtual machine.
@@ -1915,8 +1915,8 @@ func (s *AgentInfo) SetConnectorId(v string) *AgentInfo {
 }
 
 // SetHealth sets the Health field's value.
-func (s *AgentInfo) SetHealth(v string) *AgentInfo {
-	s.Health = &v
+func (s *AgentInfo) SetHealth(v AgentStatus) *AgentInfo {
+	s.Health = v
 	return s
 }
 
@@ -2006,9 +2006,11 @@ func (s AssociateConfigurationItemsToApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateConfigurationItemsToApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateConfigurationItemsToApplicationInput"}
+
 	if s.ApplicationConfigurationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationConfigurationId"))
 	}
+
 	if s.ConfigurationIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
@@ -2057,7 +2059,7 @@ type ConfigurationTag struct {
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 
 	// A type of IT asset to tag.
-	ConfigurationType *string `locationName:"configurationType" type:"string" enum:"ConfigurationItemType"`
+	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string"`
 
 	// A type of tag on which to filter. For example, serverType.
 	Key *string `locationName:"key" type:"string"`
@@ -2088,8 +2090,8 @@ func (s *ConfigurationTag) SetConfigurationId(v string) *ConfigurationTag {
 }
 
 // SetConfigurationType sets the ConfigurationType field's value.
-func (s *ConfigurationTag) SetConfigurationType(v string) *ConfigurationTag {
-	s.ConfigurationType = &v
+func (s *ConfigurationTag) SetConfigurationType(v ConfigurationItemType) *ConfigurationTag {
+	s.ConfigurationType = v
 	return s
 }
 
@@ -2137,6 +2139,7 @@ func (s CreateApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2214,9 +2217,11 @@ func (s CreateTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
+
 	if s.ConfigurationIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -2473,6 +2478,7 @@ func (s DeleteApplicationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationsInput"}
+
 	if s.ConfigurationIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
@@ -2533,6 +2539,7 @@ func (s DeleteTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
+
 	if s.ConfigurationIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
@@ -2723,6 +2730,7 @@ func (s DescribeConfigurationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConfigurationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationsInput"}
+
 	if s.ConfigurationIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
@@ -3089,9 +3097,11 @@ func (s DisassociateConfigurationItemsFromApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateConfigurationItemsFromApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateConfigurationItemsFromApplicationInput"}
+
 	if s.ApplicationConfigurationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationConfigurationId"))
 	}
+
 	if s.ConfigurationIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
@@ -3206,12 +3216,15 @@ func (s ExportFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExportFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExportFilter"}
+
 	if s.Condition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Condition"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -3263,7 +3276,7 @@ type ExportInfo struct {
 	// The status of the data export job.
 	//
 	// ExportStatus is a required field
-	ExportStatus *string `locationName:"exportStatus" type:"string" required:"true" enum:"ExportStatus"`
+	ExportStatus ExportStatus `locationName:"exportStatus" type:"string" required:"true"`
 
 	// If true, the export of agent information exceeded the size limit for a single
 	// export and the exported data is incomplete for the requested time range.
@@ -3314,8 +3327,8 @@ func (s *ExportInfo) SetExportRequestTime(v time.Time) *ExportInfo {
 }
 
 // SetExportStatus sets the ExportStatus field's value.
-func (s *ExportInfo) SetExportStatus(v string) *ExportInfo {
-	s.ExportStatus = &v
+func (s *ExportInfo) SetExportStatus(v ExportStatus) *ExportInfo {
+	s.ExportStatus = v
 	return s
 }
 
@@ -3386,12 +3399,15 @@ func (s Filter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Filter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Filter"}
+
 	if s.Condition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Condition"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -3511,7 +3527,7 @@ type ListConfigurationsInput struct {
 	// A valid configuration identified by Application Discovery Service.
 	//
 	// ConfigurationType is a required field
-	ConfigurationType *string `locationName:"configurationType" type:"string" required:"true" enum:"ConfigurationItemType"`
+	ConfigurationType ConfigurationItemType `locationName:"configurationType" type:"string" required:"true"`
 
 	// You can filter the request using various logical operators and a key-value
 	// format. For example:
@@ -3550,7 +3566,7 @@ func (s ListConfigurationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListConfigurationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListConfigurationsInput"}
-	if s.ConfigurationType == nil {
+	if len(s.ConfigurationType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationType"))
 	}
 	if s.Filters != nil {
@@ -3581,8 +3597,8 @@ func (s *ListConfigurationsInput) Validate() error {
 }
 
 // SetConfigurationType sets the ConfigurationType field's value.
-func (s *ListConfigurationsInput) SetConfigurationType(v string) *ListConfigurationsInput {
-	s.ConfigurationType = &v
+func (s *ListConfigurationsInput) SetConfigurationType(v ConfigurationItemType) *ListConfigurationsInput {
+	s.ConfigurationType = v
 	return s
 }
 
@@ -3687,6 +3703,7 @@ func (s ListServerNeighborsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListServerNeighborsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListServerNeighborsInput"}
+
 	if s.ConfigurationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
 	}
@@ -3852,7 +3869,7 @@ type OrderByElement struct {
 	FieldName *string `locationName:"fieldName" type:"string" required:"true"`
 
 	// Ordering direction.
-	SortOrder *string `locationName:"sortOrder" type:"string" enum:"orderString"`
+	SortOrder OrderString `locationName:"sortOrder" type:"string"`
 }
 
 // String returns the string representation
@@ -3868,6 +3885,7 @@ func (s OrderByElement) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OrderByElement) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OrderByElement"}
+
 	if s.FieldName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FieldName"))
 	}
@@ -3885,8 +3903,8 @@ func (s *OrderByElement) SetFieldName(v string) *OrderByElement {
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *OrderByElement) SetSortOrder(v string) *OrderByElement {
-	s.SortOrder = &v
+func (s *OrderByElement) SetSortOrder(v OrderString) *OrderByElement {
+	s.SortOrder = v
 	return s
 }
 
@@ -3919,6 +3937,7 @@ func (s StartDataCollectionByAgentIdsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartDataCollectionByAgentIdsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartDataCollectionByAgentIdsInput"}
+
 	if s.AgentIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AgentIds"))
 	}
@@ -3971,7 +3990,7 @@ type StartExportTaskInput struct {
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The file format for the returned export data. Default value is CSV.
-	ExportDataFormat []*string `locationName:"exportDataFormat" type:"list"`
+	ExportDataFormat []ExportDataFormat `locationName:"exportDataFormat" type:"list"`
 
 	// If a filter is present, it selects the single agentId of the Application
 	// Discovery Agent for which data is exported. The agentId can be found in the
@@ -4023,7 +4042,7 @@ func (s *StartExportTaskInput) SetEndTime(v time.Time) *StartExportTaskInput {
 }
 
 // SetExportDataFormat sets the ExportDataFormat field's value.
-func (s *StartExportTaskInput) SetExportDataFormat(v []*string) *StartExportTaskInput {
+func (s *StartExportTaskInput) SetExportDataFormat(v []ExportDataFormat) *StartExportTaskInput {
 	s.ExportDataFormat = v
 	return s
 }
@@ -4087,6 +4106,7 @@ func (s StopDataCollectionByAgentIdsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopDataCollectionByAgentIdsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopDataCollectionByAgentIdsInput"}
+
 	if s.AgentIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AgentIds"))
 	}
@@ -4158,9 +4178,11 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -4212,9 +4234,11 @@ func (s TagFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagFilter"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -4266,6 +4290,7 @@ func (s UpdateApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationInput"}
+
 	if s.ConfigurationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
 	}
@@ -4309,63 +4334,49 @@ func (s UpdateApplicationOutput) GoString() string {
 	return s.String()
 }
 
+type AgentStatus string
+
+// Enum values for AgentStatus
 const (
-	// AgentStatusHealthy is a AgentStatus enum value
-	AgentStatusHealthy = "HEALTHY"
-
-	// AgentStatusUnhealthy is a AgentStatus enum value
-	AgentStatusUnhealthy = "UNHEALTHY"
-
-	// AgentStatusRunning is a AgentStatus enum value
-	AgentStatusRunning = "RUNNING"
-
-	// AgentStatusUnknown is a AgentStatus enum value
-	AgentStatusUnknown = "UNKNOWN"
-
-	// AgentStatusBlacklisted is a AgentStatus enum value
-	AgentStatusBlacklisted = "BLACKLISTED"
-
-	// AgentStatusShutdown is a AgentStatus enum value
-	AgentStatusShutdown = "SHUTDOWN"
+	AgentStatusHealthy     AgentStatus = "HEALTHY"
+	AgentStatusUnhealthy   AgentStatus = "UNHEALTHY"
+	AgentStatusRunning     AgentStatus = "RUNNING"
+	AgentStatusUnknown     AgentStatus = "UNKNOWN"
+	AgentStatusBlacklisted AgentStatus = "BLACKLISTED"
+	AgentStatusShutdown    AgentStatus = "SHUTDOWN"
 )
 
+type ConfigurationItemType string
+
+// Enum values for ConfigurationItemType
 const (
-	// ConfigurationItemTypeServer is a ConfigurationItemType enum value
-	ConfigurationItemTypeServer = "SERVER"
-
-	// ConfigurationItemTypeProcess is a ConfigurationItemType enum value
-	ConfigurationItemTypeProcess = "PROCESS"
-
-	// ConfigurationItemTypeConnection is a ConfigurationItemType enum value
-	ConfigurationItemTypeConnection = "CONNECTION"
-
-	// ConfigurationItemTypeApplication is a ConfigurationItemType enum value
-	ConfigurationItemTypeApplication = "APPLICATION"
+	ConfigurationItemTypeServer      ConfigurationItemType = "SERVER"
+	ConfigurationItemTypeProcess     ConfigurationItemType = "PROCESS"
+	ConfigurationItemTypeConnection  ConfigurationItemType = "CONNECTION"
+	ConfigurationItemTypeApplication ConfigurationItemType = "APPLICATION"
 )
 
-const (
-	// ExportDataFormatCsv is a ExportDataFormat enum value
-	ExportDataFormatCsv = "CSV"
+type ExportDataFormat string
 
-	// ExportDataFormatGraphml is a ExportDataFormat enum value
-	ExportDataFormatGraphml = "GRAPHML"
+// Enum values for ExportDataFormat
+const (
+	ExportDataFormatCsv     ExportDataFormat = "CSV"
+	ExportDataFormatGraphml ExportDataFormat = "GRAPHML"
 )
 
+type ExportStatus string
+
+// Enum values for ExportStatus
 const (
-	// ExportStatusFailed is a ExportStatus enum value
-	ExportStatusFailed = "FAILED"
-
-	// ExportStatusSucceeded is a ExportStatus enum value
-	ExportStatusSucceeded = "SUCCEEDED"
-
-	// ExportStatusInProgress is a ExportStatus enum value
-	ExportStatusInProgress = "IN_PROGRESS"
+	ExportStatusFailed     ExportStatus = "FAILED"
+	ExportStatusSucceeded  ExportStatus = "SUCCEEDED"
+	ExportStatusInProgress ExportStatus = "IN_PROGRESS"
 )
 
-const (
-	// OrderStringAsc is a orderString enum value
-	OrderStringAsc = "ASC"
+type OrderString string
 
-	// OrderStringDesc is a orderString enum value
-	OrderStringDesc = "DESC"
+// Enum values for OrderString
+const (
+	OrderStringAsc  OrderString = "ASC"
+	OrderStringDesc OrderString = "DESC"
 )

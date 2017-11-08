@@ -10858,7 +10858,7 @@ type Authorizer struct {
 	// using a single authorization token submitted in a custom header, REQUEST
 	// for a Lambda function using incoming request parameters, and COGNITO_USER_POOLS
 	// for using an Amazon Cognito user pool.
-	Type *string `locationName:"type" type:"string" enum:"AuthorizerType"`
+	Type AuthorizerType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -10926,8 +10926,8 @@ func (s *Authorizer) SetProviderARNs(v []*string) *Authorizer {
 }
 
 // SetType sets the Type field's value.
-func (s *Authorizer) SetType(v string) *Authorizer {
-	s.Type = &v
+func (s *Authorizer) SetType(v AuthorizerType) *Authorizer {
+	s.Type = v
 	return s
 }
 
@@ -11206,7 +11206,7 @@ type CreateAuthorizerInput struct {
 	// for using an Amazon Cognito user pool.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"AuthorizerType"`
+	Type AuthorizerType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -11222,13 +11222,15 @@ func (s CreateAuthorizerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAuthorizerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAuthorizerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -11293,8 +11295,8 @@ func (s *CreateAuthorizerInput) SetRestApiId(v string) *CreateAuthorizerInput {
 }
 
 // SetType sets the Type field's value.
-func (s *CreateAuthorizerInput) SetType(v string) *CreateAuthorizerInput {
-	s.Type = &v
+func (s *CreateAuthorizerInput) SetType(v AuthorizerType) *CreateAuthorizerInput {
+	s.Type = v
 	return s
 }
 
@@ -11337,9 +11339,11 @@ func (s CreateBasePathMappingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBasePathMappingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateBasePathMappingInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -11383,7 +11387,7 @@ type CreateDeploymentInput struct {
 
 	// Specifies the cache cluster size for the Stage resource specified in the
 	// input, if a cache cluster is enabled.
-	CacheClusterSize *string `locationName:"cacheClusterSize" type:"string" enum:"CacheClusterSize"`
+	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string"`
 
 	// The description for the Deployment resource to create.
 	Description *string `locationName:"description" type:"string"`
@@ -11418,6 +11422,7 @@ func (s CreateDeploymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -11435,8 +11440,8 @@ func (s *CreateDeploymentInput) SetCacheClusterEnabled(v bool) *CreateDeployment
 }
 
 // SetCacheClusterSize sets the CacheClusterSize field's value.
-func (s *CreateDeploymentInput) SetCacheClusterSize(v string) *CreateDeploymentInput {
-	s.CacheClusterSize = &v
+func (s *CreateDeploymentInput) SetCacheClusterSize(v CacheClusterSize) *CreateDeploymentInput {
+	s.CacheClusterSize = v
 	return s
 }
 
@@ -11506,12 +11511,15 @@ func (s CreateDocumentationPartInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDocumentationPartInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDocumentationPartInput"}
+
 	if s.Location == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
+
 	if s.Properties == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Properties"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -11579,9 +11587,11 @@ func (s CreateDocumentationVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDocumentationVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDocumentationVersionInput"}
+
 	if s.DocumentationVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentationVersion"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -11661,6 +11671,7 @@ func (s CreateDomainNameInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainNameInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainNameInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -11747,12 +11758,15 @@ func (s CreateModelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateModelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateModelInput"}
+
 	if s.ContentType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -11827,6 +11841,7 @@ func (s CreateRequestValidatorInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRequestValidatorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRequestValidatorInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -11894,12 +11909,15 @@ func (s CreateResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceInput"}
+
 	if s.ParentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
+
 	if s.PathPart == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PathPart"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -11964,6 +11982,7 @@ func (s CreateRestApiInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRestApiInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRestApiInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -12012,7 +12031,7 @@ type CreateStageInput struct {
 	CacheClusterEnabled *bool `locationName:"cacheClusterEnabled" type:"boolean"`
 
 	// The stage's cache cluster size.
-	CacheClusterSize *string `locationName:"cacheClusterSize" type:"string" enum:"CacheClusterSize"`
+	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string"`
 
 	// The identifier of the Deployment resource for the Stage resource.
 	//
@@ -12054,12 +12073,15 @@ func (s CreateStageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStageInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -12077,8 +12099,8 @@ func (s *CreateStageInput) SetCacheClusterEnabled(v bool) *CreateStageInput {
 }
 
 // SetCacheClusterSize sets the CacheClusterSize field's value.
-func (s *CreateStageInput) SetCacheClusterSize(v string) *CreateStageInput {
-	s.CacheClusterSize = &v
+func (s *CreateStageInput) SetCacheClusterSize(v CacheClusterSize) *CreateStageInput {
+	s.CacheClusterSize = v
 	return s
 }
 
@@ -12155,6 +12177,7 @@ func (s CreateUsagePlanInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUsagePlanInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUsagePlanInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -12230,12 +12253,15 @@ func (s CreateUsagePlanKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUsagePlanKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUsagePlanKeyInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
+
 	if s.KeyType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyType"))
 	}
+
 	if s.UsagePlanId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
@@ -12287,6 +12313,7 @@ func (s DeleteApiKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApiKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApiKeyInput"}
+
 	if s.ApiKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApiKey"))
 	}
@@ -12345,9 +12372,11 @@ func (s DeleteAuthorizerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAuthorizerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAuthorizerInput"}
+
 	if s.AuthorizerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -12412,9 +12441,11 @@ func (s DeleteBasePathMappingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBasePathMappingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBasePathMappingInput"}
+
 	if s.BasePath == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BasePath"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -12474,6 +12505,7 @@ func (s DeleteClientCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClientCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClientCertificateInput"}
+
 	if s.ClientCertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientCertificateId"))
 	}
@@ -12532,9 +12564,11 @@ func (s DeleteDeploymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeploymentInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -12599,9 +12633,11 @@ func (s DeleteDocumentationPartInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDocumentationPartInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentationPartInput"}
+
 	if s.DocumentationPartId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentationPartId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -12666,9 +12702,11 @@ func (s DeleteDocumentationVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDocumentationVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentationVersionInput"}
+
 	if s.DocumentationVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentationVersion"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -12728,6 +12766,7 @@ func (s DeleteDomainNameInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainNameInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainNameInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -12786,7 +12825,7 @@ type DeleteGatewayResponseInput struct {
 	// UNSUPPORTED_MEDIA_TYPES
 	//
 	// ResponseType is a required field
-	ResponseType *string `location:"uri" locationName:"response_type" type:"string" required:"true" enum:"GatewayResponseType"`
+	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -12807,9 +12846,10 @@ func (s DeleteGatewayResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGatewayResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteGatewayResponseInput"}
-	if s.ResponseType == nil {
+	if len(s.ResponseType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResponseType"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -12821,8 +12861,8 @@ func (s *DeleteGatewayResponseInput) Validate() error {
 }
 
 // SetResponseType sets the ResponseType field's value.
-func (s *DeleteGatewayResponseInput) SetResponseType(v string) *DeleteGatewayResponseInput {
-	s.ResponseType = &v
+func (s *DeleteGatewayResponseInput) SetResponseType(v GatewayResponseType) *DeleteGatewayResponseInput {
+	s.ResponseType = v
 	return s
 }
 
@@ -12879,12 +12919,15 @@ func (s DeleteIntegrationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIntegrationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntegrationInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -12965,15 +13008,19 @@ func (s DeleteIntegrationResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIntegrationResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntegrationResponseInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StatusCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
@@ -13055,12 +13102,15 @@ func (s DeleteMethodInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMethodInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMethodInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -13141,15 +13191,19 @@ func (s DeleteMethodResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMethodResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMethodResponseInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StatusCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
@@ -13226,9 +13280,11 @@ func (s DeleteModelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteModelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteModelInput"}
+
 	if s.ModelName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -13293,9 +13349,11 @@ func (s DeleteRequestValidatorInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRequestValidatorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRequestValidatorInput"}
+
 	if s.RequestValidatorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestValidatorId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -13360,9 +13418,11 @@ func (s DeleteResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -13422,6 +13482,7 @@ func (s DeleteRestApiInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRestApiInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRestApiInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -13480,9 +13541,11 @@ func (s DeleteStageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteStageInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -13542,6 +13605,7 @@ func (s DeleteUsagePlanInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUsagePlanInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUsagePlanInput"}
+
 	if s.UsagePlanId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
@@ -13588,9 +13652,11 @@ func (s DeleteUsagePlanKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUsagePlanKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUsagePlanKeyInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
+
 	if s.UsagePlanId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
@@ -13813,7 +13879,7 @@ type DocumentationPartLocation struct {
 	// or RESOURCE type.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"DocumentationPartType"`
+	Type DocumentationPartType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -13829,7 +13895,7 @@ func (s DocumentationPartLocation) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DocumentationPartLocation) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DocumentationPartLocation"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -13864,8 +13930,8 @@ func (s *DocumentationPartLocation) SetStatusCode(v string) *DocumentationPartLo
 }
 
 // SetType sets the Type field's value.
-func (s *DocumentationPartLocation) SetType(v string) *DocumentationPartLocation {
-	s.Type = &v
+func (s *DocumentationPartLocation) SetType(v DocumentationPartType) *DocumentationPartLocation {
+	s.Type = v
 	return s
 }
 
@@ -14011,9 +14077,11 @@ func (s FlushStageAuthorizersCacheInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FlushStageAuthorizersCacheInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FlushStageAuthorizersCacheInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -14078,9 +14146,11 @@ func (s FlushStageCacheInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FlushStageCacheInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FlushStageCacheInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -14184,6 +14254,7 @@ func (s GetApiKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApiKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetApiKeyInput"}
+
 	if s.ApiKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApiKey"))
 	}
@@ -14340,9 +14411,11 @@ func (s GetAuthorizerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAuthorizerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAuthorizerInput"}
+
 	if s.AuthorizerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -14394,6 +14467,7 @@ func (s GetAuthorizersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAuthorizersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAuthorizersInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -14487,9 +14561,11 @@ func (s GetBasePathMappingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBasePathMappingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBasePathMappingInput"}
+
 	if s.BasePath == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BasePath"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -14542,6 +14618,7 @@ func (s GetBasePathMappingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBasePathMappingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBasePathMappingsInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -14627,6 +14704,7 @@ func (s GetClientCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetClientCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetClientCertificateInput"}
+
 	if s.ClientCertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientCertificateId"))
 	}
@@ -14748,9 +14826,11 @@ func (s GetDeploymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -14809,6 +14889,7 @@ func (s GetDeploymentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentsInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -14908,9 +14989,11 @@ func (s GetDocumentationPartInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentationPartInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentationPartInput"}
+
 	if s.DocumentationPartId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentationPartId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -14956,7 +15039,7 @@ type GetDocumentationPartsInput struct {
 	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
 
 	// The type of API entities of the to-be-retrieved documentation parts.
-	Type *string `location:"querystring" locationName:"type" type:"string" enum:"DocumentationPartType"`
+	Type DocumentationPartType `location:"querystring" locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -14972,6 +15055,7 @@ func (s GetDocumentationPartsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentationPartsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentationPartsInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -15013,8 +15097,8 @@ func (s *GetDocumentationPartsInput) SetRestApiId(v string) *GetDocumentationPar
 }
 
 // SetType sets the Type field's value.
-func (s *GetDocumentationPartsInput) SetType(v string) *GetDocumentationPartsInput {
-	s.Type = &v
+func (s *GetDocumentationPartsInput) SetType(v DocumentationPartType) *GetDocumentationPartsInput {
+	s.Type = v
 	return s
 }
 
@@ -15080,9 +15164,11 @@ func (s GetDocumentationVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentationVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentationVersionInput"}
+
 	if s.DocumentationVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentationVersion"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -15134,6 +15220,7 @@ func (s GetDocumentationVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentationVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentationVersionsInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -15223,6 +15310,7 @@ func (s GetDomainNameInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDomainNameInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDomainNameInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -15354,12 +15442,15 @@ func (s GetExportInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetExportInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetExportInput"}
+
 	if s.ExportType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExportType"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -15470,7 +15561,7 @@ type GetGatewayResponseInput struct {
 	// UNSUPPORTED_MEDIA_TYPES
 	//
 	// ResponseType is a required field
-	ResponseType *string `location:"uri" locationName:"response_type" type:"string" required:"true" enum:"GatewayResponseType"`
+	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -15491,9 +15582,10 @@ func (s GetGatewayResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGatewayResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGatewayResponseInput"}
-	if s.ResponseType == nil {
+	if len(s.ResponseType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResponseType"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -15505,8 +15597,8 @@ func (s *GetGatewayResponseInput) Validate() error {
 }
 
 // SetResponseType sets the ResponseType field's value.
-func (s *GetGatewayResponseInput) SetResponseType(v string) *GetGatewayResponseInput {
-	s.ResponseType = &v
+func (s *GetGatewayResponseInput) SetResponseType(v GatewayResponseType) *GetGatewayResponseInput {
+	s.ResponseType = v
 	return s
 }
 
@@ -15550,6 +15642,7 @@ func (s GetGatewayResponsesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGatewayResponsesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGatewayResponsesInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -15802,12 +15895,15 @@ func (s GetIntegrationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIntegrationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIntegrationInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -15874,15 +15970,19 @@ func (s GetIntegrationResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIntegrationResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIntegrationResponseInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StatusCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
@@ -15950,12 +16050,15 @@ func (s GetMethodInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMethodInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMethodInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -16022,15 +16125,19 @@ func (s GetMethodResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMethodResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMethodResponseInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StatusCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
@@ -16098,9 +16205,11 @@ func (s GetModelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetModelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetModelInput"}
+
 	if s.ModelName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -16157,9 +16266,11 @@ func (s GetModelTemplateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetModelTemplateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetModelTemplateInput"}
+
 	if s.ModelName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -16239,6 +16350,7 @@ func (s GetModelsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetModelsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetModelsInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -16329,9 +16441,11 @@ func (s GetRequestValidatorInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRequestValidatorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRequestValidatorInput"}
+
 	if s.RequestValidatorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestValidatorId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -16383,6 +16497,7 @@ func (s GetRequestValidatorsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRequestValidatorsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRequestValidatorsInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -16485,9 +16600,11 @@ func (s GetResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -16554,6 +16671,7 @@ func (s GetResourcesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetResourcesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetResourcesInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -16645,6 +16763,7 @@ func (s GetRestApiInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRestApiInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRestApiInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -16771,12 +16890,15 @@ func (s GetSdkInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSdkInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSdkInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.SdkType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SdkType"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -16876,6 +16998,7 @@ func (s GetSdkTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSdkTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSdkTypeInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -16985,9 +17108,11 @@ func (s GetStageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetStageInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -17036,6 +17161,7 @@ func (s GetStagesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStagesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetStagesInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -17127,12 +17253,15 @@ func (s GetUsageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUsageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetUsageInput"}
+
 	if s.EndDate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndDate"))
 	}
+
 	if s.StartDate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartDate"))
 	}
+
 	if s.UsagePlanId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
@@ -17202,6 +17331,7 @@ func (s GetUsagePlanInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUsagePlanInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetUsagePlanInput"}
+
 	if s.UsagePlanId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
@@ -17248,9 +17378,11 @@ func (s GetUsagePlanKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUsagePlanKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetUsagePlanKeyInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
+
 	if s.UsagePlanId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
@@ -17307,6 +17439,7 @@ func (s GetUsagePlanKeysInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUsagePlanKeysInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetUsagePlanKeysInput"}
+
 	if s.UsagePlanId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
@@ -17471,7 +17604,7 @@ type ImportApiKeysInput struct {
 	// only the csv format is supported.
 	//
 	// Format is a required field
-	Format *string `location:"querystring" locationName:"format" type:"string" required:"true" enum:"ApiKeysFormat"`
+	Format ApiKeysFormat `location:"querystring" locationName:"format" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -17487,10 +17620,11 @@ func (s ImportApiKeysInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportApiKeysInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportApiKeysInput"}
+
 	if s.Body == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
-	if s.Format == nil {
+	if len(s.Format) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
 
@@ -17513,8 +17647,8 @@ func (s *ImportApiKeysInput) SetFailOnWarnings(v bool) *ImportApiKeysInput {
 }
 
 // SetFormat sets the Format field's value.
-func (s *ImportApiKeysInput) SetFormat(v string) *ImportApiKeysInput {
-	s.Format = &v
+func (s *ImportApiKeysInput) SetFormat(v ApiKeysFormat) *ImportApiKeysInput {
+	s.Format = v
 	return s
 }
 
@@ -17569,7 +17703,7 @@ type ImportDocumentationPartsInput struct {
 	// A query parameter to indicate whether to overwrite (OVERWRITE) any existing
 	// DocumentationParts definition or to merge (MERGE) the new definition into
 	// the existing one. The default value is MERGE.
-	Mode *string `location:"querystring" locationName:"mode" type:"string" enum:"PutMode"`
+	Mode PutMode `location:"querystring" locationName:"mode" type:"string"`
 
 	// [Required] The string identifier of the associated RestApi.
 	//
@@ -17590,9 +17724,11 @@ func (s ImportDocumentationPartsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportDocumentationPartsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportDocumentationPartsInput"}
+
 	if s.Body == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -17616,8 +17752,8 @@ func (s *ImportDocumentationPartsInput) SetFailOnWarnings(v bool) *ImportDocumen
 }
 
 // SetMode sets the Mode field's value.
-func (s *ImportDocumentationPartsInput) SetMode(v string) *ImportDocumentationPartsInput {
-	s.Mode = &v
+func (s *ImportDocumentationPartsInput) SetMode(v PutMode) *ImportDocumentationPartsInput {
+	s.Mode = v
 	return s
 }
 
@@ -17702,6 +17838,7 @@ func (s ImportRestApiInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportRestApiInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportRestApiInput"}
+
 	if s.Body == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
@@ -17756,7 +17893,7 @@ type Integration struct {
 	// If this property is not defined, the request payload will be passed through
 	// from the method request to integration request without modification, provided
 	// that the passthroughBehaviors is configured to support payload pass-through.
-	ContentHandling *string `locationName:"contentHandling" type:"string" enum:"ContentHandlingStrategy"`
+	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string"`
 
 	// Specifies the credentials required for the integration, if any. For AWS integrations,
 	// three options are available. To specify an IAM Role for Amazon API Gateway
@@ -17835,7 +17972,7 @@ type Integration struct {
 	// without actually invoking the back end, HTTP_PROXY for integrating with the
 	// HTTP proxy integration, or AWS_PROXY for integrating with the Lambda proxy
 	// integration type.
-	Type *string `locationName:"type" type:"string" enum:"IntegrationType"`
+	Type IntegrationType `locationName:"type" type:"string"`
 
 	// Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations,
 	// the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986
@@ -17872,8 +18009,8 @@ func (s *Integration) SetCacheNamespace(v string) *Integration {
 }
 
 // SetContentHandling sets the ContentHandling field's value.
-func (s *Integration) SetContentHandling(v string) *Integration {
-	s.ContentHandling = &v
+func (s *Integration) SetContentHandling(v ContentHandlingStrategy) *Integration {
+	s.ContentHandling = v
 	return s
 }
 
@@ -17914,8 +18051,8 @@ func (s *Integration) SetRequestTemplates(v map[string]*string) *Integration {
 }
 
 // SetType sets the Type field's value.
-func (s *Integration) SetType(v string) *Integration {
-	s.Type = &v
+func (s *Integration) SetType(v IntegrationType) *Integration {
+	s.Type = v
 	return s
 }
 
@@ -17944,7 +18081,7 @@ type IntegrationResponse struct {
 	//
 	// If this property is not defined, the response payload will be passed through
 	// from the integration response to the method response without modification.
-	ContentHandling *string `locationName:"contentHandling" type:"string" enum:"ContentHandlingStrategy"`
+	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string"`
 
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the back end. The key is a method response header parameter
@@ -17989,8 +18126,8 @@ func (s IntegrationResponse) GoString() string {
 }
 
 // SetContentHandling sets the ContentHandling field's value.
-func (s *IntegrationResponse) SetContentHandling(v string) *IntegrationResponse {
-	s.ContentHandling = &v
+func (s *IntegrationResponse) SetContentHandling(v ContentHandlingStrategy) *IntegrationResponse {
+	s.ContentHandling = v
 	return s
 }
 
@@ -18406,7 +18543,7 @@ type MethodSetting struct {
 	// PATCH path for this setting is /{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy,
 	// and the available values are FAIL_WITH_403, SUCCEED_WITH_RESPONSE_HEADER,
 	// SUCCEED_WITHOUT_RESPONSE_HEADER.
-	UnauthorizedCacheControlHeaderStrategy *string `locationName:"unauthorizedCacheControlHeaderStrategy" type:"string" enum:"UnauthorizedCacheControlHeaderStrategy"`
+	UnauthorizedCacheControlHeaderStrategy UnauthorizedCacheControlHeaderStrategy `locationName:"unauthorizedCacheControlHeaderStrategy" type:"string"`
 }
 
 // String returns the string representation
@@ -18474,8 +18611,8 @@ func (s *MethodSetting) SetThrottlingRateLimit(v float64) *MethodSetting {
 }
 
 // SetUnauthorizedCacheControlHeaderStrategy sets the UnauthorizedCacheControlHeaderStrategy field's value.
-func (s *MethodSetting) SetUnauthorizedCacheControlHeaderStrategy(v string) *MethodSetting {
-	s.UnauthorizedCacheControlHeaderStrategy = &v
+func (s *MethodSetting) SetUnauthorizedCacheControlHeaderStrategy(v UnauthorizedCacheControlHeaderStrategy) *MethodSetting {
+	s.UnauthorizedCacheControlHeaderStrategy = v
 	return s
 }
 
@@ -18603,7 +18740,7 @@ type PatchOperation struct {
 	// for a given resource. Support of the operations depends on specific operational
 	// contexts. Attempts to apply an unsupported operation on a resource will return
 	// an error message.
-	Op *string `locationName:"op" type:"string" enum:"Op"`
+	Op Op `locationName:"op" type:"string"`
 
 	// The op operation's target, as identified by a JSON Pointer (https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08)
 	// value that references a location within the targeted resource. For example,
@@ -18639,8 +18776,8 @@ func (s *PatchOperation) SetFrom(v string) *PatchOperation {
 }
 
 // SetOp sets the Op field's value.
-func (s *PatchOperation) SetOp(v string) *PatchOperation {
-	s.Op = &v
+func (s *PatchOperation) SetOp(v Op) *PatchOperation {
+	s.Op = v
 	return s
 }
 
@@ -18692,7 +18829,7 @@ type PutGatewayResponseInput struct {
 	// UNSUPPORTED_MEDIA_TYPES
 	//
 	// ResponseType is a required field
-	ResponseType *string `location:"uri" locationName:"response_type" type:"string" required:"true" enum:"GatewayResponseType"`
+	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -18716,9 +18853,10 @@ func (s PutGatewayResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutGatewayResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutGatewayResponseInput"}
-	if s.ResponseType == nil {
+	if len(s.ResponseType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResponseType"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -18742,8 +18880,8 @@ func (s *PutGatewayResponseInput) SetResponseTemplates(v map[string]*string) *Pu
 }
 
 // SetResponseType sets the ResponseType field's value.
-func (s *PutGatewayResponseInput) SetResponseType(v string) *PutGatewayResponseInput {
-	s.ResponseType = &v
+func (s *PutGatewayResponseInput) SetResponseType(v GatewayResponseType) *PutGatewayResponseInput {
+	s.ResponseType = v
 	return s
 }
 
@@ -18781,7 +18919,7 @@ type PutIntegrationInput struct {
 	// If this property is not defined, the request payload will be passed through
 	// from the method request to integration request without modification, provided
 	// that the passthroughBehaviors is configured to support payload pass-through.
-	ContentHandling *string `locationName:"contentHandling" type:"string" enum:"ContentHandlingStrategy"`
+	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string"`
 
 	// Specifies whether credentials are required for a put integration.
 	Credentials *string `locationName:"credentials" type:"string"`
@@ -18839,7 +18977,7 @@ type PutIntegrationInput struct {
 	// Specifies a put integration input's type.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"IntegrationType"`
+	Type IntegrationType `locationName:"type" type:"string" required:"true"`
 
 	// Specifies the integration's Uniform Resource Identifier (URI). For HTTP integrations,
 	// the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986
@@ -18866,16 +19004,19 @@ func (s PutIntegrationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutIntegrationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutIntegrationInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -18898,8 +19039,8 @@ func (s *PutIntegrationInput) SetCacheNamespace(v string) *PutIntegrationInput {
 }
 
 // SetContentHandling sets the ContentHandling field's value.
-func (s *PutIntegrationInput) SetContentHandling(v string) *PutIntegrationInput {
-	s.ContentHandling = &v
+func (s *PutIntegrationInput) SetContentHandling(v ContentHandlingStrategy) *PutIntegrationInput {
+	s.ContentHandling = v
 	return s
 }
 
@@ -18952,8 +19093,8 @@ func (s *PutIntegrationInput) SetRestApiId(v string) *PutIntegrationInput {
 }
 
 // SetType sets the Type field's value.
-func (s *PutIntegrationInput) SetType(v string) *PutIntegrationInput {
-	s.Type = &v
+func (s *PutIntegrationInput) SetType(v IntegrationType) *PutIntegrationInput {
+	s.Type = v
 	return s
 }
 
@@ -18978,7 +19119,7 @@ type PutIntegrationResponseInput struct {
 	//
 	// If this property is not defined, the response payload will be passed through
 	// from the integration response to the method response without modification.
-	ContentHandling *string `locationName:"contentHandling" type:"string" enum:"ContentHandlingStrategy"`
+	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string"`
 
 	// Specifies a put integration response request's HTTP method.
 	//
@@ -19033,15 +19174,19 @@ func (s PutIntegrationResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutIntegrationResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutIntegrationResponseInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StatusCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
@@ -19053,8 +19198,8 @@ func (s *PutIntegrationResponseInput) Validate() error {
 }
 
 // SetContentHandling sets the ContentHandling field's value.
-func (s *PutIntegrationResponseInput) SetContentHandling(v string) *PutIntegrationResponseInput {
-	s.ContentHandling = &v
+func (s *PutIntegrationResponseInput) SetContentHandling(v ContentHandlingStrategy) *PutIntegrationResponseInput {
+	s.ContentHandling = v
 	return s
 }
 
@@ -19170,15 +19315,19 @@ func (s PutMethodInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMethodInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutMethodInput"}
+
 	if s.AuthorizationType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthorizationType"))
 	}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -19305,15 +19454,19 @@ func (s PutMethodResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMethodResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutMethodResponseInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StatusCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
@@ -19378,7 +19531,7 @@ type PutRestApiInput struct {
 
 	// The mode query parameter to specify the update mode. Valid values are "merge"
 	// and "overwrite". By default, the update mode is "merge".
-	Mode *string `location:"querystring" locationName:"mode" type:"string" enum:"PutMode"`
+	Mode PutMode `location:"querystring" locationName:"mode" type:"string"`
 
 	// Custom header parameters as part of the request. For example, to exclude
 	// DocumentationParts from an imported API, set ignore=documentation as a parameters
@@ -19405,9 +19558,11 @@ func (s PutRestApiInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRestApiInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRestApiInput"}
+
 	if s.Body == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -19431,8 +19586,8 @@ func (s *PutRestApiInput) SetFailOnWarnings(v bool) *PutRestApiInput {
 }
 
 // SetMode sets the Mode field's value.
-func (s *PutRestApiInput) SetMode(v string) *PutRestApiInput {
-	s.Mode = &v
+func (s *PutRestApiInput) SetMode(v PutMode) *PutRestApiInput {
+	s.Mode = v
 	return s
 }
 
@@ -19461,7 +19616,7 @@ type QuotaSettings struct {
 
 	// The time period in which the limit applies. Valid values are "DAY", "WEEK"
 	// or "MONTH".
-	Period *string `locationName:"period" type:"string" enum:"QuotaPeriodType"`
+	Period QuotaPeriodType `locationName:"period" type:"string"`
 }
 
 // String returns the string representation
@@ -19487,8 +19642,8 @@ func (s *QuotaSettings) SetOffset(v int64) *QuotaSettings {
 }
 
 // SetPeriod sets the Period field's value.
-func (s *QuotaSettings) SetPeriod(v string) *QuotaSettings {
-	s.Period = &v
+func (s *QuotaSettings) SetPeriod(v QuotaPeriodType) *QuotaSettings {
+	s.Period = v
 	return s
 }
 
@@ -19816,10 +19971,10 @@ type Stage struct {
 	CacheClusterEnabled *bool `locationName:"cacheClusterEnabled" type:"boolean"`
 
 	// The size of the cache cluster for the stage, if enabled.
-	CacheClusterSize *string `locationName:"cacheClusterSize" type:"string" enum:"CacheClusterSize"`
+	CacheClusterSize CacheClusterSize `locationName:"cacheClusterSize" type:"string"`
 
 	// The status of the cache cluster for the stage, if enabled.
-	CacheClusterStatus *string `locationName:"cacheClusterStatus" type:"string" enum:"CacheClusterStatus"`
+	CacheClusterStatus CacheClusterStatus `locationName:"cacheClusterStatus" type:"string"`
 
 	// The identifier of a client certificate for an API stage.
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
@@ -19872,14 +20027,14 @@ func (s *Stage) SetCacheClusterEnabled(v bool) *Stage {
 }
 
 // SetCacheClusterSize sets the CacheClusterSize field's value.
-func (s *Stage) SetCacheClusterSize(v string) *Stage {
-	s.CacheClusterSize = &v
+func (s *Stage) SetCacheClusterSize(v CacheClusterSize) *Stage {
+	s.CacheClusterSize = v
 	return s
 }
 
 // SetCacheClusterStatus sets the CacheClusterStatus field's value.
-func (s *Stage) SetCacheClusterStatus(v string) *Stage {
-	s.CacheClusterStatus = &v
+func (s *Stage) SetCacheClusterStatus(v CacheClusterStatus) *Stage {
+	s.CacheClusterStatus = v
 	return s
 }
 
@@ -20017,9 +20172,11 @@ func (s TestInvokeAuthorizerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestInvokeAuthorizerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TestInvokeAuthorizerInput"}
+
 	if s.AuthorizerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -20204,12 +20361,15 @@ func (s TestInvokeMethodInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestInvokeMethodInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TestInvokeMethodInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -20418,6 +20578,7 @@ func (s UpdateApiKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApiKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApiKeyInput"}
+
 	if s.ApiKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApiKey"))
 	}
@@ -20472,9 +20633,11 @@ func (s UpdateAuthorizerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAuthorizerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAuthorizerInput"}
+
 	if s.AuthorizerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthorizerId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -20535,9 +20698,11 @@ func (s UpdateBasePathMappingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBasePathMappingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateBasePathMappingInput"}
+
 	if s.BasePath == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BasePath"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -20593,6 +20758,7 @@ func (s UpdateClientCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateClientCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateClientCertificateInput"}
+
 	if s.ClientCertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientCertificateId"))
 	}
@@ -20648,9 +20814,11 @@ func (s UpdateDeploymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeploymentInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -20711,9 +20879,11 @@ func (s UpdateDocumentationPartInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentationPartInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentationPartInput"}
+
 	if s.DocumentationPartId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentationPartId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -20774,9 +20944,11 @@ func (s UpdateDocumentationVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentationVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentationVersionInput"}
+
 	if s.DocumentationVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentationVersion"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -20832,6 +21004,7 @@ func (s UpdateDomainNameInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainNameInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainNameInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -20885,7 +21058,7 @@ type UpdateGatewayResponseInput struct {
 	// UNSUPPORTED_MEDIA_TYPES
 	//
 	// ResponseType is a required field
-	ResponseType *string `location:"uri" locationName:"response_type" type:"string" required:"true" enum:"GatewayResponseType"`
+	ResponseType GatewayResponseType `location:"uri" locationName:"response_type" type:"string" required:"true"`
 
 	// The string identifier of the associated RestApi.
 	//
@@ -20906,9 +21079,10 @@ func (s UpdateGatewayResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGatewayResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewayResponseInput"}
-	if s.ResponseType == nil {
+	if len(s.ResponseType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResponseType"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -20926,8 +21100,8 @@ func (s *UpdateGatewayResponseInput) SetPatchOperations(v []*PatchOperation) *Up
 }
 
 // SetResponseType sets the ResponseType field's value.
-func (s *UpdateGatewayResponseInput) SetResponseType(v string) *UpdateGatewayResponseInput {
-	s.ResponseType = &v
+func (s *UpdateGatewayResponseInput) SetResponseType(v GatewayResponseType) *UpdateGatewayResponseInput {
+	s.ResponseType = v
 	return s
 }
 
@@ -21015,7 +21189,7 @@ type UpdateGatewayResponseOutput struct {
 	// THROTTLED
 	// UNAUTHORIZED
 	// UNSUPPORTED_MEDIA_TYPES
-	ResponseType *string `locationName:"responseType" type:"string" enum:"GatewayResponseType"`
+	ResponseType GatewayResponseType `locationName:"responseType" type:"string"`
 
 	// The HTTP status code for this GatewayResponse.
 	StatusCode *string `locationName:"statusCode" type:"string"`
@@ -21050,8 +21224,8 @@ func (s *UpdateGatewayResponseOutput) SetResponseTemplates(v map[string]*string)
 }
 
 // SetResponseType sets the ResponseType field's value.
-func (s *UpdateGatewayResponseOutput) SetResponseType(v string) *UpdateGatewayResponseOutput {
-	s.ResponseType = &v
+func (s *UpdateGatewayResponseOutput) SetResponseType(v GatewayResponseType) *UpdateGatewayResponseOutput {
+	s.ResponseType = v
 	return s
 }
 
@@ -21098,12 +21272,15 @@ func (s UpdateIntegrationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateIntegrationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateIntegrationInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -21180,15 +21357,19 @@ func (s UpdateIntegrationResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateIntegrationResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateIntegrationResponseInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StatusCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
@@ -21266,12 +21447,15 @@ func (s UpdateMethodInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMethodInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateMethodInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -21348,15 +21532,19 @@ func (s UpdateMethodResponseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMethodResponseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateMethodResponseInput"}
+
 	if s.HttpMethod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpMethod"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StatusCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatusCode"))
 	}
@@ -21429,9 +21617,11 @@ func (s UpdateModelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateModelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateModelInput"}
+
 	if s.ModelName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -21492,9 +21682,11 @@ func (s UpdateRequestValidatorInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRequestValidatorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRequestValidatorInput"}
+
 	if s.RequestValidatorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestValidatorId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -21616,9 +21808,11 @@ func (s UpdateResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -21674,6 +21868,7 @@ func (s UpdateRestApiInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRestApiInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRestApiInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
@@ -21728,9 +21923,11 @@ func (s UpdateStageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateStageInput"}
+
 	if s.RestApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RestApiId"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -21793,9 +21990,11 @@ func (s UpdateUsageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUsageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateUsageInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
+
 	if s.UsagePlanId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
@@ -21851,6 +22050,7 @@ func (s UpdateUsagePlanInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUsagePlanInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateUsagePlanInput"}
+
 	if s.UsagePlanId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsagePlanId"))
 	}
@@ -22080,246 +22280,154 @@ func (s *UsagePlanKey) SetValue(v string) *UsagePlanKey {
 	return s
 }
 
+type ApiKeysFormat string
+
+// Enum values for ApiKeysFormat
 const (
-	// ApiKeysFormatCsv is a ApiKeysFormat enum value
-	ApiKeysFormatCsv = "csv"
+	ApiKeysFormatCsv ApiKeysFormat = "csv"
 )
 
 // [Required] The authorizer type. Valid values are TOKEN for a Lambda function
 // using a single authorization token submitted in a custom header, REQUEST
 // for a Lambda function using incoming request parameters, and COGNITO_USER_POOLS
 // for using an Amazon Cognito user pool.
+type AuthorizerType string
+
+// Enum values for AuthorizerType
 const (
-	// AuthorizerTypeToken is a AuthorizerType enum value
-	AuthorizerTypeToken = "TOKEN"
-
-	// AuthorizerTypeRequest is a AuthorizerType enum value
-	AuthorizerTypeRequest = "REQUEST"
-
-	// AuthorizerTypeCognitoUserPools is a AuthorizerType enum value
-	AuthorizerTypeCognitoUserPools = "COGNITO_USER_POOLS"
+	AuthorizerTypeToken            AuthorizerType = "TOKEN"
+	AuthorizerTypeRequest          AuthorizerType = "REQUEST"
+	AuthorizerTypeCognitoUserPools AuthorizerType = "COGNITO_USER_POOLS"
 )
 
 // Returns the size of the CacheCluster.
+type CacheClusterSize string
+
+// Enum values for CacheClusterSize
 const (
-	// CacheClusterSize05 is a CacheClusterSize enum value
-	CacheClusterSize05 = "0.5"
-
-	// CacheClusterSize16 is a CacheClusterSize enum value
-	CacheClusterSize16 = "1.6"
-
-	// CacheClusterSize61 is a CacheClusterSize enum value
-	CacheClusterSize61 = "6.1"
-
-	// CacheClusterSize135 is a CacheClusterSize enum value
-	CacheClusterSize135 = "13.5"
-
-	// CacheClusterSize284 is a CacheClusterSize enum value
-	CacheClusterSize284 = "28.4"
-
-	// CacheClusterSize582 is a CacheClusterSize enum value
-	CacheClusterSize582 = "58.2"
-
-	// CacheClusterSize118 is a CacheClusterSize enum value
-	CacheClusterSize118 = "118"
-
-	// CacheClusterSize237 is a CacheClusterSize enum value
-	CacheClusterSize237 = "237"
+	CacheClusterSize05  CacheClusterSize = "0.5"
+	CacheClusterSize16  CacheClusterSize = "1.6"
+	CacheClusterSize61  CacheClusterSize = "6.1"
+	CacheClusterSize135 CacheClusterSize = "13.5"
+	CacheClusterSize284 CacheClusterSize = "28.4"
+	CacheClusterSize582 CacheClusterSize = "58.2"
+	CacheClusterSize118 CacheClusterSize = "118"
+	CacheClusterSize237 CacheClusterSize = "237"
 )
 
 // Returns the status of the CacheCluster.
+type CacheClusterStatus string
+
+// Enum values for CacheClusterStatus
 const (
-	// CacheClusterStatusCreateInProgress is a CacheClusterStatus enum value
-	CacheClusterStatusCreateInProgress = "CREATE_IN_PROGRESS"
-
-	// CacheClusterStatusAvailable is a CacheClusterStatus enum value
-	CacheClusterStatusAvailable = "AVAILABLE"
-
-	// CacheClusterStatusDeleteInProgress is a CacheClusterStatus enum value
-	CacheClusterStatusDeleteInProgress = "DELETE_IN_PROGRESS"
-
-	// CacheClusterStatusNotAvailable is a CacheClusterStatus enum value
-	CacheClusterStatusNotAvailable = "NOT_AVAILABLE"
-
-	// CacheClusterStatusFlushInProgress is a CacheClusterStatus enum value
-	CacheClusterStatusFlushInProgress = "FLUSH_IN_PROGRESS"
+	CacheClusterStatusCreateInProgress CacheClusterStatus = "CREATE_IN_PROGRESS"
+	CacheClusterStatusAvailable        CacheClusterStatus = "AVAILABLE"
+	CacheClusterStatusDeleteInProgress CacheClusterStatus = "DELETE_IN_PROGRESS"
+	CacheClusterStatusNotAvailable     CacheClusterStatus = "NOT_AVAILABLE"
+	CacheClusterStatusFlushInProgress  CacheClusterStatus = "FLUSH_IN_PROGRESS"
 )
 
-const (
-	// ContentHandlingStrategyConvertToBinary is a ContentHandlingStrategy enum value
-	ContentHandlingStrategyConvertToBinary = "CONVERT_TO_BINARY"
+type ContentHandlingStrategy string
 
-	// ContentHandlingStrategyConvertToText is a ContentHandlingStrategy enum value
-	ContentHandlingStrategyConvertToText = "CONVERT_TO_TEXT"
+// Enum values for ContentHandlingStrategy
+const (
+	ContentHandlingStrategyConvertToBinary ContentHandlingStrategy = "CONVERT_TO_BINARY"
+	ContentHandlingStrategyConvertToText   ContentHandlingStrategy = "CONVERT_TO_TEXT"
 )
 
+type DocumentationPartType string
+
+// Enum values for DocumentationPartType
 const (
-	// DocumentationPartTypeApi is a DocumentationPartType enum value
-	DocumentationPartTypeApi = "API"
-
-	// DocumentationPartTypeAuthorizer is a DocumentationPartType enum value
-	DocumentationPartTypeAuthorizer = "AUTHORIZER"
-
-	// DocumentationPartTypeModel is a DocumentationPartType enum value
-	DocumentationPartTypeModel = "MODEL"
-
-	// DocumentationPartTypeResource is a DocumentationPartType enum value
-	DocumentationPartTypeResource = "RESOURCE"
-
-	// DocumentationPartTypeMethod is a DocumentationPartType enum value
-	DocumentationPartTypeMethod = "METHOD"
-
-	// DocumentationPartTypePathParameter is a DocumentationPartType enum value
-	DocumentationPartTypePathParameter = "PATH_PARAMETER"
-
-	// DocumentationPartTypeQueryParameter is a DocumentationPartType enum value
-	DocumentationPartTypeQueryParameter = "QUERY_PARAMETER"
-
-	// DocumentationPartTypeRequestHeader is a DocumentationPartType enum value
-	DocumentationPartTypeRequestHeader = "REQUEST_HEADER"
-
-	// DocumentationPartTypeRequestBody is a DocumentationPartType enum value
-	DocumentationPartTypeRequestBody = "REQUEST_BODY"
-
-	// DocumentationPartTypeResponse is a DocumentationPartType enum value
-	DocumentationPartTypeResponse = "RESPONSE"
-
-	// DocumentationPartTypeResponseHeader is a DocumentationPartType enum value
-	DocumentationPartTypeResponseHeader = "RESPONSE_HEADER"
-
-	// DocumentationPartTypeResponseBody is a DocumentationPartType enum value
-	DocumentationPartTypeResponseBody = "RESPONSE_BODY"
+	DocumentationPartTypeApi            DocumentationPartType = "API"
+	DocumentationPartTypeAuthorizer     DocumentationPartType = "AUTHORIZER"
+	DocumentationPartTypeModel          DocumentationPartType = "MODEL"
+	DocumentationPartTypeResource       DocumentationPartType = "RESOURCE"
+	DocumentationPartTypeMethod         DocumentationPartType = "METHOD"
+	DocumentationPartTypePathParameter  DocumentationPartType = "PATH_PARAMETER"
+	DocumentationPartTypeQueryParameter DocumentationPartType = "QUERY_PARAMETER"
+	DocumentationPartTypeRequestHeader  DocumentationPartType = "REQUEST_HEADER"
+	DocumentationPartTypeRequestBody    DocumentationPartType = "REQUEST_BODY"
+	DocumentationPartTypeResponse       DocumentationPartType = "RESPONSE"
+	DocumentationPartTypeResponseHeader DocumentationPartType = "RESPONSE_HEADER"
+	DocumentationPartTypeResponseBody   DocumentationPartType = "RESPONSE_BODY"
 )
 
+type GatewayResponseType string
+
+// Enum values for GatewayResponseType
 const (
-	// GatewayResponseTypeDefault4xx is a GatewayResponseType enum value
-	GatewayResponseTypeDefault4xx = "DEFAULT_4XX"
-
-	// GatewayResponseTypeDefault5xx is a GatewayResponseType enum value
-	GatewayResponseTypeDefault5xx = "DEFAULT_5XX"
-
-	// GatewayResponseTypeResourceNotFound is a GatewayResponseType enum value
-	GatewayResponseTypeResourceNotFound = "RESOURCE_NOT_FOUND"
-
-	// GatewayResponseTypeUnauthorized is a GatewayResponseType enum value
-	GatewayResponseTypeUnauthorized = "UNAUTHORIZED"
-
-	// GatewayResponseTypeInvalidApiKey is a GatewayResponseType enum value
-	GatewayResponseTypeInvalidApiKey = "INVALID_API_KEY"
-
-	// GatewayResponseTypeAccessDenied is a GatewayResponseType enum value
-	GatewayResponseTypeAccessDenied = "ACCESS_DENIED"
-
-	// GatewayResponseTypeAuthorizerFailure is a GatewayResponseType enum value
-	GatewayResponseTypeAuthorizerFailure = "AUTHORIZER_FAILURE"
-
-	// GatewayResponseTypeAuthorizerConfigurationError is a GatewayResponseType enum value
-	GatewayResponseTypeAuthorizerConfigurationError = "AUTHORIZER_CONFIGURATION_ERROR"
-
-	// GatewayResponseTypeInvalidSignature is a GatewayResponseType enum value
-	GatewayResponseTypeInvalidSignature = "INVALID_SIGNATURE"
-
-	// GatewayResponseTypeExpiredToken is a GatewayResponseType enum value
-	GatewayResponseTypeExpiredToken = "EXPIRED_TOKEN"
-
-	// GatewayResponseTypeMissingAuthenticationToken is a GatewayResponseType enum value
-	GatewayResponseTypeMissingAuthenticationToken = "MISSING_AUTHENTICATION_TOKEN"
-
-	// GatewayResponseTypeIntegrationFailure is a GatewayResponseType enum value
-	GatewayResponseTypeIntegrationFailure = "INTEGRATION_FAILURE"
-
-	// GatewayResponseTypeIntegrationTimeout is a GatewayResponseType enum value
-	GatewayResponseTypeIntegrationTimeout = "INTEGRATION_TIMEOUT"
-
-	// GatewayResponseTypeApiConfigurationError is a GatewayResponseType enum value
-	GatewayResponseTypeApiConfigurationError = "API_CONFIGURATION_ERROR"
-
-	// GatewayResponseTypeUnsupportedMediaType is a GatewayResponseType enum value
-	GatewayResponseTypeUnsupportedMediaType = "UNSUPPORTED_MEDIA_TYPE"
-
-	// GatewayResponseTypeBadRequestParameters is a GatewayResponseType enum value
-	GatewayResponseTypeBadRequestParameters = "BAD_REQUEST_PARAMETERS"
-
-	// GatewayResponseTypeBadRequestBody is a GatewayResponseType enum value
-	GatewayResponseTypeBadRequestBody = "BAD_REQUEST_BODY"
-
-	// GatewayResponseTypeRequestTooLarge is a GatewayResponseType enum value
-	GatewayResponseTypeRequestTooLarge = "REQUEST_TOO_LARGE"
-
-	// GatewayResponseTypeThrottled is a GatewayResponseType enum value
-	GatewayResponseTypeThrottled = "THROTTLED"
-
-	// GatewayResponseTypeQuotaExceeded is a GatewayResponseType enum value
-	GatewayResponseTypeQuotaExceeded = "QUOTA_EXCEEDED"
+	GatewayResponseTypeDefault4xx                   GatewayResponseType = "DEFAULT_4XX"
+	GatewayResponseTypeDefault5xx                   GatewayResponseType = "DEFAULT_5XX"
+	GatewayResponseTypeResourceNotFound             GatewayResponseType = "RESOURCE_NOT_FOUND"
+	GatewayResponseTypeUnauthorized                 GatewayResponseType = "UNAUTHORIZED"
+	GatewayResponseTypeInvalidApiKey                GatewayResponseType = "INVALID_API_KEY"
+	GatewayResponseTypeAccessDenied                 GatewayResponseType = "ACCESS_DENIED"
+	GatewayResponseTypeAuthorizerFailure            GatewayResponseType = "AUTHORIZER_FAILURE"
+	GatewayResponseTypeAuthorizerConfigurationError GatewayResponseType = "AUTHORIZER_CONFIGURATION_ERROR"
+	GatewayResponseTypeInvalidSignature             GatewayResponseType = "INVALID_SIGNATURE"
+	GatewayResponseTypeExpiredToken                 GatewayResponseType = "EXPIRED_TOKEN"
+	GatewayResponseTypeMissingAuthenticationToken   GatewayResponseType = "MISSING_AUTHENTICATION_TOKEN"
+	GatewayResponseTypeIntegrationFailure           GatewayResponseType = "INTEGRATION_FAILURE"
+	GatewayResponseTypeIntegrationTimeout           GatewayResponseType = "INTEGRATION_TIMEOUT"
+	GatewayResponseTypeApiConfigurationError        GatewayResponseType = "API_CONFIGURATION_ERROR"
+	GatewayResponseTypeUnsupportedMediaType         GatewayResponseType = "UNSUPPORTED_MEDIA_TYPE"
+	GatewayResponseTypeBadRequestParameters         GatewayResponseType = "BAD_REQUEST_PARAMETERS"
+	GatewayResponseTypeBadRequestBody               GatewayResponseType = "BAD_REQUEST_BODY"
+	GatewayResponseTypeRequestTooLarge              GatewayResponseType = "REQUEST_TOO_LARGE"
+	GatewayResponseTypeThrottled                    GatewayResponseType = "THROTTLED"
+	GatewayResponseTypeQuotaExceeded                GatewayResponseType = "QUOTA_EXCEEDED"
 )
 
 // The integration type. The valid value is HTTP for integrating with an HTTP
 // back end, AWS for any AWS service endpoints, MOCK for testing without actually
 // invoking the back end, HTTP_PROXY for integrating with the HTTP proxy integration,
 // or AWS_PROXY for integrating with the Lambda proxy integration type.
+type IntegrationType string
+
+// Enum values for IntegrationType
 const (
-	// IntegrationTypeHttp is a IntegrationType enum value
-	IntegrationTypeHttp = "HTTP"
-
-	// IntegrationTypeAws is a IntegrationType enum value
-	IntegrationTypeAws = "AWS"
-
-	// IntegrationTypeMock is a IntegrationType enum value
-	IntegrationTypeMock = "MOCK"
-
-	// IntegrationTypeHttpProxy is a IntegrationType enum value
-	IntegrationTypeHttpProxy = "HTTP_PROXY"
-
-	// IntegrationTypeAwsProxy is a IntegrationType enum value
-	IntegrationTypeAwsProxy = "AWS_PROXY"
+	IntegrationTypeHttp      IntegrationType = "HTTP"
+	IntegrationTypeAws       IntegrationType = "AWS"
+	IntegrationTypeMock      IntegrationType = "MOCK"
+	IntegrationTypeHttpProxy IntegrationType = "HTTP_PROXY"
+	IntegrationTypeAwsProxy  IntegrationType = "AWS_PROXY"
 )
 
+type Op string
+
+// Enum values for Op
 const (
-	// OpAdd is a Op enum value
-	OpAdd = "add"
-
-	// OpRemove is a Op enum value
-	OpRemove = "remove"
-
-	// OpReplace is a Op enum value
-	OpReplace = "replace"
-
-	// OpMove is a Op enum value
-	OpMove = "move"
-
-	// OpCopy is a Op enum value
-	OpCopy = "copy"
-
-	// OpTest is a Op enum value
-	OpTest = "test"
+	OpAdd     Op = "add"
+	OpRemove  Op = "remove"
+	OpReplace Op = "replace"
+	OpMove    Op = "move"
+	OpCopy    Op = "copy"
+	OpTest    Op = "test"
 )
 
-const (
-	// PutModeMerge is a PutMode enum value
-	PutModeMerge = "merge"
+type PutMode string
 
-	// PutModeOverwrite is a PutMode enum value
-	PutModeOverwrite = "overwrite"
+// Enum values for PutMode
+const (
+	PutModeMerge     PutMode = "merge"
+	PutModeOverwrite PutMode = "overwrite"
 )
 
+type QuotaPeriodType string
+
+// Enum values for QuotaPeriodType
 const (
-	// QuotaPeriodTypeDay is a QuotaPeriodType enum value
-	QuotaPeriodTypeDay = "DAY"
-
-	// QuotaPeriodTypeWeek is a QuotaPeriodType enum value
-	QuotaPeriodTypeWeek = "WEEK"
-
-	// QuotaPeriodTypeMonth is a QuotaPeriodType enum value
-	QuotaPeriodTypeMonth = "MONTH"
+	QuotaPeriodTypeDay   QuotaPeriodType = "DAY"
+	QuotaPeriodTypeWeek  QuotaPeriodType = "WEEK"
+	QuotaPeriodTypeMonth QuotaPeriodType = "MONTH"
 )
 
+type UnauthorizedCacheControlHeaderStrategy string
+
+// Enum values for UnauthorizedCacheControlHeaderStrategy
 const (
-	// UnauthorizedCacheControlHeaderStrategyFailWith403 is a UnauthorizedCacheControlHeaderStrategy enum value
-	UnauthorizedCacheControlHeaderStrategyFailWith403 = "FAIL_WITH_403"
-
-	// UnauthorizedCacheControlHeaderStrategySucceedWithResponseHeader is a UnauthorizedCacheControlHeaderStrategy enum value
-	UnauthorizedCacheControlHeaderStrategySucceedWithResponseHeader = "SUCCEED_WITH_RESPONSE_HEADER"
-
-	// UnauthorizedCacheControlHeaderStrategySucceedWithoutResponseHeader is a UnauthorizedCacheControlHeaderStrategy enum value
-	UnauthorizedCacheControlHeaderStrategySucceedWithoutResponseHeader = "SUCCEED_WITHOUT_RESPONSE_HEADER"
+	UnauthorizedCacheControlHeaderStrategyFailWith403                  UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"
+	UnauthorizedCacheControlHeaderStrategySucceedWithResponseHeader    UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITH_RESPONSE_HEADER"
+	UnauthorizedCacheControlHeaderStrategySucceedWithoutResponseHeader UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITHOUT_RESPONSE_HEADER"
 )

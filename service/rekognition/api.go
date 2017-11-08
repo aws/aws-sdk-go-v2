@@ -1968,9 +1968,11 @@ func (s CompareFacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompareFacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CompareFacesInput"}
+
 	if s.SourceImage == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceImage"))
 	}
+
 	if s.TargetImage == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetImage"))
 	}
@@ -2069,7 +2071,7 @@ type CompareFacesOutput struct {
 	// is null and the SourceImageFace bounding box coordinates represent the location
 	// of the face after Exif metadata is used to correct the orientation. Images
 	// in .png format don't contain Exif metadata.
-	SourceImageOrientationCorrection *string `type:"string" enum:"OrientationCorrection"`
+	SourceImageOrientationCorrection OrientationCorrection `type:"string"`
 
 	// The orientation of the target image (in counterclockwise direction). If your
 	// application displays the target image, you can use this value to correct
@@ -2083,7 +2085,7 @@ type CompareFacesOutput struct {
 	// is null and the bounding box coordinates in FaceMatches and UnmatchedFaces
 	// represent the location of the face after Exif metadata is used to correct
 	// the orientation. Images in .png format don't contain Exif metadata.
-	TargetImageOrientationCorrection *string `type:"string" enum:"OrientationCorrection"`
+	TargetImageOrientationCorrection OrientationCorrection `type:"string"`
 
 	// An array of faces in the target image that did not match the source image
 	// face.
@@ -2113,14 +2115,14 @@ func (s *CompareFacesOutput) SetSourceImageFace(v *ComparedSourceImageFace) *Com
 }
 
 // SetSourceImageOrientationCorrection sets the SourceImageOrientationCorrection field's value.
-func (s *CompareFacesOutput) SetSourceImageOrientationCorrection(v string) *CompareFacesOutput {
-	s.SourceImageOrientationCorrection = &v
+func (s *CompareFacesOutput) SetSourceImageOrientationCorrection(v OrientationCorrection) *CompareFacesOutput {
+	s.SourceImageOrientationCorrection = v
 	return s
 }
 
 // SetTargetImageOrientationCorrection sets the TargetImageOrientationCorrection field's value.
-func (s *CompareFacesOutput) SetTargetImageOrientationCorrection(v string) *CompareFacesOutput {
-	s.TargetImageOrientationCorrection = &v
+func (s *CompareFacesOutput) SetTargetImageOrientationCorrection(v OrientationCorrection) *CompareFacesOutput {
+	s.TargetImageOrientationCorrection = v
 	return s
 }
 
@@ -2249,6 +2251,7 @@ func (s CreateCollectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCollectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCollectionInput"}
+
 	if s.CollectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
@@ -2323,6 +2326,7 @@ func (s DeleteCollectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCollectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCollectionInput"}
+
 	if s.CollectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
@@ -2392,12 +2396,14 @@ func (s DeleteFacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFacesInput"}
+
 	if s.CollectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
+
 	if s.FaceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FaceIds"))
 	}
@@ -2458,7 +2464,7 @@ type DetectFacesInput struct {
 	//
 	// If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator
 	// to determine which attributes to return (in this case, all attributes).
-	Attributes []*string `type:"list"`
+	Attributes []Attribute `type:"list"`
 
 	// The image in which you want to detect faces. You can specify a blob or an
 	// S3 object.
@@ -2480,6 +2486,7 @@ func (s DetectFacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetectFacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetectFacesInput"}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
@@ -2496,7 +2503,7 @@ func (s *DetectFacesInput) Validate() error {
 }
 
 // SetAttributes sets the Attributes field's value.
-func (s *DetectFacesInput) SetAttributes(v []*string) *DetectFacesInput {
+func (s *DetectFacesInput) SetAttributes(v []Attribute) *DetectFacesInput {
 	s.Attributes = v
 	return s
 }
@@ -2524,7 +2531,7 @@ type DetectFacesOutput struct {
 	// OrientationCorrection is null and the FaceDetails bounding box coordinates
 	// represent face locations after Exif metadata is used to correct the image
 	// orientation. Images in .png format don't contain Exif metadata.
-	OrientationCorrection *string `type:"string" enum:"OrientationCorrection"`
+	OrientationCorrection OrientationCorrection `type:"string"`
 }
 
 // String returns the string representation
@@ -2544,8 +2551,8 @@ func (s *DetectFacesOutput) SetFaceDetails(v []*FaceDetail) *DetectFacesOutput {
 }
 
 // SetOrientationCorrection sets the OrientationCorrection field's value.
-func (s *DetectFacesOutput) SetOrientationCorrection(v string) *DetectFacesOutput {
-	s.OrientationCorrection = &v
+func (s *DetectFacesOutput) SetOrientationCorrection(v OrientationCorrection) *DetectFacesOutput {
+	s.OrientationCorrection = v
 	return s
 }
 
@@ -2582,6 +2589,7 @@ func (s DetectLabelsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetectLabelsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetectLabelsInput"}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
@@ -2629,7 +2637,7 @@ type DetectLabelsOutput struct {
 	// If the input image Exif metadata populates the orientation field, Amazon
 	// Rekognition does not perform orientation correction and the value of OrientationCorrection
 	// will be null.
-	OrientationCorrection *string `type:"string" enum:"OrientationCorrection"`
+	OrientationCorrection OrientationCorrection `type:"string"`
 }
 
 // String returns the string representation
@@ -2649,8 +2657,8 @@ func (s *DetectLabelsOutput) SetLabels(v []*Label) *DetectLabelsOutput {
 }
 
 // SetOrientationCorrection sets the OrientationCorrection field's value.
-func (s *DetectLabelsOutput) SetOrientationCorrection(v string) *DetectLabelsOutput {
-	s.OrientationCorrection = &v
+func (s *DetectLabelsOutput) SetOrientationCorrection(v OrientationCorrection) *DetectLabelsOutput {
+	s.OrientationCorrection = v
 	return s
 }
 
@@ -2684,6 +2692,7 @@ func (s DetectModerationLabelsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetectModerationLabelsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetectModerationLabelsInput"}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
@@ -2745,7 +2754,7 @@ type Emotion struct {
 	Confidence *float64 `type:"float"`
 
 	// Type of emotion detected.
-	Type *string `type:"string" enum:"EmotionName"`
+	Type EmotionName `type:"string"`
 }
 
 // String returns the string representation
@@ -2765,8 +2774,8 @@ func (s *Emotion) SetConfidence(v float64) *Emotion {
 }
 
 // SetType sets the Type field's value.
-func (s *Emotion) SetType(v string) *Emotion {
-	s.Type = &v
+func (s *Emotion) SetType(v EmotionName) *Emotion {
+	s.Type = v
 	return s
 }
 
@@ -3138,7 +3147,7 @@ type Gender struct {
 	Confidence *float64 `type:"float"`
 
 	// Gender of the face.
-	Value *string `type:"string" enum:"GenderType"`
+	Value GenderType `type:"string"`
 }
 
 // String returns the string representation
@@ -3158,8 +3167,8 @@ func (s *Gender) SetConfidence(v float64) *Gender {
 }
 
 // SetValue sets the Value field's value.
-func (s *Gender) SetValue(v string) *Gender {
-	s.Value = &v
+func (s *Gender) SetValue(v GenderType) *Gender {
+	s.Value = v
 	return s
 }
 
@@ -3186,6 +3195,7 @@ func (s GetCelebrityInfoInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCelebrityInfoInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCelebrityInfoInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -3362,7 +3372,7 @@ type IndexFacesInput struct {
 	//
 	// If you provide both, ["ALL", "DEFAULT"], the service uses a logical AND operator
 	// to determine which attributes to return (in this case, all attributes).
-	DetectionAttributes []*string `type:"list"`
+	DetectionAttributes []Attribute `type:"list"`
 
 	// ID you want to assign to all the faces detected in the image.
 	ExternalImageId *string `min:"1" type:"string"`
@@ -3386,6 +3396,7 @@ func (s IndexFacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IndexFacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IndexFacesInput"}
+
 	if s.CollectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
@@ -3395,6 +3406,7 @@ func (s *IndexFacesInput) Validate() error {
 	if s.ExternalImageId != nil && len(*s.ExternalImageId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ExternalImageId", 1))
 	}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
@@ -3417,7 +3429,7 @@ func (s *IndexFacesInput) SetCollectionId(v string) *IndexFacesInput {
 }
 
 // SetDetectionAttributes sets the DetectionAttributes field's value.
-func (s *IndexFacesInput) SetDetectionAttributes(v []*string) *IndexFacesInput {
+func (s *IndexFacesInput) SetDetectionAttributes(v []Attribute) *IndexFacesInput {
 	s.DetectionAttributes = v
 	return s
 }
@@ -3451,7 +3463,7 @@ type IndexFacesOutput struct {
 	// the value of OrientationCorrection is null and the bounding box coordinates
 	// in FaceRecords represent face locations after Exif metadata is used to correct
 	// the image orientation. Images in .png format don't contain Exif metadata.
-	OrientationCorrection *string `type:"string" enum:"OrientationCorrection"`
+	OrientationCorrection OrientationCorrection `type:"string"`
 }
 
 // String returns the string representation
@@ -3471,8 +3483,8 @@ func (s *IndexFacesOutput) SetFaceRecords(v []*FaceRecord) *IndexFacesOutput {
 }
 
 // SetOrientationCorrection sets the OrientationCorrection field's value.
-func (s *IndexFacesOutput) SetOrientationCorrection(v string) *IndexFacesOutput {
-	s.OrientationCorrection = &v
+func (s *IndexFacesOutput) SetOrientationCorrection(v OrientationCorrection) *IndexFacesOutput {
+	s.OrientationCorrection = v
 	return s
 }
 
@@ -3515,7 +3527,7 @@ type Landmark struct {
 	_ struct{} `type:"structure"`
 
 	// Type of the landmark.
-	Type *string `type:"string" enum:"LandmarkType"`
+	Type LandmarkType `type:"string"`
 
 	// x-coordinate from the top left of the landmark expressed as the ratio of
 	// the width of the image. For example, if the images is 700x200 and the x-coordinate
@@ -3539,8 +3551,8 @@ func (s Landmark) GoString() string {
 }
 
 // SetType sets the Type field's value.
-func (s *Landmark) SetType(v string) *Landmark {
-	s.Type = &v
+func (s *Landmark) SetType(v LandmarkType) *Landmark {
+	s.Type = v
 	return s
 }
 
@@ -3651,6 +3663,7 @@ func (s ListFacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListFacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListFacesInput"}
+
 	if s.CollectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
@@ -3897,6 +3910,7 @@ func (s RecognizeCelebritiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecognizeCelebritiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RecognizeCelebritiesInput"}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
@@ -3937,7 +3951,7 @@ type RecognizeCelebritiesOutput struct {
 	// bounding box coordinates represent face locations after Exif metadata is
 	// used to correct the image orientation. Images in .png format don't contain
 	// Exif metadata.
-	OrientationCorrection *string `type:"string" enum:"OrientationCorrection"`
+	OrientationCorrection OrientationCorrection `type:"string"`
 
 	// Details about each unrecognized face in the image.
 	UnrecognizedFaces []*ComparedFace `type:"list"`
@@ -3960,8 +3974,8 @@ func (s *RecognizeCelebritiesOutput) SetCelebrityFaces(v []*Celebrity) *Recogniz
 }
 
 // SetOrientationCorrection sets the OrientationCorrection field's value.
-func (s *RecognizeCelebritiesOutput) SetOrientationCorrection(v string) *RecognizeCelebritiesOutput {
-	s.OrientationCorrection = &v
+func (s *RecognizeCelebritiesOutput) SetOrientationCorrection(v OrientationCorrection) *RecognizeCelebritiesOutput {
+	s.OrientationCorrection = v
 	return s
 }
 
@@ -4074,12 +4088,14 @@ func (s SearchFacesByImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SearchFacesByImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SearchFacesByImageInput"}
+
 	if s.CollectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
@@ -4201,12 +4217,14 @@ func (s SearchFacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SearchFacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SearchFacesInput"}
+
 	if s.CollectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
+
 	if s.FaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FaceId"))
 	}
@@ -4345,135 +4363,73 @@ func (s *Sunglasses) SetValue(v bool) *Sunglasses {
 	return s
 }
 
-const (
-	// AttributeDefault is a Attribute enum value
-	AttributeDefault = "DEFAULT"
+type Attribute string
 
-	// AttributeAll is a Attribute enum value
-	AttributeAll = "ALL"
+// Enum values for Attribute
+const (
+	AttributeDefault Attribute = "DEFAULT"
+	AttributeAll     Attribute = "ALL"
 )
 
+type EmotionName string
+
+// Enum values for EmotionName
 const (
-	// EmotionNameHappy is a EmotionName enum value
-	EmotionNameHappy = "HAPPY"
-
-	// EmotionNameSad is a EmotionName enum value
-	EmotionNameSad = "SAD"
-
-	// EmotionNameAngry is a EmotionName enum value
-	EmotionNameAngry = "ANGRY"
-
-	// EmotionNameConfused is a EmotionName enum value
-	EmotionNameConfused = "CONFUSED"
-
-	// EmotionNameDisgusted is a EmotionName enum value
-	EmotionNameDisgusted = "DISGUSTED"
-
-	// EmotionNameSurprised is a EmotionName enum value
-	EmotionNameSurprised = "SURPRISED"
-
-	// EmotionNameCalm is a EmotionName enum value
-	EmotionNameCalm = "CALM"
-
-	// EmotionNameUnknown is a EmotionName enum value
-	EmotionNameUnknown = "UNKNOWN"
+	EmotionNameHappy     EmotionName = "HAPPY"
+	EmotionNameSad       EmotionName = "SAD"
+	EmotionNameAngry     EmotionName = "ANGRY"
+	EmotionNameConfused  EmotionName = "CONFUSED"
+	EmotionNameDisgusted EmotionName = "DISGUSTED"
+	EmotionNameSurprised EmotionName = "SURPRISED"
+	EmotionNameCalm      EmotionName = "CALM"
+	EmotionNameUnknown   EmotionName = "UNKNOWN"
 )
 
-const (
-	// GenderTypeMale is a GenderType enum value
-	GenderTypeMale = "Male"
+type GenderType string
 
-	// GenderTypeFemale is a GenderType enum value
-	GenderTypeFemale = "Female"
+// Enum values for GenderType
+const (
+	GenderTypeMale   GenderType = "Male"
+	GenderTypeFemale GenderType = "Female"
 )
 
+type LandmarkType string
+
+// Enum values for LandmarkType
 const (
-	// LandmarkTypeEyeLeft is a LandmarkType enum value
-	LandmarkTypeEyeLeft = "eyeLeft"
-
-	// LandmarkTypeEyeRight is a LandmarkType enum value
-	LandmarkTypeEyeRight = "eyeRight"
-
-	// LandmarkTypeNose is a LandmarkType enum value
-	LandmarkTypeNose = "nose"
-
-	// LandmarkTypeMouthLeft is a LandmarkType enum value
-	LandmarkTypeMouthLeft = "mouthLeft"
-
-	// LandmarkTypeMouthRight is a LandmarkType enum value
-	LandmarkTypeMouthRight = "mouthRight"
-
-	// LandmarkTypeLeftEyeBrowLeft is a LandmarkType enum value
-	LandmarkTypeLeftEyeBrowLeft = "leftEyeBrowLeft"
-
-	// LandmarkTypeLeftEyeBrowRight is a LandmarkType enum value
-	LandmarkTypeLeftEyeBrowRight = "leftEyeBrowRight"
-
-	// LandmarkTypeLeftEyeBrowUp is a LandmarkType enum value
-	LandmarkTypeLeftEyeBrowUp = "leftEyeBrowUp"
-
-	// LandmarkTypeRightEyeBrowLeft is a LandmarkType enum value
-	LandmarkTypeRightEyeBrowLeft = "rightEyeBrowLeft"
-
-	// LandmarkTypeRightEyeBrowRight is a LandmarkType enum value
-	LandmarkTypeRightEyeBrowRight = "rightEyeBrowRight"
-
-	// LandmarkTypeRightEyeBrowUp is a LandmarkType enum value
-	LandmarkTypeRightEyeBrowUp = "rightEyeBrowUp"
-
-	// LandmarkTypeLeftEyeLeft is a LandmarkType enum value
-	LandmarkTypeLeftEyeLeft = "leftEyeLeft"
-
-	// LandmarkTypeLeftEyeRight is a LandmarkType enum value
-	LandmarkTypeLeftEyeRight = "leftEyeRight"
-
-	// LandmarkTypeLeftEyeUp is a LandmarkType enum value
-	LandmarkTypeLeftEyeUp = "leftEyeUp"
-
-	// LandmarkTypeLeftEyeDown is a LandmarkType enum value
-	LandmarkTypeLeftEyeDown = "leftEyeDown"
-
-	// LandmarkTypeRightEyeLeft is a LandmarkType enum value
-	LandmarkTypeRightEyeLeft = "rightEyeLeft"
-
-	// LandmarkTypeRightEyeRight is a LandmarkType enum value
-	LandmarkTypeRightEyeRight = "rightEyeRight"
-
-	// LandmarkTypeRightEyeUp is a LandmarkType enum value
-	LandmarkTypeRightEyeUp = "rightEyeUp"
-
-	// LandmarkTypeRightEyeDown is a LandmarkType enum value
-	LandmarkTypeRightEyeDown = "rightEyeDown"
-
-	// LandmarkTypeNoseLeft is a LandmarkType enum value
-	LandmarkTypeNoseLeft = "noseLeft"
-
-	// LandmarkTypeNoseRight is a LandmarkType enum value
-	LandmarkTypeNoseRight = "noseRight"
-
-	// LandmarkTypeMouthUp is a LandmarkType enum value
-	LandmarkTypeMouthUp = "mouthUp"
-
-	// LandmarkTypeMouthDown is a LandmarkType enum value
-	LandmarkTypeMouthDown = "mouthDown"
-
-	// LandmarkTypeLeftPupil is a LandmarkType enum value
-	LandmarkTypeLeftPupil = "leftPupil"
-
-	// LandmarkTypeRightPupil is a LandmarkType enum value
-	LandmarkTypeRightPupil = "rightPupil"
+	LandmarkTypeEyeLeft           LandmarkType = "eyeLeft"
+	LandmarkTypeEyeRight          LandmarkType = "eyeRight"
+	LandmarkTypeNose              LandmarkType = "nose"
+	LandmarkTypeMouthLeft         LandmarkType = "mouthLeft"
+	LandmarkTypeMouthRight        LandmarkType = "mouthRight"
+	LandmarkTypeLeftEyeBrowLeft   LandmarkType = "leftEyeBrowLeft"
+	LandmarkTypeLeftEyeBrowRight  LandmarkType = "leftEyeBrowRight"
+	LandmarkTypeLeftEyeBrowUp     LandmarkType = "leftEyeBrowUp"
+	LandmarkTypeRightEyeBrowLeft  LandmarkType = "rightEyeBrowLeft"
+	LandmarkTypeRightEyeBrowRight LandmarkType = "rightEyeBrowRight"
+	LandmarkTypeRightEyeBrowUp    LandmarkType = "rightEyeBrowUp"
+	LandmarkTypeLeftEyeLeft       LandmarkType = "leftEyeLeft"
+	LandmarkTypeLeftEyeRight      LandmarkType = "leftEyeRight"
+	LandmarkTypeLeftEyeUp         LandmarkType = "leftEyeUp"
+	LandmarkTypeLeftEyeDown       LandmarkType = "leftEyeDown"
+	LandmarkTypeRightEyeLeft      LandmarkType = "rightEyeLeft"
+	LandmarkTypeRightEyeRight     LandmarkType = "rightEyeRight"
+	LandmarkTypeRightEyeUp        LandmarkType = "rightEyeUp"
+	LandmarkTypeRightEyeDown      LandmarkType = "rightEyeDown"
+	LandmarkTypeNoseLeft          LandmarkType = "noseLeft"
+	LandmarkTypeNoseRight         LandmarkType = "noseRight"
+	LandmarkTypeMouthUp           LandmarkType = "mouthUp"
+	LandmarkTypeMouthDown         LandmarkType = "mouthDown"
+	LandmarkTypeLeftPupil         LandmarkType = "leftPupil"
+	LandmarkTypeRightPupil        LandmarkType = "rightPupil"
 )
 
+type OrientationCorrection string
+
+// Enum values for OrientationCorrection
 const (
-	// OrientationCorrectionRotate0 is a OrientationCorrection enum value
-	OrientationCorrectionRotate0 = "ROTATE_0"
-
-	// OrientationCorrectionRotate90 is a OrientationCorrection enum value
-	OrientationCorrectionRotate90 = "ROTATE_90"
-
-	// OrientationCorrectionRotate180 is a OrientationCorrection enum value
-	OrientationCorrectionRotate180 = "ROTATE_180"
-
-	// OrientationCorrectionRotate270 is a OrientationCorrection enum value
-	OrientationCorrectionRotate270 = "ROTATE_270"
+	OrientationCorrectionRotate0   OrientationCorrection = "ROTATE_0"
+	OrientationCorrectionRotate90  OrientationCorrection = "ROTATE_90"
+	OrientationCorrectionRotate180 OrientationCorrection = "ROTATE_180"
+	OrientationCorrectionRotate270 OrientationCorrection = "ROTATE_270"
 )

@@ -37,9 +37,15 @@ type ShapeValidation struct {
 
 var validationGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").Parse(`
 {{ define "requiredValue" -}}
+{{ if .Ref.Shape.IsEnum -}}
+    if len(s.{{ .Name }}) == 0 { 
+		invalidParams.Add(aws.NewErrParamRequired("{{ .Name }}"))
+    }
+{{- else }}		
     if s.{{ .Name }} == nil { 
 		invalidParams.Add(aws.NewErrParamRequired("{{ .Name }}"))
     }
+{{- end }}
 {{- end }}
 {{ define "minLen" -}}
 	if s.{{ .Name }} != nil && len(s.{{ .Name }}) < {{ .Ref.Shape.Min }} {
@@ -47,14 +53,18 @@ var validationGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").
 	}
 {{- end }}
 {{ define "minLenString" -}}
+{{ if (not .Ref.Shape.IsEnum) -}}
 	if s.{{ .Name }} != nil && len(*s.{{ .Name }}) < {{ .Ref.Shape.Min }} {
 		invalidParams.Add(aws.NewErrParamMinLen("{{ .Name }}", {{ .Ref.Shape.Min }}))
 	}
 {{- end }}
+{{- end }}
 {{ define "minVal" -}}
+{{ if (not .Ref.Shape.IsEnum) -}}
 	if s.{{ .Name }} != nil && *s.{{ .Name }} < {{ .Ref.Shape.Min }} {
 		invalidParams.Add(aws.NewErrParamMinValue("{{ .Name }}", {{ .Ref.Shape.Min }}))
 	}
+{{- end }}
 {{- end }}
 {{ define "nestedMapList" -}}
     if s.{{ .Name }} != nil { 
@@ -78,11 +88,6 @@ var validationGoCodeTmpls = template.Must(template.New("validationGoCodeTmpls").
 // GoCode returns the generated Go code for the Shape with its validation type.
 func (sv ShapeValidation) GoCode() string {
 	var err error
-
-	// TODO: Validate?
-	if sv.Ref.Shape.IsEnum() {
-		return ""
-	}
 
 	w := &bytes.Buffer{}
 	switch sv.Type {

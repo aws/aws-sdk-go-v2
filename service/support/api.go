@@ -1450,6 +1450,7 @@ func (s AddAttachmentsToSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddAttachmentsToSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddAttachmentsToSetInput"}
+
 	if s.Attachments == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attachments"))
 	}
@@ -1546,6 +1547,7 @@ func (s AddCommunicationToCaseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddCommunicationToCaseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddCommunicationToCaseInput"}
+
 	if s.CommunicationBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CommunicationBody"))
 	}
@@ -2003,12 +2005,14 @@ func (s CreateCaseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCaseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCaseInput"}
+
 	if s.CommunicationBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CommunicationBody"))
 	}
 	if s.CommunicationBody != nil && len(*s.CommunicationBody) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CommunicationBody", 1))
 	}
+
 	if s.Subject == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subject"))
 	}
@@ -2124,6 +2128,7 @@ func (s DescribeAttachmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAttachmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAttachmentInput"}
+
 	if s.AttachmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttachmentId"))
 	}
@@ -2355,6 +2360,7 @@ func (s DescribeCommunicationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCommunicationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCommunicationsInput"}
+
 	if s.CaseId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CaseId"))
 	}
@@ -2569,6 +2575,7 @@ func (s DescribeTrustedAdvisorCheckRefreshStatusesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTrustedAdvisorCheckRefreshStatusesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckRefreshStatusesInput"}
+
 	if s.CheckIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CheckIds"))
 	}
@@ -2641,6 +2648,7 @@ func (s DescribeTrustedAdvisorCheckResultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTrustedAdvisorCheckResultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckResultInput"}
+
 	if s.CheckId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CheckId"))
 	}
@@ -2712,6 +2720,7 @@ func (s DescribeTrustedAdvisorCheckSummariesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTrustedAdvisorCheckSummariesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorCheckSummariesInput"}
+
 	if s.CheckIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CheckIds"))
 	}
@@ -2781,6 +2790,7 @@ func (s DescribeTrustedAdvisorChecksInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTrustedAdvisorChecksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTrustedAdvisorChecksInput"}
+
 	if s.Language == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Language"))
 	}
@@ -2884,6 +2894,7 @@ func (s RefreshTrustedAdvisorCheckInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RefreshTrustedAdvisorCheckInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RefreshTrustedAdvisorCheckInput"}
+
 	if s.CheckId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CheckId"))
 	}

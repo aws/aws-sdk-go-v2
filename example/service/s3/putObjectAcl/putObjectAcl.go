@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
@@ -39,7 +38,7 @@ func main() {
 	flag.Parse()
 
 	// Based off the type, fields must be excluded.
-	switch *granteeTypePtr {
+	switch s3.Type(*granteeTypePtr) {
 	case s3.TypeCanonicalUser:
 		emailPtr, uriPtr = nil, nil
 		if *displayNamePtr == "" {
@@ -76,13 +75,13 @@ func main() {
 			Grants: []*s3.Grant{
 				{
 					Grantee: &s3.Grantee{
-						Type:         granteeTypePtr,
+						Type:         s3.Type(*granteeTypePtr),
 						DisplayName:  displayNamePtr,
 						URI:          uriPtr,
 						EmailAddress: emailPtr,
 						ID:           userPtr,
 					},
-					Permission: aws.String(s3.BucketLogsPermissionFullControl),
+					Permission: s3.PermissionFullControl,
 				},
 			},
 		},

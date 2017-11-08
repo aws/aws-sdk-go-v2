@@ -56,7 +56,7 @@ func TestMD5InPutBucketLifecycle(t *testing.T) {
 				{
 					ID:     aws.String("ID"),
 					Prefix: aws.String("Prefix"),
-					Status: aws.String("Enabled"),
+					Status: s3.ExpirationStatusEnabled,
 				},
 			},
 		},
@@ -105,7 +105,7 @@ func TestMD5InPutBucketLifecycleConfiguration(t *testing.T) {
 		Bucket: aws.String("bucketname"),
 		LifecycleConfiguration: &s3.BucketLifecycleConfiguration{
 			Rules: []*s3.LifecycleRule{
-				{Prefix: aws.String("prefix"), Status: aws.String(s3.ExpirationStatusEnabled)},
+				{Prefix: aws.String("prefix"), Status: s3.ExpirationStatusEnabled},
 			},
 		},
 	})
@@ -131,7 +131,7 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 
 	svc := s3.New(cfg)
 
-	_, err := svc.PutObject(&s3.PutObjectInput{
+	req, _ := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: aws.String("my_bucket"),
 		Key:    aws.String("my_key"),
 		Body:   strings.NewReader(""),
@@ -142,6 +142,11 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 		}(),
 	})
 
+	req.Handlers.UnmarshalMeta.PushBack(func(r *request.Request) {
+		t.Log("WEE")
+	})
+
+	err := req.Send()
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}

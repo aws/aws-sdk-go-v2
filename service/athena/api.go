@@ -1164,6 +1164,7 @@ func (s BatchGetNamedQueryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetNamedQueryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetNamedQueryInput"}
+
 	if s.NamedQueryIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NamedQueryIds"))
 	}
@@ -1239,6 +1240,7 @@ func (s BatchGetQueryExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetQueryExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetQueryExecutionInput"}
+
 	if s.QueryExecutionIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionIds"))
 	}
@@ -1311,7 +1313,7 @@ type ColumnInfo struct {
 	Name *string `type:"string" required:"true"`
 
 	// Indicates the column's nullable status.
-	Nullable *string `type:"string" enum:"ColumnNullable"`
+	Nullable ColumnNullable `type:"string"`
 
 	// For DECIMAL data types, specifies the total number of digits, up to 38. For
 	// performance reasons, we recommend up to 18 digits.
@@ -1368,8 +1370,8 @@ func (s *ColumnInfo) SetName(v string) *ColumnInfo {
 }
 
 // SetNullable sets the Nullable field's value.
-func (s *ColumnInfo) SetNullable(v string) *ColumnInfo {
-	s.Nullable = &v
+func (s *ColumnInfo) SetNullable(v ColumnNullable) *ColumnInfo {
+	s.Nullable = v
 	return s
 }
 
@@ -1452,6 +1454,7 @@ func (s *CreateNamedQueryInput) Validate() error {
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 32))
 	}
+
 	if s.Database == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Database"))
 	}
@@ -1461,12 +1464,14 @@ func (s *CreateNamedQueryInput) Validate() error {
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.QueryString == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
 	}
@@ -1582,6 +1587,7 @@ func (s DeleteNamedQueryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNamedQueryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNamedQueryInput"}
+
 	if s.NamedQueryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NamedQueryId"))
 	}
@@ -1624,7 +1630,7 @@ type EncryptionConfiguration struct {
 	// client-side encryption with KMS-managed keys (CSE-KMS) is used.
 	//
 	// EncryptionOption is a required field
-	EncryptionOption *string `type:"string" required:"true" enum:"EncryptionOption"`
+	EncryptionOption EncryptionOption `type:"string" required:"true"`
 
 	// For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 	KmsKey *string `type:"string"`
@@ -1643,7 +1649,7 @@ func (s EncryptionConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EncryptionConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EncryptionConfiguration"}
-	if s.EncryptionOption == nil {
+	if len(s.EncryptionOption) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("EncryptionOption"))
 	}
 
@@ -1654,8 +1660,8 @@ func (s *EncryptionConfiguration) Validate() error {
 }
 
 // SetEncryptionOption sets the EncryptionOption field's value.
-func (s *EncryptionConfiguration) SetEncryptionOption(v string) *EncryptionConfiguration {
-	s.EncryptionOption = &v
+func (s *EncryptionConfiguration) SetEncryptionOption(v EncryptionOption) *EncryptionConfiguration {
+	s.EncryptionOption = v
 	return s
 }
 
@@ -1688,6 +1694,7 @@ func (s GetNamedQueryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetNamedQueryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetNamedQueryInput"}
+
 	if s.NamedQueryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NamedQueryId"))
 	}
@@ -1751,6 +1758,7 @@ func (s GetQueryExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueryExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetQueryExecutionInput"}
+
 	if s.QueryExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionId"))
 	}
@@ -1821,6 +1829,7 @@ func (s GetQueryResultsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueryResultsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetQueryResultsInput"}
+
 	if s.QueryExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionId"))
 	}
@@ -2244,7 +2253,7 @@ type QueryExecutionStatus struct {
 	// results. SUCCEEDED indicates that the query completed without error. FAILED
 	// indicates that the query experienced an error and did not complete processing.
 	// CANCELLED indicates that user input interrupted query execution.
-	State *string `type:"string" enum:"QueryExecutionState"`
+	State QueryExecutionState `type:"string"`
 
 	// Further detail about the status of the query.
 	StateChangeReason *string `type:"string"`
@@ -2270,8 +2279,8 @@ func (s *QueryExecutionStatus) SetCompletionDateTime(v time.Time) *QueryExecutio
 }
 
 // SetState sets the State field's value.
-func (s *QueryExecutionStatus) SetState(v string) *QueryExecutionStatus {
-	s.State = &v
+func (s *QueryExecutionStatus) SetState(v QueryExecutionState) *QueryExecutionStatus {
+	s.State = v
 	return s
 }
 
@@ -2316,6 +2325,7 @@ func (s ResultConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResultConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResultConfiguration"}
+
 	if s.OutputLocation == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OutputLocation"))
 	}
@@ -2475,12 +2485,14 @@ func (s *StartQueryExecutionInput) Validate() error {
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 32))
 	}
+
 	if s.QueryString == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
 	}
 	if s.QueryString != nil && len(*s.QueryString) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("QueryString", 1))
 	}
+
 	if s.ResultConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResultConfiguration"))
 	}
@@ -2572,6 +2584,7 @@ func (s StopQueryExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopQueryExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopQueryExecutionInput"}
+
 	if s.QueryExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueryExecutionId"))
 	}
@@ -2692,46 +2705,38 @@ func (s *UnprocessedQueryExecutionId) SetQueryExecutionId(v string) *Unprocessed
 	return s
 }
 
+type ColumnNullable string
+
+// Enum values for ColumnNullable
 const (
-	// ColumnNullableNotNull is a ColumnNullable enum value
-	ColumnNullableNotNull = "NOT_NULL"
-
-	// ColumnNullableNullable is a ColumnNullable enum value
-	ColumnNullableNullable = "NULLABLE"
-
-	// ColumnNullableUnknown is a ColumnNullable enum value
-	ColumnNullableUnknown = "UNKNOWN"
+	ColumnNullableNotNull  ColumnNullable = "NOT_NULL"
+	ColumnNullableNullable ColumnNullable = "NULLABLE"
+	ColumnNullableUnknown  ColumnNullable = "UNKNOWN"
 )
 
+type EncryptionOption string
+
+// Enum values for EncryptionOption
 const (
-	// EncryptionOptionSseS3 is a EncryptionOption enum value
-	EncryptionOptionSseS3 = "SSE_S3"
-
-	// EncryptionOptionSseKms is a EncryptionOption enum value
-	EncryptionOptionSseKms = "SSE_KMS"
-
-	// EncryptionOptionCseKms is a EncryptionOption enum value
-	EncryptionOptionCseKms = "CSE_KMS"
+	EncryptionOptionSseS3  EncryptionOption = "SSE_S3"
+	EncryptionOptionSseKms EncryptionOption = "SSE_KMS"
+	EncryptionOptionCseKms EncryptionOption = "CSE_KMS"
 )
 
+type QueryExecutionState string
+
+// Enum values for QueryExecutionState
 const (
-	// QueryExecutionStateQueued is a QueryExecutionState enum value
-	QueryExecutionStateQueued = "QUEUED"
-
-	// QueryExecutionStateRunning is a QueryExecutionState enum value
-	QueryExecutionStateRunning = "RUNNING"
-
-	// QueryExecutionStateSucceeded is a QueryExecutionState enum value
-	QueryExecutionStateSucceeded = "SUCCEEDED"
-
-	// QueryExecutionStateFailed is a QueryExecutionState enum value
-	QueryExecutionStateFailed = "FAILED"
-
-	// QueryExecutionStateCancelled is a QueryExecutionState enum value
-	QueryExecutionStateCancelled = "CANCELLED"
+	QueryExecutionStateQueued    QueryExecutionState = "QUEUED"
+	QueryExecutionStateRunning   QueryExecutionState = "RUNNING"
+	QueryExecutionStateSucceeded QueryExecutionState = "SUCCEEDED"
+	QueryExecutionStateFailed    QueryExecutionState = "FAILED"
+	QueryExecutionStateCancelled QueryExecutionState = "CANCELLED"
 )
 
+type ThrottleReason string
+
+// Enum values for ThrottleReason
 const (
-	// ThrottleReasonConcurrentQueryLimitExceeded is a ThrottleReason enum value
-	ThrottleReasonConcurrentQueryLimitExceeded = "CONCURRENT_QUERY_LIMIT_EXCEEDED"
+	ThrottleReasonConcurrentQueryLimitExceeded ThrottleReason = "CONCURRENT_QUERY_LIMIT_EXCEEDED"
 )

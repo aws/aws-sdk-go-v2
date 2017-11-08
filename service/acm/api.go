@@ -1051,12 +1051,14 @@ func (s AddTagsToCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToCertificateInput"}
+
 	if s.CertificateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -1135,7 +1137,7 @@ type CertificateDetail struct {
 	// certificate status is FAILED. For more information, see Certificate Request
 	// Failed (http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed)
 	// in the AWS Certificate Manager User Guide.
-	FailureReason *string `type:"string" enum:"FailureReason"`
+	FailureReason FailureReason `type:"string"`
 
 	// The date and time at which the certificate was imported. This value exists
 	// only when the certificate type is IMPORTED.
@@ -1154,7 +1156,7 @@ type CertificateDetail struct {
 
 	// The algorithm that was used to generate the key pair (the public and private
 	// key).
-	KeyAlgorithm *string `type:"string" enum:"KeyAlgorithm"`
+	KeyAlgorithm KeyAlgorithm `type:"string"`
 
 	// The time after which the certificate is not valid.
 	NotAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1169,7 +1171,7 @@ type CertificateDetail struct {
 
 	// The reason the certificate was revoked. This value exists only when the certificate
 	// status is REVOKED.
-	RevocationReason *string `type:"string" enum:"RevocationReason"`
+	RevocationReason RevocationReason `type:"string"`
 
 	// The time at which the certificate was revoked. This value exists only when
 	// the certificate status is REVOKED.
@@ -1182,7 +1184,7 @@ type CertificateDetail struct {
 	SignatureAlgorithm *string `type:"string"`
 
 	// The status of the certificate.
-	Status *string `type:"string" enum:"CertificateStatus"`
+	Status CertificateStatus `type:"string"`
 
 	// The name of the entity that is associated with the public key contained in
 	// the certificate.
@@ -1202,7 +1204,7 @@ type CertificateDetail struct {
 	// certificates that you import and those that ACM provides, see Importing Certificates
 	// (http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
 	// in the AWS Certificate Manager User Guide.
-	Type *string `type:"string" enum:"CertificateType"`
+	Type CertificateType `type:"string"`
 }
 
 // String returns the string representation
@@ -1240,8 +1242,8 @@ func (s *CertificateDetail) SetDomainValidationOptions(v []*DomainValidation) *C
 }
 
 // SetFailureReason sets the FailureReason field's value.
-func (s *CertificateDetail) SetFailureReason(v string) *CertificateDetail {
-	s.FailureReason = &v
+func (s *CertificateDetail) SetFailureReason(v FailureReason) *CertificateDetail {
+	s.FailureReason = v
 	return s
 }
 
@@ -1270,8 +1272,8 @@ func (s *CertificateDetail) SetIssuer(v string) *CertificateDetail {
 }
 
 // SetKeyAlgorithm sets the KeyAlgorithm field's value.
-func (s *CertificateDetail) SetKeyAlgorithm(v string) *CertificateDetail {
-	s.KeyAlgorithm = &v
+func (s *CertificateDetail) SetKeyAlgorithm(v KeyAlgorithm) *CertificateDetail {
+	s.KeyAlgorithm = v
 	return s
 }
 
@@ -1294,8 +1296,8 @@ func (s *CertificateDetail) SetRenewalSummary(v *RenewalSummary) *CertificateDet
 }
 
 // SetRevocationReason sets the RevocationReason field's value.
-func (s *CertificateDetail) SetRevocationReason(v string) *CertificateDetail {
-	s.RevocationReason = &v
+func (s *CertificateDetail) SetRevocationReason(v RevocationReason) *CertificateDetail {
+	s.RevocationReason = v
 	return s
 }
 
@@ -1318,8 +1320,8 @@ func (s *CertificateDetail) SetSignatureAlgorithm(v string) *CertificateDetail {
 }
 
 // SetStatus sets the Status field's value.
-func (s *CertificateDetail) SetStatus(v string) *CertificateDetail {
-	s.Status = &v
+func (s *CertificateDetail) SetStatus(v CertificateStatus) *CertificateDetail {
+	s.Status = v
 	return s
 }
 
@@ -1336,8 +1338,8 @@ func (s *CertificateDetail) SetSubjectAlternativeNames(v []*string) *Certificate
 }
 
 // SetType sets the Type field's value.
-func (s *CertificateDetail) SetType(v string) *CertificateDetail {
-	s.Type = &v
+func (s *CertificateDetail) SetType(v CertificateType) *CertificateDetail {
+	s.Type = v
 	return s
 }
 
@@ -1410,6 +1412,7 @@ func (s DeleteCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCertificateInput"}
+
 	if s.CertificateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
@@ -1473,6 +1476,7 @@ func (s DescribeCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificateInput"}
+
 	if s.CertificateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
@@ -1534,7 +1538,7 @@ type DomainValidation struct {
 	ValidationEmails []*string `type:"list"`
 
 	// The validation status of the domain name.
-	ValidationStatus *string `type:"string" enum:"DomainStatus"`
+	ValidationStatus DomainStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -1566,8 +1570,8 @@ func (s *DomainValidation) SetValidationEmails(v []*string) *DomainValidation {
 }
 
 // SetValidationStatus sets the ValidationStatus field's value.
-func (s *DomainValidation) SetValidationStatus(v string) *DomainValidation {
-	s.ValidationStatus = &v
+func (s *DomainValidation) SetValidationStatus(v DomainStatus) *DomainValidation {
+	s.ValidationStatus = v
 	return s
 }
 
@@ -1616,12 +1620,14 @@ func (s DomainValidationOption) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DomainValidationOption) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DomainValidationOption"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 1))
 	}
+
 	if s.ValidationDomain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ValidationDomain"))
 	}
@@ -1675,6 +1681,7 @@ func (s GetCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCertificateInput"}
+
 	if s.CertificateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
@@ -1785,6 +1792,7 @@ func (s ImportCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportCertificateInput"}
+
 	if s.Certificate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
 	}
@@ -1797,6 +1805,7 @@ func (s *ImportCertificateInput) Validate() error {
 	if s.CertificateChain != nil && len(s.CertificateChain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CertificateChain", 1))
 	}
+
 	if s.PrivateKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrivateKey"))
 	}
@@ -1864,7 +1873,7 @@ type ListCertificatesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The status or statuses on which to filter the list of ACM Certificates.
-	CertificateStatuses []*string `type:"list"`
+	CertificateStatuses []CertificateStatus `type:"list"`
 
 	// Use this parameter when paginating results to specify the maximum number
 	// of items to return in the response. If additional items exist beyond the
@@ -1905,7 +1914,7 @@ func (s *ListCertificatesInput) Validate() error {
 }
 
 // SetCertificateStatuses sets the CertificateStatuses field's value.
-func (s *ListCertificatesInput) SetCertificateStatuses(v []*string) *ListCertificatesInput {
+func (s *ListCertificatesInput) SetCertificateStatuses(v []CertificateStatus) *ListCertificatesInput {
 	s.CertificateStatuses = v
 	return s
 }
@@ -1985,6 +1994,7 @@ func (s ListTagsForCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForCertificateInput"}
+
 	if s.CertificateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
@@ -2062,12 +2072,14 @@ func (s RemoveTagsFromCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromCertificateInput"}
+
 	if s.CertificateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -2138,7 +2150,7 @@ type RenewalSummary struct {
 	// of the certificate.
 	//
 	// RenewalStatus is a required field
-	RenewalStatus *string `type:"string" required:"true" enum:"RenewalStatus"`
+	RenewalStatus RenewalStatus `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2158,8 +2170,8 @@ func (s *RenewalSummary) SetDomainValidationOptions(v []*DomainValidation) *Rene
 }
 
 // SetRenewalStatus sets the RenewalStatus field's value.
-func (s *RenewalSummary) SetRenewalStatus(v string) *RenewalSummary {
-	s.RenewalStatus = &v
+func (s *RenewalSummary) SetRenewalStatus(v RenewalStatus) *RenewalSummary {
+	s.RenewalStatus = v
 	return s
 }
 
@@ -2224,6 +2236,7 @@ func (s RequestCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RequestCertificateInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -2363,18 +2376,21 @@ func (s ResendValidationEmailInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResendValidationEmailInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResendValidationEmailInput"}
+
 	if s.CertificateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.ValidationDomain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ValidationDomain"))
 	}
@@ -2448,6 +2464,7 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -2473,118 +2490,78 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
+type CertificateStatus string
+
+// Enum values for CertificateStatus
 const (
-	// CertificateStatusPendingValidation is a CertificateStatus enum value
-	CertificateStatusPendingValidation = "PENDING_VALIDATION"
-
-	// CertificateStatusIssued is a CertificateStatus enum value
-	CertificateStatusIssued = "ISSUED"
-
-	// CertificateStatusInactive is a CertificateStatus enum value
-	CertificateStatusInactive = "INACTIVE"
-
-	// CertificateStatusExpired is a CertificateStatus enum value
-	CertificateStatusExpired = "EXPIRED"
-
-	// CertificateStatusValidationTimedOut is a CertificateStatus enum value
-	CertificateStatusValidationTimedOut = "VALIDATION_TIMED_OUT"
-
-	// CertificateStatusRevoked is a CertificateStatus enum value
-	CertificateStatusRevoked = "REVOKED"
-
-	// CertificateStatusFailed is a CertificateStatus enum value
-	CertificateStatusFailed = "FAILED"
+	CertificateStatusPendingValidation  CertificateStatus = "PENDING_VALIDATION"
+	CertificateStatusIssued             CertificateStatus = "ISSUED"
+	CertificateStatusInactive           CertificateStatus = "INACTIVE"
+	CertificateStatusExpired            CertificateStatus = "EXPIRED"
+	CertificateStatusValidationTimedOut CertificateStatus = "VALIDATION_TIMED_OUT"
+	CertificateStatusRevoked            CertificateStatus = "REVOKED"
+	CertificateStatusFailed             CertificateStatus = "FAILED"
 )
 
-const (
-	// CertificateTypeImported is a CertificateType enum value
-	CertificateTypeImported = "IMPORTED"
+type CertificateType string
 
-	// CertificateTypeAmazonIssued is a CertificateType enum value
-	CertificateTypeAmazonIssued = "AMAZON_ISSUED"
+// Enum values for CertificateType
+const (
+	CertificateTypeImported     CertificateType = "IMPORTED"
+	CertificateTypeAmazonIssued CertificateType = "AMAZON_ISSUED"
 )
 
+type DomainStatus string
+
+// Enum values for DomainStatus
 const (
-	// DomainStatusPendingValidation is a DomainStatus enum value
-	DomainStatusPendingValidation = "PENDING_VALIDATION"
-
-	// DomainStatusSuccess is a DomainStatus enum value
-	DomainStatusSuccess = "SUCCESS"
-
-	// DomainStatusFailed is a DomainStatus enum value
-	DomainStatusFailed = "FAILED"
+	DomainStatusPendingValidation DomainStatus = "PENDING_VALIDATION"
+	DomainStatusSuccess           DomainStatus = "SUCCESS"
+	DomainStatusFailed            DomainStatus = "FAILED"
 )
 
+type FailureReason string
+
+// Enum values for FailureReason
 const (
-	// FailureReasonNoAvailableContacts is a FailureReason enum value
-	FailureReasonNoAvailableContacts = "NO_AVAILABLE_CONTACTS"
-
-	// FailureReasonAdditionalVerificationRequired is a FailureReason enum value
-	FailureReasonAdditionalVerificationRequired = "ADDITIONAL_VERIFICATION_REQUIRED"
-
-	// FailureReasonDomainNotAllowed is a FailureReason enum value
-	FailureReasonDomainNotAllowed = "DOMAIN_NOT_ALLOWED"
-
-	// FailureReasonInvalidPublicDomain is a FailureReason enum value
-	FailureReasonInvalidPublicDomain = "INVALID_PUBLIC_DOMAIN"
-
-	// FailureReasonOther is a FailureReason enum value
-	FailureReasonOther = "OTHER"
+	FailureReasonNoAvailableContacts            FailureReason = "NO_AVAILABLE_CONTACTS"
+	FailureReasonAdditionalVerificationRequired FailureReason = "ADDITIONAL_VERIFICATION_REQUIRED"
+	FailureReasonDomainNotAllowed               FailureReason = "DOMAIN_NOT_ALLOWED"
+	FailureReasonInvalidPublicDomain            FailureReason = "INVALID_PUBLIC_DOMAIN"
+	FailureReasonOther                          FailureReason = "OTHER"
 )
 
+type KeyAlgorithm string
+
+// Enum values for KeyAlgorithm
 const (
-	// KeyAlgorithmRsa2048 is a KeyAlgorithm enum value
-	KeyAlgorithmRsa2048 = "RSA_2048"
-
-	// KeyAlgorithmRsa1024 is a KeyAlgorithm enum value
-	KeyAlgorithmRsa1024 = "RSA_1024"
-
-	// KeyAlgorithmEcPrime256v1 is a KeyAlgorithm enum value
-	KeyAlgorithmEcPrime256v1 = "EC_prime256v1"
+	KeyAlgorithmRsa2048      KeyAlgorithm = "RSA_2048"
+	KeyAlgorithmRsa1024      KeyAlgorithm = "RSA_1024"
+	KeyAlgorithmEcPrime256v1 KeyAlgorithm = "EC_prime256v1"
 )
 
+type RenewalStatus string
+
+// Enum values for RenewalStatus
 const (
-	// RenewalStatusPendingAutoRenewal is a RenewalStatus enum value
-	RenewalStatusPendingAutoRenewal = "PENDING_AUTO_RENEWAL"
-
-	// RenewalStatusPendingValidation is a RenewalStatus enum value
-	RenewalStatusPendingValidation = "PENDING_VALIDATION"
-
-	// RenewalStatusSuccess is a RenewalStatus enum value
-	RenewalStatusSuccess = "SUCCESS"
-
-	// RenewalStatusFailed is a RenewalStatus enum value
-	RenewalStatusFailed = "FAILED"
+	RenewalStatusPendingAutoRenewal RenewalStatus = "PENDING_AUTO_RENEWAL"
+	RenewalStatusPendingValidation  RenewalStatus = "PENDING_VALIDATION"
+	RenewalStatusSuccess            RenewalStatus = "SUCCESS"
+	RenewalStatusFailed             RenewalStatus = "FAILED"
 )
 
+type RevocationReason string
+
+// Enum values for RevocationReason
 const (
-	// RevocationReasonUnspecified is a RevocationReason enum value
-	RevocationReasonUnspecified = "UNSPECIFIED"
-
-	// RevocationReasonKeyCompromise is a RevocationReason enum value
-	RevocationReasonKeyCompromise = "KEY_COMPROMISE"
-
-	// RevocationReasonCaCompromise is a RevocationReason enum value
-	RevocationReasonCaCompromise = "CA_COMPROMISE"
-
-	// RevocationReasonAffiliationChanged is a RevocationReason enum value
-	RevocationReasonAffiliationChanged = "AFFILIATION_CHANGED"
-
-	// RevocationReasonSuperceded is a RevocationReason enum value
-	RevocationReasonSuperceded = "SUPERCEDED"
-
-	// RevocationReasonCessationOfOperation is a RevocationReason enum value
-	RevocationReasonCessationOfOperation = "CESSATION_OF_OPERATION"
-
-	// RevocationReasonCertificateHold is a RevocationReason enum value
-	RevocationReasonCertificateHold = "CERTIFICATE_HOLD"
-
-	// RevocationReasonRemoveFromCrl is a RevocationReason enum value
-	RevocationReasonRemoveFromCrl = "REMOVE_FROM_CRL"
-
-	// RevocationReasonPrivilegeWithdrawn is a RevocationReason enum value
-	RevocationReasonPrivilegeWithdrawn = "PRIVILEGE_WITHDRAWN"
-
-	// RevocationReasonAACompromise is a RevocationReason enum value
-	RevocationReasonAACompromise = "A_A_COMPROMISE"
+	RevocationReasonUnspecified          RevocationReason = "UNSPECIFIED"
+	RevocationReasonKeyCompromise        RevocationReason = "KEY_COMPROMISE"
+	RevocationReasonCaCompromise         RevocationReason = "CA_COMPROMISE"
+	RevocationReasonAffiliationChanged   RevocationReason = "AFFILIATION_CHANGED"
+	RevocationReasonSuperceded           RevocationReason = "SUPERCEDED"
+	RevocationReasonCessationOfOperation RevocationReason = "CESSATION_OF_OPERATION"
+	RevocationReasonCertificateHold      RevocationReason = "CERTIFICATE_HOLD"
+	RevocationReasonRemoveFromCrl        RevocationReason = "REMOVE_FROM_CRL"
+	RevocationReasonPrivilegeWithdrawn   RevocationReason = "PRIVILEGE_WITHDRAWN"
+	RevocationReasonAACompromise         RevocationReason = "A_A_COMPROMISE"
 )

@@ -1447,6 +1447,7 @@ func (s DeleteRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -1562,6 +1563,7 @@ func (s DescribeRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeRuleInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -1605,7 +1607,7 @@ type DescribeRuleOutput struct {
 	ScheduleExpression *string `type:"string"`
 
 	// Specifies whether the rule is enabled or disabled.
-	State *string `type:"string" enum:"RuleState"`
+	State RuleState `type:"string"`
 }
 
 // String returns the string representation
@@ -1655,8 +1657,8 @@ func (s *DescribeRuleOutput) SetScheduleExpression(v string) *DescribeRuleOutput
 }
 
 // SetState sets the State field's value.
-func (s *DescribeRuleOutput) SetState(v string) *DescribeRuleOutput {
-	s.State = &v
+func (s *DescribeRuleOutput) SetState(v RuleState) *DescribeRuleOutput {
+	s.State = v
 	return s
 }
 
@@ -1683,6 +1685,7 @@ func (s DisableRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableRuleInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -1749,6 +1752,7 @@ func (s *EcsParameters) Validate() error {
 	if s.TaskCount != nil && *s.TaskCount < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("TaskCount", 1))
 	}
+
 	if s.TaskDefinitionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskDefinitionArn"))
 	}
@@ -1797,6 +1801,7 @@ func (s EnableRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableRuleInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -1862,6 +1867,7 @@ func (s InputTransformer) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputTransformer) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputTransformer"}
+
 	if s.InputTemplate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputTemplate"))
 	}
@@ -1916,6 +1922,7 @@ func (s KinesisParameters) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisParameters) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KinesisParameters"}
+
 	if s.PartitionKeyPath == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionKeyPath"))
 	}
@@ -1967,6 +1974,7 @@ func (s *ListRuleNamesByTargetInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.TargetArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetArn"))
 	}
@@ -2162,6 +2170,7 @@ func (s *ListTargetsByRuleInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.Rule == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
@@ -2252,6 +2261,7 @@ func (s PutEventsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEventsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutEventsInput"}
+
 	if s.Entries == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
@@ -2457,18 +2467,21 @@ func (s PutPermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutPermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutPermissionInput"}
+
 	if s.Action == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.Action != nil && len(*s.Action) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Action", 1))
 	}
+
 	if s.Principal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 	if s.Principal != nil && len(*s.Principal) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Principal", 1))
 	}
+
 	if s.StatementId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatementId"))
 	}
@@ -2538,7 +2551,7 @@ type PutRuleInput struct {
 	ScheduleExpression *string `type:"string"`
 
 	// Indicates whether the rule is enabled or disabled.
-	State *string `type:"string" enum:"RuleState"`
+	State RuleState `type:"string"`
 }
 
 // String returns the string representation
@@ -2554,6 +2567,7 @@ func (s PutRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRuleInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2601,8 +2615,8 @@ func (s *PutRuleInput) SetScheduleExpression(v string) *PutRuleInput {
 }
 
 // SetState sets the State field's value.
-func (s *PutRuleInput) SetState(v string) *PutRuleInput {
-	s.State = &v
+func (s *PutRuleInput) SetState(v RuleState) *PutRuleInput {
+	s.State = v
 	return s
 }
 
@@ -2658,12 +2672,14 @@ func (s PutTargetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutTargetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutTargetsInput"}
+
 	if s.Rule == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
 	if s.Rule != nil && len(*s.Rule) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Rule", 1))
 	}
+
 	if s.Targets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
@@ -2801,6 +2817,7 @@ func (s RemovePermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemovePermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemovePermissionInput"}
+
 	if s.StatementId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatementId"))
 	}
@@ -2863,12 +2880,14 @@ func (s RemoveTargetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTargetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTargetsInput"}
+
 	if s.Ids == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Ids"))
 	}
 	if s.Ids != nil && len(s.Ids) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Ids", 1))
 	}
+
 	if s.Rule == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
@@ -2998,7 +3017,7 @@ type Rule struct {
 	ScheduleExpression *string `type:"string"`
 
 	// The state of the rule.
-	State *string `type:"string" enum:"RuleState"`
+	State RuleState `type:"string"`
 }
 
 // String returns the string representation
@@ -3048,8 +3067,8 @@ func (s *Rule) SetScheduleExpression(v string) *Rule {
 }
 
 // SetState sets the State field's value.
-func (s *Rule) SetState(v string) *Rule {
-	s.State = &v
+func (s *Rule) SetState(v RuleState) *Rule {
+	s.State = v
 	return s
 }
 
@@ -3079,6 +3098,7 @@ func (s RunCommandParameters) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunCommandParameters) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RunCommandParameters"}
+
 	if s.RunCommandTargets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RunCommandTargets"))
 	}
@@ -3140,12 +3160,14 @@ func (s RunCommandTarget) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunCommandTarget) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RunCommandTarget"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -3238,12 +3260,14 @@ func (s Target) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Target) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Target"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Arn", 1))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -3363,9 +3387,11 @@ func (s TestEventPatternInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestEventPatternInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TestEventPatternInput"}
+
 	if s.Event == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Event"))
 	}
+
 	if s.EventPattern == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventPattern"))
 	}
@@ -3412,10 +3438,10 @@ func (s *TestEventPatternOutput) SetResult(v bool) *TestEventPatternOutput {
 	return s
 }
 
-const (
-	// RuleStateEnabled is a RuleState enum value
-	RuleStateEnabled = "ENABLED"
+type RuleState string
 
-	// RuleStateDisabled is a RuleState enum value
-	RuleStateDisabled = "DISABLED"
+// Enum values for RuleState
+const (
+	RuleStateEnabled  RuleState = "ENABLED"
+	RuleStateDisabled RuleState = "DISABLED"
 )

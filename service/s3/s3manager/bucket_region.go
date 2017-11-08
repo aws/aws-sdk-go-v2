@@ -2,8 +2,6 @@ package s3manager
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	credentials "github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
 )
@@ -11,7 +9,7 @@ import (
 // GetBucketRegion will attempt to get the region for a bucket using the
 // regionHint to determine which AWS partition to perform the query on.
 //
-// The request will not be signed, and will not use your AWS credentials.
+// The request will not be signed, and will not use your AWS aws.
 //
 // A "NotFound" error code will be returned if the bucket does not exist in
 // the AWS partition the regionHint belongs to.
@@ -31,7 +29,7 @@ import (
 //    }
 //    fmt.Printf("Bucket %s is in %s region\n", bucket, region)
 //
-func GetBucketRegion(ctx aws.Context, cfg aws.Config, bucket, regionHint string, opts ...request.Option) (string, error) {
+func GetBucketRegion(ctx aws.Context, cfg aws.Config, bucket, regionHint string, opts ...aws.Option) (string, error) {
 	cfg = cfg.Copy()
 	cfg.Region = regionHint
 
@@ -46,12 +44,12 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 // derived from the region the S3 service client was created in.
 //
 // See GetBucketRegion for more information.
-func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string, opts ...request.Option) (string, error) {
+func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string, opts ...aws.Option) (string, error) {
 	req, _ := svc.HeadBucketRequest(&s3.HeadBucketInput{
 		Bucket: aws.String(bucket),
 	})
 	req.Config.S3ForcePathStyle = true
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	req.SetContext(ctx)
 
 	// Disable HTTP redirects to prevent an invalid 301 from eating the response
@@ -61,7 +59,7 @@ func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string
 	req.DisableFollowRedirects = true
 
 	var bucketRegion string
-	req.Handlers.Send.PushBack(func(r *request.Request) {
+	req.Handlers.Send.PushBack(func(r *aws.Request) {
 		bucketRegion = r.HTTPResponse.Header.Get(bucketRegionHeader)
 		if len(bucketRegion) == 0 {
 			return
@@ -77,7 +75,7 @@ func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string
 		return "", err
 	}
 
-	bucketRegion = s3.NormalizeBucketLocation(bucketRegion)
+	bucketRegion = string(s3.NormalizeBucketLocation(s3.BucketLocationConstraint(bucketRegion)))
 
 	return bucketRegion, nil
 }

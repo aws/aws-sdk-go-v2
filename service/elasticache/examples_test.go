@@ -178,7 +178,7 @@ func ExampleElastiCache_CreateCacheCluster_shared00() {
 
 	svc := elasticache.New(cfg)
 	input := &elasticache.CreateCacheClusterInput{
-		AZMode:               aws.String("cross-az"),
+		AZMode:               elasticache.AZModeCrossAz,
 		CacheClusterId:       aws.String("my-memcached-cluster"),
 		CacheNodeType:        aws.String("cache.r3.large"),
 		CacheSubnetGroupName: aws.String("default"),
@@ -1341,7 +1341,7 @@ func ExampleElastiCache_DescribeEvents_shared00() {
 	svc := elasticache.New(cfg)
 	input := &elasticache.DescribeEventsInput{
 		Duration:   aws.Int64(360),
-		SourceType: aws.String("cache-cluster"),
+		SourceType: elasticache.SourceTypeCacheCluster,
 	}
 
 	result, err := svc.DescribeEvents(input)

@@ -5322,7 +5322,7 @@ type Artifact struct {
 	//    * APPLICATION_CRASH_REPORT: The application crash report output type.
 	//
 	//    * XCTEST_LOG: The XCode test output type.
-	Type *string `locationName:"type" type:"string" enum:"ArtifactType"`
+	Type ArtifactType `locationName:"type" type:"string"`
 
 	// The pre-signed Amazon S3 URL that can be used with a corresponding GET request
 	// to download the artifact's file.
@@ -5358,8 +5358,8 @@ func (s *Artifact) SetName(v string) *Artifact {
 }
 
 // SetType sets the Type field's value.
-func (s *Artifact) SetType(v string) *Artifact {
-	s.Type = &v
+func (s *Artifact) SetType(v ArtifactType) *Artifact {
+	s.Type = v
 	return s
 }
 
@@ -5531,15 +5531,18 @@ func (s CreateDevicePoolInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDevicePoolInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDevicePoolInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.ProjectArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
 	if s.ProjectArn != nil && len(*s.ProjectArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProjectArn", 32))
 	}
+
 	if s.Rules == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
@@ -5632,7 +5635,7 @@ type CreateNetworkProfileInput struct {
 	ProjectArn *string `locationName:"projectArn" min:"32" type:"string" required:"true"`
 
 	// The type of network profile you wish to create. Valid values are listed below.
-	Type *string `locationName:"type" type:"string" enum:"NetworkProfileType"`
+	Type NetworkProfileType `locationName:"type" type:"string"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64 `locationName:"uplinkBandwidthBits" type:"long"`
@@ -5662,9 +5665,11 @@ func (s CreateNetworkProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNetworkProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateNetworkProfileInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.ProjectArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
@@ -5721,8 +5726,8 @@ func (s *CreateNetworkProfileInput) SetProjectArn(v string) *CreateNetworkProfil
 }
 
 // SetType sets the Type field's value.
-func (s *CreateNetworkProfileInput) SetType(v string) *CreateNetworkProfileInput {
-	s.Type = &v
+func (s *CreateNetworkProfileInput) SetType(v NetworkProfileType) *CreateNetworkProfileInput {
+	s.Type = v
 	return s
 }
 
@@ -5803,6 +5808,7 @@ func (s CreateProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateProjectInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5857,7 +5863,7 @@ type CreateRemoteAccessSessionConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Returns the billing method for purposes of configuring a remote access session.
-	BillingMethod *string `locationName:"billingMethod" type:"string" enum:"BillingMethod"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
 }
 
 // String returns the string representation
@@ -5871,8 +5877,8 @@ func (s CreateRemoteAccessSessionConfiguration) GoString() string {
 }
 
 // SetBillingMethod sets the BillingMethod field's value.
-func (s *CreateRemoteAccessSessionConfiguration) SetBillingMethod(v string) *CreateRemoteAccessSessionConfiguration {
-	s.BillingMethod = &v
+func (s *CreateRemoteAccessSessionConfiguration) SetBillingMethod(v BillingMethod) *CreateRemoteAccessSessionConfiguration {
+	s.BillingMethod = v
 	return s
 }
 
@@ -5928,12 +5934,14 @@ func (s CreateRemoteAccessSessionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRemoteAccessSessionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRemoteAccessSessionInput"}
+
 	if s.DeviceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceArn"))
 	}
 	if s.DeviceArn != nil && len(*s.DeviceArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceArn", 32))
 	}
+
 	if s.ProjectArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
@@ -6079,7 +6087,7 @@ type CreateUploadInput struct {
 	// an ArgumentException error.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"UploadType"`
+	Type UploadType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6095,16 +6103,18 @@ func (s CreateUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUploadInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.ProjectArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
 	if s.ProjectArn != nil && len(*s.ProjectArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProjectArn", 32))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -6133,8 +6143,8 @@ func (s *CreateUploadInput) SetProjectArn(v string) *CreateUploadInput {
 }
 
 // SetType sets the Type field's value.
-func (s *CreateUploadInput) SetType(v string) *CreateUploadInput {
-	s.Type = &v
+func (s *CreateUploadInput) SetType(v UploadType) *CreateUploadInput {
+	s.Type = v
 	return s
 }
 
@@ -6239,6 +6249,7 @@ func (s DeleteDevicePoolInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDevicePoolInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDevicePoolInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -6297,6 +6308,7 @@ func (s DeleteNetworkProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNetworkProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNetworkProfileInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -6356,6 +6368,7 @@ func (s DeleteProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -6416,6 +6429,7 @@ func (s DeleteRemoteAccessSessionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRemoteAccessSessionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRemoteAccessSessionInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -6476,6 +6490,7 @@ func (s DeleteRunInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRunInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRunInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -6536,6 +6551,7 @@ func (s DeleteUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUploadInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -6599,7 +6615,7 @@ type Device struct {
 	//    * PHONE: The phone form factor.
 	//
 	//    * TABLET: The tablet form factor.
-	FormFactor *string `locationName:"formFactor" type:"string" enum:"DeviceFormFactor"`
+	FormFactor DeviceFormFactor `locationName:"formFactor" type:"string"`
 
 	// The device's heap size, expressed in bytes.
 	HeapSize *int64 `locationName:"heapSize" type:"long"`
@@ -6629,7 +6645,7 @@ type Device struct {
 	//    * ANDROID: The Android platform.
 	//
 	//    * IOS: The iOS platform.
-	Platform *string `locationName:"platform" type:"string" enum:"DevicePlatform"`
+	Platform DevicePlatform `locationName:"platform" type:"string"`
 
 	// The device's radio.
 	Radio *string `locationName:"radio" type:"string"`
@@ -6685,8 +6701,8 @@ func (s *Device) SetFleetType(v string) *Device {
 }
 
 // SetFormFactor sets the FormFactor field's value.
-func (s *Device) SetFormFactor(v string) *Device {
-	s.FormFactor = &v
+func (s *Device) SetFormFactor(v DeviceFormFactor) *Device {
+	s.FormFactor = v
 	return s
 }
 
@@ -6733,8 +6749,8 @@ func (s *Device) SetOs(v string) *Device {
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *Device) SetPlatform(v string) *Device {
-	s.Platform = &v
+func (s *Device) SetPlatform(v DevicePlatform) *Device {
+	s.Platform = v
 	return s
 }
 
@@ -6834,7 +6850,7 @@ type DevicePool struct {
 	//
 	//    * PRIVATE: A device pool that is created and managed by the device pool
 	//    developer.
-	Type *string `locationName:"type" type:"string" enum:"DevicePoolType"`
+	Type DevicePoolType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -6872,8 +6888,8 @@ func (s *DevicePool) SetRules(v []*Rule) *DevicePool {
 }
 
 // SetType sets the Type field's value.
-func (s *DevicePool) SetType(v string) *DevicePool {
-	s.Type = &v
+func (s *DevicePool) SetType(v DevicePoolType) *DevicePool {
+	s.Type = v
 	return s
 }
 
@@ -7032,6 +7048,7 @@ func (s GetDeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7125,7 +7142,7 @@ type GetDevicePoolCompatibilityInput struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	TestType *string `locationName:"testType" type:"string" enum:"TestType"`
+	TestType TestType `locationName:"testType" type:"string"`
 }
 
 // String returns the string representation
@@ -7144,6 +7161,7 @@ func (s *GetDevicePoolCompatibilityInput) Validate() error {
 	if s.AppArn != nil && len(*s.AppArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("AppArn", 32))
 	}
+
 	if s.DevicePoolArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DevicePoolArn"))
 	}
@@ -7181,8 +7199,8 @@ func (s *GetDevicePoolCompatibilityInput) SetTest(v *ScheduleRunTest) *GetDevice
 }
 
 // SetTestType sets the TestType field's value.
-func (s *GetDevicePoolCompatibilityInput) SetTestType(v string) *GetDevicePoolCompatibilityInput {
-	s.TestType = &v
+func (s *GetDevicePoolCompatibilityInput) SetTestType(v TestType) *GetDevicePoolCompatibilityInput {
+	s.TestType = v
 	return s
 }
 
@@ -7244,6 +7262,7 @@ func (s GetDevicePoolInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDevicePoolInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDevicePoolInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7312,6 +7331,7 @@ func (s GetJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetJobInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7380,6 +7400,7 @@ func (s GetNetworkProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetNetworkProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetNetworkProfileInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7531,6 +7552,7 @@ func (s GetProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetProjectInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7601,6 +7623,7 @@ func (s GetRemoteAccessSessionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRemoteAccessSessionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRemoteAccessSessionInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7670,6 +7693,7 @@ func (s GetRunInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRunInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRunInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7738,6 +7762,7 @@ func (s GetSuiteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSuiteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSuiteInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7806,6 +7831,7 @@ func (s GetTestInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTestInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTestInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7874,6 +7900,7 @@ func (s GetUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetUploadInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -7941,7 +7968,7 @@ type IncompatibilityMessage struct {
 	//    * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
 	//
 	//    * APPIUM_VERSION: The Appium version for the test.
-	Type *string `locationName:"type" type:"string" enum:"DeviceAttribute"`
+	Type DeviceAttribute `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -7961,8 +7988,8 @@ func (s *IncompatibilityMessage) SetMessage(v string) *IncompatibilityMessage {
 }
 
 // SetType sets the Type field's value.
-func (s *IncompatibilityMessage) SetType(v string) *IncompatibilityMessage {
-	s.Type = &v
+func (s *IncompatibilityMessage) SetType(v DeviceAttribute) *IncompatibilityMessage {
+	s.Type = v
 	return s
 }
 
@@ -7998,12 +8025,14 @@ func (s InstallToRemoteAccessSessionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstallToRemoteAccessSessionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstallToRemoteAccessSessionInput"}
+
 	if s.AppArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AppArn"))
 	}
 	if s.AppArn != nil && len(*s.AppArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("AppArn", 32))
 	}
+
 	if s.RemoteAccessSessionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RemoteAccessSessionArn"))
 	}
@@ -8098,7 +8127,7 @@ type Job struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result *string `locationName:"result" type:"string" enum:"ExecutionResult"`
+	Result ExecutionResult `locationName:"result" type:"string"`
 
 	// The job's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -8124,7 +8153,7 @@ type Job struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status *string `locationName:"status" type:"string" enum:"ExecutionStatus"`
+	Status ExecutionStatus `locationName:"status" type:"string"`
 
 	// The job's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -8162,7 +8191,7 @@ type Job struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type *string `locationName:"type" type:"string" enum:"TestType"`
+	Type TestType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -8218,8 +8247,8 @@ func (s *Job) SetName(v string) *Job {
 }
 
 // SetResult sets the Result field's value.
-func (s *Job) SetResult(v string) *Job {
-	s.Result = &v
+func (s *Job) SetResult(v ExecutionResult) *Job {
+	s.Result = v
 	return s
 }
 
@@ -8230,8 +8259,8 @@ func (s *Job) SetStarted(v time.Time) *Job {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Job) SetStatus(v string) *Job {
-	s.Status = &v
+func (s *Job) SetStatus(v ExecutionStatus) *Job {
+	s.Status = v
 	return s
 }
 
@@ -8242,8 +8271,8 @@ func (s *Job) SetStopped(v time.Time) *Job {
 }
 
 // SetType sets the Type field's value.
-func (s *Job) SetType(v string) *Job {
-	s.Type = &v
+func (s *Job) SetType(v TestType) *Job {
+	s.Type = v
 	return s
 }
 
@@ -8272,7 +8301,7 @@ type ListArtifactsInput struct {
 	//    * SCREENSHOT: The artifacts are screenshots.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"ArtifactCategory"`
+	Type ArtifactCategory `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -8288,6 +8317,7 @@ func (s ListArtifactsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListArtifactsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListArtifactsInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -8297,7 +8327,7 @@ func (s *ListArtifactsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -8320,8 +8350,8 @@ func (s *ListArtifactsInput) SetNextToken(v string) *ListArtifactsInput {
 }
 
 // SetType sets the Type field's value.
-func (s *ListArtifactsInput) SetType(v string) *ListArtifactsInput {
-	s.Type = &v
+func (s *ListArtifactsInput) SetType(v ArtifactCategory) *ListArtifactsInput {
+	s.Type = v
 	return s
 }
 
@@ -8383,7 +8413,7 @@ type ListDevicePoolsInput struct {
 	//
 	//    * PRIVATE: A device pool that is created and managed by the device pool
 	//    developer.
-	Type *string `locationName:"type" type:"string" enum:"DevicePoolType"`
+	Type DevicePoolType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -8399,6 +8429,7 @@ func (s ListDevicePoolsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDevicePoolsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDevicePoolsInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -8428,8 +8459,8 @@ func (s *ListDevicePoolsInput) SetNextToken(v string) *ListDevicePoolsInput {
 }
 
 // SetType sets the Type field's value.
-func (s *ListDevicePoolsInput) SetType(v string) *ListDevicePoolsInput {
-	s.Type = &v
+func (s *ListDevicePoolsInput) SetType(v DevicePoolType) *ListDevicePoolsInput {
+	s.Type = v
 	return s
 }
 
@@ -8584,6 +8615,7 @@ func (s ListJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -8664,7 +8696,7 @@ type ListNetworkProfilesInput struct {
 
 	// The type of network profile you wish to return information about. Valid values
 	// are listed below.
-	Type *string `locationName:"type" type:"string" enum:"NetworkProfileType"`
+	Type NetworkProfileType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -8680,6 +8712,7 @@ func (s ListNetworkProfilesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListNetworkProfilesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListNetworkProfilesInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -8709,8 +8742,8 @@ func (s *ListNetworkProfilesInput) SetNextToken(v string) *ListNetworkProfilesIn
 }
 
 // SetType sets the Type field's value.
-func (s *ListNetworkProfilesInput) SetType(v string) *ListNetworkProfilesInput {
-	s.Type = &v
+func (s *ListNetworkProfilesInput) SetType(v NetworkProfileType) *ListNetworkProfilesInput {
+	s.Type = v
 	return s
 }
 
@@ -9087,6 +9120,7 @@ func (s ListRemoteAccessSessionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRemoteAccessSessionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListRemoteAccessSessionsInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -9181,6 +9215,7 @@ func (s ListRunsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRunsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListRunsInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -9274,6 +9309,7 @@ func (s ListSamplesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSamplesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListSamplesInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -9366,6 +9402,7 @@ func (s ListSuitesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSuitesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListSuitesInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -9458,6 +9495,7 @@ func (s ListTestsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTestsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTestsInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -9550,6 +9588,7 @@ func (s ListUniqueProblemsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUniqueProblemsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListUniqueProblemsInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -9659,6 +9698,7 @@ func (s ListUploadsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUploadsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListUploadsInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -9755,9 +9795,11 @@ func (s Location) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Location) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Location"}
+
 	if s.Latitude == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Latitude"))
 	}
+
 	if s.Longitude == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Longitude"))
 	}
@@ -9789,7 +9831,7 @@ type MonetaryAmount struct {
 	Amount *float64 `locationName:"amount" type:"double"`
 
 	// The currency code of a monetary amount. For example, USD means "U.S. dollars."
-	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCode"`
+	CurrencyCode CurrencyCode `locationName:"currencyCode" type:"string"`
 }
 
 // String returns the string representation
@@ -9809,8 +9851,8 @@ func (s *MonetaryAmount) SetAmount(v float64) *MonetaryAmount {
 }
 
 // SetCurrencyCode sets the CurrencyCode field's value.
-func (s *MonetaryAmount) SetCurrencyCode(v string) *MonetaryAmount {
-	s.CurrencyCode = &v
+func (s *MonetaryAmount) SetCurrencyCode(v CurrencyCode) *MonetaryAmount {
+	s.CurrencyCode = v
 	return s
 }
 
@@ -9843,7 +9885,7 @@ type NetworkProfile struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The type of network profile. Valid values are listed below.
-	Type *string `locationName:"type" type:"string" enum:"NetworkProfileType"`
+	Type NetworkProfileType `locationName:"type" type:"string"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64 `locationName:"uplinkBandwidthBits" type:"long"`
@@ -9913,8 +9955,8 @@ func (s *NetworkProfile) SetName(v string) *NetworkProfile {
 }
 
 // SetType sets the Type field's value.
-func (s *NetworkProfile) SetType(v string) *NetworkProfile {
-	s.Type = &v
+func (s *NetworkProfile) SetType(v NetworkProfileType) *NetworkProfile {
+	s.Type = v
 	return s
 }
 
@@ -9954,13 +9996,13 @@ type Offering struct {
 	Id *string `locationName:"id" min:"32" type:"string"`
 
 	// The platform of the device (e.g., ANDROID or IOS).
-	Platform *string `locationName:"platform" type:"string" enum:"DevicePlatform"`
+	Platform DevicePlatform `locationName:"platform" type:"string"`
 
 	// Specifies whether there are recurring charges for the offering.
 	RecurringCharges []*RecurringCharge `locationName:"recurringCharges" type:"list"`
 
 	// The type of offering (e.g., "RECURRING") for a device.
-	Type *string `locationName:"type" type:"string" enum:"OfferingType"`
+	Type OfferingType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -9986,8 +10028,8 @@ func (s *Offering) SetId(v string) *Offering {
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *Offering) SetPlatform(v string) *Offering {
-	s.Platform = &v
+func (s *Offering) SetPlatform(v DevicePlatform) *Offering {
+	s.Platform = v
 	return s
 }
 
@@ -9998,8 +10040,8 @@ func (s *Offering) SetRecurringCharges(v []*RecurringCharge) *Offering {
 }
 
 // SetType sets the Type field's value.
-func (s *Offering) SetType(v string) *Offering {
-	s.Type = &v
+func (s *Offering) SetType(v OfferingType) *Offering {
+	s.Type = v
 	return s
 }
 
@@ -10052,7 +10094,7 @@ type OfferingStatus struct {
 	Quantity *int64 `locationName:"quantity" type:"integer"`
 
 	// The type specified for the offering status.
-	Type *string `locationName:"type" type:"string" enum:"OfferingTransactionType"`
+	Type OfferingTransactionType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -10084,8 +10126,8 @@ func (s *OfferingStatus) SetQuantity(v int64) *OfferingStatus {
 }
 
 // SetType sets the Type field's value.
-func (s *OfferingStatus) SetType(v string) *OfferingStatus {
-	s.Type = &v
+func (s *OfferingStatus) SetType(v OfferingTransactionType) *OfferingStatus {
+	s.Type = v
 	return s
 }
 
@@ -10181,7 +10223,7 @@ type Problem struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result *string `locationName:"result" type:"string" enum:"ExecutionResult"`
+	Result ExecutionResult `locationName:"result" type:"string"`
 
 	// Information about the associated run.
 	Run *ProblemDetail `locationName:"run" type:"structure"`
@@ -10222,8 +10264,8 @@ func (s *Problem) SetMessage(v string) *Problem {
 }
 
 // SetResult sets the Result field's value.
-func (s *Problem) SetResult(v string) *Problem {
-	s.Result = &v
+func (s *Problem) SetResult(v ExecutionResult) *Problem {
+	s.Result = v
 	return s
 }
 
@@ -10479,7 +10521,7 @@ type RecurringCharge struct {
 	Cost *MonetaryAmount `locationName:"cost" type:"structure"`
 
 	// The frequency in which charges will recur.
-	Frequency *string `locationName:"frequency" type:"string" enum:"RecurringChargeFrequency"`
+	Frequency RecurringChargeFrequency `locationName:"frequency" type:"string"`
 }
 
 // String returns the string representation
@@ -10499,8 +10541,8 @@ func (s *RecurringCharge) SetCost(v *MonetaryAmount) *RecurringCharge {
 }
 
 // SetFrequency sets the Frequency field's value.
-func (s *RecurringCharge) SetFrequency(v string) *RecurringCharge {
-	s.Frequency = &v
+func (s *RecurringCharge) SetFrequency(v RecurringChargeFrequency) *RecurringCharge {
+	s.Frequency = v
 	return s
 }
 
@@ -10515,7 +10557,7 @@ type RemoteAccessSession struct {
 	// The billing method of the remote access session. Possible values include
 	// METERED or UNMETERED. For more information about metered devices, see AWS
 	// Device Farm terminology (http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology)."
-	BillingMethod *string `locationName:"billingMethod" type:"string" enum:"BillingMethod"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
 
 	// Unique identifier of your client for the remote access session. Only returned
 	// if remote debugging is enabled for the remote access session.
@@ -10567,7 +10609,7 @@ type RemoteAccessSession struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result *string `locationName:"result" type:"string" enum:"ExecutionResult"`
+	Result ExecutionResult `locationName:"result" type:"string"`
 
 	// The date and time the remote access session was started.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -10591,7 +10633,7 @@ type RemoteAccessSession struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status *string `locationName:"status" type:"string" enum:"ExecutionStatus"`
+	Status ExecutionStatus `locationName:"status" type:"string"`
 
 	// The date and time the remote access session was stopped.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -10614,8 +10656,8 @@ func (s *RemoteAccessSession) SetArn(v string) *RemoteAccessSession {
 }
 
 // SetBillingMethod sets the BillingMethod field's value.
-func (s *RemoteAccessSession) SetBillingMethod(v string) *RemoteAccessSession {
-	s.BillingMethod = &v
+func (s *RemoteAccessSession) SetBillingMethod(v BillingMethod) *RemoteAccessSession {
+	s.BillingMethod = v
 	return s
 }
 
@@ -10680,8 +10722,8 @@ func (s *RemoteAccessSession) SetRemoteDebugEnabled(v bool) *RemoteAccessSession
 }
 
 // SetResult sets the Result field's value.
-func (s *RemoteAccessSession) SetResult(v string) *RemoteAccessSession {
-	s.Result = &v
+func (s *RemoteAccessSession) SetResult(v ExecutionResult) *RemoteAccessSession {
+	s.Result = v
 	return s
 }
 
@@ -10692,8 +10734,8 @@ func (s *RemoteAccessSession) SetStarted(v time.Time) *RemoteAccessSession {
 }
 
 // SetStatus sets the Status field's value.
-func (s *RemoteAccessSession) SetStatus(v string) *RemoteAccessSession {
-	s.Status = &v
+func (s *RemoteAccessSession) SetStatus(v ExecutionStatus) *RemoteAccessSession {
+	s.Status = v
 	return s
 }
 
@@ -10830,7 +10872,7 @@ type Rule struct {
 	//    * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
 	//
 	//    * APPIUM_VERSION: The Appium version for the test.
-	Attribute *string `locationName:"attribute" type:"string" enum:"DeviceAttribute"`
+	Attribute DeviceAttribute `locationName:"attribute" type:"string"`
 
 	// The rule's operator.
 	//
@@ -10845,7 +10887,7 @@ type Rule struct {
 	//    * NOT_IN: The not-in operator.
 	//
 	//    * CONTAINS: The contains operator.
-	Operator *string `locationName:"operator" type:"string" enum:"RuleOperator"`
+	Operator RuleOperator `locationName:"operator" type:"string"`
 
 	// The rule's value.
 	Value *string `locationName:"value" type:"string"`
@@ -10862,14 +10904,14 @@ func (s Rule) GoString() string {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *Rule) SetAttribute(v string) *Rule {
-	s.Attribute = &v
+func (s *Rule) SetAttribute(v DeviceAttribute) *Rule {
+	s.Attribute = v
 	return s
 }
 
 // SetOperator sets the Operator field's value.
-func (s *Rule) SetOperator(v string) *Rule {
-	s.Operator = &v
+func (s *Rule) SetOperator(v RuleOperator) *Rule {
+	s.Operator = v
 	return s
 }
 
@@ -10890,7 +10932,7 @@ type Run struct {
 
 	// Specifies the billing method for a test run: metered or unmetered. If the
 	// parameter is not specified, the default value is metered.
-	BillingMethod *string `locationName:"billingMethod" type:"string" enum:"BillingMethod"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
 
 	// The total number of completed jobs.
 	CompletedJobs *int64 `locationName:"completedJobs" type:"integer"`
@@ -10928,7 +10970,7 @@ type Run struct {
 	//    * ANDROID: The Android platform.
 	//
 	//    * IOS: The iOS platform.
-	Platform *string `locationName:"platform" type:"string" enum:"DevicePlatform"`
+	Platform DevicePlatform `locationName:"platform" type:"string"`
 
 	// The run's result.
 	//
@@ -10947,11 +10989,11 @@ type Run struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result *string `locationName:"result" type:"string" enum:"ExecutionResult"`
+	Result ExecutionResult `locationName:"result" type:"string"`
 
 	// Supporting field for the result field. Set only if result is SKIPPED. PARSING_FAILED
 	// if the result is skipped because of test package parsing failure.
-	ResultCode *string `locationName:"resultCode" type:"string" enum:"ExecutionResultCode"`
+	ResultCode ExecutionResultCode `locationName:"resultCode" type:"string"`
 
 	// The run's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -10977,7 +11019,7 @@ type Run struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status *string `locationName:"status" type:"string" enum:"ExecutionStatus"`
+	Status ExecutionStatus `locationName:"status" type:"string"`
 
 	// The run's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -11018,7 +11060,7 @@ type Run struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type *string `locationName:"type" type:"string" enum:"TestType"`
+	Type TestType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -11038,8 +11080,8 @@ func (s *Run) SetArn(v string) *Run {
 }
 
 // SetBillingMethod sets the BillingMethod field's value.
-func (s *Run) SetBillingMethod(v string) *Run {
-	s.BillingMethod = &v
+func (s *Run) SetBillingMethod(v BillingMethod) *Run {
+	s.BillingMethod = v
 	return s
 }
 
@@ -11098,20 +11140,20 @@ func (s *Run) SetParsingResultUrl(v string) *Run {
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *Run) SetPlatform(v string) *Run {
-	s.Platform = &v
+func (s *Run) SetPlatform(v DevicePlatform) *Run {
+	s.Platform = v
 	return s
 }
 
 // SetResult sets the Result field's value.
-func (s *Run) SetResult(v string) *Run {
-	s.Result = &v
+func (s *Run) SetResult(v ExecutionResult) *Run {
+	s.Result = v
 	return s
 }
 
 // SetResultCode sets the ResultCode field's value.
-func (s *Run) SetResultCode(v string) *Run {
-	s.ResultCode = &v
+func (s *Run) SetResultCode(v ExecutionResultCode) *Run {
+	s.ResultCode = v
 	return s
 }
 
@@ -11122,8 +11164,8 @@ func (s *Run) SetStarted(v time.Time) *Run {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Run) SetStatus(v string) *Run {
-	s.Status = &v
+func (s *Run) SetStatus(v ExecutionStatus) *Run {
+	s.Status = v
 	return s
 }
 
@@ -11140,8 +11182,8 @@ func (s *Run) SetTotalJobs(v int64) *Run {
 }
 
 // SetType sets the Type field's value.
-func (s *Run) SetType(v string) *Run {
-	s.Type = &v
+func (s *Run) SetType(v TestType) *Run {
+	s.Type = v
 	return s
 }
 
@@ -11195,7 +11237,7 @@ type Sample struct {
 	//
 	//    * TX_RATE: The total number of bytes per second (TCP and UDP) that are
 	//    received, by app process.
-	Type *string `locationName:"type" type:"string" enum:"SampleType"`
+	Type SampleType `locationName:"type" type:"string"`
 
 	// The pre-signed Amazon S3 URL that can be used with a corresponding GET request
 	// to download the sample's file.
@@ -11219,8 +11261,8 @@ func (s *Sample) SetArn(v string) *Sample {
 }
 
 // SetType sets the Type field's value.
-func (s *Sample) SetType(v string) *Sample {
-	s.Type = &v
+func (s *Sample) SetType(v SampleType) *Sample {
+	s.Type = v
 	return s
 }
 
@@ -11241,7 +11283,7 @@ type ScheduleRunConfiguration struct {
 
 	// Specifies the billing method for a test run: metered or unmetered. If the
 	// parameter is not specified, the default value is metered.
-	BillingMethod *string `locationName:"billingMethod" type:"string" enum:"BillingMethod"`
+	BillingMethod BillingMethod `locationName:"billingMethod" type:"string"`
 
 	// Input CustomerArtifactPaths object for the scheduled run configuration.
 	CustomerArtifactPaths *CustomerArtifactPaths `locationName:"customerArtifactPaths" type:"structure"`
@@ -11302,8 +11344,8 @@ func (s *ScheduleRunConfiguration) SetAuxiliaryApps(v []*string) *ScheduleRunCon
 }
 
 // SetBillingMethod sets the BillingMethod field's value.
-func (s *ScheduleRunConfiguration) SetBillingMethod(v string) *ScheduleRunConfiguration {
-	s.BillingMethod = &v
+func (s *ScheduleRunConfiguration) SetBillingMethod(v BillingMethod) *ScheduleRunConfiguration {
+	s.BillingMethod = v
 	return s
 }
 
@@ -11393,18 +11435,21 @@ func (s *ScheduleRunInput) Validate() error {
 	if s.AppArn != nil && len(*s.AppArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("AppArn", 32))
 	}
+
 	if s.DevicePoolArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DevicePoolArn"))
 	}
 	if s.DevicePoolArn != nil && len(*s.DevicePoolArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("DevicePoolArn", 32))
 	}
+
 	if s.ProjectArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
 	if s.ProjectArn != nil && len(*s.ProjectArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProjectArn", 32))
 	}
+
 	if s.Test == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Test"))
 	}
@@ -11613,7 +11658,7 @@ type ScheduleRunTest struct {
 	//    * XCTEST_UI: The XCode UI test type.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"TestType"`
+	Type TestType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -11632,7 +11677,7 @@ func (s *ScheduleRunTest) Validate() error {
 	if s.TestPackageArn != nil && len(*s.TestPackageArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("TestPackageArn", 32))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -11661,8 +11706,8 @@ func (s *ScheduleRunTest) SetTestPackageArn(v string) *ScheduleRunTest {
 }
 
 // SetType sets the Type field's value.
-func (s *ScheduleRunTest) SetType(v string) *ScheduleRunTest {
-	s.Type = &v
+func (s *ScheduleRunTest) SetType(v TestType) *ScheduleRunTest {
+	s.Type = v
 	return s
 }
 
@@ -11690,6 +11735,7 @@ func (s StopRemoteAccessSessionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopRemoteAccessSessionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopRemoteAccessSessionInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -11761,6 +11807,7 @@ func (s StopRunInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopRunInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopRunInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -11845,7 +11892,7 @@ type Suite struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result *string `locationName:"result" type:"string" enum:"ExecutionResult"`
+	Result ExecutionResult `locationName:"result" type:"string"`
 
 	// The suite's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -11871,7 +11918,7 @@ type Suite struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status *string `locationName:"status" type:"string" enum:"ExecutionStatus"`
+	Status ExecutionStatus `locationName:"status" type:"string"`
 
 	// The suite's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -11909,7 +11956,7 @@ type Suite struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type *string `locationName:"type" type:"string" enum:"TestType"`
+	Type TestType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -11959,8 +12006,8 @@ func (s *Suite) SetName(v string) *Suite {
 }
 
 // SetResult sets the Result field's value.
-func (s *Suite) SetResult(v string) *Suite {
-	s.Result = &v
+func (s *Suite) SetResult(v ExecutionResult) *Suite {
+	s.Result = v
 	return s
 }
 
@@ -11971,8 +12018,8 @@ func (s *Suite) SetStarted(v time.Time) *Suite {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Suite) SetStatus(v string) *Suite {
-	s.Status = &v
+func (s *Suite) SetStatus(v ExecutionStatus) *Suite {
+	s.Status = v
 	return s
 }
 
@@ -11983,8 +12030,8 @@ func (s *Suite) SetStopped(v time.Time) *Suite {
 }
 
 // SetType sets the Type field's value.
-func (s *Suite) SetType(v string) *Suite {
-	s.Type = &v
+func (s *Suite) SetType(v TestType) *Suite {
+	s.Type = v
 	return s
 }
 
@@ -12028,7 +12075,7 @@ type Test struct {
 	//    * ERRORED: An error condition.
 	//
 	//    * STOPPED: A stopped condition.
-	Result *string `locationName:"result" type:"string" enum:"ExecutionResult"`
+	Result ExecutionResult `locationName:"result" type:"string"`
 
 	// The test's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -12054,7 +12101,7 @@ type Test struct {
 	//    * COMPLETED: A completed status.
 	//
 	//    * STOPPING: A stopping status.
-	Status *string `locationName:"status" type:"string" enum:"ExecutionStatus"`
+	Status ExecutionStatus `locationName:"status" type:"string"`
 
 	// The test's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
@@ -12092,7 +12139,7 @@ type Test struct {
 	//    * XCTEST: The XCode test type.
 	//
 	//    * XCTEST_UI: The XCode UI test type.
-	Type *string `locationName:"type" type:"string" enum:"TestType"`
+	Type TestType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -12142,8 +12189,8 @@ func (s *Test) SetName(v string) *Test {
 }
 
 // SetResult sets the Result field's value.
-func (s *Test) SetResult(v string) *Test {
-	s.Result = &v
+func (s *Test) SetResult(v ExecutionResult) *Test {
+	s.Result = v
 	return s
 }
 
@@ -12154,8 +12201,8 @@ func (s *Test) SetStarted(v time.Time) *Test {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Test) SetStatus(v string) *Test {
-	s.Status = &v
+func (s *Test) SetStatus(v ExecutionStatus) *Test {
+	s.Status = v
 	return s
 }
 
@@ -12166,8 +12213,8 @@ func (s *Test) SetStopped(v time.Time) *Test {
 }
 
 // SetType sets the Type field's value.
-func (s *Test) SetType(v string) *Test {
-	s.Type = &v
+func (s *Test) SetType(v TestType) *Test {
+	s.Type = v
 	return s
 }
 
@@ -12275,6 +12322,7 @@ func (s UpdateDevicePoolInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDevicePoolInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDevicePoolInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -12369,7 +12417,7 @@ type UpdateNetworkProfileInput struct {
 
 	// The type of network profile you wish to return information about. Valid values
 	// are listed below.
-	Type *string `locationName:"type" type:"string" enum:"NetworkProfileType"`
+	Type NetworkProfileType `locationName:"type" type:"string"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.
 	UplinkBandwidthBits *int64 `locationName:"uplinkBandwidthBits" type:"long"`
@@ -12399,6 +12447,7 @@ func (s UpdateNetworkProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNetworkProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateNetworkProfileInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -12455,8 +12504,8 @@ func (s *UpdateNetworkProfileInput) SetName(v string) *UpdateNetworkProfileInput
 }
 
 // SetType sets the Type field's value.
-func (s *UpdateNetworkProfileInput) SetType(v string) *UpdateNetworkProfileInput {
-	s.Type = &v
+func (s *UpdateNetworkProfileInput) SetType(v NetworkProfileType) *UpdateNetworkProfileInput {
+	s.Type = v
 	return s
 }
 
@@ -12539,6 +12588,7 @@ func (s UpdateProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
@@ -12631,7 +12681,7 @@ type Upload struct {
 	//    * PROCESSING: A processing status.
 	//
 	//    * SUCCEEDED: A succeeded status.
-	Status *string `locationName:"status" type:"string" enum:"UploadStatus"`
+	Status UploadStatus `locationName:"status" type:"string"`
 
 	// The upload's type.
 	//
@@ -12671,7 +12721,7 @@ type Upload struct {
 	//    * XCTEST_TEST_PACKAGE: An XCode test package upload.
 	//
 	//    * XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.
-	Type *string `locationName:"type" type:"string" enum:"UploadType"`
+	Type UploadType `locationName:"type" type:"string"`
 
 	// The pre-signed Amazon S3 URL that was used to store a file through a corresponding
 	// PUT request.
@@ -12725,14 +12775,14 @@ func (s *Upload) SetName(v string) *Upload {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Upload) SetStatus(v string) *Upload {
-	s.Status = &v
+func (s *Upload) SetStatus(v UploadStatus) *Upload {
+	s.Status = v
 	return s
 }
 
 // SetType sets the Type field's value.
-func (s *Upload) SetType(v string) *Upload {
-	s.Type = &v
+func (s *Upload) SetType(v UploadType) *Upload {
+	s.Type = v
 	return s
 }
 
@@ -12742,423 +12792,249 @@ func (s *Upload) SetUrl(v string) *Upload {
 	return s
 }
 
+type ArtifactCategory string
+
+// Enum values for ArtifactCategory
 const (
-	// ArtifactCategoryScreenshot is a ArtifactCategory enum value
-	ArtifactCategoryScreenshot = "SCREENSHOT"
-
-	// ArtifactCategoryFile is a ArtifactCategory enum value
-	ArtifactCategoryFile = "FILE"
-
-	// ArtifactCategoryLog is a ArtifactCategory enum value
-	ArtifactCategoryLog = "LOG"
+	ArtifactCategoryScreenshot ArtifactCategory = "SCREENSHOT"
+	ArtifactCategoryFile       ArtifactCategory = "FILE"
+	ArtifactCategoryLog        ArtifactCategory = "LOG"
 )
 
+type ArtifactType string
+
+// Enum values for ArtifactType
 const (
-	// ArtifactTypeUnknown is a ArtifactType enum value
-	ArtifactTypeUnknown = "UNKNOWN"
-
-	// ArtifactTypeScreenshot is a ArtifactType enum value
-	ArtifactTypeScreenshot = "SCREENSHOT"
-
-	// ArtifactTypeDeviceLog is a ArtifactType enum value
-	ArtifactTypeDeviceLog = "DEVICE_LOG"
-
-	// ArtifactTypeMessageLog is a ArtifactType enum value
-	ArtifactTypeMessageLog = "MESSAGE_LOG"
-
-	// ArtifactTypeVideoLog is a ArtifactType enum value
-	ArtifactTypeVideoLog = "VIDEO_LOG"
-
-	// ArtifactTypeResultLog is a ArtifactType enum value
-	ArtifactTypeResultLog = "RESULT_LOG"
-
-	// ArtifactTypeServiceLog is a ArtifactType enum value
-	ArtifactTypeServiceLog = "SERVICE_LOG"
-
-	// ArtifactTypeWebkitLog is a ArtifactType enum value
-	ArtifactTypeWebkitLog = "WEBKIT_LOG"
-
-	// ArtifactTypeInstrumentationOutput is a ArtifactType enum value
-	ArtifactTypeInstrumentationOutput = "INSTRUMENTATION_OUTPUT"
-
-	// ArtifactTypeExerciserMonkeyOutput is a ArtifactType enum value
-	ArtifactTypeExerciserMonkeyOutput = "EXERCISER_MONKEY_OUTPUT"
-
-	// ArtifactTypeCalabashJsonOutput is a ArtifactType enum value
-	ArtifactTypeCalabashJsonOutput = "CALABASH_JSON_OUTPUT"
-
-	// ArtifactTypeCalabashPrettyOutput is a ArtifactType enum value
-	ArtifactTypeCalabashPrettyOutput = "CALABASH_PRETTY_OUTPUT"
-
-	// ArtifactTypeCalabashStandardOutput is a ArtifactType enum value
-	ArtifactTypeCalabashStandardOutput = "CALABASH_STANDARD_OUTPUT"
-
-	// ArtifactTypeCalabashJavaXmlOutput is a ArtifactType enum value
-	ArtifactTypeCalabashJavaXmlOutput = "CALABASH_JAVA_XML_OUTPUT"
-
-	// ArtifactTypeAutomationOutput is a ArtifactType enum value
-	ArtifactTypeAutomationOutput = "AUTOMATION_OUTPUT"
-
-	// ArtifactTypeAppiumServerOutput is a ArtifactType enum value
-	ArtifactTypeAppiumServerOutput = "APPIUM_SERVER_OUTPUT"
-
-	// ArtifactTypeAppiumJavaOutput is a ArtifactType enum value
-	ArtifactTypeAppiumJavaOutput = "APPIUM_JAVA_OUTPUT"
-
-	// ArtifactTypeAppiumJavaXmlOutput is a ArtifactType enum value
-	ArtifactTypeAppiumJavaXmlOutput = "APPIUM_JAVA_XML_OUTPUT"
-
-	// ArtifactTypeAppiumPythonOutput is a ArtifactType enum value
-	ArtifactTypeAppiumPythonOutput = "APPIUM_PYTHON_OUTPUT"
-
-	// ArtifactTypeAppiumPythonXmlOutput is a ArtifactType enum value
-	ArtifactTypeAppiumPythonXmlOutput = "APPIUM_PYTHON_XML_OUTPUT"
-
-	// ArtifactTypeExplorerEventLog is a ArtifactType enum value
-	ArtifactTypeExplorerEventLog = "EXPLORER_EVENT_LOG"
-
-	// ArtifactTypeExplorerSummaryLog is a ArtifactType enum value
-	ArtifactTypeExplorerSummaryLog = "EXPLORER_SUMMARY_LOG"
-
-	// ArtifactTypeApplicationCrashReport is a ArtifactType enum value
-	ArtifactTypeApplicationCrashReport = "APPLICATION_CRASH_REPORT"
-
-	// ArtifactTypeXctestLog is a ArtifactType enum value
-	ArtifactTypeXctestLog = "XCTEST_LOG"
-
-	// ArtifactTypeVideo is a ArtifactType enum value
-	ArtifactTypeVideo = "VIDEO"
-
-	// ArtifactTypeCustomerArtifact is a ArtifactType enum value
-	ArtifactTypeCustomerArtifact = "CUSTOMER_ARTIFACT"
-
-	// ArtifactTypeCustomerArtifactLog is a ArtifactType enum value
-	ArtifactTypeCustomerArtifactLog = "CUSTOMER_ARTIFACT_LOG"
+	ArtifactTypeUnknown                ArtifactType = "UNKNOWN"
+	ArtifactTypeScreenshot             ArtifactType = "SCREENSHOT"
+	ArtifactTypeDeviceLog              ArtifactType = "DEVICE_LOG"
+	ArtifactTypeMessageLog             ArtifactType = "MESSAGE_LOG"
+	ArtifactTypeVideoLog               ArtifactType = "VIDEO_LOG"
+	ArtifactTypeResultLog              ArtifactType = "RESULT_LOG"
+	ArtifactTypeServiceLog             ArtifactType = "SERVICE_LOG"
+	ArtifactTypeWebkitLog              ArtifactType = "WEBKIT_LOG"
+	ArtifactTypeInstrumentationOutput  ArtifactType = "INSTRUMENTATION_OUTPUT"
+	ArtifactTypeExerciserMonkeyOutput  ArtifactType = "EXERCISER_MONKEY_OUTPUT"
+	ArtifactTypeCalabashJsonOutput     ArtifactType = "CALABASH_JSON_OUTPUT"
+	ArtifactTypeCalabashPrettyOutput   ArtifactType = "CALABASH_PRETTY_OUTPUT"
+	ArtifactTypeCalabashStandardOutput ArtifactType = "CALABASH_STANDARD_OUTPUT"
+	ArtifactTypeCalabashJavaXmlOutput  ArtifactType = "CALABASH_JAVA_XML_OUTPUT"
+	ArtifactTypeAutomationOutput       ArtifactType = "AUTOMATION_OUTPUT"
+	ArtifactTypeAppiumServerOutput     ArtifactType = "APPIUM_SERVER_OUTPUT"
+	ArtifactTypeAppiumJavaOutput       ArtifactType = "APPIUM_JAVA_OUTPUT"
+	ArtifactTypeAppiumJavaXmlOutput    ArtifactType = "APPIUM_JAVA_XML_OUTPUT"
+	ArtifactTypeAppiumPythonOutput     ArtifactType = "APPIUM_PYTHON_OUTPUT"
+	ArtifactTypeAppiumPythonXmlOutput  ArtifactType = "APPIUM_PYTHON_XML_OUTPUT"
+	ArtifactTypeExplorerEventLog       ArtifactType = "EXPLORER_EVENT_LOG"
+	ArtifactTypeExplorerSummaryLog     ArtifactType = "EXPLORER_SUMMARY_LOG"
+	ArtifactTypeApplicationCrashReport ArtifactType = "APPLICATION_CRASH_REPORT"
+	ArtifactTypeXctestLog              ArtifactType = "XCTEST_LOG"
+	ArtifactTypeVideo                  ArtifactType = "VIDEO"
+	ArtifactTypeCustomerArtifact       ArtifactType = "CUSTOMER_ARTIFACT"
+	ArtifactTypeCustomerArtifactLog    ArtifactType = "CUSTOMER_ARTIFACT_LOG"
 )
 
-const (
-	// BillingMethodMetered is a BillingMethod enum value
-	BillingMethodMetered = "METERED"
+type BillingMethod string
 
-	// BillingMethodUnmetered is a BillingMethod enum value
-	BillingMethodUnmetered = "UNMETERED"
+// Enum values for BillingMethod
+const (
+	BillingMethodMetered   BillingMethod = "METERED"
+	BillingMethodUnmetered BillingMethod = "UNMETERED"
 )
 
+type CurrencyCode string
+
+// Enum values for CurrencyCode
 const (
-	// CurrencyCodeUsd is a CurrencyCode enum value
-	CurrencyCodeUsd = "USD"
+	CurrencyCodeUsd CurrencyCode = "USD"
 )
 
+type DeviceAttribute string
+
+// Enum values for DeviceAttribute
 const (
-	// DeviceAttributeArn is a DeviceAttribute enum value
-	DeviceAttributeArn = "ARN"
-
-	// DeviceAttributePlatform is a DeviceAttribute enum value
-	DeviceAttributePlatform = "PLATFORM"
-
-	// DeviceAttributeFormFactor is a DeviceAttribute enum value
-	DeviceAttributeFormFactor = "FORM_FACTOR"
-
-	// DeviceAttributeManufacturer is a DeviceAttribute enum value
-	DeviceAttributeManufacturer = "MANUFACTURER"
-
-	// DeviceAttributeRemoteAccessEnabled is a DeviceAttribute enum value
-	DeviceAttributeRemoteAccessEnabled = "REMOTE_ACCESS_ENABLED"
-
-	// DeviceAttributeRemoteDebugEnabled is a DeviceAttribute enum value
-	DeviceAttributeRemoteDebugEnabled = "REMOTE_DEBUG_ENABLED"
-
-	// DeviceAttributeAppiumVersion is a DeviceAttribute enum value
-	DeviceAttributeAppiumVersion = "APPIUM_VERSION"
+	DeviceAttributeArn                 DeviceAttribute = "ARN"
+	DeviceAttributePlatform            DeviceAttribute = "PLATFORM"
+	DeviceAttributeFormFactor          DeviceAttribute = "FORM_FACTOR"
+	DeviceAttributeManufacturer        DeviceAttribute = "MANUFACTURER"
+	DeviceAttributeRemoteAccessEnabled DeviceAttribute = "REMOTE_ACCESS_ENABLED"
+	DeviceAttributeRemoteDebugEnabled  DeviceAttribute = "REMOTE_DEBUG_ENABLED"
+	DeviceAttributeAppiumVersion       DeviceAttribute = "APPIUM_VERSION"
 )
 
-const (
-	// DeviceFormFactorPhone is a DeviceFormFactor enum value
-	DeviceFormFactorPhone = "PHONE"
+type DeviceFormFactor string
 
-	// DeviceFormFactorTablet is a DeviceFormFactor enum value
-	DeviceFormFactorTablet = "TABLET"
+// Enum values for DeviceFormFactor
+const (
+	DeviceFormFactorPhone  DeviceFormFactor = "PHONE"
+	DeviceFormFactorTablet DeviceFormFactor = "TABLET"
 )
 
-const (
-	// DevicePlatformAndroid is a DevicePlatform enum value
-	DevicePlatformAndroid = "ANDROID"
+type DevicePlatform string
 
-	// DevicePlatformIos is a DevicePlatform enum value
-	DevicePlatformIos = "IOS"
+// Enum values for DevicePlatform
+const (
+	DevicePlatformAndroid DevicePlatform = "ANDROID"
+	DevicePlatformIos     DevicePlatform = "IOS"
 )
 
-const (
-	// DevicePoolTypeCurated is a DevicePoolType enum value
-	DevicePoolTypeCurated = "CURATED"
+type DevicePoolType string
 
-	// DevicePoolTypePrivate is a DevicePoolType enum value
-	DevicePoolTypePrivate = "PRIVATE"
+// Enum values for DevicePoolType
+const (
+	DevicePoolTypeCurated DevicePoolType = "CURATED"
+	DevicePoolTypePrivate DevicePoolType = "PRIVATE"
 )
 
+type ExecutionResult string
+
+// Enum values for ExecutionResult
 const (
-	// ExecutionResultPending is a ExecutionResult enum value
-	ExecutionResultPending = "PENDING"
-
-	// ExecutionResultPassed is a ExecutionResult enum value
-	ExecutionResultPassed = "PASSED"
-
-	// ExecutionResultWarned is a ExecutionResult enum value
-	ExecutionResultWarned = "WARNED"
-
-	// ExecutionResultFailed is a ExecutionResult enum value
-	ExecutionResultFailed = "FAILED"
-
-	// ExecutionResultSkipped is a ExecutionResult enum value
-	ExecutionResultSkipped = "SKIPPED"
-
-	// ExecutionResultErrored is a ExecutionResult enum value
-	ExecutionResultErrored = "ERRORED"
-
-	// ExecutionResultStopped is a ExecutionResult enum value
-	ExecutionResultStopped = "STOPPED"
+	ExecutionResultPending ExecutionResult = "PENDING"
+	ExecutionResultPassed  ExecutionResult = "PASSED"
+	ExecutionResultWarned  ExecutionResult = "WARNED"
+	ExecutionResultFailed  ExecutionResult = "FAILED"
+	ExecutionResultSkipped ExecutionResult = "SKIPPED"
+	ExecutionResultErrored ExecutionResult = "ERRORED"
+	ExecutionResultStopped ExecutionResult = "STOPPED"
 )
 
+type ExecutionResultCode string
+
+// Enum values for ExecutionResultCode
 const (
-	// ExecutionResultCodeParsingFailed is a ExecutionResultCode enum value
-	ExecutionResultCodeParsingFailed = "PARSING_FAILED"
+	ExecutionResultCodeParsingFailed ExecutionResultCode = "PARSING_FAILED"
 )
 
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
 const (
-	// ExecutionStatusPending is a ExecutionStatus enum value
-	ExecutionStatusPending = "PENDING"
-
-	// ExecutionStatusPendingConcurrency is a ExecutionStatus enum value
-	ExecutionStatusPendingConcurrency = "PENDING_CONCURRENCY"
-
-	// ExecutionStatusPendingDevice is a ExecutionStatus enum value
-	ExecutionStatusPendingDevice = "PENDING_DEVICE"
-
-	// ExecutionStatusProcessing is a ExecutionStatus enum value
-	ExecutionStatusProcessing = "PROCESSING"
-
-	// ExecutionStatusScheduling is a ExecutionStatus enum value
-	ExecutionStatusScheduling = "SCHEDULING"
-
-	// ExecutionStatusPreparing is a ExecutionStatus enum value
-	ExecutionStatusPreparing = "PREPARING"
-
-	// ExecutionStatusRunning is a ExecutionStatus enum value
-	ExecutionStatusRunning = "RUNNING"
-
-	// ExecutionStatusCompleted is a ExecutionStatus enum value
-	ExecutionStatusCompleted = "COMPLETED"
-
-	// ExecutionStatusStopping is a ExecutionStatus enum value
-	ExecutionStatusStopping = "STOPPING"
+	ExecutionStatusPending            ExecutionStatus = "PENDING"
+	ExecutionStatusPendingConcurrency ExecutionStatus = "PENDING_CONCURRENCY"
+	ExecutionStatusPendingDevice      ExecutionStatus = "PENDING_DEVICE"
+	ExecutionStatusProcessing         ExecutionStatus = "PROCESSING"
+	ExecutionStatusScheduling         ExecutionStatus = "SCHEDULING"
+	ExecutionStatusPreparing          ExecutionStatus = "PREPARING"
+	ExecutionStatusRunning            ExecutionStatus = "RUNNING"
+	ExecutionStatusCompleted          ExecutionStatus = "COMPLETED"
+	ExecutionStatusStopping           ExecutionStatus = "STOPPING"
 )
 
-const (
-	// NetworkProfileTypeCurated is a NetworkProfileType enum value
-	NetworkProfileTypeCurated = "CURATED"
+type NetworkProfileType string
 
-	// NetworkProfileTypePrivate is a NetworkProfileType enum value
-	NetworkProfileTypePrivate = "PRIVATE"
+// Enum values for NetworkProfileType
+const (
+	NetworkProfileTypeCurated NetworkProfileType = "CURATED"
+	NetworkProfileTypePrivate NetworkProfileType = "PRIVATE"
 )
 
+type OfferingTransactionType string
+
+// Enum values for OfferingTransactionType
 const (
-	// OfferingTransactionTypePurchase is a OfferingTransactionType enum value
-	OfferingTransactionTypePurchase = "PURCHASE"
-
-	// OfferingTransactionTypeRenew is a OfferingTransactionType enum value
-	OfferingTransactionTypeRenew = "RENEW"
-
-	// OfferingTransactionTypeSystem is a OfferingTransactionType enum value
-	OfferingTransactionTypeSystem = "SYSTEM"
+	OfferingTransactionTypePurchase OfferingTransactionType = "PURCHASE"
+	OfferingTransactionTypeRenew    OfferingTransactionType = "RENEW"
+	OfferingTransactionTypeSystem   OfferingTransactionType = "SYSTEM"
 )
 
+type OfferingType string
+
+// Enum values for OfferingType
 const (
-	// OfferingTypeRecurring is a OfferingType enum value
-	OfferingTypeRecurring = "RECURRING"
+	OfferingTypeRecurring OfferingType = "RECURRING"
 )
 
+type RecurringChargeFrequency string
+
+// Enum values for RecurringChargeFrequency
 const (
-	// RecurringChargeFrequencyMonthly is a RecurringChargeFrequency enum value
-	RecurringChargeFrequencyMonthly = "MONTHLY"
+	RecurringChargeFrequencyMonthly RecurringChargeFrequency = "MONTHLY"
 )
 
+type RuleOperator string
+
+// Enum values for RuleOperator
 const (
-	// RuleOperatorEquals is a RuleOperator enum value
-	RuleOperatorEquals = "EQUALS"
-
-	// RuleOperatorLessThan is a RuleOperator enum value
-	RuleOperatorLessThan = "LESS_THAN"
-
-	// RuleOperatorGreaterThan is a RuleOperator enum value
-	RuleOperatorGreaterThan = "GREATER_THAN"
-
-	// RuleOperatorIn is a RuleOperator enum value
-	RuleOperatorIn = "IN"
-
-	// RuleOperatorNotIn is a RuleOperator enum value
-	RuleOperatorNotIn = "NOT_IN"
-
-	// RuleOperatorContains is a RuleOperator enum value
-	RuleOperatorContains = "CONTAINS"
+	RuleOperatorEquals      RuleOperator = "EQUALS"
+	RuleOperatorLessThan    RuleOperator = "LESS_THAN"
+	RuleOperatorGreaterThan RuleOperator = "GREATER_THAN"
+	RuleOperatorIn          RuleOperator = "IN"
+	RuleOperatorNotIn       RuleOperator = "NOT_IN"
+	RuleOperatorContains    RuleOperator = "CONTAINS"
 )
 
+type SampleType string
+
+// Enum values for SampleType
 const (
-	// SampleTypeCpu is a SampleType enum value
-	SampleTypeCpu = "CPU"
-
-	// SampleTypeMemory is a SampleType enum value
-	SampleTypeMemory = "MEMORY"
-
-	// SampleTypeThreads is a SampleType enum value
-	SampleTypeThreads = "THREADS"
-
-	// SampleTypeRxRate is a SampleType enum value
-	SampleTypeRxRate = "RX_RATE"
-
-	// SampleTypeTxRate is a SampleType enum value
-	SampleTypeTxRate = "TX_RATE"
-
-	// SampleTypeRx is a SampleType enum value
-	SampleTypeRx = "RX"
-
-	// SampleTypeTx is a SampleType enum value
-	SampleTypeTx = "TX"
-
-	// SampleTypeNativeFrames is a SampleType enum value
-	SampleTypeNativeFrames = "NATIVE_FRAMES"
-
-	// SampleTypeNativeFps is a SampleType enum value
-	SampleTypeNativeFps = "NATIVE_FPS"
-
-	// SampleTypeNativeMinDrawtime is a SampleType enum value
-	SampleTypeNativeMinDrawtime = "NATIVE_MIN_DRAWTIME"
-
-	// SampleTypeNativeAvgDrawtime is a SampleType enum value
-	SampleTypeNativeAvgDrawtime = "NATIVE_AVG_DRAWTIME"
-
-	// SampleTypeNativeMaxDrawtime is a SampleType enum value
-	SampleTypeNativeMaxDrawtime = "NATIVE_MAX_DRAWTIME"
-
-	// SampleTypeOpenglFrames is a SampleType enum value
-	SampleTypeOpenglFrames = "OPENGL_FRAMES"
-
-	// SampleTypeOpenglFps is a SampleType enum value
-	SampleTypeOpenglFps = "OPENGL_FPS"
-
-	// SampleTypeOpenglMinDrawtime is a SampleType enum value
-	SampleTypeOpenglMinDrawtime = "OPENGL_MIN_DRAWTIME"
-
-	// SampleTypeOpenglAvgDrawtime is a SampleType enum value
-	SampleTypeOpenglAvgDrawtime = "OPENGL_AVG_DRAWTIME"
-
-	// SampleTypeOpenglMaxDrawtime is a SampleType enum value
-	SampleTypeOpenglMaxDrawtime = "OPENGL_MAX_DRAWTIME"
+	SampleTypeCpu               SampleType = "CPU"
+	SampleTypeMemory            SampleType = "MEMORY"
+	SampleTypeThreads           SampleType = "THREADS"
+	SampleTypeRxRate            SampleType = "RX_RATE"
+	SampleTypeTxRate            SampleType = "TX_RATE"
+	SampleTypeRx                SampleType = "RX"
+	SampleTypeTx                SampleType = "TX"
+	SampleTypeNativeFrames      SampleType = "NATIVE_FRAMES"
+	SampleTypeNativeFps         SampleType = "NATIVE_FPS"
+	SampleTypeNativeMinDrawtime SampleType = "NATIVE_MIN_DRAWTIME"
+	SampleTypeNativeAvgDrawtime SampleType = "NATIVE_AVG_DRAWTIME"
+	SampleTypeNativeMaxDrawtime SampleType = "NATIVE_MAX_DRAWTIME"
+	SampleTypeOpenglFrames      SampleType = "OPENGL_FRAMES"
+	SampleTypeOpenglFps         SampleType = "OPENGL_FPS"
+	SampleTypeOpenglMinDrawtime SampleType = "OPENGL_MIN_DRAWTIME"
+	SampleTypeOpenglAvgDrawtime SampleType = "OPENGL_AVG_DRAWTIME"
+	SampleTypeOpenglMaxDrawtime SampleType = "OPENGL_MAX_DRAWTIME"
 )
 
+type TestType string
+
+// Enum values for TestType
 const (
-	// TestTypeBuiltinFuzz is a TestType enum value
-	TestTypeBuiltinFuzz = "BUILTIN_FUZZ"
-
-	// TestTypeBuiltinExplorer is a TestType enum value
-	TestTypeBuiltinExplorer = "BUILTIN_EXPLORER"
-
-	// TestTypeAppiumJavaJunit is a TestType enum value
-	TestTypeAppiumJavaJunit = "APPIUM_JAVA_JUNIT"
-
-	// TestTypeAppiumJavaTestng is a TestType enum value
-	TestTypeAppiumJavaTestng = "APPIUM_JAVA_TESTNG"
-
-	// TestTypeAppiumPython is a TestType enum value
-	TestTypeAppiumPython = "APPIUM_PYTHON"
-
-	// TestTypeAppiumWebJavaJunit is a TestType enum value
-	TestTypeAppiumWebJavaJunit = "APPIUM_WEB_JAVA_JUNIT"
-
-	// TestTypeAppiumWebJavaTestng is a TestType enum value
-	TestTypeAppiumWebJavaTestng = "APPIUM_WEB_JAVA_TESTNG"
-
-	// TestTypeAppiumWebPython is a TestType enum value
-	TestTypeAppiumWebPython = "APPIUM_WEB_PYTHON"
-
-	// TestTypeCalabash is a TestType enum value
-	TestTypeCalabash = "CALABASH"
-
-	// TestTypeInstrumentation is a TestType enum value
-	TestTypeInstrumentation = "INSTRUMENTATION"
-
-	// TestTypeUiautomation is a TestType enum value
-	TestTypeUiautomation = "UIAUTOMATION"
-
-	// TestTypeUiautomator is a TestType enum value
-	TestTypeUiautomator = "UIAUTOMATOR"
-
-	// TestTypeXctest is a TestType enum value
-	TestTypeXctest = "XCTEST"
-
-	// TestTypeXctestUi is a TestType enum value
-	TestTypeXctestUi = "XCTEST_UI"
+	TestTypeBuiltinFuzz         TestType = "BUILTIN_FUZZ"
+	TestTypeBuiltinExplorer     TestType = "BUILTIN_EXPLORER"
+	TestTypeAppiumJavaJunit     TestType = "APPIUM_JAVA_JUNIT"
+	TestTypeAppiumJavaTestng    TestType = "APPIUM_JAVA_TESTNG"
+	TestTypeAppiumPython        TestType = "APPIUM_PYTHON"
+	TestTypeAppiumWebJavaJunit  TestType = "APPIUM_WEB_JAVA_JUNIT"
+	TestTypeAppiumWebJavaTestng TestType = "APPIUM_WEB_JAVA_TESTNG"
+	TestTypeAppiumWebPython     TestType = "APPIUM_WEB_PYTHON"
+	TestTypeCalabash            TestType = "CALABASH"
+	TestTypeInstrumentation     TestType = "INSTRUMENTATION"
+	TestTypeUiautomation        TestType = "UIAUTOMATION"
+	TestTypeUiautomator         TestType = "UIAUTOMATOR"
+	TestTypeXctest              TestType = "XCTEST"
+	TestTypeXctestUi            TestType = "XCTEST_UI"
 )
 
+type UploadStatus string
+
+// Enum values for UploadStatus
 const (
-	// UploadStatusInitialized is a UploadStatus enum value
-	UploadStatusInitialized = "INITIALIZED"
-
-	// UploadStatusProcessing is a UploadStatus enum value
-	UploadStatusProcessing = "PROCESSING"
-
-	// UploadStatusSucceeded is a UploadStatus enum value
-	UploadStatusSucceeded = "SUCCEEDED"
-
-	// UploadStatusFailed is a UploadStatus enum value
-	UploadStatusFailed = "FAILED"
+	UploadStatusInitialized UploadStatus = "INITIALIZED"
+	UploadStatusProcessing  UploadStatus = "PROCESSING"
+	UploadStatusSucceeded   UploadStatus = "SUCCEEDED"
+	UploadStatusFailed      UploadStatus = "FAILED"
 )
 
+type UploadType string
+
+// Enum values for UploadType
 const (
-	// UploadTypeAndroidApp is a UploadType enum value
-	UploadTypeAndroidApp = "ANDROID_APP"
-
-	// UploadTypeIosApp is a UploadType enum value
-	UploadTypeIosApp = "IOS_APP"
-
-	// UploadTypeWebApp is a UploadType enum value
-	UploadTypeWebApp = "WEB_APP"
-
-	// UploadTypeExternalData is a UploadType enum value
-	UploadTypeExternalData = "EXTERNAL_DATA"
-
-	// UploadTypeAppiumJavaJunitTestPackage is a UploadType enum value
-	UploadTypeAppiumJavaJunitTestPackage = "APPIUM_JAVA_JUNIT_TEST_PACKAGE"
-
-	// UploadTypeAppiumJavaTestngTestPackage is a UploadType enum value
-	UploadTypeAppiumJavaTestngTestPackage = "APPIUM_JAVA_TESTNG_TEST_PACKAGE"
-
-	// UploadTypeAppiumPythonTestPackage is a UploadType enum value
-	UploadTypeAppiumPythonTestPackage = "APPIUM_PYTHON_TEST_PACKAGE"
-
-	// UploadTypeAppiumWebJavaJunitTestPackage is a UploadType enum value
-	UploadTypeAppiumWebJavaJunitTestPackage = "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"
-
-	// UploadTypeAppiumWebJavaTestngTestPackage is a UploadType enum value
-	UploadTypeAppiumWebJavaTestngTestPackage = "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"
-
-	// UploadTypeAppiumWebPythonTestPackage is a UploadType enum value
-	UploadTypeAppiumWebPythonTestPackage = "APPIUM_WEB_PYTHON_TEST_PACKAGE"
-
-	// UploadTypeCalabashTestPackage is a UploadType enum value
-	UploadTypeCalabashTestPackage = "CALABASH_TEST_PACKAGE"
-
-	// UploadTypeInstrumentationTestPackage is a UploadType enum value
-	UploadTypeInstrumentationTestPackage = "INSTRUMENTATION_TEST_PACKAGE"
-
-	// UploadTypeUiautomationTestPackage is a UploadType enum value
-	UploadTypeUiautomationTestPackage = "UIAUTOMATION_TEST_PACKAGE"
-
-	// UploadTypeUiautomatorTestPackage is a UploadType enum value
-	UploadTypeUiautomatorTestPackage = "UIAUTOMATOR_TEST_PACKAGE"
-
-	// UploadTypeXctestTestPackage is a UploadType enum value
-	UploadTypeXctestTestPackage = "XCTEST_TEST_PACKAGE"
-
-	// UploadTypeXctestUiTestPackage is a UploadType enum value
-	UploadTypeXctestUiTestPackage = "XCTEST_UI_TEST_PACKAGE"
+	UploadTypeAndroidApp                     UploadType = "ANDROID_APP"
+	UploadTypeIosApp                         UploadType = "IOS_APP"
+	UploadTypeWebApp                         UploadType = "WEB_APP"
+	UploadTypeExternalData                   UploadType = "EXTERNAL_DATA"
+	UploadTypeAppiumJavaJunitTestPackage     UploadType = "APPIUM_JAVA_JUNIT_TEST_PACKAGE"
+	UploadTypeAppiumJavaTestngTestPackage    UploadType = "APPIUM_JAVA_TESTNG_TEST_PACKAGE"
+	UploadTypeAppiumPythonTestPackage        UploadType = "APPIUM_PYTHON_TEST_PACKAGE"
+	UploadTypeAppiumWebJavaJunitTestPackage  UploadType = "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"
+	UploadTypeAppiumWebJavaTestngTestPackage UploadType = "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"
+	UploadTypeAppiumWebPythonTestPackage     UploadType = "APPIUM_WEB_PYTHON_TEST_PACKAGE"
+	UploadTypeCalabashTestPackage            UploadType = "CALABASH_TEST_PACKAGE"
+	UploadTypeInstrumentationTestPackage     UploadType = "INSTRUMENTATION_TEST_PACKAGE"
+	UploadTypeUiautomationTestPackage        UploadType = "UIAUTOMATION_TEST_PACKAGE"
+	UploadTypeUiautomatorTestPackage         UploadType = "UIAUTOMATOR_TEST_PACKAGE"
+	UploadTypeXctestTestPackage              UploadType = "XCTEST_TEST_PACKAGE"
+	UploadTypeXctestUiTestPackage            UploadType = "XCTEST_UI_TEST_PACKAGE"
 )

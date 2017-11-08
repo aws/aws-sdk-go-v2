@@ -1855,6 +1855,7 @@ func (s CancelClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelClusterInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -1913,6 +1914,7 @@ func (s CancelJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelJobInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -1957,7 +1959,7 @@ type ClusterListEntry struct {
 
 	// The current state of this cluster. For information about the state of a specific
 	// node, see JobListEntry$JobState.
-	ClusterState *string `type:"string" enum:"ClusterState"`
+	ClusterState ClusterState `type:"string"`
 
 	// The creation date for this cluster.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1984,8 +1986,8 @@ func (s *ClusterListEntry) SetClusterId(v string) *ClusterListEntry {
 }
 
 // SetClusterState sets the ClusterState field's value.
-func (s *ClusterListEntry) SetClusterState(v string) *ClusterListEntry {
-	s.ClusterState = &v
+func (s *ClusterListEntry) SetClusterState(v ClusterState) *ClusterListEntry {
+	s.ClusterState = v
 	return s
 }
 
@@ -2013,7 +2015,7 @@ type ClusterMetadata struct {
 	ClusterId *string `min:"1" type:"string"`
 
 	// The current status of the cluster.
-	ClusterState *string `type:"string" enum:"ClusterState"`
+	ClusterState ClusterState `type:"string"`
 
 	// The creation date for this cluster.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -2027,7 +2029,7 @@ type ClusterMetadata struct {
 
 	// The type of job for this cluster. Currently, the only job type supported
 	// for clusters is LOCAL_USE.
-	JobType *string `type:"string" enum:"JobType"`
+	JobType JobType `type:"string"`
 
 	// The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This
 	// ARN was created using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
@@ -2063,11 +2065,11 @@ type ClusterMetadata struct {
 	//    * In India, Snowball Edges are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
-	ShippingOption *string `type:"string" enum:"ShippingOption"`
+	ShippingOption ShippingOption `type:"string"`
 
 	// The type of AWS Snowball appliance to use for this cluster. Currently, the
 	// only supported appliance type for cluster jobs is EDGE.
-	SnowballType *string `type:"string" enum:"Type"`
+	SnowballType Type `type:"string"`
 }
 
 // String returns the string representation
@@ -2093,8 +2095,8 @@ func (s *ClusterMetadata) SetClusterId(v string) *ClusterMetadata {
 }
 
 // SetClusterState sets the ClusterState field's value.
-func (s *ClusterMetadata) SetClusterState(v string) *ClusterMetadata {
-	s.ClusterState = &v
+func (s *ClusterMetadata) SetClusterState(v ClusterState) *ClusterMetadata {
+	s.ClusterState = v
 	return s
 }
 
@@ -2117,8 +2119,8 @@ func (s *ClusterMetadata) SetForwardingAddressId(v string) *ClusterMetadata {
 }
 
 // SetJobType sets the JobType field's value.
-func (s *ClusterMetadata) SetJobType(v string) *ClusterMetadata {
-	s.JobType = &v
+func (s *ClusterMetadata) SetJobType(v JobType) *ClusterMetadata {
+	s.JobType = v
 	return s
 }
 
@@ -2147,14 +2149,14 @@ func (s *ClusterMetadata) SetRoleARN(v string) *ClusterMetadata {
 }
 
 // SetShippingOption sets the ShippingOption field's value.
-func (s *ClusterMetadata) SetShippingOption(v string) *ClusterMetadata {
-	s.ShippingOption = &v
+func (s *ClusterMetadata) SetShippingOption(v ShippingOption) *ClusterMetadata {
+	s.ShippingOption = v
 	return s
 }
 
 // SetSnowballType sets the SnowballType field's value.
-func (s *ClusterMetadata) SetSnowballType(v string) *ClusterMetadata {
-	s.SnowballType = &v
+func (s *ClusterMetadata) SetSnowballType(v Type) *ClusterMetadata {
+	s.SnowballType = v
 	return s
 }
 
@@ -2181,6 +2183,7 @@ func (s CreateAddressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAddressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAddressInput"}
+
 	if s.Address == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Address"))
 	}
@@ -2249,7 +2252,7 @@ type CreateClusterInput struct {
 	// for clusters is LOCAL_USE.
 	//
 	// JobType is a required field
-	JobType *string `type:"string" required:"true" enum:"JobType"`
+	JobType JobType `type:"string" required:"true"`
 
 	// The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN
 	// values are created by using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
@@ -2291,11 +2294,11 @@ type CreateClusterInput struct {
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	//
 	// ShippingOption is a required field
-	ShippingOption *string `type:"string" required:"true" enum:"ShippingOption"`
+	ShippingOption ShippingOption `type:"string" required:"true"`
 
 	// The type of AWS Snowball appliance to use for this cluster. Currently, the
 	// only supported appliance type for cluster jobs is EDGE.
-	SnowballType *string `type:"string" enum:"Type"`
+	SnowballType Type `type:"string"`
 }
 
 // String returns the string representation
@@ -2311,6 +2314,7 @@ func (s CreateClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterInput"}
+
 	if s.AddressId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AddressId"))
 	}
@@ -2323,16 +2327,18 @@ func (s *CreateClusterInput) Validate() error {
 	if s.ForwardingAddressId != nil && len(*s.ForwardingAddressId) < 40 {
 		invalidParams.Add(aws.NewErrParamMinLen("ForwardingAddressId", 40))
 	}
-	if s.JobType == nil {
+	if len(s.JobType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("JobType"))
 	}
+
 	if s.Resources == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resources"))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
-	if s.ShippingOption == nil {
+	if len(s.ShippingOption) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ShippingOption"))
 	}
 	if s.Resources != nil {
@@ -2366,8 +2372,8 @@ func (s *CreateClusterInput) SetForwardingAddressId(v string) *CreateClusterInpu
 }
 
 // SetJobType sets the JobType field's value.
-func (s *CreateClusterInput) SetJobType(v string) *CreateClusterInput {
-	s.JobType = &v
+func (s *CreateClusterInput) SetJobType(v JobType) *CreateClusterInput {
+	s.JobType = v
 	return s
 }
 
@@ -2396,14 +2402,14 @@ func (s *CreateClusterInput) SetRoleARN(v string) *CreateClusterInput {
 }
 
 // SetShippingOption sets the ShippingOption field's value.
-func (s *CreateClusterInput) SetShippingOption(v string) *CreateClusterInput {
-	s.ShippingOption = &v
+func (s *CreateClusterInput) SetShippingOption(v ShippingOption) *CreateClusterInput {
+	s.ShippingOption = v
 	return s
 }
 
 // SetSnowballType sets the SnowballType field's value.
-func (s *CreateClusterInput) SetSnowballType(v string) *CreateClusterInput {
-	s.SnowballType = &v
+func (s *CreateClusterInput) SetSnowballType(v Type) *CreateClusterInput {
+	s.SnowballType = v
 	return s
 }
 
@@ -2452,7 +2458,7 @@ type CreateJobInput struct {
 	ForwardingAddressId *string `min:"40" type:"string"`
 
 	// Defines the type of job that you're creating.
-	JobType *string `type:"string" enum:"JobType"`
+	JobType JobType `type:"string"`
 
 	// The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created
 	// using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
@@ -2495,16 +2501,16 @@ type CreateJobInput struct {
 	//    * In India, Snowballs are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
-	ShippingOption *string `type:"string" enum:"ShippingOption"`
+	ShippingOption ShippingOption `type:"string"`
 
 	// If your job is being created in one of the US regions, you have the option
 	// of specifying what size Snowball you'd like for this job. In all other regions,
 	// Snowballs come with 80 TB in storage capacity.
-	SnowballCapacityPreference *string `type:"string" enum:"Capacity"`
+	SnowballCapacityPreference Capacity `type:"string"`
 
 	// The type of AWS Snowball appliance to use for this job. Currently, the only
 	// supported appliance type for cluster jobs is EDGE.
-	SnowballType *string `type:"string" enum:"Type"`
+	SnowballType Type `type:"string"`
 }
 
 // String returns the string representation
@@ -2569,8 +2575,8 @@ func (s *CreateJobInput) SetForwardingAddressId(v string) *CreateJobInput {
 }
 
 // SetJobType sets the JobType field's value.
-func (s *CreateJobInput) SetJobType(v string) *CreateJobInput {
-	s.JobType = &v
+func (s *CreateJobInput) SetJobType(v JobType) *CreateJobInput {
+	s.JobType = v
 	return s
 }
 
@@ -2599,20 +2605,20 @@ func (s *CreateJobInput) SetRoleARN(v string) *CreateJobInput {
 }
 
 // SetShippingOption sets the ShippingOption field's value.
-func (s *CreateJobInput) SetShippingOption(v string) *CreateJobInput {
-	s.ShippingOption = &v
+func (s *CreateJobInput) SetShippingOption(v ShippingOption) *CreateJobInput {
+	s.ShippingOption = v
 	return s
 }
 
 // SetSnowballCapacityPreference sets the SnowballCapacityPreference field's value.
-func (s *CreateJobInput) SetSnowballCapacityPreference(v string) *CreateJobInput {
-	s.SnowballCapacityPreference = &v
+func (s *CreateJobInput) SetSnowballCapacityPreference(v Capacity) *CreateJobInput {
+	s.SnowballCapacityPreference = v
 	return s
 }
 
 // SetSnowballType sets the SnowballType field's value.
-func (s *CreateJobInput) SetSnowballType(v string) *CreateJobInput {
-	s.SnowballType = &v
+func (s *CreateJobInput) SetSnowballType(v Type) *CreateJobInput {
+	s.SnowballType = v
 	return s
 }
 
@@ -2721,6 +2727,7 @@ func (s DescribeAddressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAddressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAddressInput"}
+
 	if s.AddressId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AddressId"))
 	}
@@ -2871,6 +2878,7 @@ func (s DescribeClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -2938,6 +2946,7 @@ func (s DescribeJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeJobInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -3042,6 +3051,7 @@ func (s GetJobManifestInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobManifestInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetJobManifestInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -3110,6 +3120,7 @@ func (s GetJobUnlockCodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobUnlockCodeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetJobUnlockCodeInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -3228,13 +3239,13 @@ type JobListEntry struct {
 	JobId *string `min:"1" type:"string"`
 
 	// The current state of this job.
-	JobState *string `type:"string" enum:"JobState"`
+	JobState JobState `type:"string"`
 
 	// The type of job.
-	JobType *string `type:"string" enum:"JobType"`
+	JobType JobType `type:"string"`
 
 	// The type of appliance used with this job.
-	SnowballType *string `type:"string" enum:"Type"`
+	SnowballType Type `type:"string"`
 }
 
 // String returns the string representation
@@ -3272,20 +3283,20 @@ func (s *JobListEntry) SetJobId(v string) *JobListEntry {
 }
 
 // SetJobState sets the JobState field's value.
-func (s *JobListEntry) SetJobState(v string) *JobListEntry {
-	s.JobState = &v
+func (s *JobListEntry) SetJobState(v JobState) *JobListEntry {
+	s.JobState = v
 	return s
 }
 
 // SetJobType sets the JobType field's value.
-func (s *JobListEntry) SetJobType(v string) *JobListEntry {
-	s.JobType = &v
+func (s *JobListEntry) SetJobType(v JobType) *JobListEntry {
+	s.JobType = v
 	return s
 }
 
 // SetSnowballType sets the SnowballType field's value.
-func (s *JobListEntry) SetSnowballType(v string) *JobListEntry {
-	s.SnowballType = &v
+func (s *JobListEntry) SetSnowballType(v Type) *JobListEntry {
+	s.SnowballType = v
 	return s
 }
 
@@ -3389,10 +3400,10 @@ type JobMetadata struct {
 	JobLogInfo *JobLogs `type:"structure"`
 
 	// The current status of the jobs.
-	JobState *string `type:"string" enum:"JobState"`
+	JobState JobState `type:"string"`
 
 	// The type of job.
-	JobType *string `type:"string" enum:"JobType"`
+	JobType JobType `type:"string"`
 
 	// The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS)
 	// key associated with this job. This ARN was created using the CreateKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
@@ -3421,10 +3432,10 @@ type JobMetadata struct {
 	// The Snowball capacity preference for this job, specified at job creation.
 	// In US regions, you can choose between 50 TB and 80 TB Snowballs. All other
 	// regions use 80 TB capacity Snowballs.
-	SnowballCapacityPreference *string `type:"string" enum:"Capacity"`
+	SnowballCapacityPreference Capacity `type:"string"`
 
 	// The type of appliance used with this job.
-	SnowballType *string `type:"string" enum:"Type"`
+	SnowballType Type `type:"string"`
 }
 
 // String returns the string representation
@@ -3486,14 +3497,14 @@ func (s *JobMetadata) SetJobLogInfo(v *JobLogs) *JobMetadata {
 }
 
 // SetJobState sets the JobState field's value.
-func (s *JobMetadata) SetJobState(v string) *JobMetadata {
-	s.JobState = &v
+func (s *JobMetadata) SetJobState(v JobState) *JobMetadata {
+	s.JobState = v
 	return s
 }
 
 // SetJobType sets the JobType field's value.
-func (s *JobMetadata) SetJobType(v string) *JobMetadata {
-	s.JobType = &v
+func (s *JobMetadata) SetJobType(v JobType) *JobMetadata {
+	s.JobType = v
 	return s
 }
 
@@ -3528,14 +3539,14 @@ func (s *JobMetadata) SetShippingDetails(v *ShippingDetails) *JobMetadata {
 }
 
 // SetSnowballCapacityPreference sets the SnowballCapacityPreference field's value.
-func (s *JobMetadata) SetSnowballCapacityPreference(v string) *JobMetadata {
-	s.SnowballCapacityPreference = &v
+func (s *JobMetadata) SetSnowballCapacityPreference(v Capacity) *JobMetadata {
+	s.SnowballCapacityPreference = v
 	return s
 }
 
 // SetSnowballType sets the SnowballType field's value.
-func (s *JobMetadata) SetSnowballType(v string) *JobMetadata {
-	s.SnowballType = &v
+func (s *JobMetadata) SetSnowballType(v Type) *JobMetadata {
+	s.SnowballType = v
 	return s
 }
 
@@ -3717,6 +3728,7 @@ func (s ListClusterJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListClusterJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListClusterJobsInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -3969,7 +3981,7 @@ type Notification struct {
 	_ struct{} `type:"structure"`
 
 	// The list of job states that will trigger a notification for this job.
-	JobStatesToNotify []*string `type:"list"`
+	JobStatesToNotify []JobState `type:"list"`
 
 	// Any change in job state will trigger a notification for this job.
 	NotifyAll *bool `type:"boolean"`
@@ -3995,7 +4007,7 @@ func (s Notification) GoString() string {
 }
 
 // SetJobStatesToNotify sets the JobStatesToNotify field's value.
-func (s *Notification) SetJobStatesToNotify(v []*string) *Notification {
+func (s *Notification) SetJobStatesToNotify(v []JobState) *Notification {
 	s.JobStatesToNotify = v
 	return s
 }
@@ -4137,7 +4149,7 @@ type ShippingDetails struct {
 	//
 	//    * In the United States of America (US), you have access to one-day shipping
 	//    and two-day shipping.
-	ShippingOption *string `type:"string" enum:"ShippingOption"`
+	ShippingOption ShippingOption `type:"string"`
 }
 
 // String returns the string representation
@@ -4163,8 +4175,8 @@ func (s *ShippingDetails) SetOutboundShipment(v *Shipment) *ShippingDetails {
 }
 
 // SetShippingOption sets the ShippingOption field's value.
-func (s *ShippingDetails) SetShippingOption(v string) *ShippingDetails {
-	s.ShippingOption = &v
+func (s *ShippingDetails) SetShippingOption(v ShippingOption) *ShippingDetails {
+	s.ShippingOption = v
 	return s
 }
 
@@ -4200,7 +4212,7 @@ type UpdateClusterInput struct {
 	RoleARN *string `type:"string"`
 
 	// The updated shipping option value of this cluster's ShippingDetails object.
-	ShippingOption *string `type:"string" enum:"ShippingOption"`
+	ShippingOption ShippingOption `type:"string"`
 }
 
 // String returns the string representation
@@ -4219,6 +4231,7 @@ func (s *UpdateClusterInput) Validate() error {
 	if s.AddressId != nil && len(*s.AddressId) < 40 {
 		invalidParams.Add(aws.NewErrParamMinLen("AddressId", 40))
 	}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -4286,8 +4299,8 @@ func (s *UpdateClusterInput) SetRoleARN(v string) *UpdateClusterInput {
 }
 
 // SetShippingOption sets the ShippingOption field's value.
-func (s *UpdateClusterInput) SetShippingOption(v string) *UpdateClusterInput {
-	s.ShippingOption = &v
+func (s *UpdateClusterInput) SetShippingOption(v ShippingOption) *UpdateClusterInput {
+	s.ShippingOption = v
 	return s
 }
 
@@ -4338,11 +4351,11 @@ type UpdateJobInput struct {
 	RoleARN *string `type:"string"`
 
 	// The updated shipping option value of this job's ShippingDetails object.
-	ShippingOption *string `type:"string" enum:"ShippingOption"`
+	ShippingOption ShippingOption `type:"string"`
 
 	// The updated SnowballCapacityPreference of this job's JobMetadata object.
 	// The 50 TB Snowballs are only available in the US regions.
-	SnowballCapacityPreference *string `type:"string" enum:"Capacity"`
+	SnowballCapacityPreference Capacity `type:"string"`
 }
 
 // String returns the string representation
@@ -4367,6 +4380,7 @@ func (s *UpdateJobInput) Validate() error {
 	if s.ForwardingAddressId != nil && len(*s.ForwardingAddressId) < 40 {
 		invalidParams.Add(aws.NewErrParamMinLen("ForwardingAddressId", 40))
 	}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -4428,14 +4442,14 @@ func (s *UpdateJobInput) SetRoleARN(v string) *UpdateJobInput {
 }
 
 // SetShippingOption sets the ShippingOption field's value.
-func (s *UpdateJobInput) SetShippingOption(v string) *UpdateJobInput {
-	s.ShippingOption = &v
+func (s *UpdateJobInput) SetShippingOption(v ShippingOption) *UpdateJobInput {
+	s.ShippingOption = v
 	return s
 }
 
 // SetSnowballCapacityPreference sets the SnowballCapacityPreference field's value.
-func (s *UpdateJobInput) SetSnowballCapacityPreference(v string) *UpdateJobInput {
-	s.SnowballCapacityPreference = &v
+func (s *UpdateJobInput) SetSnowballCapacityPreference(v Capacity) *UpdateJobInput {
+	s.SnowballCapacityPreference = v
 	return s
 }
 
@@ -4454,104 +4468,68 @@ func (s UpdateJobOutput) GoString() string {
 	return s.String()
 }
 
+type Capacity string
+
+// Enum values for Capacity
 const (
-	// CapacityT50 is a Capacity enum value
-	CapacityT50 = "T50"
-
-	// CapacityT80 is a Capacity enum value
-	CapacityT80 = "T80"
-
-	// CapacityT100 is a Capacity enum value
-	CapacityT100 = "T100"
-
-	// CapacityNoPreference is a Capacity enum value
-	CapacityNoPreference = "NoPreference"
+	CapacityT50          Capacity = "T50"
+	CapacityT80          Capacity = "T80"
+	CapacityT100         Capacity = "T100"
+	CapacityNoPreference Capacity = "NoPreference"
 )
 
+type ClusterState string
+
+// Enum values for ClusterState
 const (
-	// ClusterStateAwaitingQuorum is a ClusterState enum value
-	ClusterStateAwaitingQuorum = "AwaitingQuorum"
-
-	// ClusterStatePending is a ClusterState enum value
-	ClusterStatePending = "Pending"
-
-	// ClusterStateInUse is a ClusterState enum value
-	ClusterStateInUse = "InUse"
-
-	// ClusterStateComplete is a ClusterState enum value
-	ClusterStateComplete = "Complete"
-
-	// ClusterStateCancelled is a ClusterState enum value
-	ClusterStateCancelled = "Cancelled"
+	ClusterStateAwaitingQuorum ClusterState = "AwaitingQuorum"
+	ClusterStatePending        ClusterState = "Pending"
+	ClusterStateInUse          ClusterState = "InUse"
+	ClusterStateComplete       ClusterState = "Complete"
+	ClusterStateCancelled      ClusterState = "Cancelled"
 )
 
+type JobState string
+
+// Enum values for JobState
 const (
-	// JobStateNew is a JobState enum value
-	JobStateNew = "New"
-
-	// JobStatePreparingAppliance is a JobState enum value
-	JobStatePreparingAppliance = "PreparingAppliance"
-
-	// JobStatePreparingShipment is a JobState enum value
-	JobStatePreparingShipment = "PreparingShipment"
-
-	// JobStateInTransitToCustomer is a JobState enum value
-	JobStateInTransitToCustomer = "InTransitToCustomer"
-
-	// JobStateWithCustomer is a JobState enum value
-	JobStateWithCustomer = "WithCustomer"
-
-	// JobStateInTransitToAws is a JobState enum value
-	JobStateInTransitToAws = "InTransitToAWS"
-
-	// JobStateWithAws is a JobState enum value
-	JobStateWithAws = "WithAWS"
-
-	// JobStateInProgress is a JobState enum value
-	JobStateInProgress = "InProgress"
-
-	// JobStateComplete is a JobState enum value
-	JobStateComplete = "Complete"
-
-	// JobStateCancelled is a JobState enum value
-	JobStateCancelled = "Cancelled"
-
-	// JobStateListing is a JobState enum value
-	JobStateListing = "Listing"
-
-	// JobStatePending is a JobState enum value
-	JobStatePending = "Pending"
+	JobStateNew                 JobState = "New"
+	JobStatePreparingAppliance  JobState = "PreparingAppliance"
+	JobStatePreparingShipment   JobState = "PreparingShipment"
+	JobStateInTransitToCustomer JobState = "InTransitToCustomer"
+	JobStateWithCustomer        JobState = "WithCustomer"
+	JobStateInTransitToAws      JobState = "InTransitToAWS"
+	JobStateWithAws             JobState = "WithAWS"
+	JobStateInProgress          JobState = "InProgress"
+	JobStateComplete            JobState = "Complete"
+	JobStateCancelled           JobState = "Cancelled"
+	JobStateListing             JobState = "Listing"
+	JobStatePending             JobState = "Pending"
 )
 
+type JobType string
+
+// Enum values for JobType
 const (
-	// JobTypeImport is a JobType enum value
-	JobTypeImport = "IMPORT"
-
-	// JobTypeExport is a JobType enum value
-	JobTypeExport = "EXPORT"
-
-	// JobTypeLocalUse is a JobType enum value
-	JobTypeLocalUse = "LOCAL_USE"
+	JobTypeImport   JobType = "IMPORT"
+	JobTypeExport   JobType = "EXPORT"
+	JobTypeLocalUse JobType = "LOCAL_USE"
 )
 
+type ShippingOption string
+
+// Enum values for ShippingOption
 const (
-	// ShippingOptionSecondDay is a ShippingOption enum value
-	ShippingOptionSecondDay = "SECOND_DAY"
-
-	// ShippingOptionNextDay is a ShippingOption enum value
-	ShippingOptionNextDay = "NEXT_DAY"
-
-	// ShippingOptionExpress is a ShippingOption enum value
-	ShippingOptionExpress = "EXPRESS"
-
-	// ShippingOptionStandard is a ShippingOption enum value
-	ShippingOptionStandard = "STANDARD"
+	ShippingOptionSecondDay ShippingOption = "SECOND_DAY"
+	ShippingOptionNextDay   ShippingOption = "NEXT_DAY"
+	ShippingOptionExpress   ShippingOption = "EXPRESS"
+	ShippingOptionStandard  ShippingOption = "STANDARD"
 )
 
-const (
-	// TypeStandard is a Type enum value
-	TypeStandard = "STANDARD"
+type Type string
 
-	// TypeEdge is a Type enum value
-	TypeEdge = "EDGE"
+// Enum values for Type
+const (
+	TypeStandard Type = "STANDARD"
+	TypeEdge     Type = "EDGE"
 )

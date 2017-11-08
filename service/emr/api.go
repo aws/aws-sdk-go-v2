@@ -2713,9 +2713,11 @@ func (s AddInstanceFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddInstanceFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddInstanceFleetInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
+
 	if s.InstanceFleet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceFleet"))
 	}
@@ -2805,9 +2807,11 @@ func (s AddInstanceGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddInstanceGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddInstanceGroupsInput"}
+
 	if s.InstanceGroups == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceGroups"))
 	}
+
 	if s.JobFlowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobFlowId"))
 	}
@@ -2904,9 +2908,11 @@ func (s AddJobFlowStepsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddJobFlowStepsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddJobFlowStepsInput"}
+
 	if s.JobFlowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobFlowId"))
 	}
+
 	if s.Steps == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Steps"))
 	}
@@ -2997,9 +3003,11 @@ func (s AddTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -3142,9 +3150,11 @@ func (s AutoScalingPolicy) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AutoScalingPolicy) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AutoScalingPolicy"}
+
 	if s.Constraints == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Constraints"))
 	}
+
 	if s.Rules == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
@@ -3239,7 +3249,7 @@ type AutoScalingPolicyStateChangeReason struct {
 	// that the scaling policy status was changed by a user. PROVISION_FAILURE indicates
 	// that the status change was because the policy failed to provision. CLEANUP_FAILURE
 	// indicates an error.
-	Code *string `type:"string" enum:"AutoScalingPolicyStateChangeReasonCode"`
+	Code AutoScalingPolicyStateChangeReasonCode `type:"string"`
 
 	// A friendly, more verbose message that accompanies an automatic scaling policy
 	// state change.
@@ -3257,8 +3267,8 @@ func (s AutoScalingPolicyStateChangeReason) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *AutoScalingPolicyStateChangeReason) SetCode(v string) *AutoScalingPolicyStateChangeReason {
-	s.Code = &v
+func (s *AutoScalingPolicyStateChangeReason) SetCode(v AutoScalingPolicyStateChangeReasonCode) *AutoScalingPolicyStateChangeReason {
+	s.Code = v
 	return s
 }
 
@@ -3274,7 +3284,7 @@ type AutoScalingPolicyStatus struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates the status of the automatic scaling policy.
-	State *string `type:"string" enum:"AutoScalingPolicyState"`
+	State AutoScalingPolicyState `type:"string"`
 
 	// The reason for a change in status.
 	StateChangeReason *AutoScalingPolicyStateChangeReason `type:"structure"`
@@ -3291,8 +3301,8 @@ func (s AutoScalingPolicyStatus) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *AutoScalingPolicyStatus) SetState(v string) *AutoScalingPolicyStatus {
-	s.State = &v
+func (s *AutoScalingPolicyStatus) SetState(v AutoScalingPolicyState) *AutoScalingPolicyStatus {
+	s.State = v
 	return s
 }
 
@@ -3331,9 +3341,11 @@ func (s BootstrapActionConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BootstrapActionConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BootstrapActionConfig"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.ScriptBootstrapAction == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScriptBootstrapAction"))
 	}
@@ -3396,7 +3408,7 @@ type CancelStepsInfo struct {
 	Reason *string `type:"string"`
 
 	// The status of a CancelSteps Request. The value may be SUBMITTED or FAILED.
-	Status *string `type:"string" enum:"CancelStepsRequestStatus"`
+	Status CancelStepsRequestStatus `type:"string"`
 
 	// The encrypted StepId of a step.
 	StepId *string `type:"string"`
@@ -3419,8 +3431,8 @@ func (s *CancelStepsInfo) SetReason(v string) *CancelStepsInfo {
 }
 
 // SetStatus sets the Status field's value.
-func (s *CancelStepsInfo) SetStatus(v string) *CancelStepsInfo {
-	s.Status = &v
+func (s *CancelStepsInfo) SetStatus(v CancelStepsRequestStatus) *CancelStepsInfo {
+	s.Status = v
 	return s
 }
 
@@ -3503,7 +3515,7 @@ type CloudWatchAlarmDefinition struct {
 	// specified by Threshold.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator *string `type:"string" required:"true" enum:"ComparisonOperator"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
 
 	// A CloudWatch metric dimension.
 	Dimensions []*MetricDimension `type:"list"`
@@ -3530,7 +3542,7 @@ type CloudWatchAlarmDefinition struct {
 
 	// The statistic to apply to the metric associated with the alarm. The default
 	// is AVERAGE.
-	Statistic *string `type:"string" enum:"Statistic"`
+	Statistic Statistic `type:"string"`
 
 	// The value against which the specified statistic is compared.
 	//
@@ -3540,7 +3552,7 @@ type CloudWatchAlarmDefinition struct {
 	// The unit of measure associated with the CloudWatch metric being watched.
 	// The value specified for Unit must correspond to the units specified in the
 	// CloudWatch metric.
-	Unit *string `type:"string" enum:"Unit"`
+	Unit Unit `type:"string"`
 }
 
 // String returns the string representation
@@ -3556,15 +3568,18 @@ func (s CloudWatchAlarmDefinition) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchAlarmDefinition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchAlarmDefinition"}
-	if s.ComparisonOperator == nil {
+	if len(s.ComparisonOperator) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.Period == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Period"))
 	}
+
 	if s.Threshold == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
 	}
@@ -3576,8 +3591,8 @@ func (s *CloudWatchAlarmDefinition) Validate() error {
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *CloudWatchAlarmDefinition) SetComparisonOperator(v string) *CloudWatchAlarmDefinition {
-	s.ComparisonOperator = &v
+func (s *CloudWatchAlarmDefinition) SetComparisonOperator(v ComparisonOperator) *CloudWatchAlarmDefinition {
+	s.ComparisonOperator = v
 	return s
 }
 
@@ -3612,8 +3627,8 @@ func (s *CloudWatchAlarmDefinition) SetPeriod(v int64) *CloudWatchAlarmDefinitio
 }
 
 // SetStatistic sets the Statistic field's value.
-func (s *CloudWatchAlarmDefinition) SetStatistic(v string) *CloudWatchAlarmDefinition {
-	s.Statistic = &v
+func (s *CloudWatchAlarmDefinition) SetStatistic(v Statistic) *CloudWatchAlarmDefinition {
+	s.Statistic = v
 	return s
 }
 
@@ -3624,8 +3639,8 @@ func (s *CloudWatchAlarmDefinition) SetThreshold(v float64) *CloudWatchAlarmDefi
 }
 
 // SetUnit sets the Unit field's value.
-func (s *CloudWatchAlarmDefinition) SetUnit(v string) *CloudWatchAlarmDefinition {
-	s.Unit = &v
+func (s *CloudWatchAlarmDefinition) SetUnit(v Unit) *CloudWatchAlarmDefinition {
+	s.Unit = v
 	return s
 }
 
@@ -3670,7 +3685,7 @@ type Cluster struct {
 	// The instance group configuration of the cluster. A value of INSTANCE_GROUP
 	// indicates a uniform instance group configuration. A value of INSTANCE_FLEET
 	// indicates an instance fleets configuration.
-	InstanceCollectionType *string `type:"string" enum:"InstanceCollectionType"`
+	InstanceCollectionType InstanceCollectionType `type:"string"`
 
 	// The path to the Amazon S3 location where logs for this cluster are stored.
 	LogUri *string `type:"string"`
@@ -3695,7 +3710,7 @@ type Cluster struct {
 	// Applies only when CustomAmiID is used. Specifies the type of updates that
 	// are applied from the Amazon Linux AMI package repositories when an instance
 	// boots using the AMI.
-	RepoUpgradeOnBoot *string `type:"string" enum:"RepoUpgradeOnBoot"`
+	RepoUpgradeOnBoot RepoUpgradeOnBoot `type:"string"`
 
 	// The AMI version requested for this cluster.
 	RequestedAmiVersion *string `type:"string"`
@@ -3715,7 +3730,7 @@ type Cluster struct {
 	// instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION
 	// is available only in Amazon EMR version 4.1.0 and later, and is the default
 	// for versions of Amazon EMR earlier than 5.1.0.
-	ScaleDownBehavior *string `type:"string" enum:"ScaleDownBehavior"`
+	ScaleDownBehavior ScaleDownBehavior `type:"string"`
 
 	// The name of the security configuration applied to the cluster.
 	SecurityConfiguration *string `type:"string"`
@@ -3803,8 +3818,8 @@ func (s *Cluster) SetId(v string) *Cluster {
 }
 
 // SetInstanceCollectionType sets the InstanceCollectionType field's value.
-func (s *Cluster) SetInstanceCollectionType(v string) *Cluster {
-	s.InstanceCollectionType = &v
+func (s *Cluster) SetInstanceCollectionType(v InstanceCollectionType) *Cluster {
+	s.InstanceCollectionType = v
 	return s
 }
 
@@ -3839,8 +3854,8 @@ func (s *Cluster) SetReleaseLabel(v string) *Cluster {
 }
 
 // SetRepoUpgradeOnBoot sets the RepoUpgradeOnBoot field's value.
-func (s *Cluster) SetRepoUpgradeOnBoot(v string) *Cluster {
-	s.RepoUpgradeOnBoot = &v
+func (s *Cluster) SetRepoUpgradeOnBoot(v RepoUpgradeOnBoot) *Cluster {
+	s.RepoUpgradeOnBoot = v
 	return s
 }
 
@@ -3857,8 +3872,8 @@ func (s *Cluster) SetRunningAmiVersion(v string) *Cluster {
 }
 
 // SetScaleDownBehavior sets the ScaleDownBehavior field's value.
-func (s *Cluster) SetScaleDownBehavior(v string) *Cluster {
-	s.ScaleDownBehavior = &v
+func (s *Cluster) SetScaleDownBehavior(v ScaleDownBehavior) *Cluster {
+	s.ScaleDownBehavior = v
 	return s
 }
 
@@ -3904,7 +3919,7 @@ type ClusterStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// The programmatic code for the state change reason.
-	Code *string `type:"string" enum:"ClusterStateChangeReasonCode"`
+	Code ClusterStateChangeReasonCode `type:"string"`
 
 	// The descriptive message for the state change reason.
 	Message *string `type:"string"`
@@ -3921,8 +3936,8 @@ func (s ClusterStateChangeReason) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *ClusterStateChangeReason) SetCode(v string) *ClusterStateChangeReason {
-	s.Code = &v
+func (s *ClusterStateChangeReason) SetCode(v ClusterStateChangeReasonCode) *ClusterStateChangeReason {
+	s.Code = v
 	return s
 }
 
@@ -3938,7 +3953,7 @@ type ClusterStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the cluster.
-	State *string `type:"string" enum:"ClusterState"`
+	State ClusterState `type:"string"`
 
 	// The reason for the cluster status change.
 	StateChangeReason *ClusterStateChangeReason `type:"structure"`
@@ -3959,8 +3974,8 @@ func (s ClusterStatus) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *ClusterStatus) SetState(v string) *ClusterStatus {
-	s.State = &v
+func (s *ClusterStatus) SetState(v ClusterState) *ClusterStatus {
+	s.State = v
 	return s
 }
 
@@ -4197,9 +4212,11 @@ func (s CreateSecurityConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSecurityConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSecurityConfigurationInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.SecurityConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecurityConfiguration"))
 	}
@@ -4282,6 +4299,7 @@ func (s DeleteSecurityConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSecurityConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSecurityConfigurationInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4337,6 +4355,7 @@ func (s DescribeClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -4393,7 +4412,7 @@ type DescribeJobFlowsInput struct {
 	JobFlowIds []*string `type:"list"`
 
 	// Return only job flows whose state is contained in this list.
-	JobFlowStates []*string `type:"list"`
+	JobFlowStates []JobFlowExecutionState `type:"list"`
 }
 
 // String returns the string representation
@@ -4425,7 +4444,7 @@ func (s *DescribeJobFlowsInput) SetJobFlowIds(v []*string) *DescribeJobFlowsInpu
 }
 
 // SetJobFlowStates sets the JobFlowStates field's value.
-func (s *DescribeJobFlowsInput) SetJobFlowStates(v []*string) *DescribeJobFlowsInput {
+func (s *DescribeJobFlowsInput) SetJobFlowStates(v []JobFlowExecutionState) *DescribeJobFlowsInput {
 	s.JobFlowStates = v
 	return s
 }
@@ -4478,6 +4497,7 @@ func (s DescribeSecurityConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSecurityConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSecurityConfigurationInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4565,9 +4585,11 @@ func (s DescribeStepInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStepInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeStepInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
+
 	if s.StepId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StepId"))
 	}
@@ -4681,6 +4703,7 @@ func (s EbsBlockDeviceConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EbsBlockDeviceConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EbsBlockDeviceConfig"}
+
 	if s.VolumeSpecification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeSpecification"))
 	}
@@ -5025,6 +5048,7 @@ func (s HadoopJarStepConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HadoopJarStepConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HadoopJarStepConfig"}
+
 	if s.Jar == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Jar"))
 	}
@@ -5140,7 +5164,7 @@ type Instance struct {
 	InstanceType *string `min:"1" type:"string"`
 
 	// The instance purchasing option. Valid values are ON_DEMAND or SPOT.
-	Market *string `type:"string" enum:"MarketType"`
+	Market MarketType `type:"string"`
 
 	// The private DNS name of the instance.
 	PrivateDnsName *string `type:"string"`
@@ -5205,8 +5229,8 @@ func (s *Instance) SetInstanceType(v string) *Instance {
 }
 
 // SetMarket sets the Market field's value.
-func (s *Instance) SetMarket(v string) *Instance {
-	s.Market = &v
+func (s *Instance) SetMarket(v MarketType) *Instance {
+	s.Market = v
 	return s
 }
 
@@ -5256,7 +5280,7 @@ type InstanceFleet struct {
 
 	// The node type that the instance fleet hosts. Valid values are MASTER, CORE,
 	// or TASK.
-	InstanceFleetType *string `type:"string" enum:"InstanceFleetType"`
+	InstanceFleetType InstanceFleetType `type:"string"`
 
 	// The specification for the instance types that comprise an instance fleet.
 	// Up to five unique instance specifications may be defined for each instance
@@ -5339,8 +5363,8 @@ func (s *InstanceFleet) SetId(v string) *InstanceFleet {
 }
 
 // SetInstanceFleetType sets the InstanceFleetType field's value.
-func (s *InstanceFleet) SetInstanceFleetType(v string) *InstanceFleet {
-	s.InstanceFleetType = &v
+func (s *InstanceFleet) SetInstanceFleetType(v InstanceFleetType) *InstanceFleet {
+	s.InstanceFleetType = v
 	return s
 }
 
@@ -5404,7 +5428,7 @@ type InstanceFleetConfig struct {
 	// TASK.
 	//
 	// InstanceFleetType is a required field
-	InstanceFleetType *string `type:"string" required:"true" enum:"InstanceFleetType"`
+	InstanceFleetType InstanceFleetType `type:"string" required:"true"`
 
 	// The instance type configurations that define the EC2 instances in the instance
 	// fleet.
@@ -5465,7 +5489,7 @@ func (s InstanceFleetConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceFleetConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceFleetConfig"}
-	if s.InstanceFleetType == nil {
+	if len(s.InstanceFleetType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceFleetType"))
 	}
 	if s.InstanceTypeConfigs != nil {
@@ -5491,8 +5515,8 @@ func (s *InstanceFleetConfig) Validate() error {
 }
 
 // SetInstanceFleetType sets the InstanceFleetType field's value.
-func (s *InstanceFleetConfig) SetInstanceFleetType(v string) *InstanceFleetConfig {
-	s.InstanceFleetType = &v
+func (s *InstanceFleetConfig) SetInstanceFleetType(v InstanceFleetType) *InstanceFleetConfig {
+	s.InstanceFleetType = v
 	return s
 }
 
@@ -5561,6 +5585,7 @@ func (s InstanceFleetModifyConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceFleetModifyConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceFleetModifyConfig"}
+
 	if s.InstanceFleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceFleetId"))
 	}
@@ -5618,6 +5643,7 @@ func (s InstanceFleetProvisioningSpecifications) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceFleetProvisioningSpecifications) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceFleetProvisioningSpecifications"}
+
 	if s.SpotSpecification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotSpecification"))
 	}
@@ -5648,7 +5674,7 @@ type InstanceFleetStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// A code corresponding to the reason the state change occurred.
-	Code *string `type:"string" enum:"InstanceFleetStateChangeReasonCode"`
+	Code InstanceFleetStateChangeReasonCode `type:"string"`
 
 	// An explanatory message.
 	Message *string `type:"string"`
@@ -5665,8 +5691,8 @@ func (s InstanceFleetStateChangeReason) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *InstanceFleetStateChangeReason) SetCode(v string) *InstanceFleetStateChangeReason {
-	s.Code = &v
+func (s *InstanceFleetStateChangeReason) SetCode(v InstanceFleetStateChangeReasonCode) *InstanceFleetStateChangeReason {
+	s.Code = v
 	return s
 }
 
@@ -5685,7 +5711,7 @@ type InstanceFleetStatus struct {
 	_ struct{} `type:"structure"`
 
 	// A code representing the instance fleet status.
-	State *string `type:"string" enum:"InstanceFleetState"`
+	State InstanceFleetState `type:"string"`
 
 	// Provides status change reason details for the instance fleet.
 	StateChangeReason *InstanceFleetStateChangeReason `type:"structure"`
@@ -5706,8 +5732,8 @@ func (s InstanceFleetStatus) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *InstanceFleetStatus) SetState(v string) *InstanceFleetStatus {
-	s.State = &v
+func (s *InstanceFleetStatus) SetState(v InstanceFleetState) *InstanceFleetStatus {
+	s.State = v
 	return s
 }
 
@@ -5805,14 +5831,14 @@ type InstanceGroup struct {
 	Id *string `type:"string"`
 
 	// The type of the instance group. Valid values are MASTER, CORE or TASK.
-	InstanceGroupType *string `type:"string" enum:"InstanceGroupType"`
+	InstanceGroupType InstanceGroupType `type:"string"`
 
 	// The EC2 instance type for all instances in the instance group.
 	InstanceType *string `min:"1" type:"string"`
 
 	// The marketplace to provision instances for this group. Valid values are ON_DEMAND
 	// or SPOT.
-	Market *string `type:"string" enum:"MarketType"`
+	Market MarketType `type:"string"`
 
 	// The name of the instance group.
 	Name *string `type:"string"`
@@ -5877,8 +5903,8 @@ func (s *InstanceGroup) SetId(v string) *InstanceGroup {
 }
 
 // SetInstanceGroupType sets the InstanceGroupType field's value.
-func (s *InstanceGroup) SetInstanceGroupType(v string) *InstanceGroup {
-	s.InstanceGroupType = &v
+func (s *InstanceGroup) SetInstanceGroupType(v InstanceGroupType) *InstanceGroup {
+	s.InstanceGroupType = v
 	return s
 }
 
@@ -5889,8 +5915,8 @@ func (s *InstanceGroup) SetInstanceType(v string) *InstanceGroup {
 }
 
 // SetMarket sets the Market field's value.
-func (s *InstanceGroup) SetMarket(v string) *InstanceGroup {
-	s.Market = &v
+func (s *InstanceGroup) SetMarket(v MarketType) *InstanceGroup {
+	s.Market = v
 	return s
 }
 
@@ -5958,7 +5984,7 @@ type InstanceGroupConfig struct {
 	// The role of the instance group in the cluster.
 	//
 	// InstanceRole is a required field
-	InstanceRole *string `type:"string" required:"true" enum:"InstanceRoleType"`
+	InstanceRole InstanceRoleType `type:"string" required:"true"`
 
 	// The EC2 instance type for all instances in the instance group.
 	//
@@ -5966,7 +5992,7 @@ type InstanceGroupConfig struct {
 	InstanceType *string `min:"1" type:"string" required:"true"`
 
 	// Market type of the EC2 instances used to create a cluster node.
-	Market *string `type:"string" enum:"MarketType"`
+	Market MarketType `type:"string"`
 
 	// Friendly name given to the instance group.
 	Name *string `type:"string"`
@@ -5985,12 +6011,14 @@ func (s InstanceGroupConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceGroupConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceGroupConfig"}
+
 	if s.InstanceCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))
 	}
-	if s.InstanceRole == nil {
+	if len(s.InstanceRole) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceRole"))
 	}
+
 	if s.InstanceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
@@ -6045,8 +6073,8 @@ func (s *InstanceGroupConfig) SetInstanceCount(v int64) *InstanceGroupConfig {
 }
 
 // SetInstanceRole sets the InstanceRole field's value.
-func (s *InstanceGroupConfig) SetInstanceRole(v string) *InstanceGroupConfig {
-	s.InstanceRole = &v
+func (s *InstanceGroupConfig) SetInstanceRole(v InstanceRoleType) *InstanceGroupConfig {
+	s.InstanceRole = v
 	return s
 }
 
@@ -6057,8 +6085,8 @@ func (s *InstanceGroupConfig) SetInstanceType(v string) *InstanceGroupConfig {
 }
 
 // SetMarket sets the Market field's value.
-func (s *InstanceGroupConfig) SetMarket(v string) *InstanceGroupConfig {
-	s.Market = &v
+func (s *InstanceGroupConfig) SetMarket(v MarketType) *InstanceGroupConfig {
+	s.Market = v
 	return s
 }
 
@@ -6096,7 +6124,7 @@ type InstanceGroupDetail struct {
 	// Instance group role in the cluster
 	//
 	// InstanceRole is a required field
-	InstanceRole *string `type:"string" required:"true" enum:"InstanceRoleType"`
+	InstanceRole InstanceRoleType `type:"string" required:"true"`
 
 	// Actual count of running instances.
 	//
@@ -6114,7 +6142,7 @@ type InstanceGroupDetail struct {
 	// Market type of the EC2 instances used to create a cluster node.
 	//
 	// Market is a required field
-	Market *string `type:"string" required:"true" enum:"MarketType"`
+	Market MarketType `type:"string" required:"true"`
 
 	// Friendly name for the instance group.
 	Name *string `type:"string"`
@@ -6129,7 +6157,7 @@ type InstanceGroupDetail struct {
 	// and FAILED.
 	//
 	// State is a required field
-	State *string `type:"string" required:"true" enum:"InstanceGroupState"`
+	State InstanceGroupState `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6173,8 +6201,8 @@ func (s *InstanceGroupDetail) SetInstanceRequestCount(v int64) *InstanceGroupDet
 }
 
 // SetInstanceRole sets the InstanceRole field's value.
-func (s *InstanceGroupDetail) SetInstanceRole(v string) *InstanceGroupDetail {
-	s.InstanceRole = &v
+func (s *InstanceGroupDetail) SetInstanceRole(v InstanceRoleType) *InstanceGroupDetail {
+	s.InstanceRole = v
 	return s
 }
 
@@ -6197,8 +6225,8 @@ func (s *InstanceGroupDetail) SetLastStateChangeReason(v string) *InstanceGroupD
 }
 
 // SetMarket sets the Market field's value.
-func (s *InstanceGroupDetail) SetMarket(v string) *InstanceGroupDetail {
-	s.Market = &v
+func (s *InstanceGroupDetail) SetMarket(v MarketType) *InstanceGroupDetail {
+	s.Market = v
 	return s
 }
 
@@ -6221,8 +6249,8 @@ func (s *InstanceGroupDetail) SetStartDateTime(v time.Time) *InstanceGroupDetail
 }
 
 // SetState sets the State field's value.
-func (s *InstanceGroupDetail) SetState(v string) *InstanceGroupDetail {
-	s.State = &v
+func (s *InstanceGroupDetail) SetState(v InstanceGroupState) *InstanceGroupDetail {
+	s.State = v
 	return s
 }
 
@@ -6260,6 +6288,7 @@ func (s InstanceGroupModifyConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceGroupModifyConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceGroupModifyConfig"}
+
 	if s.InstanceGroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceGroupId"))
 	}
@@ -6300,7 +6329,7 @@ type InstanceGroupStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// The programmable code for the state change reason.
-	Code *string `type:"string" enum:"InstanceGroupStateChangeReasonCode"`
+	Code InstanceGroupStateChangeReasonCode `type:"string"`
 
 	// The status change reason description.
 	Message *string `type:"string"`
@@ -6317,8 +6346,8 @@ func (s InstanceGroupStateChangeReason) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *InstanceGroupStateChangeReason) SetCode(v string) *InstanceGroupStateChangeReason {
-	s.Code = &v
+func (s *InstanceGroupStateChangeReason) SetCode(v InstanceGroupStateChangeReasonCode) *InstanceGroupStateChangeReason {
+	s.Code = v
 	return s
 }
 
@@ -6334,7 +6363,7 @@ type InstanceGroupStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the instance group.
-	State *string `type:"string" enum:"InstanceGroupState"`
+	State InstanceGroupState `type:"string"`
 
 	// The status change reason details for the instance group.
 	StateChangeReason *InstanceGroupStateChangeReason `type:"structure"`
@@ -6354,8 +6383,8 @@ func (s InstanceGroupStatus) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *InstanceGroupStatus) SetState(v string) *InstanceGroupStatus {
-	s.State = &v
+func (s *InstanceGroupStatus) SetState(v InstanceGroupState) *InstanceGroupStatus {
+	s.State = v
 	return s
 }
 
@@ -6465,7 +6494,7 @@ type InstanceStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
 	// The programmable code for the state change reason.
-	Code *string `type:"string" enum:"InstanceStateChangeReasonCode"`
+	Code InstanceStateChangeReasonCode `type:"string"`
 
 	// The status change reason description.
 	Message *string `type:"string"`
@@ -6482,8 +6511,8 @@ func (s InstanceStateChangeReason) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *InstanceStateChangeReason) SetCode(v string) *InstanceStateChangeReason {
-	s.Code = &v
+func (s *InstanceStateChangeReason) SetCode(v InstanceStateChangeReasonCode) *InstanceStateChangeReason {
+	s.Code = v
 	return s
 }
 
@@ -6499,7 +6528,7 @@ type InstanceStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The current state of the instance.
-	State *string `type:"string" enum:"InstanceState"`
+	State InstanceState `type:"string"`
 
 	// The details of the status change reason for the instance.
 	StateChangeReason *InstanceStateChangeReason `type:"structure"`
@@ -6519,8 +6548,8 @@ func (s InstanceStatus) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *InstanceStatus) SetState(v string) *InstanceStatus {
-	s.State = &v
+func (s *InstanceStatus) SetState(v InstanceState) *InstanceStatus {
+	s.State = v
 	return s
 }
 
@@ -6635,6 +6664,7 @@ func (s InstanceTypeConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceTypeConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceTypeConfig"}
+
 	if s.InstanceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
@@ -6839,7 +6869,7 @@ type JobFlowDetail struct {
 	// instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION
 	// available only in Amazon EMR version 4.1.0 and later, and is the default
 	// for versions of Amazon EMR earlier than 5.1.0.
-	ScaleDownBehavior *string `type:"string" enum:"ScaleDownBehavior"`
+	ScaleDownBehavior ScaleDownBehavior `type:"string"`
 
 	// The IAM role that will be assumed by the Amazon EMR service to access AWS
 	// resources on your behalf.
@@ -6927,8 +6957,8 @@ func (s *JobFlowDetail) SetName(v string) *JobFlowDetail {
 }
 
 // SetScaleDownBehavior sets the ScaleDownBehavior field's value.
-func (s *JobFlowDetail) SetScaleDownBehavior(v string) *JobFlowDetail {
-	s.ScaleDownBehavior = &v
+func (s *JobFlowDetail) SetScaleDownBehavior(v ScaleDownBehavior) *JobFlowDetail {
+	s.ScaleDownBehavior = v
 	return s
 }
 
@@ -6982,7 +7012,7 @@ type JobFlowExecutionStatusDetail struct {
 	// The state of the job flow.
 	//
 	// State is a required field
-	State *string `type:"string" required:"true" enum:"JobFlowExecutionState"`
+	State JobFlowExecutionState `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -7026,8 +7056,8 @@ func (s *JobFlowExecutionStatusDetail) SetStartDateTime(v time.Time) *JobFlowExe
 }
 
 // SetState sets the State field's value.
-func (s *JobFlowExecutionStatusDetail) SetState(v string) *JobFlowExecutionStatusDetail {
-	s.State = &v
+func (s *JobFlowExecutionStatusDetail) SetState(v JobFlowExecutionState) *JobFlowExecutionStatusDetail {
+	s.State = v
 	return s
 }
 
@@ -7481,6 +7511,7 @@ func (s ListBootstrapActionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBootstrapActionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListBootstrapActionsInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -7544,7 +7575,7 @@ type ListClustersInput struct {
 	_ struct{} `type:"structure"`
 
 	// The cluster state filters to apply when listing clusters.
-	ClusterStates []*string `type:"list"`
+	ClusterStates []ClusterState `type:"list"`
 
 	// The creation date and time beginning value filter for listing clusters.
 	CreatedAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -7567,7 +7598,7 @@ func (s ListClustersInput) GoString() string {
 }
 
 // SetClusterStates sets the ClusterStates field's value.
-func (s *ListClustersInput) SetClusterStates(v []*string) *ListClustersInput {
+func (s *ListClustersInput) SetClusterStates(v []ClusterState) *ListClustersInput {
 	s.ClusterStates = v
 	return s
 }
@@ -7651,6 +7682,7 @@ func (s ListInstanceFleetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListInstanceFleetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListInstanceFleetsInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -7733,6 +7765,7 @@ func (s ListInstanceGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListInstanceGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListInstanceGroupsInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -7803,17 +7836,17 @@ type ListInstancesInput struct {
 	InstanceFleetId *string `type:"string"`
 
 	// The node type of the instance fleet. For example MASTER, CORE, or TASK.
-	InstanceFleetType *string `type:"string" enum:"InstanceFleetType"`
+	InstanceFleetType InstanceFleetType `type:"string"`
 
 	// The identifier of the instance group for which to list the instances.
 	InstanceGroupId *string `type:"string"`
 
 	// The type of instance group for which to list the instances.
-	InstanceGroupTypes []*string `type:"list"`
+	InstanceGroupTypes []InstanceGroupType `type:"list"`
 
 	// A list of instance states that will filter the instances returned with this
 	// request.
-	InstanceStates []*string `type:"list"`
+	InstanceStates []InstanceState `type:"list"`
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string `type:"string"`
@@ -7832,6 +7865,7 @@ func (s ListInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListInstancesInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -7855,8 +7889,8 @@ func (s *ListInstancesInput) SetInstanceFleetId(v string) *ListInstancesInput {
 }
 
 // SetInstanceFleetType sets the InstanceFleetType field's value.
-func (s *ListInstancesInput) SetInstanceFleetType(v string) *ListInstancesInput {
-	s.InstanceFleetType = &v
+func (s *ListInstancesInput) SetInstanceFleetType(v InstanceFleetType) *ListInstancesInput {
+	s.InstanceFleetType = v
 	return s
 }
 
@@ -7867,13 +7901,13 @@ func (s *ListInstancesInput) SetInstanceGroupId(v string) *ListInstancesInput {
 }
 
 // SetInstanceGroupTypes sets the InstanceGroupTypes field's value.
-func (s *ListInstancesInput) SetInstanceGroupTypes(v []*string) *ListInstancesInput {
+func (s *ListInstancesInput) SetInstanceGroupTypes(v []InstanceGroupType) *ListInstancesInput {
 	s.InstanceGroupTypes = v
 	return s
 }
 
 // SetInstanceStates sets the InstanceStates field's value.
-func (s *ListInstancesInput) SetInstanceStates(v []*string) *ListInstancesInput {
+func (s *ListInstancesInput) SetInstanceStates(v []InstanceState) *ListInstancesInput {
 	s.InstanceStates = v
 	return s
 }
@@ -7994,7 +8028,7 @@ type ListStepsInput struct {
 	StepIds []*string `type:"list"`
 
 	// The filter to limit the step list based on certain states.
-	StepStates []*string `type:"list"`
+	StepStates []StepState `type:"list"`
 }
 
 // String returns the string representation
@@ -8010,6 +8044,7 @@ func (s ListStepsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStepsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListStepsInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -8039,7 +8074,7 @@ func (s *ListStepsInput) SetStepIds(v []*string) *ListStepsInput {
 }
 
 // SetStepStates sets the StepStates field's value.
-func (s *ListStepsInput) SetStepStates(v []*string) *ListStepsInput {
+func (s *ListStepsInput) SetStepStates(v []StepState) *ListStepsInput {
 	s.StepStates = v
 	return s
 }
@@ -8145,9 +8180,11 @@ func (s ModifyInstanceFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyInstanceFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstanceFleetInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
+
 	if s.InstanceFleet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceFleet"))
 	}
@@ -8336,12 +8373,15 @@ func (s PutAutoScalingPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutAutoScalingPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutAutoScalingPolicyInput"}
+
 	if s.AutoScalingPolicy == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingPolicy"))
 	}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
+
 	if s.InstanceGroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceGroupId"))
 	}
@@ -8447,9 +8487,11 @@ func (s RemoveAutoScalingPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveAutoScalingPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveAutoScalingPolicyInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
+
 	if s.InstanceGroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceGroupId"))
 	}
@@ -8517,9 +8559,11 @@ func (s RemoveTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -8676,7 +8720,7 @@ type RunJobFlowInput struct {
 	// using the AMI. If omitted, the default is SECURITY, which indicates that
 	// only security updates are applied. If NONE is specified, no updates are applied,
 	// and all updates must be applied manually.
-	RepoUpgradeOnBoot *string `type:"string" enum:"RepoUpgradeOnBoot"`
+	RepoUpgradeOnBoot RepoUpgradeOnBoot `type:"string"`
 
 	// Specifies the way that individual Amazon EC2 instances terminate when an
 	// automatic scale-in activity occurs or an instance group is resized. TERMINATE_AT_INSTANCE_HOUR
@@ -8690,7 +8734,7 @@ type RunJobFlowInput struct {
 	// instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION
 	// available only in Amazon EMR version 4.1.0 and later, and is the default
 	// for versions of Amazon EMR earlier than 5.1.0.
-	ScaleDownBehavior *string `type:"string" enum:"ScaleDownBehavior"`
+	ScaleDownBehavior ScaleDownBehavior `type:"string"`
 
 	// The name of a security configuration to apply to the cluster.
 	SecurityConfiguration *string `type:"string"`
@@ -8738,9 +8782,11 @@ func (s RunJobFlowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunJobFlowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RunJobFlowInput"}
+
 	if s.Instances == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Instances"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -8861,14 +8907,14 @@ func (s *RunJobFlowInput) SetReleaseLabel(v string) *RunJobFlowInput {
 }
 
 // SetRepoUpgradeOnBoot sets the RepoUpgradeOnBoot field's value.
-func (s *RunJobFlowInput) SetRepoUpgradeOnBoot(v string) *RunJobFlowInput {
-	s.RepoUpgradeOnBoot = &v
+func (s *RunJobFlowInput) SetRepoUpgradeOnBoot(v RepoUpgradeOnBoot) *RunJobFlowInput {
+	s.RepoUpgradeOnBoot = v
 	return s
 }
 
 // SetScaleDownBehavior sets the ScaleDownBehavior field's value.
-func (s *RunJobFlowInput) SetScaleDownBehavior(v string) *RunJobFlowInput {
-	s.ScaleDownBehavior = &v
+func (s *RunJobFlowInput) SetScaleDownBehavior(v ScaleDownBehavior) *RunJobFlowInput {
+	s.ScaleDownBehavior = v
 	return s
 }
 
@@ -8941,7 +8987,7 @@ type ScalingAction struct {
 
 	// Not available for instance groups. Instance groups use the market type specified
 	// for the group.
-	Market *string `type:"string" enum:"MarketType"`
+	Market MarketType `type:"string"`
 
 	// The type of adjustment the automatic scaling activity makes when triggered,
 	// and the periodicity of the adjustment.
@@ -8963,6 +9009,7 @@ func (s ScalingAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScalingAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScalingAction"}
+
 	if s.SimpleScalingPolicyConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SimpleScalingPolicyConfiguration"))
 	}
@@ -8979,8 +9026,8 @@ func (s *ScalingAction) Validate() error {
 }
 
 // SetMarket sets the Market field's value.
-func (s *ScalingAction) SetMarket(v string) *ScalingAction {
-	s.Market = &v
+func (s *ScalingAction) SetMarket(v MarketType) *ScalingAction {
+	s.Market = v
 	return s
 }
 
@@ -9025,9 +9072,11 @@ func (s ScalingConstraints) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScalingConstraints) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScalingConstraints"}
+
 	if s.MaxCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxCapacity"))
 	}
+
 	if s.MinCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinCapacity"))
 	}
@@ -9092,12 +9141,15 @@ func (s ScalingRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScalingRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScalingRule"}
+
 	if s.Action == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Trigger == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Trigger"))
 	}
@@ -9167,6 +9219,7 @@ func (s ScalingTrigger) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScalingTrigger) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScalingTrigger"}
+
 	if s.CloudWatchAlarmDefinition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CloudWatchAlarmDefinition"))
 	}
@@ -9216,6 +9269,7 @@ func (s ScriptBootstrapActionConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScriptBootstrapActionConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScriptBootstrapActionConfig"}
+
 	if s.Path == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Path"))
 	}
@@ -9305,9 +9359,11 @@ func (s SetTerminationProtectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTerminationProtectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetTerminationProtectionInput"}
+
 	if s.JobFlowIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobFlowIds"))
 	}
+
 	if s.TerminationProtected == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TerminationProtected"))
 	}
@@ -9378,9 +9434,11 @@ func (s SetVisibleToAllUsersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetVisibleToAllUsersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetVisibleToAllUsersInput"}
+
 	if s.JobFlowIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobFlowIds"))
 	}
+
 	if s.VisibleToAllUsers == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VisibleToAllUsers"))
 	}
@@ -9473,7 +9531,7 @@ type SimpleScalingPolicyConfiguration struct {
 	// indicates the scaling activity results in an instance group with the number
 	// of EC2 instances specified by ScalingAdjustment, which should be expressed
 	// as a positive integer.
-	AdjustmentType *string `type:"string" enum:"AdjustmentType"`
+	AdjustmentType AdjustmentType `type:"string"`
 
 	// The amount of time, in seconds, after a scaling activity completes before
 	// any further trigger-related scaling activities can start. The default value
@@ -9505,6 +9563,7 @@ func (s SimpleScalingPolicyConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SimpleScalingPolicyConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SimpleScalingPolicyConfiguration"}
+
 	if s.ScalingAdjustment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustment"))
 	}
@@ -9516,8 +9575,8 @@ func (s *SimpleScalingPolicyConfiguration) Validate() error {
 }
 
 // SetAdjustmentType sets the AdjustmentType field's value.
-func (s *SimpleScalingPolicyConfiguration) SetAdjustmentType(v string) *SimpleScalingPolicyConfiguration {
-	s.AdjustmentType = &v
+func (s *SimpleScalingPolicyConfiguration) SetAdjustmentType(v AdjustmentType) *SimpleScalingPolicyConfiguration {
+	s.AdjustmentType = v
 	return s
 }
 
@@ -9559,7 +9618,7 @@ type SpotProvisioningSpecification struct {
 	// Instances should be provisioned to fulfill any remaining Spot capacity.
 	//
 	// TimeoutAction is a required field
-	TimeoutAction *string `type:"string" required:"true" enum:"SpotProvisioningTimeoutAction"`
+	TimeoutAction SpotProvisioningTimeoutAction `type:"string" required:"true"`
 
 	// The spot provisioning timeout period in minutes. If Spot instances are not
 	// provisioned within this time period, the TimeOutAction is taken. Minimum
@@ -9583,9 +9642,10 @@ func (s SpotProvisioningSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SpotProvisioningSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SpotProvisioningSpecification"}
-	if s.TimeoutAction == nil {
+	if len(s.TimeoutAction) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TimeoutAction"))
 	}
+
 	if s.TimeoutDurationMinutes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimeoutDurationMinutes"))
 	}
@@ -9603,8 +9663,8 @@ func (s *SpotProvisioningSpecification) SetBlockDurationMinutes(v int64) *SpotPr
 }
 
 // SetTimeoutAction sets the TimeoutAction field's value.
-func (s *SpotProvisioningSpecification) SetTimeoutAction(v string) *SpotProvisioningSpecification {
-	s.TimeoutAction = &v
+func (s *SpotProvisioningSpecification) SetTimeoutAction(v SpotProvisioningTimeoutAction) *SpotProvisioningSpecification {
+	s.TimeoutAction = v
 	return s
 }
 
@@ -9621,7 +9681,7 @@ type Step struct {
 
 	// This specifies what action to take when the cluster step fails. Possible
 	// values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
-	ActionOnFailure *string `type:"string" enum:"ActionOnFailure"`
+	ActionOnFailure ActionOnFailure `type:"string"`
 
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig `type:"structure"`
@@ -9647,8 +9707,8 @@ func (s Step) GoString() string {
 }
 
 // SetActionOnFailure sets the ActionOnFailure field's value.
-func (s *Step) SetActionOnFailure(v string) *Step {
-	s.ActionOnFailure = &v
+func (s *Step) SetActionOnFailure(v ActionOnFailure) *Step {
+	s.ActionOnFailure = v
 	return s
 }
 
@@ -9682,7 +9742,7 @@ type StepConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The action to take if the step fails.
-	ActionOnFailure *string `type:"string" enum:"ActionOnFailure"`
+	ActionOnFailure ActionOnFailure `type:"string"`
 
 	// The JAR file used for the step.
 	//
@@ -9708,9 +9768,11 @@ func (s StepConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StepConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StepConfig"}
+
 	if s.HadoopJarStep == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HadoopJarStep"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -9727,8 +9789,8 @@ func (s *StepConfig) Validate() error {
 }
 
 // SetActionOnFailure sets the ActionOnFailure field's value.
-func (s *StepConfig) SetActionOnFailure(v string) *StepConfig {
-	s.ActionOnFailure = &v
+func (s *StepConfig) SetActionOnFailure(v ActionOnFailure) *StepConfig {
+	s.ActionOnFailure = v
 	return s
 }
 
@@ -9804,7 +9866,7 @@ type StepExecutionStatusDetail struct {
 	// The state of the step.
 	//
 	// State is a required field
-	State *string `type:"string" required:"true" enum:"StepExecutionState"`
+	State StepExecutionState `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9842,8 +9904,8 @@ func (s *StepExecutionStatusDetail) SetStartDateTime(v time.Time) *StepExecution
 }
 
 // SetState sets the State field's value.
-func (s *StepExecutionStatusDetail) SetState(v string) *StepExecutionStatusDetail {
-	s.State = &v
+func (s *StepExecutionStatusDetail) SetState(v StepExecutionState) *StepExecutionStatusDetail {
+	s.State = v
 	return s
 }
 
@@ -9854,7 +9916,7 @@ type StepStateChangeReason struct {
 
 	// The programmable code for the state change reason. Note: Currently, the service
 	// provides no code for the state change.
-	Code *string `type:"string" enum:"StepStateChangeReasonCode"`
+	Code StepStateChangeReasonCode `type:"string"`
 
 	// The descriptive message for the state change reason.
 	Message *string `type:"string"`
@@ -9871,8 +9933,8 @@ func (s StepStateChangeReason) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *StepStateChangeReason) SetCode(v string) *StepStateChangeReason {
-	s.Code = &v
+func (s *StepStateChangeReason) SetCode(v StepStateChangeReasonCode) *StepStateChangeReason {
+	s.Code = v
 	return s
 }
 
@@ -9892,7 +9954,7 @@ type StepStatus struct {
 	FailureDetails *FailureDetails `type:"structure"`
 
 	// The execution state of the cluster step.
-	State *string `type:"string" enum:"StepState"`
+	State StepState `type:"string"`
 
 	// The reason for the step execution status change.
 	StateChangeReason *StepStateChangeReason `type:"structure"`
@@ -9918,8 +9980,8 @@ func (s *StepStatus) SetFailureDetails(v *FailureDetails) *StepStatus {
 }
 
 // SetState sets the State field's value.
-func (s *StepStatus) SetState(v string) *StepStatus {
-	s.State = &v
+func (s *StepStatus) SetState(v StepState) *StepStatus {
+	s.State = v
 	return s
 }
 
@@ -9942,7 +10004,7 @@ type StepSummary struct {
 
 	// This specifies what action to take when the cluster step fails. Possible
 	// values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
-	ActionOnFailure *string `type:"string" enum:"ActionOnFailure"`
+	ActionOnFailure ActionOnFailure `type:"string"`
 
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig `type:"structure"`
@@ -9968,8 +10030,8 @@ func (s StepSummary) GoString() string {
 }
 
 // SetActionOnFailure sets the ActionOnFailure field's value.
-func (s *StepSummary) SetActionOnFailure(v string) *StepSummary {
-	s.ActionOnFailure = &v
+func (s *StepSummary) SetActionOnFailure(v ActionOnFailure) *StepSummary {
+	s.ActionOnFailure = v
 	return s
 }
 
@@ -10140,6 +10202,7 @@ func (s TerminateJobFlowsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateJobFlowsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TerminateJobFlowsInput"}
+
 	if s.JobFlowIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobFlowIds"))
 	}
@@ -10205,9 +10268,11 @@ func (s VolumeSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VolumeSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VolumeSpecification"}
+
 	if s.SizeInGB == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizeInGB"))
 	}
+
 	if s.VolumeType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeType"))
 	}
@@ -10236,497 +10301,317 @@ func (s *VolumeSpecification) SetVolumeType(v string) *VolumeSpecification {
 	return s
 }
 
+type ActionOnFailure string
+
+// Enum values for ActionOnFailure
 const (
-	// ActionOnFailureTerminateJobFlow is a ActionOnFailure enum value
-	ActionOnFailureTerminateJobFlow = "TERMINATE_JOB_FLOW"
-
-	// ActionOnFailureTerminateCluster is a ActionOnFailure enum value
-	ActionOnFailureTerminateCluster = "TERMINATE_CLUSTER"
-
-	// ActionOnFailureCancelAndWait is a ActionOnFailure enum value
-	ActionOnFailureCancelAndWait = "CANCEL_AND_WAIT"
-
-	// ActionOnFailureContinue is a ActionOnFailure enum value
-	ActionOnFailureContinue = "CONTINUE"
+	ActionOnFailureTerminateJobFlow ActionOnFailure = "TERMINATE_JOB_FLOW"
+	ActionOnFailureTerminateCluster ActionOnFailure = "TERMINATE_CLUSTER"
+	ActionOnFailureCancelAndWait    ActionOnFailure = "CANCEL_AND_WAIT"
+	ActionOnFailureContinue         ActionOnFailure = "CONTINUE"
 )
 
+type AdjustmentType string
+
+// Enum values for AdjustmentType
 const (
-	// AdjustmentTypeChangeInCapacity is a AdjustmentType enum value
-	AdjustmentTypeChangeInCapacity = "CHANGE_IN_CAPACITY"
-
-	// AdjustmentTypePercentChangeInCapacity is a AdjustmentType enum value
-	AdjustmentTypePercentChangeInCapacity = "PERCENT_CHANGE_IN_CAPACITY"
-
-	// AdjustmentTypeExactCapacity is a AdjustmentType enum value
-	AdjustmentTypeExactCapacity = "EXACT_CAPACITY"
+	AdjustmentTypeChangeInCapacity        AdjustmentType = "CHANGE_IN_CAPACITY"
+	AdjustmentTypePercentChangeInCapacity AdjustmentType = "PERCENT_CHANGE_IN_CAPACITY"
+	AdjustmentTypeExactCapacity           AdjustmentType = "EXACT_CAPACITY"
 )
 
+type AutoScalingPolicyState string
+
+// Enum values for AutoScalingPolicyState
 const (
-	// AutoScalingPolicyStatePending is a AutoScalingPolicyState enum value
-	AutoScalingPolicyStatePending = "PENDING"
-
-	// AutoScalingPolicyStateAttaching is a AutoScalingPolicyState enum value
-	AutoScalingPolicyStateAttaching = "ATTACHING"
-
-	// AutoScalingPolicyStateAttached is a AutoScalingPolicyState enum value
-	AutoScalingPolicyStateAttached = "ATTACHED"
-
-	// AutoScalingPolicyStateDetaching is a AutoScalingPolicyState enum value
-	AutoScalingPolicyStateDetaching = "DETACHING"
-
-	// AutoScalingPolicyStateDetached is a AutoScalingPolicyState enum value
-	AutoScalingPolicyStateDetached = "DETACHED"
-
-	// AutoScalingPolicyStateFailed is a AutoScalingPolicyState enum value
-	AutoScalingPolicyStateFailed = "FAILED"
+	AutoScalingPolicyStatePending   AutoScalingPolicyState = "PENDING"
+	AutoScalingPolicyStateAttaching AutoScalingPolicyState = "ATTACHING"
+	AutoScalingPolicyStateAttached  AutoScalingPolicyState = "ATTACHED"
+	AutoScalingPolicyStateDetaching AutoScalingPolicyState = "DETACHING"
+	AutoScalingPolicyStateDetached  AutoScalingPolicyState = "DETACHED"
+	AutoScalingPolicyStateFailed    AutoScalingPolicyState = "FAILED"
 )
 
+type AutoScalingPolicyStateChangeReasonCode string
+
+// Enum values for AutoScalingPolicyStateChangeReasonCode
 const (
-	// AutoScalingPolicyStateChangeReasonCodeUserRequest is a AutoScalingPolicyStateChangeReasonCode enum value
-	AutoScalingPolicyStateChangeReasonCodeUserRequest = "USER_REQUEST"
-
-	// AutoScalingPolicyStateChangeReasonCodeProvisionFailure is a AutoScalingPolicyStateChangeReasonCode enum value
-	AutoScalingPolicyStateChangeReasonCodeProvisionFailure = "PROVISION_FAILURE"
-
-	// AutoScalingPolicyStateChangeReasonCodeCleanupFailure is a AutoScalingPolicyStateChangeReasonCode enum value
-	AutoScalingPolicyStateChangeReasonCodeCleanupFailure = "CLEANUP_FAILURE"
+	AutoScalingPolicyStateChangeReasonCodeUserRequest      AutoScalingPolicyStateChangeReasonCode = "USER_REQUEST"
+	AutoScalingPolicyStateChangeReasonCodeProvisionFailure AutoScalingPolicyStateChangeReasonCode = "PROVISION_FAILURE"
+	AutoScalingPolicyStateChangeReasonCodeCleanupFailure   AutoScalingPolicyStateChangeReasonCode = "CLEANUP_FAILURE"
 )
 
-const (
-	// CancelStepsRequestStatusSubmitted is a CancelStepsRequestStatus enum value
-	CancelStepsRequestStatusSubmitted = "SUBMITTED"
+type CancelStepsRequestStatus string
 
-	// CancelStepsRequestStatusFailed is a CancelStepsRequestStatus enum value
-	CancelStepsRequestStatusFailed = "FAILED"
+// Enum values for CancelStepsRequestStatus
+const (
+	CancelStepsRequestStatusSubmitted CancelStepsRequestStatus = "SUBMITTED"
+	CancelStepsRequestStatusFailed    CancelStepsRequestStatus = "FAILED"
 )
 
+type ClusterState string
+
+// Enum values for ClusterState
 const (
-	// ClusterStateStarting is a ClusterState enum value
-	ClusterStateStarting = "STARTING"
-
-	// ClusterStateBootstrapping is a ClusterState enum value
-	ClusterStateBootstrapping = "BOOTSTRAPPING"
-
-	// ClusterStateRunning is a ClusterState enum value
-	ClusterStateRunning = "RUNNING"
-
-	// ClusterStateWaiting is a ClusterState enum value
-	ClusterStateWaiting = "WAITING"
-
-	// ClusterStateTerminating is a ClusterState enum value
-	ClusterStateTerminating = "TERMINATING"
-
-	// ClusterStateTerminated is a ClusterState enum value
-	ClusterStateTerminated = "TERMINATED"
-
-	// ClusterStateTerminatedWithErrors is a ClusterState enum value
-	ClusterStateTerminatedWithErrors = "TERMINATED_WITH_ERRORS"
+	ClusterStateStarting             ClusterState = "STARTING"
+	ClusterStateBootstrapping        ClusterState = "BOOTSTRAPPING"
+	ClusterStateRunning              ClusterState = "RUNNING"
+	ClusterStateWaiting              ClusterState = "WAITING"
+	ClusterStateTerminating          ClusterState = "TERMINATING"
+	ClusterStateTerminated           ClusterState = "TERMINATED"
+	ClusterStateTerminatedWithErrors ClusterState = "TERMINATED_WITH_ERRORS"
 )
 
+type ClusterStateChangeReasonCode string
+
+// Enum values for ClusterStateChangeReasonCode
 const (
-	// ClusterStateChangeReasonCodeInternalError is a ClusterStateChangeReasonCode enum value
-	ClusterStateChangeReasonCodeInternalError = "INTERNAL_ERROR"
-
-	// ClusterStateChangeReasonCodeValidationError is a ClusterStateChangeReasonCode enum value
-	ClusterStateChangeReasonCodeValidationError = "VALIDATION_ERROR"
-
-	// ClusterStateChangeReasonCodeInstanceFailure is a ClusterStateChangeReasonCode enum value
-	ClusterStateChangeReasonCodeInstanceFailure = "INSTANCE_FAILURE"
-
-	// ClusterStateChangeReasonCodeInstanceFleetTimeout is a ClusterStateChangeReasonCode enum value
-	ClusterStateChangeReasonCodeInstanceFleetTimeout = "INSTANCE_FLEET_TIMEOUT"
-
-	// ClusterStateChangeReasonCodeBootstrapFailure is a ClusterStateChangeReasonCode enum value
-	ClusterStateChangeReasonCodeBootstrapFailure = "BOOTSTRAP_FAILURE"
-
-	// ClusterStateChangeReasonCodeUserRequest is a ClusterStateChangeReasonCode enum value
-	ClusterStateChangeReasonCodeUserRequest = "USER_REQUEST"
-
-	// ClusterStateChangeReasonCodeStepFailure is a ClusterStateChangeReasonCode enum value
-	ClusterStateChangeReasonCodeStepFailure = "STEP_FAILURE"
-
-	// ClusterStateChangeReasonCodeAllStepsCompleted is a ClusterStateChangeReasonCode enum value
-	ClusterStateChangeReasonCodeAllStepsCompleted = "ALL_STEPS_COMPLETED"
+	ClusterStateChangeReasonCodeInternalError        ClusterStateChangeReasonCode = "INTERNAL_ERROR"
+	ClusterStateChangeReasonCodeValidationError      ClusterStateChangeReasonCode = "VALIDATION_ERROR"
+	ClusterStateChangeReasonCodeInstanceFailure      ClusterStateChangeReasonCode = "INSTANCE_FAILURE"
+	ClusterStateChangeReasonCodeInstanceFleetTimeout ClusterStateChangeReasonCode = "INSTANCE_FLEET_TIMEOUT"
+	ClusterStateChangeReasonCodeBootstrapFailure     ClusterStateChangeReasonCode = "BOOTSTRAP_FAILURE"
+	ClusterStateChangeReasonCodeUserRequest          ClusterStateChangeReasonCode = "USER_REQUEST"
+	ClusterStateChangeReasonCodeStepFailure          ClusterStateChangeReasonCode = "STEP_FAILURE"
+	ClusterStateChangeReasonCodeAllStepsCompleted    ClusterStateChangeReasonCode = "ALL_STEPS_COMPLETED"
 )
 
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
 const (
-	// ComparisonOperatorGreaterThanOrEqual is a ComparisonOperator enum value
-	ComparisonOperatorGreaterThanOrEqual = "GREATER_THAN_OR_EQUAL"
-
-	// ComparisonOperatorGreaterThan is a ComparisonOperator enum value
-	ComparisonOperatorGreaterThan = "GREATER_THAN"
-
-	// ComparisonOperatorLessThan is a ComparisonOperator enum value
-	ComparisonOperatorLessThan = "LESS_THAN"
-
-	// ComparisonOperatorLessThanOrEqual is a ComparisonOperator enum value
-	ComparisonOperatorLessThanOrEqual = "LESS_THAN_OR_EQUAL"
+	ComparisonOperatorGreaterThanOrEqual ComparisonOperator = "GREATER_THAN_OR_EQUAL"
+	ComparisonOperatorGreaterThan        ComparisonOperator = "GREATER_THAN"
+	ComparisonOperatorLessThan           ComparisonOperator = "LESS_THAN"
+	ComparisonOperatorLessThanOrEqual    ComparisonOperator = "LESS_THAN_OR_EQUAL"
 )
 
-const (
-	// InstanceCollectionTypeInstanceFleet is a InstanceCollectionType enum value
-	InstanceCollectionTypeInstanceFleet = "INSTANCE_FLEET"
+type InstanceCollectionType string
 
-	// InstanceCollectionTypeInstanceGroup is a InstanceCollectionType enum value
-	InstanceCollectionTypeInstanceGroup = "INSTANCE_GROUP"
+// Enum values for InstanceCollectionType
+const (
+	InstanceCollectionTypeInstanceFleet InstanceCollectionType = "INSTANCE_FLEET"
+	InstanceCollectionTypeInstanceGroup InstanceCollectionType = "INSTANCE_GROUP"
 )
 
+type InstanceFleetState string
+
+// Enum values for InstanceFleetState
 const (
-	// InstanceFleetStateProvisioning is a InstanceFleetState enum value
-	InstanceFleetStateProvisioning = "PROVISIONING"
-
-	// InstanceFleetStateBootstrapping is a InstanceFleetState enum value
-	InstanceFleetStateBootstrapping = "BOOTSTRAPPING"
-
-	// InstanceFleetStateRunning is a InstanceFleetState enum value
-	InstanceFleetStateRunning = "RUNNING"
-
-	// InstanceFleetStateResizing is a InstanceFleetState enum value
-	InstanceFleetStateResizing = "RESIZING"
-
-	// InstanceFleetStateSuspended is a InstanceFleetState enum value
-	InstanceFleetStateSuspended = "SUSPENDED"
-
-	// InstanceFleetStateTerminating is a InstanceFleetState enum value
-	InstanceFleetStateTerminating = "TERMINATING"
-
-	// InstanceFleetStateTerminated is a InstanceFleetState enum value
-	InstanceFleetStateTerminated = "TERMINATED"
+	InstanceFleetStateProvisioning  InstanceFleetState = "PROVISIONING"
+	InstanceFleetStateBootstrapping InstanceFleetState = "BOOTSTRAPPING"
+	InstanceFleetStateRunning       InstanceFleetState = "RUNNING"
+	InstanceFleetStateResizing      InstanceFleetState = "RESIZING"
+	InstanceFleetStateSuspended     InstanceFleetState = "SUSPENDED"
+	InstanceFleetStateTerminating   InstanceFleetState = "TERMINATING"
+	InstanceFleetStateTerminated    InstanceFleetState = "TERMINATED"
 )
 
+type InstanceFleetStateChangeReasonCode string
+
+// Enum values for InstanceFleetStateChangeReasonCode
 const (
-	// InstanceFleetStateChangeReasonCodeInternalError is a InstanceFleetStateChangeReasonCode enum value
-	InstanceFleetStateChangeReasonCodeInternalError = "INTERNAL_ERROR"
-
-	// InstanceFleetStateChangeReasonCodeValidationError is a InstanceFleetStateChangeReasonCode enum value
-	InstanceFleetStateChangeReasonCodeValidationError = "VALIDATION_ERROR"
-
-	// InstanceFleetStateChangeReasonCodeInstanceFailure is a InstanceFleetStateChangeReasonCode enum value
-	InstanceFleetStateChangeReasonCodeInstanceFailure = "INSTANCE_FAILURE"
-
-	// InstanceFleetStateChangeReasonCodeClusterTerminated is a InstanceFleetStateChangeReasonCode enum value
-	InstanceFleetStateChangeReasonCodeClusterTerminated = "CLUSTER_TERMINATED"
+	InstanceFleetStateChangeReasonCodeInternalError     InstanceFleetStateChangeReasonCode = "INTERNAL_ERROR"
+	InstanceFleetStateChangeReasonCodeValidationError   InstanceFleetStateChangeReasonCode = "VALIDATION_ERROR"
+	InstanceFleetStateChangeReasonCodeInstanceFailure   InstanceFleetStateChangeReasonCode = "INSTANCE_FAILURE"
+	InstanceFleetStateChangeReasonCodeClusterTerminated InstanceFleetStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
+type InstanceFleetType string
+
+// Enum values for InstanceFleetType
 const (
-	// InstanceFleetTypeMaster is a InstanceFleetType enum value
-	InstanceFleetTypeMaster = "MASTER"
-
-	// InstanceFleetTypeCore is a InstanceFleetType enum value
-	InstanceFleetTypeCore = "CORE"
-
-	// InstanceFleetTypeTask is a InstanceFleetType enum value
-	InstanceFleetTypeTask = "TASK"
+	InstanceFleetTypeMaster InstanceFleetType = "MASTER"
+	InstanceFleetTypeCore   InstanceFleetType = "CORE"
+	InstanceFleetTypeTask   InstanceFleetType = "TASK"
 )
 
+type InstanceGroupState string
+
+// Enum values for InstanceGroupState
 const (
-	// InstanceGroupStateProvisioning is a InstanceGroupState enum value
-	InstanceGroupStateProvisioning = "PROVISIONING"
-
-	// InstanceGroupStateBootstrapping is a InstanceGroupState enum value
-	InstanceGroupStateBootstrapping = "BOOTSTRAPPING"
-
-	// InstanceGroupStateRunning is a InstanceGroupState enum value
-	InstanceGroupStateRunning = "RUNNING"
-
-	// InstanceGroupStateResizing is a InstanceGroupState enum value
-	InstanceGroupStateResizing = "RESIZING"
-
-	// InstanceGroupStateSuspended is a InstanceGroupState enum value
-	InstanceGroupStateSuspended = "SUSPENDED"
-
-	// InstanceGroupStateTerminating is a InstanceGroupState enum value
-	InstanceGroupStateTerminating = "TERMINATING"
-
-	// InstanceGroupStateTerminated is a InstanceGroupState enum value
-	InstanceGroupStateTerminated = "TERMINATED"
-
-	// InstanceGroupStateArrested is a InstanceGroupState enum value
-	InstanceGroupStateArrested = "ARRESTED"
-
-	// InstanceGroupStateShuttingDown is a InstanceGroupState enum value
-	InstanceGroupStateShuttingDown = "SHUTTING_DOWN"
-
-	// InstanceGroupStateEnded is a InstanceGroupState enum value
-	InstanceGroupStateEnded = "ENDED"
+	InstanceGroupStateProvisioning  InstanceGroupState = "PROVISIONING"
+	InstanceGroupStateBootstrapping InstanceGroupState = "BOOTSTRAPPING"
+	InstanceGroupStateRunning       InstanceGroupState = "RUNNING"
+	InstanceGroupStateResizing      InstanceGroupState = "RESIZING"
+	InstanceGroupStateSuspended     InstanceGroupState = "SUSPENDED"
+	InstanceGroupStateTerminating   InstanceGroupState = "TERMINATING"
+	InstanceGroupStateTerminated    InstanceGroupState = "TERMINATED"
+	InstanceGroupStateArrested      InstanceGroupState = "ARRESTED"
+	InstanceGroupStateShuttingDown  InstanceGroupState = "SHUTTING_DOWN"
+	InstanceGroupStateEnded         InstanceGroupState = "ENDED"
 )
 
+type InstanceGroupStateChangeReasonCode string
+
+// Enum values for InstanceGroupStateChangeReasonCode
 const (
-	// InstanceGroupStateChangeReasonCodeInternalError is a InstanceGroupStateChangeReasonCode enum value
-	InstanceGroupStateChangeReasonCodeInternalError = "INTERNAL_ERROR"
-
-	// InstanceGroupStateChangeReasonCodeValidationError is a InstanceGroupStateChangeReasonCode enum value
-	InstanceGroupStateChangeReasonCodeValidationError = "VALIDATION_ERROR"
-
-	// InstanceGroupStateChangeReasonCodeInstanceFailure is a InstanceGroupStateChangeReasonCode enum value
-	InstanceGroupStateChangeReasonCodeInstanceFailure = "INSTANCE_FAILURE"
-
-	// InstanceGroupStateChangeReasonCodeClusterTerminated is a InstanceGroupStateChangeReasonCode enum value
-	InstanceGroupStateChangeReasonCodeClusterTerminated = "CLUSTER_TERMINATED"
+	InstanceGroupStateChangeReasonCodeInternalError     InstanceGroupStateChangeReasonCode = "INTERNAL_ERROR"
+	InstanceGroupStateChangeReasonCodeValidationError   InstanceGroupStateChangeReasonCode = "VALIDATION_ERROR"
+	InstanceGroupStateChangeReasonCodeInstanceFailure   InstanceGroupStateChangeReasonCode = "INSTANCE_FAILURE"
+	InstanceGroupStateChangeReasonCodeClusterTerminated InstanceGroupStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
+type InstanceGroupType string
+
+// Enum values for InstanceGroupType
 const (
-	// InstanceGroupTypeMaster is a InstanceGroupType enum value
-	InstanceGroupTypeMaster = "MASTER"
-
-	// InstanceGroupTypeCore is a InstanceGroupType enum value
-	InstanceGroupTypeCore = "CORE"
-
-	// InstanceGroupTypeTask is a InstanceGroupType enum value
-	InstanceGroupTypeTask = "TASK"
+	InstanceGroupTypeMaster InstanceGroupType = "MASTER"
+	InstanceGroupTypeCore   InstanceGroupType = "CORE"
+	InstanceGroupTypeTask   InstanceGroupType = "TASK"
 )
 
+type InstanceRoleType string
+
+// Enum values for InstanceRoleType
 const (
-	// InstanceRoleTypeMaster is a InstanceRoleType enum value
-	InstanceRoleTypeMaster = "MASTER"
-
-	// InstanceRoleTypeCore is a InstanceRoleType enum value
-	InstanceRoleTypeCore = "CORE"
-
-	// InstanceRoleTypeTask is a InstanceRoleType enum value
-	InstanceRoleTypeTask = "TASK"
+	InstanceRoleTypeMaster InstanceRoleType = "MASTER"
+	InstanceRoleTypeCore   InstanceRoleType = "CORE"
+	InstanceRoleTypeTask   InstanceRoleType = "TASK"
 )
 
+type InstanceState string
+
+// Enum values for InstanceState
 const (
-	// InstanceStateAwaitingFulfillment is a InstanceState enum value
-	InstanceStateAwaitingFulfillment = "AWAITING_FULFILLMENT"
-
-	// InstanceStateProvisioning is a InstanceState enum value
-	InstanceStateProvisioning = "PROVISIONING"
-
-	// InstanceStateBootstrapping is a InstanceState enum value
-	InstanceStateBootstrapping = "BOOTSTRAPPING"
-
-	// InstanceStateRunning is a InstanceState enum value
-	InstanceStateRunning = "RUNNING"
-
-	// InstanceStateTerminated is a InstanceState enum value
-	InstanceStateTerminated = "TERMINATED"
+	InstanceStateAwaitingFulfillment InstanceState = "AWAITING_FULFILLMENT"
+	InstanceStateProvisioning        InstanceState = "PROVISIONING"
+	InstanceStateBootstrapping       InstanceState = "BOOTSTRAPPING"
+	InstanceStateRunning             InstanceState = "RUNNING"
+	InstanceStateTerminated          InstanceState = "TERMINATED"
 )
 
+type InstanceStateChangeReasonCode string
+
+// Enum values for InstanceStateChangeReasonCode
 const (
-	// InstanceStateChangeReasonCodeInternalError is a InstanceStateChangeReasonCode enum value
-	InstanceStateChangeReasonCodeInternalError = "INTERNAL_ERROR"
-
-	// InstanceStateChangeReasonCodeValidationError is a InstanceStateChangeReasonCode enum value
-	InstanceStateChangeReasonCodeValidationError = "VALIDATION_ERROR"
-
-	// InstanceStateChangeReasonCodeInstanceFailure is a InstanceStateChangeReasonCode enum value
-	InstanceStateChangeReasonCodeInstanceFailure = "INSTANCE_FAILURE"
-
-	// InstanceStateChangeReasonCodeBootstrapFailure is a InstanceStateChangeReasonCode enum value
-	InstanceStateChangeReasonCodeBootstrapFailure = "BOOTSTRAP_FAILURE"
-
-	// InstanceStateChangeReasonCodeClusterTerminated is a InstanceStateChangeReasonCode enum value
-	InstanceStateChangeReasonCodeClusterTerminated = "CLUSTER_TERMINATED"
+	InstanceStateChangeReasonCodeInternalError     InstanceStateChangeReasonCode = "INTERNAL_ERROR"
+	InstanceStateChangeReasonCodeValidationError   InstanceStateChangeReasonCode = "VALIDATION_ERROR"
+	InstanceStateChangeReasonCodeInstanceFailure   InstanceStateChangeReasonCode = "INSTANCE_FAILURE"
+	InstanceStateChangeReasonCodeBootstrapFailure  InstanceStateChangeReasonCode = "BOOTSTRAP_FAILURE"
+	InstanceStateChangeReasonCodeClusterTerminated InstanceStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
 // The type of instance.
+type JobFlowExecutionState string
+
+// Enum values for JobFlowExecutionState
 const (
-	// JobFlowExecutionStateStarting is a JobFlowExecutionState enum value
-	JobFlowExecutionStateStarting = "STARTING"
-
-	// JobFlowExecutionStateBootstrapping is a JobFlowExecutionState enum value
-	JobFlowExecutionStateBootstrapping = "BOOTSTRAPPING"
-
-	// JobFlowExecutionStateRunning is a JobFlowExecutionState enum value
-	JobFlowExecutionStateRunning = "RUNNING"
-
-	// JobFlowExecutionStateWaiting is a JobFlowExecutionState enum value
-	JobFlowExecutionStateWaiting = "WAITING"
-
-	// JobFlowExecutionStateShuttingDown is a JobFlowExecutionState enum value
-	JobFlowExecutionStateShuttingDown = "SHUTTING_DOWN"
-
-	// JobFlowExecutionStateTerminated is a JobFlowExecutionState enum value
-	JobFlowExecutionStateTerminated = "TERMINATED"
-
-	// JobFlowExecutionStateCompleted is a JobFlowExecutionState enum value
-	JobFlowExecutionStateCompleted = "COMPLETED"
-
-	// JobFlowExecutionStateFailed is a JobFlowExecutionState enum value
-	JobFlowExecutionStateFailed = "FAILED"
+	JobFlowExecutionStateStarting      JobFlowExecutionState = "STARTING"
+	JobFlowExecutionStateBootstrapping JobFlowExecutionState = "BOOTSTRAPPING"
+	JobFlowExecutionStateRunning       JobFlowExecutionState = "RUNNING"
+	JobFlowExecutionStateWaiting       JobFlowExecutionState = "WAITING"
+	JobFlowExecutionStateShuttingDown  JobFlowExecutionState = "SHUTTING_DOWN"
+	JobFlowExecutionStateTerminated    JobFlowExecutionState = "TERMINATED"
+	JobFlowExecutionStateCompleted     JobFlowExecutionState = "COMPLETED"
+	JobFlowExecutionStateFailed        JobFlowExecutionState = "FAILED"
 )
 
-const (
-	// MarketTypeOnDemand is a MarketType enum value
-	MarketTypeOnDemand = "ON_DEMAND"
+type MarketType string
 
-	// MarketTypeSpot is a MarketType enum value
-	MarketTypeSpot = "SPOT"
+// Enum values for MarketType
+const (
+	MarketTypeOnDemand MarketType = "ON_DEMAND"
+	MarketTypeSpot     MarketType = "SPOT"
 )
 
-const (
-	// RepoUpgradeOnBootSecurity is a RepoUpgradeOnBoot enum value
-	RepoUpgradeOnBootSecurity = "SECURITY"
+type RepoUpgradeOnBoot string
 
-	// RepoUpgradeOnBootNone is a RepoUpgradeOnBoot enum value
-	RepoUpgradeOnBootNone = "NONE"
+// Enum values for RepoUpgradeOnBoot
+const (
+	RepoUpgradeOnBootSecurity RepoUpgradeOnBoot = "SECURITY"
+	RepoUpgradeOnBootNone     RepoUpgradeOnBoot = "NONE"
 )
 
-const (
-	// ScaleDownBehaviorTerminateAtInstanceHour is a ScaleDownBehavior enum value
-	ScaleDownBehaviorTerminateAtInstanceHour = "TERMINATE_AT_INSTANCE_HOUR"
+type ScaleDownBehavior string
 
-	// ScaleDownBehaviorTerminateAtTaskCompletion is a ScaleDownBehavior enum value
-	ScaleDownBehaviorTerminateAtTaskCompletion = "TERMINATE_AT_TASK_COMPLETION"
+// Enum values for ScaleDownBehavior
+const (
+	ScaleDownBehaviorTerminateAtInstanceHour   ScaleDownBehavior = "TERMINATE_AT_INSTANCE_HOUR"
+	ScaleDownBehaviorTerminateAtTaskCompletion ScaleDownBehavior = "TERMINATE_AT_TASK_COMPLETION"
 )
 
-const (
-	// SpotProvisioningTimeoutActionSwitchToOnDemand is a SpotProvisioningTimeoutAction enum value
-	SpotProvisioningTimeoutActionSwitchToOnDemand = "SWITCH_TO_ON_DEMAND"
+type SpotProvisioningTimeoutAction string
 
-	// SpotProvisioningTimeoutActionTerminateCluster is a SpotProvisioningTimeoutAction enum value
-	SpotProvisioningTimeoutActionTerminateCluster = "TERMINATE_CLUSTER"
+// Enum values for SpotProvisioningTimeoutAction
+const (
+	SpotProvisioningTimeoutActionSwitchToOnDemand SpotProvisioningTimeoutAction = "SWITCH_TO_ON_DEMAND"
+	SpotProvisioningTimeoutActionTerminateCluster SpotProvisioningTimeoutAction = "TERMINATE_CLUSTER"
 )
 
+type Statistic string
+
+// Enum values for Statistic
 const (
-	// StatisticSampleCount is a Statistic enum value
-	StatisticSampleCount = "SAMPLE_COUNT"
-
-	// StatisticAverage is a Statistic enum value
-	StatisticAverage = "AVERAGE"
-
-	// StatisticSum is a Statistic enum value
-	StatisticSum = "SUM"
-
-	// StatisticMinimum is a Statistic enum value
-	StatisticMinimum = "MINIMUM"
-
-	// StatisticMaximum is a Statistic enum value
-	StatisticMaximum = "MAXIMUM"
+	StatisticSampleCount Statistic = "SAMPLE_COUNT"
+	StatisticAverage     Statistic = "AVERAGE"
+	StatisticSum         Statistic = "SUM"
+	StatisticMinimum     Statistic = "MINIMUM"
+	StatisticMaximum     Statistic = "MAXIMUM"
 )
 
+type StepExecutionState string
+
+// Enum values for StepExecutionState
 const (
-	// StepExecutionStatePending is a StepExecutionState enum value
-	StepExecutionStatePending = "PENDING"
-
-	// StepExecutionStateRunning is a StepExecutionState enum value
-	StepExecutionStateRunning = "RUNNING"
-
-	// StepExecutionStateContinue is a StepExecutionState enum value
-	StepExecutionStateContinue = "CONTINUE"
-
-	// StepExecutionStateCompleted is a StepExecutionState enum value
-	StepExecutionStateCompleted = "COMPLETED"
-
-	// StepExecutionStateCancelled is a StepExecutionState enum value
-	StepExecutionStateCancelled = "CANCELLED"
-
-	// StepExecutionStateFailed is a StepExecutionState enum value
-	StepExecutionStateFailed = "FAILED"
-
-	// StepExecutionStateInterrupted is a StepExecutionState enum value
-	StepExecutionStateInterrupted = "INTERRUPTED"
+	StepExecutionStatePending     StepExecutionState = "PENDING"
+	StepExecutionStateRunning     StepExecutionState = "RUNNING"
+	StepExecutionStateContinue    StepExecutionState = "CONTINUE"
+	StepExecutionStateCompleted   StepExecutionState = "COMPLETED"
+	StepExecutionStateCancelled   StepExecutionState = "CANCELLED"
+	StepExecutionStateFailed      StepExecutionState = "FAILED"
+	StepExecutionStateInterrupted StepExecutionState = "INTERRUPTED"
 )
 
+type StepState string
+
+// Enum values for StepState
 const (
-	// StepStatePending is a StepState enum value
-	StepStatePending = "PENDING"
-
-	// StepStateCancelPending is a StepState enum value
-	StepStateCancelPending = "CANCEL_PENDING"
-
-	// StepStateRunning is a StepState enum value
-	StepStateRunning = "RUNNING"
-
-	// StepStateCompleted is a StepState enum value
-	StepStateCompleted = "COMPLETED"
-
-	// StepStateCancelled is a StepState enum value
-	StepStateCancelled = "CANCELLED"
-
-	// StepStateFailed is a StepState enum value
-	StepStateFailed = "FAILED"
-
-	// StepStateInterrupted is a StepState enum value
-	StepStateInterrupted = "INTERRUPTED"
+	StepStatePending       StepState = "PENDING"
+	StepStateCancelPending StepState = "CANCEL_PENDING"
+	StepStateRunning       StepState = "RUNNING"
+	StepStateCompleted     StepState = "COMPLETED"
+	StepStateCancelled     StepState = "CANCELLED"
+	StepStateFailed        StepState = "FAILED"
+	StepStateInterrupted   StepState = "INTERRUPTED"
 )
 
+type StepStateChangeReasonCode string
+
+// Enum values for StepStateChangeReasonCode
 const (
-	// StepStateChangeReasonCodeNone is a StepStateChangeReasonCode enum value
-	StepStateChangeReasonCodeNone = "NONE"
+	StepStateChangeReasonCodeNone StepStateChangeReasonCode = "NONE"
 )
 
+type Unit string
+
+// Enum values for Unit
 const (
-	// UnitNone is a Unit enum value
-	UnitNone = "NONE"
-
-	// UnitSeconds is a Unit enum value
-	UnitSeconds = "SECONDS"
-
-	// UnitMicroSeconds is a Unit enum value
-	UnitMicroSeconds = "MICRO_SECONDS"
-
-	// UnitMilliSeconds is a Unit enum value
-	UnitMilliSeconds = "MILLI_SECONDS"
-
-	// UnitBytes is a Unit enum value
-	UnitBytes = "BYTES"
-
-	// UnitKiloBytes is a Unit enum value
-	UnitKiloBytes = "KILO_BYTES"
-
-	// UnitMegaBytes is a Unit enum value
-	UnitMegaBytes = "MEGA_BYTES"
-
-	// UnitGigaBytes is a Unit enum value
-	UnitGigaBytes = "GIGA_BYTES"
-
-	// UnitTeraBytes is a Unit enum value
-	UnitTeraBytes = "TERA_BYTES"
-
-	// UnitBits is a Unit enum value
-	UnitBits = "BITS"
-
-	// UnitKiloBits is a Unit enum value
-	UnitKiloBits = "KILO_BITS"
-
-	// UnitMegaBits is a Unit enum value
-	UnitMegaBits = "MEGA_BITS"
-
-	// UnitGigaBits is a Unit enum value
-	UnitGigaBits = "GIGA_BITS"
-
-	// UnitTeraBits is a Unit enum value
-	UnitTeraBits = "TERA_BITS"
-
-	// UnitPercent is a Unit enum value
-	UnitPercent = "PERCENT"
-
-	// UnitCount is a Unit enum value
-	UnitCount = "COUNT"
-
-	// UnitBytesPerSecond is a Unit enum value
-	UnitBytesPerSecond = "BYTES_PER_SECOND"
-
-	// UnitKiloBytesPerSecond is a Unit enum value
-	UnitKiloBytesPerSecond = "KILO_BYTES_PER_SECOND"
-
-	// UnitMegaBytesPerSecond is a Unit enum value
-	UnitMegaBytesPerSecond = "MEGA_BYTES_PER_SECOND"
-
-	// UnitGigaBytesPerSecond is a Unit enum value
-	UnitGigaBytesPerSecond = "GIGA_BYTES_PER_SECOND"
-
-	// UnitTeraBytesPerSecond is a Unit enum value
-	UnitTeraBytesPerSecond = "TERA_BYTES_PER_SECOND"
-
-	// UnitBitsPerSecond is a Unit enum value
-	UnitBitsPerSecond = "BITS_PER_SECOND"
-
-	// UnitKiloBitsPerSecond is a Unit enum value
-	UnitKiloBitsPerSecond = "KILO_BITS_PER_SECOND"
-
-	// UnitMegaBitsPerSecond is a Unit enum value
-	UnitMegaBitsPerSecond = "MEGA_BITS_PER_SECOND"
-
-	// UnitGigaBitsPerSecond is a Unit enum value
-	UnitGigaBitsPerSecond = "GIGA_BITS_PER_SECOND"
-
-	// UnitTeraBitsPerSecond is a Unit enum value
-	UnitTeraBitsPerSecond = "TERA_BITS_PER_SECOND"
-
-	// UnitCountPerSecond is a Unit enum value
-	UnitCountPerSecond = "COUNT_PER_SECOND"
+	UnitNone               Unit = "NONE"
+	UnitSeconds            Unit = "SECONDS"
+	UnitMicroSeconds       Unit = "MICRO_SECONDS"
+	UnitMilliSeconds       Unit = "MILLI_SECONDS"
+	UnitBytes              Unit = "BYTES"
+	UnitKiloBytes          Unit = "KILO_BYTES"
+	UnitMegaBytes          Unit = "MEGA_BYTES"
+	UnitGigaBytes          Unit = "GIGA_BYTES"
+	UnitTeraBytes          Unit = "TERA_BYTES"
+	UnitBits               Unit = "BITS"
+	UnitKiloBits           Unit = "KILO_BITS"
+	UnitMegaBits           Unit = "MEGA_BITS"
+	UnitGigaBits           Unit = "GIGA_BITS"
+	UnitTeraBits           Unit = "TERA_BITS"
+	UnitPercent            Unit = "PERCENT"
+	UnitCount              Unit = "COUNT"
+	UnitBytesPerSecond     Unit = "BYTES_PER_SECOND"
+	UnitKiloBytesPerSecond Unit = "KILO_BYTES_PER_SECOND"
+	UnitMegaBytesPerSecond Unit = "MEGA_BYTES_PER_SECOND"
+	UnitGigaBytesPerSecond Unit = "GIGA_BYTES_PER_SECOND"
+	UnitTeraBytesPerSecond Unit = "TERA_BYTES_PER_SECOND"
+	UnitBitsPerSecond      Unit = "BITS_PER_SECOND"
+	UnitKiloBitsPerSecond  Unit = "KILO_BITS_PER_SECOND"
+	UnitMegaBitsPerSecond  Unit = "MEGA_BITS_PER_SECOND"
+	UnitGigaBitsPerSecond  Unit = "GIGA_BITS_PER_SECOND"
+	UnitTeraBitsPerSecond  Unit = "TERA_BITS_PER_SECOND"
+	UnitCountPerSecond     Unit = "COUNT_PER_SECOND"
 )

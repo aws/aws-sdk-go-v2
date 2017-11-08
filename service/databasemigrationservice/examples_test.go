@@ -82,14 +82,14 @@ func ExampleDatabaseMigrationService_CreateEndpoint_shared00() {
 		CertificateArn:            aws.String(""),
 		DatabaseName:              aws.String("testdb"),
 		EndpointIdentifier:        aws.String("test-endpoint-1"),
-		EndpointType:              aws.String("source"),
+		EndpointType:              databasemigrationservice.ReplicationEndpointTypeValueSource,
 		EngineName:                aws.String("mysql"),
 		ExtraConnectionAttributes: aws.String(""),
 		KmsKeyId:                  aws.String("arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd"),
 		Password:                  aws.String("pasword"),
 		Port:                      aws.Int64(3306),
 		ServerName:                aws.String("mydb.cx1llnox7iyx.us-west-2.rds.amazonaws.com"),
-		SslMode:                   aws.String("require"),
+		SslMode:                   databasemigrationservice.DmsSslModeValueRequire,
 		Tags: []*databasemigrationservice.Tag{
 			{
 				Key:   aws.String("Acount"),
@@ -264,7 +264,7 @@ func ExampleDatabaseMigrationService_CreateReplicationTask_shared00() {
 	svc := databasemigrationservice.New(cfg)
 	input := &databasemigrationservice.CreateReplicationTaskInput{
 		CdcStartTime:              parseTime("2006-01-02T15:04:05Z", "2016-12-14T18:25:43Z"),
-		MigrationType:             aws.String("full-load"),
+		MigrationType:             databasemigrationservice.MigrationTypeValueFullLoad,
 		ReplicationInstanceArn:    aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
 		ReplicationTaskIdentifier: aws.String("task1"),
 		ReplicationTaskSettings:   aws.String(""),
@@ -1066,13 +1066,13 @@ func ExampleDatabaseMigrationService_ModifyEndpoint_shared00() {
 		DatabaseName:              aws.String(""),
 		EndpointArn:               aws.String(""),
 		EndpointIdentifier:        aws.String(""),
-		EndpointType:              aws.String("source"),
+		EndpointType:              databasemigrationservice.ReplicationEndpointTypeValueSource,
 		EngineName:                aws.String(""),
 		ExtraConnectionAttributes: aws.String(""),
 		Password:                  aws.String(""),
 		Port:                      aws.Int64(123),
 		ServerName:                aws.String(""),
-		SslMode:                   aws.String("require"),
+		SslMode:                   databasemigrationservice.DmsSslModeValueRequire,
 		Username:                  aws.String(""),
 	}
 
@@ -1294,7 +1294,7 @@ func ExampleDatabaseMigrationService_StartReplicationTask_shared00() {
 	input := &databasemigrationservice.StartReplicationTaskInput{
 		CdcStartTime:             parseTime("2006-01-02T15:04:05Z", "2016-12-14T13:33:20Z"),
 		ReplicationTaskArn:       aws.String("arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ"),
-		StartReplicationTaskType: aws.String("start-replication"),
+		StartReplicationTaskType: databasemigrationservice.StartReplicationTaskTypeValueStartReplication,
 	}
 
 	result, err := svc.StartReplicationTask(input)

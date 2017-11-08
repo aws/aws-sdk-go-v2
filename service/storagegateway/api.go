@@ -6086,24 +6086,28 @@ func (s ActivateGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActivateGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ActivateGatewayInput"}
+
 	if s.ActivationKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivationKey"))
 	}
 	if s.ActivationKey != nil && len(*s.ActivationKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ActivationKey", 1))
 	}
+
 	if s.GatewayName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayName"))
 	}
 	if s.GatewayName != nil && len(*s.GatewayName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayName", 2))
 	}
+
 	if s.GatewayRegion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayRegion"))
 	}
 	if s.GatewayRegion != nil && len(*s.GatewayRegion) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayRegion", 1))
 	}
+
 	if s.GatewayTimezone == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayTimezone"))
 	}
@@ -6228,9 +6232,11 @@ func (s AddCacheInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddCacheInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddCacheInput"}
+
 	if s.DiskIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DiskIds"))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -6314,12 +6320,14 @@ func (s AddTagsToResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+
 	if s.ResourceARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 50))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -6404,9 +6412,11 @@ func (s AddUploadBufferInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddUploadBufferInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddUploadBufferInput"}
+
 	if s.DiskIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DiskIds"))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -6491,9 +6501,11 @@ func (s AddWorkingStorageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddWorkingStorageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddWorkingStorageInput"}
+
 	if s.DiskIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DiskIds"))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -6679,12 +6691,14 @@ func (s CancelArchivalInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelArchivalInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelArchivalInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.TapeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
@@ -6767,12 +6781,14 @@ func (s CancelRetrievalInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelRetrievalInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelRetrievalInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.TapeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
@@ -6926,30 +6942,35 @@ func (s CreateCachediSCSIVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCachediSCSIVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCachediSCSIVolumeInput"}
+
 	if s.ClientToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 5 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 5))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
 	if s.SourceVolumeARN != nil && len(*s.SourceVolumeARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("SourceVolumeARN", 50))
 	}
+
 	if s.TargetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetName"))
 	}
 	if s.TargetName != nil && len(*s.TargetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TargetName", 1))
 	}
+
 	if s.VolumeSizeInBytes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeSizeInBytes"))
 	}
@@ -7111,6 +7132,7 @@ func (s *CreateNFSFileShareInput) Validate() error {
 	if s.ClientList != nil && len(s.ClientList) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientList", 1))
 	}
+
 	if s.ClientToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
@@ -7120,6 +7142,7 @@ func (s *CreateNFSFileShareInput) Validate() error {
 	if s.DefaultStorageClass != nil && len(*s.DefaultStorageClass) < 5 {
 		invalidParams.Add(aws.NewErrParamMinLen("DefaultStorageClass", 5))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -7129,12 +7152,14 @@ func (s *CreateNFSFileShareInput) Validate() error {
 	if s.KMSKey != nil && len(*s.KMSKey) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 20))
 	}
+
 	if s.LocationARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LocationARN"))
 	}
 	if s.LocationARN != nil && len(*s.LocationARN) < 16 {
 		invalidParams.Add(aws.NewErrParamMinLen("LocationARN", 16))
 	}
+
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
@@ -7271,12 +7296,14 @@ func (s CreateSnapshotFromVolumeRecoveryPointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotFromVolumeRecoveryPointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotFromVolumeRecoveryPointInput"}
+
 	if s.SnapshotDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotDescription"))
 	}
 	if s.SnapshotDescription != nil && len(*s.SnapshotDescription) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SnapshotDescription", 1))
 	}
+
 	if s.VolumeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
@@ -7377,12 +7404,14 @@ func (s CreateSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
+
 	if s.SnapshotDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotDescription"))
 	}
 	if s.SnapshotDescription != nil && len(*s.SnapshotDescription) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SnapshotDescription", 1))
 	}
+
 	if s.VolumeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
@@ -7518,24 +7547,29 @@ func (s CreateStorediSCSIVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStorediSCSIVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStorediSCSIVolumeInput"}
+
 	if s.DiskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DiskId"))
 	}
 	if s.DiskId != nil && len(*s.DiskId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DiskId", 1))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.NetworkInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NetworkInterfaceId"))
 	}
+
 	if s.PreserveExistingData == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PreserveExistingData"))
 	}
+
 	if s.TargetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetName"))
 	}
@@ -7670,18 +7704,21 @@ func (s CreateTapeWithBarcodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTapeWithBarcodeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTapeWithBarcodeInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.TapeBarcode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeBarcode"))
 	}
 	if s.TapeBarcode != nil && len(*s.TapeBarcode) < 7 {
 		invalidParams.Add(aws.NewErrParamMinLen("TapeBarcode", 7))
 	}
+
 	if s.TapeSizeInBytes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeSizeInBytes"))
 	}
@@ -7791,30 +7828,35 @@ func (s CreateTapesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTapesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTapesInput"}
+
 	if s.ClientToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 5 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 5))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.NumTapesToCreate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NumTapesToCreate"))
 	}
 	if s.NumTapesToCreate != nil && *s.NumTapesToCreate < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("NumTapesToCreate", 1))
 	}
+
 	if s.TapeBarcodePrefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeBarcodePrefix"))
 	}
 	if s.TapeBarcodePrefix != nil && len(*s.TapeBarcodePrefix) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TapeBarcodePrefix", 1))
 	}
+
 	if s.TapeSizeInBytes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeSizeInBytes"))
 	}
@@ -7916,12 +7958,14 @@ func (s DeleteBandwidthRateLimitInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBandwidthRateLimitInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBandwidthRateLimitInput"}
+
 	if s.BandwidthType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BandwidthType"))
 	}
 	if s.BandwidthType != nil && len(*s.BandwidthType) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("BandwidthType", 3))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -8008,12 +8052,14 @@ func (s DeleteChapCredentialsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteChapCredentialsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteChapCredentialsInput"}
+
 	if s.InitiatorName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InitiatorName"))
 	}
 	if s.InitiatorName != nil && len(*s.InitiatorName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InitiatorName", 1))
 	}
+
 	if s.TargetARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetARN"))
 	}
@@ -8103,6 +8149,7 @@ func (s DeleteFileShareInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFileShareInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFileShareInput"}
+
 	if s.FileShareARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
 	}
@@ -8178,6 +8225,7 @@ func (s DeleteGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteGatewayInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -8244,6 +8292,7 @@ func (s DeleteSnapshotScheduleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSnapshotScheduleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotScheduleInput"}
+
 	if s.VolumeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
@@ -8311,6 +8360,7 @@ func (s DeleteTapeArchiveInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTapeArchiveInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTapeArchiveInput"}
+
 	if s.TapeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
@@ -8387,12 +8437,14 @@ func (s DeleteTapeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTapeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTapeInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.TapeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
@@ -8468,6 +8520,7 @@ func (s DeleteVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVolumeInput"}
+
 	if s.VolumeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
@@ -8538,6 +8591,7 @@ func (s DescribeBandwidthRateLimitInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBandwidthRateLimitInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeBandwidthRateLimitInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -8627,6 +8681,7 @@ func (s DescribeCacheInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCacheInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCacheInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -8740,6 +8795,7 @@ func (s DescribeCachediSCSIVolumesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCachediSCSIVolumesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCachediSCSIVolumesInput"}
+
 	if s.VolumeARNs == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeARNs"))
 	}
@@ -8808,6 +8864,7 @@ func (s DescribeChapCredentialsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeChapCredentialsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeChapCredentialsInput"}
+
 	if s.TargetARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetARN"))
 	}
@@ -8891,6 +8948,7 @@ func (s DescribeGatewayInformationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeGatewayInformationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeGatewayInformationInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -9040,6 +9098,7 @@ func (s DescribeMaintenanceStartTimeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMaintenanceStartTimeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceStartTimeInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -9159,6 +9218,7 @@ func (s DescribeNFSFileSharesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeNFSFileSharesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeNFSFileSharesInput"}
+
 	if s.FileShareARNList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileShareARNList"))
 	}
@@ -9229,6 +9289,7 @@ func (s DescribeSnapshotScheduleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSnapshotScheduleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSnapshotScheduleInput"}
+
 	if s.VolumeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
@@ -9329,6 +9390,7 @@ func (s DescribeStorediSCSIVolumesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStorediSCSIVolumesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeStorediSCSIVolumesInput"}
+
 	if s.VolumeARNs == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeARNs"))
 	}
@@ -9504,6 +9566,7 @@ func (s DescribeTapeRecoveryPointsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTapeRecoveryPointsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTapeRecoveryPointsInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -9633,6 +9696,7 @@ func (s DescribeTapesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTapesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTapesInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -9738,6 +9802,7 @@ func (s DescribeUploadBufferInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUploadBufferInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeUploadBufferInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -9847,6 +9912,7 @@ func (s DescribeVTLDevicesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeVTLDevicesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeVTLDevicesInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -9963,6 +10029,7 @@ func (s DescribeWorkingStorageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkingStorageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkingStorageInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -10118,6 +10185,7 @@ func (s DisableGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableGatewayInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -10241,7 +10309,7 @@ type Error struct {
 	_ struct{} `type:"structure"`
 
 	// Additional information about the error.
-	ErrorCode *string `locationName:"errorCode" type:"string" enum:"ErrorCode"`
+	ErrorCode ErrorCode `locationName:"errorCode" type:"string"`
 
 	// Human-readable text that provides detail about the error that occurred.
 	ErrorDetails map[string]*string `locationName:"errorDetails" type:"map"`
@@ -10258,8 +10326,8 @@ func (s Error) GoString() string {
 }
 
 // SetErrorCode sets the ErrorCode field's value.
-func (s *Error) SetErrorCode(v string) *Error {
-	s.ErrorCode = &v
+func (s *Error) SetErrorCode(v ErrorCode) *Error {
+	s.ErrorCode = v
 	return s
 }
 
@@ -10613,6 +10681,7 @@ func (s ListLocalDisksInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListLocalDisksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListLocalDisksInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -10704,6 +10773,7 @@ func (s *ListTagsForResourceInput) Validate() error {
 	if s.Marker != nil && len(*s.Marker) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
+
 	if s.ResourceARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
@@ -10916,6 +10986,7 @@ func (s ListVolumeInitiatorsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVolumeInitiatorsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListVolumeInitiatorsInput"}
+
 	if s.VolumeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
@@ -10985,6 +11056,7 @@ func (s ListVolumeRecoveryPointsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVolumeRecoveryPointsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListVolumeRecoveryPointsInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -11456,6 +11528,7 @@ func (s RefreshCacheInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RefreshCacheInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RefreshCacheInput"}
+
 	if s.FileShareARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
 	}
@@ -11530,12 +11603,14 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+
 	if s.ResourceARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 50))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -11608,6 +11683,7 @@ func (s ResetCacheInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetCacheInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetCacheInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -11687,12 +11763,14 @@ func (s RetrieveTapeArchiveInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetrieveTapeArchiveInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RetrieveTapeArchiveInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.TapeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
@@ -11774,12 +11852,14 @@ func (s RetrieveTapeRecoveryPointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetrieveTapeRecoveryPointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RetrieveTapeRecoveryPointInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.TapeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TapeARN"))
 	}
@@ -11861,12 +11941,14 @@ func (s SetLocalConsolePasswordInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLocalConsolePasswordInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetLocalConsolePasswordInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.LocalConsolePassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LocalConsolePassword"))
 	}
@@ -11942,6 +12024,7 @@ func (s ShutdownGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ShutdownGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ShutdownGatewayInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -12012,6 +12095,7 @@ func (s StartGatewayInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartGatewayInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartGatewayInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -12205,12 +12289,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -12580,6 +12666,7 @@ func (s *UpdateBandwidthRateLimitInput) Validate() error {
 	if s.AverageUploadRateLimitInBitsPerSec != nil && *s.AverageUploadRateLimitInBitsPerSec < 51200 {
 		invalidParams.Add(aws.NewErrParamMinValue("AverageUploadRateLimitInBitsPerSec", 51200))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -12692,12 +12779,14 @@ func (s UpdateChapCredentialsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateChapCredentialsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateChapCredentialsInput"}
+
 	if s.InitiatorName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InitiatorName"))
 	}
 	if s.InitiatorName != nil && len(*s.InitiatorName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InitiatorName", 1))
 	}
+
 	if s.SecretToAuthenticateInitiator == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecretToAuthenticateInitiator"))
 	}
@@ -12707,6 +12796,7 @@ func (s *UpdateChapCredentialsInput) Validate() error {
 	if s.SecretToAuthenticateTarget != nil && len(*s.SecretToAuthenticateTarget) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SecretToAuthenticateTarget", 1))
 	}
+
 	if s.TargetARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetARN"))
 	}
@@ -12809,6 +12899,7 @@ func (s UpdateGatewayInformationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGatewayInformationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewayInformationInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -12905,6 +12996,7 @@ func (s UpdateGatewaySoftwareNowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGatewaySoftwareNowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewaySoftwareNowInput"}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
@@ -13001,18 +13093,22 @@ func (s UpdateMaintenanceStartTimeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMaintenanceStartTimeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateMaintenanceStartTimeInput"}
+
 	if s.DayOfWeek == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DayOfWeek"))
 	}
+
 	if s.GatewayARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
 	}
+
 	if s.HourOfDay == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HourOfDay"))
 	}
+
 	if s.MinuteOfHour == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinuteOfHour"))
 	}
@@ -13137,6 +13233,7 @@ func (s *UpdateNFSFileShareInput) Validate() error {
 	if s.DefaultStorageClass != nil && len(*s.DefaultStorageClass) < 5 {
 		invalidParams.Add(aws.NewErrParamMinLen("DefaultStorageClass", 5))
 	}
+
 	if s.FileShareARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
 	}
@@ -13285,15 +13382,18 @@ func (s *UpdateSnapshotScheduleInput) Validate() error {
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
+
 	if s.RecurrenceInHours == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RecurrenceInHours"))
 	}
 	if s.RecurrenceInHours != nil && *s.RecurrenceInHours < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("RecurrenceInHours", 1))
 	}
+
 	if s.StartAt == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartAt"))
 	}
+
 	if s.VolumeARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeARN"))
 	}
@@ -13385,12 +13485,14 @@ func (s UpdateVTLDeviceTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateVTLDeviceTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateVTLDeviceTypeInput"}
+
 	if s.DeviceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceType"))
 	}
 	if s.DeviceType != nil && len(*s.DeviceType) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceType", 2))
 	}
+
 	if s.VTLDeviceARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VTLDeviceARN"))
 	}
@@ -13696,187 +13798,69 @@ func (s *VolumeiSCSIAttributes) SetTargetARN(v string) *VolumeiSCSIAttributes {
 	return s
 }
 
+type ErrorCode string
+
+// Enum values for ErrorCode
 const (
-	// ErrorCodeActivationKeyExpired is a ErrorCode enum value
-	ErrorCodeActivationKeyExpired = "ActivationKeyExpired"
-
-	// ErrorCodeActivationKeyInvalid is a ErrorCode enum value
-	ErrorCodeActivationKeyInvalid = "ActivationKeyInvalid"
-
-	// ErrorCodeActivationKeyNotFound is a ErrorCode enum value
-	ErrorCodeActivationKeyNotFound = "ActivationKeyNotFound"
-
-	// ErrorCodeGatewayInternalError is a ErrorCode enum value
-	ErrorCodeGatewayInternalError = "GatewayInternalError"
-
-	// ErrorCodeGatewayNotConnected is a ErrorCode enum value
-	ErrorCodeGatewayNotConnected = "GatewayNotConnected"
-
-	// ErrorCodeGatewayNotFound is a ErrorCode enum value
-	ErrorCodeGatewayNotFound = "GatewayNotFound"
-
-	// ErrorCodeGatewayProxyNetworkConnectionBusy is a ErrorCode enum value
-	ErrorCodeGatewayProxyNetworkConnectionBusy = "GatewayProxyNetworkConnectionBusy"
-
-	// ErrorCodeAuthenticationFailure is a ErrorCode enum value
-	ErrorCodeAuthenticationFailure = "AuthenticationFailure"
-
-	// ErrorCodeBandwidthThrottleScheduleNotFound is a ErrorCode enum value
-	ErrorCodeBandwidthThrottleScheduleNotFound = "BandwidthThrottleScheduleNotFound"
-
-	// ErrorCodeBlocked is a ErrorCode enum value
-	ErrorCodeBlocked = "Blocked"
-
-	// ErrorCodeCannotExportSnapshot is a ErrorCode enum value
-	ErrorCodeCannotExportSnapshot = "CannotExportSnapshot"
-
-	// ErrorCodeChapCredentialNotFound is a ErrorCode enum value
-	ErrorCodeChapCredentialNotFound = "ChapCredentialNotFound"
-
-	// ErrorCodeDiskAlreadyAllocated is a ErrorCode enum value
-	ErrorCodeDiskAlreadyAllocated = "DiskAlreadyAllocated"
-
-	// ErrorCodeDiskDoesNotExist is a ErrorCode enum value
-	ErrorCodeDiskDoesNotExist = "DiskDoesNotExist"
-
-	// ErrorCodeDiskSizeGreaterThanVolumeMaxSize is a ErrorCode enum value
-	ErrorCodeDiskSizeGreaterThanVolumeMaxSize = "DiskSizeGreaterThanVolumeMaxSize"
-
-	// ErrorCodeDiskSizeLessThanVolumeSize is a ErrorCode enum value
-	ErrorCodeDiskSizeLessThanVolumeSize = "DiskSizeLessThanVolumeSize"
-
-	// ErrorCodeDiskSizeNotGigAligned is a ErrorCode enum value
-	ErrorCodeDiskSizeNotGigAligned = "DiskSizeNotGigAligned"
-
-	// ErrorCodeDuplicateCertificateInfo is a ErrorCode enum value
-	ErrorCodeDuplicateCertificateInfo = "DuplicateCertificateInfo"
-
-	// ErrorCodeDuplicateSchedule is a ErrorCode enum value
-	ErrorCodeDuplicateSchedule = "DuplicateSchedule"
-
-	// ErrorCodeEndpointNotFound is a ErrorCode enum value
-	ErrorCodeEndpointNotFound = "EndpointNotFound"
-
-	// ErrorCodeIamnotSupported is a ErrorCode enum value
-	ErrorCodeIamnotSupported = "IAMNotSupported"
-
-	// ErrorCodeInitiatorInvalid is a ErrorCode enum value
-	ErrorCodeInitiatorInvalid = "InitiatorInvalid"
-
-	// ErrorCodeInitiatorNotFound is a ErrorCode enum value
-	ErrorCodeInitiatorNotFound = "InitiatorNotFound"
-
-	// ErrorCodeInternalError is a ErrorCode enum value
-	ErrorCodeInternalError = "InternalError"
-
-	// ErrorCodeInvalidGateway is a ErrorCode enum value
-	ErrorCodeInvalidGateway = "InvalidGateway"
-
-	// ErrorCodeInvalidEndpoint is a ErrorCode enum value
-	ErrorCodeInvalidEndpoint = "InvalidEndpoint"
-
-	// ErrorCodeInvalidParameters is a ErrorCode enum value
-	ErrorCodeInvalidParameters = "InvalidParameters"
-
-	// ErrorCodeInvalidSchedule is a ErrorCode enum value
-	ErrorCodeInvalidSchedule = "InvalidSchedule"
-
-	// ErrorCodeLocalStorageLimitExceeded is a ErrorCode enum value
-	ErrorCodeLocalStorageLimitExceeded = "LocalStorageLimitExceeded"
-
-	// ErrorCodeLunAlreadyAllocated is a ErrorCode enum value
-	ErrorCodeLunAlreadyAllocated = "LunAlreadyAllocated "
-
-	// ErrorCodeLunInvalid is a ErrorCode enum value
-	ErrorCodeLunInvalid = "LunInvalid"
-
-	// ErrorCodeMaximumContentLengthExceeded is a ErrorCode enum value
-	ErrorCodeMaximumContentLengthExceeded = "MaximumContentLengthExceeded"
-
-	// ErrorCodeMaximumTapeCartridgeCountExceeded is a ErrorCode enum value
-	ErrorCodeMaximumTapeCartridgeCountExceeded = "MaximumTapeCartridgeCountExceeded"
-
-	// ErrorCodeMaximumVolumeCountExceeded is a ErrorCode enum value
-	ErrorCodeMaximumVolumeCountExceeded = "MaximumVolumeCountExceeded"
-
-	// ErrorCodeNetworkConfigurationChanged is a ErrorCode enum value
-	ErrorCodeNetworkConfigurationChanged = "NetworkConfigurationChanged"
-
-	// ErrorCodeNoDisksAvailable is a ErrorCode enum value
-	ErrorCodeNoDisksAvailable = "NoDisksAvailable"
-
-	// ErrorCodeNotImplemented is a ErrorCode enum value
-	ErrorCodeNotImplemented = "NotImplemented"
-
-	// ErrorCodeNotSupported is a ErrorCode enum value
-	ErrorCodeNotSupported = "NotSupported"
-
-	// ErrorCodeOperationAborted is a ErrorCode enum value
-	ErrorCodeOperationAborted = "OperationAborted"
-
-	// ErrorCodeOutdatedGateway is a ErrorCode enum value
-	ErrorCodeOutdatedGateway = "OutdatedGateway"
-
-	// ErrorCodeParametersNotImplemented is a ErrorCode enum value
-	ErrorCodeParametersNotImplemented = "ParametersNotImplemented"
-
-	// ErrorCodeRegionInvalid is a ErrorCode enum value
-	ErrorCodeRegionInvalid = "RegionInvalid"
-
-	// ErrorCodeRequestTimeout is a ErrorCode enum value
-	ErrorCodeRequestTimeout = "RequestTimeout"
-
-	// ErrorCodeServiceUnavailable is a ErrorCode enum value
-	ErrorCodeServiceUnavailable = "ServiceUnavailable"
-
-	// ErrorCodeSnapshotDeleted is a ErrorCode enum value
-	ErrorCodeSnapshotDeleted = "SnapshotDeleted"
-
-	// ErrorCodeSnapshotIdInvalid is a ErrorCode enum value
-	ErrorCodeSnapshotIdInvalid = "SnapshotIdInvalid"
-
-	// ErrorCodeSnapshotInProgress is a ErrorCode enum value
-	ErrorCodeSnapshotInProgress = "SnapshotInProgress"
-
-	// ErrorCodeSnapshotNotFound is a ErrorCode enum value
-	ErrorCodeSnapshotNotFound = "SnapshotNotFound"
-
-	// ErrorCodeSnapshotScheduleNotFound is a ErrorCode enum value
-	ErrorCodeSnapshotScheduleNotFound = "SnapshotScheduleNotFound"
-
-	// ErrorCodeStagingAreaFull is a ErrorCode enum value
-	ErrorCodeStagingAreaFull = "StagingAreaFull"
-
-	// ErrorCodeStorageFailure is a ErrorCode enum value
-	ErrorCodeStorageFailure = "StorageFailure"
-
-	// ErrorCodeTapeCartridgeNotFound is a ErrorCode enum value
-	ErrorCodeTapeCartridgeNotFound = "TapeCartridgeNotFound"
-
-	// ErrorCodeTargetAlreadyExists is a ErrorCode enum value
-	ErrorCodeTargetAlreadyExists = "TargetAlreadyExists"
-
-	// ErrorCodeTargetInvalid is a ErrorCode enum value
-	ErrorCodeTargetInvalid = "TargetInvalid"
-
-	// ErrorCodeTargetNotFound is a ErrorCode enum value
-	ErrorCodeTargetNotFound = "TargetNotFound"
-
-	// ErrorCodeUnauthorizedOperation is a ErrorCode enum value
-	ErrorCodeUnauthorizedOperation = "UnauthorizedOperation"
-
-	// ErrorCodeVolumeAlreadyExists is a ErrorCode enum value
-	ErrorCodeVolumeAlreadyExists = "VolumeAlreadyExists"
-
-	// ErrorCodeVolumeIdInvalid is a ErrorCode enum value
-	ErrorCodeVolumeIdInvalid = "VolumeIdInvalid"
-
-	// ErrorCodeVolumeInUse is a ErrorCode enum value
-	ErrorCodeVolumeInUse = "VolumeInUse"
-
-	// ErrorCodeVolumeNotFound is a ErrorCode enum value
-	ErrorCodeVolumeNotFound = "VolumeNotFound"
-
-	// ErrorCodeVolumeNotReady is a ErrorCode enum value
-	ErrorCodeVolumeNotReady = "VolumeNotReady"
+	ErrorCodeActivationKeyExpired              ErrorCode = "ActivationKeyExpired"
+	ErrorCodeActivationKeyInvalid              ErrorCode = "ActivationKeyInvalid"
+	ErrorCodeActivationKeyNotFound             ErrorCode = "ActivationKeyNotFound"
+	ErrorCodeGatewayInternalError              ErrorCode = "GatewayInternalError"
+	ErrorCodeGatewayNotConnected               ErrorCode = "GatewayNotConnected"
+	ErrorCodeGatewayNotFound                   ErrorCode = "GatewayNotFound"
+	ErrorCodeGatewayProxyNetworkConnectionBusy ErrorCode = "GatewayProxyNetworkConnectionBusy"
+	ErrorCodeAuthenticationFailure             ErrorCode = "AuthenticationFailure"
+	ErrorCodeBandwidthThrottleScheduleNotFound ErrorCode = "BandwidthThrottleScheduleNotFound"
+	ErrorCodeBlocked                           ErrorCode = "Blocked"
+	ErrorCodeCannotExportSnapshot              ErrorCode = "CannotExportSnapshot"
+	ErrorCodeChapCredentialNotFound            ErrorCode = "ChapCredentialNotFound"
+	ErrorCodeDiskAlreadyAllocated              ErrorCode = "DiskAlreadyAllocated"
+	ErrorCodeDiskDoesNotExist                  ErrorCode = "DiskDoesNotExist"
+	ErrorCodeDiskSizeGreaterThanVolumeMaxSize  ErrorCode = "DiskSizeGreaterThanVolumeMaxSize"
+	ErrorCodeDiskSizeLessThanVolumeSize        ErrorCode = "DiskSizeLessThanVolumeSize"
+	ErrorCodeDiskSizeNotGigAligned             ErrorCode = "DiskSizeNotGigAligned"
+	ErrorCodeDuplicateCertificateInfo          ErrorCode = "DuplicateCertificateInfo"
+	ErrorCodeDuplicateSchedule                 ErrorCode = "DuplicateSchedule"
+	ErrorCodeEndpointNotFound                  ErrorCode = "EndpointNotFound"
+	ErrorCodeIamnotSupported                   ErrorCode = "IAMNotSupported"
+	ErrorCodeInitiatorInvalid                  ErrorCode = "InitiatorInvalid"
+	ErrorCodeInitiatorNotFound                 ErrorCode = "InitiatorNotFound"
+	ErrorCodeInternalError                     ErrorCode = "InternalError"
+	ErrorCodeInvalidGateway                    ErrorCode = "InvalidGateway"
+	ErrorCodeInvalidEndpoint                   ErrorCode = "InvalidEndpoint"
+	ErrorCodeInvalidParameters                 ErrorCode = "InvalidParameters"
+	ErrorCodeInvalidSchedule                   ErrorCode = "InvalidSchedule"
+	ErrorCodeLocalStorageLimitExceeded         ErrorCode = "LocalStorageLimitExceeded"
+	ErrorCodeLunAlreadyAllocated               ErrorCode = "LunAlreadyAllocated "
+	ErrorCodeLunInvalid                        ErrorCode = "LunInvalid"
+	ErrorCodeMaximumContentLengthExceeded      ErrorCode = "MaximumContentLengthExceeded"
+	ErrorCodeMaximumTapeCartridgeCountExceeded ErrorCode = "MaximumTapeCartridgeCountExceeded"
+	ErrorCodeMaximumVolumeCountExceeded        ErrorCode = "MaximumVolumeCountExceeded"
+	ErrorCodeNetworkConfigurationChanged       ErrorCode = "NetworkConfigurationChanged"
+	ErrorCodeNoDisksAvailable                  ErrorCode = "NoDisksAvailable"
+	ErrorCodeNotImplemented                    ErrorCode = "NotImplemented"
+	ErrorCodeNotSupported                      ErrorCode = "NotSupported"
+	ErrorCodeOperationAborted                  ErrorCode = "OperationAborted"
+	ErrorCodeOutdatedGateway                   ErrorCode = "OutdatedGateway"
+	ErrorCodeParametersNotImplemented          ErrorCode = "ParametersNotImplemented"
+	ErrorCodeRegionInvalid                     ErrorCode = "RegionInvalid"
+	ErrorCodeRequestTimeout                    ErrorCode = "RequestTimeout"
+	ErrorCodeServiceUnavailable                ErrorCode = "ServiceUnavailable"
+	ErrorCodeSnapshotDeleted                   ErrorCode = "SnapshotDeleted"
+	ErrorCodeSnapshotIdInvalid                 ErrorCode = "SnapshotIdInvalid"
+	ErrorCodeSnapshotInProgress                ErrorCode = "SnapshotInProgress"
+	ErrorCodeSnapshotNotFound                  ErrorCode = "SnapshotNotFound"
+	ErrorCodeSnapshotScheduleNotFound          ErrorCode = "SnapshotScheduleNotFound"
+	ErrorCodeStagingAreaFull                   ErrorCode = "StagingAreaFull"
+	ErrorCodeStorageFailure                    ErrorCode = "StorageFailure"
+	ErrorCodeTapeCartridgeNotFound             ErrorCode = "TapeCartridgeNotFound"
+	ErrorCodeTargetAlreadyExists               ErrorCode = "TargetAlreadyExists"
+	ErrorCodeTargetInvalid                     ErrorCode = "TargetInvalid"
+	ErrorCodeTargetNotFound                    ErrorCode = "TargetNotFound"
+	ErrorCodeUnauthorizedOperation             ErrorCode = "UnauthorizedOperation"
+	ErrorCodeVolumeAlreadyExists               ErrorCode = "VolumeAlreadyExists"
+	ErrorCodeVolumeIdInvalid                   ErrorCode = "VolumeIdInvalid"
+	ErrorCodeVolumeInUse                       ErrorCode = "VolumeInUse"
+	ErrorCodeVolumeNotFound                    ErrorCode = "VolumeNotFound"
+	ErrorCodeVolumeNotReady                    ErrorCode = "VolumeNotReady"
 )

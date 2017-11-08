@@ -1145,7 +1145,7 @@ type Backup struct {
 	BackupId *string `type:"string" required:"true"`
 
 	// The state of the backup.
-	BackupState *string `type:"string" enum:"BackupState"`
+	BackupState BackupState `type:"string"`
 
 	// The identifier (ID) of the cluster that was backed up.
 	ClusterId *string `type:"string"`
@@ -1171,8 +1171,8 @@ func (s *Backup) SetBackupId(v string) *Backup {
 }
 
 // SetBackupState sets the BackupState field's value.
-func (s *Backup) SetBackupState(v string) *Backup {
-	s.BackupState = &v
+func (s *Backup) SetBackupState(v BackupState) *Backup {
+	s.BackupState = v
 	return s
 }
 
@@ -1257,7 +1257,7 @@ type Cluster struct {
 	_ struct{} `type:"structure"`
 
 	// The cluster's backup policy.
-	BackupPolicy *string `type:"string" enum:"BackupPolicy"`
+	BackupPolicy BackupPolicy `type:"string"`
 
 	// Contains one or more certificates or a certificate signing request (CSR).
 	Certificates *Certificates `type:"structure"`
@@ -1285,7 +1285,7 @@ type Cluster struct {
 	SourceBackupId *string `type:"string"`
 
 	// The cluster's state.
-	State *string `type:"string" enum:"ClusterState"`
+	State ClusterState `type:"string"`
 
 	// A description of the cluster's state.
 	StateMessage *string `type:"string"`
@@ -1309,8 +1309,8 @@ func (s Cluster) GoString() string {
 }
 
 // SetBackupPolicy sets the BackupPolicy field's value.
-func (s *Cluster) SetBackupPolicy(v string) *Cluster {
-	s.BackupPolicy = &v
+func (s *Cluster) SetBackupPolicy(v BackupPolicy) *Cluster {
+	s.BackupPolicy = v
 	return s
 }
 
@@ -1363,8 +1363,8 @@ func (s *Cluster) SetSourceBackupId(v string) *Cluster {
 }
 
 // SetState sets the State field's value.
-func (s *Cluster) SetState(v string) *Cluster {
-	s.State = &v
+func (s *Cluster) SetState(v ClusterState) *Cluster {
+	s.State = v
 	return s
 }
 
@@ -1426,9 +1426,11 @@ func (s CreateClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterInput"}
+
 	if s.HsmType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmType"))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
@@ -1519,9 +1521,11 @@ func (s CreateHsmInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHsmInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateHsmInput"}
+
 	if s.AvailabilityZone == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
 	}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -1598,6 +1602,7 @@ func (s DeleteClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -1672,6 +1677,7 @@ func (s DeleteHsmInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHsmInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
@@ -1955,7 +1961,7 @@ type Hsm struct {
 	HsmId *string `type:"string" required:"true"`
 
 	// The HSM's state.
-	State *string `type:"string" enum:"HsmState"`
+	State HsmState `type:"string"`
 
 	// A description of the HSM's state.
 	StateMessage *string `type:"string"`
@@ -2005,8 +2011,8 @@ func (s *Hsm) SetHsmId(v string) *Hsm {
 }
 
 // SetState sets the State field's value.
-func (s *Hsm) SetState(v string) *Hsm {
-	s.State = &v
+func (s *Hsm) SetState(v HsmState) *Hsm {
+	s.State = v
 	return s
 }
 
@@ -2061,12 +2067,15 @@ func (s InitializeClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitializeClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InitializeClusterInput"}
+
 	if s.ClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
+
 	if s.SignedCert == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SignedCert"))
 	}
+
 	if s.TrustAnchor == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrustAnchor"))
 	}
@@ -2100,7 +2109,7 @@ type InitializeClusterOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The cluster's state.
-	State *string `type:"string" enum:"ClusterState"`
+	State ClusterState `type:"string"`
 
 	// A description of the cluster's state.
 	StateMessage *string `type:"string"`
@@ -2117,8 +2126,8 @@ func (s InitializeClusterOutput) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *InitializeClusterOutput) SetState(v string) *InitializeClusterOutput {
-	s.State = &v
+func (s *InitializeClusterOutput) SetState(v ClusterState) *InitializeClusterOutput {
+	s.State = v
 	return s
 }
 
@@ -2163,6 +2172,7 @@ func (s *ListTagsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -2256,12 +2266,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -2313,9 +2325,11 @@ func (s TagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.TagList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagList"))
 	}
@@ -2396,9 +2410,11 @@ func (s UntagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.TagKeyList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeyList"))
 	}
@@ -2439,64 +2455,44 @@ func (s UntagResourceOutput) GoString() string {
 	return s.String()
 }
 
+type BackupPolicy string
+
+// Enum values for BackupPolicy
 const (
-	// BackupPolicyDefault is a BackupPolicy enum value
-	BackupPolicyDefault = "DEFAULT"
+	BackupPolicyDefault BackupPolicy = "DEFAULT"
 )
 
+type BackupState string
+
+// Enum values for BackupState
 const (
-	// BackupStateCreateInProgress is a BackupState enum value
-	BackupStateCreateInProgress = "CREATE_IN_PROGRESS"
-
-	// BackupStateReady is a BackupState enum value
-	BackupStateReady = "READY"
-
-	// BackupStateDeleted is a BackupState enum value
-	BackupStateDeleted = "DELETED"
+	BackupStateCreateInProgress BackupState = "CREATE_IN_PROGRESS"
+	BackupStateReady            BackupState = "READY"
+	BackupStateDeleted          BackupState = "DELETED"
 )
 
+type ClusterState string
+
+// Enum values for ClusterState
 const (
-	// ClusterStateCreateInProgress is a ClusterState enum value
-	ClusterStateCreateInProgress = "CREATE_IN_PROGRESS"
-
-	// ClusterStateUninitialized is a ClusterState enum value
-	ClusterStateUninitialized = "UNINITIALIZED"
-
-	// ClusterStateInitializeInProgress is a ClusterState enum value
-	ClusterStateInitializeInProgress = "INITIALIZE_IN_PROGRESS"
-
-	// ClusterStateInitialized is a ClusterState enum value
-	ClusterStateInitialized = "INITIALIZED"
-
-	// ClusterStateActive is a ClusterState enum value
-	ClusterStateActive = "ACTIVE"
-
-	// ClusterStateUpdateInProgress is a ClusterState enum value
-	ClusterStateUpdateInProgress = "UPDATE_IN_PROGRESS"
-
-	// ClusterStateDeleteInProgress is a ClusterState enum value
-	ClusterStateDeleteInProgress = "DELETE_IN_PROGRESS"
-
-	// ClusterStateDeleted is a ClusterState enum value
-	ClusterStateDeleted = "DELETED"
-
-	// ClusterStateDegraded is a ClusterState enum value
-	ClusterStateDegraded = "DEGRADED"
+	ClusterStateCreateInProgress     ClusterState = "CREATE_IN_PROGRESS"
+	ClusterStateUninitialized        ClusterState = "UNINITIALIZED"
+	ClusterStateInitializeInProgress ClusterState = "INITIALIZE_IN_PROGRESS"
+	ClusterStateInitialized          ClusterState = "INITIALIZED"
+	ClusterStateActive               ClusterState = "ACTIVE"
+	ClusterStateUpdateInProgress     ClusterState = "UPDATE_IN_PROGRESS"
+	ClusterStateDeleteInProgress     ClusterState = "DELETE_IN_PROGRESS"
+	ClusterStateDeleted              ClusterState = "DELETED"
+	ClusterStateDegraded             ClusterState = "DEGRADED"
 )
 
+type HsmState string
+
+// Enum values for HsmState
 const (
-	// HsmStateCreateInProgress is a HsmState enum value
-	HsmStateCreateInProgress = "CREATE_IN_PROGRESS"
-
-	// HsmStateActive is a HsmState enum value
-	HsmStateActive = "ACTIVE"
-
-	// HsmStateDegraded is a HsmState enum value
-	HsmStateDegraded = "DEGRADED"
-
-	// HsmStateDeleteInProgress is a HsmState enum value
-	HsmStateDeleteInProgress = "DELETE_IN_PROGRESS"
-
-	// HsmStateDeleted is a HsmState enum value
-	HsmStateDeleted = "DELETED"
+	HsmStateCreateInProgress HsmState = "CREATE_IN_PROGRESS"
+	HsmStateActive           HsmState = "ACTIVE"
+	HsmStateDegraded         HsmState = "DEGRADED"
+	HsmStateDeleteInProgress HsmState = "DELETE_IN_PROGRESS"
+	HsmStateDeleted          HsmState = "DELETED"
 )

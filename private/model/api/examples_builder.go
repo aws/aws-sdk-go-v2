@@ -128,7 +128,7 @@ func (builder defaultExamplesBuilder) BuildList(name, memName string, ref *Shape
 		if isComplex {
 			ret += fmt.Sprintf("{\n%s\n},\n", builder.BuildShape(passRef, elem.(map[string]interface{}), isMap))
 		} else if isEnum {
-			ret += fmt.Sprintf("%s(%q),\n", t, elem)
+			ret += fmt.Sprintf("%s,\n", getEnumName(passRef, t, elem.(string)))
 		} else {
 			if dataType == "integer" || dataType == "int64" || dataType == "long" {
 				elem = int(elem.(float64))
@@ -148,13 +148,15 @@ func (builder defaultExamplesBuilder) BuildScalar(name, memName string, ref *Sha
 	} else if ref.Shape.MemberRefs[name] == nil {
 		if ref.Shape.MemberRef.Shape != nil && ref.Shape.MemberRef.Shape.MemberRefs[name] != nil {
 			if ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.IsEnum() {
-				return fmt.Sprintf("%s: %s(%q),\n", memName, builder.GoType(ref.Shape.MemberRef.Shape.MemberRefs[name], true), shape.(string))
+				refTemp := ref.Shape.MemberRef.Shape.MemberRefs[name]
+				return fmt.Sprintf("%s: %s, \n", memName, getEnumName(refTemp, builder.GoType(refTemp, true), shape.(string)))
 			}
 			return correctType(memName, ref.Shape.MemberRef.Shape.MemberRefs[name].Shape.Type, shape)
 		}
+
 		if ref.Shape.Type != "structure" && ref.Shape.Type != "map" {
 			if ref.Shape.IsEnum() {
-				return fmt.Sprintf("%s: %s(%q),\n", memName, builder.GoType(ref, true), shape.(string))
+				return fmt.Sprintf("%s: %s, \n", memName, getEnumName(ref, builder.GoType(ref, true), shape.(string)))
 			}
 			return correctType(memName, ref.Shape.Type, shape)
 		}
@@ -179,7 +181,7 @@ func (builder defaultExamplesBuilder) BuildScalar(name, memName string, ref *Sha
 		t := ref.Shape.MemberRefs[name].Shape.Type
 
 		if ref.Shape.MemberRefs[name].Shape.IsEnum() {
-			return fmt.Sprintf("%s: %s(%q),\n", memName, builder.GoType(ref.Shape.MemberRefs[name], false), shape.(string))
+			return fmt.Sprintf("%s: %s,\n", memName, getEnumName(ref.Shape.MemberRefs[name], builder.GoType(ref.Shape.MemberRefs[name], false), shape.(string)))
 		}
 
 		switch t {
@@ -269,4 +271,15 @@ func (builder defaultExamplesBuilder) Imports(a *API) string {
 
 	buf.WriteString(fmt.Sprintf("\"%s/%s\"", "github.com/aws/aws-sdk-go-v2/service", a.PackageName()))
 	return buf.String()
+}
+
+func getEnumName(ref *ShapeRef, t, name string) string {
+	pkg := getPkgName(ref.Shape)
+	for i, enum := range ref.Shape.Enum {
+		if name == enum {
+			return fmt.Sprintf("%s.%s", pkg, ref.Shape.EnumConsts[i])
+		}
+	}
+
+	return fmt.Sprintf("%s(%q)", t, name)
 }

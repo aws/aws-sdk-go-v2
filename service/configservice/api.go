@@ -2663,7 +2663,7 @@ type Compliance struct {
 	// For the Compliance data type, AWS Config supports only COMPLIANT, NON_COMPLIANT,
 	// and INSUFFICIENT_DATA values. AWS Config does not support the NOT_APPLICABLE
 	// value for the Compliance data type.
-	ComplianceType *string `type:"string" enum:"ComplianceType"`
+	ComplianceType ComplianceType `type:"string"`
 }
 
 // String returns the string representation
@@ -2683,8 +2683,8 @@ func (s *Compliance) SetComplianceContributorCount(v *ComplianceContributorCount
 }
 
 // SetComplianceType sets the ComplianceType field's value.
-func (s *Compliance) SetComplianceType(v string) *Compliance {
-	s.ComplianceType = &v
+func (s *Compliance) SetComplianceType(v ComplianceType) *Compliance {
+	s.ComplianceType = v
 	return s
 }
 
@@ -2905,7 +2905,7 @@ type ConfigExportDeliveryInfo struct {
 	LastErrorMessage *string `locationName:"lastErrorMessage" type:"string"`
 
 	// Status of the last attempted delivery.
-	LastStatus *string `locationName:"lastStatus" type:"string" enum:"DeliveryStatus"`
+	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string"`
 
 	// The time of the last successful delivery.
 	LastSuccessfulTime *time.Time `locationName:"lastSuccessfulTime" type:"timestamp" timestampFormat:"unix"`
@@ -2943,8 +2943,8 @@ func (s *ConfigExportDeliveryInfo) SetLastErrorMessage(v string) *ConfigExportDe
 }
 
 // SetLastStatus sets the LastStatus field's value.
-func (s *ConfigExportDeliveryInfo) SetLastStatus(v string) *ConfigExportDeliveryInfo {
-	s.LastStatus = &v
+func (s *ConfigExportDeliveryInfo) SetLastStatus(v DeliveryStatus) *ConfigExportDeliveryInfo {
+	s.LastStatus = v
 	return s
 }
 
@@ -3004,7 +3004,7 @@ type ConfigRule struct {
 	// the DeleteConfigRule request to delete the rule. After AWS Config deletes
 	// the rule, the rule and all of its evaluations are erased and are no longer
 	// available.
-	ConfigRuleState *string `type:"string" enum:"ConfigRuleState"`
+	ConfigRuleState ConfigRuleState `type:"string"`
 
 	// The description that you provide for the AWS Config rule.
 	Description *string `type:"string"`
@@ -3023,7 +3023,7 @@ type ConfigRule struct {
 	// By default, rules with a periodic trigger are evaluated every 24 hours. To
 	// change the frequency, specify a valid value for the MaximumExecutionFrequency
 	// parameter.
-	MaximumExecutionFrequency *string `type:"string" enum:"MaximumExecutionFrequency"`
+	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string"`
 
 	// Defines which resources can trigger an evaluation for the rule. The scope
 	// can include one or more resource types, a combination of one resource type
@@ -3059,6 +3059,7 @@ func (s *ConfigRule) Validate() error {
 	if s.InputParameters != nil && len(*s.InputParameters) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InputParameters", 1))
 	}
+
 	if s.Source == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
@@ -3098,8 +3099,8 @@ func (s *ConfigRule) SetConfigRuleName(v string) *ConfigRule {
 }
 
 // SetConfigRuleState sets the ConfigRuleState field's value.
-func (s *ConfigRule) SetConfigRuleState(v string) *ConfigRule {
-	s.ConfigRuleState = &v
+func (s *ConfigRule) SetConfigRuleState(v ConfigRuleState) *ConfigRule {
+	s.ConfigRuleState = v
 	return s
 }
 
@@ -3116,8 +3117,8 @@ func (s *ConfigRule) SetInputParameters(v string) *ConfigRule {
 }
 
 // SetMaximumExecutionFrequency sets the MaximumExecutionFrequency field's value.
-func (s *ConfigRule) SetMaximumExecutionFrequency(v string) *ConfigRule {
-	s.MaximumExecutionFrequency = &v
+func (s *ConfigRule) SetMaximumExecutionFrequency(v MaximumExecutionFrequency) *ConfigRule {
+	s.MaximumExecutionFrequency = v
 	return s
 }
 
@@ -3307,7 +3308,7 @@ type ConfigSnapshotDeliveryProperties struct {
 	_ struct{} `type:"structure"`
 
 	// The frequency with which AWS Config delivers configuration snapshots.
-	DeliveryFrequency *string `locationName:"deliveryFrequency" type:"string" enum:"MaximumExecutionFrequency"`
+	DeliveryFrequency MaximumExecutionFrequency `locationName:"deliveryFrequency" type:"string"`
 }
 
 // String returns the string representation
@@ -3321,8 +3322,8 @@ func (s ConfigSnapshotDeliveryProperties) GoString() string {
 }
 
 // SetDeliveryFrequency sets the DeliveryFrequency field's value.
-func (s *ConfigSnapshotDeliveryProperties) SetDeliveryFrequency(v string) *ConfigSnapshotDeliveryProperties {
-	s.DeliveryFrequency = &v
+func (s *ConfigSnapshotDeliveryProperties) SetDeliveryFrequency(v MaximumExecutionFrequency) *ConfigSnapshotDeliveryProperties {
+	s.DeliveryFrequency = v
 	return s
 }
 
@@ -3343,7 +3344,7 @@ type ConfigStreamDeliveryInfo struct {
 	// Note Providing an SNS topic on a DeliveryChannel (http://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html)
 	// for AWS Config is optional. If the SNS delivery is turned off, the last status
 	// will be Not_Applicable.
-	LastStatus *string `locationName:"lastStatus" type:"string" enum:"DeliveryStatus"`
+	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string"`
 
 	// The time from the last status change.
 	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp" timestampFormat:"unix"`
@@ -3372,8 +3373,8 @@ func (s *ConfigStreamDeliveryInfo) SetLastErrorMessage(v string) *ConfigStreamDe
 }
 
 // SetLastStatus sets the LastStatus field's value.
-func (s *ConfigStreamDeliveryInfo) SetLastStatus(v string) *ConfigStreamDeliveryInfo {
-	s.LastStatus = &v
+func (s *ConfigStreamDeliveryInfo) SetLastStatus(v DeliveryStatus) *ConfigStreamDeliveryInfo {
+	s.LastStatus = v
 	return s
 }
 
@@ -3413,7 +3414,7 @@ type ConfigurationItem struct {
 	ConfigurationItemMD5Hash *string `locationName:"configurationItemMD5Hash" type:"string"`
 
 	// The configuration item status.
-	ConfigurationItemStatus *string `locationName:"configurationItemStatus" type:"string" enum:"ConfigurationItemStatus"`
+	ConfigurationItemStatus ConfigurationItemStatus `locationName:"configurationItemStatus" type:"string"`
 
 	// An identifier that indicates the ordering of the configuration items of a
 	// resource.
@@ -3442,7 +3443,7 @@ type ConfigurationItem struct {
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The type of AWS resource.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// Configuration attributes that AWS Config returns for certain resource types
 	// to supplement the information returned for the configuration parameter.
@@ -3508,8 +3509,8 @@ func (s *ConfigurationItem) SetConfigurationItemMD5Hash(v string) *Configuration
 }
 
 // SetConfigurationItemStatus sets the ConfigurationItemStatus field's value.
-func (s *ConfigurationItem) SetConfigurationItemStatus(v string) *ConfigurationItem {
-	s.ConfigurationItemStatus = &v
+func (s *ConfigurationItem) SetConfigurationItemStatus(v ConfigurationItemStatus) *ConfigurationItem {
+	s.ConfigurationItemStatus = v
 	return s
 }
 
@@ -3550,8 +3551,8 @@ func (s *ConfigurationItem) SetResourceName(v string) *ConfigurationItem {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ConfigurationItem) SetResourceType(v string) *ConfigurationItem {
-	s.ResourceType = &v
+func (s *ConfigurationItem) SetResourceType(v ResourceType) *ConfigurationItem {
+	s.ResourceType = v
 	return s
 }
 
@@ -3649,7 +3650,7 @@ type ConfigurationRecorderStatus struct {
 	LastStartTime *time.Time `locationName:"lastStartTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The last (previous) status of the recorder.
-	LastStatus *string `locationName:"lastStatus" type:"string" enum:"RecorderStatus"`
+	LastStatus RecorderStatus `locationName:"lastStatus" type:"string"`
 
 	// The time when the status was last changed.
 	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp" timestampFormat:"unix"`
@@ -3693,8 +3694,8 @@ func (s *ConfigurationRecorderStatus) SetLastStartTime(v time.Time) *Configurati
 }
 
 // SetLastStatus sets the LastStatus field's value.
-func (s *ConfigurationRecorderStatus) SetLastStatus(v string) *ConfigurationRecorderStatus {
-	s.LastStatus = &v
+func (s *ConfigurationRecorderStatus) SetLastStatus(v RecorderStatus) *ConfigurationRecorderStatus {
+	s.LastStatus = v
 	return s
 }
 
@@ -3745,6 +3746,7 @@ func (s DeleteConfigRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigRuleInput"}
+
 	if s.ConfigRuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
 	}
@@ -3805,6 +3807,7 @@ func (s DeleteConfigurationRecorderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationRecorderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationRecorderInput"}
+
 	if s.ConfigurationRecorderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorderName"))
 	}
@@ -3864,6 +3867,7 @@ func (s DeleteDeliveryChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeliveryChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeliveryChannelInput"}
+
 	if s.DeliveryChannelName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryChannelName"))
 	}
@@ -3921,6 +3925,7 @@ func (s DeleteEvaluationResultsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEvaluationResultsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEvaluationResultsInput"}
+
 	if s.ConfigRuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
 	}
@@ -3981,6 +3986,7 @@ func (s DeliverConfigSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeliverConfigSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeliverConfigSnapshotInput"}
+
 	if s.DeliveryChannelName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryChannelName"))
 	}
@@ -4181,7 +4187,7 @@ type DescribeComplianceByConfigRuleInput struct {
 	// Filters the results by compliance.
 	//
 	// The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
-	ComplianceTypes []*string `type:"list"`
+	ComplianceTypes []ComplianceType `type:"list"`
 
 	// Specify one or more AWS Config rule names to filter the results by rule.
 	ConfigRuleNames []*string `type:"list"`
@@ -4202,7 +4208,7 @@ func (s DescribeComplianceByConfigRuleInput) GoString() string {
 }
 
 // SetComplianceTypes sets the ComplianceTypes field's value.
-func (s *DescribeComplianceByConfigRuleInput) SetComplianceTypes(v []*string) *DescribeComplianceByConfigRuleInput {
+func (s *DescribeComplianceByConfigRuleInput) SetComplianceTypes(v []ComplianceType) *DescribeComplianceByConfigRuleInput {
 	s.ComplianceTypes = v
 	return s
 }
@@ -4260,7 +4266,7 @@ type DescribeComplianceByResourceInput struct {
 	// Filters the results by compliance.
 	//
 	// The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
-	ComplianceTypes []*string `type:"list"`
+	ComplianceTypes []ComplianceType `type:"list"`
 
 	// The maximum number of evaluation results returned on each page. The default
 	// is 10. You cannot specify a limit greater than 100. If you specify 0, AWS
@@ -4309,7 +4315,7 @@ func (s *DescribeComplianceByResourceInput) Validate() error {
 }
 
 // SetComplianceTypes sets the ComplianceTypes field's value.
-func (s *DescribeComplianceByResourceInput) SetComplianceTypes(v []*string) *DescribeComplianceByResourceInput {
+func (s *DescribeComplianceByResourceInput) SetComplianceTypes(v []ComplianceType) *DescribeComplianceByResourceInput {
 	s.ComplianceTypes = v
 	return s
 }
@@ -4762,7 +4768,7 @@ type Evaluation struct {
 	// to AWS Config.
 	//
 	// ComplianceType is a required field
-	ComplianceType *string `type:"string" required:"true" enum:"ComplianceType"`
+	ComplianceType ComplianceType `type:"string" required:"true"`
 
 	// The time of the event in AWS Config that triggered the evaluation. For event-based
 	// evaluations, the time indicates when AWS Config created the configuration
@@ -4790,21 +4796,24 @@ func (s *Evaluation) Validate() error {
 	if s.Annotation != nil && len(*s.Annotation) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Annotation", 1))
 	}
+
 	if s.ComplianceResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComplianceResourceId"))
 	}
 	if s.ComplianceResourceId != nil && len(*s.ComplianceResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ComplianceResourceId", 1))
 	}
+
 	if s.ComplianceResourceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComplianceResourceType"))
 	}
 	if s.ComplianceResourceType != nil && len(*s.ComplianceResourceType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ComplianceResourceType", 1))
 	}
-	if s.ComplianceType == nil {
+	if len(s.ComplianceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ComplianceType"))
 	}
+
 	if s.OrderingTimestamp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrderingTimestamp"))
 	}
@@ -4834,8 +4843,8 @@ func (s *Evaluation) SetComplianceResourceType(v string) *Evaluation {
 }
 
 // SetComplianceType sets the ComplianceType field's value.
-func (s *Evaluation) SetComplianceType(v string) *Evaluation {
-	s.ComplianceType = &v
+func (s *Evaluation) SetComplianceType(v ComplianceType) *Evaluation {
+	s.ComplianceType = v
 	return s
 }
 
@@ -4861,7 +4870,7 @@ type EvaluationResult struct {
 	// For the EvaluationResult data type, AWS Config supports only the COMPLIANT,
 	// NON_COMPLIANT, and NOT_APPLICABLE values. AWS Config does not support the
 	// INSUFFICIENT_DATA value for the EvaluationResult data type.
-	ComplianceType *string `type:"string" enum:"ComplianceType"`
+	ComplianceType ComplianceType `type:"string"`
 
 	// The time when the AWS Config rule evaluated the AWS resource.
 	ConfigRuleInvokedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -4895,8 +4904,8 @@ func (s *EvaluationResult) SetAnnotation(v string) *EvaluationResult {
 }
 
 // SetComplianceType sets the ComplianceType field's value.
-func (s *EvaluationResult) SetComplianceType(v string) *EvaluationResult {
-	s.ComplianceType = &v
+func (s *EvaluationResult) SetComplianceType(v ComplianceType) *EvaluationResult {
+	s.ComplianceType = v
 	return s
 }
 
@@ -5013,7 +5022,7 @@ type GetComplianceDetailsByConfigRuleInput struct {
 	// Filters the results by compliance.
 	//
 	// The allowed values are COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE.
-	ComplianceTypes []*string `type:"list"`
+	ComplianceTypes []ComplianceType `type:"list"`
 
 	// The name of the AWS Config rule for which you want compliance information.
 	//
@@ -5043,6 +5052,7 @@ func (s GetComplianceDetailsByConfigRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetComplianceDetailsByConfigRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetComplianceDetailsByConfigRuleInput"}
+
 	if s.ConfigRuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
 	}
@@ -5057,7 +5067,7 @@ func (s *GetComplianceDetailsByConfigRuleInput) Validate() error {
 }
 
 // SetComplianceTypes sets the ComplianceTypes field's value.
-func (s *GetComplianceDetailsByConfigRuleInput) SetComplianceTypes(v []*string) *GetComplianceDetailsByConfigRuleInput {
+func (s *GetComplianceDetailsByConfigRuleInput) SetComplianceTypes(v []ComplianceType) *GetComplianceDetailsByConfigRuleInput {
 	s.ComplianceTypes = v
 	return s
 }
@@ -5122,7 +5132,7 @@ type GetComplianceDetailsByResourceInput struct {
 	// Filters the results by compliance.
 	//
 	// The allowed values are COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE.
-	ComplianceTypes []*string `type:"list"`
+	ComplianceTypes []ComplianceType `type:"list"`
 
 	// The NextToken string returned on a previous page that you use to get the
 	// next page of results in a paginated response.
@@ -5152,12 +5162,14 @@ func (s GetComplianceDetailsByResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetComplianceDetailsByResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetComplianceDetailsByResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
+
 	if s.ResourceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
@@ -5172,7 +5184,7 @@ func (s *GetComplianceDetailsByResourceInput) Validate() error {
 }
 
 // SetComplianceTypes sets the ComplianceTypes field's value.
-func (s *GetComplianceDetailsByResourceInput) SetComplianceTypes(v []*string) *GetComplianceDetailsByResourceInput {
+func (s *GetComplianceDetailsByResourceInput) SetComplianceTypes(v []ComplianceType) *GetComplianceDetailsByResourceInput {
 	s.ComplianceTypes = v
 	return s
 }
@@ -5442,7 +5454,7 @@ type GetResourceConfigHistoryInput struct {
 
 	// The chronological order for configuration items listed. By default the results
 	// are listed in reverse chronological order.
-	ChronologicalOrder *string `locationName:"chronologicalOrder" type:"string" enum:"ChronologicalOrder"`
+	ChronologicalOrder ChronologicalOrder `locationName:"chronologicalOrder" type:"string"`
 
 	// The time stamp that indicates an earlier time. If not specified, the action
 	// returns paginated results that contain configuration items that start from
@@ -5470,7 +5482,7 @@ type GetResourceConfigHistoryInput struct {
 	// The resource type.
 	//
 	// ResourceType is a required field
-	ResourceType *string `locationName:"resourceType" type:"string" required:"true" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5486,10 +5498,11 @@ func (s GetResourceConfigHistoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetResourceConfigHistoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetResourceConfigHistoryInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
@@ -5500,8 +5513,8 @@ func (s *GetResourceConfigHistoryInput) Validate() error {
 }
 
 // SetChronologicalOrder sets the ChronologicalOrder field's value.
-func (s *GetResourceConfigHistoryInput) SetChronologicalOrder(v string) *GetResourceConfigHistoryInput {
-	s.ChronologicalOrder = &v
+func (s *GetResourceConfigHistoryInput) SetChronologicalOrder(v ChronologicalOrder) *GetResourceConfigHistoryInput {
+	s.ChronologicalOrder = v
 	return s
 }
 
@@ -5536,8 +5549,8 @@ func (s *GetResourceConfigHistoryInput) SetResourceId(v string) *GetResourceConf
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *GetResourceConfigHistoryInput) SetResourceType(v string) *GetResourceConfigHistoryInput {
-	s.ResourceType = &v
+func (s *GetResourceConfigHistoryInput) SetResourceType(v ResourceType) *GetResourceConfigHistoryInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -5606,7 +5619,7 @@ type ListDiscoveredResourcesInput struct {
 	// The type of resources that you want AWS Config to list in the response.
 	//
 	// ResourceType is a required field
-	ResourceType *string `locationName:"resourceType" type:"string" required:"true" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5622,7 +5635,7 @@ func (s ListDiscoveredResourcesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDiscoveredResourcesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDiscoveredResourcesInput"}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
@@ -5663,8 +5676,8 @@ func (s *ListDiscoveredResourcesInput) SetResourceName(v string) *ListDiscovered
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ListDiscoveredResourcesInput) SetResourceType(v string) *ListDiscoveredResourcesInput {
-	s.ResourceType = &v
+func (s *ListDiscoveredResourcesInput) SetResourceType(v ResourceType) *ListDiscoveredResourcesInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -5726,6 +5739,7 @@ func (s PutConfigRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutConfigRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutConfigRuleInput"}
+
 	if s.ConfigRule == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigRule"))
 	}
@@ -5787,6 +5801,7 @@ func (s PutConfigurationRecorderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutConfigurationRecorderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutConfigurationRecorderInput"}
+
 	if s.ConfigurationRecorder == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorder"))
 	}
@@ -5848,6 +5863,7 @@ func (s PutDeliveryChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutDeliveryChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutDeliveryChannelInput"}
+
 	if s.DeliveryChannel == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryChannel"))
 	}
@@ -5922,6 +5938,7 @@ func (s PutEvaluationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEvaluationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutEvaluationsInput"}
+
 	if s.ResultToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResultToken"))
 	}
@@ -6055,7 +6072,7 @@ type RecordingGroup struct {
 	//
 	// For a list of valid resourceTypes values, see the resourceType Value column
 	// in Supported AWS Resource Types (http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources).
-	ResourceTypes []*string `locationName:"resourceTypes" type:"list"`
+	ResourceTypes []ResourceType `locationName:"resourceTypes" type:"list"`
 }
 
 // String returns the string representation
@@ -6081,7 +6098,7 @@ func (s *RecordingGroup) SetIncludeGlobalResourceTypes(v bool) *RecordingGroup {
 }
 
 // SetResourceTypes sets the ResourceTypes field's value.
-func (s *RecordingGroup) SetResourceTypes(v []*string) *RecordingGroup {
+func (s *RecordingGroup) SetResourceTypes(v []ResourceType) *RecordingGroup {
 	s.ResourceTypes = v
 	return s
 }
@@ -6101,7 +6118,7 @@ type Relationship struct {
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The resource type of the related resource.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 }
 
 // String returns the string representation
@@ -6133,8 +6150,8 @@ func (s *Relationship) SetResourceName(v string) *Relationship {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *Relationship) SetResourceType(v string) *Relationship {
-	s.ResourceType = &v
+func (s *Relationship) SetResourceType(v ResourceType) *Relationship {
+	s.ResourceType = v
 	return s
 }
 
@@ -6147,7 +6164,7 @@ type ResourceCount struct {
 	Count *int64 `locationName:"count" type:"long"`
 
 	// The resource type, for example "AWS::EC2::Instance".
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 }
 
 // String returns the string representation
@@ -6167,8 +6184,8 @@ func (s *ResourceCount) SetCount(v int64) *ResourceCount {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ResourceCount) SetResourceType(v string) *ResourceCount {
-	s.ResourceType = &v
+func (s *ResourceCount) SetResourceType(v ResourceType) *ResourceCount {
+	s.ResourceType = v
 	return s
 }
 
@@ -6188,7 +6205,7 @@ type ResourceIdentifier struct {
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The type of resource.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 }
 
 // String returns the string representation
@@ -6220,8 +6237,8 @@ func (s *ResourceIdentifier) SetResourceName(v string) *ResourceIdentifier {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ResourceIdentifier) SetResourceType(v string) *ResourceIdentifier {
-	s.ResourceType = &v
+func (s *ResourceIdentifier) SetResourceType(v ResourceType) *ResourceIdentifier {
+	s.ResourceType = v
 	return s
 }
 
@@ -6317,7 +6334,7 @@ type Source struct {
 	// Indicates whether AWS or the customer owns and manages the AWS Config rule.
 	//
 	// Owner is a required field
-	Owner *string `type:"string" required:"true" enum:"Owner"`
+	Owner Owner `type:"string" required:"true"`
 
 	// Provides the source and type of the event that causes AWS Config to evaluate
 	// your AWS resources.
@@ -6347,9 +6364,10 @@ func (s Source) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Source) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Source"}
-	if s.Owner == nil {
+	if len(s.Owner) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Owner"))
 	}
+
 	if s.SourceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceIdentifier"))
 	}
@@ -6364,8 +6382,8 @@ func (s *Source) Validate() error {
 }
 
 // SetOwner sets the Owner field's value.
-func (s *Source) SetOwner(v string) *Source {
-	s.Owner = &v
+func (s *Source) SetOwner(v Owner) *Source {
+	s.Owner = v
 	return s
 }
 
@@ -6392,7 +6410,7 @@ type SourceDetail struct {
 
 	// The source of the event, such as an AWS service, that triggers AWS Config
 	// to evaluate your AWS resources.
-	EventSource *string `type:"string" enum:"EventSource"`
+	EventSource EventSource `type:"string"`
 
 	// The frequency that you want AWS Config to run evaluations for a custom rule
 	// with a periodic trigger. If you specify a value for MaximumExecutionFrequency,
@@ -6401,7 +6419,7 @@ type SourceDetail struct {
 	// By default, rules with a periodic trigger are evaluated every 24 hours. To
 	// change the frequency, specify a valid value for the MaximumExecutionFrequency
 	// parameter.
-	MaximumExecutionFrequency *string `type:"string" enum:"MaximumExecutionFrequency"`
+	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string"`
 
 	// The type of notification that triggers AWS Config to run an evaluation for
 	// a rule. You can specify the following notification types:
@@ -6422,7 +6440,7 @@ type SourceDetail struct {
 	//
 	// If you want your custom rule to be triggered by configuration changes, specify
 	// both ConfigurationItemChangeNotification and OversizedConfigurationItemChangeNotification.
-	MessageType *string `type:"string" enum:"MessageType"`
+	MessageType MessageType `type:"string"`
 }
 
 // String returns the string representation
@@ -6436,20 +6454,20 @@ func (s SourceDetail) GoString() string {
 }
 
 // SetEventSource sets the EventSource field's value.
-func (s *SourceDetail) SetEventSource(v string) *SourceDetail {
-	s.EventSource = &v
+func (s *SourceDetail) SetEventSource(v EventSource) *SourceDetail {
+	s.EventSource = v
 	return s
 }
 
 // SetMaximumExecutionFrequency sets the MaximumExecutionFrequency field's value.
-func (s *SourceDetail) SetMaximumExecutionFrequency(v string) *SourceDetail {
-	s.MaximumExecutionFrequency = &v
+func (s *SourceDetail) SetMaximumExecutionFrequency(v MaximumExecutionFrequency) *SourceDetail {
+	s.MaximumExecutionFrequency = v
 	return s
 }
 
 // SetMessageType sets the MessageType field's value.
-func (s *SourceDetail) SetMessageType(v string) *SourceDetail {
-	s.MessageType = &v
+func (s *SourceDetail) SetMessageType(v MessageType) *SourceDetail {
+	s.MessageType = v
 	return s
 }
 
@@ -6531,6 +6549,7 @@ func (s StartConfigurationRecorderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartConfigurationRecorderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartConfigurationRecorderInput"}
+
 	if s.ConfigurationRecorderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorderName"))
 	}
@@ -6590,6 +6609,7 @@ func (s StopConfigurationRecorderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopConfigurationRecorderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopConfigurationRecorderInput"}
+
 	if s.ConfigurationRecorderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorderName"))
 	}
@@ -6624,243 +6644,141 @@ func (s StopConfigurationRecorderOutput) GoString() string {
 	return s.String()
 }
 
-const (
-	// ChronologicalOrderReverse is a ChronologicalOrder enum value
-	ChronologicalOrderReverse = "Reverse"
+type ChronologicalOrder string
 
-	// ChronologicalOrderForward is a ChronologicalOrder enum value
-	ChronologicalOrderForward = "Forward"
+// Enum values for ChronologicalOrder
+const (
+	ChronologicalOrderReverse ChronologicalOrder = "Reverse"
+	ChronologicalOrderForward ChronologicalOrder = "Forward"
 )
 
+type ComplianceType string
+
+// Enum values for ComplianceType
 const (
-	// ComplianceTypeCompliant is a ComplianceType enum value
-	ComplianceTypeCompliant = "COMPLIANT"
-
-	// ComplianceTypeNonCompliant is a ComplianceType enum value
-	ComplianceTypeNonCompliant = "NON_COMPLIANT"
-
-	// ComplianceTypeNotApplicable is a ComplianceType enum value
-	ComplianceTypeNotApplicable = "NOT_APPLICABLE"
-
-	// ComplianceTypeInsufficientData is a ComplianceType enum value
-	ComplianceTypeInsufficientData = "INSUFFICIENT_DATA"
+	ComplianceTypeCompliant        ComplianceType = "COMPLIANT"
+	ComplianceTypeNonCompliant     ComplianceType = "NON_COMPLIANT"
+	ComplianceTypeNotApplicable    ComplianceType = "NOT_APPLICABLE"
+	ComplianceTypeInsufficientData ComplianceType = "INSUFFICIENT_DATA"
 )
 
+type ConfigRuleState string
+
+// Enum values for ConfigRuleState
 const (
-	// ConfigRuleStateActive is a ConfigRuleState enum value
-	ConfigRuleStateActive = "ACTIVE"
-
-	// ConfigRuleStateDeleting is a ConfigRuleState enum value
-	ConfigRuleStateDeleting = "DELETING"
-
-	// ConfigRuleStateDeletingResults is a ConfigRuleState enum value
-	ConfigRuleStateDeletingResults = "DELETING_RESULTS"
-
-	// ConfigRuleStateEvaluating is a ConfigRuleState enum value
-	ConfigRuleStateEvaluating = "EVALUATING"
+	ConfigRuleStateActive          ConfigRuleState = "ACTIVE"
+	ConfigRuleStateDeleting        ConfigRuleState = "DELETING"
+	ConfigRuleStateDeletingResults ConfigRuleState = "DELETING_RESULTS"
+	ConfigRuleStateEvaluating      ConfigRuleState = "EVALUATING"
 )
 
+type ConfigurationItemStatus string
+
+// Enum values for ConfigurationItemStatus
 const (
-	// ConfigurationItemStatusOk is a ConfigurationItemStatus enum value
-	ConfigurationItemStatusOk = "Ok"
-
-	// ConfigurationItemStatusFailed is a ConfigurationItemStatus enum value
-	ConfigurationItemStatusFailed = "Failed"
-
-	// ConfigurationItemStatusDiscovered is a ConfigurationItemStatus enum value
-	ConfigurationItemStatusDiscovered = "Discovered"
-
-	// ConfigurationItemStatusDeleted is a ConfigurationItemStatus enum value
-	ConfigurationItemStatusDeleted = "Deleted"
+	ConfigurationItemStatusOk         ConfigurationItemStatus = "Ok"
+	ConfigurationItemStatusFailed     ConfigurationItemStatus = "Failed"
+	ConfigurationItemStatusDiscovered ConfigurationItemStatus = "Discovered"
+	ConfigurationItemStatusDeleted    ConfigurationItemStatus = "Deleted"
 )
 
+type DeliveryStatus string
+
+// Enum values for DeliveryStatus
 const (
-	// DeliveryStatusSuccess is a DeliveryStatus enum value
-	DeliveryStatusSuccess = "Success"
-
-	// DeliveryStatusFailure is a DeliveryStatus enum value
-	DeliveryStatusFailure = "Failure"
-
-	// DeliveryStatusNotApplicable is a DeliveryStatus enum value
-	DeliveryStatusNotApplicable = "Not_Applicable"
+	DeliveryStatusSuccess       DeliveryStatus = "Success"
+	DeliveryStatusFailure       DeliveryStatus = "Failure"
+	DeliveryStatusNotApplicable DeliveryStatus = "Not_Applicable"
 )
 
+type EventSource string
+
+// Enum values for EventSource
 const (
-	// EventSourceAwsConfig is a EventSource enum value
-	EventSourceAwsConfig = "aws.config"
+	EventSourceAwsConfig EventSource = "aws.config"
 )
 
+type MaximumExecutionFrequency string
+
+// Enum values for MaximumExecutionFrequency
 const (
-	// MaximumExecutionFrequencyOneHour is a MaximumExecutionFrequency enum value
-	MaximumExecutionFrequencyOneHour = "One_Hour"
-
-	// MaximumExecutionFrequencyThreeHours is a MaximumExecutionFrequency enum value
-	MaximumExecutionFrequencyThreeHours = "Three_Hours"
-
-	// MaximumExecutionFrequencySixHours is a MaximumExecutionFrequency enum value
-	MaximumExecutionFrequencySixHours = "Six_Hours"
-
-	// MaximumExecutionFrequencyTwelveHours is a MaximumExecutionFrequency enum value
-	MaximumExecutionFrequencyTwelveHours = "Twelve_Hours"
-
-	// MaximumExecutionFrequencyTwentyFourHours is a MaximumExecutionFrequency enum value
-	MaximumExecutionFrequencyTwentyFourHours = "TwentyFour_Hours"
+	MaximumExecutionFrequencyOneHour         MaximumExecutionFrequency = "One_Hour"
+	MaximumExecutionFrequencyThreeHours      MaximumExecutionFrequency = "Three_Hours"
+	MaximumExecutionFrequencySixHours        MaximumExecutionFrequency = "Six_Hours"
+	MaximumExecutionFrequencyTwelveHours     MaximumExecutionFrequency = "Twelve_Hours"
+	MaximumExecutionFrequencyTwentyFourHours MaximumExecutionFrequency = "TwentyFour_Hours"
 )
 
+type MessageType string
+
+// Enum values for MessageType
 const (
-	// MessageTypeConfigurationItemChangeNotification is a MessageType enum value
-	MessageTypeConfigurationItemChangeNotification = "ConfigurationItemChangeNotification"
-
-	// MessageTypeConfigurationSnapshotDeliveryCompleted is a MessageType enum value
-	MessageTypeConfigurationSnapshotDeliveryCompleted = "ConfigurationSnapshotDeliveryCompleted"
-
-	// MessageTypeScheduledNotification is a MessageType enum value
-	MessageTypeScheduledNotification = "ScheduledNotification"
-
-	// MessageTypeOversizedConfigurationItemChangeNotification is a MessageType enum value
-	MessageTypeOversizedConfigurationItemChangeNotification = "OversizedConfigurationItemChangeNotification"
+	MessageTypeConfigurationItemChangeNotification          MessageType = "ConfigurationItemChangeNotification"
+	MessageTypeConfigurationSnapshotDeliveryCompleted       MessageType = "ConfigurationSnapshotDeliveryCompleted"
+	MessageTypeScheduledNotification                        MessageType = "ScheduledNotification"
+	MessageTypeOversizedConfigurationItemChangeNotification MessageType = "OversizedConfigurationItemChangeNotification"
 )
 
-const (
-	// OwnerCustomLambda is a Owner enum value
-	OwnerCustomLambda = "CUSTOM_LAMBDA"
+type Owner string
 
-	// OwnerAws is a Owner enum value
-	OwnerAws = "AWS"
+// Enum values for Owner
+const (
+	OwnerCustomLambda Owner = "CUSTOM_LAMBDA"
+	OwnerAws          Owner = "AWS"
 )
 
+type RecorderStatus string
+
+// Enum values for RecorderStatus
 const (
-	// RecorderStatusPending is a RecorderStatus enum value
-	RecorderStatusPending = "Pending"
-
-	// RecorderStatusSuccess is a RecorderStatus enum value
-	RecorderStatusSuccess = "Success"
-
-	// RecorderStatusFailure is a RecorderStatus enum value
-	RecorderStatusFailure = "Failure"
+	RecorderStatusPending RecorderStatus = "Pending"
+	RecorderStatusSuccess RecorderStatus = "Success"
+	RecorderStatusFailure RecorderStatus = "Failure"
 )
 
+type ResourceType string
+
+// Enum values for ResourceType
 const (
-	// ResourceTypeAwsEc2CustomerGateway is a ResourceType enum value
-	ResourceTypeAwsEc2CustomerGateway = "AWS::EC2::CustomerGateway"
-
-	// ResourceTypeAwsEc2Eip is a ResourceType enum value
-	ResourceTypeAwsEc2Eip = "AWS::EC2::EIP"
-
-	// ResourceTypeAwsEc2Host is a ResourceType enum value
-	ResourceTypeAwsEc2Host = "AWS::EC2::Host"
-
-	// ResourceTypeAwsEc2Instance is a ResourceType enum value
-	ResourceTypeAwsEc2Instance = "AWS::EC2::Instance"
-
-	// ResourceTypeAwsEc2InternetGateway is a ResourceType enum value
-	ResourceTypeAwsEc2InternetGateway = "AWS::EC2::InternetGateway"
-
-	// ResourceTypeAwsEc2NetworkAcl is a ResourceType enum value
-	ResourceTypeAwsEc2NetworkAcl = "AWS::EC2::NetworkAcl"
-
-	// ResourceTypeAwsEc2NetworkInterface is a ResourceType enum value
-	ResourceTypeAwsEc2NetworkInterface = "AWS::EC2::NetworkInterface"
-
-	// ResourceTypeAwsEc2RouteTable is a ResourceType enum value
-	ResourceTypeAwsEc2RouteTable = "AWS::EC2::RouteTable"
-
-	// ResourceTypeAwsEc2SecurityGroup is a ResourceType enum value
-	ResourceTypeAwsEc2SecurityGroup = "AWS::EC2::SecurityGroup"
-
-	// ResourceTypeAwsEc2Subnet is a ResourceType enum value
-	ResourceTypeAwsEc2Subnet = "AWS::EC2::Subnet"
-
-	// ResourceTypeAwsCloudTrailTrail is a ResourceType enum value
-	ResourceTypeAwsCloudTrailTrail = "AWS::CloudTrail::Trail"
-
-	// ResourceTypeAwsEc2Volume is a ResourceType enum value
-	ResourceTypeAwsEc2Volume = "AWS::EC2::Volume"
-
-	// ResourceTypeAwsEc2Vpc is a ResourceType enum value
-	ResourceTypeAwsEc2Vpc = "AWS::EC2::VPC"
-
-	// ResourceTypeAwsEc2Vpnconnection is a ResourceType enum value
-	ResourceTypeAwsEc2Vpnconnection = "AWS::EC2::VPNConnection"
-
-	// ResourceTypeAwsEc2Vpngateway is a ResourceType enum value
-	ResourceTypeAwsEc2Vpngateway = "AWS::EC2::VPNGateway"
-
-	// ResourceTypeAwsIamGroup is a ResourceType enum value
-	ResourceTypeAwsIamGroup = "AWS::IAM::Group"
-
-	// ResourceTypeAwsIamPolicy is a ResourceType enum value
-	ResourceTypeAwsIamPolicy = "AWS::IAM::Policy"
-
-	// ResourceTypeAwsIamRole is a ResourceType enum value
-	ResourceTypeAwsIamRole = "AWS::IAM::Role"
-
-	// ResourceTypeAwsIamUser is a ResourceType enum value
-	ResourceTypeAwsIamUser = "AWS::IAM::User"
-
-	// ResourceTypeAwsAcmCertificate is a ResourceType enum value
-	ResourceTypeAwsAcmCertificate = "AWS::ACM::Certificate"
-
-	// ResourceTypeAwsRdsDbinstance is a ResourceType enum value
-	ResourceTypeAwsRdsDbinstance = "AWS::RDS::DBInstance"
-
-	// ResourceTypeAwsRdsDbsubnetGroup is a ResourceType enum value
-	ResourceTypeAwsRdsDbsubnetGroup = "AWS::RDS::DBSubnetGroup"
-
-	// ResourceTypeAwsRdsDbsecurityGroup is a ResourceType enum value
-	ResourceTypeAwsRdsDbsecurityGroup = "AWS::RDS::DBSecurityGroup"
-
-	// ResourceTypeAwsRdsDbsnapshot is a ResourceType enum value
-	ResourceTypeAwsRdsDbsnapshot = "AWS::RDS::DBSnapshot"
-
-	// ResourceTypeAwsRdsEventSubscription is a ResourceType enum value
-	ResourceTypeAwsRdsEventSubscription = "AWS::RDS::EventSubscription"
-
-	// ResourceTypeAwsElasticLoadBalancingV2LoadBalancer is a ResourceType enum value
-	ResourceTypeAwsElasticLoadBalancingV2LoadBalancer = "AWS::ElasticLoadBalancingV2::LoadBalancer"
-
-	// ResourceTypeAwsS3Bucket is a ResourceType enum value
-	ResourceTypeAwsS3Bucket = "AWS::S3::Bucket"
-
-	// ResourceTypeAwsSsmManagedInstanceInventory is a ResourceType enum value
-	ResourceTypeAwsSsmManagedInstanceInventory = "AWS::SSM::ManagedInstanceInventory"
-
-	// ResourceTypeAwsRedshiftCluster is a ResourceType enum value
-	ResourceTypeAwsRedshiftCluster = "AWS::Redshift::Cluster"
-
-	// ResourceTypeAwsRedshiftClusterSnapshot is a ResourceType enum value
-	ResourceTypeAwsRedshiftClusterSnapshot = "AWS::Redshift::ClusterSnapshot"
-
-	// ResourceTypeAwsRedshiftClusterParameterGroup is a ResourceType enum value
-	ResourceTypeAwsRedshiftClusterParameterGroup = "AWS::Redshift::ClusterParameterGroup"
-
-	// ResourceTypeAwsRedshiftClusterSecurityGroup is a ResourceType enum value
-	ResourceTypeAwsRedshiftClusterSecurityGroup = "AWS::Redshift::ClusterSecurityGroup"
-
-	// ResourceTypeAwsRedshiftClusterSubnetGroup is a ResourceType enum value
-	ResourceTypeAwsRedshiftClusterSubnetGroup = "AWS::Redshift::ClusterSubnetGroup"
-
-	// ResourceTypeAwsRedshiftEventSubscription is a ResourceType enum value
-	ResourceTypeAwsRedshiftEventSubscription = "AWS::Redshift::EventSubscription"
-
-	// ResourceTypeAwsCloudWatchAlarm is a ResourceType enum value
-	ResourceTypeAwsCloudWatchAlarm = "AWS::CloudWatch::Alarm"
-
-	// ResourceTypeAwsCloudFormationStack is a ResourceType enum value
-	ResourceTypeAwsCloudFormationStack = "AWS::CloudFormation::Stack"
-
-	// ResourceTypeAwsDynamoDbTable is a ResourceType enum value
-	ResourceTypeAwsDynamoDbTable = "AWS::DynamoDB::Table"
-
-	// ResourceTypeAwsAutoScalingAutoScalingGroup is a ResourceType enum value
-	ResourceTypeAwsAutoScalingAutoScalingGroup = "AWS::AutoScaling::AutoScalingGroup"
-
-	// ResourceTypeAwsAutoScalingLaunchConfiguration is a ResourceType enum value
-	ResourceTypeAwsAutoScalingLaunchConfiguration = "AWS::AutoScaling::LaunchConfiguration"
-
-	// ResourceTypeAwsAutoScalingScalingPolicy is a ResourceType enum value
-	ResourceTypeAwsAutoScalingScalingPolicy = "AWS::AutoScaling::ScalingPolicy"
-
-	// ResourceTypeAwsAutoScalingScheduledAction is a ResourceType enum value
-	ResourceTypeAwsAutoScalingScheduledAction = "AWS::AutoScaling::ScheduledAction"
+	ResourceTypeAwsEc2CustomerGateway                 ResourceType = "AWS::EC2::CustomerGateway"
+	ResourceTypeAwsEc2Eip                             ResourceType = "AWS::EC2::EIP"
+	ResourceTypeAwsEc2Host                            ResourceType = "AWS::EC2::Host"
+	ResourceTypeAwsEc2Instance                        ResourceType = "AWS::EC2::Instance"
+	ResourceTypeAwsEc2InternetGateway                 ResourceType = "AWS::EC2::InternetGateway"
+	ResourceTypeAwsEc2NetworkAcl                      ResourceType = "AWS::EC2::NetworkAcl"
+	ResourceTypeAwsEc2NetworkInterface                ResourceType = "AWS::EC2::NetworkInterface"
+	ResourceTypeAwsEc2RouteTable                      ResourceType = "AWS::EC2::RouteTable"
+	ResourceTypeAwsEc2SecurityGroup                   ResourceType = "AWS::EC2::SecurityGroup"
+	ResourceTypeAwsEc2Subnet                          ResourceType = "AWS::EC2::Subnet"
+	ResourceTypeAwsCloudTrailTrail                    ResourceType = "AWS::CloudTrail::Trail"
+	ResourceTypeAwsEc2Volume                          ResourceType = "AWS::EC2::Volume"
+	ResourceTypeAwsEc2Vpc                             ResourceType = "AWS::EC2::VPC"
+	ResourceTypeAwsEc2Vpnconnection                   ResourceType = "AWS::EC2::VPNConnection"
+	ResourceTypeAwsEc2Vpngateway                      ResourceType = "AWS::EC2::VPNGateway"
+	ResourceTypeAwsIamGroup                           ResourceType = "AWS::IAM::Group"
+	ResourceTypeAwsIamPolicy                          ResourceType = "AWS::IAM::Policy"
+	ResourceTypeAwsIamRole                            ResourceType = "AWS::IAM::Role"
+	ResourceTypeAwsIamUser                            ResourceType = "AWS::IAM::User"
+	ResourceTypeAwsAcmCertificate                     ResourceType = "AWS::ACM::Certificate"
+	ResourceTypeAwsRdsDbinstance                      ResourceType = "AWS::RDS::DBInstance"
+	ResourceTypeAwsRdsDbsubnetGroup                   ResourceType = "AWS::RDS::DBSubnetGroup"
+	ResourceTypeAwsRdsDbsecurityGroup                 ResourceType = "AWS::RDS::DBSecurityGroup"
+	ResourceTypeAwsRdsDbsnapshot                      ResourceType = "AWS::RDS::DBSnapshot"
+	ResourceTypeAwsRdsEventSubscription               ResourceType = "AWS::RDS::EventSubscription"
+	ResourceTypeAwsElasticLoadBalancingV2LoadBalancer ResourceType = "AWS::ElasticLoadBalancingV2::LoadBalancer"
+	ResourceTypeAwsS3Bucket                           ResourceType = "AWS::S3::Bucket"
+	ResourceTypeAwsSsmManagedInstanceInventory        ResourceType = "AWS::SSM::ManagedInstanceInventory"
+	ResourceTypeAwsRedshiftCluster                    ResourceType = "AWS::Redshift::Cluster"
+	ResourceTypeAwsRedshiftClusterSnapshot            ResourceType = "AWS::Redshift::ClusterSnapshot"
+	ResourceTypeAwsRedshiftClusterParameterGroup      ResourceType = "AWS::Redshift::ClusterParameterGroup"
+	ResourceTypeAwsRedshiftClusterSecurityGroup       ResourceType = "AWS::Redshift::ClusterSecurityGroup"
+	ResourceTypeAwsRedshiftClusterSubnetGroup         ResourceType = "AWS::Redshift::ClusterSubnetGroup"
+	ResourceTypeAwsRedshiftEventSubscription          ResourceType = "AWS::Redshift::EventSubscription"
+	ResourceTypeAwsCloudWatchAlarm                    ResourceType = "AWS::CloudWatch::Alarm"
+	ResourceTypeAwsCloudFormationStack                ResourceType = "AWS::CloudFormation::Stack"
+	ResourceTypeAwsDynamoDbTable                      ResourceType = "AWS::DynamoDB::Table"
+	ResourceTypeAwsAutoScalingAutoScalingGroup        ResourceType = "AWS::AutoScaling::AutoScalingGroup"
+	ResourceTypeAwsAutoScalingLaunchConfiguration     ResourceType = "AWS::AutoScaling::LaunchConfiguration"
+	ResourceTypeAwsAutoScalingScalingPolicy           ResourceType = "AWS::AutoScaling::ScalingPolicy"
+	ResourceTypeAwsAutoScalingScheduledAction         ResourceType = "AWS::AutoScaling::ScheduledAction"
 )

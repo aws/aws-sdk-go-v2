@@ -1787,15 +1787,18 @@ func (s AssociateCreatedArtifactInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateCreatedArtifactInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateCreatedArtifactInput"}
+
 	if s.CreatedArtifact == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CreatedArtifact"))
 	}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
@@ -1890,15 +1893,18 @@ func (s AssociateDiscoveredResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateDiscoveredResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateDiscoveredResourceInput"}
+
 	if s.DiscoveredResource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DiscoveredResource"))
 	}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
@@ -1983,6 +1989,7 @@ func (s CreateProgressUpdateStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProgressUpdateStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateProgressUpdateStreamInput"}
+
 	if s.ProgressUpdateStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStreamName"))
 	}
@@ -2052,6 +2059,7 @@ func (s CreatedArtifact) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatedArtifact) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatedArtifact"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2104,6 +2112,7 @@ func (s DeleteProgressUpdateStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProgressUpdateStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteProgressUpdateStreamInput"}
+
 	if s.ProgressUpdateStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStreamName"))
 	}
@@ -2167,6 +2176,7 @@ func (s DescribeApplicationStateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeApplicationStateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeApplicationStateInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -2191,7 +2201,7 @@ type DescribeApplicationStateOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Status of the application - Not Started, In-Progress, Complete.
-	ApplicationStatus *string `type:"string" enum:"ApplicationStatus"`
+	ApplicationStatus ApplicationStatus `type:"string"`
 
 	// The timestamp when the application status was last updated.
 	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -2208,8 +2218,8 @@ func (s DescribeApplicationStateOutput) GoString() string {
 }
 
 // SetApplicationStatus sets the ApplicationStatus field's value.
-func (s *DescribeApplicationStateOutput) SetApplicationStatus(v string) *DescribeApplicationStateOutput {
-	s.ApplicationStatus = &v
+func (s *DescribeApplicationStateOutput) SetApplicationStatus(v ApplicationStatus) *DescribeApplicationStateOutput {
+	s.ApplicationStatus = v
 	return s
 }
 
@@ -2247,12 +2257,14 @@ func (s DescribeMigrationTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMigrationTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeMigrationTaskInput"}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
@@ -2341,18 +2353,21 @@ func (s DisassociateCreatedArtifactInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateCreatedArtifactInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateCreatedArtifactInput"}
+
 	if s.CreatedArtifactName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CreatedArtifactName"))
 	}
 	if s.CreatedArtifactName != nil && len(*s.CreatedArtifactName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CreatedArtifactName", 1))
 	}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
@@ -2442,18 +2457,21 @@ func (s DisassociateDiscoveredResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateDiscoveredResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateDiscoveredResourceInput"}
+
 	if s.ConfigurationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
 	}
 	if s.ConfigurationId != nil && len(*s.ConfigurationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationId", 1))
 	}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
@@ -2534,6 +2552,7 @@ func (s DiscoveredResource) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DiscoveredResource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DiscoveredResource"}
+
 	if s.ConfigurationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
 	}
@@ -2591,12 +2610,14 @@ func (s ImportMigrationTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportMigrationTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportMigrationTaskInput"}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
@@ -2682,12 +2703,14 @@ func (s *ListCreatedArtifactsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
@@ -2799,12 +2822,14 @@ func (s *ListDiscoveredResourcesInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
@@ -3130,7 +3155,7 @@ type MigrationTaskSummary struct {
 	ProgressUpdateStream *string `min:"1" type:"string"`
 
 	// Status of the task.
-	Status *string `type:"string" enum:"Status"`
+	Status Status `type:"string"`
 
 	// Detail information of what is being done within the overall status state.
 	StatusDetail *string `type:"string"`
@@ -3168,8 +3193,8 @@ func (s *MigrationTaskSummary) SetProgressUpdateStream(v string) *MigrationTaskS
 }
 
 // SetStatus sets the Status field's value.
-func (s *MigrationTaskSummary) SetStatus(v string) *MigrationTaskSummary {
-	s.Status = &v
+func (s *MigrationTaskSummary) SetStatus(v Status) *MigrationTaskSummary {
+	s.Status = v
 	return s
 }
 
@@ -3201,7 +3226,7 @@ type NotifyApplicationStateInput struct {
 	// Status of the application - Not Started, In-Progress, Complete.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"ApplicationStatus"`
+	Status ApplicationStatus `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3217,13 +3242,14 @@ func (s NotifyApplicationStateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotifyApplicationStateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NotifyApplicationStateInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.ApplicationId != nil && len(*s.ApplicationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationId", 1))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
@@ -3246,8 +3272,8 @@ func (s *NotifyApplicationStateInput) SetDryRun(v bool) *NotifyApplicationStateI
 }
 
 // SetStatus sets the Status field's value.
-func (s *NotifyApplicationStateInput) SetStatus(v string) *NotifyApplicationStateInput {
-	s.Status = &v
+func (s *NotifyApplicationStateInput) SetStatus(v ApplicationStatus) *NotifyApplicationStateInput {
+	s.Status = v
 	return s
 }
 
@@ -3315,24 +3341,29 @@ func (s NotifyMigrationTaskStateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotifyMigrationTaskStateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NotifyMigrationTaskStateInput"}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.NextUpdateSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NextUpdateSeconds"))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
+
 	if s.Task == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Task"))
 	}
+
 	if s.UpdateDateTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UpdateDateTime"))
 	}
@@ -3464,18 +3495,21 @@ func (s PutResourceAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutResourceAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutResourceAttributesInput"}
+
 	if s.MigrationTaskName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
+
 	if s.ProgressUpdateStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
+
 	if s.ResourceAttributeList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceAttributeList"))
 	}
@@ -3546,7 +3580,7 @@ type ResourceAttribute struct {
 	// Type of resource.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"ResourceAttributeType"`
+	Type ResourceAttributeType `type:"string" required:"true"`
 
 	// Value of the resource type.
 	//
@@ -3567,9 +3601,10 @@ func (s ResourceAttribute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceAttribute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResourceAttribute"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -3584,8 +3619,8 @@ func (s *ResourceAttribute) Validate() error {
 }
 
 // SetType sets the Type field's value.
-func (s *ResourceAttribute) SetType(v string) *ResourceAttribute {
-	s.Type = &v
+func (s *ResourceAttribute) SetType(v ResourceAttributeType) *ResourceAttribute {
+	s.Type = v
 	return s
 }
 
@@ -3606,7 +3641,7 @@ type Task struct {
 	// Status of the task - Not Started, In-Progress, Complete.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"Status"`
+	Status Status `type:"string" required:"true"`
 
 	// Details of task status as notified by a migration tool. A tool might use
 	// this field to provide clarifying information about the status that is unique
@@ -3627,7 +3662,7 @@ func (s Task) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Task) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Task"}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
@@ -3644,8 +3679,8 @@ func (s *Task) SetProgressPercent(v int64) *Task {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Task) SetStatus(v string) *Task {
-	s.Status = &v
+func (s *Task) SetStatus(v Status) *Task {
+	s.Status = v
 	return s
 }
 
@@ -3655,62 +3690,38 @@ func (s *Task) SetStatusDetail(v string) *Task {
 	return s
 }
 
+type ApplicationStatus string
+
+// Enum values for ApplicationStatus
 const (
-	// ApplicationStatusNotStarted is a ApplicationStatus enum value
-	ApplicationStatusNotStarted = "NOT_STARTED"
-
-	// ApplicationStatusInProgress is a ApplicationStatus enum value
-	ApplicationStatusInProgress = "IN_PROGRESS"
-
-	// ApplicationStatusCompleted is a ApplicationStatus enum value
-	ApplicationStatusCompleted = "COMPLETED"
+	ApplicationStatusNotStarted ApplicationStatus = "NOT_STARTED"
+	ApplicationStatusInProgress ApplicationStatus = "IN_PROGRESS"
+	ApplicationStatusCompleted  ApplicationStatus = "COMPLETED"
 )
 
+type ResourceAttributeType string
+
+// Enum values for ResourceAttributeType
 const (
-	// ResourceAttributeTypeIpv4Address is a ResourceAttributeType enum value
-	ResourceAttributeTypeIpv4Address = "IPV4_ADDRESS"
-
-	// ResourceAttributeTypeIpv6Address is a ResourceAttributeType enum value
-	ResourceAttributeTypeIpv6Address = "IPV6_ADDRESS"
-
-	// ResourceAttributeTypeMacAddress is a ResourceAttributeType enum value
-	ResourceAttributeTypeMacAddress = "MAC_ADDRESS"
-
-	// ResourceAttributeTypeFqdn is a ResourceAttributeType enum value
-	ResourceAttributeTypeFqdn = "FQDN"
-
-	// ResourceAttributeTypeVmManagerId is a ResourceAttributeType enum value
-	ResourceAttributeTypeVmManagerId = "VM_MANAGER_ID"
-
-	// ResourceAttributeTypeVmManagedObjectReference is a ResourceAttributeType enum value
-	ResourceAttributeTypeVmManagedObjectReference = "VM_MANAGED_OBJECT_REFERENCE"
-
-	// ResourceAttributeTypeVmName is a ResourceAttributeType enum value
-	ResourceAttributeTypeVmName = "VM_NAME"
-
-	// ResourceAttributeTypeVmPath is a ResourceAttributeType enum value
-	ResourceAttributeTypeVmPath = "VM_PATH"
-
-	// ResourceAttributeTypeBiosId is a ResourceAttributeType enum value
-	ResourceAttributeTypeBiosId = "BIOS_ID"
-
-	// ResourceAttributeTypeMotherboardSerialNumber is a ResourceAttributeType enum value
-	ResourceAttributeTypeMotherboardSerialNumber = "MOTHERBOARD_SERIAL_NUMBER"
-
-	// ResourceAttributeTypeLabel is a ResourceAttributeType enum value
-	ResourceAttributeTypeLabel = "LABEL"
+	ResourceAttributeTypeIpv4Address              ResourceAttributeType = "IPV4_ADDRESS"
+	ResourceAttributeTypeIpv6Address              ResourceAttributeType = "IPV6_ADDRESS"
+	ResourceAttributeTypeMacAddress               ResourceAttributeType = "MAC_ADDRESS"
+	ResourceAttributeTypeFqdn                     ResourceAttributeType = "FQDN"
+	ResourceAttributeTypeVmManagerId              ResourceAttributeType = "VM_MANAGER_ID"
+	ResourceAttributeTypeVmManagedObjectReference ResourceAttributeType = "VM_MANAGED_OBJECT_REFERENCE"
+	ResourceAttributeTypeVmName                   ResourceAttributeType = "VM_NAME"
+	ResourceAttributeTypeVmPath                   ResourceAttributeType = "VM_PATH"
+	ResourceAttributeTypeBiosId                   ResourceAttributeType = "BIOS_ID"
+	ResourceAttributeTypeMotherboardSerialNumber  ResourceAttributeType = "MOTHERBOARD_SERIAL_NUMBER"
+	ResourceAttributeTypeLabel                    ResourceAttributeType = "LABEL"
 )
 
+type Status string
+
+// Enum values for Status
 const (
-	// StatusNotStarted is a Status enum value
-	StatusNotStarted = "NOT_STARTED"
-
-	// StatusInProgress is a Status enum value
-	StatusInProgress = "IN_PROGRESS"
-
-	// StatusFailed is a Status enum value
-	StatusFailed = "FAILED"
-
-	// StatusCompleted is a Status enum value
-	StatusCompleted = "COMPLETED"
+	StatusNotStarted Status = "NOT_STARTED"
+	StatusInProgress Status = "IN_PROGRESS"
+	StatusFailed     Status = "FAILED"
+	StatusCompleted  Status = "COMPLETED"
 )

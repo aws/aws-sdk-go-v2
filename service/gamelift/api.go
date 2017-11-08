@@ -8167,7 +8167,7 @@ type AcceptMatchInput struct {
 	// Player response to the proposed match.
 	//
 	// AcceptanceType is a required field
-	AcceptanceType *string `type:"string" required:"true" enum:"AcceptanceType"`
+	AcceptanceType AcceptanceType `type:"string" required:"true"`
 
 	// Unique identifier for a player delivering the response. This parameter can
 	// include one or multiple player IDs.
@@ -8195,12 +8195,14 @@ func (s AcceptMatchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptMatchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AcceptMatchInput"}
-	if s.AcceptanceType == nil {
+	if len(s.AcceptanceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("AcceptanceType"))
 	}
+
 	if s.PlayerIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlayerIds"))
 	}
+
 	if s.TicketId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TicketId"))
 	}
@@ -8215,8 +8217,8 @@ func (s *AcceptMatchInput) Validate() error {
 }
 
 // SetAcceptanceType sets the AcceptanceType field's value.
-func (s *AcceptMatchInput) SetAcceptanceType(v string) *AcceptMatchInput {
-	s.AcceptanceType = &v
+func (s *AcceptMatchInput) SetAcceptanceType(v AcceptanceType) *AcceptMatchInput {
+	s.AcceptanceType = v
 	return s
 }
 
@@ -8490,7 +8492,7 @@ type Build struct {
 
 	// Operating system that the game server binaries are built to run on. This
 	// value determines the type of fleet resources that you can use for this build.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 
 	// File size of the uploaded game build, expressed in bytes. When the build
 	// status is INITIALIZED, this value is 0.
@@ -8510,7 +8512,7 @@ type Build struct {
 	//
 	//    * FAILED -- The game build upload failed. You cannot create new fleets
 	//    for this build.
-	Status *string `type:"string" enum:"BuildStatus"`
+	Status BuildStatus `type:"string"`
 
 	// Version that is associated with this build. Version strings do not need to
 	// be unique. This value can be set using CreateBuild or UpdateBuild.
@@ -8546,8 +8548,8 @@ func (s *Build) SetName(v string) *Build {
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *Build) SetOperatingSystem(v string) *Build {
-	s.OperatingSystem = &v
+func (s *Build) SetOperatingSystem(v OperatingSystem) *Build {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -8558,8 +8560,8 @@ func (s *Build) SetSizeOnDisk(v int64) *Build {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Build) SetStatus(v string) *Build {
-	s.Status = &v
+func (s *Build) SetStatus(v BuildStatus) *Build {
+	s.Status = v
 	return s
 }
 
@@ -8605,12 +8607,14 @@ func (s *CreateAliasInput) Validate() error {
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.RoutingStrategy == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoutingStrategy"))
 	}
@@ -8677,7 +8681,7 @@ type CreateBuildInput struct {
 	// value determines the type of fleet resources that you can use for this build.
 	// If your game build contains multiple executables, they all must run on the
 	// same operating system.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 
 	// Amazon S3 location of the game build files to be uploaded. The S3 bucket
 	// must be owned by the same AWS account that you're using to manage Amazon
@@ -8730,8 +8734,8 @@ func (s *CreateBuildInput) SetName(v string) *CreateBuildInput {
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *CreateBuildInput) SetOperatingSystem(v string) *CreateBuildInput {
-	s.OperatingSystem = &v
+func (s *CreateBuildInput) SetOperatingSystem(v OperatingSystem) *CreateBuildInput {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -8819,7 +8823,7 @@ type CreateFleetInput struct {
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
 	//
 	// EC2InstanceType is a required field
-	EC2InstanceType *string `type:"string" required:"true" enum:"EC2InstanceType"`
+	EC2InstanceType EC2InstanceType `type:"string" required:"true"`
 
 	// This parameter is no longer used. Instead, to specify where Amazon GameLift
 	// should store log files once a server process shuts down, use the Amazon GameLift
@@ -8849,7 +8853,7 @@ type CreateFleetInput struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy *string `type:"string" enum:"ProtectionPolicy"`
+	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string"`
 
 	// Unique identifier for the AWS account with the VPC that you want to peer
 	// your Amazon GameLift fleet with. You can find your Account ID in the AWS
@@ -8905,15 +8909,17 @@ func (s CreateFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateFleetInput"}
+
 	if s.BuildId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
-	if s.EC2InstanceType == nil {
+	if len(s.EC2InstanceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("EC2InstanceType"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -8973,8 +8979,8 @@ func (s *CreateFleetInput) SetEC2InboundPermissions(v []*IpPermission) *CreateFl
 }
 
 // SetEC2InstanceType sets the EC2InstanceType field's value.
-func (s *CreateFleetInput) SetEC2InstanceType(v string) *CreateFleetInput {
-	s.EC2InstanceType = &v
+func (s *CreateFleetInput) SetEC2InstanceType(v EC2InstanceType) *CreateFleetInput {
+	s.EC2InstanceType = v
 	return s
 }
 
@@ -8997,8 +9003,8 @@ func (s *CreateFleetInput) SetName(v string) *CreateFleetInput {
 }
 
 // SetNewGameSessionProtectionPolicy sets the NewGameSessionProtectionPolicy field's value.
-func (s *CreateFleetInput) SetNewGameSessionProtectionPolicy(v string) *CreateFleetInput {
-	s.NewGameSessionProtectionPolicy = &v
+func (s *CreateFleetInput) SetNewGameSessionProtectionPolicy(v ProtectionPolicy) *CreateFleetInput {
+	s.NewGameSessionProtectionPolicy = v
 	return s
 }
 
@@ -9147,6 +9153,7 @@ func (s *CreateGameSessionInput) Validate() error {
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
+
 	if s.MaximumPlayerSessionCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaximumPlayerSessionCount"))
 	}
@@ -9296,6 +9303,7 @@ func (s CreateGameSessionQueueInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGameSessionQueueInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateGameSessionQueueInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -9457,6 +9465,7 @@ func (s CreateMatchmakingConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMatchmakingConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateMatchmakingConfigurationInput"}
+
 	if s.AcceptanceRequired == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AcceptanceRequired"))
 	}
@@ -9469,21 +9478,25 @@ func (s *CreateMatchmakingConfigurationInput) Validate() error {
 	if s.GameSessionData != nil && len(*s.GameSessionData) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GameSessionData", 1))
 	}
+
 	if s.GameSessionQueueArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GameSessionQueueArns"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.RequestTimeoutSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestTimeoutSeconds"))
 	}
 	if s.RequestTimeoutSeconds != nil && *s.RequestTimeoutSeconds < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("RequestTimeoutSeconds", 1))
 	}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -9635,12 +9648,14 @@ func (s CreateMatchmakingRuleSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMatchmakingRuleSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateMatchmakingRuleSetInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.RuleSetBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetBody"))
 	}
@@ -9726,6 +9741,7 @@ func (s CreatePlayerSessionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlayerSessionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePlayerSessionInput"}
+
 	if s.GameSessionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
 	}
@@ -9735,6 +9751,7 @@ func (s *CreatePlayerSessionInput) Validate() error {
 	if s.PlayerData != nil && len(*s.PlayerData) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PlayerData", 1))
 	}
+
 	if s.PlayerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlayerId"))
 	}
@@ -9826,12 +9843,14 @@ func (s CreatePlayerSessionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlayerSessionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePlayerSessionsInput"}
+
 	if s.GameSessionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
 	}
 	if s.GameSessionId != nil && len(*s.GameSessionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GameSessionId", 1))
 	}
+
 	if s.PlayerIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlayerIds"))
 	}
@@ -9922,12 +9941,14 @@ func (s CreateVpcPeeringAuthorizationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVpcPeeringAuthorizationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcPeeringAuthorizationInput"}
+
 	if s.GameLiftAwsAccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GameLiftAwsAccountId"))
 	}
 	if s.GameLiftAwsAccountId != nil && len(*s.GameLiftAwsAccountId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GameLiftAwsAccountId", 1))
 	}
+
 	if s.PeerVpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PeerVpcId"))
 	}
@@ -10018,15 +10039,18 @@ func (s CreateVpcPeeringConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVpcPeeringConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVpcPeeringConnectionInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
+
 	if s.PeerVpcAwsAccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PeerVpcAwsAccountId"))
 	}
 	if s.PeerVpcAwsAccountId != nil && len(*s.PeerVpcAwsAccountId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PeerVpcAwsAccountId", 1))
 	}
+
 	if s.PeerVpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PeerVpcId"))
 	}
@@ -10097,6 +10121,7 @@ func (s DeleteAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAliasInput"}
+
 	if s.AliasId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
 	}
@@ -10152,6 +10177,7 @@ func (s DeleteBuildInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBuildInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBuildInput"}
+
 	if s.BuildId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
@@ -10207,6 +10233,7 @@ func (s DeleteFleetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFleetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFleetInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
@@ -10263,6 +10290,7 @@ func (s DeleteGameSessionQueueInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGameSessionQueueInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteGameSessionQueueInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -10321,6 +10349,7 @@ func (s DeleteMatchmakingConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMatchmakingConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMatchmakingConfigurationInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -10385,9 +10414,11 @@ func (s DeleteScalingPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteScalingPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteScalingPolicyInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -10462,12 +10493,14 @@ func (s DeleteVpcPeeringAuthorizationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpcPeeringAuthorizationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcPeeringAuthorizationInput"}
+
 	if s.GameLiftAwsAccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GameLiftAwsAccountId"))
 	}
 	if s.GameLiftAwsAccountId != nil && len(*s.GameLiftAwsAccountId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GameLiftAwsAccountId", 1))
 	}
+
 	if s.PeerVpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PeerVpcId"))
 	}
@@ -10539,9 +10572,11 @@ func (s DeleteVpcPeeringConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVpcPeeringConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVpcPeeringConnectionInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
+
 	if s.VpcPeeringConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcPeeringConnectionId"))
 	}
@@ -10606,6 +10641,7 @@ func (s DescribeAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAliasInput"}
+
 	if s.AliasId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
 	}
@@ -10671,6 +10707,7 @@ func (s DescribeBuildInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBuildInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeBuildInput"}
+
 	if s.BuildId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
@@ -10723,7 +10760,7 @@ type DescribeEC2InstanceLimitsInput struct {
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions. Leave
 	// this parameter blank to retrieve limits for all types.
-	EC2InstanceType *string `type:"string" enum:"EC2InstanceType"`
+	EC2InstanceType EC2InstanceType `type:"string"`
 }
 
 // String returns the string representation
@@ -10737,8 +10774,8 @@ func (s DescribeEC2InstanceLimitsInput) GoString() string {
 }
 
 // SetEC2InstanceType sets the EC2InstanceType field's value.
-func (s *DescribeEC2InstanceLimitsInput) SetEC2InstanceType(v string) *DescribeEC2InstanceLimitsInput {
-	s.EC2InstanceType = &v
+func (s *DescribeEC2InstanceLimitsInput) SetEC2InstanceType(v EC2InstanceType) *DescribeEC2InstanceLimitsInput {
+	s.EC2InstanceType = v
 	return s
 }
 
@@ -11023,6 +11060,7 @@ func (s DescribeFleetEventsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFleetEventsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetEventsInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
@@ -11129,6 +11167,7 @@ func (s DescribeFleetPortSettingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFleetPortSettingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetPortSettingsInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
@@ -11435,6 +11474,7 @@ func (s DescribeGameSessionPlacementInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeGameSessionPlacementInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeGameSessionPlacementInput"}
+
 	if s.PlacementId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlacementId"))
 	}
@@ -11751,6 +11791,7 @@ func (s DescribeInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancesInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
@@ -11964,6 +12005,7 @@ func (s DescribeMatchmakingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMatchmakingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeMatchmakingInput"}
+
 	if s.TicketIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TicketIds"))
 	}
@@ -12283,6 +12325,7 @@ func (s DescribeRuntimeConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRuntimeConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeRuntimeConfigurationInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
@@ -12361,7 +12404,7 @@ type DescribeScalingPoliciesInput struct {
 	//
 	//    * ERROR -- An error occurred in creating the policy. It should be removed
 	//    and recreated.
-	StatusFilter *string `type:"string" enum:"ScalingStatusType"`
+	StatusFilter ScalingStatusType `type:"string"`
 }
 
 // String returns the string representation
@@ -12377,6 +12420,7 @@ func (s DescribeScalingPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeScalingPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingPoliciesInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
@@ -12412,8 +12456,8 @@ func (s *DescribeScalingPoliciesInput) SetNextToken(v string) *DescribeScalingPo
 }
 
 // SetStatusFilter sets the StatusFilter field's value.
-func (s *DescribeScalingPoliciesInput) SetStatusFilter(v string) *DescribeScalingPoliciesInput {
-	s.StatusFilter = &v
+func (s *DescribeScalingPoliciesInput) SetStatusFilter(v ScalingStatusType) *DescribeScalingPoliciesInput {
+	s.StatusFilter = v
 	return s
 }
 
@@ -12739,7 +12783,7 @@ type EC2InstanceLimit struct {
 	// fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
-	EC2InstanceType *string `type:"string" enum:"EC2InstanceType"`
+	EC2InstanceType EC2InstanceType `type:"string"`
 
 	// Number of instances allowed.
 	InstanceLimit *int64 `type:"integer"`
@@ -12762,8 +12806,8 @@ func (s *EC2InstanceLimit) SetCurrentInstances(v int64) *EC2InstanceLimit {
 }
 
 // SetEC2InstanceType sets the EC2InstanceType field's value.
-func (s *EC2InstanceLimit) SetEC2InstanceType(v string) *EC2InstanceLimit {
-	s.EC2InstanceType = &v
+func (s *EC2InstanceLimit) SetEC2InstanceType(v EC2InstanceType) *EC2InstanceLimit {
+	s.EC2InstanceType = v
 	return s
 }
 
@@ -12872,7 +12916,7 @@ type Event struct {
 	//    includes both the old and new policy setting.
 	//
 	//    * FLEET_DELETED -- A request to delete a fleet was initiated.
-	EventCode *string `type:"string" enum:"EventCode"`
+	EventCode EventCode `type:"string"`
 
 	// Unique identifier for a fleet event.
 	EventId *string `min:"1" type:"string"`
@@ -12904,8 +12948,8 @@ func (s Event) GoString() string {
 }
 
 // SetEventCode sets the EventCode field's value.
-func (s *Event) SetEventCode(v string) *Event {
-	s.EventCode = &v
+func (s *Event) SetEventCode(v EventCode) *Event {
+	s.EventCode = v
 	return s
 }
 
@@ -13032,12 +13076,12 @@ type FleetAttributes struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy *string `type:"string" enum:"ProtectionPolicy"`
+	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string"`
 
 	// Operating system of the fleet's computing resources. A fleet's operating
 	// system depends on the OS specified for the build that is deployed on this
 	// fleet.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 
 	// Fleet policy to limit the number of game sessions an individual player can
 	// create over a span of time.
@@ -13072,7 +13116,7 @@ type FleetAttributes struct {
 	//    * DELETING -- Hosts are responding to a delete fleet request.
 	//
 	//    * TERMINATED -- The fleet no longer exists.
-	Status *string `type:"string" enum:"FleetStatus"`
+	Status FleetStatus `type:"string"`
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -13138,14 +13182,14 @@ func (s *FleetAttributes) SetName(v string) *FleetAttributes {
 }
 
 // SetNewGameSessionProtectionPolicy sets the NewGameSessionProtectionPolicy field's value.
-func (s *FleetAttributes) SetNewGameSessionProtectionPolicy(v string) *FleetAttributes {
-	s.NewGameSessionProtectionPolicy = &v
+func (s *FleetAttributes) SetNewGameSessionProtectionPolicy(v ProtectionPolicy) *FleetAttributes {
+	s.NewGameSessionProtectionPolicy = v
 	return s
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *FleetAttributes) SetOperatingSystem(v string) *FleetAttributes {
-	s.OperatingSystem = &v
+func (s *FleetAttributes) SetOperatingSystem(v OperatingSystem) *FleetAttributes {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -13168,8 +13212,8 @@ func (s *FleetAttributes) SetServerLaunchPath(v string) *FleetAttributes {
 }
 
 // SetStatus sets the Status field's value.
-func (s *FleetAttributes) SetStatus(v string) *FleetAttributes {
-	s.Status = &v
+func (s *FleetAttributes) SetStatus(v FleetStatus) *FleetAttributes {
+	s.Status = v
 	return s
 }
 
@@ -13242,7 +13286,7 @@ type FleetCapacity struct {
 	// fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
-	InstanceType *string `type:"string" enum:"EC2InstanceType"`
+	InstanceType EC2InstanceType `type:"string"`
 }
 
 // String returns the string representation
@@ -13268,8 +13312,8 @@ func (s *FleetCapacity) SetInstanceCounts(v *EC2InstanceCounts) *FleetCapacity {
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *FleetCapacity) SetInstanceType(v string) *FleetCapacity {
-	s.InstanceType = &v
+func (s *FleetCapacity) SetInstanceType(v EC2InstanceType) *FleetCapacity {
+	s.InstanceType = v
 	return s
 }
 
@@ -13418,9 +13462,11 @@ func (s GameProperty) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GameProperty) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GameProperty"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -13522,7 +13568,7 @@ type GameSession struct {
 	Name *string `min:"1" type:"string"`
 
 	// Indicates whether or not the game session is accepting new players.
-	PlayerSessionCreationPolicy *string `type:"string" enum:"PlayerSessionCreationPolicy"`
+	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string"`
 
 	// Port number for the game session. To connect to a Amazon GameLift game server,
 	// an app needs both the IP address and port number.
@@ -13530,7 +13576,7 @@ type GameSession struct {
 
 	// Current status of the game session. A game session must have an ACTIVE status
 	// to have player sessions.
-	Status *string `type:"string" enum:"GameSessionStatus"`
+	Status GameSessionStatus `type:"string"`
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -13608,8 +13654,8 @@ func (s *GameSession) SetName(v string) *GameSession {
 }
 
 // SetPlayerSessionCreationPolicy sets the PlayerSessionCreationPolicy field's value.
-func (s *GameSession) SetPlayerSessionCreationPolicy(v string) *GameSession {
-	s.PlayerSessionCreationPolicy = &v
+func (s *GameSession) SetPlayerSessionCreationPolicy(v PlayerSessionCreationPolicy) *GameSession {
+	s.PlayerSessionCreationPolicy = v
 	return s
 }
 
@@ -13620,8 +13666,8 @@ func (s *GameSession) SetPort(v int64) *GameSession {
 }
 
 // SetStatus sets the Status field's value.
-func (s *GameSession) SetStatus(v string) *GameSession {
-	s.Status = &v
+func (s *GameSession) SetStatus(v GameSessionStatus) *GameSession {
+	s.Status = v
 	return s
 }
 
@@ -13707,7 +13753,7 @@ type GameSessionDetail struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	ProtectionPolicy *string `type:"string" enum:"ProtectionPolicy"`
+	ProtectionPolicy ProtectionPolicy `type:"string"`
 }
 
 // String returns the string representation
@@ -13727,8 +13773,8 @@ func (s *GameSessionDetail) SetGameSession(v *GameSession) *GameSessionDetail {
 }
 
 // SetProtectionPolicy sets the ProtectionPolicy field's value.
-func (s *GameSessionDetail) SetProtectionPolicy(v string) *GameSessionDetail {
-	s.ProtectionPolicy = &v
+func (s *GameSessionDetail) SetProtectionPolicy(v ProtectionPolicy) *GameSessionDetail {
+	s.ProtectionPolicy = v
 	return s
 }
 
@@ -13832,7 +13878,7 @@ type GameSessionPlacement struct {
 	//
 	//    * TIMED_OUT -- A new game session was not successfully created before
 	//    the time limit expired. You can resubmit the placement request as needed.
-	Status *string `type:"string" enum:"GameSessionPlacementState"`
+	Status GameSessionPlacementState `type:"string"`
 }
 
 // String returns the string representation
@@ -13936,8 +13982,8 @@ func (s *GameSessionPlacement) SetStartTime(v time.Time) *GameSessionPlacement {
 }
 
 // SetStatus sets the Status field's value.
-func (s *GameSessionPlacement) SetStatus(v string) *GameSessionPlacement {
-	s.Status = &v
+func (s *GameSessionPlacement) SetStatus(v GameSessionPlacementState) *GameSessionPlacement {
+	s.Status = v
 	return s
 }
 
@@ -14117,6 +14163,7 @@ func (s GetGameSessionLogUrlInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGameSessionLogUrlInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGameSessionLogUrlInput"}
+
 	if s.GameSessionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
 	}
@@ -14194,9 +14241,11 @@ func (s GetInstanceAccessInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceAccessInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceAccessInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -14265,7 +14314,7 @@ type Instance struct {
 	IpAddress *string `type:"string"`
 
 	// Operating system that is running on this instance.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 
 	// Current status of the instance. Possible statuses include the following:
 	//
@@ -14280,10 +14329,10 @@ type Instance struct {
 	//    * TERMINATING -- The instance is in the process of shutting down. This
 	//    may happen to reduce capacity during a scaling down event or to recycle
 	//    resources in the event of a problem.
-	Status *string `type:"string" enum:"InstanceStatus"`
+	Status InstanceStatus `type:"string"`
 
 	// EC2 instance type that defines the computing resources of this instance.
-	Type *string `type:"string" enum:"EC2InstanceType"`
+	Type EC2InstanceType `type:"string"`
 }
 
 // String returns the string representation
@@ -14321,20 +14370,20 @@ func (s *Instance) SetIpAddress(v string) *Instance {
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *Instance) SetOperatingSystem(v string) *Instance {
-	s.OperatingSystem = &v
+func (s *Instance) SetOperatingSystem(v OperatingSystem) *Instance {
+	s.OperatingSystem = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *Instance) SetStatus(v string) *Instance {
-	s.Status = &v
+func (s *Instance) SetStatus(v InstanceStatus) *Instance {
+	s.Status = v
 	return s
 }
 
 // SetType sets the Type field's value.
-func (s *Instance) SetType(v string) *Instance {
-	s.Type = &v
+func (s *Instance) SetType(v EC2InstanceType) *Instance {
+	s.Type = v
 	return s
 }
 
@@ -14357,7 +14406,7 @@ type InstanceAccess struct {
 	IpAddress *string `type:"string"`
 
 	// Operating system that is running on the instance.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 }
 
 // String returns the string representation
@@ -14395,8 +14444,8 @@ func (s *InstanceAccess) SetIpAddress(v string) *InstanceAccess {
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *InstanceAccess) SetOperatingSystem(v string) *InstanceAccess {
-	s.OperatingSystem = &v
+func (s *InstanceAccess) SetOperatingSystem(v OperatingSystem) *InstanceAccess {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -14462,7 +14511,7 @@ type IpPermission struct {
 	// Network communication protocol used by the fleet.
 	//
 	// Protocol is a required field
-	Protocol *string `type:"string" required:"true" enum:"IpProtocol"`
+	Protocol IpProtocol `type:"string" required:"true"`
 
 	// Ending value for a range of allowed port numbers. Port numbers are end-inclusive.
 	// This value must be higher than FromPort.
@@ -14484,18 +14533,21 @@ func (s IpPermission) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IpPermission) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IpPermission"}
+
 	if s.FromPort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FromPort"))
 	}
 	if s.FromPort != nil && *s.FromPort < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("FromPort", 1))
 	}
+
 	if s.IpRange == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IpRange"))
 	}
-	if s.Protocol == nil {
+	if len(s.Protocol) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
+
 	if s.ToPort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ToPort"))
 	}
@@ -14522,8 +14574,8 @@ func (s *IpPermission) SetIpRange(v string) *IpPermission {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *IpPermission) SetProtocol(v string) *IpPermission {
-	s.Protocol = &v
+func (s *IpPermission) SetProtocol(v IpProtocol) *IpPermission {
+	s.Protocol = v
 	return s
 }
 
@@ -14563,7 +14615,7 @@ type ListAliasesInput struct {
 	//    * TERMINAL -- The alias does not resolve to a fleet but instead can be
 	//    used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException
 	//    with the RoutingStrategy message embedded.
-	RoutingStrategyType *string `type:"string" enum:"RoutingStrategyType"`
+	RoutingStrategyType RoutingStrategyType `type:"string"`
 }
 
 // String returns the string representation
@@ -14614,8 +14666,8 @@ func (s *ListAliasesInput) SetNextToken(v string) *ListAliasesInput {
 }
 
 // SetRoutingStrategyType sets the RoutingStrategyType field's value.
-func (s *ListAliasesInput) SetRoutingStrategyType(v string) *ListAliasesInput {
-	s.RoutingStrategyType = &v
+func (s *ListAliasesInput) SetRoutingStrategyType(v RoutingStrategyType) *ListAliasesInput {
+	s.RoutingStrategyType = v
 	return s
 }
 
@@ -14684,7 +14736,7 @@ type ListBuildsInput struct {
 	//
 	//    * FAILED -- The game build upload failed. You cannot create new fleets
 	//    for this build.
-	Status *string `type:"string" enum:"BuildStatus"`
+	Status BuildStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -14726,8 +14778,8 @@ func (s *ListBuildsInput) SetNextToken(v string) *ListBuildsInput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ListBuildsInput) SetStatus(v string) *ListBuildsInput {
-	s.Status = &v
+func (s *ListBuildsInput) SetStatus(v BuildStatus) *ListBuildsInput {
+	s.Status = v
 	return s
 }
 
@@ -15209,7 +15261,7 @@ type MatchmakingTicket struct {
 	//    * TIMED_OUT -- The matchmaking request was not completed within the duration
 	//    specified in the matchmaking configuration. Matchmaking requests that
 	//    time out can be resubmitted.
-	Status *string `type:"string" enum:"MatchmakingConfigurationStatus"`
+	Status MatchmakingConfigurationStatus `type:"string"`
 
 	// Additional information about the current status.
 	StatusMessage *string `type:"string"`
@@ -15270,8 +15322,8 @@ func (s *MatchmakingTicket) SetStartTime(v time.Time) *MatchmakingTicket {
 }
 
 // SetStatus sets the Status field's value.
-func (s *MatchmakingTicket) SetStatus(v string) *MatchmakingTicket {
-	s.Status = &v
+func (s *MatchmakingTicket) SetStatus(v MatchmakingConfigurationStatus) *MatchmakingTicket {
+	s.Status = v
 	return s
 }
 
@@ -15628,7 +15680,7 @@ type PlayerSession struct {
 	//
 	//    * TIMEDOUT -- A player session request was received, but the player did
 	//    not connect and/or was not validated within the timeout limit (60 seconds).
-	Status *string `type:"string" enum:"PlayerSessionStatus"`
+	Status PlayerSessionStatus `type:"string"`
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -15694,8 +15746,8 @@ func (s *PlayerSession) SetPort(v int64) *PlayerSession {
 }
 
 // SetStatus sets the Status field's value.
-func (s *PlayerSession) SetStatus(v string) *PlayerSession {
-	s.Status = &v
+func (s *PlayerSession) SetStatus(v PlayerSessionStatus) *PlayerSession {
+	s.Status = v
 	return s
 }
 
@@ -15714,7 +15766,7 @@ type PutScalingPolicyInput struct {
 	// value.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator *string `type:"string" required:"true" enum:"ComparisonOperatorType"`
+	ComparisonOperator ComparisonOperatorType `type:"string" required:"true"`
 
 	// Length of time (in minutes) the metric must be at or beyond the threshold
 	// before a scaling event is triggered.
@@ -15749,7 +15801,7 @@ type PutScalingPolicyInput struct {
 	//    * IdleInstances -- number of instances not currently running a game session.
 	//
 	// MetricName is a required field
-	MetricName *string `type:"string" required:"true" enum:"MetricName"`
+	MetricName MetricName `type:"string" required:"true"`
 
 	// Descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique. A fleet can have only one scaling policy with the
@@ -15777,7 +15829,7 @@ type PutScalingPolicyInput struct {
 	//    the fleet down by 10%.
 	//
 	// ScalingAdjustmentType is a required field
-	ScalingAdjustmentType *string `type:"string" required:"true" enum:"ScalingAdjustmentType"`
+	ScalingAdjustmentType ScalingAdjustmentType `type:"string" required:"true"`
 
 	// Metric value used to trigger a scaling event.
 	//
@@ -15798,33 +15850,38 @@ func (s PutScalingPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutScalingPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutScalingPolicyInput"}
-	if s.ComparisonOperator == nil {
+	if len(s.ComparisonOperator) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
+
 	if s.EvaluationPeriods == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EvaluationPeriods"))
 	}
 	if s.EvaluationPeriods != nil && *s.EvaluationPeriods < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("EvaluationPeriods", 1))
 	}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
-	if s.MetricName == nil {
+	if len(s.MetricName) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.ScalingAdjustment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustment"))
 	}
-	if s.ScalingAdjustmentType == nil {
+	if len(s.ScalingAdjustmentType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustmentType"))
 	}
+
 	if s.Threshold == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
 	}
@@ -15836,8 +15893,8 @@ func (s *PutScalingPolicyInput) Validate() error {
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *PutScalingPolicyInput) SetComparisonOperator(v string) *PutScalingPolicyInput {
-	s.ComparisonOperator = &v
+func (s *PutScalingPolicyInput) SetComparisonOperator(v ComparisonOperatorType) *PutScalingPolicyInput {
+	s.ComparisonOperator = v
 	return s
 }
 
@@ -15854,8 +15911,8 @@ func (s *PutScalingPolicyInput) SetFleetId(v string) *PutScalingPolicyInput {
 }
 
 // SetMetricName sets the MetricName field's value.
-func (s *PutScalingPolicyInput) SetMetricName(v string) *PutScalingPolicyInput {
-	s.MetricName = &v
+func (s *PutScalingPolicyInput) SetMetricName(v MetricName) *PutScalingPolicyInput {
+	s.MetricName = v
 	return s
 }
 
@@ -15872,8 +15929,8 @@ func (s *PutScalingPolicyInput) SetScalingAdjustment(v int64) *PutScalingPolicyI
 }
 
 // SetScalingAdjustmentType sets the ScalingAdjustmentType field's value.
-func (s *PutScalingPolicyInput) SetScalingAdjustmentType(v string) *PutScalingPolicyInput {
-	s.ScalingAdjustmentType = &v
+func (s *PutScalingPolicyInput) SetScalingAdjustmentType(v ScalingAdjustmentType) *PutScalingPolicyInput {
+	s.ScalingAdjustmentType = v
 	return s
 }
 
@@ -15933,6 +15990,7 @@ func (s RequestUploadCredentialsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestUploadCredentialsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RequestUploadCredentialsInput"}
+
 	if s.BuildId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
@@ -16009,6 +16067,7 @@ func (s ResolveAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResolveAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResolveAliasInput"}
+
 	if s.AliasId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
 	}
@@ -16160,7 +16219,7 @@ type RoutingStrategy struct {
 	//    * TERMINAL -- The alias does not resolve to a fleet but instead can be
 	//    used to display a message to the user. A terminal alias throws a TerminalRoutingStrategyException
 	//    with the RoutingStrategy message embedded.
-	Type *string `type:"string" enum:"RoutingStrategyType"`
+	Type RoutingStrategyType `type:"string"`
 }
 
 // String returns the string representation
@@ -16186,8 +16245,8 @@ func (s *RoutingStrategy) SetMessage(v string) *RoutingStrategy {
 }
 
 // SetType sets the Type field's value.
-func (s *RoutingStrategy) SetType(v string) *RoutingStrategy {
-	s.Type = &v
+func (s *RoutingStrategy) SetType(v RoutingStrategyType) *RoutingStrategy {
+	s.Type = v
 	return s
 }
 
@@ -16450,7 +16509,7 @@ type ScalingPolicy struct {
 
 	// Comparison operator to use when measuring a metric against the threshold
 	// value.
-	ComparisonOperator *string `type:"string" enum:"ComparisonOperatorType"`
+	ComparisonOperator ComparisonOperatorType `type:"string"`
 
 	// Length of time (in minutes) the metric must be at or beyond the threshold
 	// before a scaling event is triggered.
@@ -16479,7 +16538,7 @@ type ScalingPolicy struct {
 	//    * ActiveInstances -- number of instances currently running a game session.
 	//
 	//    * IdleInstances -- number of instances not currently running a game session.
-	MetricName *string `type:"string" enum:"MetricName"`
+	MetricName MetricName `type:"string"`
 
 	// Descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique.
@@ -16499,7 +16558,7 @@ type ScalingPolicy struct {
 	//    * PercentChangeInCapacity -- increase or reduce the current instance count
 	//    by the scaling adjustment, read as a percentage. Positive values scale
 	//    up while negative values scale down.
-	ScalingAdjustmentType *string `type:"string" enum:"ScalingAdjustmentType"`
+	ScalingAdjustmentType ScalingAdjustmentType `type:"string"`
 
 	// Current status of the scaling policy. The scaling policy is only in force
 	// when in an ACTIVE status.
@@ -16520,7 +16579,7 @@ type ScalingPolicy struct {
 	//
 	//    * ERROR -- An error occurred in creating the policy. It should be removed
 	//    and recreated.
-	Status *string `type:"string" enum:"ScalingStatusType"`
+	Status ScalingStatusType `type:"string"`
 
 	// Metric value used to trigger a scaling event.
 	Threshold *float64 `type:"double"`
@@ -16537,8 +16596,8 @@ func (s ScalingPolicy) GoString() string {
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *ScalingPolicy) SetComparisonOperator(v string) *ScalingPolicy {
-	s.ComparisonOperator = &v
+func (s *ScalingPolicy) SetComparisonOperator(v ComparisonOperatorType) *ScalingPolicy {
+	s.ComparisonOperator = v
 	return s
 }
 
@@ -16555,8 +16614,8 @@ func (s *ScalingPolicy) SetFleetId(v string) *ScalingPolicy {
 }
 
 // SetMetricName sets the MetricName field's value.
-func (s *ScalingPolicy) SetMetricName(v string) *ScalingPolicy {
-	s.MetricName = &v
+func (s *ScalingPolicy) SetMetricName(v MetricName) *ScalingPolicy {
+	s.MetricName = v
 	return s
 }
 
@@ -16573,14 +16632,14 @@ func (s *ScalingPolicy) SetScalingAdjustment(v int64) *ScalingPolicy {
 }
 
 // SetScalingAdjustmentType sets the ScalingAdjustmentType field's value.
-func (s *ScalingPolicy) SetScalingAdjustmentType(v string) *ScalingPolicy {
-	s.ScalingAdjustmentType = &v
+func (s *ScalingPolicy) SetScalingAdjustmentType(v ScalingAdjustmentType) *ScalingPolicy {
+	s.ScalingAdjustmentType = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *ScalingPolicy) SetStatus(v string) *ScalingPolicy {
-	s.Status = &v
+func (s *ScalingPolicy) SetStatus(v ScalingStatusType) *ScalingPolicy {
+	s.Status = v
 	return s
 }
 
@@ -16818,12 +16877,14 @@ func (s ServerProcess) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ServerProcess) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ServerProcess"}
+
 	if s.ConcurrentExecutions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConcurrentExecutions"))
 	}
 	if s.ConcurrentExecutions != nil && *s.ConcurrentExecutions < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ConcurrentExecutions", 1))
 	}
+
 	if s.LaunchPath == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LaunchPath"))
 	}
@@ -16926,15 +16987,18 @@ func (s *StartGameSessionPlacementInput) Validate() error {
 	if s.GameSessionName != nil && len(*s.GameSessionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GameSessionName", 1))
 	}
+
 	if s.GameSessionQueueName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GameSessionQueueName"))
 	}
 	if s.GameSessionQueueName != nil && len(*s.GameSessionQueueName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GameSessionQueueName", 1))
 	}
+
 	if s.MaximumPlayerSessionCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaximumPlayerSessionCount"))
 	}
+
 	if s.PlacementId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlacementId"))
 	}
@@ -17090,12 +17154,14 @@ func (s StartMatchmakingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartMatchmakingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartMatchmakingInput"}
+
 	if s.ConfigurationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationName"))
 	}
 	if s.ConfigurationName != nil && len(*s.ConfigurationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationName", 1))
 	}
+
 	if s.Players == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Players"))
 	}
@@ -17188,6 +17254,7 @@ func (s StopGameSessionPlacementInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopGameSessionPlacementInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopGameSessionPlacementInput"}
+
 	if s.PlacementId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlacementId"))
 	}
@@ -17257,6 +17324,7 @@ func (s StopMatchmakingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopMatchmakingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopMatchmakingInput"}
+
 	if s.TicketId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TicketId"))
 	}
@@ -17325,6 +17393,7 @@ func (s UpdateAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAliasInput"}
+
 	if s.AliasId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AliasId"))
 	}
@@ -17422,6 +17491,7 @@ func (s UpdateBuildInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBuildInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateBuildInput"}
+
 	if s.BuildId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BuildId"))
 	}
@@ -17514,7 +17584,7 @@ type UpdateFleetAttributesInput struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy *string `type:"string" enum:"ProtectionPolicy"`
+	NewGameSessionProtectionPolicy ProtectionPolicy `type:"string"`
 
 	// Policy that limits the number of game sessions an individual player can create
 	// over a span of time.
@@ -17537,6 +17607,7 @@ func (s *UpdateFleetAttributesInput) Validate() error {
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
@@ -17575,8 +17646,8 @@ func (s *UpdateFleetAttributesInput) SetName(v string) *UpdateFleetAttributesInp
 }
 
 // SetNewGameSessionProtectionPolicy sets the NewGameSessionProtectionPolicy field's value.
-func (s *UpdateFleetAttributesInput) SetNewGameSessionProtectionPolicy(v string) *UpdateFleetAttributesInput {
-	s.NewGameSessionProtectionPolicy = &v
+func (s *UpdateFleetAttributesInput) SetNewGameSessionProtectionPolicy(v ProtectionPolicy) *UpdateFleetAttributesInput {
+	s.NewGameSessionProtectionPolicy = v
 	return s
 }
 
@@ -17646,6 +17717,7 @@ func (s UpdateFleetCapacityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFleetCapacityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateFleetCapacityInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
@@ -17735,6 +17807,7 @@ func (s UpdateFleetPortSettingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFleetPortSettingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateFleetPortSettingsInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
@@ -17827,7 +17900,7 @@ type UpdateGameSessionInput struct {
 	Name *string `min:"1" type:"string"`
 
 	// Policy determining whether or not the game session accepts new players.
-	PlayerSessionCreationPolicy *string `type:"string" enum:"PlayerSessionCreationPolicy"`
+	PlayerSessionCreationPolicy PlayerSessionCreationPolicy `type:"string"`
 
 	// Game session protection policy to apply to this game session only.
 	//
@@ -17836,7 +17909,7 @@ type UpdateGameSessionInput struct {
 	//
 	//    * FullProtection -- If the game session is in an ACTIVE status, it cannot
 	//    be terminated during a scale-down event.
-	ProtectionPolicy *string `type:"string" enum:"ProtectionPolicy"`
+	ProtectionPolicy ProtectionPolicy `type:"string"`
 }
 
 // String returns the string representation
@@ -17852,6 +17925,7 @@ func (s UpdateGameSessionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGameSessionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGameSessionInput"}
+
 	if s.GameSessionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GameSessionId"))
 	}
@@ -17887,14 +17961,14 @@ func (s *UpdateGameSessionInput) SetName(v string) *UpdateGameSessionInput {
 }
 
 // SetPlayerSessionCreationPolicy sets the PlayerSessionCreationPolicy field's value.
-func (s *UpdateGameSessionInput) SetPlayerSessionCreationPolicy(v string) *UpdateGameSessionInput {
-	s.PlayerSessionCreationPolicy = &v
+func (s *UpdateGameSessionInput) SetPlayerSessionCreationPolicy(v PlayerSessionCreationPolicy) *UpdateGameSessionInput {
+	s.PlayerSessionCreationPolicy = v
 	return s
 }
 
 // SetProtectionPolicy sets the ProtectionPolicy field's value.
-func (s *UpdateGameSessionInput) SetProtectionPolicy(v string) *UpdateGameSessionInput {
-	s.ProtectionPolicy = &v
+func (s *UpdateGameSessionInput) SetProtectionPolicy(v ProtectionPolicy) *UpdateGameSessionInput {
+	s.ProtectionPolicy = v
 	return s
 }
 
@@ -17970,6 +18044,7 @@ func (s UpdateGameSessionQueueInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGameSessionQueueInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGameSessionQueueInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -18133,6 +18208,7 @@ func (s *UpdateMatchmakingConfigurationInput) Validate() error {
 	if s.GameSessionData != nil && len(*s.GameSessionData) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GameSessionData", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -18293,9 +18369,11 @@ func (s UpdateRuntimeConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRuntimeConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRuntimeConfigurationInput"}
+
 	if s.FleetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
 	}
+
 	if s.RuntimeConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuntimeConfiguration"))
 	}
@@ -18373,6 +18451,7 @@ func (s ValidateMatchmakingRuleSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ValidateMatchmakingRuleSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ValidateMatchmakingRuleSetInput"}
+
 	if s.RuleSetBody == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetBody"))
 	}
@@ -18635,457 +18714,255 @@ func (s *VpcPeeringConnectionStatus) SetMessage(v string) *VpcPeeringConnectionS
 	return s
 }
 
-const (
-	// AcceptanceTypeAccept is a AcceptanceType enum value
-	AcceptanceTypeAccept = "ACCEPT"
+type AcceptanceType string
 
-	// AcceptanceTypeReject is a AcceptanceType enum value
-	AcceptanceTypeReject = "REJECT"
+// Enum values for AcceptanceType
+const (
+	AcceptanceTypeAccept AcceptanceType = "ACCEPT"
+	AcceptanceTypeReject AcceptanceType = "REJECT"
 )
 
+type BuildStatus string
+
+// Enum values for BuildStatus
 const (
-	// BuildStatusInitialized is a BuildStatus enum value
-	BuildStatusInitialized = "INITIALIZED"
-
-	// BuildStatusReady is a BuildStatus enum value
-	BuildStatusReady = "READY"
-
-	// BuildStatusFailed is a BuildStatus enum value
-	BuildStatusFailed = "FAILED"
+	BuildStatusInitialized BuildStatus = "INITIALIZED"
+	BuildStatusReady       BuildStatus = "READY"
+	BuildStatusFailed      BuildStatus = "FAILED"
 )
 
+type ComparisonOperatorType string
+
+// Enum values for ComparisonOperatorType
 const (
-	// ComparisonOperatorTypeGreaterThanOrEqualToThreshold is a ComparisonOperatorType enum value
-	ComparisonOperatorTypeGreaterThanOrEqualToThreshold = "GreaterThanOrEqualToThreshold"
-
-	// ComparisonOperatorTypeGreaterThanThreshold is a ComparisonOperatorType enum value
-	ComparisonOperatorTypeGreaterThanThreshold = "GreaterThanThreshold"
-
-	// ComparisonOperatorTypeLessThanThreshold is a ComparisonOperatorType enum value
-	ComparisonOperatorTypeLessThanThreshold = "LessThanThreshold"
-
-	// ComparisonOperatorTypeLessThanOrEqualToThreshold is a ComparisonOperatorType enum value
-	ComparisonOperatorTypeLessThanOrEqualToThreshold = "LessThanOrEqualToThreshold"
+	ComparisonOperatorTypeGreaterThanOrEqualToThreshold ComparisonOperatorType = "GreaterThanOrEqualToThreshold"
+	ComparisonOperatorTypeGreaterThanThreshold          ComparisonOperatorType = "GreaterThanThreshold"
+	ComparisonOperatorTypeLessThanThreshold             ComparisonOperatorType = "LessThanThreshold"
+	ComparisonOperatorTypeLessThanOrEqualToThreshold    ComparisonOperatorType = "LessThanOrEqualToThreshold"
 )
 
+type EC2InstanceType string
+
+// Enum values for EC2InstanceType
 const (
-	// EC2InstanceTypeT2Micro is a EC2InstanceType enum value
-	EC2InstanceTypeT2Micro = "t2.micro"
-
-	// EC2InstanceTypeT2Small is a EC2InstanceType enum value
-	EC2InstanceTypeT2Small = "t2.small"
-
-	// EC2InstanceTypeT2Medium is a EC2InstanceType enum value
-	EC2InstanceTypeT2Medium = "t2.medium"
-
-	// EC2InstanceTypeT2Large is a EC2InstanceType enum value
-	EC2InstanceTypeT2Large = "t2.large"
-
-	// EC2InstanceTypeC3Large is a EC2InstanceType enum value
-	EC2InstanceTypeC3Large = "c3.large"
-
-	// EC2InstanceTypeC3Xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeC3Xlarge = "c3.xlarge"
-
-	// EC2InstanceTypeC32xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeC32xlarge = "c3.2xlarge"
-
-	// EC2InstanceTypeC34xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeC34xlarge = "c3.4xlarge"
-
-	// EC2InstanceTypeC38xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeC38xlarge = "c3.8xlarge"
-
-	// EC2InstanceTypeC4Large is a EC2InstanceType enum value
-	EC2InstanceTypeC4Large = "c4.large"
-
-	// EC2InstanceTypeC4Xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeC4Xlarge = "c4.xlarge"
-
-	// EC2InstanceTypeC42xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeC42xlarge = "c4.2xlarge"
-
-	// EC2InstanceTypeC44xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeC44xlarge = "c4.4xlarge"
-
-	// EC2InstanceTypeC48xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeC48xlarge = "c4.8xlarge"
-
-	// EC2InstanceTypeR3Large is a EC2InstanceType enum value
-	EC2InstanceTypeR3Large = "r3.large"
-
-	// EC2InstanceTypeR3Xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeR3Xlarge = "r3.xlarge"
-
-	// EC2InstanceTypeR32xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeR32xlarge = "r3.2xlarge"
-
-	// EC2InstanceTypeR34xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeR34xlarge = "r3.4xlarge"
-
-	// EC2InstanceTypeR38xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeR38xlarge = "r3.8xlarge"
-
-	// EC2InstanceTypeR4Large is a EC2InstanceType enum value
-	EC2InstanceTypeR4Large = "r4.large"
-
-	// EC2InstanceTypeR4Xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeR4Xlarge = "r4.xlarge"
-
-	// EC2InstanceTypeR42xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeR42xlarge = "r4.2xlarge"
-
-	// EC2InstanceTypeR44xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeR44xlarge = "r4.4xlarge"
-
-	// EC2InstanceTypeR48xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeR48xlarge = "r4.8xlarge"
-
-	// EC2InstanceTypeR416xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeR416xlarge = "r4.16xlarge"
-
-	// EC2InstanceTypeM3Medium is a EC2InstanceType enum value
-	EC2InstanceTypeM3Medium = "m3.medium"
-
-	// EC2InstanceTypeM3Large is a EC2InstanceType enum value
-	EC2InstanceTypeM3Large = "m3.large"
-
-	// EC2InstanceTypeM3Xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeM3Xlarge = "m3.xlarge"
-
-	// EC2InstanceTypeM32xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeM32xlarge = "m3.2xlarge"
-
-	// EC2InstanceTypeM4Large is a EC2InstanceType enum value
-	EC2InstanceTypeM4Large = "m4.large"
-
-	// EC2InstanceTypeM4Xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeM4Xlarge = "m4.xlarge"
-
-	// EC2InstanceTypeM42xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeM42xlarge = "m4.2xlarge"
-
-	// EC2InstanceTypeM44xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeM44xlarge = "m4.4xlarge"
-
-	// EC2InstanceTypeM410xlarge is a EC2InstanceType enum value
-	EC2InstanceTypeM410xlarge = "m4.10xlarge"
+	EC2InstanceTypeT2Micro    EC2InstanceType = "t2.micro"
+	EC2InstanceTypeT2Small    EC2InstanceType = "t2.small"
+	EC2InstanceTypeT2Medium   EC2InstanceType = "t2.medium"
+	EC2InstanceTypeT2Large    EC2InstanceType = "t2.large"
+	EC2InstanceTypeC3Large    EC2InstanceType = "c3.large"
+	EC2InstanceTypeC3Xlarge   EC2InstanceType = "c3.xlarge"
+	EC2InstanceTypeC32xlarge  EC2InstanceType = "c3.2xlarge"
+	EC2InstanceTypeC34xlarge  EC2InstanceType = "c3.4xlarge"
+	EC2InstanceTypeC38xlarge  EC2InstanceType = "c3.8xlarge"
+	EC2InstanceTypeC4Large    EC2InstanceType = "c4.large"
+	EC2InstanceTypeC4Xlarge   EC2InstanceType = "c4.xlarge"
+	EC2InstanceTypeC42xlarge  EC2InstanceType = "c4.2xlarge"
+	EC2InstanceTypeC44xlarge  EC2InstanceType = "c4.4xlarge"
+	EC2InstanceTypeC48xlarge  EC2InstanceType = "c4.8xlarge"
+	EC2InstanceTypeR3Large    EC2InstanceType = "r3.large"
+	EC2InstanceTypeR3Xlarge   EC2InstanceType = "r3.xlarge"
+	EC2InstanceTypeR32xlarge  EC2InstanceType = "r3.2xlarge"
+	EC2InstanceTypeR34xlarge  EC2InstanceType = "r3.4xlarge"
+	EC2InstanceTypeR38xlarge  EC2InstanceType = "r3.8xlarge"
+	EC2InstanceTypeR4Large    EC2InstanceType = "r4.large"
+	EC2InstanceTypeR4Xlarge   EC2InstanceType = "r4.xlarge"
+	EC2InstanceTypeR42xlarge  EC2InstanceType = "r4.2xlarge"
+	EC2InstanceTypeR44xlarge  EC2InstanceType = "r4.4xlarge"
+	EC2InstanceTypeR48xlarge  EC2InstanceType = "r4.8xlarge"
+	EC2InstanceTypeR416xlarge EC2InstanceType = "r4.16xlarge"
+	EC2InstanceTypeM3Medium   EC2InstanceType = "m3.medium"
+	EC2InstanceTypeM3Large    EC2InstanceType = "m3.large"
+	EC2InstanceTypeM3Xlarge   EC2InstanceType = "m3.xlarge"
+	EC2InstanceTypeM32xlarge  EC2InstanceType = "m3.2xlarge"
+	EC2InstanceTypeM4Large    EC2InstanceType = "m4.large"
+	EC2InstanceTypeM4Xlarge   EC2InstanceType = "m4.xlarge"
+	EC2InstanceTypeM42xlarge  EC2InstanceType = "m4.2xlarge"
+	EC2InstanceTypeM44xlarge  EC2InstanceType = "m4.4xlarge"
+	EC2InstanceTypeM410xlarge EC2InstanceType = "m4.10xlarge"
 )
 
+type EventCode string
+
+// Enum values for EventCode
 const (
-	// EventCodeGenericEvent is a EventCode enum value
-	EventCodeGenericEvent = "GENERIC_EVENT"
-
-	// EventCodeFleetCreated is a EventCode enum value
-	EventCodeFleetCreated = "FLEET_CREATED"
-
-	// EventCodeFleetDeleted is a EventCode enum value
-	EventCodeFleetDeleted = "FLEET_DELETED"
-
-	// EventCodeFleetScalingEvent is a EventCode enum value
-	EventCodeFleetScalingEvent = "FLEET_SCALING_EVENT"
-
-	// EventCodeFleetStateDownloading is a EventCode enum value
-	EventCodeFleetStateDownloading = "FLEET_STATE_DOWNLOADING"
-
-	// EventCodeFleetStateValidating is a EventCode enum value
-	EventCodeFleetStateValidating = "FLEET_STATE_VALIDATING"
-
-	// EventCodeFleetStateBuilding is a EventCode enum value
-	EventCodeFleetStateBuilding = "FLEET_STATE_BUILDING"
-
-	// EventCodeFleetStateActivating is a EventCode enum value
-	EventCodeFleetStateActivating = "FLEET_STATE_ACTIVATING"
-
-	// EventCodeFleetStateActive is a EventCode enum value
-	EventCodeFleetStateActive = "FLEET_STATE_ACTIVE"
-
-	// EventCodeFleetStateError is a EventCode enum value
-	EventCodeFleetStateError = "FLEET_STATE_ERROR"
-
-	// EventCodeFleetInitializationFailed is a EventCode enum value
-	EventCodeFleetInitializationFailed = "FLEET_INITIALIZATION_FAILED"
-
-	// EventCodeFleetBinaryDownloadFailed is a EventCode enum value
-	EventCodeFleetBinaryDownloadFailed = "FLEET_BINARY_DOWNLOAD_FAILED"
-
-	// EventCodeFleetValidationLaunchPathNotFound is a EventCode enum value
-	EventCodeFleetValidationLaunchPathNotFound = "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"
-
-	// EventCodeFleetValidationExecutableRuntimeFailure is a EventCode enum value
-	EventCodeFleetValidationExecutableRuntimeFailure = "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"
-
-	// EventCodeFleetValidationTimedOut is a EventCode enum value
-	EventCodeFleetValidationTimedOut = "FLEET_VALIDATION_TIMED_OUT"
-
-	// EventCodeFleetActivationFailed is a EventCode enum value
-	EventCodeFleetActivationFailed = "FLEET_ACTIVATION_FAILED"
-
-	// EventCodeFleetActivationFailedNoInstances is a EventCode enum value
-	EventCodeFleetActivationFailedNoInstances = "FLEET_ACTIVATION_FAILED_NO_INSTANCES"
-
-	// EventCodeFleetNewGameSessionProtectionPolicyUpdated is a EventCode enum value
-	EventCodeFleetNewGameSessionProtectionPolicyUpdated = "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"
-
-	// EventCodeServerProcessInvalidPath is a EventCode enum value
-	EventCodeServerProcessInvalidPath = "SERVER_PROCESS_INVALID_PATH"
-
-	// EventCodeServerProcessSdkInitializationTimeout is a EventCode enum value
-	EventCodeServerProcessSdkInitializationTimeout = "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT"
-
-	// EventCodeServerProcessProcessReadyTimeout is a EventCode enum value
-	EventCodeServerProcessProcessReadyTimeout = "SERVER_PROCESS_PROCESS_READY_TIMEOUT"
-
-	// EventCodeServerProcessCrashed is a EventCode enum value
-	EventCodeServerProcessCrashed = "SERVER_PROCESS_CRASHED"
-
-	// EventCodeServerProcessTerminatedUnhealthy is a EventCode enum value
-	EventCodeServerProcessTerminatedUnhealthy = "SERVER_PROCESS_TERMINATED_UNHEALTHY"
-
-	// EventCodeServerProcessForceTerminated is a EventCode enum value
-	EventCodeServerProcessForceTerminated = "SERVER_PROCESS_FORCE_TERMINATED"
-
-	// EventCodeServerProcessProcessExitTimeout is a EventCode enum value
-	EventCodeServerProcessProcessExitTimeout = "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"
-
-	// EventCodeGameSessionActivationTimeout is a EventCode enum value
-	EventCodeGameSessionActivationTimeout = "GAME_SESSION_ACTIVATION_TIMEOUT"
-
-	// EventCodeFleetCreationExtractingBuild is a EventCode enum value
-	EventCodeFleetCreationExtractingBuild = "FLEET_CREATION_EXTRACTING_BUILD"
-
-	// EventCodeFleetCreationRunningInstaller is a EventCode enum value
-	EventCodeFleetCreationRunningInstaller = "FLEET_CREATION_RUNNING_INSTALLER"
-
-	// EventCodeFleetCreationValidatingRuntimeConfig is a EventCode enum value
-	EventCodeFleetCreationValidatingRuntimeConfig = "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG"
-
-	// EventCodeFleetVpcPeeringSucceeded is a EventCode enum value
-	EventCodeFleetVpcPeeringSucceeded = "FLEET_VPC_PEERING_SUCCEEDED"
-
-	// EventCodeFleetVpcPeeringFailed is a EventCode enum value
-	EventCodeFleetVpcPeeringFailed = "FLEET_VPC_PEERING_FAILED"
-
-	// EventCodeFleetVpcPeeringDeleted is a EventCode enum value
-	EventCodeFleetVpcPeeringDeleted = "FLEET_VPC_PEERING_DELETED"
+	EventCodeGenericEvent                               EventCode = "GENERIC_EVENT"
+	EventCodeFleetCreated                               EventCode = "FLEET_CREATED"
+	EventCodeFleetDeleted                               EventCode = "FLEET_DELETED"
+	EventCodeFleetScalingEvent                          EventCode = "FLEET_SCALING_EVENT"
+	EventCodeFleetStateDownloading                      EventCode = "FLEET_STATE_DOWNLOADING"
+	EventCodeFleetStateValidating                       EventCode = "FLEET_STATE_VALIDATING"
+	EventCodeFleetStateBuilding                         EventCode = "FLEET_STATE_BUILDING"
+	EventCodeFleetStateActivating                       EventCode = "FLEET_STATE_ACTIVATING"
+	EventCodeFleetStateActive                           EventCode = "FLEET_STATE_ACTIVE"
+	EventCodeFleetStateError                            EventCode = "FLEET_STATE_ERROR"
+	EventCodeFleetInitializationFailed                  EventCode = "FLEET_INITIALIZATION_FAILED"
+	EventCodeFleetBinaryDownloadFailed                  EventCode = "FLEET_BINARY_DOWNLOAD_FAILED"
+	EventCodeFleetValidationLaunchPathNotFound          EventCode = "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"
+	EventCodeFleetValidationExecutableRuntimeFailure    EventCode = "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"
+	EventCodeFleetValidationTimedOut                    EventCode = "FLEET_VALIDATION_TIMED_OUT"
+	EventCodeFleetActivationFailed                      EventCode = "FLEET_ACTIVATION_FAILED"
+	EventCodeFleetActivationFailedNoInstances           EventCode = "FLEET_ACTIVATION_FAILED_NO_INSTANCES"
+	EventCodeFleetNewGameSessionProtectionPolicyUpdated EventCode = "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"
+	EventCodeServerProcessInvalidPath                   EventCode = "SERVER_PROCESS_INVALID_PATH"
+	EventCodeServerProcessSdkInitializationTimeout      EventCode = "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT"
+	EventCodeServerProcessProcessReadyTimeout           EventCode = "SERVER_PROCESS_PROCESS_READY_TIMEOUT"
+	EventCodeServerProcessCrashed                       EventCode = "SERVER_PROCESS_CRASHED"
+	EventCodeServerProcessTerminatedUnhealthy           EventCode = "SERVER_PROCESS_TERMINATED_UNHEALTHY"
+	EventCodeServerProcessForceTerminated               EventCode = "SERVER_PROCESS_FORCE_TERMINATED"
+	EventCodeServerProcessProcessExitTimeout            EventCode = "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"
+	EventCodeGameSessionActivationTimeout               EventCode = "GAME_SESSION_ACTIVATION_TIMEOUT"
+	EventCodeFleetCreationExtractingBuild               EventCode = "FLEET_CREATION_EXTRACTING_BUILD"
+	EventCodeFleetCreationRunningInstaller              EventCode = "FLEET_CREATION_RUNNING_INSTALLER"
+	EventCodeFleetCreationValidatingRuntimeConfig       EventCode = "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG"
+	EventCodeFleetVpcPeeringSucceeded                   EventCode = "FLEET_VPC_PEERING_SUCCEEDED"
+	EventCodeFleetVpcPeeringFailed                      EventCode = "FLEET_VPC_PEERING_FAILED"
+	EventCodeFleetVpcPeeringDeleted                     EventCode = "FLEET_VPC_PEERING_DELETED"
 )
 
+type FleetStatus string
+
+// Enum values for FleetStatus
 const (
-	// FleetStatusNew is a FleetStatus enum value
-	FleetStatusNew = "NEW"
-
-	// FleetStatusDownloading is a FleetStatus enum value
-	FleetStatusDownloading = "DOWNLOADING"
-
-	// FleetStatusValidating is a FleetStatus enum value
-	FleetStatusValidating = "VALIDATING"
-
-	// FleetStatusBuilding is a FleetStatus enum value
-	FleetStatusBuilding = "BUILDING"
-
-	// FleetStatusActivating is a FleetStatus enum value
-	FleetStatusActivating = "ACTIVATING"
-
-	// FleetStatusActive is a FleetStatus enum value
-	FleetStatusActive = "ACTIVE"
-
-	// FleetStatusDeleting is a FleetStatus enum value
-	FleetStatusDeleting = "DELETING"
-
-	// FleetStatusError is a FleetStatus enum value
-	FleetStatusError = "ERROR"
-
-	// FleetStatusTerminated is a FleetStatus enum value
-	FleetStatusTerminated = "TERMINATED"
+	FleetStatusNew         FleetStatus = "NEW"
+	FleetStatusDownloading FleetStatus = "DOWNLOADING"
+	FleetStatusValidating  FleetStatus = "VALIDATING"
+	FleetStatusBuilding    FleetStatus = "BUILDING"
+	FleetStatusActivating  FleetStatus = "ACTIVATING"
+	FleetStatusActive      FleetStatus = "ACTIVE"
+	FleetStatusDeleting    FleetStatus = "DELETING"
+	FleetStatusError       FleetStatus = "ERROR"
+	FleetStatusTerminated  FleetStatus = "TERMINATED"
 )
 
+type GameSessionPlacementState string
+
+// Enum values for GameSessionPlacementState
 const (
-	// GameSessionPlacementStatePending is a GameSessionPlacementState enum value
-	GameSessionPlacementStatePending = "PENDING"
-
-	// GameSessionPlacementStateFulfilled is a GameSessionPlacementState enum value
-	GameSessionPlacementStateFulfilled = "FULFILLED"
-
-	// GameSessionPlacementStateCancelled is a GameSessionPlacementState enum value
-	GameSessionPlacementStateCancelled = "CANCELLED"
-
-	// GameSessionPlacementStateTimedOut is a GameSessionPlacementState enum value
-	GameSessionPlacementStateTimedOut = "TIMED_OUT"
+	GameSessionPlacementStatePending   GameSessionPlacementState = "PENDING"
+	GameSessionPlacementStateFulfilled GameSessionPlacementState = "FULFILLED"
+	GameSessionPlacementStateCancelled GameSessionPlacementState = "CANCELLED"
+	GameSessionPlacementStateTimedOut  GameSessionPlacementState = "TIMED_OUT"
 )
 
+type GameSessionStatus string
+
+// Enum values for GameSessionStatus
 const (
-	// GameSessionStatusActive is a GameSessionStatus enum value
-	GameSessionStatusActive = "ACTIVE"
-
-	// GameSessionStatusActivating is a GameSessionStatus enum value
-	GameSessionStatusActivating = "ACTIVATING"
-
-	// GameSessionStatusTerminated is a GameSessionStatus enum value
-	GameSessionStatusTerminated = "TERMINATED"
-
-	// GameSessionStatusTerminating is a GameSessionStatus enum value
-	GameSessionStatusTerminating = "TERMINATING"
-
-	// GameSessionStatusError is a GameSessionStatus enum value
-	GameSessionStatusError = "ERROR"
+	GameSessionStatusActive      GameSessionStatus = "ACTIVE"
+	GameSessionStatusActivating  GameSessionStatus = "ACTIVATING"
+	GameSessionStatusTerminated  GameSessionStatus = "TERMINATED"
+	GameSessionStatusTerminating GameSessionStatus = "TERMINATING"
+	GameSessionStatusError       GameSessionStatus = "ERROR"
 )
 
+type InstanceStatus string
+
+// Enum values for InstanceStatus
 const (
-	// InstanceStatusPending is a InstanceStatus enum value
-	InstanceStatusPending = "PENDING"
-
-	// InstanceStatusActive is a InstanceStatus enum value
-	InstanceStatusActive = "ACTIVE"
-
-	// InstanceStatusTerminating is a InstanceStatus enum value
-	InstanceStatusTerminating = "TERMINATING"
+	InstanceStatusPending     InstanceStatus = "PENDING"
+	InstanceStatusActive      InstanceStatus = "ACTIVE"
+	InstanceStatusTerminating InstanceStatus = "TERMINATING"
 )
 
-const (
-	// IpProtocolTcp is a IpProtocol enum value
-	IpProtocolTcp = "TCP"
+type IpProtocol string
 
-	// IpProtocolUdp is a IpProtocol enum value
-	IpProtocolUdp = "UDP"
+// Enum values for IpProtocol
+const (
+	IpProtocolTcp IpProtocol = "TCP"
+	IpProtocolUdp IpProtocol = "UDP"
 )
 
+type MatchmakingConfigurationStatus string
+
+// Enum values for MatchmakingConfigurationStatus
 const (
-	// MatchmakingConfigurationStatusCancelled is a MatchmakingConfigurationStatus enum value
-	MatchmakingConfigurationStatusCancelled = "CANCELLED"
-
-	// MatchmakingConfigurationStatusCompleted is a MatchmakingConfigurationStatus enum value
-	MatchmakingConfigurationStatusCompleted = "COMPLETED"
-
-	// MatchmakingConfigurationStatusFailed is a MatchmakingConfigurationStatus enum value
-	MatchmakingConfigurationStatusFailed = "FAILED"
-
-	// MatchmakingConfigurationStatusPlacing is a MatchmakingConfigurationStatus enum value
-	MatchmakingConfigurationStatusPlacing = "PLACING"
-
-	// MatchmakingConfigurationStatusQueued is a MatchmakingConfigurationStatus enum value
-	MatchmakingConfigurationStatusQueued = "QUEUED"
-
-	// MatchmakingConfigurationStatusRequiresAcceptance is a MatchmakingConfigurationStatus enum value
-	MatchmakingConfigurationStatusRequiresAcceptance = "REQUIRES_ACCEPTANCE"
-
-	// MatchmakingConfigurationStatusSearching is a MatchmakingConfigurationStatus enum value
-	MatchmakingConfigurationStatusSearching = "SEARCHING"
-
-	// MatchmakingConfigurationStatusTimedOut is a MatchmakingConfigurationStatus enum value
-	MatchmakingConfigurationStatusTimedOut = "TIMED_OUT"
+	MatchmakingConfigurationStatusCancelled          MatchmakingConfigurationStatus = "CANCELLED"
+	MatchmakingConfigurationStatusCompleted          MatchmakingConfigurationStatus = "COMPLETED"
+	MatchmakingConfigurationStatusFailed             MatchmakingConfigurationStatus = "FAILED"
+	MatchmakingConfigurationStatusPlacing            MatchmakingConfigurationStatus = "PLACING"
+	MatchmakingConfigurationStatusQueued             MatchmakingConfigurationStatus = "QUEUED"
+	MatchmakingConfigurationStatusRequiresAcceptance MatchmakingConfigurationStatus = "REQUIRES_ACCEPTANCE"
+	MatchmakingConfigurationStatusSearching          MatchmakingConfigurationStatus = "SEARCHING"
+	MatchmakingConfigurationStatusTimedOut           MatchmakingConfigurationStatus = "TIMED_OUT"
 )
 
+type MetricName string
+
+// Enum values for MetricName
 const (
-	// MetricNameActivatingGameSessions is a MetricName enum value
-	MetricNameActivatingGameSessions = "ActivatingGameSessions"
-
-	// MetricNameActiveGameSessions is a MetricName enum value
-	MetricNameActiveGameSessions = "ActiveGameSessions"
-
-	// MetricNameActiveInstances is a MetricName enum value
-	MetricNameActiveInstances = "ActiveInstances"
-
-	// MetricNameAvailableGameSessions is a MetricName enum value
-	MetricNameAvailableGameSessions = "AvailableGameSessions"
-
-	// MetricNameAvailablePlayerSessions is a MetricName enum value
-	MetricNameAvailablePlayerSessions = "AvailablePlayerSessions"
-
-	// MetricNameCurrentPlayerSessions is a MetricName enum value
-	MetricNameCurrentPlayerSessions = "CurrentPlayerSessions"
-
-	// MetricNameIdleInstances is a MetricName enum value
-	MetricNameIdleInstances = "IdleInstances"
-
-	// MetricNamePercentAvailableGameSessions is a MetricName enum value
-	MetricNamePercentAvailableGameSessions = "PercentAvailableGameSessions"
-
-	// MetricNamePercentIdleInstances is a MetricName enum value
-	MetricNamePercentIdleInstances = "PercentIdleInstances"
-
-	// MetricNameQueueDepth is a MetricName enum value
-	MetricNameQueueDepth = "QueueDepth"
-
-	// MetricNameWaitTime is a MetricName enum value
-	MetricNameWaitTime = "WaitTime"
+	MetricNameActivatingGameSessions       MetricName = "ActivatingGameSessions"
+	MetricNameActiveGameSessions           MetricName = "ActiveGameSessions"
+	MetricNameActiveInstances              MetricName = "ActiveInstances"
+	MetricNameAvailableGameSessions        MetricName = "AvailableGameSessions"
+	MetricNameAvailablePlayerSessions      MetricName = "AvailablePlayerSessions"
+	MetricNameCurrentPlayerSessions        MetricName = "CurrentPlayerSessions"
+	MetricNameIdleInstances                MetricName = "IdleInstances"
+	MetricNamePercentAvailableGameSessions MetricName = "PercentAvailableGameSessions"
+	MetricNamePercentIdleInstances         MetricName = "PercentIdleInstances"
+	MetricNameQueueDepth                   MetricName = "QueueDepth"
+	MetricNameWaitTime                     MetricName = "WaitTime"
 )
 
-const (
-	// OperatingSystemWindows2012 is a OperatingSystem enum value
-	OperatingSystemWindows2012 = "WINDOWS_2012"
+type OperatingSystem string
 
-	// OperatingSystemAmazonLinux is a OperatingSystem enum value
-	OperatingSystemAmazonLinux = "AMAZON_LINUX"
+// Enum values for OperatingSystem
+const (
+	OperatingSystemWindows2012 OperatingSystem = "WINDOWS_2012"
+	OperatingSystemAmazonLinux OperatingSystem = "AMAZON_LINUX"
 )
 
-const (
-	// PlayerSessionCreationPolicyAcceptAll is a PlayerSessionCreationPolicy enum value
-	PlayerSessionCreationPolicyAcceptAll = "ACCEPT_ALL"
+type PlayerSessionCreationPolicy string
 
-	// PlayerSessionCreationPolicyDenyAll is a PlayerSessionCreationPolicy enum value
-	PlayerSessionCreationPolicyDenyAll = "DENY_ALL"
+// Enum values for PlayerSessionCreationPolicy
+const (
+	PlayerSessionCreationPolicyAcceptAll PlayerSessionCreationPolicy = "ACCEPT_ALL"
+	PlayerSessionCreationPolicyDenyAll   PlayerSessionCreationPolicy = "DENY_ALL"
 )
 
+type PlayerSessionStatus string
+
+// Enum values for PlayerSessionStatus
 const (
-	// PlayerSessionStatusReserved is a PlayerSessionStatus enum value
-	PlayerSessionStatusReserved = "RESERVED"
-
-	// PlayerSessionStatusActive is a PlayerSessionStatus enum value
-	PlayerSessionStatusActive = "ACTIVE"
-
-	// PlayerSessionStatusCompleted is a PlayerSessionStatus enum value
-	PlayerSessionStatusCompleted = "COMPLETED"
-
-	// PlayerSessionStatusTimedout is a PlayerSessionStatus enum value
-	PlayerSessionStatusTimedout = "TIMEDOUT"
+	PlayerSessionStatusReserved  PlayerSessionStatus = "RESERVED"
+	PlayerSessionStatusActive    PlayerSessionStatus = "ACTIVE"
+	PlayerSessionStatusCompleted PlayerSessionStatus = "COMPLETED"
+	PlayerSessionStatusTimedout  PlayerSessionStatus = "TIMEDOUT"
 )
 
-const (
-	// ProtectionPolicyNoProtection is a ProtectionPolicy enum value
-	ProtectionPolicyNoProtection = "NoProtection"
+type ProtectionPolicy string
 
-	// ProtectionPolicyFullProtection is a ProtectionPolicy enum value
-	ProtectionPolicyFullProtection = "FullProtection"
+// Enum values for ProtectionPolicy
+const (
+	ProtectionPolicyNoProtection   ProtectionPolicy = "NoProtection"
+	ProtectionPolicyFullProtection ProtectionPolicy = "FullProtection"
 )
 
-const (
-	// RoutingStrategyTypeSimple is a RoutingStrategyType enum value
-	RoutingStrategyTypeSimple = "SIMPLE"
+type RoutingStrategyType string
 
-	// RoutingStrategyTypeTerminal is a RoutingStrategyType enum value
-	RoutingStrategyTypeTerminal = "TERMINAL"
+// Enum values for RoutingStrategyType
+const (
+	RoutingStrategyTypeSimple   RoutingStrategyType = "SIMPLE"
+	RoutingStrategyTypeTerminal RoutingStrategyType = "TERMINAL"
 )
 
+type ScalingAdjustmentType string
+
+// Enum values for ScalingAdjustmentType
 const (
-	// ScalingAdjustmentTypeChangeInCapacity is a ScalingAdjustmentType enum value
-	ScalingAdjustmentTypeChangeInCapacity = "ChangeInCapacity"
-
-	// ScalingAdjustmentTypeExactCapacity is a ScalingAdjustmentType enum value
-	ScalingAdjustmentTypeExactCapacity = "ExactCapacity"
-
-	// ScalingAdjustmentTypePercentChangeInCapacity is a ScalingAdjustmentType enum value
-	ScalingAdjustmentTypePercentChangeInCapacity = "PercentChangeInCapacity"
+	ScalingAdjustmentTypeChangeInCapacity        ScalingAdjustmentType = "ChangeInCapacity"
+	ScalingAdjustmentTypeExactCapacity           ScalingAdjustmentType = "ExactCapacity"
+	ScalingAdjustmentTypePercentChangeInCapacity ScalingAdjustmentType = "PercentChangeInCapacity"
 )
 
+type ScalingStatusType string
+
+// Enum values for ScalingStatusType
 const (
-	// ScalingStatusTypeActive is a ScalingStatusType enum value
-	ScalingStatusTypeActive = "ACTIVE"
-
-	// ScalingStatusTypeUpdateRequested is a ScalingStatusType enum value
-	ScalingStatusTypeUpdateRequested = "UPDATE_REQUESTED"
-
-	// ScalingStatusTypeUpdating is a ScalingStatusType enum value
-	ScalingStatusTypeUpdating = "UPDATING"
-
-	// ScalingStatusTypeDeleteRequested is a ScalingStatusType enum value
-	ScalingStatusTypeDeleteRequested = "DELETE_REQUESTED"
-
-	// ScalingStatusTypeDeleting is a ScalingStatusType enum value
-	ScalingStatusTypeDeleting = "DELETING"
-
-	// ScalingStatusTypeDeleted is a ScalingStatusType enum value
-	ScalingStatusTypeDeleted = "DELETED"
-
-	// ScalingStatusTypeError is a ScalingStatusType enum value
-	ScalingStatusTypeError = "ERROR"
+	ScalingStatusTypeActive          ScalingStatusType = "ACTIVE"
+	ScalingStatusTypeUpdateRequested ScalingStatusType = "UPDATE_REQUESTED"
+	ScalingStatusTypeUpdating        ScalingStatusType = "UPDATING"
+	ScalingStatusTypeDeleteRequested ScalingStatusType = "DELETE_REQUESTED"
+	ScalingStatusTypeDeleting        ScalingStatusType = "DELETING"
+	ScalingStatusTypeDeleted         ScalingStatusType = "DELETED"
+	ScalingStatusTypeError           ScalingStatusType = "ERROR"
 )

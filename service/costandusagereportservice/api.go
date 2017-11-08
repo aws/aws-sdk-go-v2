@@ -476,6 +476,7 @@ func (s PutReportDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutReportDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutReportDefinitionInput"}
+
 	if s.ReportDefinition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReportDefinition"))
 	}
@@ -521,22 +522,22 @@ type ReportDefinition struct {
 	_ struct{} `type:"structure"`
 
 	// A list of additional artifacts.
-	AdditionalArtifacts []*string `type:"list"`
+	AdditionalArtifacts []AdditionalArtifact `type:"list"`
 
 	// A list of schema elements.
 	//
 	// AdditionalSchemaElements is a required field
-	AdditionalSchemaElements []*string `type:"list" required:"true"`
+	AdditionalSchemaElements []SchemaElement `type:"list" required:"true"`
 
 	// Preferred compression format for report.
 	//
 	// Compression is a required field
-	Compression *string `type:"string" required:"true" enum:"CompressionFormat"`
+	Compression CompressionFormat `type:"string" required:"true"`
 
 	// Preferred format for report.
 	//
 	// Format is a required field
-	Format *string `type:"string" required:"true" enum:"ReportFormat"`
+	Format ReportFormat `type:"string" required:"true"`
 
 	// Preferred name for a report, it has to be unique. Must starts with a number/letter,
 	// case sensitive. Limited to 256 characters.
@@ -557,12 +558,12 @@ type ReportDefinition struct {
 	// Region of customer S3 bucket.
 	//
 	// S3Region is a required field
-	S3Region *string `type:"string" required:"true" enum:"AWSRegion"`
+	S3Region AWSRegion `type:"string" required:"true"`
 
 	// The frequency on which report data are measured and displayed.
 	//
 	// TimeUnit is a required field
-	TimeUnit *string `type:"string" required:"true" enum:"TimeUnit"`
+	TimeUnit TimeUnit `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -578,28 +579,32 @@ func (s ReportDefinition) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReportDefinition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReportDefinition"}
+
 	if s.AdditionalSchemaElements == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AdditionalSchemaElements"))
 	}
-	if s.Compression == nil {
+	if len(s.Compression) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Compression"))
 	}
-	if s.Format == nil {
+	if len(s.Format) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
+
 	if s.ReportName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReportName"))
 	}
+
 	if s.S3Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Bucket"))
 	}
+
 	if s.S3Prefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Prefix"))
 	}
-	if s.S3Region == nil {
+	if len(s.S3Region) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("S3Region"))
 	}
-	if s.TimeUnit == nil {
+	if len(s.TimeUnit) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TimeUnit"))
 	}
 
@@ -610,26 +615,26 @@ func (s *ReportDefinition) Validate() error {
 }
 
 // SetAdditionalArtifacts sets the AdditionalArtifacts field's value.
-func (s *ReportDefinition) SetAdditionalArtifacts(v []*string) *ReportDefinition {
+func (s *ReportDefinition) SetAdditionalArtifacts(v []AdditionalArtifact) *ReportDefinition {
 	s.AdditionalArtifacts = v
 	return s
 }
 
 // SetAdditionalSchemaElements sets the AdditionalSchemaElements field's value.
-func (s *ReportDefinition) SetAdditionalSchemaElements(v []*string) *ReportDefinition {
+func (s *ReportDefinition) SetAdditionalSchemaElements(v []SchemaElement) *ReportDefinition {
 	s.AdditionalSchemaElements = v
 	return s
 }
 
 // SetCompression sets the Compression field's value.
-func (s *ReportDefinition) SetCompression(v string) *ReportDefinition {
-	s.Compression = &v
+func (s *ReportDefinition) SetCompression(v CompressionFormat) *ReportDefinition {
+	s.Compression = v
 	return s
 }
 
 // SetFormat sets the Format field's value.
-func (s *ReportDefinition) SetFormat(v string) *ReportDefinition {
-	s.Format = &v
+func (s *ReportDefinition) SetFormat(v ReportFormat) *ReportDefinition {
+	s.Format = v
 	return s
 }
 
@@ -652,80 +657,72 @@ func (s *ReportDefinition) SetS3Prefix(v string) *ReportDefinition {
 }
 
 // SetS3Region sets the S3Region field's value.
-func (s *ReportDefinition) SetS3Region(v string) *ReportDefinition {
-	s.S3Region = &v
+func (s *ReportDefinition) SetS3Region(v AWSRegion) *ReportDefinition {
+	s.S3Region = v
 	return s
 }
 
 // SetTimeUnit sets the TimeUnit field's value.
-func (s *ReportDefinition) SetTimeUnit(v string) *ReportDefinition {
-	s.TimeUnit = &v
+func (s *ReportDefinition) SetTimeUnit(v TimeUnit) *ReportDefinition {
+	s.TimeUnit = v
 	return s
 }
 
 // Region of customer S3 bucket.
+type AWSRegion string
+
+// Enum values for AWSRegion
 const (
-	// AWSRegionUsEast1 is a AWSRegion enum value
-	AWSRegionUsEast1 = "us-east-1"
-
-	// AWSRegionUsWest1 is a AWSRegion enum value
-	AWSRegionUsWest1 = "us-west-1"
-
-	// AWSRegionUsWest2 is a AWSRegion enum value
-	AWSRegionUsWest2 = "us-west-2"
-
-	// AWSRegionEuCentral1 is a AWSRegion enum value
-	AWSRegionEuCentral1 = "eu-central-1"
-
-	// AWSRegionEuWest1 is a AWSRegion enum value
-	AWSRegionEuWest1 = "eu-west-1"
-
-	// AWSRegionApSoutheast1 is a AWSRegion enum value
-	AWSRegionApSoutheast1 = "ap-southeast-1"
-
-	// AWSRegionApSoutheast2 is a AWSRegion enum value
-	AWSRegionApSoutheast2 = "ap-southeast-2"
-
-	// AWSRegionApNortheast1 is a AWSRegion enum value
-	AWSRegionApNortheast1 = "ap-northeast-1"
+	AWSRegionUsEast1      AWSRegion = "us-east-1"
+	AWSRegionUsWest1      AWSRegion = "us-west-1"
+	AWSRegionUsWest2      AWSRegion = "us-west-2"
+	AWSRegionEuCentral1   AWSRegion = "eu-central-1"
+	AWSRegionEuWest1      AWSRegion = "eu-west-1"
+	AWSRegionApSoutheast1 AWSRegion = "ap-southeast-1"
+	AWSRegionApSoutheast2 AWSRegion = "ap-southeast-2"
+	AWSRegionApNortheast1 AWSRegion = "ap-northeast-1"
 )
 
 // Enable support for Redshift and/or QuickSight.
-const (
-	// AdditionalArtifactRedshift is a AdditionalArtifact enum value
-	AdditionalArtifactRedshift = "REDSHIFT"
+type AdditionalArtifact string
 
-	// AdditionalArtifactQuicksight is a AdditionalArtifact enum value
-	AdditionalArtifactQuicksight = "QUICKSIGHT"
+// Enum values for AdditionalArtifact
+const (
+	AdditionalArtifactRedshift   AdditionalArtifact = "REDSHIFT"
+	AdditionalArtifactQuicksight AdditionalArtifact = "QUICKSIGHT"
 )
 
 // Preferred compression format for report.
-const (
-	// CompressionFormatZip is a CompressionFormat enum value
-	CompressionFormatZip = "ZIP"
+type CompressionFormat string
 
-	// CompressionFormatGzip is a CompressionFormat enum value
-	CompressionFormatGzip = "GZIP"
+// Enum values for CompressionFormat
+const (
+	CompressionFormatZip  CompressionFormat = "ZIP"
+	CompressionFormatGzip CompressionFormat = "GZIP"
 )
 
 // Preferred format for report.
+type ReportFormat string
+
+// Enum values for ReportFormat
 const (
-	// ReportFormatTextOrcsv is a ReportFormat enum value
-	ReportFormatTextOrcsv = "textORcsv"
+	ReportFormatTextOrcsv ReportFormat = "textORcsv"
 )
 
 // Preference of including Resource IDs. You can include additional details
 // about individual resource IDs in your report.
+type SchemaElement string
+
+// Enum values for SchemaElement
 const (
-	// SchemaElementResources is a SchemaElement enum value
-	SchemaElementResources = "RESOURCES"
+	SchemaElementResources SchemaElement = "RESOURCES"
 )
 
 // The frequency on which report data are measured and displayed.
-const (
-	// TimeUnitHourly is a TimeUnit enum value
-	TimeUnitHourly = "HOURLY"
+type TimeUnit string
 
-	// TimeUnitDaily is a TimeUnit enum value
-	TimeUnitDaily = "DAILY"
+// Enum values for TimeUnit
+const (
+	TimeUnitHourly TimeUnit = "HOURLY"
+	TimeUnitDaily  TimeUnit = "DAILY"
 )

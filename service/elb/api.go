@@ -2760,6 +2760,7 @@ func (s AccessLog) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AccessLog) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AccessLog"}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
@@ -2823,9 +2824,11 @@ func (s AddTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
+
 	if s.LoadBalancerNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -2976,9 +2979,11 @@ func (s ApplySecurityGroupsToLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplySecurityGroupsToLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ApplySecurityGroupsToLoadBalancerInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.SecurityGroups == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecurityGroups"))
 	}
@@ -3056,9 +3061,11 @@ func (s AttachLoadBalancerToSubnetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachLoadBalancerToSubnetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachLoadBalancerToSubnetsInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.Subnets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
 	}
@@ -3169,9 +3176,11 @@ func (s ConfigureHealthCheckInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfigureHealthCheckInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfigureHealthCheckInput"}
+
 	if s.HealthCheck == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HealthCheck"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -3252,6 +3261,7 @@ func (s ConnectionDraining) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConnectionDraining) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConnectionDraining"}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
@@ -3299,6 +3309,7 @@ func (s ConnectionSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConnectionSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConnectionSettings"}
+
 	if s.IdleTimeout == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdleTimeout"))
 	}
@@ -3354,12 +3365,15 @@ func (s CreateAppCookieStickinessPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAppCookieStickinessPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAppCookieStickinessPolicyInput"}
+
 	if s.CookieName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CookieName"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -3441,9 +3455,11 @@ func (s CreateLBCookieStickinessPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLBCookieStickinessPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLBCookieStickinessPolicyInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -3558,9 +3574,11 @@ func (s CreateLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerInput"}
+
 	if s.Listeners == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Listeners"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -3665,9 +3683,11 @@ func (s CreateLoadBalancerListenersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoadBalancerListenersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerListenersInput"}
+
 	if s.Listeners == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Listeners"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -3779,12 +3799,15 @@ func (s CreateLoadBalancerPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoadBalancerPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerPolicyInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
+
 	if s.PolicyTypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyTypeName"))
 	}
@@ -3859,6 +3882,7 @@ func (s CrossZoneLoadBalancing) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CrossZoneLoadBalancing) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CrossZoneLoadBalancing"}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
@@ -3899,6 +3923,7 @@ func (s DeleteLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -3944,9 +3969,11 @@ func (s DeleteLoadBalancerListenersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoadBalancerListenersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerListenersInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.LoadBalancerPorts == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPorts"))
 	}
@@ -4030,9 +4057,11 @@ func (s DeleteLoadBalancerPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoadBalancerPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerPolicyInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -4100,9 +4129,11 @@ func (s DeregisterInstancesFromLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterInstancesFromLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterInstancesFromLoadBalancerInput"}
+
 	if s.Instances == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Instances"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -4258,6 +4289,7 @@ func (s DescribeInstanceHealthInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstanceHealthInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceHealthInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -4329,6 +4361,7 @@ func (s DescribeLoadBalancerAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBalancerAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancerAttributesInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -4597,6 +4630,7 @@ func (s DescribeTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
+
 	if s.LoadBalancerNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
 	}
@@ -4670,9 +4704,11 @@ func (s DetachLoadBalancerFromSubnetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachLoadBalancerFromSubnetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachLoadBalancerFromSubnetsInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.Subnets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
 	}
@@ -4749,9 +4785,11 @@ func (s DisableAvailabilityZonesForLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableAvailabilityZonesForLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableAvailabilityZonesForLoadBalancerInput"}
+
 	if s.AvailabilityZones == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZones"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -4828,9 +4866,11 @@ func (s EnableAvailabilityZonesForLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableAvailabilityZonesForLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableAvailabilityZonesForLoadBalancerInput"}
+
 	if s.AvailabilityZones == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZones"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -4945,27 +4985,32 @@ func (s HealthCheck) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HealthCheck) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HealthCheck"}
+
 	if s.HealthyThreshold == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HealthyThreshold"))
 	}
 	if s.HealthyThreshold != nil && *s.HealthyThreshold < 2 {
 		invalidParams.Add(aws.NewErrParamMinValue("HealthyThreshold", 2))
 	}
+
 	if s.Interval == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Interval"))
 	}
 	if s.Interval != nil && *s.Interval < 5 {
 		invalidParams.Add(aws.NewErrParamMinValue("Interval", 5))
 	}
+
 	if s.Target == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Target"))
 	}
+
 	if s.Timeout == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Timeout"))
 	}
 	if s.Timeout != nil && *s.Timeout < 2 {
 		invalidParams.Add(aws.NewErrParamMinValue("Timeout", 2))
 	}
+
 	if s.UnhealthyThreshold == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UnhealthyThreshold"))
 	}
@@ -5251,15 +5296,18 @@ func (s Listener) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Listener) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Listener"}
+
 	if s.InstancePort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstancePort"))
 	}
 	if s.InstancePort != nil && *s.InstancePort < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("InstancePort", 1))
 	}
+
 	if s.LoadBalancerPort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPort"))
 	}
+
 	if s.Protocol == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
@@ -5645,9 +5693,11 @@ func (s ModifyLoadBalancerAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyLoadBalancerAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyLoadBalancerAttributesInput"}
+
 	if s.LoadBalancerAttributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerAttributes"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -6007,9 +6057,11 @@ func (s RegisterInstancesWithLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterInstancesWithLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterInstancesWithLoadBalancerInput"}
+
 	if s.Instances == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Instances"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
@@ -6087,9 +6139,11 @@ func (s RemoveTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
+
 	if s.LoadBalancerNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -6175,12 +6229,15 @@ func (s SetLoadBalancerListenerSSLCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoadBalancerListenerSSLCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBalancerListenerSSLCertificateInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.LoadBalancerPort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPort"))
 	}
+
 	if s.SSLCertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SSLCertificateId"))
 	}
@@ -6260,12 +6317,15 @@ func (s SetLoadBalancerPoliciesForBackendServerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoadBalancerPoliciesForBackendServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBalancerPoliciesForBackendServerInput"}
+
 	if s.InstancePort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstancePort"))
 	}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.PolicyNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyNames"))
 	}
@@ -6346,12 +6406,15 @@ func (s SetLoadBalancerPoliciesOfListenerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoadBalancerPoliciesOfListenerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBalancerPoliciesOfListenerInput"}
+
 	if s.LoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
+
 	if s.LoadBalancerPort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPort"))
 	}
+
 	if s.PolicyNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyNames"))
 	}
@@ -6457,6 +6520,7 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}

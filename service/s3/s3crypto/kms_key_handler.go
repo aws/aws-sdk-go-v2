@@ -1,7 +1,6 @@
 package s3crypto
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 	"github.com/aws/aws-sdk-go-v2/service/kms/kmsiface"
@@ -96,7 +95,7 @@ func (kp *kmsKeyHandler) GenerateCipherData(keySize, ivSize int) (CipherData, er
 	out, err := kp.kms.GenerateDataKey(&kms.GenerateDataKeyInput{
 		EncryptionContext: kp.CipherData.MaterialDescription,
 		KeyId:             kp.cmkID,
-		KeySpec:           aws.String("AES_256"),
+		KeySpec:           kms.DataKeySpecAes256,
 	})
 	if err != nil {
 		return CipherData{}, err

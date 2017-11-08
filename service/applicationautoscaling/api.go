@@ -958,7 +958,7 @@ type CustomizedMetricSpecification struct {
 	// The statistic of the metric.
 	//
 	// Statistic is a required field
-	Statistic *string `type:"string" required:"true" enum:"MetricStatistic"`
+	Statistic MetricStatistic `type:"string" required:"true"`
 
 	// The unit of the metric.
 	Unit *string `type:"string"`
@@ -977,13 +977,15 @@ func (s CustomizedMetricSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomizedMetricSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CustomizedMetricSpecification"}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.Namespace == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
-	if s.Statistic == nil {
+	if len(s.Statistic) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Statistic"))
 	}
 	if s.Dimensions != nil {
@@ -1022,8 +1024,8 @@ func (s *CustomizedMetricSpecification) SetNamespace(v string) *CustomizedMetric
 }
 
 // SetStatistic sets the Statistic field's value.
-func (s *CustomizedMetricSpecification) SetStatistic(v string) *CustomizedMetricSpecification {
-	s.Statistic = &v
+func (s *CustomizedMetricSpecification) SetStatistic(v MetricStatistic) *CustomizedMetricSpecification {
+	s.Statistic = v
 	return s
 }
 
@@ -1093,14 +1095,14 @@ type DeleteScalingPolicyInput struct {
 	//    a DynamoDB global secondary index.
 	//
 	// ScalableDimension is a required field
-	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string" required:"true"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1116,22 +1118,24 @@ func (s DeleteScalingPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteScalingPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteScalingPolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
-	if s.ScalableDimension == nil {
+	if len(s.ScalableDimension) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ScalableDimension"))
 	}
-	if s.ServiceNamespace == nil {
+	if len(s.ServiceNamespace) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
@@ -1154,14 +1158,14 @@ func (s *DeleteScalingPolicyInput) SetResourceId(v string) *DeleteScalingPolicyI
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *DeleteScalingPolicyInput) SetScalableDimension(v string) *DeleteScalingPolicyInput {
-	s.ScalableDimension = &v
+func (s *DeleteScalingPolicyInput) SetScalableDimension(v ScalableDimension) *DeleteScalingPolicyInput {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DeleteScalingPolicyInput) SetServiceNamespace(v string) *DeleteScalingPolicyInput {
-	s.ServiceNamespace = &v
+func (s *DeleteScalingPolicyInput) SetServiceNamespace(v ServiceNamespace) *DeleteScalingPolicyInput {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -1235,14 +1239,14 @@ type DeregisterScalableTargetInput struct {
 	//    a DynamoDB global secondary index.
 	//
 	// ScalableDimension is a required field
-	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string" required:"true"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1258,16 +1262,17 @@ func (s DeregisterScalableTargetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterScalableTargetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterScalableTargetInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
-	if s.ScalableDimension == nil {
+	if len(s.ScalableDimension) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ScalableDimension"))
 	}
-	if s.ServiceNamespace == nil {
+	if len(s.ServiceNamespace) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
@@ -1284,14 +1289,14 @@ func (s *DeregisterScalableTargetInput) SetResourceId(v string) *DeregisterScala
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *DeregisterScalableTargetInput) SetScalableDimension(v string) *DeregisterScalableTargetInput {
-	s.ScalableDimension = &v
+func (s *DeregisterScalableTargetInput) SetScalableDimension(v ScalableDimension) *DeregisterScalableTargetInput {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DeregisterScalableTargetInput) SetServiceNamespace(v string) *DeregisterScalableTargetInput {
-	s.ServiceNamespace = &v
+func (s *DeregisterScalableTargetInput) SetServiceNamespace(v ServiceNamespace) *DeregisterScalableTargetInput {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -1375,14 +1380,14 @@ type DescribeScalableTargetsInput struct {
 	//
 	//    * dynamodb:index:WriteCapacityUnits - The provisioned write capacity for
 	//    a DynamoDB global secondary index.
-	ScalableDimension *string `type:"string" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1398,7 +1403,7 @@ func (s DescribeScalableTargetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeScalableTargetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalableTargetsInput"}
-	if s.ServiceNamespace == nil {
+	if len(s.ServiceNamespace) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
@@ -1427,14 +1432,14 @@ func (s *DescribeScalableTargetsInput) SetResourceIds(v []*string) *DescribeScal
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *DescribeScalableTargetsInput) SetScalableDimension(v string) *DescribeScalableTargetsInput {
-	s.ScalableDimension = &v
+func (s *DescribeScalableTargetsInput) SetScalableDimension(v ScalableDimension) *DescribeScalableTargetsInput {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DescribeScalableTargetsInput) SetServiceNamespace(v string) *DescribeScalableTargetsInput {
-	s.ServiceNamespace = &v
+func (s *DescribeScalableTargetsInput) SetServiceNamespace(v ServiceNamespace) *DescribeScalableTargetsInput {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -1537,14 +1542,14 @@ type DescribeScalingActivitiesInput struct {
 	//
 	//    * dynamodb:index:WriteCapacityUnits - The provisioned write capacity for
 	//    a DynamoDB global secondary index.
-	ScalableDimension *string `type:"string" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1563,7 +1568,7 @@ func (s *DescribeScalingActivitiesInput) Validate() error {
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
-	if s.ServiceNamespace == nil {
+	if len(s.ServiceNamespace) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
@@ -1592,14 +1597,14 @@ func (s *DescribeScalingActivitiesInput) SetResourceId(v string) *DescribeScalin
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *DescribeScalingActivitiesInput) SetScalableDimension(v string) *DescribeScalingActivitiesInput {
-	s.ScalableDimension = &v
+func (s *DescribeScalingActivitiesInput) SetScalableDimension(v ScalableDimension) *DescribeScalingActivitiesInput {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DescribeScalingActivitiesInput) SetServiceNamespace(v string) *DescribeScalingActivitiesInput {
-	s.ServiceNamespace = &v
+func (s *DescribeScalingActivitiesInput) SetServiceNamespace(v ServiceNamespace) *DescribeScalingActivitiesInput {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -1705,14 +1710,14 @@ type DescribeScalingPoliciesInput struct {
 	//
 	//    * dynamodb:index:WriteCapacityUnits - The provisioned write capacity for
 	//    a DynamoDB global secondary index.
-	ScalableDimension *string `type:"string" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1731,7 +1736,7 @@ func (s *DescribeScalingPoliciesInput) Validate() error {
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
-	if s.ServiceNamespace == nil {
+	if len(s.ServiceNamespace) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
@@ -1766,14 +1771,14 @@ func (s *DescribeScalingPoliciesInput) SetResourceId(v string) *DescribeScalingP
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *DescribeScalingPoliciesInput) SetScalableDimension(v string) *DescribeScalingPoliciesInput {
-	s.ScalableDimension = &v
+func (s *DescribeScalingPoliciesInput) SetScalableDimension(v ScalableDimension) *DescribeScalingPoliciesInput {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *DescribeScalingPoliciesInput) SetServiceNamespace(v string) *DescribeScalingPoliciesInput {
-	s.ServiceNamespace = &v
+func (s *DescribeScalingPoliciesInput) SetServiceNamespace(v ServiceNamespace) *DescribeScalingPoliciesInput {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -1840,9 +1845,11 @@ func (s MetricDimension) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricDimension) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MetricDimension"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -1873,7 +1880,7 @@ type PredefinedMetricSpecification struct {
 	// The metric type.
 	//
 	// PredefinedMetricType is a required field
-	PredefinedMetricType *string `type:"string" required:"true" enum:"MetricType"`
+	PredefinedMetricType MetricType `type:"string" required:"true"`
 
 	// Reserved for future use.
 	ResourceLabel *string `min:"1" type:"string"`
@@ -1892,7 +1899,7 @@ func (s PredefinedMetricSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PredefinedMetricSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PredefinedMetricSpecification"}
-	if s.PredefinedMetricType == nil {
+	if len(s.PredefinedMetricType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("PredefinedMetricType"))
 	}
 	if s.ResourceLabel != nil && len(*s.ResourceLabel) < 1 {
@@ -1906,8 +1913,8 @@ func (s *PredefinedMetricSpecification) Validate() error {
 }
 
 // SetPredefinedMetricType sets the PredefinedMetricType field's value.
-func (s *PredefinedMetricSpecification) SetPredefinedMetricType(v string) *PredefinedMetricSpecification {
-	s.PredefinedMetricType = &v
+func (s *PredefinedMetricSpecification) SetPredefinedMetricType(v MetricType) *PredefinedMetricSpecification {
+	s.PredefinedMetricType = v
 	return s
 }
 
@@ -1931,7 +1938,7 @@ type PutScalingPolicyInput struct {
 	//
 	// For DynamoDB, only TargetTrackingScaling is supported. For any other service,
 	// only StepScaling is supported.
-	PolicyType *string `type:"string" enum:"PolicyType"`
+	PolicyType PolicyType `type:"string"`
 
 	// The identifier of the resource associated with the scaling policy. This string
 	// consists of the resource type and unique identifier.
@@ -1984,14 +1991,14 @@ type PutScalingPolicyInput struct {
 	//    a DynamoDB global secondary index.
 	//
 	// ScalableDimension is a required field
-	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string" required:"true"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 
 	// A step scaling policy.
 	//
@@ -2019,22 +2026,24 @@ func (s PutScalingPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutScalingPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutScalingPolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
-	if s.ScalableDimension == nil {
+	if len(s.ScalableDimension) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ScalableDimension"))
 	}
-	if s.ServiceNamespace == nil {
+	if len(s.ServiceNamespace) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 	if s.StepScalingPolicyConfiguration != nil {
@@ -2061,8 +2070,8 @@ func (s *PutScalingPolicyInput) SetPolicyName(v string) *PutScalingPolicyInput {
 }
 
 // SetPolicyType sets the PolicyType field's value.
-func (s *PutScalingPolicyInput) SetPolicyType(v string) *PutScalingPolicyInput {
-	s.PolicyType = &v
+func (s *PutScalingPolicyInput) SetPolicyType(v PolicyType) *PutScalingPolicyInput {
+	s.PolicyType = v
 	return s
 }
 
@@ -2073,14 +2082,14 @@ func (s *PutScalingPolicyInput) SetResourceId(v string) *PutScalingPolicyInput {
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *PutScalingPolicyInput) SetScalableDimension(v string) *PutScalingPolicyInput {
-	s.ScalableDimension = &v
+func (s *PutScalingPolicyInput) SetScalableDimension(v ScalableDimension) *PutScalingPolicyInput {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *PutScalingPolicyInput) SetServiceNamespace(v string) *PutScalingPolicyInput {
-	s.ServiceNamespace = &v
+func (s *PutScalingPolicyInput) SetServiceNamespace(v ServiceNamespace) *PutScalingPolicyInput {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -2201,14 +2210,14 @@ type RegisterScalableTargetInput struct {
 	//    a DynamoDB global secondary index.
 	//
 	// ScalableDimension is a required field
-	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string" required:"true"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2224,6 +2233,7 @@ func (s RegisterScalableTargetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterScalableTargetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterScalableTargetInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -2233,10 +2243,10 @@ func (s *RegisterScalableTargetInput) Validate() error {
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
-	if s.ScalableDimension == nil {
+	if len(s.ScalableDimension) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ScalableDimension"))
 	}
-	if s.ServiceNamespace == nil {
+	if len(s.ServiceNamespace) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
@@ -2271,14 +2281,14 @@ func (s *RegisterScalableTargetInput) SetRoleARN(v string) *RegisterScalableTarg
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *RegisterScalableTargetInput) SetScalableDimension(v string) *RegisterScalableTargetInput {
-	s.ScalableDimension = &v
+func (s *RegisterScalableTargetInput) SetScalableDimension(v ScalableDimension) *RegisterScalableTargetInput {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *RegisterScalableTargetInput) SetServiceNamespace(v string) *RegisterScalableTargetInput {
-	s.ServiceNamespace = &v
+func (s *RegisterScalableTargetInput) SetServiceNamespace(v ServiceNamespace) *RegisterScalableTargetInput {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -2374,14 +2384,14 @@ type ScalableTarget struct {
 	//    a DynamoDB global secondary index.
 	//
 	// ScalableDimension is a required field
-	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string" required:"true"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2425,14 +2435,14 @@ func (s *ScalableTarget) SetRoleARN(v string) *ScalableTarget {
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *ScalableTarget) SetScalableDimension(v string) *ScalableTarget {
-	s.ScalableDimension = &v
+func (s *ScalableTarget) SetScalableDimension(v ScalableDimension) *ScalableTarget {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *ScalableTarget) SetServiceNamespace(v string) *ScalableTarget {
-	s.ServiceNamespace = &v
+func (s *ScalableTarget) SetServiceNamespace(v ServiceNamespace) *ScalableTarget {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -2513,14 +2523,14 @@ type ScalingActivity struct {
 	//    a DynamoDB global secondary index.
 	//
 	// ScalableDimension is a required field
-	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string" required:"true"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 
 	// The Unix timestamp for when the scaling activity began.
 	//
@@ -2530,7 +2540,7 @@ type ScalingActivity struct {
 	// Indicates the status of the scaling activity.
 	//
 	// StatusCode is a required field
-	StatusCode *string `type:"string" required:"true" enum:"ScalingActivityStatusCode"`
+	StatusCode ScalingActivityStatusCode `type:"string" required:"true"`
 
 	// A simple message about the current status of the scaling activity.
 	StatusMessage *string `type:"string"`
@@ -2583,14 +2593,14 @@ func (s *ScalingActivity) SetResourceId(v string) *ScalingActivity {
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *ScalingActivity) SetScalableDimension(v string) *ScalingActivity {
-	s.ScalableDimension = &v
+func (s *ScalingActivity) SetScalableDimension(v ScalableDimension) *ScalingActivity {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *ScalingActivity) SetServiceNamespace(v string) *ScalingActivity {
-	s.ServiceNamespace = &v
+func (s *ScalingActivity) SetServiceNamespace(v ServiceNamespace) *ScalingActivity {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -2601,8 +2611,8 @@ func (s *ScalingActivity) SetStartTime(v time.Time) *ScalingActivity {
 }
 
 // SetStatusCode sets the StatusCode field's value.
-func (s *ScalingActivity) SetStatusCode(v string) *ScalingActivity {
-	s.StatusCode = &v
+func (s *ScalingActivity) SetStatusCode(v ScalingActivityStatusCode) *ScalingActivity {
+	s.StatusCode = v
 	return s
 }
 
@@ -2638,7 +2648,7 @@ type ScalingPolicy struct {
 	// The scaling policy type.
 	//
 	// PolicyType is a required field
-	PolicyType *string `type:"string" required:"true" enum:"PolicyType"`
+	PolicyType PolicyType `type:"string" required:"true"`
 
 	// The identifier of the resource associated with the scaling policy. This string
 	// consists of the resource type and unique identifier.
@@ -2691,14 +2701,14 @@ type ScalingPolicy struct {
 	//    a DynamoDB global secondary index.
 	//
 	// ScalableDimension is a required field
-	ScalableDimension *string `type:"string" required:"true" enum:"ScalableDimension"`
+	ScalableDimension ScalableDimension `type:"string" required:"true"`
 
 	// The namespace of the AWS service. For more information, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
-	ServiceNamespace *string `type:"string" required:"true" enum:"ServiceNamespace"`
+	ServiceNamespace ServiceNamespace `type:"string" required:"true"`
 
 	// A step scaling policy.
 	StepScalingPolicyConfiguration *StepScalingPolicyConfiguration `type:"structure"`
@@ -2742,8 +2752,8 @@ func (s *ScalingPolicy) SetPolicyName(v string) *ScalingPolicy {
 }
 
 // SetPolicyType sets the PolicyType field's value.
-func (s *ScalingPolicy) SetPolicyType(v string) *ScalingPolicy {
-	s.PolicyType = &v
+func (s *ScalingPolicy) SetPolicyType(v PolicyType) *ScalingPolicy {
+	s.PolicyType = v
 	return s
 }
 
@@ -2754,14 +2764,14 @@ func (s *ScalingPolicy) SetResourceId(v string) *ScalingPolicy {
 }
 
 // SetScalableDimension sets the ScalableDimension field's value.
-func (s *ScalingPolicy) SetScalableDimension(v string) *ScalingPolicy {
-	s.ScalableDimension = &v
+func (s *ScalingPolicy) SetScalableDimension(v ScalableDimension) *ScalingPolicy {
+	s.ScalableDimension = v
 	return s
 }
 
 // SetServiceNamespace sets the ServiceNamespace field's value.
-func (s *ScalingPolicy) SetServiceNamespace(v string) *ScalingPolicy {
-	s.ServiceNamespace = &v
+func (s *ScalingPolicy) SetServiceNamespace(v ServiceNamespace) *ScalingPolicy {
+	s.ServiceNamespace = v
 	return s
 }
 
@@ -2847,6 +2857,7 @@ func (s StepAdjustment) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StepAdjustment) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StepAdjustment"}
+
 	if s.ScalingAdjustment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustment"))
 	}
@@ -2882,7 +2893,7 @@ type StepScalingPolicyConfiguration struct {
 
 	// The adjustment type, which specifies how the ScalingAdjustment parameter
 	// in a StepAdjustment is interpreted.
-	AdjustmentType *string `type:"string" enum:"AdjustmentType"`
+	AdjustmentType AdjustmentType `type:"string"`
 
 	// The amount of time, in seconds, after a scaling activity completes where
 	// previous trigger-related scaling activities can influence future scaling
@@ -2909,7 +2920,7 @@ type StepScalingPolicyConfiguration struct {
 
 	// The aggregation type for the CloudWatch metrics. Valid values are Minimum,
 	// Maximum, and Average.
-	MetricAggregationType *string `type:"string" enum:"MetricAggregationType"`
+	MetricAggregationType MetricAggregationType `type:"string"`
 
 	// The minimum number to adjust your scalable dimension as a result of a scaling
 	// activity. If the adjustment type is PercentChangeInCapacity, the scaling
@@ -2952,8 +2963,8 @@ func (s *StepScalingPolicyConfiguration) Validate() error {
 }
 
 // SetAdjustmentType sets the AdjustmentType field's value.
-func (s *StepScalingPolicyConfiguration) SetAdjustmentType(v string) *StepScalingPolicyConfiguration {
-	s.AdjustmentType = &v
+func (s *StepScalingPolicyConfiguration) SetAdjustmentType(v AdjustmentType) *StepScalingPolicyConfiguration {
+	s.AdjustmentType = v
 	return s
 }
 
@@ -2964,8 +2975,8 @@ func (s *StepScalingPolicyConfiguration) SetCooldown(v int64) *StepScalingPolicy
 }
 
 // SetMetricAggregationType sets the MetricAggregationType field's value.
-func (s *StepScalingPolicyConfiguration) SetMetricAggregationType(v string) *StepScalingPolicyConfiguration {
-	s.MetricAggregationType = &v
+func (s *StepScalingPolicyConfiguration) SetMetricAggregationType(v MetricAggregationType) *StepScalingPolicyConfiguration {
+	s.MetricAggregationType = v
 	return s
 }
 
@@ -3038,6 +3049,7 @@ func (s TargetTrackingScalingPolicyConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TargetTrackingScalingPolicyConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TargetTrackingScalingPolicyConfiguration"}
+
 	if s.TargetValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetValue"))
 	}
@@ -3094,120 +3106,84 @@ func (s *TargetTrackingScalingPolicyConfiguration) SetTargetValue(v float64) *Ta
 	return s
 }
 
+type AdjustmentType string
+
+// Enum values for AdjustmentType
 const (
-	// AdjustmentTypeChangeInCapacity is a AdjustmentType enum value
-	AdjustmentTypeChangeInCapacity = "ChangeInCapacity"
-
-	// AdjustmentTypePercentChangeInCapacity is a AdjustmentType enum value
-	AdjustmentTypePercentChangeInCapacity = "PercentChangeInCapacity"
-
-	// AdjustmentTypeExactCapacity is a AdjustmentType enum value
-	AdjustmentTypeExactCapacity = "ExactCapacity"
+	AdjustmentTypeChangeInCapacity        AdjustmentType = "ChangeInCapacity"
+	AdjustmentTypePercentChangeInCapacity AdjustmentType = "PercentChangeInCapacity"
+	AdjustmentTypeExactCapacity           AdjustmentType = "ExactCapacity"
 )
 
+type MetricAggregationType string
+
+// Enum values for MetricAggregationType
 const (
-	// MetricAggregationTypeAverage is a MetricAggregationType enum value
-	MetricAggregationTypeAverage = "Average"
-
-	// MetricAggregationTypeMinimum is a MetricAggregationType enum value
-	MetricAggregationTypeMinimum = "Minimum"
-
-	// MetricAggregationTypeMaximum is a MetricAggregationType enum value
-	MetricAggregationTypeMaximum = "Maximum"
+	MetricAggregationTypeAverage MetricAggregationType = "Average"
+	MetricAggregationTypeMinimum MetricAggregationType = "Minimum"
+	MetricAggregationTypeMaximum MetricAggregationType = "Maximum"
 )
 
+type MetricStatistic string
+
+// Enum values for MetricStatistic
 const (
-	// MetricStatisticAverage is a MetricStatistic enum value
-	MetricStatisticAverage = "Average"
-
-	// MetricStatisticMinimum is a MetricStatistic enum value
-	MetricStatisticMinimum = "Minimum"
-
-	// MetricStatisticMaximum is a MetricStatistic enum value
-	MetricStatisticMaximum = "Maximum"
-
-	// MetricStatisticSampleCount is a MetricStatistic enum value
-	MetricStatisticSampleCount = "SampleCount"
-
-	// MetricStatisticSum is a MetricStatistic enum value
-	MetricStatisticSum = "Sum"
+	MetricStatisticAverage     MetricStatistic = "Average"
+	MetricStatisticMinimum     MetricStatistic = "Minimum"
+	MetricStatisticMaximum     MetricStatistic = "Maximum"
+	MetricStatisticSampleCount MetricStatistic = "SampleCount"
+	MetricStatisticSum         MetricStatistic = "Sum"
 )
 
-const (
-	// MetricTypeDynamoDbreadCapacityUtilization is a MetricType enum value
-	MetricTypeDynamoDbreadCapacityUtilization = "DynamoDBReadCapacityUtilization"
+type MetricType string
 
-	// MetricTypeDynamoDbwriteCapacityUtilization is a MetricType enum value
-	MetricTypeDynamoDbwriteCapacityUtilization = "DynamoDBWriteCapacityUtilization"
+// Enum values for MetricType
+const (
+	MetricTypeDynamoDbreadCapacityUtilization  MetricType = "DynamoDBReadCapacityUtilization"
+	MetricTypeDynamoDbwriteCapacityUtilization MetricType = "DynamoDBWriteCapacityUtilization"
 )
 
-const (
-	// PolicyTypeStepScaling is a PolicyType enum value
-	PolicyTypeStepScaling = "StepScaling"
+type PolicyType string
 
-	// PolicyTypeTargetTrackingScaling is a PolicyType enum value
-	PolicyTypeTargetTrackingScaling = "TargetTrackingScaling"
+// Enum values for PolicyType
+const (
+	PolicyTypeStepScaling           PolicyType = "StepScaling"
+	PolicyTypeTargetTrackingScaling PolicyType = "TargetTrackingScaling"
 )
 
+type ScalableDimension string
+
+// Enum values for ScalableDimension
 const (
-	// ScalableDimensionEcsServiceDesiredCount is a ScalableDimension enum value
-	ScalableDimensionEcsServiceDesiredCount = "ecs:service:DesiredCount"
-
-	// ScalableDimensionEc2SpotFleetRequestTargetCapacity is a ScalableDimension enum value
-	ScalableDimensionEc2SpotFleetRequestTargetCapacity = "ec2:spot-fleet-request:TargetCapacity"
-
-	// ScalableDimensionElasticmapreduceInstancegroupInstanceCount is a ScalableDimension enum value
-	ScalableDimensionElasticmapreduceInstancegroupInstanceCount = "elasticmapreduce:instancegroup:InstanceCount"
-
-	// ScalableDimensionAppstreamFleetDesiredCapacity is a ScalableDimension enum value
-	ScalableDimensionAppstreamFleetDesiredCapacity = "appstream:fleet:DesiredCapacity"
-
-	// ScalableDimensionDynamodbTableReadCapacityUnits is a ScalableDimension enum value
-	ScalableDimensionDynamodbTableReadCapacityUnits = "dynamodb:table:ReadCapacityUnits"
-
-	// ScalableDimensionDynamodbTableWriteCapacityUnits is a ScalableDimension enum value
-	ScalableDimensionDynamodbTableWriteCapacityUnits = "dynamodb:table:WriteCapacityUnits"
-
-	// ScalableDimensionDynamodbIndexReadCapacityUnits is a ScalableDimension enum value
-	ScalableDimensionDynamodbIndexReadCapacityUnits = "dynamodb:index:ReadCapacityUnits"
-
-	// ScalableDimensionDynamodbIndexWriteCapacityUnits is a ScalableDimension enum value
-	ScalableDimensionDynamodbIndexWriteCapacityUnits = "dynamodb:index:WriteCapacityUnits"
+	ScalableDimensionEcsServiceDesiredCount                     ScalableDimension = "ecs:service:DesiredCount"
+	ScalableDimensionEc2SpotFleetRequestTargetCapacity          ScalableDimension = "ec2:spot-fleet-request:TargetCapacity"
+	ScalableDimensionElasticmapreduceInstancegroupInstanceCount ScalableDimension = "elasticmapreduce:instancegroup:InstanceCount"
+	ScalableDimensionAppstreamFleetDesiredCapacity              ScalableDimension = "appstream:fleet:DesiredCapacity"
+	ScalableDimensionDynamodbTableReadCapacityUnits             ScalableDimension = "dynamodb:table:ReadCapacityUnits"
+	ScalableDimensionDynamodbTableWriteCapacityUnits            ScalableDimension = "dynamodb:table:WriteCapacityUnits"
+	ScalableDimensionDynamodbIndexReadCapacityUnits             ScalableDimension = "dynamodb:index:ReadCapacityUnits"
+	ScalableDimensionDynamodbIndexWriteCapacityUnits            ScalableDimension = "dynamodb:index:WriteCapacityUnits"
 )
 
+type ScalingActivityStatusCode string
+
+// Enum values for ScalingActivityStatusCode
 const (
-	// ScalingActivityStatusCodePending is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodePending = "Pending"
-
-	// ScalingActivityStatusCodeInProgress is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeInProgress = "InProgress"
-
-	// ScalingActivityStatusCodeSuccessful is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeSuccessful = "Successful"
-
-	// ScalingActivityStatusCodeOverridden is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeOverridden = "Overridden"
-
-	// ScalingActivityStatusCodeUnfulfilled is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeUnfulfilled = "Unfulfilled"
-
-	// ScalingActivityStatusCodeFailed is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeFailed = "Failed"
+	ScalingActivityStatusCodePending     ScalingActivityStatusCode = "Pending"
+	ScalingActivityStatusCodeInProgress  ScalingActivityStatusCode = "InProgress"
+	ScalingActivityStatusCodeSuccessful  ScalingActivityStatusCode = "Successful"
+	ScalingActivityStatusCodeOverridden  ScalingActivityStatusCode = "Overridden"
+	ScalingActivityStatusCodeUnfulfilled ScalingActivityStatusCode = "Unfulfilled"
+	ScalingActivityStatusCodeFailed      ScalingActivityStatusCode = "Failed"
 )
 
+type ServiceNamespace string
+
+// Enum values for ServiceNamespace
 const (
-	// ServiceNamespaceEcs is a ServiceNamespace enum value
-	ServiceNamespaceEcs = "ecs"
-
-	// ServiceNamespaceElasticmapreduce is a ServiceNamespace enum value
-	ServiceNamespaceElasticmapreduce = "elasticmapreduce"
-
-	// ServiceNamespaceEc2 is a ServiceNamespace enum value
-	ServiceNamespaceEc2 = "ec2"
-
-	// ServiceNamespaceAppstream is a ServiceNamespace enum value
-	ServiceNamespaceAppstream = "appstream"
-
-	// ServiceNamespaceDynamodb is a ServiceNamespace enum value
-	ServiceNamespaceDynamodb = "dynamodb"
+	ServiceNamespaceEcs              ServiceNamespace = "ecs"
+	ServiceNamespaceElasticmapreduce ServiceNamespace = "elasticmapreduce"
+	ServiceNamespaceEc2              ServiceNamespace = "ec2"
+	ServiceNamespaceAppstream        ServiceNamespace = "appstream"
+	ServiceNamespaceDynamodb         ServiceNamespace = "dynamodb"
 )

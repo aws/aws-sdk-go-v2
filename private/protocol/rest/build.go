@@ -18,6 +18,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 // RFC822 returns an RFC822 formatted timestamp for AWS protocols
@@ -25,8 +26,6 @@ const RFC822 = "Mon, 2 Jan 2006 15:04:05 GMT"
 
 // Whether the byte value can be sent without escaping in AWS URLs
 var noEscape [256]bool
-
-var errValueNotSet = fmt.Errorf("value not set")
 
 func init() {
 	for i := 0; i < len(noEscape); i++ {
@@ -110,6 +109,10 @@ func buildLocationElements(r *request.Request, v reflect.Value, buildGETQuery bo
 					err = buildQueryString(query, m, name, field.Tag)
 				}
 			}
+
+			if protocol.IsNotSetError(err) {
+				err = nil
+			}
 			r.Error = err
 		}
 		if r.Error != nil {
@@ -153,14 +156,12 @@ func buildHeader(header *http.Header, v reflect.Value, name string, tag reflect.
 	str := ""
 
 	if v.Kind() == reflect.String {
-		if v.Len() == 0 {
-			return nil
-		}
-		str = v.String()
+		str, err = protocol.GetValue(v)
 	} else {
 		str, err = convertType(v, tag)
 	}
-	if err == errValueNotSet {
+
+	if protocol.IsNotSetError(err) {
 		return nil
 	} else if err != nil {
 		return awserr.New("SerializationError", "failed to encode REST request", err)
@@ -175,7 +176,7 @@ func buildHeaderMap(header *http.Header, v reflect.Value, tag reflect.StructTag)
 	prefix := tag.Get("locationName")
 	for _, key := range v.MapKeys() {
 		str, err := convertType(v.MapIndex(key), tag)
-		if err == errValueNotSet {
+		if protocol.IsNotSetError(err) {
 			continue
 		} else if err != nil {
 			return awserr.New("SerializationError", "failed to encode REST request", err)
@@ -191,16 +192,12 @@ func buildURI(u *url.URL, v reflect.Value, name string, tag reflect.StructTag) e
 	value := ""
 	var err error
 	if v.Kind() == reflect.String {
-		if v.Len() == 0 {
-			return nil
-		}
-
-		value = v.String()
+		value, err = protocol.GetValue(v)
 	} else {
 		value, err = convertType(v, tag)
 	}
 
-	if err == errValueNotSet {
+	if protocol.IsNotSetError(err) {
 		return nil
 	} else if err != nil {
 		return awserr.New("SerializationError", "failed to encode REST request", err)
@@ -217,10 +214,11 @@ func buildURI(u *url.URL, v reflect.Value, name string, tag reflect.StructTag) e
 
 func buildQueryString(query url.Values, v reflect.Value, name string, tag reflect.StructTag) error {
 	if kind := v.Kind(); kind == reflect.String {
-		if v.Len() > 0 {
-			query.Add(name, v.String())
+		value, err := protocol.GetValue(v)
+		if err == nil {
+			query.Add(name, value)
 		}
-		return nil
+		return err
 	} else if kind == reflect.Ptr {
 		v = v.Elem()
 	}
@@ -249,7 +247,7 @@ func buildQueryString(query url.Values, v reflect.Value, name string, tag reflec
 		}
 	default:
 		str, err := convertType(v, tag)
-		if err == errValueNotSet {
+		if protocol.IsNotSetError(err) {
 			return nil
 		} else if err != nil {
 			return awserr.New("SerializationError", "failed to encode REST request", err)
@@ -291,7 +289,7 @@ func EscapePath(path string, encodeSep bool) string {
 func convertType(v reflect.Value, tag reflect.StructTag) (string, error) {
 	v = reflect.Indirect(v)
 	if !v.IsValid() {
-		return "", errValueNotSet
+		return "", &protocol.ErrValueNotSet{}
 	}
 
 	var str string

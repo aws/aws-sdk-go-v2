@@ -5198,6 +5198,7 @@ func (s AssociateRoleToGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateRoleToGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateRoleToGroupInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -5558,6 +5559,7 @@ func (s CreateCoreDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCoreDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCoreDefinitionVersionInput"}
+
 	if s.CoreDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
@@ -5645,7 +5647,7 @@ type CreateDeploymentInput struct {
 
 	// Type of deployment. When used in CreateDeployment, only NewDeployment and
 	// Redeployment are valid.
-	DeploymentType *string `type:"string" enum:"DeploymentType"`
+	DeploymentType DeploymentType `type:"string"`
 
 	// GroupId is a required field
 	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
@@ -5667,6 +5669,7 @@ func (s CreateDeploymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -5690,8 +5693,8 @@ func (s *CreateDeploymentInput) SetDeploymentId(v string) *CreateDeploymentInput
 }
 
 // SetDeploymentType sets the DeploymentType field's value.
-func (s *CreateDeploymentInput) SetDeploymentType(v string) *CreateDeploymentInput {
-	s.DeploymentType = &v
+func (s *CreateDeploymentInput) SetDeploymentType(v DeploymentType) *CreateDeploymentInput {
+	s.DeploymentType = v
 	return s
 }
 
@@ -5876,6 +5879,7 @@ func (s CreateDeviceDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeviceDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDeviceDefinitionVersionInput"}
+
 	if s.DeviceDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
@@ -6087,6 +6091,7 @@ func (s CreateFunctionDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFunctionDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateFunctionDefinitionVersionInput"}
+
 	if s.FunctionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
@@ -6185,6 +6190,7 @@ func (s CreateGroupCertificateAuthorityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGroupCertificateAuthorityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupCertificateAuthorityInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -6375,6 +6381,7 @@ func (s CreateGroupVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGroupVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupVersionInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -6610,6 +6617,7 @@ func (s CreateLoggerDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoggerDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLoggerDefinitionVersionInput"}
+
 	if s.LoggerDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
@@ -6821,6 +6829,7 @@ func (s CreateSubscriptionDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSubscriptionDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSubscriptionDefinitionVersionInput"}
+
 	if s.SubscriptionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
@@ -6996,6 +7005,7 @@ func (s DeleteCoreDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCoreDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCoreDefinitionInput"}
+
 	if s.CoreDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
@@ -7048,6 +7058,7 @@ func (s DeleteDeviceDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeviceDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeviceDefinitionInput"}
+
 	if s.DeviceDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
@@ -7100,6 +7111,7 @@ func (s DeleteFunctionDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFunctionDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFunctionDefinitionInput"}
+
 	if s.FunctionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
@@ -7152,6 +7164,7 @@ func (s DeleteGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteGroupInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -7204,6 +7217,7 @@ func (s DeleteLoggerDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoggerDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoggerDefinitionInput"}
+
 	if s.LoggerDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
@@ -7256,6 +7270,7 @@ func (s DeleteSubscriptionDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSubscriptionDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubscriptionDefinitionInput"}
+
 	if s.SubscriptionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
@@ -7302,7 +7317,7 @@ type Deployment struct {
 	DeploymentId *string `type:"string"`
 
 	// The type of deployment.
-	DeploymentType *string `type:"string" enum:"DeploymentType"`
+	DeploymentType DeploymentType `type:"string"`
 
 	// Arn of the group for this deployment.
 	GroupArn *string `type:"string"`
@@ -7337,8 +7352,8 @@ func (s *Deployment) SetDeploymentId(v string) *Deployment {
 }
 
 // SetDeploymentType sets the DeploymentType field's value.
-func (s *Deployment) SetDeploymentType(v string) *Deployment {
-	s.DeploymentType = &v
+func (s *Deployment) SetDeploymentType(v DeploymentType) *Deployment {
+	s.DeploymentType = v
 	return s
 }
 
@@ -7447,6 +7462,7 @@ func (s DisassociateRoleFromGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateRoleFromGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateRoleFromGroupInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -7745,6 +7761,7 @@ func (s GetAssociatedRoleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAssociatedRoleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAssociatedRoleInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -7815,6 +7832,7 @@ func (s GetConnectivityInfoInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetConnectivityInfoInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetConnectivityInfoInput"}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -7885,6 +7903,7 @@ func (s GetCoreDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCoreDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCoreDefinitionInput"}
+
 	if s.CoreDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
@@ -7996,9 +8015,11 @@ func (s GetCoreDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCoreDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCoreDefinitionVersionInput"}
+
 	if s.CoreDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
+
 	if s.CoreDefinitionVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionVersionId"))
 	}
@@ -8105,9 +8126,11 @@ func (s GetDeploymentStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentStatusInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -8139,7 +8162,7 @@ type GetDeploymentStatusOutput struct {
 	DeploymentStatus *string `type:"string"`
 
 	// The type of the deployment.
-	DeploymentType *string `type:"string" enum:"DeploymentType"`
+	DeploymentType DeploymentType `type:"string"`
 
 	// The error Details
 	ErrorDetails []*ErrorDetail `type:"list"`
@@ -8168,8 +8191,8 @@ func (s *GetDeploymentStatusOutput) SetDeploymentStatus(v string) *GetDeployment
 }
 
 // SetDeploymentType sets the DeploymentType field's value.
-func (s *GetDeploymentStatusOutput) SetDeploymentType(v string) *GetDeploymentStatusOutput {
-	s.DeploymentType = &v
+func (s *GetDeploymentStatusOutput) SetDeploymentType(v DeploymentType) *GetDeploymentStatusOutput {
+	s.DeploymentType = v
 	return s
 }
 
@@ -8212,6 +8235,7 @@ func (s GetDeviceDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeviceDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceDefinitionInput"}
+
 	if s.DeviceDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
@@ -8323,9 +8347,11 @@ func (s GetDeviceDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeviceDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceDefinitionVersionInput"}
+
 	if s.DeviceDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
+
 	if s.DeviceDefinitionVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionVersionId"))
 	}
@@ -8429,6 +8455,7 @@ func (s GetFunctionDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFunctionDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionDefinitionInput"}
+
 	if s.FunctionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
@@ -8540,9 +8567,11 @@ func (s GetFunctionDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFunctionDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionDefinitionVersionInput"}
+
 	if s.FunctionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
+
 	if s.FunctionDefinitionVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionVersionId"))
 	}
@@ -8650,9 +8679,11 @@ func (s GetGroupCertificateAuthorityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupCertificateAuthorityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGroupCertificateAuthorityInput"}
+
 	if s.CertificateAuthorityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityId"))
 	}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -8739,6 +8770,7 @@ func (s GetGroupCertificateConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupCertificateConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGroupCertificateConfigurationInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -8815,6 +8847,7 @@ func (s GetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGroupInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -8926,9 +8959,11 @@ func (s GetGroupVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGroupVersionInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
+
 	if s.GroupVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupVersionId"))
 	}
@@ -9033,6 +9068,7 @@ func (s GetLoggerDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetLoggerDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetLoggerDefinitionInput"}
+
 	if s.LoggerDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
@@ -9144,9 +9180,11 @@ func (s GetLoggerDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetLoggerDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetLoggerDefinitionVersionInput"}
+
 	if s.LoggerDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
+
 	if s.LoggerDefinitionVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionVersionId"))
 	}
@@ -9299,6 +9337,7 @@ func (s GetSubscriptionDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSubscriptionDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSubscriptionDefinitionInput"}
+
 	if s.SubscriptionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
@@ -9410,9 +9449,11 @@ func (s GetSubscriptionDefinitionVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSubscriptionDefinitionVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSubscriptionDefinitionVersionInput"}
+
 	if s.SubscriptionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
+
 	if s.SubscriptionDefinitionVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionVersionId"))
 	}
@@ -9695,6 +9736,7 @@ func (s ListCoreDefinitionVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCoreDefinitionVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListCoreDefinitionVersionsInput"}
+
 	if s.CoreDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
@@ -9841,6 +9883,7 @@ func (s ListDeploymentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeploymentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDeploymentsInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -9928,6 +9971,7 @@ func (s ListDeviceDefinitionVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeviceDefinitionVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDeviceDefinitionVersionsInput"}
+
 	if s.DeviceDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
@@ -10074,6 +10118,7 @@ func (s ListFunctionDefinitionVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListFunctionDefinitionVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListFunctionDefinitionVersionsInput"}
+
 	if s.FunctionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
@@ -10216,6 +10261,7 @@ func (s ListGroupCertificateAuthoritiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGroupCertificateAuthoritiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListGroupCertificateAuthoritiesInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -10281,6 +10327,7 @@ func (s ListGroupVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGroupVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListGroupVersionsInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -10430,6 +10477,7 @@ func (s ListLoggerDefinitionVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListLoggerDefinitionVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListLoggerDefinitionVersionsInput"}
+
 	if s.LoggerDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
@@ -10576,6 +10624,7 @@ func (s ListSubscriptionDefinitionVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSubscriptionDefinitionVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListSubscriptionDefinitionVersionsInput"}
+
 	if s.SubscriptionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
@@ -10703,20 +10752,20 @@ type Logger struct {
 	_ struct{} `type:"structure"`
 
 	// The component that will be subject to logs
-	Component *string `type:"string" enum:"LoggerComponent"`
+	Component LoggerComponent `type:"string"`
 
 	// Element Id for this entry in the list.
 	Id *string `type:"string"`
 
 	// The level of the logs
-	Level *string `type:"string" enum:"LoggerLevel"`
+	Level LoggerLevel `type:"string"`
 
 	// Amount of hardware space, in KB, to use if file system is used for logging
 	// purposes.
 	Space *int64 `type:"integer"`
 
 	// The type which will be use for log output
-	Type *string `type:"string" enum:"LoggerType"`
+	Type LoggerType `type:"string"`
 }
 
 // String returns the string representation
@@ -10730,8 +10779,8 @@ func (s Logger) GoString() string {
 }
 
 // SetComponent sets the Component field's value.
-func (s *Logger) SetComponent(v string) *Logger {
-	s.Component = &v
+func (s *Logger) SetComponent(v LoggerComponent) *Logger {
+	s.Component = v
 	return s
 }
 
@@ -10742,8 +10791,8 @@ func (s *Logger) SetId(v string) *Logger {
 }
 
 // SetLevel sets the Level field's value.
-func (s *Logger) SetLevel(v string) *Logger {
-	s.Level = &v
+func (s *Logger) SetLevel(v LoggerLevel) *Logger {
+	s.Level = v
 	return s
 }
 
@@ -10754,8 +10803,8 @@ func (s *Logger) SetSpace(v int64) *Logger {
 }
 
 // SetType sets the Type field's value.
-func (s *Logger) SetType(v string) *Logger {
-	s.Type = &v
+func (s *Logger) SetType(v LoggerType) *Logger {
+	s.Type = v
 	return s
 }
 
@@ -10811,6 +10860,7 @@ func (s ResetDeploymentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetDeploymentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetDeploymentsInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -10974,6 +11024,7 @@ func (s UpdateConnectivityInfoInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConnectivityInfoInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateConnectivityInfoInput"}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -11051,6 +11102,7 @@ func (s UpdateCoreDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCoreDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateCoreDefinitionInput"}
+
 	if s.CoreDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
@@ -11111,6 +11163,7 @@ func (s UpdateDeviceDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDeviceDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceDefinitionInput"}
+
 	if s.DeviceDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
@@ -11171,6 +11224,7 @@ func (s UpdateFunctionDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFunctionDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateFunctionDefinitionInput"}
+
 	if s.FunctionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
@@ -11232,6 +11286,7 @@ func (s UpdateGroupCertificateConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGroupCertificateConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupCertificateConfigurationInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -11316,6 +11371,7 @@ func (s UpdateGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
+
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
@@ -11376,6 +11432,7 @@ func (s UpdateLoggerDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateLoggerDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateLoggerDefinitionInput"}
+
 	if s.LoggerDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
@@ -11436,6 +11493,7 @@ func (s UpdateSubscriptionDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSubscriptionDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSubscriptionDefinitionInput"}
+
 	if s.SubscriptionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
@@ -11525,49 +11583,39 @@ func (s *VersionInformation) SetVersion(v string) *VersionInformation {
 	return s
 }
 
+type DeploymentType string
+
+// Enum values for DeploymentType
 const (
-	// DeploymentTypeNewDeployment is a DeploymentType enum value
-	DeploymentTypeNewDeployment = "NewDeployment"
-
-	// DeploymentTypeRedeployment is a DeploymentType enum value
-	DeploymentTypeRedeployment = "Redeployment"
-
-	// DeploymentTypeResetDeployment is a DeploymentType enum value
-	DeploymentTypeResetDeployment = "ResetDeployment"
-
-	// DeploymentTypeForceResetDeployment is a DeploymentType enum value
-	DeploymentTypeForceResetDeployment = "ForceResetDeployment"
+	DeploymentTypeNewDeployment        DeploymentType = "NewDeployment"
+	DeploymentTypeRedeployment         DeploymentType = "Redeployment"
+	DeploymentTypeResetDeployment      DeploymentType = "ResetDeployment"
+	DeploymentTypeForceResetDeployment DeploymentType = "ForceResetDeployment"
 )
 
-const (
-	// LoggerComponentGreengrassSystem is a LoggerComponent enum value
-	LoggerComponentGreengrassSystem = "GreengrassSystem"
+type LoggerComponent string
 
-	// LoggerComponentLambda is a LoggerComponent enum value
-	LoggerComponentLambda = "Lambda"
+// Enum values for LoggerComponent
+const (
+	LoggerComponentGreengrassSystem LoggerComponent = "GreengrassSystem"
+	LoggerComponentLambda           LoggerComponent = "Lambda"
 )
 
+type LoggerLevel string
+
+// Enum values for LoggerLevel
 const (
-	// LoggerLevelDebug is a LoggerLevel enum value
-	LoggerLevelDebug = "DEBUG"
-
-	// LoggerLevelInfo is a LoggerLevel enum value
-	LoggerLevelInfo = "INFO"
-
-	// LoggerLevelWarn is a LoggerLevel enum value
-	LoggerLevelWarn = "WARN"
-
-	// LoggerLevelError is a LoggerLevel enum value
-	LoggerLevelError = "ERROR"
-
-	// LoggerLevelFatal is a LoggerLevel enum value
-	LoggerLevelFatal = "FATAL"
+	LoggerLevelDebug LoggerLevel = "DEBUG"
+	LoggerLevelInfo  LoggerLevel = "INFO"
+	LoggerLevelWarn  LoggerLevel = "WARN"
+	LoggerLevelError LoggerLevel = "ERROR"
+	LoggerLevelFatal LoggerLevel = "FATAL"
 )
 
-const (
-	// LoggerTypeFileSystem is a LoggerType enum value
-	LoggerTypeFileSystem = "FileSystem"
+type LoggerType string
 
-	// LoggerTypeAwscloudWatch is a LoggerType enum value
-	LoggerTypeAwscloudWatch = "AWSCloudWatch"
+// Enum values for LoggerType
+const (
+	LoggerTypeFileSystem    LoggerType = "FileSystem"
+	LoggerTypeAwscloudWatch LoggerType = "AWSCloudWatch"
 )

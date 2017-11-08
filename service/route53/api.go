@@ -5432,7 +5432,7 @@ type AlarmIdentifier struct {
 	// Reference.
 	//
 	// Region is a required field
-	Region *string `min:"1" type:"string" required:"true" enum:"CloudWatchRegion"`
+	Region CloudWatchRegion `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5448,17 +5448,15 @@ func (s AlarmIdentifier) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AlarmIdentifier) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AlarmIdentifier"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.Region == nil {
+	if len(s.Region) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Region"))
-	}
-	if s.Region != nil && len(*s.Region) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Region", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5474,8 +5472,8 @@ func (s *AlarmIdentifier) SetName(v string) *AlarmIdentifier {
 }
 
 // SetRegion sets the Region field's value.
-func (s *AlarmIdentifier) SetRegion(v string) *AlarmIdentifier {
-	s.Region = &v
+func (s *AlarmIdentifier) SetRegion(v CloudWatchRegion) *AlarmIdentifier {
+	s.Region = v
 	return s
 }
 
@@ -5687,12 +5685,15 @@ func (s AliasTarget) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AliasTarget) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AliasTarget"}
+
 	if s.DNSName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DNSName"))
 	}
+
 	if s.EvaluateTargetHealth == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EvaluateTargetHealth"))
 	}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
@@ -5759,9 +5760,11 @@ func (s AssociateVPCWithHostedZoneInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateVPCWithHostedZoneInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateVPCWithHostedZoneInput"}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
+
 	if s.VPC == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VPC"))
 	}
@@ -5881,7 +5884,7 @@ type Change struct {
 	//    record sets)
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"ChangeAction"`
+	Action ChangeAction `type:"string" required:"true"`
 
 	// Information about the resource record set to create, delete, or update.
 	//
@@ -5902,9 +5905,10 @@ func (s Change) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Change) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Change"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.ResourceRecordSet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceRecordSet"))
 	}
@@ -5921,8 +5925,8 @@ func (s *Change) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *Change) SetAction(v string) *Change {
-	s.Action = &v
+func (s *Change) SetAction(v ChangeAction) *Change {
+	s.Action = v
 	return s
 }
 
@@ -5959,6 +5963,7 @@ func (s ChangeBatch) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeBatch) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ChangeBatch"}
+
 	if s.Changes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Changes"))
 	}
@@ -6016,7 +6021,7 @@ type ChangeInfo struct {
 	// not yet been applied to all Amazon Route 53 DNS servers.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"ChangeStatus"`
+	Status ChangeStatus `type:"string" required:"true"`
 
 	// The date and time that the change request was submitted in ISO 8601 format
 	// (https://en.wikipedia.org/wiki/ISO_8601) and Coordinated Universal Time (UTC).
@@ -6050,8 +6055,8 @@ func (s *ChangeInfo) SetId(v string) *ChangeInfo {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ChangeInfo) SetStatus(v string) *ChangeInfo {
-	s.Status = &v
+func (s *ChangeInfo) SetStatus(v ChangeStatus) *ChangeInfo {
+	s.Status = v
 	return s
 }
 
@@ -6091,9 +6096,11 @@ func (s ChangeResourceRecordSetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangeResourceRecordSetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ChangeResourceRecordSetsInput"}
+
 	if s.ChangeBatch == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeBatch"))
 	}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
@@ -6181,7 +6188,7 @@ type ChangeTagsForResourceInput struct {
 	//    * The resource type for hosted zones is hostedzone.
 	//
 	// ResourceType is a required field
-	ResourceType *string `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"TagResourceType"`
+	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6203,10 +6210,11 @@ func (s *ChangeTagsForResourceInput) Validate() error {
 	if s.RemoveTagKeys != nil && len(s.RemoveTagKeys) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RemoveTagKeys", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
@@ -6235,8 +6243,8 @@ func (s *ChangeTagsForResourceInput) SetResourceId(v string) *ChangeTagsForResou
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ChangeTagsForResourceInput) SetResourceType(v string) *ChangeTagsForResourceInput {
-	s.ResourceType = &v
+func (s *ChangeTagsForResourceInput) SetResourceType(v TagResourceType) *ChangeTagsForResourceInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -6266,7 +6274,7 @@ type CloudWatchAlarmConfiguration struct {
 	// operation that is used for the comparison.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator *string `type:"string" required:"true" enum:"ComparisonOperator"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
 
 	// For the metric that the CloudWatch alarm is associated with, a complex type
 	// that contains information about the dimensions for the metric. For information,
@@ -6302,7 +6310,7 @@ type CloudWatchAlarmConfiguration struct {
 	// that is applied to the metric.
 	//
 	// Statistic is a required field
-	Statistic *string `type:"string" required:"true" enum:"Statistic"`
+	Statistic Statistic `type:"string" required:"true"`
 
 	// For the metric that the CloudWatch alarm is associated with, the value the
 	// metric is compared with.
@@ -6322,8 +6330,8 @@ func (s CloudWatchAlarmConfiguration) GoString() string {
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *CloudWatchAlarmConfiguration) SetComparisonOperator(v string) *CloudWatchAlarmConfiguration {
-	s.ComparisonOperator = &v
+func (s *CloudWatchAlarmConfiguration) SetComparisonOperator(v ComparisonOperator) *CloudWatchAlarmConfiguration {
+	s.ComparisonOperator = v
 	return s
 }
 
@@ -6358,8 +6366,8 @@ func (s *CloudWatchAlarmConfiguration) SetPeriod(v int64) *CloudWatchAlarmConfig
 }
 
 // SetStatistic sets the Statistic field's value.
-func (s *CloudWatchAlarmConfiguration) SetStatistic(v string) *CloudWatchAlarmConfiguration {
-	s.Statistic = &v
+func (s *CloudWatchAlarmConfiguration) SetStatistic(v Statistic) *CloudWatchAlarmConfiguration {
+	s.Statistic = v
 	return s
 }
 
@@ -6417,12 +6425,14 @@ func (s CreateHealthCheckInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHealthCheckInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateHealthCheckInput"}
+
 	if s.CallerReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
 	if s.CallerReference != nil && len(*s.CallerReference) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CallerReference", 1))
 	}
+
 	if s.HealthCheckConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HealthCheckConfig"))
 	}
@@ -6555,12 +6565,14 @@ func (s CreateHostedZoneInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHostedZoneInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateHostedZoneInput"}
+
 	if s.CallerReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
 	if s.CallerReference != nil && len(*s.CallerReference) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CallerReference", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6713,9 +6725,11 @@ func (s CreateQueryLoggingConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateQueryLoggingConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateQueryLoggingConfigInput"}
+
 	if s.CloudWatchLogsLogGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLogsLogGroupArn"))
 	}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
@@ -6808,6 +6822,7 @@ func (s CreateReusableDelegationSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReusableDelegationSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReusableDelegationSetInput"}
+
 	if s.CallerReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
@@ -6904,9 +6919,11 @@ func (s CreateTrafficPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrafficPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTrafficPolicyInput"}
+
 	if s.Document == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Document"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6986,21 +7003,26 @@ func (s CreateTrafficPolicyInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrafficPolicyInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTrafficPolicyInstanceInput"}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.TTL == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TTL"))
 	}
+
 	if s.TrafficPolicyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyId"))
 	}
 	if s.TrafficPolicyId != nil && len(*s.TrafficPolicyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyId", 1))
 	}
+
 	if s.TrafficPolicyVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyVersion"))
 	}
@@ -7158,9 +7180,11 @@ func (s CreateTrafficPolicyVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrafficPolicyVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTrafficPolicyVersionInput"}
+
 	if s.Document == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Document"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7265,9 +7289,11 @@ func (s CreateVPCAssociationAuthorizationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVPCAssociationAuthorizationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVPCAssociationAuthorizationInput"}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
+
 	if s.VPC == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VPC"))
 	}
@@ -7406,6 +7432,7 @@ func (s DeleteHealthCheckInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHealthCheckInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteHealthCheckInput"}
+
 	if s.HealthCheckId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
@@ -7462,6 +7489,7 @@ func (s DeleteHostedZoneInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHostedZoneInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteHostedZoneInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7529,6 +7557,7 @@ func (s DeleteQueryLoggingConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteQueryLoggingConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteQueryLoggingConfigInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7587,6 +7616,7 @@ func (s DeleteReusableDelegationSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReusableDelegationSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteReusableDelegationSetInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7648,12 +7678,14 @@ func (s DeleteTrafficPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTrafficPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrafficPolicyInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -7707,6 +7739,7 @@ func (s DeleteTrafficPolicyInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTrafficPolicyInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrafficPolicyInstanceInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7793,9 +7826,11 @@ func (s DeleteVPCAssociationAuthorizationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVPCAssociationAuthorizationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVPCAssociationAuthorizationInput"}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
+
 	if s.VPC == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VPC"))
 	}
@@ -7914,9 +7949,11 @@ func (s DisassociateVPCFromHostedZoneInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateVPCFromHostedZoneInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateVPCFromHostedZoneInput"}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
+
 	if s.VPC == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VPC"))
 	}
@@ -8146,6 +8183,7 @@ func (s GetChangeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetChangeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetChangeInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8409,6 +8447,7 @@ func (s GetHealthCheckInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHealthCheckInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetHealthCheckInput"}
+
 	if s.HealthCheckId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
@@ -8451,6 +8490,7 @@ func (s GetHealthCheckLastFailureReasonInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHealthCheckLastFailureReasonInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetHealthCheckLastFailureReasonInput"}
+
 	if s.HealthCheckId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
@@ -8554,6 +8594,7 @@ func (s GetHealthCheckStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHealthCheckStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetHealthCheckStatusInput"}
+
 	if s.HealthCheckId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
@@ -8667,6 +8708,7 @@ func (s GetHostedZoneInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHostedZoneInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetHostedZoneInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8755,6 +8797,7 @@ func (s GetQueryLoggingConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueryLoggingConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetQueryLoggingConfigInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8826,6 +8869,7 @@ func (s GetReusableDelegationSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetReusableDelegationSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetReusableDelegationSetInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8900,12 +8944,14 @@ func (s GetTrafficPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTrafficPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTrafficPolicyInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -9001,6 +9047,7 @@ func (s GetTrafficPolicyInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTrafficPolicyInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTrafficPolicyInstanceInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -9321,7 +9368,7 @@ type HealthCheckConfig struct {
 	//    from the last time that CloudWatch had sufficient data to determine the
 	//    alarm state. For new health checks that have no last known status, the
 	//    default status for the health check is healthy.
-	InsufficientDataHealthStatus *string `type:"string" enum:"InsufficientDataHealthStatus"`
+	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string"`
 
 	// Specify whether you want Amazon Route 53 to invert the status of a health
 	// check, for example, to consider a health check unhealthy when it otherwise
@@ -9349,7 +9396,7 @@ type HealthCheckConfig struct {
 	// health checks, Amazon Route 53 will briefly continue to perform checks from
 	// that region to ensure that some health checkers are always checking the endpoint
 	// (for example, if you replace three regions with four different regions).
-	Regions []*string `locationNameList:"Region" min:"3" type:"list"`
+	Regions []HealthCheckRegion `locationNameList:"Region" min:"3" type:"list"`
 
 	// The number of seconds between the time that Amazon Route 53 gets a response
 	// from your endpoint and the time that it sends the next health check request.
@@ -9423,7 +9470,7 @@ type HealthCheckConfig struct {
 	// in the Amazon Route 53 Developer Guide.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"HealthCheckType"`
+	Type HealthCheckType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9451,7 +9498,7 @@ func (s *HealthCheckConfig) Validate() error {
 	if s.RequestInterval != nil && *s.RequestInterval < 10 {
 		invalidParams.Add(aws.NewErrParamMinValue("RequestInterval", 10))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.AlarmIdentifier != nil {
@@ -9509,8 +9556,8 @@ func (s *HealthCheckConfig) SetIPAddress(v string) *HealthCheckConfig {
 }
 
 // SetInsufficientDataHealthStatus sets the InsufficientDataHealthStatus field's value.
-func (s *HealthCheckConfig) SetInsufficientDataHealthStatus(v string) *HealthCheckConfig {
-	s.InsufficientDataHealthStatus = &v
+func (s *HealthCheckConfig) SetInsufficientDataHealthStatus(v InsufficientDataHealthStatus) *HealthCheckConfig {
+	s.InsufficientDataHealthStatus = v
 	return s
 }
 
@@ -9533,7 +9580,7 @@ func (s *HealthCheckConfig) SetPort(v int64) *HealthCheckConfig {
 }
 
 // SetRegions sets the Regions field's value.
-func (s *HealthCheckConfig) SetRegions(v []*string) *HealthCheckConfig {
+func (s *HealthCheckConfig) SetRegions(v []HealthCheckRegion) *HealthCheckConfig {
 	s.Regions = v
 	return s
 }
@@ -9557,8 +9604,8 @@ func (s *HealthCheckConfig) SetSearchString(v string) *HealthCheckConfig {
 }
 
 // SetType sets the Type field's value.
-func (s *HealthCheckConfig) SetType(v string) *HealthCheckConfig {
-	s.Type = &v
+func (s *HealthCheckConfig) SetType(v HealthCheckType) *HealthCheckConfig {
+	s.Type = v
 	return s
 }
 
@@ -9574,7 +9621,7 @@ type HealthCheckObservation struct {
 
 	// The region of the Amazon Route 53 health checker that provided the status
 	// in StatusReport.
-	Region *string `min:"1" type:"string" enum:"HealthCheckRegion"`
+	Region HealthCheckRegion `min:"1" type:"string"`
 
 	// A complex type that contains the last failure reason as reported by one Amazon
 	// Route 53 health checker and the time of the failed health check.
@@ -9598,8 +9645,8 @@ func (s *HealthCheckObservation) SetIPAddress(v string) *HealthCheckObservation 
 }
 
 // SetRegion sets the Region field's value.
-func (s *HealthCheckObservation) SetRegion(v string) *HealthCheckObservation {
-	s.Region = &v
+func (s *HealthCheckObservation) SetRegion(v HealthCheckRegion) *HealthCheckObservation {
+	s.Region = v
 	return s
 }
 
@@ -10480,7 +10527,7 @@ type ListResourceRecordSetsInput struct {
 	//
 	// Constraint: Specifying type without specifying name returns an InvalidInput
 	// error.
-	StartRecordType *string `location:"querystring" locationName:"type" type:"string" enum:"RRType"`
+	StartRecordType RRType `location:"querystring" locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -10496,6 +10543,7 @@ func (s ListResourceRecordSetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourceRecordSetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListResourceRecordSetsInput"}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
@@ -10534,8 +10582,8 @@ func (s *ListResourceRecordSetsInput) SetStartRecordName(v string) *ListResource
 }
 
 // SetStartRecordType sets the StartRecordType field's value.
-func (s *ListResourceRecordSetsInput) SetStartRecordType(v string) *ListResourceRecordSetsInput {
-	s.StartRecordType = &v
+func (s *ListResourceRecordSetsInput) SetStartRecordType(v RRType) *ListResourceRecordSetsInput {
+	s.StartRecordType = v
 	return s
 }
 
@@ -10569,7 +10617,7 @@ type ListResourceRecordSetsOutput struct {
 	// If the results were truncated, the type of the next record in the list.
 	//
 	// This element is present only if IsTruncated is true.
-	NextRecordType *string `type:"string" enum:"RRType"`
+	NextRecordType RRType `type:"string"`
 
 	// Information about multiple resource record sets.
 	//
@@ -10612,8 +10660,8 @@ func (s *ListResourceRecordSetsOutput) SetNextRecordName(v string) *ListResource
 }
 
 // SetNextRecordType sets the NextRecordType field's value.
-func (s *ListResourceRecordSetsOutput) SetNextRecordType(v string) *ListResourceRecordSetsOutput {
-	s.NextRecordType = &v
+func (s *ListResourceRecordSetsOutput) SetNextRecordType(v RRType) *ListResourceRecordSetsOutput {
+	s.NextRecordType = v
 	return s
 }
 
@@ -10764,7 +10812,7 @@ type ListTagsForResourceInput struct {
 	//    * The resource type for hosted zones is hostedzone.
 	//
 	// ResourceType is a required field
-	ResourceType *string `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"TagResourceType"`
+	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -10780,10 +10828,11 @@ func (s ListTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
@@ -10800,8 +10849,8 @@ func (s *ListTagsForResourceInput) SetResourceId(v string) *ListTagsForResourceI
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ListTagsForResourceInput) SetResourceType(v string) *ListTagsForResourceInput {
-	s.ResourceType = &v
+func (s *ListTagsForResourceInput) SetResourceType(v TagResourceType) *ListTagsForResourceInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -10852,7 +10901,7 @@ type ListTagsForResourcesInput struct {
 	//    * The resource type for hosted zones is hostedzone.
 	//
 	// ResourceType is a required field
-	ResourceType *string `location:"uri" locationName:"ResourceType" type:"string" required:"true" enum:"TagResourceType"`
+	ResourceType TagResourceType `location:"uri" locationName:"ResourceType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -10868,13 +10917,14 @@ func (s ListTagsForResourcesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourcesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourcesInput"}
+
 	if s.ResourceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceIds"))
 	}
 	if s.ResourceIds != nil && len(s.ResourceIds) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceIds", 1))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
@@ -10891,8 +10941,8 @@ func (s *ListTagsForResourcesInput) SetResourceIds(v []*string) *ListTagsForReso
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ListTagsForResourcesInput) SetResourceType(v string) *ListTagsForResourcesInput {
-	s.ResourceType = &v
+func (s *ListTagsForResourcesInput) SetResourceType(v TagResourceType) *ListTagsForResourcesInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -11088,7 +11138,7 @@ type ListTrafficPolicyInstancesByHostedZoneInput struct {
 	//
 	// If the value of IsTruncated in the previous response was false, there are
 	// no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker *string `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string" enum:"RRType"`
+	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string"`
 }
 
 // String returns the string representation
@@ -11104,6 +11154,7 @@ func (s ListTrafficPolicyInstancesByHostedZoneInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTrafficPolicyInstancesByHostedZoneInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTrafficPolicyInstancesByHostedZoneInput"}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
@@ -11133,8 +11184,8 @@ func (s *ListTrafficPolicyInstancesByHostedZoneInput) SetTrafficPolicyInstanceNa
 }
 
 // SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneInput) SetTrafficPolicyInstanceTypeMarker(v string) *ListTrafficPolicyInstancesByHostedZoneInput {
-	s.TrafficPolicyInstanceTypeMarker = &v
+func (s *ListTrafficPolicyInstancesByHostedZoneInput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesByHostedZoneInput {
+	s.TrafficPolicyInstanceTypeMarker = v
 	return s
 }
 
@@ -11165,7 +11216,7 @@ type ListTrafficPolicyInstancesByHostedZoneOutput struct {
 	// If IsTruncated is true, TrafficPolicyInstanceTypeMarker is the DNS type of
 	// the resource record sets that are associated with the first traffic policy
 	// instance in the next group of traffic policy instances.
-	TrafficPolicyInstanceTypeMarker *string `type:"string" enum:"RRType"`
+	TrafficPolicyInstanceTypeMarker RRType `type:"string"`
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
@@ -11203,8 +11254,8 @@ func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetTrafficPolicyInstanceN
 }
 
 // SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetTrafficPolicyInstanceTypeMarker(v string) *ListTrafficPolicyInstancesByHostedZoneOutput {
-	s.TrafficPolicyInstanceTypeMarker = &v
+func (s *ListTrafficPolicyInstancesByHostedZoneOutput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesByHostedZoneOutput {
+	s.TrafficPolicyInstanceTypeMarker = v
 	return s
 }
 
@@ -11267,7 +11318,7 @@ type ListTrafficPolicyInstancesByPolicyInput struct {
 	//
 	// If the value of IsTruncated in the previous response was false, there are
 	// no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker *string `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string" enum:"RRType"`
+	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string"`
 
 	// The version of the traffic policy for which you want to list traffic policy
 	// instances. The version must be associated with the traffic policy that is
@@ -11290,12 +11341,14 @@ func (s ListTrafficPolicyInstancesByPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTrafficPolicyInstancesByPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTrafficPolicyInstancesByPolicyInput"}
+
 	if s.TrafficPolicyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyId"))
 	}
 	if s.TrafficPolicyId != nil && len(*s.TrafficPolicyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyId", 1))
 	}
+
 	if s.TrafficPolicyVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyVersion"))
 	}
@@ -11334,8 +11387,8 @@ func (s *ListTrafficPolicyInstancesByPolicyInput) SetTrafficPolicyInstanceNameMa
 }
 
 // SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesByPolicyInput) SetTrafficPolicyInstanceTypeMarker(v string) *ListTrafficPolicyInstancesByPolicyInput {
-	s.TrafficPolicyInstanceTypeMarker = &v
+func (s *ListTrafficPolicyInstancesByPolicyInput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesByPolicyInput {
+	s.TrafficPolicyInstanceTypeMarker = v
 	return s
 }
 
@@ -11378,7 +11431,7 @@ type ListTrafficPolicyInstancesByPolicyOutput struct {
 	// If IsTruncated is true, TrafficPolicyInstanceTypeMarker is the DNS type of
 	// the resource record sets that are associated with the first traffic policy
 	// instance in the next group of MaxItems traffic policy instances.
-	TrafficPolicyInstanceTypeMarker *string `type:"string" enum:"RRType"`
+	TrafficPolicyInstanceTypeMarker RRType `type:"string"`
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
@@ -11422,8 +11475,8 @@ func (s *ListTrafficPolicyInstancesByPolicyOutput) SetTrafficPolicyInstanceNameM
 }
 
 // SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesByPolicyOutput) SetTrafficPolicyInstanceTypeMarker(v string) *ListTrafficPolicyInstancesByPolicyOutput {
-	s.TrafficPolicyInstanceTypeMarker = &v
+func (s *ListTrafficPolicyInstancesByPolicyOutput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesByPolicyOutput {
+	s.TrafficPolicyInstanceTypeMarker = v
 	return s
 }
 
@@ -11478,7 +11531,7 @@ type ListTrafficPolicyInstancesInput struct {
 	//
 	// If the value of IsTruncated in the previous response was false, there are
 	// no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker *string `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string" enum:"RRType"`
+	TrafficPolicyInstanceTypeMarker RRType `location:"querystring" locationName:"trafficpolicyinstancetype" type:"string"`
 }
 
 // String returns the string representation
@@ -11510,8 +11563,8 @@ func (s *ListTrafficPolicyInstancesInput) SetTrafficPolicyInstanceNameMarker(v s
 }
 
 // SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesInput) SetTrafficPolicyInstanceTypeMarker(v string) *ListTrafficPolicyInstancesInput {
-	s.TrafficPolicyInstanceTypeMarker = &v
+func (s *ListTrafficPolicyInstancesInput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesInput {
+	s.TrafficPolicyInstanceTypeMarker = v
 	return s
 }
 
@@ -11549,7 +11602,7 @@ type ListTrafficPolicyInstancesOutput struct {
 	// the resource record sets that are associated with the first traffic policy
 	// instance that Amazon Route 53 will return if you submit another ListTrafficPolicyInstances
 	// request.
-	TrafficPolicyInstanceTypeMarker *string `type:"string" enum:"RRType"`
+	TrafficPolicyInstanceTypeMarker RRType `type:"string"`
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.
@@ -11593,8 +11646,8 @@ func (s *ListTrafficPolicyInstancesOutput) SetTrafficPolicyInstanceNameMarker(v 
 }
 
 // SetTrafficPolicyInstanceTypeMarker sets the TrafficPolicyInstanceTypeMarker field's value.
-func (s *ListTrafficPolicyInstancesOutput) SetTrafficPolicyInstanceTypeMarker(v string) *ListTrafficPolicyInstancesOutput {
-	s.TrafficPolicyInstanceTypeMarker = &v
+func (s *ListTrafficPolicyInstancesOutput) SetTrafficPolicyInstanceTypeMarker(v RRType) *ListTrafficPolicyInstancesOutput {
+	s.TrafficPolicyInstanceTypeMarker = v
 	return s
 }
 
@@ -11648,6 +11701,7 @@ func (s ListTrafficPolicyVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTrafficPolicyVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTrafficPolicyVersionsInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -11787,6 +11841,7 @@ func (s ListVPCAssociationAuthorizationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVPCAssociationAuthorizationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListVPCAssociationAuthorizationsInput"}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
@@ -11953,6 +12008,7 @@ func (s ResourceRecord) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceRecord) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResourceRecord"}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -12033,7 +12089,7 @@ type ResourceRecordSet struct {
 	//    * Amazon Route 53 Health Checks and DNS Failover (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html)
 	//
 	//    * Configuring Failover in a Private Hosted Zone (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html)
-	Failover *string `type:"string" enum:"ResourceRecordSetFailover"`
+	Failover ResourceRecordSetFailover `type:"string"`
 
 	// Geo location resource record sets only: A complex type that lets you control
 	// how Amazon Route 53 responds to DNS queries based on the geographic origin
@@ -12236,7 +12292,7 @@ type ResourceRecordSet struct {
 	//
 	//    * You can't create non-latency resource record sets that have the same
 	//    values for the Name and Type elements as latency resource record sets.
-	Region *string `min:"1" type:"string" enum:"ResourceRecordSetRegion"`
+	Region ResourceRecordSetRegion `min:"1" type:"string"`
 
 	// Information about the resource records to act upon.
 	//
@@ -12327,7 +12383,7 @@ type ResourceRecordSet struct {
 	//    are supported except NS and SOA.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"RRType"`
+	Type RRType `type:"string" required:"true"`
 
 	// Weighted resource record sets only: Among resource record sets that have
 	// the same combination of DNS name and type, a value that determines the proportion
@@ -12378,12 +12434,11 @@ func (s ResourceRecordSet) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceRecordSet) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResourceRecordSet"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
-	if s.Region != nil && len(*s.Region) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Region", 1))
-	}
+
 	if s.ResourceRecords != nil && len(s.ResourceRecords) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceRecords", 1))
 	}
@@ -12393,7 +12448,7 @@ func (s *ResourceRecordSet) Validate() error {
 	if s.TrafficPolicyInstanceId != nil && len(*s.TrafficPolicyInstanceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyInstanceId", 1))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.AliasTarget != nil {
@@ -12430,8 +12485,8 @@ func (s *ResourceRecordSet) SetAliasTarget(v *AliasTarget) *ResourceRecordSet {
 }
 
 // SetFailover sets the Failover field's value.
-func (s *ResourceRecordSet) SetFailover(v string) *ResourceRecordSet {
-	s.Failover = &v
+func (s *ResourceRecordSet) SetFailover(v ResourceRecordSetFailover) *ResourceRecordSet {
+	s.Failover = v
 	return s
 }
 
@@ -12460,8 +12515,8 @@ func (s *ResourceRecordSet) SetName(v string) *ResourceRecordSet {
 }
 
 // SetRegion sets the Region field's value.
-func (s *ResourceRecordSet) SetRegion(v string) *ResourceRecordSet {
-	s.Region = &v
+func (s *ResourceRecordSet) SetRegion(v ResourceRecordSetRegion) *ResourceRecordSet {
+	s.Region = v
 	return s
 }
 
@@ -12490,8 +12545,8 @@ func (s *ResourceRecordSet) SetTrafficPolicyInstanceId(v string) *ResourceRecord
 }
 
 // SetType sets the Type field's value.
-func (s *ResourceRecordSet) SetType(v string) *ResourceRecordSet {
-	s.Type = &v
+func (s *ResourceRecordSet) SetType(v RRType) *ResourceRecordSet {
+	s.Type = v
 	return s
 }
 
@@ -12514,7 +12569,7 @@ type ResourceTagSet struct {
 	//    * The resource type for health checks is healthcheck.
 	//
 	//    * The resource type for hosted zones is hostedzone.
-	ResourceType *string `type:"string" enum:"TagResourceType"`
+	ResourceType TagResourceType `type:"string"`
 
 	// The tags associated with the specified resource.
 	Tags []*Tag `locationNameList:"Tag" min:"1" type:"list"`
@@ -12537,8 +12592,8 @@ func (s *ResourceTagSet) SetResourceId(v string) *ResourceTagSet {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ResourceTagSet) SetResourceType(v string) *ResourceTagSet {
-	s.ResourceType = &v
+func (s *ResourceTagSet) SetResourceType(v TagResourceType) *ResourceTagSet {
+	s.ResourceType = v
 	return s
 }
 
@@ -12674,7 +12729,7 @@ type TestDNSAnswerInput struct {
 	// The type of the resource record set.
 	//
 	// RecordType is a required field
-	RecordType *string `location:"querystring" locationName:"recordtype" type:"string" required:"true" enum:"RRType"`
+	RecordType RRType `location:"querystring" locationName:"recordtype" type:"string" required:"true"`
 
 	// If you want to simulate a request from a specific DNS resolver, specify the
 	// IP address for that resolver. If you omit this value, TestDnsAnswer uses
@@ -12696,13 +12751,15 @@ func (s TestDNSAnswerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestDNSAnswerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TestDNSAnswerInput"}
+
 	if s.HostedZoneId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostedZoneId"))
 	}
+
 	if s.RecordName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RecordName"))
 	}
-	if s.RecordType == nil {
+	if len(s.RecordType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RecordType"))
 	}
 
@@ -12737,8 +12794,8 @@ func (s *TestDNSAnswerInput) SetRecordName(v string) *TestDNSAnswerInput {
 }
 
 // SetRecordType sets the RecordType field's value.
-func (s *TestDNSAnswerInput) SetRecordType(v string) *TestDNSAnswerInput {
-	s.RecordType = &v
+func (s *TestDNSAnswerInput) SetRecordType(v RRType) *TestDNSAnswerInput {
+	s.RecordType = v
 	return s
 }
 
@@ -12778,7 +12835,7 @@ type TestDNSAnswerOutput struct {
 	// The type of the resource record set that you submitted a request for.
 	//
 	// RecordType is a required field
-	RecordType *string `type:"string" required:"true" enum:"RRType"`
+	RecordType RRType `type:"string" required:"true"`
 
 	// A code that indicates whether the request is valid or not. The most common
 	// response code is NOERROR, meaning that the request is valid. If the response
@@ -12825,8 +12882,8 @@ func (s *TestDNSAnswerOutput) SetRecordName(v string) *TestDNSAnswerOutput {
 }
 
 // SetRecordType sets the RecordType field's value.
-func (s *TestDNSAnswerOutput) SetRecordType(v string) *TestDNSAnswerOutput {
-	s.RecordType = &v
+func (s *TestDNSAnswerOutput) SetRecordType(v RRType) *TestDNSAnswerOutput {
+	s.RecordType = v
 	return s
 }
 
@@ -12866,7 +12923,7 @@ type TrafficPolicy struct {
 	// you use a traffic policy to create a traffic policy instance.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"RRType"`
+	Type RRType `type:"string" required:"true"`
 
 	// The version number that Amazon Route 53 assigns to a traffic policy. For
 	// a new traffic policy, the value of Version is always 1.
@@ -12910,8 +12967,8 @@ func (s *TrafficPolicy) SetName(v string) *TrafficPolicy {
 }
 
 // SetType sets the Type field's value.
-func (s *TrafficPolicy) SetType(v string) *TrafficPolicy {
-	s.Type = &v
+func (s *TrafficPolicy) SetType(v RRType) *TrafficPolicy {
+	s.Type = v
 	return s
 }
 
@@ -12981,7 +13038,7 @@ type TrafficPolicyInstance struct {
 	// sets that it created for this traffic policy instance.
 	//
 	// TrafficPolicyType is a required field
-	TrafficPolicyType *string `type:"string" required:"true" enum:"RRType"`
+	TrafficPolicyType RRType `type:"string" required:"true"`
 
 	// The version of the traffic policy that Amazon Route 53 used to create resource
 	// record sets in the specified hosted zone.
@@ -13043,8 +13100,8 @@ func (s *TrafficPolicyInstance) SetTrafficPolicyId(v string) *TrafficPolicyInsta
 }
 
 // SetTrafficPolicyType sets the TrafficPolicyType field's value.
-func (s *TrafficPolicyInstance) SetTrafficPolicyType(v string) *TrafficPolicyInstance {
-	s.TrafficPolicyType = &v
+func (s *TrafficPolicyInstance) SetTrafficPolicyType(v RRType) *TrafficPolicyInstance {
+	s.TrafficPolicyType = v
 	return s
 }
 
@@ -13085,7 +13142,7 @@ type TrafficPolicySummary struct {
 	// you use a traffic policy to create a traffic policy instance.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"RRType"`
+	Type RRType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -13123,8 +13180,8 @@ func (s *TrafficPolicySummary) SetTrafficPolicyCount(v int64) *TrafficPolicySumm
 }
 
 // SetType sets the Type field's value.
-func (s *TrafficPolicySummary) SetType(v string) *TrafficPolicySummary {
-	s.Type = &v
+func (s *TrafficPolicySummary) SetType(v RRType) *TrafficPolicySummary {
+	s.Type = v
 	return s
 }
 
@@ -13335,7 +13392,7 @@ type UpdateHealthCheckInput struct {
 	//    from the last time CloudWatch had sufficient data to determine the alarm
 	//    state. For new health checks that have no last known status, the default
 	//    status for the health check is healthy.
-	InsufficientDataHealthStatus *string `type:"string" enum:"InsufficientDataHealthStatus"`
+	InsufficientDataHealthStatus InsufficientDataHealthStatus `type:"string"`
 
 	// Specify whether you want Amazon Route 53 to invert the status of a health
 	// check, for example, to consider a health check unhealthy when it otherwise
@@ -13348,7 +13405,7 @@ type UpdateHealthCheckInput struct {
 
 	// A complex type that contains one Region element for each region that you
 	// want Amazon Route 53 health checkers to check the specified endpoint from.
-	Regions []*string `locationNameList:"Region" min:"3" type:"list"`
+	Regions []HealthCheckRegion `locationNameList:"Region" min:"3" type:"list"`
 
 	// A complex type that contains one ResetElement element for each element that
 	// you want to reset to the default value. Valid values for ResetElement include
@@ -13365,7 +13422,7 @@ type UpdateHealthCheckInput struct {
 	//
 	//    * ResourcePath: Amazon Route 53 resets HealthCheckConfig$ResourcePath
 	//    to null.
-	ResetElements []*string `locationNameList:"ResettableElementName" type:"list"`
+	ResetElements []ResettableElementName `locationNameList:"ResettableElementName" type:"list"`
 
 	// The path that you want Amazon Route 53 to request when performing health
 	// checks. The path can be any value for which your endpoint will return an
@@ -13399,6 +13456,7 @@ func (s *UpdateHealthCheckInput) Validate() error {
 	if s.FailureThreshold != nil && *s.FailureThreshold < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("FailureThreshold", 1))
 	}
+
 	if s.HealthCheckId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HealthCheckId"))
 	}
@@ -13478,8 +13536,8 @@ func (s *UpdateHealthCheckInput) SetIPAddress(v string) *UpdateHealthCheckInput 
 }
 
 // SetInsufficientDataHealthStatus sets the InsufficientDataHealthStatus field's value.
-func (s *UpdateHealthCheckInput) SetInsufficientDataHealthStatus(v string) *UpdateHealthCheckInput {
-	s.InsufficientDataHealthStatus = &v
+func (s *UpdateHealthCheckInput) SetInsufficientDataHealthStatus(v InsufficientDataHealthStatus) *UpdateHealthCheckInput {
+	s.InsufficientDataHealthStatus = v
 	return s
 }
 
@@ -13496,13 +13554,13 @@ func (s *UpdateHealthCheckInput) SetPort(v int64) *UpdateHealthCheckInput {
 }
 
 // SetRegions sets the Regions field's value.
-func (s *UpdateHealthCheckInput) SetRegions(v []*string) *UpdateHealthCheckInput {
+func (s *UpdateHealthCheckInput) SetRegions(v []HealthCheckRegion) *UpdateHealthCheckInput {
 	s.Regions = v
 	return s
 }
 
 // SetResetElements sets the ResetElements field's value.
-func (s *UpdateHealthCheckInput) SetResetElements(v []*string) *UpdateHealthCheckInput {
+func (s *UpdateHealthCheckInput) SetResetElements(v []ResettableElementName) *UpdateHealthCheckInput {
 	s.ResetElements = v
 	return s
 }
@@ -13574,6 +13632,7 @@ func (s UpdateHostedZoneCommentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateHostedZoneCommentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateHostedZoneCommentInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -13661,15 +13720,18 @@ func (s UpdateTrafficPolicyCommentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTrafficPolicyCommentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTrafficPolicyCommentInput"}
+
 	if s.Comment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Comment"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -13771,21 +13833,25 @@ func (s UpdateTrafficPolicyInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTrafficPolicyInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTrafficPolicyInstanceInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
+
 	if s.TTL == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TTL"))
 	}
+
 	if s.TrafficPolicyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyId"))
 	}
 	if s.TrafficPolicyId != nil && len(*s.TrafficPolicyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TrafficPolicyId", 1))
 	}
+
 	if s.TrafficPolicyVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrafficPolicyVersion"))
 	}
@@ -13861,7 +13927,7 @@ type VPC struct {
 	VPCId *string `type:"string"`
 
 	// (Private hosted zones only) The region in which you created an Amazon VPC.
-	VPCRegion *string `min:"1" type:"string" enum:"VPCRegion"`
+	VPCRegion VPCRegion `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -13877,9 +13943,6 @@ func (s VPC) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VPC) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VPC"}
-	if s.VPCRegion != nil && len(*s.VPCRegion) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("VPCRegion", 1))
-	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13894,323 +13957,187 @@ func (s *VPC) SetVPCId(v string) *VPC {
 }
 
 // SetVPCRegion sets the VPCRegion field's value.
-func (s *VPC) SetVPCRegion(v string) *VPC {
-	s.VPCRegion = &v
+func (s *VPC) SetVPCRegion(v VPCRegion) *VPC {
+	s.VPCRegion = v
 	return s
 }
 
+type ChangeAction string
+
+// Enum values for ChangeAction
 const (
-	// ChangeActionCreate is a ChangeAction enum value
-	ChangeActionCreate = "CREATE"
-
-	// ChangeActionDelete is a ChangeAction enum value
-	ChangeActionDelete = "DELETE"
-
-	// ChangeActionUpsert is a ChangeAction enum value
-	ChangeActionUpsert = "UPSERT"
+	ChangeActionCreate ChangeAction = "CREATE"
+	ChangeActionDelete ChangeAction = "DELETE"
+	ChangeActionUpsert ChangeAction = "UPSERT"
 )
 
-const (
-	// ChangeStatusPending is a ChangeStatus enum value
-	ChangeStatusPending = "PENDING"
+type ChangeStatus string
 
-	// ChangeStatusInsync is a ChangeStatus enum value
-	ChangeStatusInsync = "INSYNC"
+// Enum values for ChangeStatus
+const (
+	ChangeStatusPending ChangeStatus = "PENDING"
+	ChangeStatusInsync  ChangeStatus = "INSYNC"
 )
 
+type CloudWatchRegion string
+
+// Enum values for CloudWatchRegion
 const (
-	// CloudWatchRegionUsEast1 is a CloudWatchRegion enum value
-	CloudWatchRegionUsEast1 = "us-east-1"
-
-	// CloudWatchRegionUsEast2 is a CloudWatchRegion enum value
-	CloudWatchRegionUsEast2 = "us-east-2"
-
-	// CloudWatchRegionUsWest1 is a CloudWatchRegion enum value
-	CloudWatchRegionUsWest1 = "us-west-1"
-
-	// CloudWatchRegionUsWest2 is a CloudWatchRegion enum value
-	CloudWatchRegionUsWest2 = "us-west-2"
-
-	// CloudWatchRegionCaCentral1 is a CloudWatchRegion enum value
-	CloudWatchRegionCaCentral1 = "ca-central-1"
-
-	// CloudWatchRegionEuCentral1 is a CloudWatchRegion enum value
-	CloudWatchRegionEuCentral1 = "eu-central-1"
-
-	// CloudWatchRegionEuWest1 is a CloudWatchRegion enum value
-	CloudWatchRegionEuWest1 = "eu-west-1"
-
-	// CloudWatchRegionEuWest2 is a CloudWatchRegion enum value
-	CloudWatchRegionEuWest2 = "eu-west-2"
-
-	// CloudWatchRegionApSouth1 is a CloudWatchRegion enum value
-	CloudWatchRegionApSouth1 = "ap-south-1"
-
-	// CloudWatchRegionApSoutheast1 is a CloudWatchRegion enum value
-	CloudWatchRegionApSoutheast1 = "ap-southeast-1"
-
-	// CloudWatchRegionApSoutheast2 is a CloudWatchRegion enum value
-	CloudWatchRegionApSoutheast2 = "ap-southeast-2"
-
-	// CloudWatchRegionApNortheast1 is a CloudWatchRegion enum value
-	CloudWatchRegionApNortheast1 = "ap-northeast-1"
-
-	// CloudWatchRegionApNortheast2 is a CloudWatchRegion enum value
-	CloudWatchRegionApNortheast2 = "ap-northeast-2"
-
-	// CloudWatchRegionSaEast1 is a CloudWatchRegion enum value
-	CloudWatchRegionSaEast1 = "sa-east-1"
+	CloudWatchRegionUsEast1      CloudWatchRegion = "us-east-1"
+	CloudWatchRegionUsEast2      CloudWatchRegion = "us-east-2"
+	CloudWatchRegionUsWest1      CloudWatchRegion = "us-west-1"
+	CloudWatchRegionUsWest2      CloudWatchRegion = "us-west-2"
+	CloudWatchRegionCaCentral1   CloudWatchRegion = "ca-central-1"
+	CloudWatchRegionEuCentral1   CloudWatchRegion = "eu-central-1"
+	CloudWatchRegionEuWest1      CloudWatchRegion = "eu-west-1"
+	CloudWatchRegionEuWest2      CloudWatchRegion = "eu-west-2"
+	CloudWatchRegionApSouth1     CloudWatchRegion = "ap-south-1"
+	CloudWatchRegionApSoutheast1 CloudWatchRegion = "ap-southeast-1"
+	CloudWatchRegionApSoutheast2 CloudWatchRegion = "ap-southeast-2"
+	CloudWatchRegionApNortheast1 CloudWatchRegion = "ap-northeast-1"
+	CloudWatchRegionApNortheast2 CloudWatchRegion = "ap-northeast-2"
+	CloudWatchRegionSaEast1      CloudWatchRegion = "sa-east-1"
 )
 
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
 const (
-	// ComparisonOperatorGreaterThanOrEqualToThreshold is a ComparisonOperator enum value
-	ComparisonOperatorGreaterThanOrEqualToThreshold = "GreaterThanOrEqualToThreshold"
-
-	// ComparisonOperatorGreaterThanThreshold is a ComparisonOperator enum value
-	ComparisonOperatorGreaterThanThreshold = "GreaterThanThreshold"
-
-	// ComparisonOperatorLessThanThreshold is a ComparisonOperator enum value
-	ComparisonOperatorLessThanThreshold = "LessThanThreshold"
-
-	// ComparisonOperatorLessThanOrEqualToThreshold is a ComparisonOperator enum value
-	ComparisonOperatorLessThanOrEqualToThreshold = "LessThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanOrEqualToThreshold ComparisonOperator = "GreaterThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanThreshold          ComparisonOperator = "GreaterThanThreshold"
+	ComparisonOperatorLessThanThreshold             ComparisonOperator = "LessThanThreshold"
+	ComparisonOperatorLessThanOrEqualToThreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
 )
 
+type HealthCheckRegion string
+
+// Enum values for HealthCheckRegion
 const (
-	// HealthCheckRegionUsEast1 is a HealthCheckRegion enum value
-	HealthCheckRegionUsEast1 = "us-east-1"
-
-	// HealthCheckRegionUsWest1 is a HealthCheckRegion enum value
-	HealthCheckRegionUsWest1 = "us-west-1"
-
-	// HealthCheckRegionUsWest2 is a HealthCheckRegion enum value
-	HealthCheckRegionUsWest2 = "us-west-2"
-
-	// HealthCheckRegionEuWest1 is a HealthCheckRegion enum value
-	HealthCheckRegionEuWest1 = "eu-west-1"
-
-	// HealthCheckRegionApSoutheast1 is a HealthCheckRegion enum value
-	HealthCheckRegionApSoutheast1 = "ap-southeast-1"
-
-	// HealthCheckRegionApSoutheast2 is a HealthCheckRegion enum value
-	HealthCheckRegionApSoutheast2 = "ap-southeast-2"
-
-	// HealthCheckRegionApNortheast1 is a HealthCheckRegion enum value
-	HealthCheckRegionApNortheast1 = "ap-northeast-1"
-
-	// HealthCheckRegionSaEast1 is a HealthCheckRegion enum value
-	HealthCheckRegionSaEast1 = "sa-east-1"
+	HealthCheckRegionUsEast1      HealthCheckRegion = "us-east-1"
+	HealthCheckRegionUsWest1      HealthCheckRegion = "us-west-1"
+	HealthCheckRegionUsWest2      HealthCheckRegion = "us-west-2"
+	HealthCheckRegionEuWest1      HealthCheckRegion = "eu-west-1"
+	HealthCheckRegionApSoutheast1 HealthCheckRegion = "ap-southeast-1"
+	HealthCheckRegionApSoutheast2 HealthCheckRegion = "ap-southeast-2"
+	HealthCheckRegionApNortheast1 HealthCheckRegion = "ap-northeast-1"
+	HealthCheckRegionSaEast1      HealthCheckRegion = "sa-east-1"
 )
 
+type HealthCheckType string
+
+// Enum values for HealthCheckType
 const (
-	// HealthCheckTypeHttp is a HealthCheckType enum value
-	HealthCheckTypeHttp = "HTTP"
-
-	// HealthCheckTypeHttps is a HealthCheckType enum value
-	HealthCheckTypeHttps = "HTTPS"
-
-	// HealthCheckTypeHttpStrMatch is a HealthCheckType enum value
-	HealthCheckTypeHttpStrMatch = "HTTP_STR_MATCH"
-
-	// HealthCheckTypeHttpsStrMatch is a HealthCheckType enum value
-	HealthCheckTypeHttpsStrMatch = "HTTPS_STR_MATCH"
-
-	// HealthCheckTypeTcp is a HealthCheckType enum value
-	HealthCheckTypeTcp = "TCP"
-
-	// HealthCheckTypeCalculated is a HealthCheckType enum value
-	HealthCheckTypeCalculated = "CALCULATED"
-
-	// HealthCheckTypeCloudwatchMetric is a HealthCheckType enum value
-	HealthCheckTypeCloudwatchMetric = "CLOUDWATCH_METRIC"
+	HealthCheckTypeHttp             HealthCheckType = "HTTP"
+	HealthCheckTypeHttps            HealthCheckType = "HTTPS"
+	HealthCheckTypeHttpStrMatch     HealthCheckType = "HTTP_STR_MATCH"
+	HealthCheckTypeHttpsStrMatch    HealthCheckType = "HTTPS_STR_MATCH"
+	HealthCheckTypeTcp              HealthCheckType = "TCP"
+	HealthCheckTypeCalculated       HealthCheckType = "CALCULATED"
+	HealthCheckTypeCloudwatchMetric HealthCheckType = "CLOUDWATCH_METRIC"
 )
 
+type InsufficientDataHealthStatus string
+
+// Enum values for InsufficientDataHealthStatus
 const (
-	// InsufficientDataHealthStatusHealthy is a InsufficientDataHealthStatus enum value
-	InsufficientDataHealthStatusHealthy = "Healthy"
-
-	// InsufficientDataHealthStatusUnhealthy is a InsufficientDataHealthStatus enum value
-	InsufficientDataHealthStatusUnhealthy = "Unhealthy"
-
-	// InsufficientDataHealthStatusLastKnownStatus is a InsufficientDataHealthStatus enum value
-	InsufficientDataHealthStatusLastKnownStatus = "LastKnownStatus"
+	InsufficientDataHealthStatusHealthy         InsufficientDataHealthStatus = "Healthy"
+	InsufficientDataHealthStatusUnhealthy       InsufficientDataHealthStatus = "Unhealthy"
+	InsufficientDataHealthStatusLastKnownStatus InsufficientDataHealthStatus = "LastKnownStatus"
 )
 
+type RRType string
+
+// Enum values for RRType
 const (
-	// RRTypeSoa is a RRType enum value
-	RRTypeSoa = "SOA"
-
-	// RRTypeA is a RRType enum value
-	RRTypeA = "A"
-
-	// RRTypeTxt is a RRType enum value
-	RRTypeTxt = "TXT"
-
-	// RRTypeNs is a RRType enum value
-	RRTypeNs = "NS"
-
-	// RRTypeCname is a RRType enum value
-	RRTypeCname = "CNAME"
-
-	// RRTypeMx is a RRType enum value
-	RRTypeMx = "MX"
-
-	// RRTypeNaptr is a RRType enum value
-	RRTypeNaptr = "NAPTR"
-
-	// RRTypePtr is a RRType enum value
-	RRTypePtr = "PTR"
-
-	// RRTypeSrv is a RRType enum value
-	RRTypeSrv = "SRV"
-
-	// RRTypeSpf is a RRType enum value
-	RRTypeSpf = "SPF"
-
-	// RRTypeAaaa is a RRType enum value
-	RRTypeAaaa = "AAAA"
-
-	// RRTypeCaa is a RRType enum value
-	RRTypeCaa = "CAA"
+	RRTypeSoa   RRType = "SOA"
+	RRTypeA     RRType = "A"
+	RRTypeTxt   RRType = "TXT"
+	RRTypeNs    RRType = "NS"
+	RRTypeCname RRType = "CNAME"
+	RRTypeMx    RRType = "MX"
+	RRTypeNaptr RRType = "NAPTR"
+	RRTypePtr   RRType = "PTR"
+	RRTypeSrv   RRType = "SRV"
+	RRTypeSpf   RRType = "SPF"
+	RRTypeAaaa  RRType = "AAAA"
+	RRTypeCaa   RRType = "CAA"
 )
 
+type ResettableElementName string
+
+// Enum values for ResettableElementName
 const (
-	// ResettableElementNameFullyQualifiedDomainName is a ResettableElementName enum value
-	ResettableElementNameFullyQualifiedDomainName = "FullyQualifiedDomainName"
-
-	// ResettableElementNameRegions is a ResettableElementName enum value
-	ResettableElementNameRegions = "Regions"
-
-	// ResettableElementNameResourcePath is a ResettableElementName enum value
-	ResettableElementNameResourcePath = "ResourcePath"
-
-	// ResettableElementNameChildHealthChecks is a ResettableElementName enum value
-	ResettableElementNameChildHealthChecks = "ChildHealthChecks"
+	ResettableElementNameFullyQualifiedDomainName ResettableElementName = "FullyQualifiedDomainName"
+	ResettableElementNameRegions                  ResettableElementName = "Regions"
+	ResettableElementNameResourcePath             ResettableElementName = "ResourcePath"
+	ResettableElementNameChildHealthChecks        ResettableElementName = "ChildHealthChecks"
 )
 
-const (
-	// ResourceRecordSetFailoverPrimary is a ResourceRecordSetFailover enum value
-	ResourceRecordSetFailoverPrimary = "PRIMARY"
+type ResourceRecordSetFailover string
 
-	// ResourceRecordSetFailoverSecondary is a ResourceRecordSetFailover enum value
-	ResourceRecordSetFailoverSecondary = "SECONDARY"
+// Enum values for ResourceRecordSetFailover
+const (
+	ResourceRecordSetFailoverPrimary   ResourceRecordSetFailover = "PRIMARY"
+	ResourceRecordSetFailoverSecondary ResourceRecordSetFailover = "SECONDARY"
 )
 
+type ResourceRecordSetRegion string
+
+// Enum values for ResourceRecordSetRegion
 const (
-	// ResourceRecordSetRegionUsEast1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionUsEast1 = "us-east-1"
-
-	// ResourceRecordSetRegionUsEast2 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionUsEast2 = "us-east-2"
-
-	// ResourceRecordSetRegionUsWest1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionUsWest1 = "us-west-1"
-
-	// ResourceRecordSetRegionUsWest2 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionUsWest2 = "us-west-2"
-
-	// ResourceRecordSetRegionCaCentral1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionCaCentral1 = "ca-central-1"
-
-	// ResourceRecordSetRegionEuWest1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionEuWest1 = "eu-west-1"
-
-	// ResourceRecordSetRegionEuWest2 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionEuWest2 = "eu-west-2"
-
-	// ResourceRecordSetRegionEuCentral1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionEuCentral1 = "eu-central-1"
-
-	// ResourceRecordSetRegionApSoutheast1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionApSoutheast1 = "ap-southeast-1"
-
-	// ResourceRecordSetRegionApSoutheast2 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionApSoutheast2 = "ap-southeast-2"
-
-	// ResourceRecordSetRegionApNortheast1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionApNortheast1 = "ap-northeast-1"
-
-	// ResourceRecordSetRegionApNortheast2 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionApNortheast2 = "ap-northeast-2"
-
-	// ResourceRecordSetRegionSaEast1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionSaEast1 = "sa-east-1"
-
-	// ResourceRecordSetRegionCnNorth1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionCnNorth1 = "cn-north-1"
-
-	// ResourceRecordSetRegionApSouth1 is a ResourceRecordSetRegion enum value
-	ResourceRecordSetRegionApSouth1 = "ap-south-1"
+	ResourceRecordSetRegionUsEast1      ResourceRecordSetRegion = "us-east-1"
+	ResourceRecordSetRegionUsEast2      ResourceRecordSetRegion = "us-east-2"
+	ResourceRecordSetRegionUsWest1      ResourceRecordSetRegion = "us-west-1"
+	ResourceRecordSetRegionUsWest2      ResourceRecordSetRegion = "us-west-2"
+	ResourceRecordSetRegionCaCentral1   ResourceRecordSetRegion = "ca-central-1"
+	ResourceRecordSetRegionEuWest1      ResourceRecordSetRegion = "eu-west-1"
+	ResourceRecordSetRegionEuWest2      ResourceRecordSetRegion = "eu-west-2"
+	ResourceRecordSetRegionEuCentral1   ResourceRecordSetRegion = "eu-central-1"
+	ResourceRecordSetRegionApSoutheast1 ResourceRecordSetRegion = "ap-southeast-1"
+	ResourceRecordSetRegionApSoutheast2 ResourceRecordSetRegion = "ap-southeast-2"
+	ResourceRecordSetRegionApNortheast1 ResourceRecordSetRegion = "ap-northeast-1"
+	ResourceRecordSetRegionApNortheast2 ResourceRecordSetRegion = "ap-northeast-2"
+	ResourceRecordSetRegionSaEast1      ResourceRecordSetRegion = "sa-east-1"
+	ResourceRecordSetRegionCnNorth1     ResourceRecordSetRegion = "cn-north-1"
+	ResourceRecordSetRegionApSouth1     ResourceRecordSetRegion = "ap-south-1"
 )
 
+type Statistic string
+
+// Enum values for Statistic
 const (
-	// StatisticAverage is a Statistic enum value
-	StatisticAverage = "Average"
-
-	// StatisticSum is a Statistic enum value
-	StatisticSum = "Sum"
-
-	// StatisticSampleCount is a Statistic enum value
-	StatisticSampleCount = "SampleCount"
-
-	// StatisticMaximum is a Statistic enum value
-	StatisticMaximum = "Maximum"
-
-	// StatisticMinimum is a Statistic enum value
-	StatisticMinimum = "Minimum"
+	StatisticAverage     Statistic = "Average"
+	StatisticSum         Statistic = "Sum"
+	StatisticSampleCount Statistic = "SampleCount"
+	StatisticMaximum     Statistic = "Maximum"
+	StatisticMinimum     Statistic = "Minimum"
 )
 
-const (
-	// TagResourceTypeHealthcheck is a TagResourceType enum value
-	TagResourceTypeHealthcheck = "healthcheck"
+type TagResourceType string
 
-	// TagResourceTypeHostedzone is a TagResourceType enum value
-	TagResourceTypeHostedzone = "hostedzone"
+// Enum values for TagResourceType
+const (
+	TagResourceTypeHealthcheck TagResourceType = "healthcheck"
+	TagResourceTypeHostedzone  TagResourceType = "hostedzone"
 )
 
+type VPCRegion string
+
+// Enum values for VPCRegion
 const (
-	// VPCRegionUsEast1 is a VPCRegion enum value
-	VPCRegionUsEast1 = "us-east-1"
-
-	// VPCRegionUsEast2 is a VPCRegion enum value
-	VPCRegionUsEast2 = "us-east-2"
-
-	// VPCRegionUsWest1 is a VPCRegion enum value
-	VPCRegionUsWest1 = "us-west-1"
-
-	// VPCRegionUsWest2 is a VPCRegion enum value
-	VPCRegionUsWest2 = "us-west-2"
-
-	// VPCRegionEuWest1 is a VPCRegion enum value
-	VPCRegionEuWest1 = "eu-west-1"
-
-	// VPCRegionEuWest2 is a VPCRegion enum value
-	VPCRegionEuWest2 = "eu-west-2"
-
-	// VPCRegionEuCentral1 is a VPCRegion enum value
-	VPCRegionEuCentral1 = "eu-central-1"
-
-	// VPCRegionApSoutheast1 is a VPCRegion enum value
-	VPCRegionApSoutheast1 = "ap-southeast-1"
-
-	// VPCRegionApSoutheast2 is a VPCRegion enum value
-	VPCRegionApSoutheast2 = "ap-southeast-2"
-
-	// VPCRegionApSouth1 is a VPCRegion enum value
-	VPCRegionApSouth1 = "ap-south-1"
-
-	// VPCRegionApNortheast1 is a VPCRegion enum value
-	VPCRegionApNortheast1 = "ap-northeast-1"
-
-	// VPCRegionApNortheast2 is a VPCRegion enum value
-	VPCRegionApNortheast2 = "ap-northeast-2"
-
-	// VPCRegionSaEast1 is a VPCRegion enum value
-	VPCRegionSaEast1 = "sa-east-1"
-
-	// VPCRegionCaCentral1 is a VPCRegion enum value
-	VPCRegionCaCentral1 = "ca-central-1"
-
-	// VPCRegionCnNorth1 is a VPCRegion enum value
-	VPCRegionCnNorth1 = "cn-north-1"
+	VPCRegionUsEast1      VPCRegion = "us-east-1"
+	VPCRegionUsEast2      VPCRegion = "us-east-2"
+	VPCRegionUsWest1      VPCRegion = "us-west-1"
+	VPCRegionUsWest2      VPCRegion = "us-west-2"
+	VPCRegionEuWest1      VPCRegion = "eu-west-1"
+	VPCRegionEuWest2      VPCRegion = "eu-west-2"
+	VPCRegionEuCentral1   VPCRegion = "eu-central-1"
+	VPCRegionApSoutheast1 VPCRegion = "ap-southeast-1"
+	VPCRegionApSoutheast2 VPCRegion = "ap-southeast-2"
+	VPCRegionApSouth1     VPCRegion = "ap-south-1"
+	VPCRegionApNortheast1 VPCRegion = "ap-northeast-1"
+	VPCRegionApNortheast2 VPCRegion = "ap-northeast-2"
+	VPCRegionSaEast1      VPCRegion = "sa-east-1"
+	VPCRegionCaCentral1   VPCRegion = "ca-central-1"
+	VPCRegionCnNorth1     VPCRegion = "cn-north-1"
 )

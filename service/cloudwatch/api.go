@@ -1581,7 +1581,7 @@ type AlarmHistoryItem struct {
 	HistoryData *string `min:"1" type:"string"`
 
 	// The type of alarm history item.
-	HistoryItemType *string `type:"string" enum:"HistoryItemType"`
+	HistoryItemType HistoryItemType `type:"string"`
 
 	// A summary of the alarm history, in text format.
 	HistorySummary *string `min:"1" type:"string"`
@@ -1613,8 +1613,8 @@ func (s *AlarmHistoryItem) SetHistoryData(v string) *AlarmHistoryItem {
 }
 
 // SetHistoryItemType sets the HistoryItemType field's value.
-func (s *AlarmHistoryItem) SetHistoryItemType(v string) *AlarmHistoryItem {
-	s.HistoryItemType = &v
+func (s *AlarmHistoryItem) SetHistoryItemType(v HistoryItemType) *AlarmHistoryItem {
+	s.HistoryItemType = v
 	return s
 }
 
@@ -1746,7 +1746,7 @@ type Datapoint struct {
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The standard unit for the data point.
-	Unit *string `type:"string" enum:"StandardUnit"`
+	Unit StandardUnit `type:"string"`
 }
 
 // String returns the string representation
@@ -1802,8 +1802,8 @@ func (s *Datapoint) SetTimestamp(v time.Time) *Datapoint {
 }
 
 // SetUnit sets the Unit field's value.
-func (s *Datapoint) SetUnit(v string) *Datapoint {
-	s.Unit = &v
+func (s *Datapoint) SetUnit(v StandardUnit) *Datapoint {
+	s.Unit = v
 	return s
 }
 
@@ -1830,6 +1830,7 @@ func (s DeleteAlarmsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAlarmsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAlarmsInput"}
+
 	if s.AlarmNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AlarmNames"))
 	}
@@ -1911,7 +1912,7 @@ type DescribeAlarmHistoryInput struct {
 	EndDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The type of alarm histories to retrieve.
-	HistoryItemType *string `type:"string" enum:"HistoryItemType"`
+	HistoryItemType HistoryItemType `type:"string"`
 
 	// The maximum number of alarm history records to retrieve.
 	MaxRecords *int64 `min:"1" type:"integer"`
@@ -1963,8 +1964,8 @@ func (s *DescribeAlarmHistoryInput) SetEndDate(v time.Time) *DescribeAlarmHistor
 }
 
 // SetHistoryItemType sets the HistoryItemType field's value.
-func (s *DescribeAlarmHistoryInput) SetHistoryItemType(v string) *DescribeAlarmHistoryInput {
-	s.HistoryItemType = &v
+func (s *DescribeAlarmHistoryInput) SetHistoryItemType(v HistoryItemType) *DescribeAlarmHistoryInput {
+	s.HistoryItemType = v
 	return s
 }
 
@@ -2046,10 +2047,10 @@ type DescribeAlarmsForMetricInput struct {
 
 	// The statistic for the metric, other than percentiles. For percentile statistics,
 	// use ExtendedStatistics.
-	Statistic *string `type:"string" enum:"Statistic"`
+	Statistic Statistic `type:"string"`
 
 	// The unit for the metric.
-	Unit *string `type:"string" enum:"StandardUnit"`
+	Unit StandardUnit `type:"string"`
 }
 
 // String returns the string representation
@@ -2065,12 +2066,14 @@ func (s DescribeAlarmsForMetricInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAlarmsForMetricInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlarmsForMetricInput"}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.MetricName != nil && len(*s.MetricName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
+
 	if s.Namespace == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
@@ -2128,14 +2131,14 @@ func (s *DescribeAlarmsForMetricInput) SetPeriod(v int64) *DescribeAlarmsForMetr
 }
 
 // SetStatistic sets the Statistic field's value.
-func (s *DescribeAlarmsForMetricInput) SetStatistic(v string) *DescribeAlarmsForMetricInput {
-	s.Statistic = &v
+func (s *DescribeAlarmsForMetricInput) SetStatistic(v Statistic) *DescribeAlarmsForMetricInput {
+	s.Statistic = v
 	return s
 }
 
 // SetUnit sets the Unit field's value.
-func (s *DescribeAlarmsForMetricInput) SetUnit(v string) *DescribeAlarmsForMetricInput {
-	s.Unit = &v
+func (s *DescribeAlarmsForMetricInput) SetUnit(v StandardUnit) *DescribeAlarmsForMetricInput {
+	s.Unit = v
 	return s
 }
 
@@ -2185,7 +2188,7 @@ type DescribeAlarmsInput struct {
 	NextToken *string `type:"string"`
 
 	// The state value to be used in matching alarms.
-	StateValue *string `type:"string" enum:"StateValue"`
+	StateValue StateValue `type:"string"`
 }
 
 // String returns the string representation
@@ -2248,8 +2251,8 @@ func (s *DescribeAlarmsInput) SetNextToken(v string) *DescribeAlarmsInput {
 }
 
 // SetStateValue sets the StateValue field's value.
-func (s *DescribeAlarmsInput) SetStateValue(v string) *DescribeAlarmsInput {
-	s.StateValue = &v
+func (s *DescribeAlarmsInput) SetStateValue(v StateValue) *DescribeAlarmsInput {
+	s.StateValue = v
 	return s
 }
 
@@ -2315,12 +2318,14 @@ func (s Dimension) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Dimension) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Dimension"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -2373,6 +2378,7 @@ func (s DimensionFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DimensionFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DimensionFilter"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2424,6 +2430,7 @@ func (s DisableAlarmActionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableAlarmActionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableAlarmActionsInput"}
+
 	if s.AlarmNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AlarmNames"))
 	}
@@ -2478,6 +2485,7 @@ func (s EnableAlarmActionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableAlarmActionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableAlarmActionsInput"}
+
 	if s.AlarmNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AlarmNames"))
 	}
@@ -2669,12 +2677,12 @@ type GetMetricStatisticsInput struct {
 	// The metric statistics, other than percentile. For percentile statistics,
 	// use ExtendedStatistics. When calling GetMetricStatistics, you must specify
 	// either Statistics or ExtendedStatistics, but not both.
-	Statistics []*string `min:"1" type:"list"`
+	Statistics []Statistic `min:"1" type:"list"`
 
 	// The unit for a given metric. Metrics may be reported in multiple units. Not
 	// supplying a unit results in all units being returned. If the metric only
 	// ever reports one unit, specifying a unit has no effect.
-	Unit *string `type:"string" enum:"StandardUnit"`
+	Unit StandardUnit `type:"string"`
 }
 
 // String returns the string representation
@@ -2690,30 +2698,35 @@ func (s GetMetricStatisticsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMetricStatisticsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMetricStatisticsInput"}
+
 	if s.EndTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
 	if s.ExtendedStatistics != nil && len(s.ExtendedStatistics) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ExtendedStatistics", 1))
 	}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.MetricName != nil && len(*s.MetricName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
+
 	if s.Namespace == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
 	if s.Namespace != nil && len(*s.Namespace) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
 	}
+
 	if s.Period == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Period"))
 	}
 	if s.Period != nil && *s.Period < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Period", 1))
 	}
+
 	if s.StartTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
@@ -2780,14 +2793,14 @@ func (s *GetMetricStatisticsInput) SetStartTime(v time.Time) *GetMetricStatistic
 }
 
 // SetStatistics sets the Statistics field's value.
-func (s *GetMetricStatisticsInput) SetStatistics(v []*string) *GetMetricStatisticsInput {
+func (s *GetMetricStatisticsInput) SetStatistics(v []Statistic) *GetMetricStatisticsInput {
 	s.Statistics = v
 	return s
 }
 
 // SetUnit sets the Unit field's value.
-func (s *GetMetricStatisticsInput) SetUnit(v string) *GetMetricStatisticsInput {
-	s.Unit = &v
+func (s *GetMetricStatisticsInput) SetUnit(v StandardUnit) *GetMetricStatisticsInput {
+	s.Unit = v
 	return s
 }
 
@@ -3074,7 +3087,7 @@ type MetricAlarm struct {
 
 	// The arithmetic operation to use when comparing the specified statistic and
 	// threshold. The specified statistic value is used as the first operand.
-	ComparisonOperator *string `type:"string" enum:"ComparisonOperator"`
+	ComparisonOperator ComparisonOperator `type:"string"`
 
 	// The dimensions for the metric associated with the alarm.
 	Dimensions []*Dimension `type:"list"`
@@ -3120,11 +3133,11 @@ type MetricAlarm struct {
 	StateUpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state value for the alarm.
-	StateValue *string `type:"string" enum:"StateValue"`
+	StateValue StateValue `type:"string"`
 
 	// The statistic for the metric associated with the alarm, other than percentile.
 	// For percentile statistics, use ExtendedStatistic.
-	Statistic *string `type:"string" enum:"Statistic"`
+	Statistic Statistic `type:"string"`
 
 	// The value to compare with the specified statistic.
 	Threshold *float64 `type:"double"`
@@ -3134,7 +3147,7 @@ type MetricAlarm struct {
 	TreatMissingData *string `min:"1" type:"string"`
 
 	// The unit of the metric associated with the alarm.
-	Unit *string `type:"string" enum:"StandardUnit"`
+	Unit StandardUnit `type:"string"`
 }
 
 // String returns the string representation
@@ -3184,8 +3197,8 @@ func (s *MetricAlarm) SetAlarmName(v string) *MetricAlarm {
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *MetricAlarm) SetComparisonOperator(v string) *MetricAlarm {
-	s.ComparisonOperator = &v
+func (s *MetricAlarm) SetComparisonOperator(v ComparisonOperator) *MetricAlarm {
+	s.ComparisonOperator = v
 	return s
 }
 
@@ -3262,14 +3275,14 @@ func (s *MetricAlarm) SetStateUpdatedTimestamp(v time.Time) *MetricAlarm {
 }
 
 // SetStateValue sets the StateValue field's value.
-func (s *MetricAlarm) SetStateValue(v string) *MetricAlarm {
-	s.StateValue = &v
+func (s *MetricAlarm) SetStateValue(v StateValue) *MetricAlarm {
+	s.StateValue = v
 	return s
 }
 
 // SetStatistic sets the Statistic field's value.
-func (s *MetricAlarm) SetStatistic(v string) *MetricAlarm {
-	s.Statistic = &v
+func (s *MetricAlarm) SetStatistic(v Statistic) *MetricAlarm {
+	s.Statistic = v
 	return s
 }
 
@@ -3286,8 +3299,8 @@ func (s *MetricAlarm) SetTreatMissingData(v string) *MetricAlarm {
 }
 
 // SetUnit sets the Unit field's value.
-func (s *MetricAlarm) SetUnit(v string) *MetricAlarm {
-	s.Unit = &v
+func (s *MetricAlarm) SetUnit(v StandardUnit) *MetricAlarm {
+	s.Unit = v
 	return s
 }
 
@@ -3324,7 +3337,7 @@ type MetricDatum struct {
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The unit of the metric.
-	Unit *string `type:"string" enum:"StandardUnit"`
+	Unit StandardUnit `type:"string"`
 
 	// The value for the metric.
 	//
@@ -3349,6 +3362,7 @@ func (s MetricDatum) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricDatum) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MetricDatum"}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
@@ -3411,8 +3425,8 @@ func (s *MetricDatum) SetTimestamp(v time.Time) *MetricDatum {
 }
 
 // SetUnit sets the Unit field's value.
-func (s *MetricDatum) SetUnit(v string) *MetricDatum {
-	s.Unit = &v
+func (s *MetricDatum) SetUnit(v StandardUnit) *MetricDatum {
+	s.Unit = v
 	return s
 }
 
@@ -3524,7 +3538,7 @@ type PutMetricAlarmInput struct {
 	// threshold. The specified statistic value is used as the first operand.
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator *string `type:"string" required:"true" enum:"ComparisonOperator"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
 
 	// The dimensions for the metric associated with the alarm.
 	Dimensions []*Dimension `type:"list"`
@@ -3604,7 +3618,7 @@ type PutMetricAlarmInput struct {
 
 	// The statistic for the metric associated with the alarm, other than percentile.
 	// For percentile statistics, use ExtendedStatistic.
-	Statistic *string `type:"string" enum:"Statistic"`
+	Statistic Statistic `type:"string"`
 
 	// The value against which the specified statistic is compared.
 	//
@@ -3627,7 +3641,7 @@ type PutMetricAlarmInput struct {
 	//
 	// If you specify a unit, you must use a unit that is appropriate for the metric.
 	// Otherwise, the CloudWatch alarm can get stuck in the INSUFFICIENT DATA state.
-	Unit *string `type:"string" enum:"StandardUnit"`
+	Unit StandardUnit `type:"string"`
 }
 
 // String returns the string representation
@@ -3643,42 +3657,48 @@ func (s PutMetricAlarmInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMetricAlarmInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutMetricAlarmInput"}
+
 	if s.AlarmName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AlarmName"))
 	}
 	if s.AlarmName != nil && len(*s.AlarmName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AlarmName", 1))
 	}
-	if s.ComparisonOperator == nil {
+	if len(s.ComparisonOperator) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
 	if s.EvaluateLowSampleCountPercentile != nil && len(*s.EvaluateLowSampleCountPercentile) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EvaluateLowSampleCountPercentile", 1))
 	}
+
 	if s.EvaluationPeriods == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EvaluationPeriods"))
 	}
 	if s.EvaluationPeriods != nil && *s.EvaluationPeriods < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("EvaluationPeriods", 1))
 	}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.MetricName != nil && len(*s.MetricName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
+
 	if s.Namespace == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
 	if s.Namespace != nil && len(*s.Namespace) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
 	}
+
 	if s.Period == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Period"))
 	}
 	if s.Period != nil && *s.Period < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Period", 1))
 	}
+
 	if s.Threshold == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
 	}
@@ -3727,8 +3747,8 @@ func (s *PutMetricAlarmInput) SetAlarmName(v string) *PutMetricAlarmInput {
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *PutMetricAlarmInput) SetComparisonOperator(v string) *PutMetricAlarmInput {
-	s.ComparisonOperator = &v
+func (s *PutMetricAlarmInput) SetComparisonOperator(v ComparisonOperator) *PutMetricAlarmInput {
+	s.ComparisonOperator = v
 	return s
 }
 
@@ -3787,8 +3807,8 @@ func (s *PutMetricAlarmInput) SetPeriod(v int64) *PutMetricAlarmInput {
 }
 
 // SetStatistic sets the Statistic field's value.
-func (s *PutMetricAlarmInput) SetStatistic(v string) *PutMetricAlarmInput {
-	s.Statistic = &v
+func (s *PutMetricAlarmInput) SetStatistic(v Statistic) *PutMetricAlarmInput {
+	s.Statistic = v
 	return s
 }
 
@@ -3805,8 +3825,8 @@ func (s *PutMetricAlarmInput) SetTreatMissingData(v string) *PutMetricAlarmInput
 }
 
 // SetUnit sets the Unit field's value.
-func (s *PutMetricAlarmInput) SetUnit(v string) *PutMetricAlarmInput {
-	s.Unit = &v
+func (s *PutMetricAlarmInput) SetUnit(v StandardUnit) *PutMetricAlarmInput {
+	s.Unit = v
 	return s
 }
 
@@ -3856,9 +3876,11 @@ func (s PutMetricDataInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMetricDataInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutMetricDataInput"}
+
 	if s.MetricData == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricData"))
 	}
+
 	if s.Namespace == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
@@ -3930,7 +3952,7 @@ type SetAlarmStateInput struct {
 	// The value of the state.
 	//
 	// StateValue is a required field
-	StateValue *string `type:"string" required:"true" enum:"StateValue"`
+	StateValue StateValue `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3946,16 +3968,18 @@ func (s SetAlarmStateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetAlarmStateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetAlarmStateInput"}
+
 	if s.AlarmName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AlarmName"))
 	}
 	if s.AlarmName != nil && len(*s.AlarmName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AlarmName", 1))
 	}
+
 	if s.StateReason == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StateReason"))
 	}
-	if s.StateValue == nil {
+	if len(s.StateValue) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("StateValue"))
 	}
 
@@ -3984,8 +4008,8 @@ func (s *SetAlarmStateInput) SetStateReasonData(v string) *SetAlarmStateInput {
 }
 
 // SetStateValue sets the StateValue field's value.
-func (s *SetAlarmStateInput) SetStateValue(v string) *SetAlarmStateInput {
-	s.StateValue = &v
+func (s *SetAlarmStateInput) SetStateValue(v StateValue) *SetAlarmStateInput {
+	s.StateValue = v
 	return s
 }
 
@@ -4043,15 +4067,19 @@ func (s StatisticSet) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StatisticSet) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StatisticSet"}
+
 	if s.Maximum == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Maximum"))
 	}
+
 	if s.Minimum == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Minimum"))
 	}
+
 	if s.SampleCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SampleCount"))
 	}
+
 	if s.Sum == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Sum"))
 	}
@@ -4086,138 +4114,74 @@ func (s *StatisticSet) SetSum(v float64) *StatisticSet {
 	return s
 }
 
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
 const (
-	// ComparisonOperatorGreaterThanOrEqualToThreshold is a ComparisonOperator enum value
-	ComparisonOperatorGreaterThanOrEqualToThreshold = "GreaterThanOrEqualToThreshold"
-
-	// ComparisonOperatorGreaterThanThreshold is a ComparisonOperator enum value
-	ComparisonOperatorGreaterThanThreshold = "GreaterThanThreshold"
-
-	// ComparisonOperatorLessThanThreshold is a ComparisonOperator enum value
-	ComparisonOperatorLessThanThreshold = "LessThanThreshold"
-
-	// ComparisonOperatorLessThanOrEqualToThreshold is a ComparisonOperator enum value
-	ComparisonOperatorLessThanOrEqualToThreshold = "LessThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanOrEqualToThreshold ComparisonOperator = "GreaterThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanThreshold          ComparisonOperator = "GreaterThanThreshold"
+	ComparisonOperatorLessThanThreshold             ComparisonOperator = "LessThanThreshold"
+	ComparisonOperatorLessThanOrEqualToThreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
 )
 
+type HistoryItemType string
+
+// Enum values for HistoryItemType
 const (
-	// HistoryItemTypeConfigurationUpdate is a HistoryItemType enum value
-	HistoryItemTypeConfigurationUpdate = "ConfigurationUpdate"
-
-	// HistoryItemTypeStateUpdate is a HistoryItemType enum value
-	HistoryItemTypeStateUpdate = "StateUpdate"
-
-	// HistoryItemTypeAction is a HistoryItemType enum value
-	HistoryItemTypeAction = "Action"
+	HistoryItemTypeConfigurationUpdate HistoryItemType = "ConfigurationUpdate"
+	HistoryItemTypeStateUpdate         HistoryItemType = "StateUpdate"
+	HistoryItemTypeAction              HistoryItemType = "Action"
 )
 
+type StandardUnit string
+
+// Enum values for StandardUnit
 const (
-	// StandardUnitSeconds is a StandardUnit enum value
-	StandardUnitSeconds = "Seconds"
-
-	// StandardUnitMicroseconds is a StandardUnit enum value
-	StandardUnitMicroseconds = "Microseconds"
-
-	// StandardUnitMilliseconds is a StandardUnit enum value
-	StandardUnitMilliseconds = "Milliseconds"
-
-	// StandardUnitBytes is a StandardUnit enum value
-	StandardUnitBytes = "Bytes"
-
-	// StandardUnitKilobytes is a StandardUnit enum value
-	StandardUnitKilobytes = "Kilobytes"
-
-	// StandardUnitMegabytes is a StandardUnit enum value
-	StandardUnitMegabytes = "Megabytes"
-
-	// StandardUnitGigabytes is a StandardUnit enum value
-	StandardUnitGigabytes = "Gigabytes"
-
-	// StandardUnitTerabytes is a StandardUnit enum value
-	StandardUnitTerabytes = "Terabytes"
-
-	// StandardUnitBits is a StandardUnit enum value
-	StandardUnitBits = "Bits"
-
-	// StandardUnitKilobits is a StandardUnit enum value
-	StandardUnitKilobits = "Kilobits"
-
-	// StandardUnitMegabits is a StandardUnit enum value
-	StandardUnitMegabits = "Megabits"
-
-	// StandardUnitGigabits is a StandardUnit enum value
-	StandardUnitGigabits = "Gigabits"
-
-	// StandardUnitTerabits is a StandardUnit enum value
-	StandardUnitTerabits = "Terabits"
-
-	// StandardUnitPercent is a StandardUnit enum value
-	StandardUnitPercent = "Percent"
-
-	// StandardUnitCount is a StandardUnit enum value
-	StandardUnitCount = "Count"
-
-	// StandardUnitBytesSecond is a StandardUnit enum value
-	StandardUnitBytesSecond = "Bytes/Second"
-
-	// StandardUnitKilobytesSecond is a StandardUnit enum value
-	StandardUnitKilobytesSecond = "Kilobytes/Second"
-
-	// StandardUnitMegabytesSecond is a StandardUnit enum value
-	StandardUnitMegabytesSecond = "Megabytes/Second"
-
-	// StandardUnitGigabytesSecond is a StandardUnit enum value
-	StandardUnitGigabytesSecond = "Gigabytes/Second"
-
-	// StandardUnitTerabytesSecond is a StandardUnit enum value
-	StandardUnitTerabytesSecond = "Terabytes/Second"
-
-	// StandardUnitBitsSecond is a StandardUnit enum value
-	StandardUnitBitsSecond = "Bits/Second"
-
-	// StandardUnitKilobitsSecond is a StandardUnit enum value
-	StandardUnitKilobitsSecond = "Kilobits/Second"
-
-	// StandardUnitMegabitsSecond is a StandardUnit enum value
-	StandardUnitMegabitsSecond = "Megabits/Second"
-
-	// StandardUnitGigabitsSecond is a StandardUnit enum value
-	StandardUnitGigabitsSecond = "Gigabits/Second"
-
-	// StandardUnitTerabitsSecond is a StandardUnit enum value
-	StandardUnitTerabitsSecond = "Terabits/Second"
-
-	// StandardUnitCountSecond is a StandardUnit enum value
-	StandardUnitCountSecond = "Count/Second"
-
-	// StandardUnitNone is a StandardUnit enum value
-	StandardUnitNone = "None"
+	StandardUnitSeconds         StandardUnit = "Seconds"
+	StandardUnitMicroseconds    StandardUnit = "Microseconds"
+	StandardUnitMilliseconds    StandardUnit = "Milliseconds"
+	StandardUnitBytes           StandardUnit = "Bytes"
+	StandardUnitKilobytes       StandardUnit = "Kilobytes"
+	StandardUnitMegabytes       StandardUnit = "Megabytes"
+	StandardUnitGigabytes       StandardUnit = "Gigabytes"
+	StandardUnitTerabytes       StandardUnit = "Terabytes"
+	StandardUnitBits            StandardUnit = "Bits"
+	StandardUnitKilobits        StandardUnit = "Kilobits"
+	StandardUnitMegabits        StandardUnit = "Megabits"
+	StandardUnitGigabits        StandardUnit = "Gigabits"
+	StandardUnitTerabits        StandardUnit = "Terabits"
+	StandardUnitPercent         StandardUnit = "Percent"
+	StandardUnitCount           StandardUnit = "Count"
+	StandardUnitBytesSecond     StandardUnit = "Bytes/Second"
+	StandardUnitKilobytesSecond StandardUnit = "Kilobytes/Second"
+	StandardUnitMegabytesSecond StandardUnit = "Megabytes/Second"
+	StandardUnitGigabytesSecond StandardUnit = "Gigabytes/Second"
+	StandardUnitTerabytesSecond StandardUnit = "Terabytes/Second"
+	StandardUnitBitsSecond      StandardUnit = "Bits/Second"
+	StandardUnitKilobitsSecond  StandardUnit = "Kilobits/Second"
+	StandardUnitMegabitsSecond  StandardUnit = "Megabits/Second"
+	StandardUnitGigabitsSecond  StandardUnit = "Gigabits/Second"
+	StandardUnitTerabitsSecond  StandardUnit = "Terabits/Second"
+	StandardUnitCountSecond     StandardUnit = "Count/Second"
+	StandardUnitNone            StandardUnit = "None"
 )
 
+type StateValue string
+
+// Enum values for StateValue
 const (
-	// StateValueOk is a StateValue enum value
-	StateValueOk = "OK"
-
-	// StateValueAlarm is a StateValue enum value
-	StateValueAlarm = "ALARM"
-
-	// StateValueInsufficientData is a StateValue enum value
-	StateValueInsufficientData = "INSUFFICIENT_DATA"
+	StateValueOk               StateValue = "OK"
+	StateValueAlarm            StateValue = "ALARM"
+	StateValueInsufficientData StateValue = "INSUFFICIENT_DATA"
 )
 
+type Statistic string
+
+// Enum values for Statistic
 const (
-	// StatisticSampleCount is a Statistic enum value
-	StatisticSampleCount = "SampleCount"
-
-	// StatisticAverage is a Statistic enum value
-	StatisticAverage = "Average"
-
-	// StatisticSum is a Statistic enum value
-	StatisticSum = "Sum"
-
-	// StatisticMinimum is a Statistic enum value
-	StatisticMinimum = "Minimum"
-
-	// StatisticMaximum is a Statistic enum value
-	StatisticMaximum = "Maximum"
+	StatisticSampleCount Statistic = "SampleCount"
+	StatisticAverage     Statistic = "Average"
+	StatisticSum         Statistic = "Sum"
+	StatisticMinimum     Statistic = "Minimum"
+	StatisticMaximum     Statistic = "Maximum"
 )

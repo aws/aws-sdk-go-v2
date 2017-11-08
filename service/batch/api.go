@@ -1556,9 +1556,11 @@ func (s CancelJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelJobInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
+
 	if s.Reason == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Reason"))
 	}
@@ -1627,17 +1629,17 @@ type ComputeEnvironmentDetail struct {
 	// The state of the compute environment. The valid values are ENABLED or DISABLED.
 	// An ENABLED state indicates that you can register instances with the compute
 	// environment and that the associated instances can accept jobs.
-	State *string `locationName:"state" type:"string" enum:"CEState"`
+	State CEState `locationName:"state" type:"string"`
 
 	// The current status of the compute environment (for example, CREATING or VALID).
-	Status *string `locationName:"status" type:"string" enum:"CEStatus"`
+	Status CEStatus `locationName:"status" type:"string"`
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the compute environment.
 	StatusReason *string `locationName:"statusReason" type:"string"`
 
 	// The type of the compute environment.
-	Type *string `locationName:"type" type:"string" enum:"CEType"`
+	Type CEType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -1681,14 +1683,14 @@ func (s *ComputeEnvironmentDetail) SetServiceRole(v string) *ComputeEnvironmentD
 }
 
 // SetState sets the State field's value.
-func (s *ComputeEnvironmentDetail) SetState(v string) *ComputeEnvironmentDetail {
-	s.State = &v
+func (s *ComputeEnvironmentDetail) SetState(v CEState) *ComputeEnvironmentDetail {
+	s.State = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *ComputeEnvironmentDetail) SetStatus(v string) *ComputeEnvironmentDetail {
-	s.Status = &v
+func (s *ComputeEnvironmentDetail) SetStatus(v CEStatus) *ComputeEnvironmentDetail {
+	s.Status = v
 	return s
 }
 
@@ -1699,8 +1701,8 @@ func (s *ComputeEnvironmentDetail) SetStatusReason(v string) *ComputeEnvironment
 }
 
 // SetType sets the Type field's value.
-func (s *ComputeEnvironmentDetail) SetType(v string) *ComputeEnvironmentDetail {
-	s.Type = &v
+func (s *ComputeEnvironmentDetail) SetType(v CEType) *ComputeEnvironmentDetail {
+	s.Type = v
 	return s
 }
 
@@ -1736,9 +1738,11 @@ func (s ComputeEnvironmentOrder) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComputeEnvironmentOrder) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ComputeEnvironmentOrder"}
+
 	if s.ComputeEnvironment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironment"))
 	}
+
 	if s.Order == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Order"))
 	}
@@ -1828,7 +1832,7 @@ type ComputeResource struct {
 	// The type of compute environment.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"CRType"`
+	Type CRType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1844,25 +1848,31 @@ func (s ComputeResource) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComputeResource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ComputeResource"}
+
 	if s.InstanceRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceRole"))
 	}
+
 	if s.InstanceTypes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceTypes"))
 	}
+
 	if s.MaxvCpus == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxvCpus"))
 	}
+
 	if s.MinvCpus == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinvCpus"))
 	}
+
 	if s.SecurityGroupIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
 	}
+
 	if s.Subnets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -1945,8 +1955,8 @@ func (s *ComputeResource) SetTags(v map[string]*string) *ComputeResource {
 }
 
 // SetType sets the Type field's value.
-func (s *ComputeResource) SetType(v string) *ComputeResource {
-	s.Type = &v
+func (s *ComputeResource) SetType(v CRType) *ComputeResource {
+	s.Type = v
 	return s
 }
 
@@ -2348,12 +2358,15 @@ func (s ContainerProperties) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContainerProperties) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ContainerProperties"}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
+
 	if s.Memory == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Memory"))
 	}
+
 	if s.Vcpus == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vcpus"))
 	}
@@ -2479,12 +2492,12 @@ type CreateComputeEnvironmentInput struct {
 	// The state of the compute environment. If the state is ENABLED, then the compute
 	// environment accepts jobs from a queue and can scale out automatically based
 	// on queues.
-	State *string `locationName:"state" type:"string" enum:"CEState"`
+	State CEState `locationName:"state" type:"string"`
 
 	// The type of the compute environment.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"CEType"`
+	Type CEType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2500,13 +2513,15 @@ func (s CreateComputeEnvironmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateComputeEnvironmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateComputeEnvironmentInput"}
+
 	if s.ComputeEnvironmentName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironmentName"))
 	}
+
 	if s.ServiceRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceRole"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.ComputeResources != nil {
@@ -2540,14 +2555,14 @@ func (s *CreateComputeEnvironmentInput) SetServiceRole(v string) *CreateComputeE
 }
 
 // SetState sets the State field's value.
-func (s *CreateComputeEnvironmentInput) SetState(v string) *CreateComputeEnvironmentInput {
-	s.State = &v
+func (s *CreateComputeEnvironmentInput) SetState(v CEState) *CreateComputeEnvironmentInput {
+	s.State = v
 	return s
 }
 
 // SetType sets the Type field's value.
-func (s *CreateComputeEnvironmentInput) SetType(v string) *CreateComputeEnvironmentInput {
-	s.Type = &v
+func (s *CreateComputeEnvironmentInput) SetType(v CEType) *CreateComputeEnvironmentInput {
+	s.Type = v
 	return s
 }
 
@@ -2613,7 +2628,7 @@ type CreateJobQueueInput struct {
 
 	// The state of the job queue. If the job queue state is ENABLED, it is able
 	// to accept jobs.
-	State *string `locationName:"state" type:"string" enum:"JQState"`
+	State JQState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -2629,12 +2644,15 @@ func (s CreateJobQueueInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateJobQueueInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateJobQueueInput"}
+
 	if s.ComputeEnvironmentOrder == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironmentOrder"))
 	}
+
 	if s.JobQueueName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobQueueName"))
 	}
+
 	if s.Priority == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Priority"))
 	}
@@ -2674,8 +2692,8 @@ func (s *CreateJobQueueInput) SetPriority(v int64) *CreateJobQueueInput {
 }
 
 // SetState sets the State field's value.
-func (s *CreateJobQueueInput) SetState(v string) *CreateJobQueueInput {
-	s.State = &v
+func (s *CreateJobQueueInput) SetState(v JQState) *CreateJobQueueInput {
+	s.State = v
 	return s
 }
 
@@ -2739,6 +2757,7 @@ func (s DeleteComputeEnvironmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteComputeEnvironmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteComputeEnvironmentInput"}
+
 	if s.ComputeEnvironment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironment"))
 	}
@@ -2793,6 +2812,7 @@ func (s DeleteJobQueueInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteJobQueueInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteJobQueueInput"}
+
 	if s.JobQueue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
 	}
@@ -2848,6 +2868,7 @@ func (s DeregisterJobDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterJobDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterJobDefinitionInput"}
+
 	if s.JobDefinition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobDefinition"))
 	}
@@ -3197,6 +3218,7 @@ func (s DescribeJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeJobsInput"}
+
 	if s.Jobs == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Jobs"))
 	}
@@ -3453,7 +3475,7 @@ type JobDetail struct {
 	// The current status for the job.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"JobStatus"`
+	Status JobStatus `locationName:"status" type:"string" required:"true"`
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the job.
@@ -3541,8 +3563,8 @@ func (s *JobDetail) SetStartedAt(v int64) *JobDetail {
 }
 
 // SetStatus sets the Status field's value.
-func (s *JobDetail) SetStatus(v string) *JobDetail {
-	s.Status = &v
+func (s *JobDetail) SetStatus(v JobStatus) *JobDetail {
+	s.Status = v
 	return s
 }
 
@@ -3588,10 +3610,10 @@ type JobQueueDetail struct {
 	// Describes the ability of the queue to accept new jobs.
 	//
 	// State is a required field
-	State *string `locationName:"state" type:"string" required:"true" enum:"JQState"`
+	State JQState `locationName:"state" type:"string" required:"true"`
 
 	// The status of the job queue (for example, CREATING or VALID).
-	Status *string `locationName:"status" type:"string" enum:"JQStatus"`
+	Status JQStatus `locationName:"status" type:"string"`
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the job queue.
@@ -3633,14 +3655,14 @@ func (s *JobQueueDetail) SetPriority(v int64) *JobQueueDetail {
 }
 
 // SetState sets the State field's value.
-func (s *JobQueueDetail) SetState(v string) *JobQueueDetail {
-	s.State = &v
+func (s *JobQueueDetail) SetState(v JQState) *JobQueueDetail {
+	s.State = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *JobQueueDetail) SetStatus(v string) *JobQueueDetail {
-	s.Status = &v
+func (s *JobQueueDetail) SetStatus(v JQStatus) *JobQueueDetail {
+	s.Status = v
 	return s
 }
 
@@ -3736,7 +3758,7 @@ type ListJobsInput struct {
 
 	// The job status with which to filter jobs in the specified queue. If you do
 	// not specify a status, only RUNNING jobs are returned.
-	JobStatus *string `locationName:"jobStatus" type:"string" enum:"JobStatus"`
+	JobStatus JobStatus `locationName:"jobStatus" type:"string"`
 
 	// The maximum number of results returned by ListJobs in paginated output. When
 	// this parameter is used, ListJobs only returns maxResults results in a single
@@ -3770,6 +3792,7 @@ func (s ListJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
+
 	if s.JobQueue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
 	}
@@ -3787,8 +3810,8 @@ func (s *ListJobsInput) SetJobQueue(v string) *ListJobsInput {
 }
 
 // SetJobStatus sets the JobStatus field's value.
-func (s *ListJobsInput) SetJobStatus(v string) *ListJobsInput {
-	s.JobStatus = &v
+func (s *ListJobsInput) SetJobStatus(v JobStatus) *ListJobsInput {
+	s.JobStatus = v
 	return s
 }
 
@@ -3914,7 +3937,7 @@ type RegisterJobDefinitionInput struct {
 	// The type of job definition.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"JobDefinitionType"`
+	Type JobDefinitionType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3930,10 +3953,11 @@ func (s RegisterJobDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterJobDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterJobDefinitionInput"}
+
 	if s.JobDefinitionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobDefinitionName"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.ContainerProperties != nil {
@@ -3973,8 +3997,8 @@ func (s *RegisterJobDefinitionInput) SetRetryStrategy(v *RetryStrategy) *Registe
 }
 
 // SetType sets the Type field's value.
-func (s *RegisterJobDefinitionInput) SetType(v string) *RegisterJobDefinitionInput {
-	s.Type = &v
+func (s *RegisterJobDefinitionInput) SetType(v JobDefinitionType) *RegisterJobDefinitionInput {
+	s.Type = v
 	return s
 }
 
@@ -4114,12 +4138,15 @@ func (s SubmitJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SubmitJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SubmitJobInput"}
+
 	if s.JobDefinition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobDefinition"))
 	}
+
 	if s.JobName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
+
 	if s.JobQueue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
 	}
@@ -4239,9 +4266,11 @@ func (s TerminateJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TerminateJobInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
+
 	if s.Reason == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Reason"))
 	}
@@ -4313,12 +4342,15 @@ func (s Ulimit) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Ulimit) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Ulimit"}
+
 	if s.HardLimit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HardLimit"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.SoftLimit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SoftLimit"))
 	}
@@ -4378,7 +4410,7 @@ type UpdateComputeEnvironmentInput struct {
 	// The state of the compute environment. Compute environments in the ENABLED
 	// state can accept jobs from a queue and scale in or out automatically based
 	// on the workload demand of its associated queues.
-	State *string `locationName:"state" type:"string" enum:"CEState"`
+	State CEState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -4394,6 +4426,7 @@ func (s UpdateComputeEnvironmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateComputeEnvironmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateComputeEnvironmentInput"}
+
 	if s.ComputeEnvironment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironment"))
 	}
@@ -4423,8 +4456,8 @@ func (s *UpdateComputeEnvironmentInput) SetServiceRole(v string) *UpdateComputeE
 }
 
 // SetState sets the State field's value.
-func (s *UpdateComputeEnvironmentInput) SetState(v string) *UpdateComputeEnvironmentInput {
-	s.State = &v
+func (s *UpdateComputeEnvironmentInput) SetState(v CEState) *UpdateComputeEnvironmentInput {
+	s.State = v
 	return s
 }
 
@@ -4483,7 +4516,7 @@ type UpdateJobQueueInput struct {
 	Priority *int64 `locationName:"priority" type:"integer"`
 
 	// Describes the queue's ability to accept new jobs.
-	State *string `locationName:"state" type:"string" enum:"JQState"`
+	State JQState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -4499,6 +4532,7 @@ func (s UpdateJobQueueInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateJobQueueInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobQueueInput"}
+
 	if s.JobQueue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
 	}
@@ -4538,8 +4572,8 @@ func (s *UpdateJobQueueInput) SetPriority(v int64) *UpdateJobQueueInput {
 }
 
 // SetState sets the State field's value.
-func (s *UpdateJobQueueInput) SetState(v string) *UpdateJobQueueInput {
-	s.State = &v
+func (s *UpdateJobQueueInput) SetState(v JQState) *UpdateJobQueueInput {
+	s.State = v
 	return s
 }
 
@@ -4616,102 +4650,78 @@ func (s *Volume) SetName(v string) *Volume {
 	return s
 }
 
-const (
-	// CEStateEnabled is a CEState enum value
-	CEStateEnabled = "ENABLED"
+type CEState string
 
-	// CEStateDisabled is a CEState enum value
-	CEStateDisabled = "DISABLED"
+// Enum values for CEState
+const (
+	CEStateEnabled  CEState = "ENABLED"
+	CEStateDisabled CEState = "DISABLED"
 )
 
+type CEStatus string
+
+// Enum values for CEStatus
 const (
-	// CEStatusCreating is a CEStatus enum value
-	CEStatusCreating = "CREATING"
-
-	// CEStatusUpdating is a CEStatus enum value
-	CEStatusUpdating = "UPDATING"
-
-	// CEStatusDeleting is a CEStatus enum value
-	CEStatusDeleting = "DELETING"
-
-	// CEStatusDeleted is a CEStatus enum value
-	CEStatusDeleted = "DELETED"
-
-	// CEStatusValid is a CEStatus enum value
-	CEStatusValid = "VALID"
-
-	// CEStatusInvalid is a CEStatus enum value
-	CEStatusInvalid = "INVALID"
+	CEStatusCreating CEStatus = "CREATING"
+	CEStatusUpdating CEStatus = "UPDATING"
+	CEStatusDeleting CEStatus = "DELETING"
+	CEStatusDeleted  CEStatus = "DELETED"
+	CEStatusValid    CEStatus = "VALID"
+	CEStatusInvalid  CEStatus = "INVALID"
 )
 
-const (
-	// CETypeManaged is a CEType enum value
-	CETypeManaged = "MANAGED"
+type CEType string
 
-	// CETypeUnmanaged is a CEType enum value
-	CETypeUnmanaged = "UNMANAGED"
+// Enum values for CEType
+const (
+	CETypeManaged   CEType = "MANAGED"
+	CETypeUnmanaged CEType = "UNMANAGED"
 )
 
-const (
-	// CRTypeEc2 is a CRType enum value
-	CRTypeEc2 = "EC2"
+type CRType string
 
-	// CRTypeSpot is a CRType enum value
-	CRTypeSpot = "SPOT"
+// Enum values for CRType
+const (
+	CRTypeEc2  CRType = "EC2"
+	CRTypeSpot CRType = "SPOT"
 )
 
-const (
-	// JQStateEnabled is a JQState enum value
-	JQStateEnabled = "ENABLED"
+type JQState string
 
-	// JQStateDisabled is a JQState enum value
-	JQStateDisabled = "DISABLED"
+// Enum values for JQState
+const (
+	JQStateEnabled  JQState = "ENABLED"
+	JQStateDisabled JQState = "DISABLED"
 )
 
+type JQStatus string
+
+// Enum values for JQStatus
 const (
-	// JQStatusCreating is a JQStatus enum value
-	JQStatusCreating = "CREATING"
-
-	// JQStatusUpdating is a JQStatus enum value
-	JQStatusUpdating = "UPDATING"
-
-	// JQStatusDeleting is a JQStatus enum value
-	JQStatusDeleting = "DELETING"
-
-	// JQStatusDeleted is a JQStatus enum value
-	JQStatusDeleted = "DELETED"
-
-	// JQStatusValid is a JQStatus enum value
-	JQStatusValid = "VALID"
-
-	// JQStatusInvalid is a JQStatus enum value
-	JQStatusInvalid = "INVALID"
+	JQStatusCreating JQStatus = "CREATING"
+	JQStatusUpdating JQStatus = "UPDATING"
+	JQStatusDeleting JQStatus = "DELETING"
+	JQStatusDeleted  JQStatus = "DELETED"
+	JQStatusValid    JQStatus = "VALID"
+	JQStatusInvalid  JQStatus = "INVALID"
 )
 
+type JobDefinitionType string
+
+// Enum values for JobDefinitionType
 const (
-	// JobDefinitionTypeContainer is a JobDefinitionType enum value
-	JobDefinitionTypeContainer = "container"
+	JobDefinitionTypeContainer JobDefinitionType = "container"
 )
 
+type JobStatus string
+
+// Enum values for JobStatus
 const (
-	// JobStatusSubmitted is a JobStatus enum value
-	JobStatusSubmitted = "SUBMITTED"
-
-	// JobStatusPending is a JobStatus enum value
-	JobStatusPending = "PENDING"
-
-	// JobStatusRunnable is a JobStatus enum value
-	JobStatusRunnable = "RUNNABLE"
-
-	// JobStatusStarting is a JobStatus enum value
-	JobStatusStarting = "STARTING"
-
-	// JobStatusRunning is a JobStatus enum value
-	JobStatusRunning = "RUNNING"
-
-	// JobStatusSucceeded is a JobStatus enum value
-	JobStatusSucceeded = "SUCCEEDED"
-
-	// JobStatusFailed is a JobStatus enum value
-	JobStatusFailed = "FAILED"
+	JobStatusSubmitted JobStatus = "SUBMITTED"
+	JobStatusPending   JobStatus = "PENDING"
+	JobStatusRunnable  JobStatus = "RUNNABLE"
+	JobStatusStarting  JobStatus = "STARTING"
+	JobStatusRunning   JobStatus = "RUNNING"
+	JobStatusSucceeded JobStatus = "SUCCEEDED"
+	JobStatusFailed    JobStatus = "FAILED"
 )

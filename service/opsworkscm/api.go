@@ -1501,12 +1501,15 @@ func (s AssociateNodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateNodeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateNodeInput"}
+
 	if s.EngineAttributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EngineAttributes"))
 	}
+
 	if s.NodeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NodeName"))
 	}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -1575,7 +1578,7 @@ type Backup struct {
 	BackupId *string `type:"string"`
 
 	// The backup type. Valid values are automated or manual.
-	BackupType *string `type:"string" enum:"BackupType"`
+	BackupType BackupType `type:"string"`
 
 	// The time stamp when the backup was created in the database. Example: 2016-07-29T13:38:47.520Z
 	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1633,7 +1636,7 @@ type Backup struct {
 	ServiceRoleArn *string `type:"string"`
 
 	// The status of a backup while in progress.
-	Status *string `type:"string" enum:"BackupStatus"`
+	Status BackupStatus `type:"string"`
 
 	// An informational message about backup status.
 	StatusDescription *string `type:"string"`
@@ -1673,8 +1676,8 @@ func (s *Backup) SetBackupId(v string) *Backup {
 }
 
 // SetBackupType sets the BackupType field's value.
-func (s *Backup) SetBackupType(v string) *Backup {
-	s.BackupType = &v
+func (s *Backup) SetBackupType(v BackupType) *Backup {
+	s.BackupType = v
 	return s
 }
 
@@ -1775,8 +1778,8 @@ func (s *Backup) SetServiceRoleArn(v string) *Backup {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Backup) SetStatus(v string) *Backup {
-	s.Status = &v
+func (s *Backup) SetStatus(v BackupStatus) *Backup {
+	s.Status = v
 	return s
 }
 
@@ -1830,6 +1833,7 @@ func (s CreateBackupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBackupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateBackupInput"}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -2036,18 +2040,22 @@ func (s *CreateServerInput) Validate() error {
 	if s.BackupRetentionCount != nil && *s.BackupRetentionCount < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("BackupRetentionCount", 1))
 	}
+
 	if s.InstanceProfileArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileArn"))
 	}
+
 	if s.InstanceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
+
 	if s.ServiceRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
@@ -2208,6 +2216,7 @@ func (s DeleteBackupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBackupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBackupInput"}
+
 	if s.BackupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
 	}
@@ -2262,6 +2271,7 @@ func (s DeleteServerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteServerInput"}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -2496,6 +2506,7 @@ func (s *DescribeEventsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -2595,9 +2606,11 @@ func (s DescribeNodeAssociationStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeNodeAssociationStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeNodeAssociationStatusInput"}
+
 	if s.NodeAssociationStatusToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NodeAssociationStatusToken"))
 	}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -2639,7 +2652,7 @@ type DescribeNodeAssociationStatusOutput struct {
 	//    * FAILED: The association or disassociation failed.
 	//
 	//    * IN_PROGRESS: The association or disassociation is still in progress.
-	NodeAssociationStatus *string `type:"string" enum:"NodeAssociationStatus"`
+	NodeAssociationStatus NodeAssociationStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -2659,8 +2672,8 @@ func (s *DescribeNodeAssociationStatusOutput) SetEngineAttributes(v []*EngineAtt
 }
 
 // SetNodeAssociationStatus sets the NodeAssociationStatus field's value.
-func (s *DescribeNodeAssociationStatusOutput) SetNodeAssociationStatus(v string) *DescribeNodeAssociationStatusOutput {
-	s.NodeAssociationStatus = &v
+func (s *DescribeNodeAssociationStatusOutput) SetNodeAssociationStatus(v NodeAssociationStatus) *DescribeNodeAssociationStatusOutput {
+	s.NodeAssociationStatus = v
 	return s
 }
 
@@ -2809,9 +2822,11 @@ func (s DisassociateNodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateNodeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateNodeInput"}
+
 	if s.NodeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NodeName"))
 	}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -2940,9 +2955,11 @@ func (s RestoreServerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreServerInput"}
+
 	if s.BackupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
 	}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -3058,7 +3075,7 @@ type Server struct {
 	KeyPair *string `type:"string"`
 
 	// The status of the most recent server maintenance run. Shows SUCCESS or FAILED.
-	MaintenanceStatus *string `type:"string" enum:"MaintenanceStatus"`
+	MaintenanceStatus MaintenanceStatus `type:"string"`
 
 	// The preferred backup period specified for the server.
 	PreferredBackupWindow *string `type:"string"`
@@ -3083,7 +3100,7 @@ type Server struct {
 	// The server's status. This field displays the states of actions in progress,
 	// such as creating, running, or backing up the server, as well as the server's
 	// health state.
-	Status *string `type:"string" enum:"ServerStatus"`
+	Status ServerStatus `type:"string"`
 
 	// Depending on the server status, this field has either a human-readable message
 	// (such as a create or backup error), or an escaped block of JSON (used for
@@ -3183,8 +3200,8 @@ func (s *Server) SetKeyPair(v string) *Server {
 }
 
 // SetMaintenanceStatus sets the MaintenanceStatus field's value.
-func (s *Server) SetMaintenanceStatus(v string) *Server {
-	s.MaintenanceStatus = &v
+func (s *Server) SetMaintenanceStatus(v MaintenanceStatus) *Server {
+	s.MaintenanceStatus = v
 	return s
 }
 
@@ -3225,8 +3242,8 @@ func (s *Server) SetServiceRoleArn(v string) *Server {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Server) SetStatus(v string) *Server {
-	s.Status = &v
+func (s *Server) SetStatus(v ServerStatus) *Server {
+	s.Status = v
 	return s
 }
 
@@ -3322,6 +3339,7 @@ func (s StartMaintenanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartMaintenanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartMaintenanceInput"}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -3402,12 +3420,14 @@ func (s UpdateServerEngineAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateServerEngineAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateServerEngineAttributesInput"}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -3505,6 +3525,7 @@ func (s UpdateServerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateServerInput"}
+
 	if s.ServerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
@@ -3572,34 +3593,30 @@ func (s *UpdateServerOutput) SetServer(v *Server) *UpdateServerOutput {
 	return s
 }
 
+type BackupStatus string
+
+// Enum values for BackupStatus
 const (
-	// BackupStatusInProgress is a BackupStatus enum value
-	BackupStatusInProgress = "IN_PROGRESS"
-
-	// BackupStatusOk is a BackupStatus enum value
-	BackupStatusOk = "OK"
-
-	// BackupStatusFailed is a BackupStatus enum value
-	BackupStatusFailed = "FAILED"
-
-	// BackupStatusDeleting is a BackupStatus enum value
-	BackupStatusDeleting = "DELETING"
+	BackupStatusInProgress BackupStatus = "IN_PROGRESS"
+	BackupStatusOk         BackupStatus = "OK"
+	BackupStatusFailed     BackupStatus = "FAILED"
+	BackupStatusDeleting   BackupStatus = "DELETING"
 )
 
-const (
-	// BackupTypeAutomated is a BackupType enum value
-	BackupTypeAutomated = "AUTOMATED"
+type BackupType string
 
-	// BackupTypeManual is a BackupType enum value
-	BackupTypeManual = "MANUAL"
+// Enum values for BackupType
+const (
+	BackupTypeAutomated BackupType = "AUTOMATED"
+	BackupTypeManual    BackupType = "MANUAL"
 )
 
-const (
-	// MaintenanceStatusSuccess is a MaintenanceStatus enum value
-	MaintenanceStatusSuccess = "SUCCESS"
+type MaintenanceStatus string
 
-	// MaintenanceStatusFailed is a MaintenanceStatus enum value
-	MaintenanceStatusFailed = "FAILED"
+// Enum values for MaintenanceStatus
+const (
+	MaintenanceStatusSuccess MaintenanceStatus = "SUCCESS"
+	MaintenanceStatusFailed  MaintenanceStatus = "FAILED"
 )
 
 // The status of the association or disassociation request.
@@ -3611,54 +3628,30 @@ const (
 //    * FAILED: The association or disassociation failed.
 //
 //    * IN_PROGRESS: The association or disassociation is still in progress.
+type NodeAssociationStatus string
+
+// Enum values for NodeAssociationStatus
 const (
-	// NodeAssociationStatusSuccess is a NodeAssociationStatus enum value
-	NodeAssociationStatusSuccess = "SUCCESS"
-
-	// NodeAssociationStatusFailed is a NodeAssociationStatus enum value
-	NodeAssociationStatusFailed = "FAILED"
-
-	// NodeAssociationStatusInProgress is a NodeAssociationStatus enum value
-	NodeAssociationStatusInProgress = "IN_PROGRESS"
+	NodeAssociationStatusSuccess    NodeAssociationStatus = "SUCCESS"
+	NodeAssociationStatusFailed     NodeAssociationStatus = "FAILED"
+	NodeAssociationStatusInProgress NodeAssociationStatus = "IN_PROGRESS"
 )
 
+type ServerStatus string
+
+// Enum values for ServerStatus
 const (
-	// ServerStatusBackingUp is a ServerStatus enum value
-	ServerStatusBackingUp = "BACKING_UP"
-
-	// ServerStatusConnectionLost is a ServerStatus enum value
-	ServerStatusConnectionLost = "CONNECTION_LOST"
-
-	// ServerStatusCreating is a ServerStatus enum value
-	ServerStatusCreating = "CREATING"
-
-	// ServerStatusDeleting is a ServerStatus enum value
-	ServerStatusDeleting = "DELETING"
-
-	// ServerStatusModifying is a ServerStatus enum value
-	ServerStatusModifying = "MODIFYING"
-
-	// ServerStatusFailed is a ServerStatus enum value
-	ServerStatusFailed = "FAILED"
-
-	// ServerStatusHealthy is a ServerStatus enum value
-	ServerStatusHealthy = "HEALTHY"
-
-	// ServerStatusRunning is a ServerStatus enum value
-	ServerStatusRunning = "RUNNING"
-
-	// ServerStatusRestoring is a ServerStatus enum value
-	ServerStatusRestoring = "RESTORING"
-
-	// ServerStatusSetup is a ServerStatus enum value
-	ServerStatusSetup = "SETUP"
-
-	// ServerStatusUnderMaintenance is a ServerStatus enum value
-	ServerStatusUnderMaintenance = "UNDER_MAINTENANCE"
-
-	// ServerStatusUnhealthy is a ServerStatus enum value
-	ServerStatusUnhealthy = "UNHEALTHY"
-
-	// ServerStatusTerminated is a ServerStatus enum value
-	ServerStatusTerminated = "TERMINATED"
+	ServerStatusBackingUp        ServerStatus = "BACKING_UP"
+	ServerStatusConnectionLost   ServerStatus = "CONNECTION_LOST"
+	ServerStatusCreating         ServerStatus = "CREATING"
+	ServerStatusDeleting         ServerStatus = "DELETING"
+	ServerStatusModifying        ServerStatus = "MODIFYING"
+	ServerStatusFailed           ServerStatus = "FAILED"
+	ServerStatusHealthy          ServerStatus = "HEALTHY"
+	ServerStatusRunning          ServerStatus = "RUNNING"
+	ServerStatusRestoring        ServerStatus = "RESTORING"
+	ServerStatusSetup            ServerStatus = "SETUP"
+	ServerStatusUnderMaintenance ServerStatus = "UNDER_MAINTENANCE"
+	ServerStatusUnhealthy        ServerStatus = "UNHEALTHY"
+	ServerStatusTerminated       ServerStatus = "TERMINATED"
 )

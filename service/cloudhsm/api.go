@@ -1775,9 +1775,11 @@ func (s AddTagsToResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.TagList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagList"))
 	}
@@ -1860,6 +1862,7 @@ func (s CreateHapgInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHapgInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateHapgInput"}
+
 	if s.Label == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
@@ -1942,7 +1945,7 @@ type CreateHsmInput struct {
 	//    * TRIAL - The HSM is being used in a product trial.
 	//
 	// SubscriptionType is a required field
-	SubscriptionType *string `locationName:"SubscriptionType" type:"string" required:"true" enum:"SubscriptionType"`
+	SubscriptionType SubscriptionType `locationName:"SubscriptionType" type:"string" required:"true"`
 
 	// The IP address for the syslog monitoring server. The AWS CloudHSM service
 	// only supports one syslog monitoring server.
@@ -1962,16 +1965,19 @@ func (s CreateHsmInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHsmInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateHsmInput"}
+
 	if s.IamRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamRoleArn"))
 	}
+
 	if s.SshKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SshKey"))
 	}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
-	if s.SubscriptionType == nil {
+	if len(s.SubscriptionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionType"))
 	}
 
@@ -2018,8 +2024,8 @@ func (s *CreateHsmInput) SetSubnetId(v string) *CreateHsmInput {
 }
 
 // SetSubscriptionType sets the SubscriptionType field's value.
-func (s *CreateHsmInput) SetSubscriptionType(v string) *CreateHsmInput {
-	s.SubscriptionType = &v
+func (s *CreateHsmInput) SetSubscriptionType(v SubscriptionType) *CreateHsmInput {
+	s.SubscriptionType = v
 	return s
 }
 
@@ -2082,6 +2088,7 @@ func (s CreateLunaClientInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLunaClientInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLunaClientInput"}
+
 	if s.Certificate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
 	}
@@ -2156,6 +2163,7 @@ func (s DeleteHapgInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHapgInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteHapgInput"}
+
 	if s.HapgArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HapgArn"))
 	}
@@ -2223,6 +2231,7 @@ func (s DeleteHsmInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHsmInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmInput"}
+
 	if s.HsmArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmArn"))
 	}
@@ -2289,6 +2298,7 @@ func (s DeleteLunaClientInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLunaClientInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLunaClientInput"}
+
 	if s.ClientArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientArn"))
 	}
@@ -2355,6 +2365,7 @@ func (s DescribeHapgInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeHapgInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeHapgInput"}
+
 	if s.HapgArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HapgArn"))
 	}
@@ -2402,7 +2413,7 @@ type DescribeHapgOutput struct {
 	PartitionSerialList []*string `type:"list"`
 
 	// The state of the high-availability partition group.
-	State *string `type:"string" enum:"CloudHsmObjectState"`
+	State CloudHsmObjectState `type:"string"`
 }
 
 // String returns the string representation
@@ -2464,8 +2475,8 @@ func (s *DescribeHapgOutput) SetPartitionSerialList(v []*string) *DescribeHapgOu
 }
 
 // SetState sets the State field's value.
-func (s *DescribeHapgOutput) SetState(v string) *DescribeHapgOutput {
-	s.State = &v
+func (s *DescribeHapgOutput) SetState(v CloudHsmObjectState) *DescribeHapgOutput {
+	s.State = v
 	return s
 }
 
@@ -2550,7 +2561,7 @@ type DescribeHsmOutput struct {
 	SshPublicKey *string `type:"string"`
 
 	// The status of the HSM.
-	Status *string `type:"string" enum:"HsmStatus"`
+	Status HsmStatus `type:"string"`
 
 	// Contains additional information about the status of the HSM.
 	StatusDetails *string `type:"string"`
@@ -2569,7 +2580,7 @@ type DescribeHsmOutput struct {
 	//    * PRODUCTION - The HSM is being used in a production environment.
 	//
 	//    * TRIAL - The HSM is being used in a product trial.
-	SubscriptionType *string `type:"string" enum:"SubscriptionType"`
+	SubscriptionType SubscriptionType `type:"string"`
 
 	// The name of the HSM vendor.
 	VendorName *string `type:"string"`
@@ -2667,8 +2678,8 @@ func (s *DescribeHsmOutput) SetSshPublicKey(v string) *DescribeHsmOutput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *DescribeHsmOutput) SetStatus(v string) *DescribeHsmOutput {
-	s.Status = &v
+func (s *DescribeHsmOutput) SetStatus(v HsmStatus) *DescribeHsmOutput {
+	s.Status = v
 	return s
 }
 
@@ -2697,8 +2708,8 @@ func (s *DescribeHsmOutput) SetSubscriptionStartDate(v string) *DescribeHsmOutpu
 }
 
 // SetSubscriptionType sets the SubscriptionType field's value.
-func (s *DescribeHsmOutput) SetSubscriptionType(v string) *DescribeHsmOutput {
-	s.SubscriptionType = &v
+func (s *DescribeHsmOutput) SetSubscriptionType(v SubscriptionType) *DescribeHsmOutput {
+	s.SubscriptionType = v
 	return s
 }
 
@@ -2819,7 +2830,7 @@ type GetConfigInput struct {
 	// The client version.
 	//
 	// ClientVersion is a required field
-	ClientVersion *string `type:"string" required:"true" enum:"ClientVersion"`
+	ClientVersion ClientVersion `type:"string" required:"true"`
 
 	// A list of ARNs that identify the high-availability partition groups that
 	// are associated with the client.
@@ -2841,12 +2852,14 @@ func (s GetConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetConfigInput"}
+
 	if s.ClientArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientArn"))
 	}
-	if s.ClientVersion == nil {
+	if len(s.ClientVersion) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ClientVersion"))
 	}
+
 	if s.HapgList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HapgList"))
 	}
@@ -2864,8 +2877,8 @@ func (s *GetConfigInput) SetClientArn(v string) *GetConfigInput {
 }
 
 // SetClientVersion sets the ClientVersion field's value.
-func (s *GetConfigInput) SetClientVersion(v string) *GetConfigInput {
-	s.ClientVersion = &v
+func (s *GetConfigInput) SetClientVersion(v ClientVersion) *GetConfigInput {
+	s.ClientVersion = v
 	return s
 }
 
@@ -3162,6 +3175,7 @@ func (s ListTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -3234,6 +3248,7 @@ func (s ModifyHapgInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyHapgInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyHapgInput"}
+
 	if s.HapgArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HapgArn"))
 	}
@@ -3331,6 +3346,7 @@ func (s ModifyHsmInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyHsmInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyHsmInput"}
+
 	if s.HsmArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmArn"))
 	}
@@ -3430,12 +3446,14 @@ func (s ModifyLunaClientInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyLunaClientInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyLunaClientInput"}
+
 	if s.Certificate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
 	}
 	if s.Certificate != nil && len(*s.Certificate) < 600 {
 		invalidParams.Add(aws.NewErrParamMinLen("Certificate", 600))
 	}
+
 	if s.ClientArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientArn"))
 	}
@@ -3513,9 +3531,11 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.TagKeyList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeyList"))
 	}
@@ -3594,12 +3614,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -3622,46 +3644,34 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
-const (
-	// ClientVersion51 is a ClientVersion enum value
-	ClientVersion51 = "5.1"
+type ClientVersion string
 
-	// ClientVersion53 is a ClientVersion enum value
-	ClientVersion53 = "5.3"
+// Enum values for ClientVersion
+const (
+	ClientVersion51 ClientVersion = "5.1"
+	ClientVersion53 ClientVersion = "5.3"
 )
 
+type CloudHsmObjectState string
+
+// Enum values for CloudHsmObjectState
 const (
-	// CloudHsmObjectStateReady is a CloudHsmObjectState enum value
-	CloudHsmObjectStateReady = "READY"
-
-	// CloudHsmObjectStateUpdating is a CloudHsmObjectState enum value
-	CloudHsmObjectStateUpdating = "UPDATING"
-
-	// CloudHsmObjectStateDegraded is a CloudHsmObjectState enum value
-	CloudHsmObjectStateDegraded = "DEGRADED"
+	CloudHsmObjectStateReady    CloudHsmObjectState = "READY"
+	CloudHsmObjectStateUpdating CloudHsmObjectState = "UPDATING"
+	CloudHsmObjectStateDegraded CloudHsmObjectState = "DEGRADED"
 )
 
+type HsmStatus string
+
+// Enum values for HsmStatus
 const (
-	// HsmStatusPending is a HsmStatus enum value
-	HsmStatusPending = "PENDING"
-
-	// HsmStatusRunning is a HsmStatus enum value
-	HsmStatusRunning = "RUNNING"
-
-	// HsmStatusUpdating is a HsmStatus enum value
-	HsmStatusUpdating = "UPDATING"
-
-	// HsmStatusSuspended is a HsmStatus enum value
-	HsmStatusSuspended = "SUSPENDED"
-
-	// HsmStatusTerminating is a HsmStatus enum value
-	HsmStatusTerminating = "TERMINATING"
-
-	// HsmStatusTerminated is a HsmStatus enum value
-	HsmStatusTerminated = "TERMINATED"
-
-	// HsmStatusDegraded is a HsmStatus enum value
-	HsmStatusDegraded = "DEGRADED"
+	HsmStatusPending     HsmStatus = "PENDING"
+	HsmStatusRunning     HsmStatus = "RUNNING"
+	HsmStatusUpdating    HsmStatus = "UPDATING"
+	HsmStatusSuspended   HsmStatus = "SUSPENDED"
+	HsmStatusTerminating HsmStatus = "TERMINATING"
+	HsmStatusTerminated  HsmStatus = "TERMINATED"
+	HsmStatusDegraded    HsmStatus = "DEGRADED"
 )
 
 // Specifies the type of subscription for the HSM.
@@ -3669,7 +3679,9 @@ const (
 //    * PRODUCTION - The HSM is being used in a production environment.
 //
 //    * TRIAL - The HSM is being used in a product trial.
+type SubscriptionType string
+
+// Enum values for SubscriptionType
 const (
-	// SubscriptionTypeProduction is a SubscriptionType enum value
-	SubscriptionTypeProduction = "PRODUCTION"
+	SubscriptionTypeProduction SubscriptionType = "PRODUCTION"
 )

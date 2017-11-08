@@ -92,12 +92,12 @@ func ExampleELBV2_CreateListener_shared00() {
 		DefaultActions: []*elbv2.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-				Type:           aws.String("forward"),
+				Type:           elbv2.ActionTypeEnumForward,
 			},
 		},
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 		Port:            aws.Int64(80),
-		Protocol:        aws.String("HTTP"),
+		Protocol:        elbv2.ProtocolEnumHttp,
 	}
 
 	result, err := svc.CreateListener(input)
@@ -168,12 +168,12 @@ func ExampleELBV2_CreateListener_shared01() {
 		DefaultActions: []*elbv2.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-				Type:           aws.String("forward"),
+				Type:           elbv2.ActionTypeEnumForward,
 			},
 		},
 		LoadBalancerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"),
 		Port:            aws.Int64(443),
-		Protocol:        aws.String("HTTPS"),
+		Protocol:        elbv2.ProtocolEnumHttps,
 		SslPolicy:       aws.String("ELBSecurityPolicy-2015-05"),
 	}
 
@@ -295,7 +295,7 @@ func ExampleELBV2_CreateLoadBalancer_shared01() {
 	svc := elbv2.New(cfg)
 	input := &elbv2.CreateLoadBalancerInput{
 		Name:   aws.String("my-internal-load-balancer"),
-		Scheme: aws.String("internal"),
+		Scheme: elbv2.LoadBalancerSchemeEnumInternal,
 		Subnets: []*string{
 			aws.String("subnet-b7d581c0"),
 			aws.String("subnet-8360a9e7"),
@@ -359,7 +359,7 @@ func ExampleELBV2_CreateRule_shared00() {
 		Actions: []*elbv2.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067"),
-				Type:           aws.String("forward"),
+				Type:           elbv2.ActionTypeEnumForward,
 			},
 		},
 		Conditions: []*elbv2.RuleCondition{
@@ -426,7 +426,7 @@ func ExampleELBV2_CreateTargetGroup_shared00() {
 	input := &elbv2.CreateTargetGroupInput{
 		Name:     aws.String("my-targets"),
 		Port:     aws.Int64(80),
-		Protocol: aws.String("HTTP"),
+		Protocol: elbv2.ProtocolEnumHttp,
 		VpcId:    aws.String("vpc-3ac0fb5f"),
 	}
 
@@ -1029,7 +1029,7 @@ func ExampleELBV2_ModifyListener_shared00() {
 		DefaultActions: []*elbv2.Action{
 			{
 				TargetGroupArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-new-targets/2453ed029918f21f"),
-				Type:           aws.String("forward"),
+				Type:           elbv2.ActionTypeEnumForward,
 			},
 		},
 		ListenerArn: aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2"),
@@ -1345,7 +1345,7 @@ func ExampleELBV2_ModifyTargetGroup_shared00() {
 	svc := elbv2.New(cfg)
 	input := &elbv2.ModifyTargetGroupInput{
 		HealthCheckPort:     aws.String("443"),
-		HealthCheckProtocol: aws.String("HTTPS"),
+		HealthCheckProtocol: elbv2.ProtocolEnumHttps,
 		TargetGroupArn:      aws.String("arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-https-targets/2453ed029918f21f"),
 	}
 

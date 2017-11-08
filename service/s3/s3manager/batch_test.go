@@ -89,11 +89,11 @@ func TestHasParity(t *testing.T) {
 		},
 		{
 			&s3.DeleteObjectsInput{
-				RequestPayer: aws.String("foo"),
+				RequestPayer: s3.RequestPayer("foo"),
 			},
 			BatchDeleteObject{
 				Object: &s3.DeleteObjectInput{
-					RequestPayer: aws.String("bar"),
+					RequestPayer: s3.RequestPayerRequester,
 				},
 			},
 			false,
@@ -102,14 +102,14 @@ func TestHasParity(t *testing.T) {
 			&s3.DeleteObjectsInput{},
 			BatchDeleteObject{
 				Object: &s3.DeleteObjectInput{
-					RequestPayer: aws.String("foo"),
+					RequestPayer: s3.RequestPayerRequester,
 				},
 			},
 			false,
 		},
 		{
 			&s3.DeleteObjectsInput{
-				RequestPayer: aws.String("foo"),
+				RequestPayer: s3.RequestPayerRequester,
 			},
 			BatchDeleteObject{
 				Object: &s3.DeleteObjectInput{},
@@ -131,7 +131,7 @@ func TestBatchDelete(t *testing.T) {
 		size     int
 		expected int
 	}{
-		{
+		{ // 0
 			[]BatchDeleteObject{
 				{
 					Object: &s3.DeleteObjectInput{
@@ -161,7 +161,7 @@ func TestBatchDelete(t *testing.T) {
 			1,
 			4,
 		},
-		{
+		{ // 1
 			[]BatchDeleteObject{
 				{
 					Object: &s3.DeleteObjectInput{
@@ -191,7 +191,7 @@ func TestBatchDelete(t *testing.T) {
 			1,
 			4,
 		},
-		{
+		{ // 2
 			[]BatchDeleteObject{
 				{
 					Object: &s3.DeleteObjectInput{
@@ -221,7 +221,7 @@ func TestBatchDelete(t *testing.T) {
 			4,
 			2,
 		},
-		{
+		{ // 3
 			[]BatchDeleteObject{
 				{
 					Object: &s3.DeleteObjectInput{
@@ -251,7 +251,7 @@ func TestBatchDelete(t *testing.T) {
 			10,
 			2,
 		},
-		{
+		{ // 4
 			[]BatchDeleteObject{
 				{
 					Object: &s3.DeleteObjectInput{
@@ -297,7 +297,7 @@ func TestBatchDelete(t *testing.T) {
 		}
 
 		if err := batcher.Delete(aws.BackgroundContext(), &DeleteObjectsIterator{Objects: c.objects}); err != nil {
-			panic(err)
+			t.Errorf("expected no error, but received %v", err)
 		}
 
 		if count != c.expected {
@@ -385,7 +385,7 @@ func TestBatchDeleteList(t *testing.T) {
 	}
 
 	if err := batcher.Delete(aws.BackgroundContext(), iter); err != nil {
-		t.Error(err)
+		t.Errorf("expected no error, but received %v", err)
 	}
 
 	if count != len(objects) {
@@ -522,7 +522,7 @@ func TestBatchDownload(t *testing.T) {
 
 	iter := &DownloadObjectsIterator{Objects: objects}
 	if err := svc.DownloadWithIterator(aws.BackgroundContext(), iter); err != nil {
-		panic(err)
+		t.Errorf("expected no error, but received %v", err)
 	}
 
 	if count != len(objects) {

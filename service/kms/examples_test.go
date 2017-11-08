@@ -128,9 +128,9 @@ func ExampleKMS_CreateGrant_shared00() {
 	input := &kms.CreateGrantInput{
 		GranteePrincipal: aws.String("arn:aws:iam::111122223333:role/ExampleRole"),
 		KeyId:            aws.String("arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab"),
-		Operations: []*string{
-			aws.String("Encrypt"),
-			aws.String("Decrypt"),
+		Operations: []kms.GrantOperation{
+			kms.GrantOperation("Encrypt"),
+			kms.GrantOperation("Decrypt"),
 		},
 	}
 
@@ -636,7 +636,7 @@ func ExampleKMS_GenerateDataKey_shared00() {
 	svc := kms.New(cfg)
 	input := &kms.GenerateDataKeyInput{
 		KeyId:   aws.String("alias/ExampleAlias"),
-		KeySpec: aws.String("AES_256"),
+		KeySpec: kms.DataKeySpecAes256,
 	}
 
 	result, err := svc.GenerateDataKey(input)
@@ -687,7 +687,7 @@ func ExampleKMS_GenerateDataKeyWithoutPlaintext_shared00() {
 	svc := kms.New(cfg)
 	input := &kms.GenerateDataKeyWithoutPlaintextInput{
 		KeyId:   aws.String("alias/ExampleAlias"),
-		KeySpec: aws.String("AES_256"),
+		KeySpec: kms.DataKeySpecAes256,
 	}
 
 	result, err := svc.GenerateDataKeyWithoutPlaintext(input)
@@ -862,8 +862,8 @@ func ExampleKMS_GetParametersForImport_shared00() {
 	svc := kms.New(cfg)
 	input := &kms.GetParametersForImportInput{
 		KeyId:             aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
-		WrappingAlgorithm: aws.String("RSAES_OAEP_SHA_1"),
-		WrappingKeySpec:   aws.String("RSA_2048"),
+		WrappingAlgorithm: kms.AlgorithmSpecRsaesOaepSha1,
+		WrappingKeySpec:   kms.WrappingKeySpecRsa2048,
 	}
 
 	result, err := svc.GetParametersForImport(input)
@@ -908,7 +908,7 @@ func ExampleKMS_ImportKeyMaterial_shared00() {
 	svc := kms.New(cfg)
 	input := &kms.ImportKeyMaterialInput{
 		EncryptedKeyMaterial: []byte("<binary data>"),
-		ExpirationModel:      aws.String("KEY_MATERIAL_DOES_NOT_EXPIRE"),
+		ExpirationModel:      kms.ExpirationModelTypeKeyMaterialDoesNotExpire,
 		ImportToken:          []byte("<binary data>"),
 		KeyId:                aws.String("1234abcd-12ab-34cd-56ef-1234567890ab"),
 	}

@@ -4175,9 +4175,11 @@ func (s AddTagsToResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -4447,7 +4449,7 @@ type CreateEndpointInput struct {
 	// The type of endpoint.
 	//
 	// EndpointType is a required field
-	EndpointType *string `type:"string" required:"true" enum:"ReplicationEndpointTypeValue"`
+	EndpointType ReplicationEndpointTypeValue `type:"string" required:"true"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndPointType,
 	// include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB,
@@ -4491,7 +4493,7 @@ type CreateEndpointInput struct {
 	// SSL mode can be one of four values: none, require, verify-ca, verify-full.
 	//
 	// The default value is none.
-	SslMode *string `type:"string" enum:"DmsSslModeValue"`
+	SslMode DmsSslModeValue `type:"string"`
 
 	// Tags to be added to the endpoint.
 	Tags []*Tag `locationNameList:"Tag" type:"list"`
@@ -4513,12 +4515,14 @@ func (s CreateEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateEndpointInput"}
+
 	if s.EndpointIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointIdentifier"))
 	}
-	if s.EndpointType == nil {
+	if len(s.EndpointType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointType"))
 	}
+
 	if s.EngineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EngineName"))
 	}
@@ -4559,8 +4563,8 @@ func (s *CreateEndpointInput) SetEndpointIdentifier(v string) *CreateEndpointInp
 }
 
 // SetEndpointType sets the EndpointType field's value.
-func (s *CreateEndpointInput) SetEndpointType(v string) *CreateEndpointInput {
-	s.EndpointType = &v
+func (s *CreateEndpointInput) SetEndpointType(v ReplicationEndpointTypeValue) *CreateEndpointInput {
+	s.EndpointType = v
 	return s
 }
 
@@ -4613,8 +4617,8 @@ func (s *CreateEndpointInput) SetServerName(v string) *CreateEndpointInput {
 }
 
 // SetSslMode sets the SslMode field's value.
-func (s *CreateEndpointInput) SetSslMode(v string) *CreateEndpointInput {
-	s.SslMode = &v
+func (s *CreateEndpointInput) SetSslMode(v DmsSslModeValue) *CreateEndpointInput {
+	s.SslMode = v
 	return s
 }
 
@@ -4714,9 +4718,11 @@ func (s CreateEventSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEventSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
+
 	if s.SnsTopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -4896,9 +4902,11 @@ func (s CreateReplicationInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationInstanceInput"}
+
 	if s.ReplicationInstanceClass == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceClass"))
 	}
+
 	if s.ReplicationInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceIdentifier"))
 	}
@@ -5053,12 +5061,15 @@ func (s CreateReplicationSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationSubnetGroupInput"}
+
 	if s.ReplicationSubnetGroupDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupDescription"))
 	}
+
 	if s.ReplicationSubnetGroupIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
@@ -5127,7 +5138,7 @@ type CreateReplicationTaskInput struct {
 	// The migration type.
 	//
 	// MigrationType is a required field
-	MigrationType *string `type:"string" required:"true" enum:"MigrationTypeValue"`
+	MigrationType MigrationTypeValue `type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	//
@@ -5188,21 +5199,26 @@ func (s CreateReplicationTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationTaskInput"}
-	if s.MigrationType == nil {
+	if len(s.MigrationType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("MigrationType"))
 	}
+
 	if s.ReplicationInstanceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
+
 	if s.ReplicationTaskIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskIdentifier"))
 	}
+
 	if s.SourceEndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceEndpointArn"))
 	}
+
 	if s.TableMappings == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableMappings"))
 	}
+
 	if s.TargetEndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetEndpointArn"))
 	}
@@ -5220,8 +5236,8 @@ func (s *CreateReplicationTaskInput) SetCdcStartTime(v time.Time) *CreateReplica
 }
 
 // SetMigrationType sets the MigrationType field's value.
-func (s *CreateReplicationTaskInput) SetMigrationType(v string) *CreateReplicationTaskInput {
-	s.MigrationType = &v
+func (s *CreateReplicationTaskInput) SetMigrationType(v MigrationTypeValue) *CreateReplicationTaskInput {
+	s.MigrationType = v
 	return s
 }
 
@@ -5314,6 +5330,7 @@ func (s DeleteCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCertificateInput"}
+
 	if s.CertificateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
@@ -5377,6 +5394,7 @@ func (s DeleteEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEndpointInput"}
+
 	if s.EndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
@@ -5440,6 +5458,7 @@ func (s DeleteEventSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -5503,6 +5522,7 @@ func (s DeleteReplicationInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationInstanceInput"}
+
 	if s.ReplicationInstanceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
@@ -5566,6 +5586,7 @@ func (s DeleteReplicationSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationSubnetGroupInput"}
+
 	if s.ReplicationSubnetGroupIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
 	}
@@ -5620,6 +5641,7 @@ func (s DeleteReplicationTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationTaskInput"}
+
 	if s.ReplicationTaskArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
@@ -6353,7 +6375,7 @@ type DescribeEventsInput struct {
 	// The type of AWS DMS resource that generates events.
 	//
 	// Valid values: replication-instance | migration-task
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 
 	// The start time for the events to be listed.
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -6432,8 +6454,8 @@ func (s *DescribeEventsInput) SetSourceIdentifier(v string) *DescribeEventsInput
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *DescribeEventsInput) SetSourceType(v string) *DescribeEventsInput {
-	s.SourceType = &v
+func (s *DescribeEventsInput) SetSourceType(v SourceType) *DescribeEventsInput {
+	s.SourceType = v
 	return s
 }
 
@@ -6577,6 +6599,7 @@ func (s DescribeRefreshSchemasStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRefreshSchemasStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeRefreshSchemasStatusInput"}
+
 	if s.EndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
@@ -6975,6 +6998,7 @@ func (s DescribeSchemasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSchemasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSchemasInput"}
+
 	if s.EndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
@@ -7075,6 +7099,7 @@ func (s DescribeTableStatisticsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTableStatisticsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTableStatisticsInput"}
+
 	if s.ReplicationTaskArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
@@ -7170,6 +7195,7 @@ func (s DynamoDbSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DynamoDbSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DynamoDbSettings"}
+
 	if s.ServiceAccessRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceAccessRoleArn"))
 	}
@@ -7209,7 +7235,7 @@ type Endpoint struct {
 	EndpointIdentifier *string `type:"string"`
 
 	// The type of endpoint.
-	EndpointType *string `type:"string" enum:"ReplicationEndpointTypeValue"`
+	EndpointType ReplicationEndpointTypeValue `type:"string"`
 
 	// The database engine name. Valid values, depending on the EndPointType, include
 	// MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB,
@@ -7250,7 +7276,7 @@ type Endpoint struct {
 	// SSL mode can be one of four values: none, require, verify-ca, verify-full.
 	//
 	// The default value is none.
-	SslMode *string `type:"string" enum:"DmsSslModeValue"`
+	SslMode DmsSslModeValue `type:"string"`
 
 	// The status of the endpoint.
 	Status *string `type:"string"`
@@ -7300,8 +7326,8 @@ func (s *Endpoint) SetEndpointIdentifier(v string) *Endpoint {
 }
 
 // SetEndpointType sets the EndpointType field's value.
-func (s *Endpoint) SetEndpointType(v string) *Endpoint {
-	s.EndpointType = &v
+func (s *Endpoint) SetEndpointType(v ReplicationEndpointTypeValue) *Endpoint {
+	s.EndpointType = v
 	return s
 }
 
@@ -7354,8 +7380,8 @@ func (s *Endpoint) SetServerName(v string) *Endpoint {
 }
 
 // SetSslMode sets the SslMode field's value.
-func (s *Endpoint) SetSslMode(v string) *Endpoint {
-	s.SslMode = &v
+func (s *Endpoint) SetSslMode(v DmsSslModeValue) *Endpoint {
+	s.SslMode = v
 	return s
 }
 
@@ -7394,7 +7420,7 @@ type Event struct {
 	// The type of AWS DMS resource that generates events.
 	//
 	// Valid values: replication-instance | endpoint | migration-task
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 }
 
 // String returns the string representation
@@ -7432,8 +7458,8 @@ func (s *Event) SetSourceIdentifier(v string) *Event {
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *Event) SetSourceType(v string) *Event {
-	s.SourceType = &v
+func (s *Event) SetSourceType(v SourceType) *Event {
+	s.SourceType = v
 	return s
 }
 
@@ -7609,9 +7635,11 @@ func (s Filter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Filter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Filter"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -7669,6 +7697,7 @@ func (s ImportCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportCertificateInput"}
+
 	if s.CertificateIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateIdentifier"))
 	}
@@ -7751,6 +7780,7 @@ func (s ListTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -7818,7 +7848,7 @@ type ModifyEndpointInput struct {
 	EndpointIdentifier *string `type:"string"`
 
 	// The type of endpoint.
-	EndpointType *string `type:"string" enum:"ReplicationEndpointTypeValue"`
+	EndpointType ReplicationEndpointTypeValue `type:"string"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndPointType,
 	// include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, DYNAMODB,
@@ -7853,7 +7883,7 @@ type ModifyEndpointInput struct {
 	// SSL mode can be one of four values: none, require, verify-ca, verify-full.
 	//
 	// The default value is none.
-	SslMode *string `type:"string" enum:"DmsSslModeValue"`
+	SslMode DmsSslModeValue `type:"string"`
 
 	// The user name to be used to login to the endpoint database.
 	Username *string `type:"string"`
@@ -7872,6 +7902,7 @@ func (s ModifyEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyEndpointInput"}
+
 	if s.EndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
@@ -7918,8 +7949,8 @@ func (s *ModifyEndpointInput) SetEndpointIdentifier(v string) *ModifyEndpointInp
 }
 
 // SetEndpointType sets the EndpointType field's value.
-func (s *ModifyEndpointInput) SetEndpointType(v string) *ModifyEndpointInput {
-	s.EndpointType = &v
+func (s *ModifyEndpointInput) SetEndpointType(v ReplicationEndpointTypeValue) *ModifyEndpointInput {
+	s.EndpointType = v
 	return s
 }
 
@@ -7966,8 +7997,8 @@ func (s *ModifyEndpointInput) SetServerName(v string) *ModifyEndpointInput {
 }
 
 // SetSslMode sets the SslMode field's value.
-func (s *ModifyEndpointInput) SetSslMode(v string) *ModifyEndpointInput {
-	s.SslMode = &v
+func (s *ModifyEndpointInput) SetSslMode(v DmsSslModeValue) *ModifyEndpointInput {
+	s.SslMode = v
 	return s
 }
 
@@ -8042,6 +8073,7 @@ func (s ModifyEventSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyEventSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -8193,6 +8225,7 @@ func (s ModifyReplicationInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyReplicationInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationInstanceInput"}
+
 	if s.ReplicationInstanceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
@@ -8324,9 +8357,11 @@ func (s ModifyReplicationSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyReplicationSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationSubnetGroupInput"}
+
 	if s.ReplicationSubnetGroupIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
@@ -8389,7 +8424,7 @@ type ModifyReplicationTaskInput struct {
 	// The migration type.
 	//
 	// Valid values: full-load | cdc | full-load-and-cdc
-	MigrationType *string `type:"string" enum:"MigrationTypeValue"`
+	MigrationType MigrationTypeValue `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the replication task.
 	//
@@ -8431,6 +8466,7 @@ func (s ModifyReplicationTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyReplicationTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationTaskInput"}
+
 	if s.ReplicationTaskArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
@@ -8448,8 +8484,8 @@ func (s *ModifyReplicationTaskInput) SetCdcStartTime(v time.Time) *ModifyReplica
 }
 
 // SetMigrationType sets the MigrationType field's value.
-func (s *ModifyReplicationTaskInput) SetMigrationType(v string) *ModifyReplicationTaskInput {
-	s.MigrationType = &v
+func (s *ModifyReplicationTaskInput) SetMigrationType(v MigrationTypeValue) *ModifyReplicationTaskInput {
+	s.MigrationType = v
 	return s
 }
 
@@ -8511,7 +8547,7 @@ type MongoDbSettings struct {
 	//
 	// DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x,
 	// use SCRAM_SHA_1. This attribute is not used when authType=No.
-	AuthMechanism *string `type:"string" enum:"AuthMechanismValue"`
+	AuthMechanism AuthMechanismValue `type:"string"`
 
 	// The MongoDB database name. This attribute is not used when authType=NO.
 	//
@@ -8524,7 +8560,7 @@ type MongoDbSettings struct {
 	//
 	// When NO is selected, user name and password parameters are not used and can
 	// be empty.
-	AuthType *string `type:"string" enum:"AuthTypeValue"`
+	AuthType AuthTypeValue `type:"string"`
 
 	// The database name on the MongoDB source endpoint.
 	DatabaseName *string `type:"string"`
@@ -8547,7 +8583,7 @@ type MongoDbSettings struct {
 	//
 	// Default value is NONE. Specify NONE to use document mode. Specify ONE to
 	// use table mode.
-	NestingLevel *string `type:"string" enum:"NestingLevelValue"`
+	NestingLevel NestingLevelValue `type:"string"`
 
 	// The password for the user account you use to access the MongoDB source endpoint.
 	Password *string `type:"string"`
@@ -8573,8 +8609,8 @@ func (s MongoDbSettings) GoString() string {
 }
 
 // SetAuthMechanism sets the AuthMechanism field's value.
-func (s *MongoDbSettings) SetAuthMechanism(v string) *MongoDbSettings {
-	s.AuthMechanism = &v
+func (s *MongoDbSettings) SetAuthMechanism(v AuthMechanismValue) *MongoDbSettings {
+	s.AuthMechanism = v
 	return s
 }
 
@@ -8585,8 +8621,8 @@ func (s *MongoDbSettings) SetAuthSource(v string) *MongoDbSettings {
 }
 
 // SetAuthType sets the AuthType field's value.
-func (s *MongoDbSettings) SetAuthType(v string) *MongoDbSettings {
-	s.AuthType = &v
+func (s *MongoDbSettings) SetAuthType(v AuthTypeValue) *MongoDbSettings {
+	s.AuthType = v
 	return s
 }
 
@@ -8609,8 +8645,8 @@ func (s *MongoDbSettings) SetExtractDocId(v string) *MongoDbSettings {
 }
 
 // SetNestingLevel sets the NestingLevel field's value.
-func (s *MongoDbSettings) SetNestingLevel(v string) *MongoDbSettings {
-	s.NestingLevel = &v
+func (s *MongoDbSettings) SetNestingLevel(v NestingLevelValue) *MongoDbSettings {
+	s.NestingLevel = v
 	return s
 }
 
@@ -8751,9 +8787,11 @@ func (s RefreshSchemasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RefreshSchemasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RefreshSchemasInput"}
+
 	if s.EndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
+
 	if s.ReplicationInstanceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
@@ -8817,7 +8855,7 @@ type RefreshSchemasStatus struct {
 	ReplicationInstanceArn *string `type:"string"`
 
 	// The status of the schema.
-	Status *string `type:"string" enum:"RefreshSchemasStatusTypeValue"`
+	Status RefreshSchemasStatusTypeValue `type:"string"`
 }
 
 // String returns the string representation
@@ -8855,8 +8893,8 @@ func (s *RefreshSchemasStatus) SetReplicationInstanceArn(v string) *RefreshSchem
 }
 
 // SetStatus sets the Status field's value.
-func (s *RefreshSchemasStatus) SetStatus(v string) *RefreshSchemasStatus {
-	s.Status = &v
+func (s *RefreshSchemasStatus) SetStatus(v RefreshSchemasStatusTypeValue) *RefreshSchemasStatus {
+	s.Status = v
 	return s
 }
 
@@ -8888,9 +8926,11 @@ func (s ReloadTablesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReloadTablesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReloadTablesInput"}
+
 	if s.ReplicationTaskArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
+
 	if s.TablesToReload == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TablesToReload"))
 	}
@@ -8966,9 +9006,11 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -9357,7 +9399,7 @@ type ReplicationTask struct {
 	LastFailureMessage *string `type:"string"`
 
 	// The type of migration.
-	MigrationType *string `type:"string" enum:"MigrationTypeValue"`
+	MigrationType MigrationTypeValue `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	ReplicationInstanceArn *string `type:"string"`
@@ -9422,8 +9464,8 @@ func (s *ReplicationTask) SetLastFailureMessage(v string) *ReplicationTask {
 }
 
 // SetMigrationType sets the MigrationType field's value.
-func (s *ReplicationTask) SetMigrationType(v string) *ReplicationTask {
-	s.MigrationType = &v
+func (s *ReplicationTask) SetMigrationType(v MigrationTypeValue) *ReplicationTask {
+	s.MigrationType = v
 	return s
 }
 
@@ -9583,7 +9625,7 @@ type S3Settings struct {
 	// An optional parameter to use GZIP to compress the target files. Set to GZIP
 	// to compress the target files. Set to NONE (the default) or do not use to
 	// leave the files uncompressed.
-	CompressionType *string `type:"string" enum:"CompressionTypeValue"`
+	CompressionType CompressionTypeValue `type:"string"`
 
 	// The delimiter used to separate columns in the source files. The default is
 	// a comma.
@@ -9622,8 +9664,8 @@ func (s *S3Settings) SetBucketName(v string) *S3Settings {
 }
 
 // SetCompressionType sets the CompressionType field's value.
-func (s *S3Settings) SetCompressionType(v string) *S3Settings {
-	s.CompressionType = &v
+func (s *S3Settings) SetCompressionType(v CompressionTypeValue) *S3Settings {
+	s.CompressionType = v
 	return s
 }
 
@@ -9666,7 +9708,7 @@ type StartReplicationTaskInput struct {
 	// The type of replication task.
 	//
 	// StartReplicationTaskType is a required field
-	StartReplicationTaskType *string `type:"string" required:"true" enum:"StartReplicationTaskTypeValue"`
+	StartReplicationTaskType StartReplicationTaskTypeValue `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9682,10 +9724,11 @@ func (s StartReplicationTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartReplicationTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartReplicationTaskInput"}
+
 	if s.ReplicationTaskArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
-	if s.StartReplicationTaskType == nil {
+	if len(s.StartReplicationTaskType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("StartReplicationTaskType"))
 	}
 
@@ -9708,8 +9751,8 @@ func (s *StartReplicationTaskInput) SetReplicationTaskArn(v string) *StartReplic
 }
 
 // SetStartReplicationTaskType sets the StartReplicationTaskType field's value.
-func (s *StartReplicationTaskInput) SetStartReplicationTaskType(v string) *StartReplicationTaskInput {
-	s.StartReplicationTaskType = &v
+func (s *StartReplicationTaskInput) SetStartReplicationTaskType(v StartReplicationTaskTypeValue) *StartReplicationTaskInput {
+	s.StartReplicationTaskType = v
 	return s
 }
 
@@ -9760,6 +9803,7 @@ func (s StopReplicationTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopReplicationTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopReplicationTaskInput"}
+
 	if s.ReplicationTaskArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
@@ -9847,7 +9891,7 @@ type SupportedEndpointType struct {
 	_ struct{} `type:"structure"`
 
 	// The type of endpoint.
-	EndpointType *string `type:"string" enum:"ReplicationEndpointTypeValue"`
+	EndpointType ReplicationEndpointTypeValue `type:"string"`
 
 	// The database engine name. Valid values, depending on the EndPointType, include
 	// MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB,
@@ -9869,8 +9913,8 @@ func (s SupportedEndpointType) GoString() string {
 }
 
 // SetEndpointType sets the EndpointType field's value.
-func (s *SupportedEndpointType) SetEndpointType(v string) *SupportedEndpointType {
-	s.EndpointType = &v
+func (s *SupportedEndpointType) SetEndpointType(v ReplicationEndpointTypeValue) *SupportedEndpointType {
+	s.EndpointType = v
 	return s
 }
 
@@ -10103,9 +10147,11 @@ func (s TestConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TestConnectionInput"}
+
 	if s.EndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
+
 	if s.ReplicationInstanceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
@@ -10185,97 +10231,87 @@ func (s *VpcSecurityGroupMembership) SetVpcSecurityGroupId(v string) *VpcSecurit
 	return s
 }
 
+type AuthMechanismValue string
+
+// Enum values for AuthMechanismValue
 const (
-	// AuthMechanismValueDefault is a AuthMechanismValue enum value
-	AuthMechanismValueDefault = "default"
-
-	// AuthMechanismValueMongodbCr is a AuthMechanismValue enum value
-	AuthMechanismValueMongodbCr = "mongodb_cr"
-
-	// AuthMechanismValueScramSha1 is a AuthMechanismValue enum value
-	AuthMechanismValueScramSha1 = "scram_sha_1"
+	AuthMechanismValueDefault   AuthMechanismValue = "default"
+	AuthMechanismValueMongodbCr AuthMechanismValue = "mongodb_cr"
+	AuthMechanismValueScramSha1 AuthMechanismValue = "scram_sha_1"
 )
 
-const (
-	// AuthTypeValueNo is a AuthTypeValue enum value
-	AuthTypeValueNo = "no"
+type AuthTypeValue string
 
-	// AuthTypeValuePassword is a AuthTypeValue enum value
-	AuthTypeValuePassword = "password"
+// Enum values for AuthTypeValue
+const (
+	AuthTypeValueNo       AuthTypeValue = "no"
+	AuthTypeValuePassword AuthTypeValue = "password"
 )
 
-const (
-	// CompressionTypeValueNone is a CompressionTypeValue enum value
-	CompressionTypeValueNone = "none"
+type CompressionTypeValue string
 
-	// CompressionTypeValueGzip is a CompressionTypeValue enum value
-	CompressionTypeValueGzip = "gzip"
+// Enum values for CompressionTypeValue
+const (
+	CompressionTypeValueNone CompressionTypeValue = "none"
+	CompressionTypeValueGzip CompressionTypeValue = "gzip"
 )
 
+type DmsSslModeValue string
+
+// Enum values for DmsSslModeValue
 const (
-	// DmsSslModeValueNone is a DmsSslModeValue enum value
-	DmsSslModeValueNone = "none"
-
-	// DmsSslModeValueRequire is a DmsSslModeValue enum value
-	DmsSslModeValueRequire = "require"
-
-	// DmsSslModeValueVerifyCa is a DmsSslModeValue enum value
-	DmsSslModeValueVerifyCa = "verify-ca"
-
-	// DmsSslModeValueVerifyFull is a DmsSslModeValue enum value
-	DmsSslModeValueVerifyFull = "verify-full"
+	DmsSslModeValueNone       DmsSslModeValue = "none"
+	DmsSslModeValueRequire    DmsSslModeValue = "require"
+	DmsSslModeValueVerifyCa   DmsSslModeValue = "verify-ca"
+	DmsSslModeValueVerifyFull DmsSslModeValue = "verify-full"
 )
 
+type MigrationTypeValue string
+
+// Enum values for MigrationTypeValue
 const (
-	// MigrationTypeValueFullLoad is a MigrationTypeValue enum value
-	MigrationTypeValueFullLoad = "full-load"
-
-	// MigrationTypeValueCdc is a MigrationTypeValue enum value
-	MigrationTypeValueCdc = "cdc"
-
-	// MigrationTypeValueFullLoadAndCdc is a MigrationTypeValue enum value
-	MigrationTypeValueFullLoadAndCdc = "full-load-and-cdc"
+	MigrationTypeValueFullLoad       MigrationTypeValue = "full-load"
+	MigrationTypeValueCdc            MigrationTypeValue = "cdc"
+	MigrationTypeValueFullLoadAndCdc MigrationTypeValue = "full-load-and-cdc"
 )
 
-const (
-	// NestingLevelValueNone is a NestingLevelValue enum value
-	NestingLevelValueNone = "none"
+type NestingLevelValue string
 
-	// NestingLevelValueOne is a NestingLevelValue enum value
-	NestingLevelValueOne = "one"
+// Enum values for NestingLevelValue
+const (
+	NestingLevelValueNone NestingLevelValue = "none"
+	NestingLevelValueOne  NestingLevelValue = "one"
 )
 
+type RefreshSchemasStatusTypeValue string
+
+// Enum values for RefreshSchemasStatusTypeValue
 const (
-	// RefreshSchemasStatusTypeValueSuccessful is a RefreshSchemasStatusTypeValue enum value
-	RefreshSchemasStatusTypeValueSuccessful = "successful"
-
-	// RefreshSchemasStatusTypeValueFailed is a RefreshSchemasStatusTypeValue enum value
-	RefreshSchemasStatusTypeValueFailed = "failed"
-
-	// RefreshSchemasStatusTypeValueRefreshing is a RefreshSchemasStatusTypeValue enum value
-	RefreshSchemasStatusTypeValueRefreshing = "refreshing"
+	RefreshSchemasStatusTypeValueSuccessful RefreshSchemasStatusTypeValue = "successful"
+	RefreshSchemasStatusTypeValueFailed     RefreshSchemasStatusTypeValue = "failed"
+	RefreshSchemasStatusTypeValueRefreshing RefreshSchemasStatusTypeValue = "refreshing"
 )
 
-const (
-	// ReplicationEndpointTypeValueSource is a ReplicationEndpointTypeValue enum value
-	ReplicationEndpointTypeValueSource = "source"
+type ReplicationEndpointTypeValue string
 
-	// ReplicationEndpointTypeValueTarget is a ReplicationEndpointTypeValue enum value
-	ReplicationEndpointTypeValueTarget = "target"
+// Enum values for ReplicationEndpointTypeValue
+const (
+	ReplicationEndpointTypeValueSource ReplicationEndpointTypeValue = "source"
+	ReplicationEndpointTypeValueTarget ReplicationEndpointTypeValue = "target"
 )
 
+type SourceType string
+
+// Enum values for SourceType
 const (
-	// SourceTypeReplicationInstance is a SourceType enum value
-	SourceTypeReplicationInstance = "replication-instance"
+	SourceTypeReplicationInstance SourceType = "replication-instance"
 )
 
+type StartReplicationTaskTypeValue string
+
+// Enum values for StartReplicationTaskTypeValue
 const (
-	// StartReplicationTaskTypeValueStartReplication is a StartReplicationTaskTypeValue enum value
-	StartReplicationTaskTypeValueStartReplication = "start-replication"
-
-	// StartReplicationTaskTypeValueResumeProcessing is a StartReplicationTaskTypeValue enum value
-	StartReplicationTaskTypeValueResumeProcessing = "resume-processing"
-
-	// StartReplicationTaskTypeValueReloadTarget is a StartReplicationTaskTypeValue enum value
-	StartReplicationTaskTypeValueReloadTarget = "reload-target"
+	StartReplicationTaskTypeValueStartReplication StartReplicationTaskTypeValue = "start-replication"
+	StartReplicationTaskTypeValueResumeProcessing StartReplicationTaskTypeValue = "resume-processing"
+	StartReplicationTaskTypeValueReloadTarget     StartReplicationTaskTypeValue = "reload-target"
 )

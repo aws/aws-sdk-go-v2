@@ -592,8 +592,8 @@ func ExampleElasticBeanstalk_DescribeEnvironmentHealth_shared00() {
 
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.DescribeEnvironmentHealthInput{
-		AttributeNames: []*string{
-			aws.String("All"),
+		AttributeNames: []elasticbeanstalk.EnvironmentHealthAttribute{
+			elasticbeanstalk.EnvironmentHealthAttribute("All"),
 		},
 		EnvironmentName: aws.String("my-env"),
 	}
@@ -733,8 +733,8 @@ func ExampleElasticBeanstalk_DescribeInstancesHealth_shared00() {
 
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.DescribeInstancesHealthInput{
-		AttributeNames: []*string{
-			aws.String("All"),
+		AttributeNames: []elasticbeanstalk.InstancesHealthAttribute{
+			elasticbeanstalk.InstancesHealthAttribute("All"),
 		},
 		EnvironmentName: aws.String("my-env"),
 	}
@@ -839,7 +839,7 @@ func ExampleElasticBeanstalk_RequestEnvironmentInfo_shared00() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.RequestEnvironmentInfoInput{
 		EnvironmentName: aws.String("my-env"),
-		InfoType:        aws.String("tail"),
+		InfoType:        elasticbeanstalk.EnvironmentInfoTypeTail,
 	}
 
 	result, err := svc.RequestEnvironmentInfo(input)
@@ -905,7 +905,7 @@ func ExampleElasticBeanstalk_RetrieveEnvironmentInfo_shared00() {
 	svc := elasticbeanstalk.New(cfg)
 	input := &elasticbeanstalk.RetrieveEnvironmentInfoInput{
 		EnvironmentName: aws.String("my-env"),
-		InfoType:        aws.String("tail"),
+		InfoType:        elasticbeanstalk.EnvironmentInfoTypeTail,
 	}
 
 	result, err := svc.RetrieveEnvironmentInfo(input)

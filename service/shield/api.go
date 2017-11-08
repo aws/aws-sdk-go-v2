@@ -985,12 +985,14 @@ func (s CreateProtectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProtectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateProtectionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -1093,6 +1095,7 @@ func (s DeleteProtectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProtectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteProtectionInput"}
+
 	if s.ProtectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProtectionId"))
 	}
@@ -1180,6 +1183,7 @@ func (s DescribeAttackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAttackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAttackInput"}
+
 	if s.AttackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttackId"))
 	}
@@ -1246,6 +1250,7 @@ func (s DescribeProtectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProtectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProtectionInput"}
+
 	if s.ProtectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProtectionId"))
 	}
@@ -1608,7 +1613,7 @@ type SubResourceSummary struct {
 	Id *string `type:"string"`
 
 	// The SubResource type.
-	Type *string `type:"string" enum:"SubResourceType"`
+	Type SubResourceType `type:"string"`
 }
 
 // String returns the string representation
@@ -1640,8 +1645,8 @@ func (s *SubResourceSummary) SetId(v string) *SubResourceSummary {
 }
 
 // SetType sets the Type field's value.
-func (s *SubResourceSummary) SetType(v string) *SubResourceSummary {
-	s.Type = &v
+func (s *SubResourceSummary) SetType(v SubResourceType) *SubResourceSummary {
+	s.Type = v
 	return s
 }
 
@@ -1819,10 +1824,10 @@ func (s *TimeRange) SetToExclusive(v time.Time) *TimeRange {
 	return s
 }
 
-const (
-	// SubResourceTypeIp is a SubResourceType enum value
-	SubResourceTypeIp = "IP"
+type SubResourceType string
 
-	// SubResourceTypeUrl is a SubResourceType enum value
-	SubResourceTypeUrl = "URL"
+// Enum values for SubResourceType
+const (
+	SubResourceTypeIp  SubResourceType = "IP"
+	SubResourceTypeUrl SubResourceType = "URL"
 )

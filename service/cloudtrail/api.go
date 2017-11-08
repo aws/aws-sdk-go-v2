@@ -1728,6 +1728,7 @@ func (s AddTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -1874,9 +1875,11 @@ func (s CreateTrailInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrailInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTrailInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.S3BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3BucketName"))
 	}
@@ -2173,6 +2176,7 @@ func (s DeleteTrailInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTrailInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrailInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2399,7 +2403,7 @@ type EventSelector struct {
 	// and RunInstances is a write-only API operation.
 	//
 	// By default, the value is All.
-	ReadWriteType *string `type:"string" enum:"ReadWriteType"`
+	ReadWriteType ReadWriteType `type:"string"`
 }
 
 // String returns the string representation
@@ -2425,8 +2429,8 @@ func (s *EventSelector) SetIncludeManagementEvents(v bool) *EventSelector {
 }
 
 // SetReadWriteType sets the ReadWriteType field's value.
-func (s *EventSelector) SetReadWriteType(v string) *EventSelector {
-	s.ReadWriteType = &v
+func (s *EventSelector) SetReadWriteType(v ReadWriteType) *EventSelector {
+	s.ReadWriteType = v
 	return s
 }
 
@@ -2470,6 +2474,7 @@ func (s GetEventSelectorsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEventSelectorsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetEventSelectorsInput"}
+
 	if s.TrailName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrailName"))
 	}
@@ -2547,6 +2552,7 @@ func (s GetTrailStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTrailStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTrailStatusInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2871,6 +2877,7 @@ func (s ListTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
+
 	if s.ResourceIdList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceIdList"))
 	}
@@ -2936,7 +2943,7 @@ type LookupAttribute struct {
 	// Specifies an attribute on which to filter the events returned.
 	//
 	// AttributeKey is a required field
-	AttributeKey *string `type:"string" required:"true" enum:"LookupAttributeKey"`
+	AttributeKey LookupAttributeKey `type:"string" required:"true"`
 
 	// Specifies a value for the specified AttributeKey.
 	//
@@ -2957,9 +2964,10 @@ func (s LookupAttribute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LookupAttribute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LookupAttribute"}
-	if s.AttributeKey == nil {
+	if len(s.AttributeKey) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeKey"))
 	}
+
 	if s.AttributeValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeValue"))
 	}
@@ -2971,8 +2979,8 @@ func (s *LookupAttribute) Validate() error {
 }
 
 // SetAttributeKey sets the AttributeKey field's value.
-func (s *LookupAttribute) SetAttributeKey(v string) *LookupAttribute {
-	s.AttributeKey = &v
+func (s *LookupAttribute) SetAttributeKey(v LookupAttributeKey) *LookupAttribute {
+	s.AttributeKey = v
 	return s
 }
 
@@ -3216,9 +3224,11 @@ func (s PutEventSelectorsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEventSelectorsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutEventSelectorsInput"}
+
 	if s.EventSelectors == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventSelectors"))
 	}
+
 	if s.TrailName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrailName"))
 	}
@@ -3307,6 +3317,7 @@ func (s RemoveTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -3458,6 +3469,7 @@ func (s StartLoggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartLoggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartLoggingInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3519,6 +3531,7 @@ func (s StopLoggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopLoggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopLoggingInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3581,6 +3594,7 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -3863,6 +3877,7 @@ func (s UpdateTrailInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTrailInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTrailInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4073,33 +4088,23 @@ func (s *UpdateTrailOutput) SetTrailARN(v string) *UpdateTrailOutput {
 	return s
 }
 
+type LookupAttributeKey string
+
+// Enum values for LookupAttributeKey
 const (
-	// LookupAttributeKeyEventId is a LookupAttributeKey enum value
-	LookupAttributeKeyEventId = "EventId"
-
-	// LookupAttributeKeyEventName is a LookupAttributeKey enum value
-	LookupAttributeKeyEventName = "EventName"
-
-	// LookupAttributeKeyUsername is a LookupAttributeKey enum value
-	LookupAttributeKeyUsername = "Username"
-
-	// LookupAttributeKeyResourceType is a LookupAttributeKey enum value
-	LookupAttributeKeyResourceType = "ResourceType"
-
-	// LookupAttributeKeyResourceName is a LookupAttributeKey enum value
-	LookupAttributeKeyResourceName = "ResourceName"
-
-	// LookupAttributeKeyEventSource is a LookupAttributeKey enum value
-	LookupAttributeKeyEventSource = "EventSource"
+	LookupAttributeKeyEventId      LookupAttributeKey = "EventId"
+	LookupAttributeKeyEventName    LookupAttributeKey = "EventName"
+	LookupAttributeKeyUsername     LookupAttributeKey = "Username"
+	LookupAttributeKeyResourceType LookupAttributeKey = "ResourceType"
+	LookupAttributeKeyResourceName LookupAttributeKey = "ResourceName"
+	LookupAttributeKeyEventSource  LookupAttributeKey = "EventSource"
 )
 
+type ReadWriteType string
+
+// Enum values for ReadWriteType
 const (
-	// ReadWriteTypeReadOnly is a ReadWriteType enum value
-	ReadWriteTypeReadOnly = "ReadOnly"
-
-	// ReadWriteTypeWriteOnly is a ReadWriteType enum value
-	ReadWriteTypeWriteOnly = "WriteOnly"
-
-	// ReadWriteTypeAll is a ReadWriteType enum value
-	ReadWriteTypeAll = "All"
+	ReadWriteTypeReadOnly  ReadWriteType = "ReadOnly"
+	ReadWriteTypeWriteOnly ReadWriteType = "WriteOnly"
+	ReadWriteTypeAll       ReadWriteType = "All"
 )

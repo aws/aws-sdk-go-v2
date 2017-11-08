@@ -665,7 +665,7 @@ type FailureInfo struct {
 	// The code of the common error. Valid values include InternalServiceException,
 	// InvalidParameterException, and any valid error code returned by the AWS service
 	// that hosts the resource that you want to tag.
-	ErrorCode *string `type:"string" enum:"ErrorCode"`
+	ErrorCode ErrorCode `type:"string"`
 
 	// The message of the common error.
 	ErrorMessage *string `type:"string"`
@@ -685,8 +685,8 @@ func (s FailureInfo) GoString() string {
 }
 
 // SetErrorCode sets the ErrorCode field's value.
-func (s *FailureInfo) SetErrorCode(v string) *FailureInfo {
-	s.ErrorCode = &v
+func (s *FailureInfo) SetErrorCode(v ErrorCode) *FailureInfo {
+	s.ErrorCode = v
 	return s
 }
 
@@ -950,6 +950,7 @@ func (s GetTagValuesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTagValuesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTagValuesInput"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -1171,12 +1172,14 @@ func (s TagResourcesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourcesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourcesInput"}
+
 	if s.ResourceARNList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARNList"))
 	}
 	if s.ResourceARNList != nil && len(s.ResourceARNList) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNList", 1))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -1259,12 +1262,14 @@ func (s UntagResourcesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourcesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourcesInput"}
+
 	if s.ResourceARNList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARNList"))
 	}
 	if s.ResourceARNList != nil && len(s.ResourceARNList) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNList", 1))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -1315,10 +1320,10 @@ func (s *UntagResourcesOutput) SetFailedResourcesMap(v map[string]*FailureInfo) 
 	return s
 }
 
-const (
-	// ErrorCodeInternalServiceException is a ErrorCode enum value
-	ErrorCodeInternalServiceException = "InternalServiceException"
+type ErrorCode string
 
-	// ErrorCodeInvalidParameterException is a ErrorCode enum value
-	ErrorCodeInvalidParameterException = "InvalidParameterException"
+// Enum values for ErrorCode
+const (
+	ErrorCodeInternalServiceException  ErrorCode = "InternalServiceException"
+	ErrorCodeInvalidParameterException ErrorCode = "InvalidParameterException"
 )

@@ -3760,7 +3760,7 @@ type AccountGateResult struct {
 	//
 	// Either no action is necessary, or no action is possible, on the stack. AWS
 	//    CloudFormation skips the stack set operation in this account and region.
-	Status *string `type:"string" enum:"AccountGateStatus"`
+	Status AccountGateStatus `type:"string"`
 
 	// The reason for the account gate status assigned to this account and region
 	// for the stack set operation.
@@ -3778,8 +3778,8 @@ func (s AccountGateResult) GoString() string {
 }
 
 // SetStatus sets the Status field's value.
-func (s *AccountGateResult) SetStatus(v string) *AccountGateResult {
-	s.Status = &v
+func (s *AccountGateResult) SetStatus(v AccountGateStatus) *AccountGateResult {
+	s.Status = v
 	return s
 }
 
@@ -3857,6 +3857,7 @@ func (s *CancelUpdateStackInput) Validate() error {
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -3906,7 +3907,7 @@ type Change struct {
 
 	// The type of entity that AWS CloudFormation changes. Currently, the only entity
 	// type is Resource.
-	Type *string `type:"string" enum:"ChangeType"`
+	Type ChangeType `type:"string"`
 }
 
 // String returns the string representation
@@ -3926,8 +3927,8 @@ func (s *Change) SetResourceChange(v *ResourceChange) *Change {
 }
 
 // SetType sets the Type field's value.
-func (s *Change) SetType(v string) *Change {
-	s.Type = &v
+func (s *Change) SetType(v ChangeType) *Change {
+	s.Type = v
 	return s
 }
 
@@ -3954,7 +3955,7 @@ type ChangeSetSummary struct {
 	// a change set might be in an UNAVAILABLE state because AWS CloudFormation
 	// is still creating it or in an OBSOLETE state because the stack was already
 	// updated.
-	ExecutionStatus *string `type:"string" enum:"ExecutionStatus"`
+	ExecutionStatus ExecutionStatus `type:"string"`
 
 	// The ID of the stack with which the change set is associated.
 	StackId *string `type:"string"`
@@ -3964,7 +3965,7 @@ type ChangeSetSummary struct {
 
 	// The state of the change set, such as CREATE_IN_PROGRESS, CREATE_COMPLETE,
 	// or FAILED.
-	Status *string `type:"string" enum:"ChangeSetStatus"`
+	Status ChangeSetStatus `type:"string"`
 
 	// A description of the change set's status. For example, if your change set
 	// is in the FAILED state, AWS CloudFormation shows the error message.
@@ -4006,8 +4007,8 @@ func (s *ChangeSetSummary) SetDescription(v string) *ChangeSetSummary {
 }
 
 // SetExecutionStatus sets the ExecutionStatus field's value.
-func (s *ChangeSetSummary) SetExecutionStatus(v string) *ChangeSetSummary {
-	s.ExecutionStatus = &v
+func (s *ChangeSetSummary) SetExecutionStatus(v ExecutionStatus) *ChangeSetSummary {
+	s.ExecutionStatus = v
 	return s
 }
 
@@ -4024,8 +4025,8 @@ func (s *ChangeSetSummary) SetStackName(v string) *ChangeSetSummary {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ChangeSetSummary) SetStatus(v string) *ChangeSetSummary {
-	s.Status = &v
+func (s *ChangeSetSummary) SetStatus(v ChangeSetStatus) *ChangeSetSummary {
+	s.Status = v
 	return s
 }
 
@@ -4125,6 +4126,7 @@ func (s *ContinueUpdateRollbackInput) Validate() error {
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -4207,7 +4209,7 @@ type CreateChangeSetInput struct {
 	//
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
 	// Templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// The name of the change set. The name must be unique among all change sets
 	// that are associated with the specified stack.
@@ -4230,7 +4232,7 @@ type CreateChangeSetInput struct {
 	// By default, AWS CloudFormation specifies UPDATE. You can't use the UPDATE
 	// type to create a change set for a new stack or the CREATE type to create
 	// a change set for an existing stack.
-	ChangeSetType *string `type:"string" enum:"ChangeSetType"`
+	ChangeSetType ChangeSetType `type:"string"`
 
 	// A unique identifier for this CreateChangeSet request. Specify this token
 	// if you plan to retry requests so that AWS CloudFormation knows that you're
@@ -4327,6 +4329,7 @@ func (s CreateChangeSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateChangeSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateChangeSetInput"}
+
 	if s.ChangeSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
 	}
@@ -4342,6 +4345,7 @@ func (s *CreateChangeSetInput) Validate() error {
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -4377,7 +4381,7 @@ func (s *CreateChangeSetInput) Validate() error {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *CreateChangeSetInput) SetCapabilities(v []*string) *CreateChangeSetInput {
+func (s *CreateChangeSetInput) SetCapabilities(v []Capability) *CreateChangeSetInput {
 	s.Capabilities = v
 	return s
 }
@@ -4389,8 +4393,8 @@ func (s *CreateChangeSetInput) SetChangeSetName(v string) *CreateChangeSetInput 
 }
 
 // SetChangeSetType sets the ChangeSetType field's value.
-func (s *CreateChangeSetInput) SetChangeSetType(v string) *CreateChangeSetInput {
-	s.ChangeSetType = &v
+func (s *CreateChangeSetInput) SetChangeSetType(v ChangeSetType) *CreateChangeSetInput {
+	s.ChangeSetType = v
 	return s
 }
 
@@ -4529,7 +4533,7 @@ type CreateStackInput struct {
 	//
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
 	// Templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// A unique identifier for this CreateStack request. Specify this token if you
 	// plan to retry requests so that AWS CloudFormation knows that you're not attempting
@@ -4576,7 +4580,7 @@ type CreateStackInput struct {
 	// or DisableRollback, but not both.
 	//
 	// Default: ROLLBACK
-	OnFailure *string `type:"string" enum:"OnFailure"`
+	OnFailure OnFailure `type:"string"`
 
 	// A list of Parameter structures that specify input parameters for the stack.
 	// For more information, see the Parameter (http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
@@ -4686,6 +4690,7 @@ func (s *CreateStackInput) Validate() error {
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -4727,7 +4732,7 @@ func (s *CreateStackInput) Validate() error {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *CreateStackInput) SetCapabilities(v []*string) *CreateStackInput {
+func (s *CreateStackInput) SetCapabilities(v []Capability) *CreateStackInput {
 	s.Capabilities = v
 	return s
 }
@@ -4757,8 +4762,8 @@ func (s *CreateStackInput) SetNotificationARNs(v []*string) *CreateStackInput {
 }
 
 // SetOnFailure sets the OnFailure field's value.
-func (s *CreateStackInput) SetOnFailure(v string) *CreateStackInput {
-	s.OnFailure = &v
+func (s *CreateStackInput) SetOnFailure(v OnFailure) *CreateStackInput {
+	s.OnFailure = v
 	return s
 }
 
@@ -4880,15 +4885,18 @@ func (s CreateStackInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStackInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStackInstancesInput"}
+
 	if s.Accounts == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Accounts"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
+
 	if s.Regions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Regions"))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -5021,7 +5029,7 @@ type CreateStackSetInput struct {
 	//
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
 	// Templates. (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// A unique identifier for this CreateStackSet request. Specify this token if
 	// you plan to retry requests so that AWS CloudFormation knows that you're not
@@ -5097,6 +5105,7 @@ func (s *CreateStackSetInput) Validate() error {
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -5124,7 +5133,7 @@ func (s *CreateStackSetInput) Validate() error {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *CreateStackSetInput) SetCapabilities(v []*string) *CreateStackSetInput {
+func (s *CreateStackSetInput) SetCapabilities(v []Capability) *CreateStackSetInput {
 	s.Capabilities = v
 	return s
 }
@@ -5224,6 +5233,7 @@ func (s DeleteChangeSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteChangeSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteChangeSetInput"}
+
 	if s.ChangeSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
 	}
@@ -5332,6 +5342,7 @@ func (s *DeleteStackInput) Validate() error {
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -5425,18 +5436,22 @@ func (s DeleteStackInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStackInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackInstancesInput"}
+
 	if s.Accounts == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Accounts"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
+
 	if s.Regions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Regions"))
 	}
+
 	if s.RetainStacks == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RetainStacks"))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -5551,6 +5566,7 @@ func (s DeleteStackSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStackSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackSetInput"}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -5689,6 +5705,7 @@ func (s DescribeChangeSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeChangeSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeChangeSetInput"}
+
 	if s.ChangeSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
 	}
@@ -5733,7 +5750,7 @@ type DescribeChangeSetOutput struct {
 
 	// If you execute the change set, the list of capabilities that were explicitly
 	// acknowledged when the change set was created.
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// The ARN of the change set.
 	ChangeSetId *string `min:"1" type:"string"`
@@ -5756,7 +5773,7 @@ type DescribeChangeSetOutput struct {
 	// a change set might be in an UNAVAILABLE state because AWS CloudFormation
 	// is still creating it or in an OBSOLETE state because the stack was already
 	// updated.
-	ExecutionStatus *string `type:"string" enum:"ExecutionStatus"`
+	ExecutionStatus ExecutionStatus `type:"string"`
 
 	// If the output exceeds 1 MB, a string that identifies the next page of changes.
 	// If there is no additional page, this value is null.
@@ -5784,7 +5801,7 @@ type DescribeChangeSetOutput struct {
 
 	// The current status of the change set, such as CREATE_IN_PROGRESS, CREATE_COMPLETE,
 	// or FAILED.
-	Status *string `type:"string" enum:"ChangeSetStatus"`
+	Status ChangeSetStatus `type:"string"`
 
 	// A description of the change set's status. For example, if your attempt to
 	// create a change set failed, AWS CloudFormation shows the error message.
@@ -5806,7 +5823,7 @@ func (s DescribeChangeSetOutput) GoString() string {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *DescribeChangeSetOutput) SetCapabilities(v []*string) *DescribeChangeSetOutput {
+func (s *DescribeChangeSetOutput) SetCapabilities(v []Capability) *DescribeChangeSetOutput {
 	s.Capabilities = v
 	return s
 }
@@ -5842,8 +5859,8 @@ func (s *DescribeChangeSetOutput) SetDescription(v string) *DescribeChangeSetOut
 }
 
 // SetExecutionStatus sets the ExecutionStatus field's value.
-func (s *DescribeChangeSetOutput) SetExecutionStatus(v string) *DescribeChangeSetOutput {
-	s.ExecutionStatus = &v
+func (s *DescribeChangeSetOutput) SetExecutionStatus(v ExecutionStatus) *DescribeChangeSetOutput {
+	s.ExecutionStatus = v
 	return s
 }
 
@@ -5884,8 +5901,8 @@ func (s *DescribeChangeSetOutput) SetStackName(v string) *DescribeChangeSetOutpu
 }
 
 // SetStatus sets the Status field's value.
-func (s *DescribeChangeSetOutput) SetStatus(v string) *DescribeChangeSetOutput {
-	s.Status = &v
+func (s *DescribeChangeSetOutput) SetStatus(v ChangeSetStatus) *DescribeChangeSetOutput {
+	s.Status = v
 	return s
 }
 
@@ -6025,12 +6042,15 @@ func (s DescribeStackInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackInstanceInput"}
+
 	if s.StackInstanceAccount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackInstanceAccount"))
 	}
+
 	if s.StackInstanceRegion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackInstanceRegion"))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -6122,9 +6142,11 @@ func (s DescribeStackResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackResourceInput"}
+
 	if s.LogicalResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogicalResourceId"))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -6288,6 +6310,7 @@ func (s DescribeStackSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackSetInput"}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -6332,12 +6355,14 @@ func (s DescribeStackSetOperationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackSetOperationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackSetOperationInput"}
+
 	if s.OperationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -6631,6 +6656,7 @@ func (s ExecuteChangeSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExecuteChangeSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExecuteChangeSetInput"}
+
 	if s.ChangeSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
 	}
@@ -6755,6 +6781,7 @@ func (s GetStackPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStackPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetStackPolicyInput"}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -6826,7 +6853,7 @@ type GetTemplateInput struct {
 	//
 	// If the template doesn't include transforms, Original and Processed return
 	// the same template. By default, AWS CloudFormation specifies Original.
-	TemplateStage *string `type:"string" enum:"TemplateStage"`
+	TemplateStage TemplateStage `type:"string"`
 }
 
 // String returns the string representation
@@ -6865,8 +6892,8 @@ func (s *GetTemplateInput) SetStackName(v string) *GetTemplateInput {
 }
 
 // SetTemplateStage sets the TemplateStage field's value.
-func (s *GetTemplateInput) SetTemplateStage(v string) *GetTemplateInput {
-	s.TemplateStage = &v
+func (s *GetTemplateInput) SetTemplateStage(v TemplateStage) *GetTemplateInput {
+	s.TemplateStage = v
 	return s
 }
 
@@ -6879,7 +6906,7 @@ type GetTemplateOutput struct {
 	// and Processed templates are always available. For change sets, the Original
 	// template is always available. After AWS CloudFormation finishes creating
 	// the change set, the Processed template becomes available.
-	StagesAvailable []*string `type:"list"`
+	StagesAvailable []TemplateStage `type:"list"`
 
 	// Structure containing the template body. (For more information, go to Template
 	// Anatomy (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
@@ -6901,7 +6928,7 @@ func (s GetTemplateOutput) GoString() string {
 }
 
 // SetStagesAvailable sets the StagesAvailable field's value.
-func (s *GetTemplateOutput) SetStagesAvailable(v []*string) *GetTemplateOutput {
+func (s *GetTemplateOutput) SetStagesAvailable(v []TemplateStage) *GetTemplateOutput {
 	s.StagesAvailable = v
 	return s
 }
@@ -7020,7 +7047,7 @@ type GetTemplateSummaryOutput struct {
 	//
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
 	// Templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// The list of resources that generated the values in the Capabilities response
 	// element.
@@ -7059,7 +7086,7 @@ func (s GetTemplateSummaryOutput) GoString() string {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *GetTemplateSummaryOutput) SetCapabilities(v []*string) *GetTemplateSummaryOutput {
+func (s *GetTemplateSummaryOutput) SetCapabilities(v []Capability) *GetTemplateSummaryOutput {
 	s.Capabilities = v
 	return s
 }
@@ -7138,6 +7165,7 @@ func (s *ListChangeSetsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -7299,6 +7327,7 @@ func (s ListImportsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListImportsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListImportsInput"}
+
 	if s.ExportName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExportName"))
 	}
@@ -7407,6 +7436,7 @@ func (s *ListStackInstancesInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -7523,6 +7553,7 @@ func (s *ListStackResourcesInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -7628,12 +7659,14 @@ func (s *ListStackSetOperationResultsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.OperationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -7749,6 +7782,7 @@ func (s *ListStackSetOperationsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -7832,7 +7866,7 @@ type ListStackSetsInput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The status of the stack sets that you want to get summary information about.
-	Status *string `type:"string" enum:"StackSetStatus"`
+	Status StackSetStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -7874,8 +7908,8 @@ func (s *ListStackSetsInput) SetNextToken(v string) *ListStackSetsInput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ListStackSetsInput) SetStatus(v string) *ListStackSetsInput {
-	s.Status = &v
+func (s *ListStackSetsInput) SetStatus(v StackSetStatus) *ListStackSetsInput {
+	s.Status = v
 	return s
 }
 
@@ -7927,7 +7961,7 @@ type ListStacksInput struct {
 	// Stack status to use as a filter. Specify one or more stack status codes to
 	// list only stacks with the specified status codes. For a complete list of
 	// stack status codes, see the StackStatus parameter of the Stack data type.
-	StackStatusFilter []*string `type:"list"`
+	StackStatusFilter []StackStatus `type:"list"`
 }
 
 // String returns the string representation
@@ -7960,7 +7994,7 @@ func (s *ListStacksInput) SetNextToken(v string) *ListStacksInput {
 }
 
 // SetStackStatusFilter sets the StackStatusFilter field's value.
-func (s *ListStacksInput) SetStackStatusFilter(v []*string) *ListStacksInput {
+func (s *ListStacksInput) SetStackStatusFilter(v []StackStatus) *ListStacksInput {
 	s.StackStatusFilter = v
 	return s
 }
@@ -8206,7 +8240,7 @@ type ResourceChange struct {
 
 	// The action that AWS CloudFormation takes on the resource, such as Add (adds
 	// a new resource), Modify (changes a resource), or Remove (deletes a resource).
-	Action *string `type:"string" enum:"ChangeAction"`
+	Action ChangeAction `type:"string"`
 
 	// For the Modify action, a list of ResourceChangeDetail structures that describes
 	// the changes that AWS CloudFormation will make to the resource.
@@ -8230,7 +8264,7 @@ type ResourceChange struct {
 	// Replacement value depends on the change with the most impact. A RequiresRecreation
 	// value of Always has the most impact, followed by Conditionally, and then
 	// Never.
-	Replacement *string `type:"string" enum:"Replacement"`
+	Replacement Replacement `type:"string"`
 
 	// The type of AWS CloudFormation resource, such as AWS::S3::Bucket.
 	ResourceType *string `min:"1" type:"string"`
@@ -8238,7 +8272,7 @@ type ResourceChange struct {
 	// For the Modify action, indicates which resource attribute is triggering this
 	// update, such as a change in the resource attribute's Metadata, Properties,
 	// or Tags.
-	Scope []*string `type:"list"`
+	Scope []ResourceAttribute `type:"list"`
 }
 
 // String returns the string representation
@@ -8252,8 +8286,8 @@ func (s ResourceChange) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *ResourceChange) SetAction(v string) *ResourceChange {
-	s.Action = &v
+func (s *ResourceChange) SetAction(v ChangeAction) *ResourceChange {
+	s.Action = v
 	return s
 }
 
@@ -8276,8 +8310,8 @@ func (s *ResourceChange) SetPhysicalResourceId(v string) *ResourceChange {
 }
 
 // SetReplacement sets the Replacement field's value.
-func (s *ResourceChange) SetReplacement(v string) *ResourceChange {
-	s.Replacement = &v
+func (s *ResourceChange) SetReplacement(v Replacement) *ResourceChange {
+	s.Replacement = v
 	return s
 }
 
@@ -8288,7 +8322,7 @@ func (s *ResourceChange) SetResourceType(v string) *ResourceChange {
 }
 
 // SetScope sets the Scope field's value.
-func (s *ResourceChange) SetScope(v []*string) *ResourceChange {
+func (s *ResourceChange) SetScope(v []ResourceAttribute) *ResourceChange {
 	s.Scope = v
 	return s
 }
@@ -8329,7 +8363,7 @@ type ResourceChangeDetail struct {
 	//    the nested stack's template might have changed. Changes to a nested stack's
 	//    template aren't visible to AWS CloudFormation until you run an update
 	//    on the parent stack.
-	ChangeSource *string `type:"string" enum:"ChangeSource"`
+	ChangeSource ChangeSource `type:"string"`
 
 	// Indicates whether AWS CloudFormation can determine the target value, and
 	// whether the target value will change before you execute a change set.
@@ -8346,7 +8380,7 @@ type ResourceChangeDetail struct {
 	// reference (the physical ID of the resource) might change, depending on if
 	// the resource is recreated. If the resource is recreated, it will have a new
 	// physical ID, so all references to that resource will also be updated.
-	Evaluation *string `type:"string" enum:"EvaluationType"`
+	Evaluation EvaluationType `type:"string"`
 
 	// A ResourceTargetDefinition structure that describes the field that AWS CloudFormation
 	// will change and whether the resource will be recreated.
@@ -8370,14 +8404,14 @@ func (s *ResourceChangeDetail) SetCausingEntity(v string) *ResourceChangeDetail 
 }
 
 // SetChangeSource sets the ChangeSource field's value.
-func (s *ResourceChangeDetail) SetChangeSource(v string) *ResourceChangeDetail {
-	s.ChangeSource = &v
+func (s *ResourceChangeDetail) SetChangeSource(v ChangeSource) *ResourceChangeDetail {
+	s.ChangeSource = v
 	return s
 }
 
 // SetEvaluation sets the Evaluation field's value.
-func (s *ResourceChangeDetail) SetEvaluation(v string) *ResourceChangeDetail {
-	s.Evaluation = &v
+func (s *ResourceChangeDetail) SetEvaluation(v EvaluationType) *ResourceChangeDetail {
+	s.Evaluation = v
 	return s
 }
 
@@ -8395,7 +8429,7 @@ type ResourceTargetDefinition struct {
 
 	// Indicates which resource attribute is triggering this update, such as a change
 	// in the resource attribute's Metadata, Properties, or Tags.
-	Attribute *string `type:"string" enum:"ResourceAttribute"`
+	Attribute ResourceAttribute `type:"string"`
 
 	// If the Attribute value is Properties, the name of the property. For all other
 	// attributes, the value is null.
@@ -8406,7 +8440,7 @@ type ResourceTargetDefinition struct {
 	// or Conditionally. To determine the conditions for a Conditionally recreation,
 	// see the update behavior for that property (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
-	RequiresRecreation *string `type:"string" enum:"RequiresRecreation"`
+	RequiresRecreation RequiresRecreation `type:"string"`
 }
 
 // String returns the string representation
@@ -8420,8 +8454,8 @@ func (s ResourceTargetDefinition) GoString() string {
 }
 
 // SetAttribute sets the Attribute field's value.
-func (s *ResourceTargetDefinition) SetAttribute(v string) *ResourceTargetDefinition {
-	s.Attribute = &v
+func (s *ResourceTargetDefinition) SetAttribute(v ResourceAttribute) *ResourceTargetDefinition {
+	s.Attribute = v
 	return s
 }
 
@@ -8432,8 +8466,8 @@ func (s *ResourceTargetDefinition) SetName(v string) *ResourceTargetDefinition {
 }
 
 // SetRequiresRecreation sets the RequiresRecreation field's value.
-func (s *ResourceTargetDefinition) SetRequiresRecreation(v string) *ResourceTargetDefinition {
-	s.RequiresRecreation = &v
+func (s *ResourceTargetDefinition) SetRequiresRecreation(v RequiresRecreation) *ResourceTargetDefinition {
+	s.RequiresRecreation = v
 	return s
 }
 
@@ -8587,9 +8621,11 @@ func (s RollbackTrigger) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RollbackTrigger) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RollbackTrigger"}
+
 	if s.Arn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
+
 	if s.Type == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
@@ -8648,6 +8684,7 @@ func (s SetStackPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetStackPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetStackPolicyInput"}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -8718,7 +8755,7 @@ type SignalResourceInput struct {
 	// causes AWS CloudFormation to immediately fail the stack creation or update.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"ResourceSignalStatus"`
+	Status ResourceSignalStatus `type:"string" required:"true"`
 
 	// A unique ID of the signal. When you signal Amazon EC2 instances or Auto Scaling
 	// groups, specify the instance ID that you are signaling as the unique ID.
@@ -8742,18 +8779,21 @@ func (s SignalResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SignalResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SignalResourceInput"}
+
 	if s.LogicalResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogicalResourceId"))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
+
 	if s.UniqueId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UniqueId"))
 	}
@@ -8780,8 +8820,8 @@ func (s *SignalResourceInput) SetStackName(v string) *SignalResourceInput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *SignalResourceInput) SetStatus(v string) *SignalResourceInput {
-	s.Status = &v
+func (s *SignalResourceInput) SetStatus(v ResourceSignalStatus) *SignalResourceInput {
+	s.Status = v
 	return s
 }
 
@@ -8812,7 +8852,7 @@ type Stack struct {
 	_ struct{} `type:"structure"`
 
 	// The capabilities allowed in the stack.
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// The unique ID of the change set.
 	ChangeSetId *string `min:"1" type:"string"`
@@ -8892,7 +8932,7 @@ type Stack struct {
 	// Current status of the stack.
 	//
 	// StackStatus is a required field
-	StackStatus *string `type:"string" required:"true" enum:"StackStatus"`
+	StackStatus StackStatus `type:"string" required:"true"`
 
 	// Success/failure message associated with the stack status.
 	StackStatusReason *string `type:"string"`
@@ -8915,7 +8955,7 @@ func (s Stack) GoString() string {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *Stack) SetCapabilities(v []*string) *Stack {
+func (s *Stack) SetCapabilities(v []Capability) *Stack {
 	s.Capabilities = v
 	return s
 }
@@ -9017,8 +9057,8 @@ func (s *Stack) SetStackName(v string) *Stack {
 }
 
 // SetStackStatus sets the StackStatus field's value.
-func (s *Stack) SetStackStatus(v string) *Stack {
-	s.StackStatus = &v
+func (s *Stack) SetStackStatus(v StackStatus) *Stack {
+	s.StackStatus = v
 	return s
 }
 
@@ -9075,7 +9115,7 @@ type StackEvent struct {
 	ResourceProperties *string `type:"string"`
 
 	// Current status of the resource.
-	ResourceStatus *string `type:"string" enum:"ResourceStatus"`
+	ResourceStatus ResourceStatus `type:"string"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -9142,8 +9182,8 @@ func (s *StackEvent) SetResourceProperties(v string) *StackEvent {
 }
 
 // SetResourceStatus sets the ResourceStatus field's value.
-func (s *StackEvent) SetResourceStatus(v string) *StackEvent {
-	s.ResourceStatus = &v
+func (s *StackEvent) SetResourceStatus(v ResourceStatus) *StackEvent {
+	s.ResourceStatus = v
 	return s
 }
 
@@ -9219,7 +9259,7 @@ type StackInstance struct {
 	//    or was stopped before the stack was created or updated.
 	//
 	//    * CURRENT: The stack is currently up to date with the stack set.
-	Status *string `type:"string" enum:"StackInstanceStatus"`
+	Status StackInstanceStatus `type:"string"`
 
 	// The explanation for the specific status code that is assigned to this stack
 	// instance.
@@ -9261,8 +9301,8 @@ func (s *StackInstance) SetStackSetId(v string) *StackInstance {
 }
 
 // SetStatus sets the Status field's value.
-func (s *StackInstance) SetStatus(v string) *StackInstance {
-	s.Status = &v
+func (s *StackInstance) SetStatus(v StackInstanceStatus) *StackInstance {
+	s.Status = v
 	return s
 }
 
@@ -9308,7 +9348,7 @@ type StackInstanceSummary struct {
 	//    or was stopped before the stack was created or updated.
 	//
 	//    * CURRENT: The stack is currently up to date with the stack set.
-	Status *string `type:"string" enum:"StackInstanceStatus"`
+	Status StackInstanceStatus `type:"string"`
 
 	// The explanation for the specific status code assigned to this stack instance.
 	StatusReason *string `type:"string"`
@@ -9349,8 +9389,8 @@ func (s *StackInstanceSummary) SetStackSetId(v string) *StackInstanceSummary {
 }
 
 // SetStatus sets the Status field's value.
-func (s *StackInstanceSummary) SetStatus(v string) *StackInstanceSummary {
-	s.Status = &v
+func (s *StackInstanceSummary) SetStatus(v StackInstanceStatus) *StackInstanceSummary {
+	s.Status = v
 	return s
 }
 
@@ -9380,7 +9420,7 @@ type StackResource struct {
 	// Current status of the resource.
 	//
 	// ResourceStatus is a required field
-	ResourceStatus *string `type:"string" required:"true" enum:"ResourceStatus"`
+	ResourceStatus ResourceStatus `type:"string" required:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -9433,8 +9473,8 @@ func (s *StackResource) SetPhysicalResourceId(v string) *StackResource {
 }
 
 // SetResourceStatus sets the ResourceStatus field's value.
-func (s *StackResource) SetResourceStatus(v string) *StackResource {
-	s.ResourceStatus = &v
+func (s *StackResource) SetResourceStatus(v ResourceStatus) *StackResource {
+	s.ResourceStatus = v
 	return s
 }
 
@@ -9498,7 +9538,7 @@ type StackResourceDetail struct {
 	// Current status of the resource.
 	//
 	// ResourceStatus is a required field
-	ResourceStatus *string `type:"string" required:"true" enum:"ResourceStatus"`
+	ResourceStatus ResourceStatus `type:"string" required:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -9558,8 +9598,8 @@ func (s *StackResourceDetail) SetPhysicalResourceId(v string) *StackResourceDeta
 }
 
 // SetResourceStatus sets the ResourceStatus field's value.
-func (s *StackResourceDetail) SetResourceStatus(v string) *StackResourceDetail {
-	s.ResourceStatus = &v
+func (s *StackResourceDetail) SetResourceStatus(v ResourceStatus) *StackResourceDetail {
+	s.ResourceStatus = v
 	return s
 }
 
@@ -9609,7 +9649,7 @@ type StackResourceSummary struct {
 	// Current status of the resource.
 	//
 	// ResourceStatus is a required field
-	ResourceStatus *string `type:"string" required:"true" enum:"ResourceStatus"`
+	ResourceStatus ResourceStatus `type:"string" required:"true"`
 
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
@@ -9651,8 +9691,8 @@ func (s *StackResourceSummary) SetPhysicalResourceId(v string) *StackResourceSum
 }
 
 // SetResourceStatus sets the ResourceStatus field's value.
-func (s *StackResourceSummary) SetResourceStatus(v string) *StackResourceSummary {
-	s.ResourceStatus = &v
+func (s *StackResourceSummary) SetResourceStatus(v ResourceStatus) *StackResourceSummary {
+	s.ResourceStatus = v
 	return s
 }
 
@@ -9681,7 +9721,7 @@ type StackSet struct {
 	// example, by creating new AWS Identity and Access Management (IAM) users.
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
 	// Templates. (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// A description of the stack set that you specify when the stack set is created
 	// or updated.
@@ -9697,7 +9737,7 @@ type StackSet struct {
 	StackSetName *string `type:"string"`
 
 	// The status of the stack set.
-	Status *string `type:"string" enum:"StackSetStatus"`
+	Status StackSetStatus `type:"string"`
 
 	// A list of tags that specify information about the stack set. A maximum number
 	// of 50 tags can be specified.
@@ -9719,7 +9759,7 @@ func (s StackSet) GoString() string {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *StackSet) SetCapabilities(v []*string) *StackSet {
+func (s *StackSet) SetCapabilities(v []Capability) *StackSet {
 	s.Capabilities = v
 	return s
 }
@@ -9749,8 +9789,8 @@ func (s *StackSet) SetStackSetName(v string) *StackSet {
 }
 
 // SetStatus sets the Status field's value.
-func (s *StackSet) SetStatus(v string) *StackSet {
-	s.Status = &v
+func (s *StackSet) SetStatus(v StackSetStatus) *StackSet {
+	s.Status = v
 	return s
 }
 
@@ -9775,7 +9815,7 @@ type StackSetOperation struct {
 	// operations affect only the specified stack set instances that are associated
 	// with the specified stack set. Update operations affect both the stack set
 	// itself, as well as all associated stack set instances.
-	Action *string `type:"string" enum:"StackSetOperationAction"`
+	Action StackSetOperationAction `type:"string"`
 
 	// The time at which the operation was initiated. Note that the creation times
 	// for the stack set operation might differ from the creation time of the individual
@@ -9823,7 +9863,7 @@ type StackSetOperation struct {
 	//
 	//    * SUCCEEDED: The operation completed creating or updating all the specified
 	//    stacks without exceeding the failure tolerance for the operation.
-	Status *string `type:"string" enum:"StackSetOperationStatus"`
+	Status StackSetOperationStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -9837,8 +9877,8 @@ func (s StackSetOperation) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *StackSetOperation) SetAction(v string) *StackSetOperation {
-	s.Action = &v
+func (s *StackSetOperation) SetAction(v StackSetOperationAction) *StackSetOperation {
+	s.Action = v
 	return s
 }
 
@@ -9879,8 +9919,8 @@ func (s *StackSetOperation) SetStackSetId(v string) *StackSetOperation {
 }
 
 // SetStatus sets the Status field's value.
-func (s *StackSetOperation) SetStatus(v string) *StackSetOperation {
-	s.Status = &v
+func (s *StackSetOperation) SetStatus(v StackSetOperationStatus) *StackSetOperation {
+	s.Status = v
 	return s
 }
 
@@ -10039,7 +10079,7 @@ type StackSetOperationResultSummary struct {
 	//
 	//    * SUCCEEDED: The operation in the specified account and region completed
 	//    successfully.
-	Status *string `type:"string" enum:"StackSetOperationResultStatus"`
+	Status StackSetOperationResultStatus `type:"string"`
 
 	// The reason for the assigned result status.
 	StatusReason *string `type:"string"`
@@ -10074,8 +10114,8 @@ func (s *StackSetOperationResultSummary) SetRegion(v string) *StackSetOperationR
 }
 
 // SetStatus sets the Status field's value.
-func (s *StackSetOperationResultSummary) SetStatus(v string) *StackSetOperationResultSummary {
-	s.Status = &v
+func (s *StackSetOperationResultSummary) SetStatus(v StackSetOperationResultStatus) *StackSetOperationResultSummary {
+	s.Status = v
 	return s
 }
 
@@ -10094,7 +10134,7 @@ type StackSetOperationSummary struct {
 	// affect only the specified stack instances that are associated with the specified
 	// stack set. Update operations affect both the stack set itself as well as
 	// all associated stack set instances.
-	Action *string `type:"string" enum:"StackSetOperationAction"`
+	Action StackSetOperationAction `type:"string"`
 
 	// The time at which the operation was initiated. Note that the creation times
 	// for the stack set operation might differ from the creation time of the individual
@@ -10130,7 +10170,7 @@ type StackSetOperationSummary struct {
 	//
 	//    * SUCCEEDED: The operation completed creating or updating all the specified
 	//    stacks without exceeding the failure tolerance for the operation.
-	Status *string `type:"string" enum:"StackSetOperationStatus"`
+	Status StackSetOperationStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -10144,8 +10184,8 @@ func (s StackSetOperationSummary) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *StackSetOperationSummary) SetAction(v string) *StackSetOperationSummary {
-	s.Action = &v
+func (s *StackSetOperationSummary) SetAction(v StackSetOperationAction) *StackSetOperationSummary {
+	s.Action = v
 	return s
 }
 
@@ -10168,8 +10208,8 @@ func (s *StackSetOperationSummary) SetOperationId(v string) *StackSetOperationSu
 }
 
 // SetStatus sets the Status field's value.
-func (s *StackSetOperationSummary) SetStatus(v string) *StackSetOperationSummary {
-	s.Status = &v
+func (s *StackSetOperationSummary) SetStatus(v StackSetOperationStatus) *StackSetOperationSummary {
+	s.Status = v
 	return s
 }
 
@@ -10190,7 +10230,7 @@ type StackSetSummary struct {
 	StackSetName *string `type:"string"`
 
 	// The status of the stack set.
-	Status *string `type:"string" enum:"StackSetStatus"`
+	Status StackSetStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -10222,8 +10262,8 @@ func (s *StackSetSummary) SetStackSetName(v string) *StackSetSummary {
 }
 
 // SetStatus sets the Status field's value.
-func (s *StackSetSummary) SetStatus(v string) *StackSetSummary {
-	s.Status = &v
+func (s *StackSetSummary) SetStatus(v StackSetStatus) *StackSetSummary {
+	s.Status = v
 	return s
 }
 
@@ -10270,7 +10310,7 @@ type StackSummary struct {
 	// The current status of the stack.
 	//
 	// StackStatus is a required field
-	StackStatus *string `type:"string" required:"true" enum:"StackStatus"`
+	StackStatus StackStatus `type:"string" required:"true"`
 
 	// Success/Failure message associated with the stack status.
 	StackStatusReason *string `type:"string"`
@@ -10332,8 +10372,8 @@ func (s *StackSummary) SetStackName(v string) *StackSummary {
 }
 
 // SetStackStatus sets the StackStatus field's value.
-func (s *StackSummary) SetStackStatus(v string) *StackSummary {
-	s.StackStatus = &v
+func (s *StackSummary) SetStackStatus(v StackStatus) *StackSummary {
+	s.StackStatus = v
 	return s
 }
 
@@ -10378,12 +10418,14 @@ func (s StopStackSetOperationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopStackSetOperationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopStackSetOperationInput"}
+
 	if s.OperationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -10454,12 +10496,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -10567,7 +10611,7 @@ type UpdateStackInput struct {
 	//
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
 	// Templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// A unique identifier for this UpdateStack request. Specify this token if you
 	// plan to retry requests so that AWS CloudFormation knows that you're not attempting
@@ -10720,6 +10764,7 @@ func (s *UpdateStackInput) Validate() error {
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -10764,7 +10809,7 @@ func (s *UpdateStackInput) Validate() error {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *UpdateStackInput) SetCapabilities(v []*string) *UpdateStackInput {
+func (s *UpdateStackInput) SetCapabilities(v []Capability) *UpdateStackInput {
 	s.Capabilities = v
 	return s
 }
@@ -10922,7 +10967,7 @@ type UpdateStackSetInput struct {
 	//
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
 	// Templates. (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// A brief description of updates that you are making.
 	Description *string `min:"1" type:"string"`
@@ -11025,6 +11070,7 @@ func (s *UpdateStackSetInput) Validate() error {
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
+
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
@@ -11057,7 +11103,7 @@ func (s *UpdateStackSetInput) Validate() error {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *UpdateStackSetInput) SetCapabilities(v []*string) *UpdateStackSetInput {
+func (s *UpdateStackSetInput) SetCapabilities(v []Capability) *UpdateStackSetInput {
 	s.Capabilities = v
 	return s
 }
@@ -11169,9 +11215,11 @@ func (s UpdateTerminationProtectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTerminationProtectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTerminationProtectionInput"}
+
 	if s.EnableTerminationProtection == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EnableTerminationProtection"))
 	}
+
 	if s.StackName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
@@ -11296,7 +11344,7 @@ type ValidateTemplateOutput struct {
 	//
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
 	// Templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
-	Capabilities []*string `type:"list"`
+	Capabilities []Capability `type:"list"`
 
 	// The list of resources that generated the values in the Capabilities response
 	// element.
@@ -11323,7 +11371,7 @@ func (s ValidateTemplateOutput) GoString() string {
 }
 
 // SetCapabilities sets the Capabilities field's value.
-func (s *ValidateTemplateOutput) SetCapabilities(v []*string) *ValidateTemplateOutput {
+func (s *ValidateTemplateOutput) SetCapabilities(v []Capability) *ValidateTemplateOutput {
 	s.Capabilities = v
 	return s
 }
@@ -11352,325 +11400,227 @@ func (s *ValidateTemplateOutput) SetParameters(v []*TemplateParameter) *Validate
 	return s
 }
 
+type AccountGateStatus string
+
+// Enum values for AccountGateStatus
 const (
-	// AccountGateStatusSucceeded is a AccountGateStatus enum value
-	AccountGateStatusSucceeded = "SUCCEEDED"
-
-	// AccountGateStatusFailed is a AccountGateStatus enum value
-	AccountGateStatusFailed = "FAILED"
-
-	// AccountGateStatusSkipped is a AccountGateStatus enum value
-	AccountGateStatusSkipped = "SKIPPED"
+	AccountGateStatusSucceeded AccountGateStatus = "SUCCEEDED"
+	AccountGateStatusFailed    AccountGateStatus = "FAILED"
+	AccountGateStatusSkipped   AccountGateStatus = "SKIPPED"
 )
 
-const (
-	// CapabilityCapabilityIam is a Capability enum value
-	CapabilityCapabilityIam = "CAPABILITY_IAM"
+type Capability string
 
-	// CapabilityCapabilityNamedIam is a Capability enum value
-	CapabilityCapabilityNamedIam = "CAPABILITY_NAMED_IAM"
+// Enum values for Capability
+const (
+	CapabilityCapabilityIam      Capability = "CAPABILITY_IAM"
+	CapabilityCapabilityNamedIam Capability = "CAPABILITY_NAMED_IAM"
 )
 
+type ChangeAction string
+
+// Enum values for ChangeAction
 const (
-	// ChangeActionAdd is a ChangeAction enum value
-	ChangeActionAdd = "Add"
-
-	// ChangeActionModify is a ChangeAction enum value
-	ChangeActionModify = "Modify"
-
-	// ChangeActionRemove is a ChangeAction enum value
-	ChangeActionRemove = "Remove"
+	ChangeActionAdd    ChangeAction = "Add"
+	ChangeActionModify ChangeAction = "Modify"
+	ChangeActionRemove ChangeAction = "Remove"
 )
 
+type ChangeSetStatus string
+
+// Enum values for ChangeSetStatus
 const (
-	// ChangeSetStatusCreatePending is a ChangeSetStatus enum value
-	ChangeSetStatusCreatePending = "CREATE_PENDING"
-
-	// ChangeSetStatusCreateInProgress is a ChangeSetStatus enum value
-	ChangeSetStatusCreateInProgress = "CREATE_IN_PROGRESS"
-
-	// ChangeSetStatusCreateComplete is a ChangeSetStatus enum value
-	ChangeSetStatusCreateComplete = "CREATE_COMPLETE"
-
-	// ChangeSetStatusDeleteComplete is a ChangeSetStatus enum value
-	ChangeSetStatusDeleteComplete = "DELETE_COMPLETE"
-
-	// ChangeSetStatusFailed is a ChangeSetStatus enum value
-	ChangeSetStatusFailed = "FAILED"
+	ChangeSetStatusCreatePending    ChangeSetStatus = "CREATE_PENDING"
+	ChangeSetStatusCreateInProgress ChangeSetStatus = "CREATE_IN_PROGRESS"
+	ChangeSetStatusCreateComplete   ChangeSetStatus = "CREATE_COMPLETE"
+	ChangeSetStatusDeleteComplete   ChangeSetStatus = "DELETE_COMPLETE"
+	ChangeSetStatusFailed           ChangeSetStatus = "FAILED"
 )
 
-const (
-	// ChangeSetTypeCreate is a ChangeSetType enum value
-	ChangeSetTypeCreate = "CREATE"
+type ChangeSetType string
 
-	// ChangeSetTypeUpdate is a ChangeSetType enum value
-	ChangeSetTypeUpdate = "UPDATE"
+// Enum values for ChangeSetType
+const (
+	ChangeSetTypeCreate ChangeSetType = "CREATE"
+	ChangeSetTypeUpdate ChangeSetType = "UPDATE"
 )
 
+type ChangeSource string
+
+// Enum values for ChangeSource
 const (
-	// ChangeSourceResourceReference is a ChangeSource enum value
-	ChangeSourceResourceReference = "ResourceReference"
-
-	// ChangeSourceParameterReference is a ChangeSource enum value
-	ChangeSourceParameterReference = "ParameterReference"
-
-	// ChangeSourceResourceAttribute is a ChangeSource enum value
-	ChangeSourceResourceAttribute = "ResourceAttribute"
-
-	// ChangeSourceDirectModification is a ChangeSource enum value
-	ChangeSourceDirectModification = "DirectModification"
-
-	// ChangeSourceAutomatic is a ChangeSource enum value
-	ChangeSourceAutomatic = "Automatic"
+	ChangeSourceResourceReference  ChangeSource = "ResourceReference"
+	ChangeSourceParameterReference ChangeSource = "ParameterReference"
+	ChangeSourceResourceAttribute  ChangeSource = "ResourceAttribute"
+	ChangeSourceDirectModification ChangeSource = "DirectModification"
+	ChangeSourceAutomatic          ChangeSource = "Automatic"
 )
 
+type ChangeType string
+
+// Enum values for ChangeType
 const (
-	// ChangeTypeResource is a ChangeType enum value
-	ChangeTypeResource = "Resource"
+	ChangeTypeResource ChangeType = "Resource"
 )
 
-const (
-	// EvaluationTypeStatic is a EvaluationType enum value
-	EvaluationTypeStatic = "Static"
+type EvaluationType string
 
-	// EvaluationTypeDynamic is a EvaluationType enum value
-	EvaluationTypeDynamic = "Dynamic"
+// Enum values for EvaluationType
+const (
+	EvaluationTypeStatic  EvaluationType = "Static"
+	EvaluationTypeDynamic EvaluationType = "Dynamic"
 )
 
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
 const (
-	// ExecutionStatusUnavailable is a ExecutionStatus enum value
-	ExecutionStatusUnavailable = "UNAVAILABLE"
-
-	// ExecutionStatusAvailable is a ExecutionStatus enum value
-	ExecutionStatusAvailable = "AVAILABLE"
-
-	// ExecutionStatusExecuteInProgress is a ExecutionStatus enum value
-	ExecutionStatusExecuteInProgress = "EXECUTE_IN_PROGRESS"
-
-	// ExecutionStatusExecuteComplete is a ExecutionStatus enum value
-	ExecutionStatusExecuteComplete = "EXECUTE_COMPLETE"
-
-	// ExecutionStatusExecuteFailed is a ExecutionStatus enum value
-	ExecutionStatusExecuteFailed = "EXECUTE_FAILED"
-
-	// ExecutionStatusObsolete is a ExecutionStatus enum value
-	ExecutionStatusObsolete = "OBSOLETE"
+	ExecutionStatusUnavailable       ExecutionStatus = "UNAVAILABLE"
+	ExecutionStatusAvailable         ExecutionStatus = "AVAILABLE"
+	ExecutionStatusExecuteInProgress ExecutionStatus = "EXECUTE_IN_PROGRESS"
+	ExecutionStatusExecuteComplete   ExecutionStatus = "EXECUTE_COMPLETE"
+	ExecutionStatusExecuteFailed     ExecutionStatus = "EXECUTE_FAILED"
+	ExecutionStatusObsolete          ExecutionStatus = "OBSOLETE"
 )
 
+type OnFailure string
+
+// Enum values for OnFailure
 const (
-	// OnFailureDoNothing is a OnFailure enum value
-	OnFailureDoNothing = "DO_NOTHING"
-
-	// OnFailureRollback is a OnFailure enum value
-	OnFailureRollback = "ROLLBACK"
-
-	// OnFailureDelete is a OnFailure enum value
-	OnFailureDelete = "DELETE"
+	OnFailureDoNothing OnFailure = "DO_NOTHING"
+	OnFailureRollback  OnFailure = "ROLLBACK"
+	OnFailureDelete    OnFailure = "DELETE"
 )
 
+type Replacement string
+
+// Enum values for Replacement
 const (
-	// ReplacementTrue is a Replacement enum value
-	ReplacementTrue = "True"
-
-	// ReplacementFalse is a Replacement enum value
-	ReplacementFalse = "False"
-
-	// ReplacementConditional is a Replacement enum value
-	ReplacementConditional = "Conditional"
+	ReplacementTrue        Replacement = "True"
+	ReplacementFalse       Replacement = "False"
+	ReplacementConditional Replacement = "Conditional"
 )
 
+type RequiresRecreation string
+
+// Enum values for RequiresRecreation
 const (
-	// RequiresRecreationNever is a RequiresRecreation enum value
-	RequiresRecreationNever = "Never"
-
-	// RequiresRecreationConditionally is a RequiresRecreation enum value
-	RequiresRecreationConditionally = "Conditionally"
-
-	// RequiresRecreationAlways is a RequiresRecreation enum value
-	RequiresRecreationAlways = "Always"
+	RequiresRecreationNever         RequiresRecreation = "Never"
+	RequiresRecreationConditionally RequiresRecreation = "Conditionally"
+	RequiresRecreationAlways        RequiresRecreation = "Always"
 )
 
+type ResourceAttribute string
+
+// Enum values for ResourceAttribute
 const (
-	// ResourceAttributeProperties is a ResourceAttribute enum value
-	ResourceAttributeProperties = "Properties"
-
-	// ResourceAttributeMetadata is a ResourceAttribute enum value
-	ResourceAttributeMetadata = "Metadata"
-
-	// ResourceAttributeCreationPolicy is a ResourceAttribute enum value
-	ResourceAttributeCreationPolicy = "CreationPolicy"
-
-	// ResourceAttributeUpdatePolicy is a ResourceAttribute enum value
-	ResourceAttributeUpdatePolicy = "UpdatePolicy"
-
-	// ResourceAttributeDeletionPolicy is a ResourceAttribute enum value
-	ResourceAttributeDeletionPolicy = "DeletionPolicy"
-
-	// ResourceAttributeTags is a ResourceAttribute enum value
-	ResourceAttributeTags = "Tags"
+	ResourceAttributeProperties     ResourceAttribute = "Properties"
+	ResourceAttributeMetadata       ResourceAttribute = "Metadata"
+	ResourceAttributeCreationPolicy ResourceAttribute = "CreationPolicy"
+	ResourceAttributeUpdatePolicy   ResourceAttribute = "UpdatePolicy"
+	ResourceAttributeDeletionPolicy ResourceAttribute = "DeletionPolicy"
+	ResourceAttributeTags           ResourceAttribute = "Tags"
 )
 
-const (
-	// ResourceSignalStatusSuccess is a ResourceSignalStatus enum value
-	ResourceSignalStatusSuccess = "SUCCESS"
+type ResourceSignalStatus string
 
-	// ResourceSignalStatusFailure is a ResourceSignalStatus enum value
-	ResourceSignalStatusFailure = "FAILURE"
+// Enum values for ResourceSignalStatus
+const (
+	ResourceSignalStatusSuccess ResourceSignalStatus = "SUCCESS"
+	ResourceSignalStatusFailure ResourceSignalStatus = "FAILURE"
 )
 
+type ResourceStatus string
+
+// Enum values for ResourceStatus
 const (
-	// ResourceStatusCreateInProgress is a ResourceStatus enum value
-	ResourceStatusCreateInProgress = "CREATE_IN_PROGRESS"
-
-	// ResourceStatusCreateFailed is a ResourceStatus enum value
-	ResourceStatusCreateFailed = "CREATE_FAILED"
-
-	// ResourceStatusCreateComplete is a ResourceStatus enum value
-	ResourceStatusCreateComplete = "CREATE_COMPLETE"
-
-	// ResourceStatusDeleteInProgress is a ResourceStatus enum value
-	ResourceStatusDeleteInProgress = "DELETE_IN_PROGRESS"
-
-	// ResourceStatusDeleteFailed is a ResourceStatus enum value
-	ResourceStatusDeleteFailed = "DELETE_FAILED"
-
-	// ResourceStatusDeleteComplete is a ResourceStatus enum value
-	ResourceStatusDeleteComplete = "DELETE_COMPLETE"
-
-	// ResourceStatusDeleteSkipped is a ResourceStatus enum value
-	ResourceStatusDeleteSkipped = "DELETE_SKIPPED"
-
-	// ResourceStatusUpdateInProgress is a ResourceStatus enum value
-	ResourceStatusUpdateInProgress = "UPDATE_IN_PROGRESS"
-
-	// ResourceStatusUpdateFailed is a ResourceStatus enum value
-	ResourceStatusUpdateFailed = "UPDATE_FAILED"
-
-	// ResourceStatusUpdateComplete is a ResourceStatus enum value
-	ResourceStatusUpdateComplete = "UPDATE_COMPLETE"
+	ResourceStatusCreateInProgress ResourceStatus = "CREATE_IN_PROGRESS"
+	ResourceStatusCreateFailed     ResourceStatus = "CREATE_FAILED"
+	ResourceStatusCreateComplete   ResourceStatus = "CREATE_COMPLETE"
+	ResourceStatusDeleteInProgress ResourceStatus = "DELETE_IN_PROGRESS"
+	ResourceStatusDeleteFailed     ResourceStatus = "DELETE_FAILED"
+	ResourceStatusDeleteComplete   ResourceStatus = "DELETE_COMPLETE"
+	ResourceStatusDeleteSkipped    ResourceStatus = "DELETE_SKIPPED"
+	ResourceStatusUpdateInProgress ResourceStatus = "UPDATE_IN_PROGRESS"
+	ResourceStatusUpdateFailed     ResourceStatus = "UPDATE_FAILED"
+	ResourceStatusUpdateComplete   ResourceStatus = "UPDATE_COMPLETE"
 )
 
+type StackInstanceStatus string
+
+// Enum values for StackInstanceStatus
 const (
-	// StackInstanceStatusCurrent is a StackInstanceStatus enum value
-	StackInstanceStatusCurrent = "CURRENT"
-
-	// StackInstanceStatusOutdated is a StackInstanceStatus enum value
-	StackInstanceStatusOutdated = "OUTDATED"
-
-	// StackInstanceStatusInoperable is a StackInstanceStatus enum value
-	StackInstanceStatusInoperable = "INOPERABLE"
+	StackInstanceStatusCurrent    StackInstanceStatus = "CURRENT"
+	StackInstanceStatusOutdated   StackInstanceStatus = "OUTDATED"
+	StackInstanceStatusInoperable StackInstanceStatus = "INOPERABLE"
 )
 
+type StackSetOperationAction string
+
+// Enum values for StackSetOperationAction
 const (
-	// StackSetOperationActionCreate is a StackSetOperationAction enum value
-	StackSetOperationActionCreate = "CREATE"
-
-	// StackSetOperationActionUpdate is a StackSetOperationAction enum value
-	StackSetOperationActionUpdate = "UPDATE"
-
-	// StackSetOperationActionDelete is a StackSetOperationAction enum value
-	StackSetOperationActionDelete = "DELETE"
+	StackSetOperationActionCreate StackSetOperationAction = "CREATE"
+	StackSetOperationActionUpdate StackSetOperationAction = "UPDATE"
+	StackSetOperationActionDelete StackSetOperationAction = "DELETE"
 )
 
+type StackSetOperationResultStatus string
+
+// Enum values for StackSetOperationResultStatus
 const (
-	// StackSetOperationResultStatusPending is a StackSetOperationResultStatus enum value
-	StackSetOperationResultStatusPending = "PENDING"
-
-	// StackSetOperationResultStatusRunning is a StackSetOperationResultStatus enum value
-	StackSetOperationResultStatusRunning = "RUNNING"
-
-	// StackSetOperationResultStatusSucceeded is a StackSetOperationResultStatus enum value
-	StackSetOperationResultStatusSucceeded = "SUCCEEDED"
-
-	// StackSetOperationResultStatusFailed is a StackSetOperationResultStatus enum value
-	StackSetOperationResultStatusFailed = "FAILED"
-
-	// StackSetOperationResultStatusCancelled is a StackSetOperationResultStatus enum value
-	StackSetOperationResultStatusCancelled = "CANCELLED"
+	StackSetOperationResultStatusPending   StackSetOperationResultStatus = "PENDING"
+	StackSetOperationResultStatusRunning   StackSetOperationResultStatus = "RUNNING"
+	StackSetOperationResultStatusSucceeded StackSetOperationResultStatus = "SUCCEEDED"
+	StackSetOperationResultStatusFailed    StackSetOperationResultStatus = "FAILED"
+	StackSetOperationResultStatusCancelled StackSetOperationResultStatus = "CANCELLED"
 )
 
+type StackSetOperationStatus string
+
+// Enum values for StackSetOperationStatus
 const (
-	// StackSetOperationStatusRunning is a StackSetOperationStatus enum value
-	StackSetOperationStatusRunning = "RUNNING"
-
-	// StackSetOperationStatusSucceeded is a StackSetOperationStatus enum value
-	StackSetOperationStatusSucceeded = "SUCCEEDED"
-
-	// StackSetOperationStatusFailed is a StackSetOperationStatus enum value
-	StackSetOperationStatusFailed = "FAILED"
-
-	// StackSetOperationStatusStopping is a StackSetOperationStatus enum value
-	StackSetOperationStatusStopping = "STOPPING"
-
-	// StackSetOperationStatusStopped is a StackSetOperationStatus enum value
-	StackSetOperationStatusStopped = "STOPPED"
+	StackSetOperationStatusRunning   StackSetOperationStatus = "RUNNING"
+	StackSetOperationStatusSucceeded StackSetOperationStatus = "SUCCEEDED"
+	StackSetOperationStatusFailed    StackSetOperationStatus = "FAILED"
+	StackSetOperationStatusStopping  StackSetOperationStatus = "STOPPING"
+	StackSetOperationStatusStopped   StackSetOperationStatus = "STOPPED"
 )
 
-const (
-	// StackSetStatusActive is a StackSetStatus enum value
-	StackSetStatusActive = "ACTIVE"
+type StackSetStatus string
 
-	// StackSetStatusDeleted is a StackSetStatus enum value
-	StackSetStatusDeleted = "DELETED"
+// Enum values for StackSetStatus
+const (
+	StackSetStatusActive  StackSetStatus = "ACTIVE"
+	StackSetStatusDeleted StackSetStatus = "DELETED"
 )
 
+type StackStatus string
+
+// Enum values for StackStatus
 const (
-	// StackStatusCreateInProgress is a StackStatus enum value
-	StackStatusCreateInProgress = "CREATE_IN_PROGRESS"
-
-	// StackStatusCreateFailed is a StackStatus enum value
-	StackStatusCreateFailed = "CREATE_FAILED"
-
-	// StackStatusCreateComplete is a StackStatus enum value
-	StackStatusCreateComplete = "CREATE_COMPLETE"
-
-	// StackStatusRollbackInProgress is a StackStatus enum value
-	StackStatusRollbackInProgress = "ROLLBACK_IN_PROGRESS"
-
-	// StackStatusRollbackFailed is a StackStatus enum value
-	StackStatusRollbackFailed = "ROLLBACK_FAILED"
-
-	// StackStatusRollbackComplete is a StackStatus enum value
-	StackStatusRollbackComplete = "ROLLBACK_COMPLETE"
-
-	// StackStatusDeleteInProgress is a StackStatus enum value
-	StackStatusDeleteInProgress = "DELETE_IN_PROGRESS"
-
-	// StackStatusDeleteFailed is a StackStatus enum value
-	StackStatusDeleteFailed = "DELETE_FAILED"
-
-	// StackStatusDeleteComplete is a StackStatus enum value
-	StackStatusDeleteComplete = "DELETE_COMPLETE"
-
-	// StackStatusUpdateInProgress is a StackStatus enum value
-	StackStatusUpdateInProgress = "UPDATE_IN_PROGRESS"
-
-	// StackStatusUpdateCompleteCleanupInProgress is a StackStatus enum value
-	StackStatusUpdateCompleteCleanupInProgress = "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"
-
-	// StackStatusUpdateComplete is a StackStatus enum value
-	StackStatusUpdateComplete = "UPDATE_COMPLETE"
-
-	// StackStatusUpdateRollbackInProgress is a StackStatus enum value
-	StackStatusUpdateRollbackInProgress = "UPDATE_ROLLBACK_IN_PROGRESS"
-
-	// StackStatusUpdateRollbackFailed is a StackStatus enum value
-	StackStatusUpdateRollbackFailed = "UPDATE_ROLLBACK_FAILED"
-
-	// StackStatusUpdateRollbackCompleteCleanupInProgress is a StackStatus enum value
-	StackStatusUpdateRollbackCompleteCleanupInProgress = "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"
-
-	// StackStatusUpdateRollbackComplete is a StackStatus enum value
-	StackStatusUpdateRollbackComplete = "UPDATE_ROLLBACK_COMPLETE"
-
-	// StackStatusReviewInProgress is a StackStatus enum value
-	StackStatusReviewInProgress = "REVIEW_IN_PROGRESS"
+	StackStatusCreateInProgress                        StackStatus = "CREATE_IN_PROGRESS"
+	StackStatusCreateFailed                            StackStatus = "CREATE_FAILED"
+	StackStatusCreateComplete                          StackStatus = "CREATE_COMPLETE"
+	StackStatusRollbackInProgress                      StackStatus = "ROLLBACK_IN_PROGRESS"
+	StackStatusRollbackFailed                          StackStatus = "ROLLBACK_FAILED"
+	StackStatusRollbackComplete                        StackStatus = "ROLLBACK_COMPLETE"
+	StackStatusDeleteInProgress                        StackStatus = "DELETE_IN_PROGRESS"
+	StackStatusDeleteFailed                            StackStatus = "DELETE_FAILED"
+	StackStatusDeleteComplete                          StackStatus = "DELETE_COMPLETE"
+	StackStatusUpdateInProgress                        StackStatus = "UPDATE_IN_PROGRESS"
+	StackStatusUpdateCompleteCleanupInProgress         StackStatus = "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"
+	StackStatusUpdateComplete                          StackStatus = "UPDATE_COMPLETE"
+	StackStatusUpdateRollbackInProgress                StackStatus = "UPDATE_ROLLBACK_IN_PROGRESS"
+	StackStatusUpdateRollbackFailed                    StackStatus = "UPDATE_ROLLBACK_FAILED"
+	StackStatusUpdateRollbackCompleteCleanupInProgress StackStatus = "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"
+	StackStatusUpdateRollbackComplete                  StackStatus = "UPDATE_ROLLBACK_COMPLETE"
+	StackStatusReviewInProgress                        StackStatus = "REVIEW_IN_PROGRESS"
 )
 
-const (
-	// TemplateStageOriginal is a TemplateStage enum value
-	TemplateStageOriginal = "Original"
+type TemplateStage string
 
-	// TemplateStageProcessed is a TemplateStage enum value
-	TemplateStageProcessed = "Processed"
+// Enum values for TemplateStage
+const (
+	TemplateStageOriginal  TemplateStage = "Original"
+	TemplateStageProcessed TemplateStage = "Processed"
 )

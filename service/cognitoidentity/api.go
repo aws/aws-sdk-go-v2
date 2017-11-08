@@ -1891,12 +1891,14 @@ func (s CreateIdentityPoolInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIdentityPoolInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateIdentityPoolInput"}
+
 	if s.AllowUnauthenticatedIdentities == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AllowUnauthenticatedIdentities"))
 	}
 	if s.DeveloperProviderName != nil && len(*s.DeveloperProviderName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeveloperProviderName", 1))
 	}
+
 	if s.IdentityPoolName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolName"))
 	}
@@ -2038,6 +2040,7 @@ func (s DeleteIdentitiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIdentitiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentitiesInput"}
+
 	if s.IdentityIdsToDelete == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityIdsToDelete"))
 	}
@@ -2107,6 +2110,7 @@ func (s DeleteIdentityPoolInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIdentityPoolInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityPoolInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2165,6 +2169,7 @@ func (s DescribeIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityInput"}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
@@ -2208,6 +2213,7 @@ func (s DescribeIdentityPoolInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeIdentityPoolInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityPoolInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2263,6 +2269,7 @@ func (s *GetCredentialsForIdentityInput) Validate() error {
 	if s.CustomRoleArn != nil && len(*s.CustomRoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("CustomRoleArn", 20))
 	}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
@@ -2374,6 +2381,7 @@ func (s *GetIdInput) Validate() error {
 	if s.AccountId != nil && len(*s.AccountId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2454,6 +2462,7 @@ func (s GetIdentityPoolRolesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityPoolRolesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityPoolRolesInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2572,12 +2581,14 @@ func (s *GetOpenIdTokenForDeveloperIdentityInput) Validate() error {
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
 	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
 	}
+
 	if s.Logins == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Logins"))
 	}
@@ -2680,6 +2691,7 @@ func (s GetOpenIdTokenInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOpenIdTokenInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetOpenIdTokenInput"}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
@@ -2842,18 +2854,21 @@ func (s IdentityPool) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IdentityPool) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IdentityPool"}
+
 	if s.AllowUnauthenticatedIdentities == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AllowUnauthenticatedIdentities"))
 	}
 	if s.DeveloperProviderName != nil && len(*s.DeveloperProviderName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeveloperProviderName", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
 	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
 	}
+
 	if s.IdentityPoolName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolName"))
 	}
@@ -2996,12 +3011,14 @@ func (s ListIdentitiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIdentitiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListIdentitiesInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
 	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
 	}
+
 	if s.MaxResults == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
 	}
@@ -3112,6 +3129,7 @@ func (s ListIdentityPoolsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIdentityPoolsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListIdentityPoolsInput"}
+
 	if s.MaxResults == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
 	}
@@ -3223,6 +3241,7 @@ func (s *LookupDeveloperIdentityInput) Validate() error {
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -3338,7 +3357,7 @@ type MappingRule struct {
 	// token must match Value.
 	//
 	// MatchType is a required field
-	MatchType *string `type:"string" required:"true" enum:"MappingRuleMatchType"`
+	MatchType MappingRuleMatchType `type:"string" required:"true"`
 
 	// The role ARN.
 	//
@@ -3364,21 +3383,24 @@ func (s MappingRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MappingRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MappingRule"}
+
 	if s.Claim == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Claim"))
 	}
 	if s.Claim != nil && len(*s.Claim) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Claim", 1))
 	}
-	if s.MatchType == nil {
+	if len(s.MatchType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("MatchType"))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -3399,8 +3421,8 @@ func (s *MappingRule) SetClaim(v string) *MappingRule {
 }
 
 // SetMatchType sets the MatchType field's value.
-func (s *MappingRule) SetMatchType(v string) *MappingRule {
-	s.MatchType = &v
+func (s *MappingRule) SetMatchType(v MappingRuleMatchType) *MappingRule {
+	s.MatchType = v
 	return s
 }
 
@@ -3459,24 +3481,28 @@ func (s MergeDeveloperIdentitiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MergeDeveloperIdentitiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MergeDeveloperIdentitiesInput"}
+
 	if s.DestinationUserIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationUserIdentifier"))
 	}
 	if s.DestinationUserIdentifier != nil && len(*s.DestinationUserIdentifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DestinationUserIdentifier", 1))
 	}
+
 	if s.DeveloperProviderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeveloperProviderName"))
 	}
 	if s.DeveloperProviderName != nil && len(*s.DeveloperProviderName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeveloperProviderName", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
 	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
 	}
+
 	if s.SourceUserIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceUserIdentifier"))
 	}
@@ -3611,7 +3637,7 @@ type RoleMapping struct {
 	// Specifies the action to be taken if either no rules match the claim value
 	// for the Rules type, or there is no cognito:preferred_role claim and there
 	// are multiple cognito:roles matches for the Token type.
-	AmbiguousRoleResolution *string `type:"string" enum:"AmbiguousRoleResolutionType"`
+	AmbiguousRoleResolution AmbiguousRoleResolutionType `type:"string"`
 
 	// The rules to be used for mapping users to roles.
 	//
@@ -3623,7 +3649,7 @@ type RoleMapping struct {
 	// will attempt to match claims from the token to map to a role.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"RoleMappingType"`
+	Type RoleMappingType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3639,7 +3665,7 @@ func (s RoleMapping) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RoleMapping) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RoleMapping"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.RulesConfiguration != nil {
@@ -3655,8 +3681,8 @@ func (s *RoleMapping) Validate() error {
 }
 
 // SetAmbiguousRoleResolution sets the AmbiguousRoleResolution field's value.
-func (s *RoleMapping) SetAmbiguousRoleResolution(v string) *RoleMapping {
-	s.AmbiguousRoleResolution = &v
+func (s *RoleMapping) SetAmbiguousRoleResolution(v AmbiguousRoleResolutionType) *RoleMapping {
+	s.AmbiguousRoleResolution = v
 	return s
 }
 
@@ -3667,8 +3693,8 @@ func (s *RoleMapping) SetRulesConfiguration(v *RulesConfigurationType) *RoleMapp
 }
 
 // SetType sets the Type field's value.
-func (s *RoleMapping) SetType(v string) *RoleMapping {
-	s.Type = &v
+func (s *RoleMapping) SetType(v RoleMappingType) *RoleMapping {
+	s.Type = v
 	return s
 }
 
@@ -3698,6 +3724,7 @@ func (s RulesConfigurationType) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RulesConfigurationType) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RulesConfigurationType"}
+
 	if s.Rules == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
@@ -3765,12 +3792,14 @@ func (s SetIdentityPoolRolesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityPoolRolesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityPoolRolesInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
 	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
 	}
+
 	if s.Roles == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Roles"))
 	}
@@ -3863,24 +3892,28 @@ func (s UnlinkDeveloperIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnlinkDeveloperIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnlinkDeveloperIdentityInput"}
+
 	if s.DeveloperProviderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeveloperProviderName"))
 	}
 	if s.DeveloperProviderName != nil && len(*s.DeveloperProviderName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeveloperProviderName", 1))
 	}
+
 	if s.DeveloperUserIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeveloperUserIdentifier"))
 	}
 	if s.DeveloperUserIdentifier != nil && len(*s.DeveloperUserIdentifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeveloperUserIdentifier", 1))
 	}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -3967,15 +4000,18 @@ func (s UnlinkIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnlinkIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnlinkIdentityInput"}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.Logins == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Logins"))
 	}
+
 	if s.LoginsToRemove == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoginsToRemove"))
 	}
@@ -4026,7 +4062,7 @@ type UnprocessedIdentityId struct {
 	_ struct{} `type:"structure"`
 
 	// The error code indicating the type of error that occurred.
-	ErrorCode *string `type:"string" enum:"ErrorCode"`
+	ErrorCode ErrorCode `type:"string"`
 
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string `min:"1" type:"string"`
@@ -4043,8 +4079,8 @@ func (s UnprocessedIdentityId) GoString() string {
 }
 
 // SetErrorCode sets the ErrorCode field's value.
-func (s *UnprocessedIdentityId) SetErrorCode(v string) *UnprocessedIdentityId {
-	s.ErrorCode = &v
+func (s *UnprocessedIdentityId) SetErrorCode(v ErrorCode) *UnprocessedIdentityId {
+	s.ErrorCode = v
 	return s
 }
 
@@ -4054,40 +4090,36 @@ func (s *UnprocessedIdentityId) SetIdentityId(v string) *UnprocessedIdentityId {
 	return s
 }
 
-const (
-	// AmbiguousRoleResolutionTypeAuthenticatedRole is a AmbiguousRoleResolutionType enum value
-	AmbiguousRoleResolutionTypeAuthenticatedRole = "AuthenticatedRole"
+type AmbiguousRoleResolutionType string
 
-	// AmbiguousRoleResolutionTypeDeny is a AmbiguousRoleResolutionType enum value
-	AmbiguousRoleResolutionTypeDeny = "Deny"
+// Enum values for AmbiguousRoleResolutionType
+const (
+	AmbiguousRoleResolutionTypeAuthenticatedRole AmbiguousRoleResolutionType = "AuthenticatedRole"
+	AmbiguousRoleResolutionTypeDeny              AmbiguousRoleResolutionType = "Deny"
 )
 
-const (
-	// ErrorCodeAccessDenied is a ErrorCode enum value
-	ErrorCodeAccessDenied = "AccessDenied"
+type ErrorCode string
 
-	// ErrorCodeInternalServerError is a ErrorCode enum value
-	ErrorCodeInternalServerError = "InternalServerError"
+// Enum values for ErrorCode
+const (
+	ErrorCodeAccessDenied        ErrorCode = "AccessDenied"
+	ErrorCodeInternalServerError ErrorCode = "InternalServerError"
 )
 
+type MappingRuleMatchType string
+
+// Enum values for MappingRuleMatchType
 const (
-	// MappingRuleMatchTypeEquals is a MappingRuleMatchType enum value
-	MappingRuleMatchTypeEquals = "Equals"
-
-	// MappingRuleMatchTypeContains is a MappingRuleMatchType enum value
-	MappingRuleMatchTypeContains = "Contains"
-
-	// MappingRuleMatchTypeStartsWith is a MappingRuleMatchType enum value
-	MappingRuleMatchTypeStartsWith = "StartsWith"
-
-	// MappingRuleMatchTypeNotEqual is a MappingRuleMatchType enum value
-	MappingRuleMatchTypeNotEqual = "NotEqual"
+	MappingRuleMatchTypeEquals     MappingRuleMatchType = "Equals"
+	MappingRuleMatchTypeContains   MappingRuleMatchType = "Contains"
+	MappingRuleMatchTypeStartsWith MappingRuleMatchType = "StartsWith"
+	MappingRuleMatchTypeNotEqual   MappingRuleMatchType = "NotEqual"
 )
 
-const (
-	// RoleMappingTypeToken is a RoleMappingType enum value
-	RoleMappingTypeToken = "Token"
+type RoleMappingType string
 
-	// RoleMappingTypeRules is a RoleMappingType enum value
-	RoleMappingTypeRules = "Rules"
+// Enum values for RoleMappingType
+const (
+	RoleMappingTypeToken RoleMappingType = "Token"
+	RoleMappingTypeRules RoleMappingType = "Rules"
 )

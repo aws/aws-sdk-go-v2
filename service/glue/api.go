@@ -7300,15 +7300,18 @@ func (s *BatchCreatePartitionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.PartitionInputList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionInputList"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -7410,6 +7413,7 @@ func (s *BatchDeleteConnectionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.ConnectionNameList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionNameList"))
 	}
@@ -7506,15 +7510,18 @@ func (s *BatchDeletePartitionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.PartitionsToDelete == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionsToDelete"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -7621,12 +7628,14 @@ func (s *BatchDeleteTableInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.TablesToDelete == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TablesToDelete"))
 	}
@@ -7719,15 +7728,18 @@ func (s *BatchGetPartitionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.PartitionsToGet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionsToGet"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -7838,12 +7850,14 @@ func (s CatalogEntry) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CatalogEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CatalogEntry"}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -7973,12 +7987,14 @@ func (s CodeGenEdge) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CodeGenEdge) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CodeGenEdge"}
+
 	if s.Source == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
 	if s.Source != nil && len(*s.Source) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Source", 1))
 	}
+
 	if s.Target == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Target"))
 	}
@@ -8047,15 +8063,18 @@ func (s CodeGenNode) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CodeGenNode) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CodeGenNode"}
+
 	if s.Args == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Args"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
+
 	if s.NodeType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NodeType"))
 	}
@@ -8132,9 +8151,11 @@ func (s CodeGenNodeArg) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CodeGenNodeArg) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CodeGenNodeArg"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -8193,6 +8214,7 @@ func (s Column) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Column) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Column"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -8230,9 +8252,9 @@ type Condition struct {
 
 	JobName *string `min:"1" type:"string"`
 
-	LogicalOperator *string `type:"string" enum:"LogicalOperator"`
+	LogicalOperator LogicalOperator `type:"string"`
 
-	State *string `type:"string" enum:"JobRunState"`
+	State JobRunState `type:"string"`
 }
 
 // String returns the string representation
@@ -8265,14 +8287,14 @@ func (s *Condition) SetJobName(v string) *Condition {
 }
 
 // SetLogicalOperator sets the LogicalOperator field's value.
-func (s *Condition) SetLogicalOperator(v string) *Condition {
-	s.LogicalOperator = &v
+func (s *Condition) SetLogicalOperator(v LogicalOperator) *Condition {
+	s.LogicalOperator = v
 	return s
 }
 
 // SetState sets the State field's value.
-func (s *Condition) SetState(v string) *Condition {
-	s.State = &v
+func (s *Condition) SetState(v JobRunState) *Condition {
+	s.State = v
 	return s
 }
 
@@ -8285,7 +8307,7 @@ type Connection struct {
 	ConnectionProperties map[string]*string `type:"map"`
 
 	// The type of the connection.
-	ConnectionType *string `type:"string" enum:"ConnectionType"`
+	ConnectionType ConnectionType `type:"string"`
 
 	// The time this connection definition was created.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -8327,8 +8349,8 @@ func (s *Connection) SetConnectionProperties(v map[string]*string) *Connection {
 }
 
 // SetConnectionType sets the ConnectionType field's value.
-func (s *Connection) SetConnectionType(v string) *Connection {
-	s.ConnectionType = &v
+func (s *Connection) SetConnectionType(v ConnectionType) *Connection {
+	s.ConnectionType = v
 	return s
 }
 
@@ -8383,7 +8405,7 @@ type ConnectionInput struct {
 	ConnectionProperties map[string]*string `type:"map"`
 
 	// The type of the connection.
-	ConnectionType *string `type:"string" enum:"ConnectionType"`
+	ConnectionType ConnectionType `type:"string"`
 
 	// Description of the connection.
 	Description *string `type:"string"`
@@ -8434,8 +8456,8 @@ func (s *ConnectionInput) SetConnectionProperties(v map[string]*string) *Connect
 }
 
 // SetConnectionType sets the ConnectionType field's value.
-func (s *ConnectionInput) SetConnectionType(v string) *ConnectionInput {
-	s.ConnectionType = &v
+func (s *ConnectionInput) SetConnectionType(v ConnectionType) *ConnectionInput {
+	s.ConnectionType = v
 	return s
 }
 
@@ -8533,7 +8555,7 @@ type Crawler struct {
 	SchemaChangePolicy *SchemaChangePolicy `type:"structure"`
 
 	// Indicates whether this Crawler is running, or whether a run is pending.
-	State *string `type:"string" enum:"CrawlerState"`
+	State CrawlerState `type:"string"`
 
 	// The table prefix used for catalog tables created.
 	TablePrefix *string `type:"string"`
@@ -8622,8 +8644,8 @@ func (s *Crawler) SetSchemaChangePolicy(v *SchemaChangePolicy) *Crawler {
 }
 
 // SetState sets the State field's value.
-func (s *Crawler) SetState(v string) *Crawler {
-	s.State = &v
+func (s *Crawler) SetState(v CrawlerState) *Crawler {
+	s.State = v
 	return s
 }
 
@@ -8851,6 +8873,7 @@ func (s *CreateConnectionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.ConnectionInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionInput"))
 	}
@@ -8950,18 +8973,22 @@ func (s CreateCrawlerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCrawlerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCrawlerInput"}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
+
 	if s.Targets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
@@ -9071,6 +9098,7 @@ func (s *CreateDatabaseInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseInput"))
 	}
@@ -9165,15 +9193,19 @@ func (s CreateDevEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDevEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDevEndpointInput"}
+
 	if s.EndpointName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
+
 	if s.SecurityGroupIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
 	}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
@@ -9404,15 +9436,18 @@ func (s CreateGrokClassifierRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGrokClassifierRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateGrokClassifierRequest"}
+
 	if s.Classification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Classification"))
 	}
+
 	if s.GrokPattern == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GrokPattern"))
 	}
 	if s.GrokPattern != nil && len(*s.GrokPattern) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GrokPattern", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -9505,15 +9540,18 @@ func (s CreateJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateJobInput"}
+
 	if s.Command == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Command"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
@@ -9648,15 +9686,18 @@ func (s *CreatePartitionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.PartitionInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionInput"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -9836,12 +9877,14 @@ func (s *CreateTableInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.TableInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableInput"))
 	}
@@ -9916,7 +9959,7 @@ type CreateTriggerInput struct {
 	// The type of the new trigger.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"TriggerType"`
+	Type TriggerType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9932,16 +9975,18 @@ func (s CreateTriggerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTriggerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTriggerInput"}
+
 	if s.Actions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Actions"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Actions != nil {
@@ -9997,8 +10042,8 @@ func (s *CreateTriggerInput) SetSchedule(v string) *CreateTriggerInput {
 }
 
 // SetType sets the Type field's value.
-func (s *CreateTriggerInput) SetType(v string) *CreateTriggerInput {
-	s.Type = &v
+func (s *CreateTriggerInput) SetType(v TriggerType) *CreateTriggerInput {
+	s.Type = v
 	return s
 }
 
@@ -10061,12 +10106,14 @@ func (s *CreateUserDefinedFunctionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.FunctionInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionInput"))
 	}
@@ -10215,6 +10262,7 @@ func (s *DatabaseInput) Validate() error {
 	if s.LocationUri != nil && len(*s.LocationUri) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LocationUri", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -10275,6 +10323,7 @@ func (s DeleteClassifierInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClassifierInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClassifierInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -10339,6 +10388,7 @@ func (s *DeleteConnectionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.ConnectionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
 	}
@@ -10402,6 +10452,7 @@ func (s DeleteCrawlerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCrawlerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCrawlerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -10466,6 +10517,7 @@ func (s *DeleteDatabaseInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -10529,6 +10581,7 @@ func (s DeleteDevEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDevEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDevEndpointInput"}
+
 	if s.EndpointName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
 	}
@@ -10583,6 +10636,7 @@ func (s DeleteJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteJobInput"}
+
 	if s.JobName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
@@ -10666,15 +10720,18 @@ func (s *DeletePartitionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.PartitionValues == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionValues"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -10762,12 +10819,14 @@ func (s *DeleteTableInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -10837,6 +10896,7 @@ func (s DeleteTriggerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTriggerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTriggerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -10915,12 +10975,14 @@ func (s *DeleteUserDefinedFunctionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -11318,6 +11380,7 @@ func (s GetClassifierInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetClassifierInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetClassifierInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -11470,6 +11533,7 @@ func (s *GetConnectionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -11525,7 +11589,7 @@ type GetConnectionsFilter struct {
 	_ struct{} `type:"structure"`
 
 	// The type of connections to return.
-	ConnectionType *string `type:"string" enum:"ConnectionType"`
+	ConnectionType ConnectionType `type:"string"`
 
 	// A criteria string that must match the criteria recorded in the connection
 	// definition for that connection definition to be returned.
@@ -11543,8 +11607,8 @@ func (s GetConnectionsFilter) GoString() string {
 }
 
 // SetConnectionType sets the ConnectionType field's value.
-func (s *GetConnectionsFilter) SetConnectionType(v string) *GetConnectionsFilter {
-	s.ConnectionType = &v
+func (s *GetConnectionsFilter) SetConnectionType(v ConnectionType) *GetConnectionsFilter {
+	s.ConnectionType = v
 	return s
 }
 
@@ -11679,6 +11743,7 @@ func (s GetCrawlerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCrawlerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCrawlerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -11921,6 +11986,7 @@ func (s *GetDatabaseInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -12145,6 +12211,7 @@ func (s GetDevEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDevEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDevEndpointInput"}
+
 	if s.EndpointName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
 	}
@@ -12287,6 +12354,7 @@ func (s GetJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetJobInput"}
+
 	if s.JobName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
@@ -12361,12 +12429,14 @@ func (s GetJobRunInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobRunInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetJobRunInput"}
+
 	if s.JobName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
+
 	if s.RunId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RunId"))
 	}
@@ -12451,6 +12521,7 @@ func (s GetJobRunsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobRunsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetJobRunsInput"}
+
 	if s.JobName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
@@ -12626,6 +12697,7 @@ func (s GetMappingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMappingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMappingInput"}
+
 	if s.Source == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
@@ -12740,15 +12812,18 @@ func (s *GetPartitionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.PartitionValues == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionValues"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -12857,6 +12932,7 @@ func (s *GetPartitionsInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
@@ -12866,6 +12942,7 @@ func (s *GetPartitionsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -12994,9 +13071,11 @@ func (s GetPlanInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPlanInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPlanInput"}
+
 	if s.Mapping == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Mapping"))
 	}
+
 	if s.Source == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
@@ -13110,12 +13189,14 @@ func (s *GetTableInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -13212,6 +13293,7 @@ func (s *GetTableVersionsInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
@@ -13221,6 +13303,7 @@ func (s *GetTableVersionsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -13338,6 +13421,7 @@ func (s *GetTablesInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
@@ -13440,6 +13524,7 @@ func (s GetTriggerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTriggerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTriggerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -13609,12 +13694,14 @@ func (s *GetUserDefinedFunctionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -13712,6 +13799,7 @@ func (s *GetUserDefinedFunctionsInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
@@ -13721,6 +13809,7 @@ func (s *GetUserDefinedFunctionsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Pattern == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Pattern"))
 	}
@@ -14227,7 +14316,7 @@ type JobRun struct {
 	JobName *string `min:"1" type:"string"`
 
 	// The current state of the job run.
-	JobRunState *string `type:"string" enum:"JobRunState"`
+	JobRunState JobRunState `type:"string"`
 
 	// The last time this job run was modified.
 	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -14298,8 +14387,8 @@ func (s *JobRun) SetJobName(v string) *JobRun {
 }
 
 // SetJobRunState sets the JobRunState field's value.
-func (s *JobRun) SetJobRunState(v string) *JobRun {
-	s.JobRunState = &v
+func (s *JobRun) SetJobRunState(v JobRunState) *JobRun {
+	s.JobRunState = v
 	return s
 }
 
@@ -14452,7 +14541,7 @@ type LastCrawlInfo struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Status of the last crawl.
-	Status *string `type:"string" enum:"LastCrawlStatus"`
+	Status LastCrawlStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -14496,8 +14585,8 @@ func (s *LastCrawlInfo) SetStartTime(v time.Time) *LastCrawlInfo {
 }
 
 // SetStatus sets the Status field's value.
-func (s *LastCrawlInfo) SetStatus(v string) *LastCrawlInfo {
-	s.Status = &v
+func (s *LastCrawlInfo) SetStatus(v LastCrawlStatus) *LastCrawlInfo {
+	s.Status = v
 	return s
 }
 
@@ -14665,12 +14754,14 @@ func (s Order) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Order) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Order"}
+
 	if s.Column == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Column"))
 	}
 	if s.Column != nil && len(*s.Column) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Column", 1))
 	}
+
 	if s.SortOrder == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SortOrder"))
 	}
@@ -14912,6 +15003,7 @@ func (s PartitionValueList) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PartitionValueList) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PartitionValueList"}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -15030,7 +15122,7 @@ type Predicate struct {
 	Conditions []*Condition `type:"list"`
 
 	// Currently "OR" is not supported.
-	Logical *string `type:"string" enum:"Logical"`
+	Logical Logical `type:"string"`
 }
 
 // String returns the string representation
@@ -15070,8 +15162,8 @@ func (s *Predicate) SetConditions(v []*Condition) *Predicate {
 }
 
 // SetLogical sets the Logical field's value.
-func (s *Predicate) SetLogical(v string) *Predicate {
-	s.Logical = &v
+func (s *Predicate) SetLogical(v Logical) *Predicate {
+	s.Logical = v
 	return s
 }
 
@@ -15098,6 +15190,7 @@ func (s ResetJobBookmarkInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetJobBookmarkInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetJobBookmarkInput"}
+
 	if s.JobName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
@@ -15144,7 +15237,7 @@ type ResourceUri struct {
 	_ struct{} `type:"structure"`
 
 	// The type of the resource.
-	ResourceType *string `type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `type:"string"`
 
 	// The URI for accessing the resource.
 	Uri *string `min:"1" type:"string"`
@@ -15174,8 +15267,8 @@ func (s *ResourceUri) Validate() error {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ResourceUri) SetResourceType(v string) *ResourceUri {
-	s.ResourceType = &v
+func (s *ResourceUri) SetResourceType(v ResourceType) *ResourceUri {
+	s.ResourceType = v
 	return s
 }
 
@@ -15231,7 +15324,7 @@ type Schedule struct {
 	ScheduleExpression *string `type:"string"`
 
 	// The state of the schedule.
-	State *string `type:"string" enum:"ScheduleState"`
+	State ScheduleState `type:"string"`
 }
 
 // String returns the string representation
@@ -15251,8 +15344,8 @@ func (s *Schedule) SetScheduleExpression(v string) *Schedule {
 }
 
 // SetState sets the State field's value.
-func (s *Schedule) SetState(v string) *Schedule {
-	s.State = &v
+func (s *Schedule) SetState(v ScheduleState) *Schedule {
+	s.State = v
 	return s
 }
 
@@ -15262,10 +15355,10 @@ type SchemaChangePolicy struct {
 	_ struct{} `type:"structure"`
 
 	// The deletion behavior.
-	DeleteBehavior *string `type:"string" enum:"DeleteBehavior"`
+	DeleteBehavior DeleteBehavior `type:"string"`
 
 	// The update behavior.
-	UpdateBehavior *string `type:"string" enum:"UpdateBehavior"`
+	UpdateBehavior UpdateBehavior `type:"string"`
 }
 
 // String returns the string representation
@@ -15279,14 +15372,14 @@ func (s SchemaChangePolicy) GoString() string {
 }
 
 // SetDeleteBehavior sets the DeleteBehavior field's value.
-func (s *SchemaChangePolicy) SetDeleteBehavior(v string) *SchemaChangePolicy {
-	s.DeleteBehavior = &v
+func (s *SchemaChangePolicy) SetDeleteBehavior(v DeleteBehavior) *SchemaChangePolicy {
+	s.DeleteBehavior = v
 	return s
 }
 
 // SetUpdateBehavior sets the UpdateBehavior field's value.
-func (s *SchemaChangePolicy) SetUpdateBehavior(v string) *SchemaChangePolicy {
-	s.UpdateBehavior = &v
+func (s *SchemaChangePolicy) SetUpdateBehavior(v UpdateBehavior) *SchemaChangePolicy {
+	s.UpdateBehavior = v
 	return s
 }
 
@@ -15322,9 +15415,11 @@ func (s Segment) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Segment) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Segment"}
+
 	if s.SegmentNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SegmentNumber"))
 	}
+
 	if s.TotalSegments == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TotalSegments"))
 	}
@@ -15477,6 +15572,7 @@ func (s StartCrawlerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartCrawlerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartCrawlerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -15534,6 +15630,7 @@ func (s StartCrawlerScheduleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartCrawlerScheduleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartCrawlerScheduleInput"}
+
 	if s.CrawlerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CrawlerName"))
 	}
@@ -15600,6 +15697,7 @@ func (s StartJobRunInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartJobRunInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartJobRunInput"}
+
 	if s.JobName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
@@ -15687,6 +15785,7 @@ func (s StartTriggerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartTriggerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartTriggerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -15753,6 +15852,7 @@ func (s StopCrawlerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopCrawlerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopCrawlerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -15810,6 +15910,7 @@ func (s StopCrawlerScheduleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopCrawlerScheduleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopCrawlerScheduleInput"}
+
 	if s.CrawlerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CrawlerName"))
 	}
@@ -15867,6 +15968,7 @@ func (s StopTriggerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopTriggerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopTriggerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -16333,6 +16435,7 @@ func (s TableInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TableInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -16492,10 +16595,10 @@ type Trigger struct {
 	Schedule *string `type:"string"`
 
 	// The current state of the trigger.
-	State *string `type:"string" enum:"TriggerState"`
+	State TriggerState `type:"string"`
 
 	// The type of trigger that this is.
-	Type *string `type:"string" enum:"TriggerType"`
+	Type TriggerType `type:"string"`
 }
 
 // String returns the string representation
@@ -16545,14 +16648,14 @@ func (s *Trigger) SetSchedule(v string) *Trigger {
 }
 
 // SetState sets the State field's value.
-func (s *Trigger) SetState(v string) *Trigger {
-	s.State = &v
+func (s *Trigger) SetState(v TriggerState) *Trigger {
+	s.State = v
 	return s
 }
 
 // SetType sets the Type field's value.
-func (s *Trigger) SetType(v string) *Trigger {
-	s.Type = &v
+func (s *Trigger) SetType(v TriggerType) *Trigger {
+	s.Type = v
 	return s
 }
 
@@ -16734,9 +16837,11 @@ func (s *UpdateConnectionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.ConnectionInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionInput"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -16839,6 +16944,7 @@ func (s UpdateCrawlerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCrawlerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateCrawlerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -16947,6 +17053,7 @@ func (s UpdateCrawlerScheduleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCrawlerScheduleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateCrawlerScheduleInput"}
+
 	if s.CrawlerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CrawlerName"))
 	}
@@ -17023,9 +17130,11 @@ func (s *UpdateDatabaseInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseInput"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -17106,6 +17215,7 @@ func (s UpdateDevEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDevEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDevEndpointInput"}
+
 	if s.EndpointName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
 	}
@@ -17186,6 +17296,7 @@ func (s *UpdateGrokClassifierRequest) Validate() error {
 	if s.GrokPattern != nil && len(*s.GrokPattern) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GrokPattern", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -17251,12 +17362,14 @@ func (s UpdateJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobInput"}
+
 	if s.JobName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
+
 	if s.JobUpdate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobUpdate"))
 	}
@@ -17348,18 +17461,22 @@ func (s *UpdatePartitionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.PartitionInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionInput"))
 	}
+
 	if s.PartitionValueList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionValueList"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -17458,12 +17575,14 @@ func (s *UpdateTableInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.TableInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableInput"))
 	}
@@ -17540,12 +17659,14 @@ func (s UpdateTriggerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTriggerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTriggerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.TriggerUpdate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TriggerUpdate"))
 	}
@@ -17637,15 +17758,18 @@ func (s *UpdateUserDefinedFunctionInput) Validate() error {
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
+
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
+
 	if s.FunctionInput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionInput"))
 	}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -17721,7 +17845,7 @@ type UserDefinedFunction struct {
 	OwnerName *string `min:"1" type:"string"`
 
 	// The owner type.
-	OwnerType *string `type:"string" enum:"PrincipalType"`
+	OwnerType PrincipalType `type:"string"`
 
 	// The resource URIs for the function.
 	ResourceUris []*ResourceUri `type:"list"`
@@ -17762,8 +17886,8 @@ func (s *UserDefinedFunction) SetOwnerName(v string) *UserDefinedFunction {
 }
 
 // SetOwnerType sets the OwnerType field's value.
-func (s *UserDefinedFunction) SetOwnerType(v string) *UserDefinedFunction {
-	s.OwnerType = &v
+func (s *UserDefinedFunction) SetOwnerType(v PrincipalType) *UserDefinedFunction {
+	s.OwnerType = v
 	return s
 }
 
@@ -17788,7 +17912,7 @@ type UserDefinedFunctionInput struct {
 	OwnerName *string `min:"1" type:"string"`
 
 	// The owner type.
-	OwnerType *string `type:"string" enum:"PrincipalType"`
+	OwnerType PrincipalType `type:"string"`
 
 	// The resource URIs for the function.
 	ResourceUris []*ResourceUri `type:"list"`
@@ -17852,8 +17976,8 @@ func (s *UserDefinedFunctionInput) SetOwnerName(v string) *UserDefinedFunctionIn
 }
 
 // SetOwnerType sets the OwnerType field's value.
-func (s *UserDefinedFunctionInput) SetOwnerType(v string) *UserDefinedFunctionInput {
-	s.OwnerType = &v
+func (s *UserDefinedFunctionInput) SetOwnerType(v PrincipalType) *UserDefinedFunctionInput {
+	s.OwnerType = v
 	return s
 }
 
@@ -17863,186 +17987,138 @@ func (s *UserDefinedFunctionInput) SetResourceUris(v []*ResourceUri) *UserDefine
 	return s
 }
 
+type ConnectionPropertyKey string
+
+// Enum values for ConnectionPropertyKey
 const (
-	// ConnectionPropertyKeyHost is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyHost = "HOST"
-
-	// ConnectionPropertyKeyPort is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyPort = "PORT"
-
-	// ConnectionPropertyKeyUsername is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyUsername = "USERNAME"
-
-	// ConnectionPropertyKeyPassword is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyPassword = "PASSWORD"
-
-	// ConnectionPropertyKeyJdbcDriverJarUri is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyJdbcDriverJarUri = "JDBC_DRIVER_JAR_URI"
-
-	// ConnectionPropertyKeyJdbcDriverClassName is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyJdbcDriverClassName = "JDBC_DRIVER_CLASS_NAME"
-
-	// ConnectionPropertyKeyJdbcEngine is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyJdbcEngine = "JDBC_ENGINE"
-
-	// ConnectionPropertyKeyJdbcEngineVersion is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyJdbcEngineVersion = "JDBC_ENGINE_VERSION"
-
-	// ConnectionPropertyKeyConfigFiles is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyConfigFiles = "CONFIG_FILES"
-
-	// ConnectionPropertyKeyInstanceId is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyInstanceId = "INSTANCE_ID"
-
-	// ConnectionPropertyKeyJdbcConnectionUrl is a ConnectionPropertyKey enum value
-	ConnectionPropertyKeyJdbcConnectionUrl = "JDBC_CONNECTION_URL"
+	ConnectionPropertyKeyHost                ConnectionPropertyKey = "HOST"
+	ConnectionPropertyKeyPort                ConnectionPropertyKey = "PORT"
+	ConnectionPropertyKeyUsername            ConnectionPropertyKey = "USERNAME"
+	ConnectionPropertyKeyPassword            ConnectionPropertyKey = "PASSWORD"
+	ConnectionPropertyKeyJdbcDriverJarUri    ConnectionPropertyKey = "JDBC_DRIVER_JAR_URI"
+	ConnectionPropertyKeyJdbcDriverClassName ConnectionPropertyKey = "JDBC_DRIVER_CLASS_NAME"
+	ConnectionPropertyKeyJdbcEngine          ConnectionPropertyKey = "JDBC_ENGINE"
+	ConnectionPropertyKeyJdbcEngineVersion   ConnectionPropertyKey = "JDBC_ENGINE_VERSION"
+	ConnectionPropertyKeyConfigFiles         ConnectionPropertyKey = "CONFIG_FILES"
+	ConnectionPropertyKeyInstanceId          ConnectionPropertyKey = "INSTANCE_ID"
+	ConnectionPropertyKeyJdbcConnectionUrl   ConnectionPropertyKey = "JDBC_CONNECTION_URL"
 )
 
-const (
-	// ConnectionTypeJdbc is a ConnectionType enum value
-	ConnectionTypeJdbc = "JDBC"
+type ConnectionType string
 
-	// ConnectionTypeSftp is a ConnectionType enum value
-	ConnectionTypeSftp = "SFTP"
+// Enum values for ConnectionType
+const (
+	ConnectionTypeJdbc ConnectionType = "JDBC"
+	ConnectionTypeSftp ConnectionType = "SFTP"
 )
 
+type CrawlerState string
+
+// Enum values for CrawlerState
 const (
-	// CrawlerStateReady is a CrawlerState enum value
-	CrawlerStateReady = "READY"
-
-	// CrawlerStateRunning is a CrawlerState enum value
-	CrawlerStateRunning = "RUNNING"
-
-	// CrawlerStateStopping is a CrawlerState enum value
-	CrawlerStateStopping = "STOPPING"
+	CrawlerStateReady    CrawlerState = "READY"
+	CrawlerStateRunning  CrawlerState = "RUNNING"
+	CrawlerStateStopping CrawlerState = "STOPPING"
 )
 
+type DeleteBehavior string
+
+// Enum values for DeleteBehavior
 const (
-	// DeleteBehaviorLog is a DeleteBehavior enum value
-	DeleteBehaviorLog = "LOG"
-
-	// DeleteBehaviorDeleteFromDatabase is a DeleteBehavior enum value
-	DeleteBehaviorDeleteFromDatabase = "DELETE_FROM_DATABASE"
-
-	// DeleteBehaviorDeprecateInDatabase is a DeleteBehavior enum value
-	DeleteBehaviorDeprecateInDatabase = "DEPRECATE_IN_DATABASE"
+	DeleteBehaviorLog                 DeleteBehavior = "LOG"
+	DeleteBehaviorDeleteFromDatabase  DeleteBehavior = "DELETE_FROM_DATABASE"
+	DeleteBehaviorDeprecateInDatabase DeleteBehavior = "DEPRECATE_IN_DATABASE"
 )
 
+type JobRunState string
+
+// Enum values for JobRunState
 const (
-	// JobRunStateStarting is a JobRunState enum value
-	JobRunStateStarting = "STARTING"
-
-	// JobRunStateRunning is a JobRunState enum value
-	JobRunStateRunning = "RUNNING"
-
-	// JobRunStateStopping is a JobRunState enum value
-	JobRunStateStopping = "STOPPING"
-
-	// JobRunStateStopped is a JobRunState enum value
-	JobRunStateStopped = "STOPPED"
-
-	// JobRunStateSucceeded is a JobRunState enum value
-	JobRunStateSucceeded = "SUCCEEDED"
-
-	// JobRunStateFailed is a JobRunState enum value
-	JobRunStateFailed = "FAILED"
+	JobRunStateStarting  JobRunState = "STARTING"
+	JobRunStateRunning   JobRunState = "RUNNING"
+	JobRunStateStopping  JobRunState = "STOPPING"
+	JobRunStateStopped   JobRunState = "STOPPED"
+	JobRunStateSucceeded JobRunState = "SUCCEEDED"
+	JobRunStateFailed    JobRunState = "FAILED"
 )
 
+type LastCrawlStatus string
+
+// Enum values for LastCrawlStatus
 const (
-	// LastCrawlStatusSucceeded is a LastCrawlStatus enum value
-	LastCrawlStatusSucceeded = "SUCCEEDED"
-
-	// LastCrawlStatusCancelled is a LastCrawlStatus enum value
-	LastCrawlStatusCancelled = "CANCELLED"
-
-	// LastCrawlStatusFailed is a LastCrawlStatus enum value
-	LastCrawlStatusFailed = "FAILED"
+	LastCrawlStatusSucceeded LastCrawlStatus = "SUCCEEDED"
+	LastCrawlStatusCancelled LastCrawlStatus = "CANCELLED"
+	LastCrawlStatusFailed    LastCrawlStatus = "FAILED"
 )
 
+type Logical string
+
+// Enum values for Logical
 const (
-	// LogicalAnd is a Logical enum value
-	LogicalAnd = "AND"
+	LogicalAnd Logical = "AND"
 )
 
+type LogicalOperator string
+
+// Enum values for LogicalOperator
 const (
-	// LogicalOperatorEquals is a LogicalOperator enum value
-	LogicalOperatorEquals = "EQUALS"
+	LogicalOperatorEquals LogicalOperator = "EQUALS"
 )
 
+type PrincipalType string
+
+// Enum values for PrincipalType
 const (
-	// PrincipalTypeUser is a PrincipalType enum value
-	PrincipalTypeUser = "USER"
-
-	// PrincipalTypeRole is a PrincipalType enum value
-	PrincipalTypeRole = "ROLE"
-
-	// PrincipalTypeGroup is a PrincipalType enum value
-	PrincipalTypeGroup = "GROUP"
+	PrincipalTypeUser  PrincipalType = "USER"
+	PrincipalTypeRole  PrincipalType = "ROLE"
+	PrincipalTypeGroup PrincipalType = "GROUP"
 )
 
+type ResourceType string
+
+// Enum values for ResourceType
 const (
-	// ResourceTypeJar is a ResourceType enum value
-	ResourceTypeJar = "JAR"
-
-	// ResourceTypeFile is a ResourceType enum value
-	ResourceTypeFile = "FILE"
-
-	// ResourceTypeArchive is a ResourceType enum value
-	ResourceTypeArchive = "ARCHIVE"
+	ResourceTypeJar     ResourceType = "JAR"
+	ResourceTypeFile    ResourceType = "FILE"
+	ResourceTypeArchive ResourceType = "ARCHIVE"
 )
 
+type ScheduleState string
+
+// Enum values for ScheduleState
 const (
-	// ScheduleStateScheduled is a ScheduleState enum value
-	ScheduleStateScheduled = "SCHEDULED"
-
-	// ScheduleStateNotScheduled is a ScheduleState enum value
-	ScheduleStateNotScheduled = "NOT_SCHEDULED"
-
-	// ScheduleStateTransitioning is a ScheduleState enum value
-	ScheduleStateTransitioning = "TRANSITIONING"
+	ScheduleStateScheduled     ScheduleState = "SCHEDULED"
+	ScheduleStateNotScheduled  ScheduleState = "NOT_SCHEDULED"
+	ScheduleStateTransitioning ScheduleState = "TRANSITIONING"
 )
 
+type TriggerState string
+
+// Enum values for TriggerState
 const (
-	// TriggerStateCreating is a TriggerState enum value
-	TriggerStateCreating = "CREATING"
-
-	// TriggerStateCreated is a TriggerState enum value
-	TriggerStateCreated = "CREATED"
-
-	// TriggerStateActivating is a TriggerState enum value
-	TriggerStateActivating = "ACTIVATING"
-
-	// TriggerStateActivated is a TriggerState enum value
-	TriggerStateActivated = "ACTIVATED"
-
-	// TriggerStateDeactivating is a TriggerState enum value
-	TriggerStateDeactivating = "DEACTIVATING"
-
-	// TriggerStateDeactivated is a TriggerState enum value
-	TriggerStateDeactivated = "DEACTIVATED"
-
-	// TriggerStateDeleting is a TriggerState enum value
-	TriggerStateDeleting = "DELETING"
-
-	// TriggerStateUpdating is a TriggerState enum value
-	TriggerStateUpdating = "UPDATING"
+	TriggerStateCreating     TriggerState = "CREATING"
+	TriggerStateCreated      TriggerState = "CREATED"
+	TriggerStateActivating   TriggerState = "ACTIVATING"
+	TriggerStateActivated    TriggerState = "ACTIVATED"
+	TriggerStateDeactivating TriggerState = "DEACTIVATING"
+	TriggerStateDeactivated  TriggerState = "DEACTIVATED"
+	TriggerStateDeleting     TriggerState = "DELETING"
+	TriggerStateUpdating     TriggerState = "UPDATING"
 )
 
+type TriggerType string
+
+// Enum values for TriggerType
 const (
-	// TriggerTypeScheduled is a TriggerType enum value
-	TriggerTypeScheduled = "SCHEDULED"
-
-	// TriggerTypeConditional is a TriggerType enum value
-	TriggerTypeConditional = "CONDITIONAL"
-
-	// TriggerTypeOnDemand is a TriggerType enum value
-	TriggerTypeOnDemand = "ON_DEMAND"
+	TriggerTypeScheduled   TriggerType = "SCHEDULED"
+	TriggerTypeConditional TriggerType = "CONDITIONAL"
+	TriggerTypeOnDemand    TriggerType = "ON_DEMAND"
 )
 
-const (
-	// UpdateBehaviorLog is a UpdateBehavior enum value
-	UpdateBehaviorLog = "LOG"
+type UpdateBehavior string
 
-	// UpdateBehaviorUpdateInDatabase is a UpdateBehavior enum value
-	UpdateBehaviorUpdateInDatabase = "UPDATE_IN_DATABASE"
+// Enum values for UpdateBehavior
+const (
+	UpdateBehaviorLog              UpdateBehavior = "LOG"
+	UpdateBehaviorUpdateInDatabase UpdateBehavior = "UPDATE_IN_DATABASE"
 )

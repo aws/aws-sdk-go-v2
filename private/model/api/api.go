@@ -206,6 +206,17 @@ func (a *API) ShapeListErrors() []*Shape {
 	return list
 }
 
+func (a *API) ShapeEnumList() []*Shape {
+	list := []*Shape{}
+	for _, n := range a.ShapeNames() {
+		// Ignore error shapes in list
+		if s := a.Shapes[n]; s.IsEnum() {
+			list = append(list, s)
+		}
+	}
+	return list
+}
+
 // resetImports resets the import map to default values.
 func (a *API) resetImports() {
 	a.imports = map[string]bool{

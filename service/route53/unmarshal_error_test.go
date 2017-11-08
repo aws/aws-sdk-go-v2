@@ -80,10 +80,10 @@ but it already exists
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 					ResourceRecordSet: &route53.ResourceRecordSet{
 						Name: aws.String("domain"),
-						Type: aws.String("CNAME"),
+						Type: route53.RRTypeCname,
 						TTL:  aws.Int64(120),
 						ResourceRecords: []*route53.ResourceRecord{
 							{

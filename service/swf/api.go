@@ -4333,7 +4333,7 @@ type ActivityTaskTimedOutEventAttributes struct {
 	// The type of the timeout that caused this event.
 	//
 	// TimeoutType is a required field
-	TimeoutType *string `locationName:"timeoutType" type:"string" required:"true" enum:"ActivityTaskTimeoutType"`
+	TimeoutType ActivityTaskTimeoutType `locationName:"timeoutType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4365,8 +4365,8 @@ func (s *ActivityTaskTimedOutEventAttributes) SetStartedEventId(v int64) *Activi
 }
 
 // SetTimeoutType sets the TimeoutType field's value.
-func (s *ActivityTaskTimedOutEventAttributes) SetTimeoutType(v string) *ActivityTaskTimedOutEventAttributes {
-	s.TimeoutType = &v
+func (s *ActivityTaskTimedOutEventAttributes) SetTimeoutType(v ActivityTaskTimeoutType) *ActivityTaskTimedOutEventAttributes {
+	s.TimeoutType = v
 	return s
 }
 
@@ -4404,12 +4404,14 @@ func (s ActivityType) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActivityType) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ActivityType"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -4565,7 +4567,7 @@ type ActivityTypeInfo struct {
 	// The current status of the activity type.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"RegistrationStatus"`
+	Status RegistrationStatus `locationName:"status" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4603,8 +4605,8 @@ func (s *ActivityTypeInfo) SetDescription(v string) *ActivityTypeInfo {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ActivityTypeInfo) SetStatus(v string) *ActivityTypeInfo {
-	s.Status = &v
+func (s *ActivityTypeInfo) SetStatus(v RegistrationStatus) *ActivityTypeInfo {
+	s.Status = v
 	return s
 }
 
@@ -4650,6 +4652,7 @@ func (s CancelTimerDecisionAttributes) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelTimerDecisionAttributes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelTimerDecisionAttributes"}
+
 	if s.TimerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimerId"))
 	}
@@ -4682,7 +4685,7 @@ type CancelTimerFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"CancelTimerFailedCause"`
+	Cause CancelTimerFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the CancelTimer decision to cancel this timer. This information
@@ -4709,8 +4712,8 @@ func (s CancelTimerFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *CancelTimerFailedEventAttributes) SetCause(v string) *CancelTimerFailedEventAttributes {
-	s.Cause = &v
+func (s *CancelTimerFailedEventAttributes) SetCause(v CancelTimerFailedCause) *CancelTimerFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -4782,7 +4785,7 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"CancelWorkflowExecutionFailedCause"`
+	Cause CancelWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the CancelWorkflowExecution decision for this cancellation
@@ -4804,8 +4807,8 @@ func (s CancelWorkflowExecutionFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *CancelWorkflowExecutionFailedEventAttributes) SetCause(v string) *CancelWorkflowExecutionFailedEventAttributes {
-	s.Cause = &v
+func (s *CancelWorkflowExecutionFailedEventAttributes) SetCause(v CancelWorkflowExecutionFailedCause) *CancelWorkflowExecutionFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -5181,7 +5184,7 @@ type ChildWorkflowExecutionTimedOutEventAttributes struct {
 	// out.
 	//
 	// TimeoutType is a required field
-	TimeoutType *string `locationName:"timeoutType" type:"string" required:"true" enum:"WorkflowExecutionTimeoutType"`
+	TimeoutType WorkflowExecutionTimeoutType `locationName:"timeoutType" type:"string" required:"true"`
 
 	// The child workflow execution that timed out.
 	//
@@ -5217,8 +5220,8 @@ func (s *ChildWorkflowExecutionTimedOutEventAttributes) SetStartedEventId(v int6
 }
 
 // SetTimeoutType sets the TimeoutType field's value.
-func (s *ChildWorkflowExecutionTimedOutEventAttributes) SetTimeoutType(v string) *ChildWorkflowExecutionTimedOutEventAttributes {
-	s.TimeoutType = &v
+func (s *ChildWorkflowExecutionTimedOutEventAttributes) SetTimeoutType(v WorkflowExecutionTimeoutType) *ChildWorkflowExecutionTimedOutEventAttributes {
+	s.TimeoutType = v
 	return s
 }
 
@@ -5243,7 +5246,7 @@ type CloseStatusFilter struct {
 	// to meet the criteria of this filter.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"CloseStatus"`
+	Status CloseStatus `locationName:"status" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5259,7 +5262,7 @@ func (s CloseStatusFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloseStatusFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloseStatusFilter"}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
@@ -5270,8 +5273,8 @@ func (s *CloseStatusFilter) Validate() error {
 }
 
 // SetStatus sets the Status field's value.
-func (s *CloseStatusFilter) SetStatus(v string) *CloseStatusFilter {
-	s.Status = &v
+func (s *CloseStatusFilter) SetStatus(v CloseStatus) *CloseStatusFilter {
+	s.Status = v
 	return s
 }
 
@@ -5332,7 +5335,7 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"CompleteWorkflowExecutionFailedCause"`
+	Cause CompleteWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the CompleteWorkflowExecution decision to complete this
@@ -5354,8 +5357,8 @@ func (s CompleteWorkflowExecutionFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *CompleteWorkflowExecutionFailedEventAttributes) SetCause(v string) *CompleteWorkflowExecutionFailedEventAttributes {
-	s.Cause = &v
+func (s *CompleteWorkflowExecutionFailedEventAttributes) SetCause(v CompleteWorkflowExecutionFailedCause) *CompleteWorkflowExecutionFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -5415,7 +5418,7 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	// default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default child policy was specified at registration
 	// time then a fault is returned.
-	ChildPolicy *string `locationName:"childPolicy" type:"string" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string"`
 
 	// If set, specifies the total duration for this workflow execution. This overrides
 	// the defaultExecutionStartToCloseTimeout specified when registering the workflow
@@ -5505,8 +5508,8 @@ func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) Validate() error {
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetChildPolicy(v string) *ContinueAsNewWorkflowExecutionDecisionAttributes {
-	s.ChildPolicy = &v
+func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) SetChildPolicy(v ChildPolicy) *ContinueAsNewWorkflowExecutionDecisionAttributes {
+	s.ChildPolicy = v
 	return s
 }
 
@@ -5571,7 +5574,7 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"ContinueAsNewWorkflowExecutionFailedCause"`
+	Cause ContinueAsNewWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the ContinueAsNewWorkflowExecution decision that started
@@ -5593,8 +5596,8 @@ func (s ContinueAsNewWorkflowExecutionFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *ContinueAsNewWorkflowExecutionFailedEventAttributes) SetCause(v string) *ContinueAsNewWorkflowExecutionFailedEventAttributes {
-	s.Cause = &v
+func (s *ContinueAsNewWorkflowExecutionFailedEventAttributes) SetCause(v ContinueAsNewWorkflowExecutionFailedCause) *ContinueAsNewWorkflowExecutionFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -5667,6 +5670,7 @@ func (s CountClosedWorkflowExecutionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CountClosedWorkflowExecutionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CountClosedWorkflowExecutionsInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -5800,12 +5804,14 @@ func (s CountOpenWorkflowExecutionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CountOpenWorkflowExecutionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CountOpenWorkflowExecutionsInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.StartTimeFilter == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartTimeFilter"))
 	}
@@ -5893,12 +5899,14 @@ func (s CountPendingActivityTasksInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CountPendingActivityTasksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CountPendingActivityTasksInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.TaskList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
 	}
@@ -5953,12 +5961,14 @@ func (s CountPendingDecisionTasksInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CountPendingDecisionTasksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CountPendingDecisionTasksInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.TaskList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
 	}
@@ -6175,7 +6185,7 @@ type Decision struct {
 	// Specifies the type of the decision.
 	//
 	// DecisionType is a required field
-	DecisionType *string `locationName:"decisionType" type:"string" required:"true" enum:"DecisionType"`
+	DecisionType DecisionType `locationName:"decisionType" type:"string" required:"true"`
 
 	// Provides the details of the FailWorkflowExecution decision. It isn't set
 	// for other decision types.
@@ -6227,7 +6237,7 @@ func (s Decision) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Decision) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Decision"}
-	if s.DecisionType == nil {
+	if len(s.DecisionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("DecisionType"))
 	}
 	if s.CancelTimerDecisionAttributes != nil {
@@ -6312,8 +6322,8 @@ func (s *Decision) SetContinueAsNewWorkflowExecutionDecisionAttributes(v *Contin
 }
 
 // SetDecisionType sets the DecisionType field's value.
-func (s *Decision) SetDecisionType(v string) *Decision {
-	s.DecisionType = &v
+func (s *Decision) SetDecisionType(v DecisionType) *Decision {
+	s.DecisionType = v
 	return s
 }
 
@@ -6534,7 +6544,7 @@ type DecisionTaskTimedOutEventAttributes struct {
 	// The type of timeout that expired before the decision task could be completed.
 	//
 	// TimeoutType is a required field
-	TimeoutType *string `locationName:"timeoutType" type:"string" required:"true" enum:"DecisionTaskTimeoutType"`
+	TimeoutType DecisionTaskTimeoutType `locationName:"timeoutType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6560,8 +6570,8 @@ func (s *DecisionTaskTimedOutEventAttributes) SetStartedEventId(v int64) *Decisi
 }
 
 // SetTimeoutType sets the TimeoutType field's value.
-func (s *DecisionTaskTimedOutEventAttributes) SetTimeoutType(v string) *DecisionTaskTimedOutEventAttributes {
-	s.TimeoutType = &v
+func (s *DecisionTaskTimedOutEventAttributes) SetTimeoutType(v DecisionTaskTimeoutType) *DecisionTaskTimedOutEventAttributes {
+	s.TimeoutType = v
 	return s
 }
 
@@ -6592,9 +6602,11 @@ func (s DeprecateActivityTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeprecateActivityTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeprecateActivityTypeInput"}
+
 	if s.ActivityType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivityType"))
 	}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -6661,6 +6673,7 @@ func (s DeprecateDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeprecateDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeprecateDomainInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6721,12 +6734,14 @@ func (s DeprecateWorkflowTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeprecateWorkflowTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeprecateWorkflowTypeInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.WorkflowType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowType"))
 	}
@@ -6796,9 +6811,11 @@ func (s DescribeActivityTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeActivityTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivityTypeInput"}
+
 	if s.ActivityType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivityType"))
 	}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -6898,6 +6915,7 @@ func (s DescribeDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDomainInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6982,12 +7000,14 @@ func (s DescribeWorkflowExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkflowExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkflowExecutionInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.Execution == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Execution"))
 	}
@@ -7114,12 +7134,14 @@ func (s DescribeWorkflowTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkflowTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkflowTypeInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.WorkflowType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowType"))
 	}
@@ -7242,7 +7264,7 @@ type DomainInfo struct {
 	//    still in use. You should not create new workflow executions in this domain.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"RegistrationStatus"`
+	Status RegistrationStatus `locationName:"status" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -7268,8 +7290,8 @@ func (s *DomainInfo) SetName(v string) *DomainInfo {
 }
 
 // SetStatus sets the Status field's value.
-func (s *DomainInfo) SetStatus(v string) *DomainInfo {
-	s.Status = &v
+func (s *DomainInfo) SetStatus(v RegistrationStatus) *DomainInfo {
+	s.Status = v
 	return s
 }
 
@@ -7303,6 +7325,7 @@ func (s ExecutionTimeFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExecutionTimeFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExecutionTimeFilter"}
+
 	if s.OldestDate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OldestDate"))
 	}
@@ -7470,7 +7493,7 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"FailWorkflowExecutionFailedCause"`
+	Cause FailWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the FailWorkflowExecution decision to fail this execution.
@@ -7492,8 +7515,8 @@ func (s FailWorkflowExecutionFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *FailWorkflowExecutionFailedEventAttributes) SetCause(v string) *FailWorkflowExecutionFailedEventAttributes {
-	s.Cause = &v
+func (s *FailWorkflowExecutionFailedEventAttributes) SetCause(v FailWorkflowExecutionFailedCause) *FailWorkflowExecutionFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -7551,12 +7574,14 @@ func (s GetWorkflowExecutionHistoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetWorkflowExecutionHistoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetWorkflowExecutionHistoryInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.Execution == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Execution"))
 	}
@@ -7901,7 +7926,7 @@ type HistoryEvent struct {
 	// The type of the history event.
 	//
 	// EventType is a required field
-	EventType *string `locationName:"eventType" type:"string" required:"true" enum:"EventType"`
+	EventType EventType `locationName:"eventType" type:"string" required:"true"`
 
 	// If the event is of type ExternalWorkflowExecutionCancelRequested then this
 	// member is set and provides detailed information about the event. It isn't
@@ -8205,8 +8230,8 @@ func (s *HistoryEvent) SetEventTimestamp(v time.Time) *HistoryEvent {
 }
 
 // SetEventType sets the EventType field's value.
-func (s *HistoryEvent) SetEventType(v string) *HistoryEvent {
-	s.EventType = &v
+func (s *HistoryEvent) SetEventType(v EventType) *HistoryEvent {
+	s.EventType = v
 	return s
 }
 
@@ -8647,7 +8672,7 @@ type LambdaFunctionTimedOutEventAttributes struct {
 	StartedEventId *int64 `locationName:"startedEventId" type:"long" required:"true"`
 
 	// The type of the timeout that caused this event.
-	TimeoutType *string `locationName:"timeoutType" type:"string" enum:"LambdaFunctionTimeoutType"`
+	TimeoutType LambdaFunctionTimeoutType `locationName:"timeoutType" type:"string"`
 }
 
 // String returns the string representation
@@ -8673,8 +8698,8 @@ func (s *LambdaFunctionTimedOutEventAttributes) SetStartedEventId(v int64) *Lamb
 }
 
 // SetTimeoutType sets the TimeoutType field's value.
-func (s *LambdaFunctionTimedOutEventAttributes) SetTimeoutType(v string) *LambdaFunctionTimedOutEventAttributes {
-	s.TimeoutType = &v
+func (s *LambdaFunctionTimedOutEventAttributes) SetTimeoutType(v LambdaFunctionTimeoutType) *LambdaFunctionTimedOutEventAttributes {
+	s.TimeoutType = v
 	return s
 }
 
@@ -8709,7 +8734,7 @@ type ListActivityTypesInput struct {
 	// Specifies the registration status of the activity types to list.
 	//
 	// RegistrationStatus is a required field
-	RegistrationStatus *string `locationName:"registrationStatus" type:"string" required:"true" enum:"RegistrationStatus"`
+	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true"`
 
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the activity types.
@@ -8729,6 +8754,7 @@ func (s ListActivityTypesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListActivityTypesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListActivityTypesInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -8738,7 +8764,7 @@ func (s *ListActivityTypesInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.RegistrationStatus == nil {
+	if len(s.RegistrationStatus) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RegistrationStatus"))
 	}
 
@@ -8773,8 +8799,8 @@ func (s *ListActivityTypesInput) SetNextPageToken(v string) *ListActivityTypesIn
 }
 
 // SetRegistrationStatus sets the RegistrationStatus field's value.
-func (s *ListActivityTypesInput) SetRegistrationStatus(v string) *ListActivityTypesInput {
-	s.RegistrationStatus = &v
+func (s *ListActivityTypesInput) SetRegistrationStatus(v RegistrationStatus) *ListActivityTypesInput {
+	s.RegistrationStatus = v
 	return s
 }
 
@@ -8912,6 +8938,7 @@ func (s ListClosedWorkflowExecutionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListClosedWorkflowExecutionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListClosedWorkflowExecutionsInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -9038,7 +9065,7 @@ type ListDomainsInput struct {
 	// Specifies the registration status of the domains to list.
 	//
 	// RegistrationStatus is a required field
-	RegistrationStatus *string `locationName:"registrationStatus" type:"string" required:"true" enum:"RegistrationStatus"`
+	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true"`
 
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the domains.
@@ -9058,7 +9085,7 @@ func (s ListDomainsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDomainsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDomainsInput"}
-	if s.RegistrationStatus == nil {
+	if len(s.RegistrationStatus) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RegistrationStatus"))
 	}
 
@@ -9081,8 +9108,8 @@ func (s *ListDomainsInput) SetNextPageToken(v string) *ListDomainsInput {
 }
 
 // SetRegistrationStatus sets the RegistrationStatus field's value.
-func (s *ListDomainsInput) SetRegistrationStatus(v string) *ListDomainsInput {
-	s.RegistrationStatus = &v
+func (s *ListDomainsInput) SetRegistrationStatus(v RegistrationStatus) *ListDomainsInput {
+	s.RegistrationStatus = v
 	return s
 }
 
@@ -9200,12 +9227,14 @@ func (s ListOpenWorkflowExecutionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListOpenWorkflowExecutionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListOpenWorkflowExecutionsInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.StartTimeFilter == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartTimeFilter"))
 	}
@@ -9315,7 +9344,7 @@ type ListWorkflowTypesInput struct {
 	// Specifies the registration status of the workflow types to list.
 	//
 	// RegistrationStatus is a required field
-	RegistrationStatus *string `locationName:"registrationStatus" type:"string" required:"true" enum:"RegistrationStatus"`
+	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string" required:"true"`
 
 	// When set to true, returns the results in reverse order. By default the results
 	// are returned in ascending alphabetical order of the name of the workflow
@@ -9336,6 +9365,7 @@ func (s ListWorkflowTypesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListWorkflowTypesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListWorkflowTypesInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -9345,7 +9375,7 @@ func (s *ListWorkflowTypesInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.RegistrationStatus == nil {
+	if len(s.RegistrationStatus) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RegistrationStatus"))
 	}
 
@@ -9380,8 +9410,8 @@ func (s *ListWorkflowTypesInput) SetNextPageToken(v string) *ListWorkflowTypesIn
 }
 
 // SetRegistrationStatus sets the RegistrationStatus field's value.
-func (s *ListWorkflowTypesInput) SetRegistrationStatus(v string) *ListWorkflowTypesInput {
-	s.RegistrationStatus = &v
+func (s *ListWorkflowTypesInput) SetRegistrationStatus(v RegistrationStatus) *ListWorkflowTypesInput {
+	s.RegistrationStatus = v
 	return s
 }
 
@@ -9552,12 +9582,14 @@ func (s PollForActivityTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PollForActivityTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PollForActivityTaskInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.TaskList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
 	}
@@ -9735,12 +9767,14 @@ func (s PollForDecisionTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PollForDecisionTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PollForDecisionTaskInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.TaskList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
 	}
@@ -9921,6 +9955,7 @@ func (s RecordActivityTaskHeartbeatInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordActivityTaskHeartbeatInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RecordActivityTaskHeartbeatInput"}
+
 	if s.TaskToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
@@ -10017,6 +10052,7 @@ func (s RecordMarkerDecisionAttributes) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordMarkerDecisionAttributes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RecordMarkerDecisionAttributes"}
+
 	if s.MarkerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MarkerName"))
 	}
@@ -10055,7 +10091,7 @@ type RecordMarkerFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"RecordMarkerFailedCause"`
+	Cause RecordMarkerFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the RecordMarkerFailed decision for this cancellation request.
@@ -10082,8 +10118,8 @@ func (s RecordMarkerFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *RecordMarkerFailedEventAttributes) SetCause(v string) *RecordMarkerFailedEventAttributes {
-	s.Cause = &v
+func (s *RecordMarkerFailedEventAttributes) SetCause(v RecordMarkerFailedCause) *RecordMarkerFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -10197,18 +10233,21 @@ func (s RegisterActivityTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterActivityTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterActivityTypeInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -10346,12 +10385,14 @@ func (s RegisterDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterDomainInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.WorkflowExecutionRetentionPeriodInDays == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowExecutionRetentionPeriodInDays"))
 	}
@@ -10416,7 +10457,7 @@ type RegisterWorkflowTypeInput struct {
 	//    execution history with this event.
 	//
 	//    * ABANDON – No action is taken. The child executions continue to run.
-	DefaultChildPolicy *string `locationName:"defaultChildPolicy" type:"string" enum:"ChildPolicy"`
+	DefaultChildPolicy ChildPolicy `locationName:"defaultChildPolicy" type:"string"`
 
 	// If set, specifies the default maximum duration for executions of this workflow
 	// type. You can override this default when starting an execution through the
@@ -10509,18 +10550,21 @@ func (s *RegisterWorkflowTypeInput) Validate() error {
 	if s.DefaultLambdaRole != nil && len(*s.DefaultLambdaRole) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DefaultLambdaRole", 1))
 	}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -10540,8 +10584,8 @@ func (s *RegisterWorkflowTypeInput) Validate() error {
 }
 
 // SetDefaultChildPolicy sets the DefaultChildPolicy field's value.
-func (s *RegisterWorkflowTypeInput) SetDefaultChildPolicy(v string) *RegisterWorkflowTypeInput {
-	s.DefaultChildPolicy = &v
+func (s *RegisterWorkflowTypeInput) SetDefaultChildPolicy(v ChildPolicy) *RegisterWorkflowTypeInput {
+	s.DefaultChildPolicy = v
 	return s
 }
 
@@ -10655,6 +10699,7 @@ func (s RequestCancelActivityTaskDecisionAttributes) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestCancelActivityTaskDecisionAttributes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RequestCancelActivityTaskDecisionAttributes"}
+
 	if s.ActivityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivityId"))
 	}
@@ -10692,7 +10737,7 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"RequestCancelActivityTaskFailedCause"`
+	Cause RequestCancelActivityTaskFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the RequestCancelActivityTask decision for this cancellation
@@ -10720,8 +10765,8 @@ func (s *RequestCancelActivityTaskFailedEventAttributes) SetActivityId(v string)
 }
 
 // SetCause sets the Cause field's value.
-func (s *RequestCancelActivityTaskFailedEventAttributes) SetCause(v string) *RequestCancelActivityTaskFailedEventAttributes {
-	s.Cause = &v
+func (s *RequestCancelActivityTaskFailedEventAttributes) SetCause(v RequestCancelActivityTaskFailedCause) *RequestCancelActivityTaskFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -10780,6 +10825,7 @@ func (s RequestCancelExternalWorkflowExecutionDecisionAttributes) GoString() str
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestCancelExternalWorkflowExecutionDecisionAttributes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RequestCancelExternalWorkflowExecutionDecisionAttributes"}
+
 	if s.WorkflowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
@@ -10825,7 +10871,7 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"RequestCancelExternalWorkflowExecutionFailedCause"`
+	Cause RequestCancelExternalWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The data attached to the event that the decider can use in subsequent workflow
 	// tasks. This data isn't sent to the workflow execution.
@@ -10868,8 +10914,8 @@ func (s RequestCancelExternalWorkflowExecutionFailedEventAttributes) GoString() 
 }
 
 // SetCause sets the Cause field's value.
-func (s *RequestCancelExternalWorkflowExecutionFailedEventAttributes) SetCause(v string) *RequestCancelExternalWorkflowExecutionFailedEventAttributes {
-	s.Cause = &v
+func (s *RequestCancelExternalWorkflowExecutionFailedEventAttributes) SetCause(v RequestCancelExternalWorkflowExecutionFailedCause) *RequestCancelExternalWorkflowExecutionFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -10993,12 +11039,14 @@ func (s RequestCancelWorkflowExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestCancelWorkflowExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RequestCancelWorkflowExecutionInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.WorkflowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
@@ -11073,6 +11121,7 @@ func (s RespondActivityTaskCanceledInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondActivityTaskCanceledInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RespondActivityTaskCanceledInput"}
+
 	if s.TaskToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
@@ -11142,6 +11191,7 @@ func (s RespondActivityTaskCompletedInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondActivityTaskCompletedInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RespondActivityTaskCompletedInput"}
+
 	if s.TaskToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
@@ -11213,6 +11263,7 @@ func (s RespondActivityTaskFailedInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondActivityTaskFailedInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RespondActivityTaskFailedInput"}
+
 	if s.TaskToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
@@ -11292,6 +11343,7 @@ func (s RespondDecisionTaskCompletedInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondDecisionTaskCompletedInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RespondDecisionTaskCompletedInput"}
+
 	if s.TaskToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
@@ -11485,12 +11537,14 @@ func (s ScheduleActivityTaskDecisionAttributes) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleActivityTaskDecisionAttributes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScheduleActivityTaskDecisionAttributes"}
+
 	if s.ActivityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivityId"))
 	}
 	if s.ActivityId != nil && len(*s.ActivityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ActivityId", 1))
 	}
+
 	if s.ActivityType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivityType"))
 	}
@@ -11594,7 +11648,7 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"ScheduleActivityTaskFailedCause"`
+	Cause ScheduleActivityTaskFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision that
 	// resulted in the scheduling of this activity task. This information can be
@@ -11628,8 +11682,8 @@ func (s *ScheduleActivityTaskFailedEventAttributes) SetActivityType(v *ActivityT
 }
 
 // SetCause sets the Cause field's value.
-func (s *ScheduleActivityTaskFailedEventAttributes) SetCause(v string) *ScheduleActivityTaskFailedEventAttributes {
-	s.Cause = &v
+func (s *ScheduleActivityTaskFailedEventAttributes) SetCause(v ScheduleActivityTaskFailedCause) *ScheduleActivityTaskFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -11680,12 +11734,14 @@ func (s ScheduleLambdaFunctionDecisionAttributes) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleLambdaFunctionDecisionAttributes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScheduleLambdaFunctionDecisionAttributes"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -11743,7 +11799,7 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"ScheduleLambdaFunctionFailedCause"`
+	Cause ScheduleLambdaFunctionFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the LambdaFunctionCompleted event corresponding to the decision
 	// that resulted in scheduling this Lambda task. To help diagnose issues, use
@@ -11774,8 +11830,8 @@ func (s ScheduleLambdaFunctionFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *ScheduleLambdaFunctionFailedEventAttributes) SetCause(v string) *ScheduleLambdaFunctionFailedEventAttributes {
-	s.Cause = &v
+func (s *ScheduleLambdaFunctionFailedEventAttributes) SetCause(v ScheduleLambdaFunctionFailedCause) *ScheduleLambdaFunctionFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -11856,12 +11912,14 @@ func (s SignalExternalWorkflowExecutionDecisionAttributes) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SignalExternalWorkflowExecutionDecisionAttributes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SignalExternalWorkflowExecutionDecisionAttributes"}
+
 	if s.SignalName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SignalName"))
 	}
 	if s.SignalName != nil && len(*s.SignalName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SignalName", 1))
 	}
+
 	if s.WorkflowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
@@ -11918,7 +11976,7 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"SignalExternalWorkflowExecutionFailedCause"`
+	Cause SignalExternalWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The data attached to the event that the decider can use in subsequent workflow
 	// tasks. This data isn't sent to the workflow execution.
@@ -11962,8 +12020,8 @@ func (s SignalExternalWorkflowExecutionFailedEventAttributes) GoString() string 
 }
 
 // SetCause sets the Cause field's value.
-func (s *SignalExternalWorkflowExecutionFailedEventAttributes) SetCause(v string) *SignalExternalWorkflowExecutionFailedEventAttributes {
-	s.Cause = &v
+func (s *SignalExternalWorkflowExecutionFailedEventAttributes) SetCause(v SignalExternalWorkflowExecutionFailedCause) *SignalExternalWorkflowExecutionFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -12115,18 +12173,21 @@ func (s SignalWorkflowExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SignalWorkflowExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SignalWorkflowExecutionInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.SignalName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SignalName"))
 	}
 	if s.SignalName != nil && len(*s.SignalName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SignalName", 1))
 	}
+
 	if s.WorkflowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
@@ -12237,7 +12298,7 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default child policy was specified at registration
 	// time then a fault is returned.
-	ChildPolicy *string `locationName:"childPolicy" type:"string" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string"`
 
 	// The data attached to the event that can be used by the decider in subsequent
 	// workflow tasks. This data isn't sent to the child workflow execution.
@@ -12335,12 +12396,14 @@ func (s *StartChildWorkflowExecutionDecisionAttributes) Validate() error {
 	if s.LambdaRole != nil && len(*s.LambdaRole) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LambdaRole", 1))
 	}
+
 	if s.WorkflowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
+
 	if s.WorkflowType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowType"))
 	}
@@ -12362,8 +12425,8 @@ func (s *StartChildWorkflowExecutionDecisionAttributes) Validate() error {
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *StartChildWorkflowExecutionDecisionAttributes) SetChildPolicy(v string) *StartChildWorkflowExecutionDecisionAttributes {
-	s.ChildPolicy = &v
+func (s *StartChildWorkflowExecutionDecisionAttributes) SetChildPolicy(v ChildPolicy) *StartChildWorkflowExecutionDecisionAttributes {
+	s.ChildPolicy = v
 	return s
 }
 
@@ -12440,7 +12503,7 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"StartChildWorkflowExecutionFailedCause"`
+	Cause StartChildWorkflowExecutionFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The data attached to the event that the decider can use in subsequent workflow
 	// tasks. This data isn't sent to the child workflow execution.
@@ -12488,8 +12551,8 @@ func (s StartChildWorkflowExecutionFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *StartChildWorkflowExecutionFailedEventAttributes) SetCause(v string) *StartChildWorkflowExecutionFailedEventAttributes {
-	s.Cause = &v
+func (s *StartChildWorkflowExecutionFailedEventAttributes) SetCause(v StartChildWorkflowExecutionFailedCause) *StartChildWorkflowExecutionFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -12543,7 +12606,7 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy *string `locationName:"childPolicy" type:"string" required:"true" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
 
 	// Data attached to the event that can be used by the decider in subsequent
 	// decision tasks. This data isn't sent to the activity.
@@ -12616,8 +12679,8 @@ func (s StartChildWorkflowExecutionInitiatedEventAttributes) GoString() string {
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetChildPolicy(v string) *StartChildWorkflowExecutionInitiatedEventAttributes {
-	s.ChildPolicy = &v
+func (s *StartChildWorkflowExecutionInitiatedEventAttributes) SetChildPolicy(v ChildPolicy) *StartChildWorkflowExecutionInitiatedEventAttributes {
+	s.ChildPolicy = v
 	return s
 }
 
@@ -12699,7 +12762,7 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	// IAM role attached to the execution lacked sufficient permissions. For details
 	// and example IAM policies, see Lambda Tasks (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
-	Cause *string `locationName:"cause" type:"string" enum:"StartLambdaFunctionFailedCause"`
+	Cause StartLambdaFunctionFailedCause `locationName:"cause" type:"string"`
 
 	// A description that can help diagnose the cause of the fault.
 	Message *string `locationName:"message" type:"string"`
@@ -12721,8 +12784,8 @@ func (s StartLambdaFunctionFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *StartLambdaFunctionFailedEventAttributes) SetCause(v string) *StartLambdaFunctionFailedEventAttributes {
-	s.Cause = &v
+func (s *StartLambdaFunctionFailedEventAttributes) SetCause(v StartLambdaFunctionFailedCause) *StartLambdaFunctionFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -12796,12 +12859,14 @@ func (s StartTimerDecisionAttributes) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartTimerDecisionAttributes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartTimerDecisionAttributes"}
+
 	if s.StartToFireTimeout == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartToFireTimeout"))
 	}
 	if s.StartToFireTimeout != nil && len(*s.StartToFireTimeout) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StartToFireTimeout", 1))
 	}
+
 	if s.TimerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimerId"))
 	}
@@ -12846,7 +12911,7 @@ type StartTimerFailedEventAttributes struct {
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
-	Cause *string `locationName:"cause" type:"string" required:"true" enum:"StartTimerFailedCause"`
+	Cause StartTimerFailedCause `locationName:"cause" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the StartTimer decision for this activity task. This information
@@ -12873,8 +12938,8 @@ func (s StartTimerFailedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *StartTimerFailedEventAttributes) SetCause(v string) *StartTimerFailedEventAttributes {
-	s.Cause = &v
+func (s *StartTimerFailedEventAttributes) SetCause(v StartTimerFailedCause) *StartTimerFailedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -12913,7 +12978,7 @@ type StartWorkflowExecutionInput struct {
 	// default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default child policy was specified at registration
 	// time then a fault is returned.
-	ChildPolicy *string `locationName:"childPolicy" type:"string" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string"`
 
 	// The name of the domain in which the workflow execution is created.
 	//
@@ -13026,6 +13091,7 @@ func (s StartWorkflowExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartWorkflowExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartWorkflowExecutionInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -13035,12 +13101,14 @@ func (s *StartWorkflowExecutionInput) Validate() error {
 	if s.LambdaRole != nil && len(*s.LambdaRole) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LambdaRole", 1))
 	}
+
 	if s.WorkflowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
+
 	if s.WorkflowType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowType"))
 	}
@@ -13062,8 +13130,8 @@ func (s *StartWorkflowExecutionInput) Validate() error {
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *StartWorkflowExecutionInput) SetChildPolicy(v string) *StartWorkflowExecutionInput {
-	s.ChildPolicy = &v
+func (s *StartWorkflowExecutionInput) SetChildPolicy(v ChildPolicy) *StartWorkflowExecutionInput {
+	s.ChildPolicy = v
 	return s
 }
 
@@ -13176,6 +13244,7 @@ func (s TagFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagFilter"}
+
 	if s.Tag == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tag"))
 	}
@@ -13215,6 +13284,7 @@ func (s TaskList) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TaskList) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TaskList"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -13257,7 +13327,7 @@ type TerminateWorkflowExecutionInput struct {
 	// default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default child policy was specified at registration
 	// time then a fault is returned.
-	ChildPolicy *string `locationName:"childPolicy" type:"string" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string"`
 
 	// Details for terminating the workflow execution.
 	Details *string `locationName:"details" type:"string"`
@@ -13292,12 +13362,14 @@ func (s TerminateWorkflowExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateWorkflowExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TerminateWorkflowExecutionInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
+
 	if s.WorkflowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
@@ -13312,8 +13384,8 @@ func (s *TerminateWorkflowExecutionInput) Validate() error {
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *TerminateWorkflowExecutionInput) SetChildPolicy(v string) *TerminateWorkflowExecutionInput {
-	s.ChildPolicy = &v
+func (s *TerminateWorkflowExecutionInput) SetChildPolicy(v ChildPolicy) *TerminateWorkflowExecutionInput {
+	s.ChildPolicy = v
 	return s
 }
 
@@ -13545,12 +13617,14 @@ func (s WorkflowExecution) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkflowExecution) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "WorkflowExecution"}
+
 	if s.RunId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RunId"))
 	}
 	if s.RunId != nil && len(*s.RunId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RunId", 1))
 	}
+
 	if s.WorkflowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
@@ -13583,7 +13657,7 @@ type WorkflowExecutionCancelRequestedEventAttributes struct {
 	// If set, indicates that the request to cancel the workflow execution was automatically
 	// generated, and specifies the cause. This happens if the parent workflow execution
 	// times out or is terminated, and the child policy is set to cancel child executions.
-	Cause *string `locationName:"cause" type:"string" enum:"WorkflowExecutionCancelRequestedCause"`
+	Cause WorkflowExecutionCancelRequestedCause `locationName:"cause" type:"string"`
 
 	// The ID of the RequestCancelExternalWorkflowExecutionInitiated event corresponding
 	// to the RequestCancelExternalWorkflowExecution decision to cancel this workflow
@@ -13607,8 +13681,8 @@ func (s WorkflowExecutionCancelRequestedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *WorkflowExecutionCancelRequestedEventAttributes) SetCause(v string) *WorkflowExecutionCancelRequestedEventAttributes {
-	s.Cause = &v
+func (s *WorkflowExecutionCancelRequestedEventAttributes) SetCause(v WorkflowExecutionCancelRequestedCause) *WorkflowExecutionCancelRequestedEventAttributes {
+	s.Cause = v
 	return s
 }
 
@@ -13723,7 +13797,7 @@ type WorkflowExecutionConfiguration struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy *string `locationName:"childPolicy" type:"string" required:"true" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
 
 	// The total duration for this workflow execution.
 	//
@@ -13770,8 +13844,8 @@ func (s WorkflowExecutionConfiguration) GoString() string {
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionConfiguration) SetChildPolicy(v string) *WorkflowExecutionConfiguration {
-	s.ChildPolicy = &v
+func (s *WorkflowExecutionConfiguration) SetChildPolicy(v ChildPolicy) *WorkflowExecutionConfiguration {
+	s.ChildPolicy = v
 	return s
 }
 
@@ -13825,7 +13899,7 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy *string `locationName:"childPolicy" type:"string" required:"true" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the ContinueAsNewWorkflowExecution decision that started
@@ -13887,8 +13961,8 @@ func (s WorkflowExecutionContinuedAsNewEventAttributes) GoString() string {
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetChildPolicy(v string) *WorkflowExecutionContinuedAsNewEventAttributes {
-	s.ChildPolicy = &v
+func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetChildPolicy(v ChildPolicy) *WorkflowExecutionContinuedAsNewEventAttributes {
+	s.ChildPolicy = v
 	return s
 }
 
@@ -14059,6 +14133,7 @@ func (s WorkflowExecutionFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkflowExecutionFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "WorkflowExecutionFilter"}
+
 	if s.WorkflowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
@@ -14103,7 +14178,7 @@ type WorkflowExecutionInfo struct {
 	//    * CONTINUED_AS_NEW – the execution is logically continued. This means
 	//    the current execution was completed and a new execution was started to
 	//    carry on the workflow.
-	CloseStatus *string `locationName:"closeStatus" type:"string" enum:"CloseStatus"`
+	CloseStatus CloseStatus `locationName:"closeStatus" type:"string"`
 
 	// The time when the workflow execution was closed. Set only if the execution
 	// status is CLOSED.
@@ -14117,7 +14192,7 @@ type WorkflowExecutionInfo struct {
 	// The current status of the execution.
 	//
 	// ExecutionStatus is a required field
-	ExecutionStatus *string `locationName:"executionStatus" type:"string" required:"true" enum:"ExecutionStatus"`
+	ExecutionStatus ExecutionStatus `locationName:"executionStatus" type:"string" required:"true"`
 
 	// If this workflow execution is a child of another execution then contains
 	// the workflow execution that started this execution.
@@ -14156,8 +14231,8 @@ func (s *WorkflowExecutionInfo) SetCancelRequested(v bool) *WorkflowExecutionInf
 }
 
 // SetCloseStatus sets the CloseStatus field's value.
-func (s *WorkflowExecutionInfo) SetCloseStatus(v string) *WorkflowExecutionInfo {
-	s.CloseStatus = &v
+func (s *WorkflowExecutionInfo) SetCloseStatus(v CloseStatus) *WorkflowExecutionInfo {
+	s.CloseStatus = v
 	return s
 }
 
@@ -14174,8 +14249,8 @@ func (s *WorkflowExecutionInfo) SetExecution(v *WorkflowExecution) *WorkflowExec
 }
 
 // SetExecutionStatus sets the ExecutionStatus field's value.
-func (s *WorkflowExecutionInfo) SetExecutionStatus(v string) *WorkflowExecutionInfo {
-	s.ExecutionStatus = &v
+func (s *WorkflowExecutionInfo) SetExecutionStatus(v ExecutionStatus) *WorkflowExecutionInfo {
+	s.ExecutionStatus = v
 	return s
 }
 
@@ -14395,7 +14470,7 @@ type WorkflowExecutionStartedEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy *string `locationName:"childPolicy" type:"string" required:"true" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
 
 	// If this workflow execution was started due to a ContinueAsNewWorkflowExecution
 	// decision, then it contains the runId of the previous workflow execution that
@@ -14461,8 +14536,8 @@ func (s WorkflowExecutionStartedEventAttributes) GoString() string {
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionStartedEventAttributes) SetChildPolicy(v string) *WorkflowExecutionStartedEventAttributes {
-	s.ChildPolicy = &v
+func (s *WorkflowExecutionStartedEventAttributes) SetChildPolicy(v ChildPolicy) *WorkflowExecutionStartedEventAttributes {
+	s.ChildPolicy = v
 	return s
 }
 
@@ -14539,7 +14614,7 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 	// If set, indicates that the workflow execution was automatically terminated,
 	// and specifies the cause. This happens if the parent workflow execution times
 	// out or is terminated and the child policy is set to terminate child executions.
-	Cause *string `locationName:"cause" type:"string" enum:"WorkflowExecutionTerminatedCause"`
+	Cause WorkflowExecutionTerminatedCause `locationName:"cause" type:"string"`
 
 	// The policy used for the child workflow executions of this workflow execution.
 	//
@@ -14555,7 +14630,7 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy *string `locationName:"childPolicy" type:"string" required:"true" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
 
 	// The details provided for the termination.
 	Details *string `locationName:"details" type:"string"`
@@ -14575,14 +14650,14 @@ func (s WorkflowExecutionTerminatedEventAttributes) GoString() string {
 }
 
 // SetCause sets the Cause field's value.
-func (s *WorkflowExecutionTerminatedEventAttributes) SetCause(v string) *WorkflowExecutionTerminatedEventAttributes {
-	s.Cause = &v
+func (s *WorkflowExecutionTerminatedEventAttributes) SetCause(v WorkflowExecutionTerminatedCause) *WorkflowExecutionTerminatedEventAttributes {
+	s.Cause = v
 	return s
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionTerminatedEventAttributes) SetChildPolicy(v string) *WorkflowExecutionTerminatedEventAttributes {
-	s.ChildPolicy = &v
+func (s *WorkflowExecutionTerminatedEventAttributes) SetChildPolicy(v ChildPolicy) *WorkflowExecutionTerminatedEventAttributes {
+	s.ChildPolicy = v
 	return s
 }
 
@@ -14616,12 +14691,12 @@ type WorkflowExecutionTimedOutEventAttributes struct {
 	//    * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// ChildPolicy is a required field
-	ChildPolicy *string `locationName:"childPolicy" type:"string" required:"true" enum:"ChildPolicy"`
+	ChildPolicy ChildPolicy `locationName:"childPolicy" type:"string" required:"true"`
 
 	// The type of timeout that caused this event.
 	//
 	// TimeoutType is a required field
-	TimeoutType *string `locationName:"timeoutType" type:"string" required:"true" enum:"WorkflowExecutionTimeoutType"`
+	TimeoutType WorkflowExecutionTimeoutType `locationName:"timeoutType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -14635,14 +14710,14 @@ func (s WorkflowExecutionTimedOutEventAttributes) GoString() string {
 }
 
 // SetChildPolicy sets the ChildPolicy field's value.
-func (s *WorkflowExecutionTimedOutEventAttributes) SetChildPolicy(v string) *WorkflowExecutionTimedOutEventAttributes {
-	s.ChildPolicy = &v
+func (s *WorkflowExecutionTimedOutEventAttributes) SetChildPolicy(v ChildPolicy) *WorkflowExecutionTimedOutEventAttributes {
+	s.ChildPolicy = v
 	return s
 }
 
 // SetTimeoutType sets the TimeoutType field's value.
-func (s *WorkflowExecutionTimedOutEventAttributes) SetTimeoutType(v string) *WorkflowExecutionTimedOutEventAttributes {
-	s.TimeoutType = &v
+func (s *WorkflowExecutionTimedOutEventAttributes) SetTimeoutType(v WorkflowExecutionTimeoutType) *WorkflowExecutionTimedOutEventAttributes {
+	s.TimeoutType = v
 	return s
 }
 
@@ -14680,12 +14755,14 @@ func (s WorkflowType) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkflowType) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "WorkflowType"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -14731,7 +14808,7 @@ type WorkflowTypeConfiguration struct {
 	//    execution history with this event.
 	//
 	//    * ABANDON – No action is taken. The child executions continue to run.
-	DefaultChildPolicy *string `locationName:"defaultChildPolicy" type:"string" enum:"ChildPolicy"`
+	DefaultChildPolicy ChildPolicy `locationName:"defaultChildPolicy" type:"string"`
 
 	// The default maximum duration, specified when registering the workflow type,
 	// for executions of this workflow type. This default can be overridden when
@@ -14794,8 +14871,8 @@ func (s WorkflowTypeConfiguration) GoString() string {
 }
 
 // SetDefaultChildPolicy sets the DefaultChildPolicy field's value.
-func (s *WorkflowTypeConfiguration) SetDefaultChildPolicy(v string) *WorkflowTypeConfiguration {
-	s.DefaultChildPolicy = &v
+func (s *WorkflowTypeConfiguration) SetDefaultChildPolicy(v ChildPolicy) *WorkflowTypeConfiguration {
+	s.DefaultChildPolicy = v
 	return s
 }
 
@@ -14856,6 +14933,7 @@ func (s WorkflowTypeFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkflowTypeFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "WorkflowTypeFilter"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -14900,7 +14978,7 @@ type WorkflowTypeInfo struct {
 	// The current status of the workflow type.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"RegistrationStatus"`
+	Status RegistrationStatus `locationName:"status" type:"string" required:"true"`
 
 	// The workflow type this information is about.
 	//
@@ -14937,8 +15015,8 @@ func (s *WorkflowTypeInfo) SetDescription(v string) *WorkflowTypeInfo {
 }
 
 // SetStatus sets the Status field's value.
-func (s *WorkflowTypeInfo) SetStatus(v string) *WorkflowTypeInfo {
-	s.Status = &v
+func (s *WorkflowTypeInfo) SetStatus(v RegistrationStatus) *WorkflowTypeInfo {
+	s.Status = v
 	return s
 }
 
@@ -14948,498 +15026,306 @@ func (s *WorkflowTypeInfo) SetWorkflowType(v *WorkflowType) *WorkflowTypeInfo {
 	return s
 }
 
+type ActivityTaskTimeoutType string
+
+// Enum values for ActivityTaskTimeoutType
 const (
-	// ActivityTaskTimeoutTypeStartToClose is a ActivityTaskTimeoutType enum value
-	ActivityTaskTimeoutTypeStartToClose = "START_TO_CLOSE"
-
-	// ActivityTaskTimeoutTypeScheduleToStart is a ActivityTaskTimeoutType enum value
-	ActivityTaskTimeoutTypeScheduleToStart = "SCHEDULE_TO_START"
-
-	// ActivityTaskTimeoutTypeScheduleToClose is a ActivityTaskTimeoutType enum value
-	ActivityTaskTimeoutTypeScheduleToClose = "SCHEDULE_TO_CLOSE"
-
-	// ActivityTaskTimeoutTypeHeartbeat is a ActivityTaskTimeoutType enum value
-	ActivityTaskTimeoutTypeHeartbeat = "HEARTBEAT"
+	ActivityTaskTimeoutTypeStartToClose    ActivityTaskTimeoutType = "START_TO_CLOSE"
+	ActivityTaskTimeoutTypeScheduleToStart ActivityTaskTimeoutType = "SCHEDULE_TO_START"
+	ActivityTaskTimeoutTypeScheduleToClose ActivityTaskTimeoutType = "SCHEDULE_TO_CLOSE"
+	ActivityTaskTimeoutTypeHeartbeat       ActivityTaskTimeoutType = "HEARTBEAT"
 )
 
-const (
-	// CancelTimerFailedCauseTimerIdUnknown is a CancelTimerFailedCause enum value
-	CancelTimerFailedCauseTimerIdUnknown = "TIMER_ID_UNKNOWN"
+type CancelTimerFailedCause string
 
-	// CancelTimerFailedCauseOperationNotPermitted is a CancelTimerFailedCause enum value
-	CancelTimerFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+// Enum values for CancelTimerFailedCause
+const (
+	CancelTimerFailedCauseTimerIdUnknown        CancelTimerFailedCause = "TIMER_ID_UNKNOWN"
+	CancelTimerFailedCauseOperationNotPermitted CancelTimerFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
-const (
-	// CancelWorkflowExecutionFailedCauseUnhandledDecision is a CancelWorkflowExecutionFailedCause enum value
-	CancelWorkflowExecutionFailedCauseUnhandledDecision = "UNHANDLED_DECISION"
+type CancelWorkflowExecutionFailedCause string
 
-	// CancelWorkflowExecutionFailedCauseOperationNotPermitted is a CancelWorkflowExecutionFailedCause enum value
-	CancelWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+// Enum values for CancelWorkflowExecutionFailedCause
+const (
+	CancelWorkflowExecutionFailedCauseUnhandledDecision     CancelWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
+	CancelWorkflowExecutionFailedCauseOperationNotPermitted CancelWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type ChildPolicy string
+
+// Enum values for ChildPolicy
 const (
-	// ChildPolicyTerminate is a ChildPolicy enum value
-	ChildPolicyTerminate = "TERMINATE"
-
-	// ChildPolicyRequestCancel is a ChildPolicy enum value
-	ChildPolicyRequestCancel = "REQUEST_CANCEL"
-
-	// ChildPolicyAbandon is a ChildPolicy enum value
-	ChildPolicyAbandon = "ABANDON"
+	ChildPolicyTerminate     ChildPolicy = "TERMINATE"
+	ChildPolicyRequestCancel ChildPolicy = "REQUEST_CANCEL"
+	ChildPolicyAbandon       ChildPolicy = "ABANDON"
 )
 
+type CloseStatus string
+
+// Enum values for CloseStatus
 const (
-	// CloseStatusCompleted is a CloseStatus enum value
-	CloseStatusCompleted = "COMPLETED"
-
-	// CloseStatusFailed is a CloseStatus enum value
-	CloseStatusFailed = "FAILED"
-
-	// CloseStatusCanceled is a CloseStatus enum value
-	CloseStatusCanceled = "CANCELED"
-
-	// CloseStatusTerminated is a CloseStatus enum value
-	CloseStatusTerminated = "TERMINATED"
-
-	// CloseStatusContinuedAsNew is a CloseStatus enum value
-	CloseStatusContinuedAsNew = "CONTINUED_AS_NEW"
-
-	// CloseStatusTimedOut is a CloseStatus enum value
-	CloseStatusTimedOut = "TIMED_OUT"
+	CloseStatusCompleted      CloseStatus = "COMPLETED"
+	CloseStatusFailed         CloseStatus = "FAILED"
+	CloseStatusCanceled       CloseStatus = "CANCELED"
+	CloseStatusTerminated     CloseStatus = "TERMINATED"
+	CloseStatusContinuedAsNew CloseStatus = "CONTINUED_AS_NEW"
+	CloseStatusTimedOut       CloseStatus = "TIMED_OUT"
 )
 
-const (
-	// CompleteWorkflowExecutionFailedCauseUnhandledDecision is a CompleteWorkflowExecutionFailedCause enum value
-	CompleteWorkflowExecutionFailedCauseUnhandledDecision = "UNHANDLED_DECISION"
+type CompleteWorkflowExecutionFailedCause string
 
-	// CompleteWorkflowExecutionFailedCauseOperationNotPermitted is a CompleteWorkflowExecutionFailedCause enum value
-	CompleteWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+// Enum values for CompleteWorkflowExecutionFailedCause
+const (
+	CompleteWorkflowExecutionFailedCauseUnhandledDecision     CompleteWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
+	CompleteWorkflowExecutionFailedCauseOperationNotPermitted CompleteWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type ContinueAsNewWorkflowExecutionFailedCause string
+
+// Enum values for ContinueAsNewWorkflowExecutionFailedCause
 const (
-	// ContinueAsNewWorkflowExecutionFailedCauseUnhandledDecision is a ContinueAsNewWorkflowExecutionFailedCause enum value
-	ContinueAsNewWorkflowExecutionFailedCauseUnhandledDecision = "UNHANDLED_DECISION"
-
-	// ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDeprecated is a ContinueAsNewWorkflowExecutionFailedCause enum value
-	ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDeprecated = "WORKFLOW_TYPE_DEPRECATED"
-
-	// ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist is a ContinueAsNewWorkflowExecutionFailedCause enum value
-	ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist = "WORKFLOW_TYPE_DOES_NOT_EXIST"
-
-	// ContinueAsNewWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined is a ContinueAsNewWorkflowExecutionFailedCause enum value
-	ContinueAsNewWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-
-	// ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined is a ContinueAsNewWorkflowExecutionFailedCause enum value
-	ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-
-	// ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskListUndefined is a ContinueAsNewWorkflowExecutionFailedCause enum value
-	ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskListUndefined = "DEFAULT_TASK_LIST_UNDEFINED"
-
-	// ContinueAsNewWorkflowExecutionFailedCauseDefaultChildPolicyUndefined is a ContinueAsNewWorkflowExecutionFailedCause enum value
-	ContinueAsNewWorkflowExecutionFailedCauseDefaultChildPolicyUndefined = "DEFAULT_CHILD_POLICY_UNDEFINED"
-
-	// ContinueAsNewWorkflowExecutionFailedCauseContinueAsNewWorkflowExecutionRateExceeded is a ContinueAsNewWorkflowExecutionFailedCause enum value
-	ContinueAsNewWorkflowExecutionFailedCauseContinueAsNewWorkflowExecutionRateExceeded = "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED"
-
-	// ContinueAsNewWorkflowExecutionFailedCauseOperationNotPermitted is a ContinueAsNewWorkflowExecutionFailedCause enum value
-	ContinueAsNewWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+	ContinueAsNewWorkflowExecutionFailedCauseUnhandledDecision                            ContinueAsNewWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
+	ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDeprecated                       ContinueAsNewWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DEPRECATED"
+	ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist                     ContinueAsNewWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DOES_NOT_EXIST"
+	ContinueAsNewWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined      ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskListUndefined                     ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
+	ContinueAsNewWorkflowExecutionFailedCauseDefaultChildPolicyUndefined                  ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_CHILD_POLICY_UNDEFINED"
+	ContinueAsNewWorkflowExecutionFailedCauseContinueAsNewWorkflowExecutionRateExceeded   ContinueAsNewWorkflowExecutionFailedCause = "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED"
+	ContinueAsNewWorkflowExecutionFailedCauseOperationNotPermitted                        ContinueAsNewWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type DecisionTaskTimeoutType string
+
+// Enum values for DecisionTaskTimeoutType
 const (
-	// DecisionTaskTimeoutTypeStartToClose is a DecisionTaskTimeoutType enum value
-	DecisionTaskTimeoutTypeStartToClose = "START_TO_CLOSE"
+	DecisionTaskTimeoutTypeStartToClose DecisionTaskTimeoutType = "START_TO_CLOSE"
 )
 
+type DecisionType string
+
+// Enum values for DecisionType
 const (
-	// DecisionTypeScheduleActivityTask is a DecisionType enum value
-	DecisionTypeScheduleActivityTask = "ScheduleActivityTask"
-
-	// DecisionTypeRequestCancelActivityTask is a DecisionType enum value
-	DecisionTypeRequestCancelActivityTask = "RequestCancelActivityTask"
-
-	// DecisionTypeCompleteWorkflowExecution is a DecisionType enum value
-	DecisionTypeCompleteWorkflowExecution = "CompleteWorkflowExecution"
-
-	// DecisionTypeFailWorkflowExecution is a DecisionType enum value
-	DecisionTypeFailWorkflowExecution = "FailWorkflowExecution"
-
-	// DecisionTypeCancelWorkflowExecution is a DecisionType enum value
-	DecisionTypeCancelWorkflowExecution = "CancelWorkflowExecution"
-
-	// DecisionTypeContinueAsNewWorkflowExecution is a DecisionType enum value
-	DecisionTypeContinueAsNewWorkflowExecution = "ContinueAsNewWorkflowExecution"
-
-	// DecisionTypeRecordMarker is a DecisionType enum value
-	DecisionTypeRecordMarker = "RecordMarker"
-
-	// DecisionTypeStartTimer is a DecisionType enum value
-	DecisionTypeStartTimer = "StartTimer"
-
-	// DecisionTypeCancelTimer is a DecisionType enum value
-	DecisionTypeCancelTimer = "CancelTimer"
-
-	// DecisionTypeSignalExternalWorkflowExecution is a DecisionType enum value
-	DecisionTypeSignalExternalWorkflowExecution = "SignalExternalWorkflowExecution"
-
-	// DecisionTypeRequestCancelExternalWorkflowExecution is a DecisionType enum value
-	DecisionTypeRequestCancelExternalWorkflowExecution = "RequestCancelExternalWorkflowExecution"
-
-	// DecisionTypeStartChildWorkflowExecution is a DecisionType enum value
-	DecisionTypeStartChildWorkflowExecution = "StartChildWorkflowExecution"
-
-	// DecisionTypeScheduleLambdaFunction is a DecisionType enum value
-	DecisionTypeScheduleLambdaFunction = "ScheduleLambdaFunction"
+	DecisionTypeScheduleActivityTask                   DecisionType = "ScheduleActivityTask"
+	DecisionTypeRequestCancelActivityTask              DecisionType = "RequestCancelActivityTask"
+	DecisionTypeCompleteWorkflowExecution              DecisionType = "CompleteWorkflowExecution"
+	DecisionTypeFailWorkflowExecution                  DecisionType = "FailWorkflowExecution"
+	DecisionTypeCancelWorkflowExecution                DecisionType = "CancelWorkflowExecution"
+	DecisionTypeContinueAsNewWorkflowExecution         DecisionType = "ContinueAsNewWorkflowExecution"
+	DecisionTypeRecordMarker                           DecisionType = "RecordMarker"
+	DecisionTypeStartTimer                             DecisionType = "StartTimer"
+	DecisionTypeCancelTimer                            DecisionType = "CancelTimer"
+	DecisionTypeSignalExternalWorkflowExecution        DecisionType = "SignalExternalWorkflowExecution"
+	DecisionTypeRequestCancelExternalWorkflowExecution DecisionType = "RequestCancelExternalWorkflowExecution"
+	DecisionTypeStartChildWorkflowExecution            DecisionType = "StartChildWorkflowExecution"
+	DecisionTypeScheduleLambdaFunction                 DecisionType = "ScheduleLambdaFunction"
 )
 
+type EventType string
+
+// Enum values for EventType
 const (
-	// EventTypeWorkflowExecutionStarted is a EventType enum value
-	EventTypeWorkflowExecutionStarted = "WorkflowExecutionStarted"
-
-	// EventTypeWorkflowExecutionCancelRequested is a EventType enum value
-	EventTypeWorkflowExecutionCancelRequested = "WorkflowExecutionCancelRequested"
-
-	// EventTypeWorkflowExecutionCompleted is a EventType enum value
-	EventTypeWorkflowExecutionCompleted = "WorkflowExecutionCompleted"
-
-	// EventTypeCompleteWorkflowExecutionFailed is a EventType enum value
-	EventTypeCompleteWorkflowExecutionFailed = "CompleteWorkflowExecutionFailed"
-
-	// EventTypeWorkflowExecutionFailed is a EventType enum value
-	EventTypeWorkflowExecutionFailed = "WorkflowExecutionFailed"
-
-	// EventTypeFailWorkflowExecutionFailed is a EventType enum value
-	EventTypeFailWorkflowExecutionFailed = "FailWorkflowExecutionFailed"
-
-	// EventTypeWorkflowExecutionTimedOut is a EventType enum value
-	EventTypeWorkflowExecutionTimedOut = "WorkflowExecutionTimedOut"
-
-	// EventTypeWorkflowExecutionCanceled is a EventType enum value
-	EventTypeWorkflowExecutionCanceled = "WorkflowExecutionCanceled"
-
-	// EventTypeCancelWorkflowExecutionFailed is a EventType enum value
-	EventTypeCancelWorkflowExecutionFailed = "CancelWorkflowExecutionFailed"
-
-	// EventTypeWorkflowExecutionContinuedAsNew is a EventType enum value
-	EventTypeWorkflowExecutionContinuedAsNew = "WorkflowExecutionContinuedAsNew"
-
-	// EventTypeContinueAsNewWorkflowExecutionFailed is a EventType enum value
-	EventTypeContinueAsNewWorkflowExecutionFailed = "ContinueAsNewWorkflowExecutionFailed"
-
-	// EventTypeWorkflowExecutionTerminated is a EventType enum value
-	EventTypeWorkflowExecutionTerminated = "WorkflowExecutionTerminated"
-
-	// EventTypeDecisionTaskScheduled is a EventType enum value
-	EventTypeDecisionTaskScheduled = "DecisionTaskScheduled"
-
-	// EventTypeDecisionTaskStarted is a EventType enum value
-	EventTypeDecisionTaskStarted = "DecisionTaskStarted"
-
-	// EventTypeDecisionTaskCompleted is a EventType enum value
-	EventTypeDecisionTaskCompleted = "DecisionTaskCompleted"
-
-	// EventTypeDecisionTaskTimedOut is a EventType enum value
-	EventTypeDecisionTaskTimedOut = "DecisionTaskTimedOut"
-
-	// EventTypeActivityTaskScheduled is a EventType enum value
-	EventTypeActivityTaskScheduled = "ActivityTaskScheduled"
-
-	// EventTypeScheduleActivityTaskFailed is a EventType enum value
-	EventTypeScheduleActivityTaskFailed = "ScheduleActivityTaskFailed"
-
-	// EventTypeActivityTaskStarted is a EventType enum value
-	EventTypeActivityTaskStarted = "ActivityTaskStarted"
-
-	// EventTypeActivityTaskCompleted is a EventType enum value
-	EventTypeActivityTaskCompleted = "ActivityTaskCompleted"
-
-	// EventTypeActivityTaskFailed is a EventType enum value
-	EventTypeActivityTaskFailed = "ActivityTaskFailed"
-
-	// EventTypeActivityTaskTimedOut is a EventType enum value
-	EventTypeActivityTaskTimedOut = "ActivityTaskTimedOut"
-
-	// EventTypeActivityTaskCanceled is a EventType enum value
-	EventTypeActivityTaskCanceled = "ActivityTaskCanceled"
-
-	// EventTypeActivityTaskCancelRequested is a EventType enum value
-	EventTypeActivityTaskCancelRequested = "ActivityTaskCancelRequested"
-
-	// EventTypeRequestCancelActivityTaskFailed is a EventType enum value
-	EventTypeRequestCancelActivityTaskFailed = "RequestCancelActivityTaskFailed"
-
-	// EventTypeWorkflowExecutionSignaled is a EventType enum value
-	EventTypeWorkflowExecutionSignaled = "WorkflowExecutionSignaled"
-
-	// EventTypeMarkerRecorded is a EventType enum value
-	EventTypeMarkerRecorded = "MarkerRecorded"
-
-	// EventTypeRecordMarkerFailed is a EventType enum value
-	EventTypeRecordMarkerFailed = "RecordMarkerFailed"
-
-	// EventTypeTimerStarted is a EventType enum value
-	EventTypeTimerStarted = "TimerStarted"
-
-	// EventTypeStartTimerFailed is a EventType enum value
-	EventTypeStartTimerFailed = "StartTimerFailed"
-
-	// EventTypeTimerFired is a EventType enum value
-	EventTypeTimerFired = "TimerFired"
-
-	// EventTypeTimerCanceled is a EventType enum value
-	EventTypeTimerCanceled = "TimerCanceled"
-
-	// EventTypeCancelTimerFailed is a EventType enum value
-	EventTypeCancelTimerFailed = "CancelTimerFailed"
-
-	// EventTypeStartChildWorkflowExecutionInitiated is a EventType enum value
-	EventTypeStartChildWorkflowExecutionInitiated = "StartChildWorkflowExecutionInitiated"
-
-	// EventTypeStartChildWorkflowExecutionFailed is a EventType enum value
-	EventTypeStartChildWorkflowExecutionFailed = "StartChildWorkflowExecutionFailed"
-
-	// EventTypeChildWorkflowExecutionStarted is a EventType enum value
-	EventTypeChildWorkflowExecutionStarted = "ChildWorkflowExecutionStarted"
-
-	// EventTypeChildWorkflowExecutionCompleted is a EventType enum value
-	EventTypeChildWorkflowExecutionCompleted = "ChildWorkflowExecutionCompleted"
-
-	// EventTypeChildWorkflowExecutionFailed is a EventType enum value
-	EventTypeChildWorkflowExecutionFailed = "ChildWorkflowExecutionFailed"
-
-	// EventTypeChildWorkflowExecutionTimedOut is a EventType enum value
-	EventTypeChildWorkflowExecutionTimedOut = "ChildWorkflowExecutionTimedOut"
-
-	// EventTypeChildWorkflowExecutionCanceled is a EventType enum value
-	EventTypeChildWorkflowExecutionCanceled = "ChildWorkflowExecutionCanceled"
-
-	// EventTypeChildWorkflowExecutionTerminated is a EventType enum value
-	EventTypeChildWorkflowExecutionTerminated = "ChildWorkflowExecutionTerminated"
-
-	// EventTypeSignalExternalWorkflowExecutionInitiated is a EventType enum value
-	EventTypeSignalExternalWorkflowExecutionInitiated = "SignalExternalWorkflowExecutionInitiated"
-
-	// EventTypeSignalExternalWorkflowExecutionFailed is a EventType enum value
-	EventTypeSignalExternalWorkflowExecutionFailed = "SignalExternalWorkflowExecutionFailed"
-
-	// EventTypeExternalWorkflowExecutionSignaled is a EventType enum value
-	EventTypeExternalWorkflowExecutionSignaled = "ExternalWorkflowExecutionSignaled"
-
-	// EventTypeRequestCancelExternalWorkflowExecutionInitiated is a EventType enum value
-	EventTypeRequestCancelExternalWorkflowExecutionInitiated = "RequestCancelExternalWorkflowExecutionInitiated"
-
-	// EventTypeRequestCancelExternalWorkflowExecutionFailed is a EventType enum value
-	EventTypeRequestCancelExternalWorkflowExecutionFailed = "RequestCancelExternalWorkflowExecutionFailed"
-
-	// EventTypeExternalWorkflowExecutionCancelRequested is a EventType enum value
-	EventTypeExternalWorkflowExecutionCancelRequested = "ExternalWorkflowExecutionCancelRequested"
-
-	// EventTypeLambdaFunctionScheduled is a EventType enum value
-	EventTypeLambdaFunctionScheduled = "LambdaFunctionScheduled"
-
-	// EventTypeLambdaFunctionStarted is a EventType enum value
-	EventTypeLambdaFunctionStarted = "LambdaFunctionStarted"
-
-	// EventTypeLambdaFunctionCompleted is a EventType enum value
-	EventTypeLambdaFunctionCompleted = "LambdaFunctionCompleted"
-
-	// EventTypeLambdaFunctionFailed is a EventType enum value
-	EventTypeLambdaFunctionFailed = "LambdaFunctionFailed"
-
-	// EventTypeLambdaFunctionTimedOut is a EventType enum value
-	EventTypeLambdaFunctionTimedOut = "LambdaFunctionTimedOut"
-
-	// EventTypeScheduleLambdaFunctionFailed is a EventType enum value
-	EventTypeScheduleLambdaFunctionFailed = "ScheduleLambdaFunctionFailed"
-
-	// EventTypeStartLambdaFunctionFailed is a EventType enum value
-	EventTypeStartLambdaFunctionFailed = "StartLambdaFunctionFailed"
+	EventTypeWorkflowExecutionStarted                        EventType = "WorkflowExecutionStarted"
+	EventTypeWorkflowExecutionCancelRequested                EventType = "WorkflowExecutionCancelRequested"
+	EventTypeWorkflowExecutionCompleted                      EventType = "WorkflowExecutionCompleted"
+	EventTypeCompleteWorkflowExecutionFailed                 EventType = "CompleteWorkflowExecutionFailed"
+	EventTypeWorkflowExecutionFailed                         EventType = "WorkflowExecutionFailed"
+	EventTypeFailWorkflowExecutionFailed                     EventType = "FailWorkflowExecutionFailed"
+	EventTypeWorkflowExecutionTimedOut                       EventType = "WorkflowExecutionTimedOut"
+	EventTypeWorkflowExecutionCanceled                       EventType = "WorkflowExecutionCanceled"
+	EventTypeCancelWorkflowExecutionFailed                   EventType = "CancelWorkflowExecutionFailed"
+	EventTypeWorkflowExecutionContinuedAsNew                 EventType = "WorkflowExecutionContinuedAsNew"
+	EventTypeContinueAsNewWorkflowExecutionFailed            EventType = "ContinueAsNewWorkflowExecutionFailed"
+	EventTypeWorkflowExecutionTerminated                     EventType = "WorkflowExecutionTerminated"
+	EventTypeDecisionTaskScheduled                           EventType = "DecisionTaskScheduled"
+	EventTypeDecisionTaskStarted                             EventType = "DecisionTaskStarted"
+	EventTypeDecisionTaskCompleted                           EventType = "DecisionTaskCompleted"
+	EventTypeDecisionTaskTimedOut                            EventType = "DecisionTaskTimedOut"
+	EventTypeActivityTaskScheduled                           EventType = "ActivityTaskScheduled"
+	EventTypeScheduleActivityTaskFailed                      EventType = "ScheduleActivityTaskFailed"
+	EventTypeActivityTaskStarted                             EventType = "ActivityTaskStarted"
+	EventTypeActivityTaskCompleted                           EventType = "ActivityTaskCompleted"
+	EventTypeActivityTaskFailed                              EventType = "ActivityTaskFailed"
+	EventTypeActivityTaskTimedOut                            EventType = "ActivityTaskTimedOut"
+	EventTypeActivityTaskCanceled                            EventType = "ActivityTaskCanceled"
+	EventTypeActivityTaskCancelRequested                     EventType = "ActivityTaskCancelRequested"
+	EventTypeRequestCancelActivityTaskFailed                 EventType = "RequestCancelActivityTaskFailed"
+	EventTypeWorkflowExecutionSignaled                       EventType = "WorkflowExecutionSignaled"
+	EventTypeMarkerRecorded                                  EventType = "MarkerRecorded"
+	EventTypeRecordMarkerFailed                              EventType = "RecordMarkerFailed"
+	EventTypeTimerStarted                                    EventType = "TimerStarted"
+	EventTypeStartTimerFailed                                EventType = "StartTimerFailed"
+	EventTypeTimerFired                                      EventType = "TimerFired"
+	EventTypeTimerCanceled                                   EventType = "TimerCanceled"
+	EventTypeCancelTimerFailed                               EventType = "CancelTimerFailed"
+	EventTypeStartChildWorkflowExecutionInitiated            EventType = "StartChildWorkflowExecutionInitiated"
+	EventTypeStartChildWorkflowExecutionFailed               EventType = "StartChildWorkflowExecutionFailed"
+	EventTypeChildWorkflowExecutionStarted                   EventType = "ChildWorkflowExecutionStarted"
+	EventTypeChildWorkflowExecutionCompleted                 EventType = "ChildWorkflowExecutionCompleted"
+	EventTypeChildWorkflowExecutionFailed                    EventType = "ChildWorkflowExecutionFailed"
+	EventTypeChildWorkflowExecutionTimedOut                  EventType = "ChildWorkflowExecutionTimedOut"
+	EventTypeChildWorkflowExecutionCanceled                  EventType = "ChildWorkflowExecutionCanceled"
+	EventTypeChildWorkflowExecutionTerminated                EventType = "ChildWorkflowExecutionTerminated"
+	EventTypeSignalExternalWorkflowExecutionInitiated        EventType = "SignalExternalWorkflowExecutionInitiated"
+	EventTypeSignalExternalWorkflowExecutionFailed           EventType = "SignalExternalWorkflowExecutionFailed"
+	EventTypeExternalWorkflowExecutionSignaled               EventType = "ExternalWorkflowExecutionSignaled"
+	EventTypeRequestCancelExternalWorkflowExecutionInitiated EventType = "RequestCancelExternalWorkflowExecutionInitiated"
+	EventTypeRequestCancelExternalWorkflowExecutionFailed    EventType = "RequestCancelExternalWorkflowExecutionFailed"
+	EventTypeExternalWorkflowExecutionCancelRequested        EventType = "ExternalWorkflowExecutionCancelRequested"
+	EventTypeLambdaFunctionScheduled                         EventType = "LambdaFunctionScheduled"
+	EventTypeLambdaFunctionStarted                           EventType = "LambdaFunctionStarted"
+	EventTypeLambdaFunctionCompleted                         EventType = "LambdaFunctionCompleted"
+	EventTypeLambdaFunctionFailed                            EventType = "LambdaFunctionFailed"
+	EventTypeLambdaFunctionTimedOut                          EventType = "LambdaFunctionTimedOut"
+	EventTypeScheduleLambdaFunctionFailed                    EventType = "ScheduleLambdaFunctionFailed"
+	EventTypeStartLambdaFunctionFailed                       EventType = "StartLambdaFunctionFailed"
 )
 
-const (
-	// ExecutionStatusOpen is a ExecutionStatus enum value
-	ExecutionStatusOpen = "OPEN"
+type ExecutionStatus string
 
-	// ExecutionStatusClosed is a ExecutionStatus enum value
-	ExecutionStatusClosed = "CLOSED"
+// Enum values for ExecutionStatus
+const (
+	ExecutionStatusOpen   ExecutionStatus = "OPEN"
+	ExecutionStatusClosed ExecutionStatus = "CLOSED"
 )
 
-const (
-	// FailWorkflowExecutionFailedCauseUnhandledDecision is a FailWorkflowExecutionFailedCause enum value
-	FailWorkflowExecutionFailedCauseUnhandledDecision = "UNHANDLED_DECISION"
+type FailWorkflowExecutionFailedCause string
 
-	// FailWorkflowExecutionFailedCauseOperationNotPermitted is a FailWorkflowExecutionFailedCause enum value
-	FailWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+// Enum values for FailWorkflowExecutionFailedCause
+const (
+	FailWorkflowExecutionFailedCauseUnhandledDecision     FailWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
+	FailWorkflowExecutionFailedCauseOperationNotPermitted FailWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type LambdaFunctionTimeoutType string
+
+// Enum values for LambdaFunctionTimeoutType
 const (
-	// LambdaFunctionTimeoutTypeStartToClose is a LambdaFunctionTimeoutType enum value
-	LambdaFunctionTimeoutTypeStartToClose = "START_TO_CLOSE"
+	LambdaFunctionTimeoutTypeStartToClose LambdaFunctionTimeoutType = "START_TO_CLOSE"
 )
 
+type RecordMarkerFailedCause string
+
+// Enum values for RecordMarkerFailedCause
 const (
-	// RecordMarkerFailedCauseOperationNotPermitted is a RecordMarkerFailedCause enum value
-	RecordMarkerFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+	RecordMarkerFailedCauseOperationNotPermitted RecordMarkerFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
-const (
-	// RegistrationStatusRegistered is a RegistrationStatus enum value
-	RegistrationStatusRegistered = "REGISTERED"
+type RegistrationStatus string
 
-	// RegistrationStatusDeprecated is a RegistrationStatus enum value
-	RegistrationStatusDeprecated = "DEPRECATED"
+// Enum values for RegistrationStatus
+const (
+	RegistrationStatusRegistered RegistrationStatus = "REGISTERED"
+	RegistrationStatusDeprecated RegistrationStatus = "DEPRECATED"
 )
 
-const (
-	// RequestCancelActivityTaskFailedCauseActivityIdUnknown is a RequestCancelActivityTaskFailedCause enum value
-	RequestCancelActivityTaskFailedCauseActivityIdUnknown = "ACTIVITY_ID_UNKNOWN"
+type RequestCancelActivityTaskFailedCause string
 
-	// RequestCancelActivityTaskFailedCauseOperationNotPermitted is a RequestCancelActivityTaskFailedCause enum value
-	RequestCancelActivityTaskFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+// Enum values for RequestCancelActivityTaskFailedCause
+const (
+	RequestCancelActivityTaskFailedCauseActivityIdUnknown     RequestCancelActivityTaskFailedCause = "ACTIVITY_ID_UNKNOWN"
+	RequestCancelActivityTaskFailedCauseOperationNotPermitted RequestCancelActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type RequestCancelExternalWorkflowExecutionFailedCause string
+
+// Enum values for RequestCancelExternalWorkflowExecutionFailedCause
 const (
-	// RequestCancelExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution is a RequestCancelExternalWorkflowExecutionFailedCause enum value
-	RequestCancelExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
-
-	// RequestCancelExternalWorkflowExecutionFailedCauseRequestCancelExternalWorkflowExecutionRateExceeded is a RequestCancelExternalWorkflowExecutionFailedCause enum value
-	RequestCancelExternalWorkflowExecutionFailedCauseRequestCancelExternalWorkflowExecutionRateExceeded = "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
-
-	// RequestCancelExternalWorkflowExecutionFailedCauseOperationNotPermitted is a RequestCancelExternalWorkflowExecutionFailedCause enum value
-	RequestCancelExternalWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+	RequestCancelExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution                   RequestCancelExternalWorkflowExecutionFailedCause = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
+	RequestCancelExternalWorkflowExecutionFailedCauseRequestCancelExternalWorkflowExecutionRateExceeded RequestCancelExternalWorkflowExecutionFailedCause = "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
+	RequestCancelExternalWorkflowExecutionFailedCauseOperationNotPermitted                              RequestCancelExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type ScheduleActivityTaskFailedCause string
+
+// Enum values for ScheduleActivityTaskFailedCause
 const (
-	// ScheduleActivityTaskFailedCauseActivityTypeDeprecated is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseActivityTypeDeprecated = "ACTIVITY_TYPE_DEPRECATED"
-
-	// ScheduleActivityTaskFailedCauseActivityTypeDoesNotExist is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseActivityTypeDoesNotExist = "ACTIVITY_TYPE_DOES_NOT_EXIST"
-
-	// ScheduleActivityTaskFailedCauseActivityIdAlreadyInUse is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseActivityIdAlreadyInUse = "ACTIVITY_ID_ALREADY_IN_USE"
-
-	// ScheduleActivityTaskFailedCauseOpenActivitiesLimitExceeded is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseOpenActivitiesLimitExceeded = "OPEN_ACTIVITIES_LIMIT_EXCEEDED"
-
-	// ScheduleActivityTaskFailedCauseActivityCreationRateExceeded is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseActivityCreationRateExceeded = "ACTIVITY_CREATION_RATE_EXCEEDED"
-
-	// ScheduleActivityTaskFailedCauseDefaultScheduleToCloseTimeoutUndefined is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseDefaultScheduleToCloseTimeoutUndefined = "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED"
-
-	// ScheduleActivityTaskFailedCauseDefaultTaskListUndefined is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseDefaultTaskListUndefined = "DEFAULT_TASK_LIST_UNDEFINED"
-
-	// ScheduleActivityTaskFailedCauseDefaultScheduleToStartTimeoutUndefined is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseDefaultScheduleToStartTimeoutUndefined = "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED"
-
-	// ScheduleActivityTaskFailedCauseDefaultStartToCloseTimeoutUndefined is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseDefaultStartToCloseTimeoutUndefined = "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-
-	// ScheduleActivityTaskFailedCauseDefaultHeartbeatTimeoutUndefined is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseDefaultHeartbeatTimeoutUndefined = "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED"
-
-	// ScheduleActivityTaskFailedCauseOperationNotPermitted is a ScheduleActivityTaskFailedCause enum value
-	ScheduleActivityTaskFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+	ScheduleActivityTaskFailedCauseActivityTypeDeprecated                 ScheduleActivityTaskFailedCause = "ACTIVITY_TYPE_DEPRECATED"
+	ScheduleActivityTaskFailedCauseActivityTypeDoesNotExist               ScheduleActivityTaskFailedCause = "ACTIVITY_TYPE_DOES_NOT_EXIST"
+	ScheduleActivityTaskFailedCauseActivityIdAlreadyInUse                 ScheduleActivityTaskFailedCause = "ACTIVITY_ID_ALREADY_IN_USE"
+	ScheduleActivityTaskFailedCauseOpenActivitiesLimitExceeded            ScheduleActivityTaskFailedCause = "OPEN_ACTIVITIES_LIMIT_EXCEEDED"
+	ScheduleActivityTaskFailedCauseActivityCreationRateExceeded           ScheduleActivityTaskFailedCause = "ACTIVITY_CREATION_RATE_EXCEEDED"
+	ScheduleActivityTaskFailedCauseDefaultScheduleToCloseTimeoutUndefined ScheduleActivityTaskFailedCause = "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED"
+	ScheduleActivityTaskFailedCauseDefaultTaskListUndefined               ScheduleActivityTaskFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
+	ScheduleActivityTaskFailedCauseDefaultScheduleToStartTimeoutUndefined ScheduleActivityTaskFailedCause = "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED"
+	ScheduleActivityTaskFailedCauseDefaultStartToCloseTimeoutUndefined    ScheduleActivityTaskFailedCause = "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	ScheduleActivityTaskFailedCauseDefaultHeartbeatTimeoutUndefined       ScheduleActivityTaskFailedCause = "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED"
+	ScheduleActivityTaskFailedCauseOperationNotPermitted                  ScheduleActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type ScheduleLambdaFunctionFailedCause string
+
+// Enum values for ScheduleLambdaFunctionFailedCause
 const (
-	// ScheduleLambdaFunctionFailedCauseIdAlreadyInUse is a ScheduleLambdaFunctionFailedCause enum value
-	ScheduleLambdaFunctionFailedCauseIdAlreadyInUse = "ID_ALREADY_IN_USE"
-
-	// ScheduleLambdaFunctionFailedCauseOpenLambdaFunctionsLimitExceeded is a ScheduleLambdaFunctionFailedCause enum value
-	ScheduleLambdaFunctionFailedCauseOpenLambdaFunctionsLimitExceeded = "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED"
-
-	// ScheduleLambdaFunctionFailedCauseLambdaFunctionCreationRateExceeded is a ScheduleLambdaFunctionFailedCause enum value
-	ScheduleLambdaFunctionFailedCauseLambdaFunctionCreationRateExceeded = "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED"
-
-	// ScheduleLambdaFunctionFailedCauseLambdaServiceNotAvailableInRegion is a ScheduleLambdaFunctionFailedCause enum value
-	ScheduleLambdaFunctionFailedCauseLambdaServiceNotAvailableInRegion = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
+	ScheduleLambdaFunctionFailedCauseIdAlreadyInUse                     ScheduleLambdaFunctionFailedCause = "ID_ALREADY_IN_USE"
+	ScheduleLambdaFunctionFailedCauseOpenLambdaFunctionsLimitExceeded   ScheduleLambdaFunctionFailedCause = "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED"
+	ScheduleLambdaFunctionFailedCauseLambdaFunctionCreationRateExceeded ScheduleLambdaFunctionFailedCause = "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED"
+	ScheduleLambdaFunctionFailedCauseLambdaServiceNotAvailableInRegion  ScheduleLambdaFunctionFailedCause = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
 )
 
+type SignalExternalWorkflowExecutionFailedCause string
+
+// Enum values for SignalExternalWorkflowExecutionFailedCause
 const (
-	// SignalExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution is a SignalExternalWorkflowExecutionFailedCause enum value
-	SignalExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
-
-	// SignalExternalWorkflowExecutionFailedCauseSignalExternalWorkflowExecutionRateExceeded is a SignalExternalWorkflowExecutionFailedCause enum value
-	SignalExternalWorkflowExecutionFailedCauseSignalExternalWorkflowExecutionRateExceeded = "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
-
-	// SignalExternalWorkflowExecutionFailedCauseOperationNotPermitted is a SignalExternalWorkflowExecutionFailedCause enum value
-	SignalExternalWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+	SignalExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution            SignalExternalWorkflowExecutionFailedCause = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
+	SignalExternalWorkflowExecutionFailedCauseSignalExternalWorkflowExecutionRateExceeded SignalExternalWorkflowExecutionFailedCause = "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
+	SignalExternalWorkflowExecutionFailedCauseOperationNotPermitted                       SignalExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type StartChildWorkflowExecutionFailedCause string
+
+// Enum values for StartChildWorkflowExecutionFailedCause
 const (
-	// StartChildWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist = "WORKFLOW_TYPE_DOES_NOT_EXIST"
-
-	// StartChildWorkflowExecutionFailedCauseWorkflowTypeDeprecated is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseWorkflowTypeDeprecated = "WORKFLOW_TYPE_DEPRECATED"
-
-	// StartChildWorkflowExecutionFailedCauseOpenChildrenLimitExceeded is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseOpenChildrenLimitExceeded = "OPEN_CHILDREN_LIMIT_EXCEEDED"
-
-	// StartChildWorkflowExecutionFailedCauseOpenWorkflowsLimitExceeded is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseOpenWorkflowsLimitExceeded = "OPEN_WORKFLOWS_LIMIT_EXCEEDED"
-
-	// StartChildWorkflowExecutionFailedCauseChildCreationRateExceeded is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseChildCreationRateExceeded = "CHILD_CREATION_RATE_EXCEEDED"
-
-	// StartChildWorkflowExecutionFailedCauseWorkflowAlreadyRunning is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseWorkflowAlreadyRunning = "WORKFLOW_ALREADY_RUNNING"
-
-	// StartChildWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-
-	// StartChildWorkflowExecutionFailedCauseDefaultTaskListUndefined is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseDefaultTaskListUndefined = "DEFAULT_TASK_LIST_UNDEFINED"
-
-	// StartChildWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-
-	// StartChildWorkflowExecutionFailedCauseDefaultChildPolicyUndefined is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseDefaultChildPolicyUndefined = "DEFAULT_CHILD_POLICY_UNDEFINED"
-
-	// StartChildWorkflowExecutionFailedCauseOperationNotPermitted is a StartChildWorkflowExecutionFailedCause enum value
-	StartChildWorkflowExecutionFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+	StartChildWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist                     StartChildWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DOES_NOT_EXIST"
+	StartChildWorkflowExecutionFailedCauseWorkflowTypeDeprecated                       StartChildWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DEPRECATED"
+	StartChildWorkflowExecutionFailedCauseOpenChildrenLimitExceeded                    StartChildWorkflowExecutionFailedCause = "OPEN_CHILDREN_LIMIT_EXCEEDED"
+	StartChildWorkflowExecutionFailedCauseOpenWorkflowsLimitExceeded                   StartChildWorkflowExecutionFailedCause = "OPEN_WORKFLOWS_LIMIT_EXCEEDED"
+	StartChildWorkflowExecutionFailedCauseChildCreationRateExceeded                    StartChildWorkflowExecutionFailedCause = "CHILD_CREATION_RATE_EXCEEDED"
+	StartChildWorkflowExecutionFailedCauseWorkflowAlreadyRunning                       StartChildWorkflowExecutionFailedCause = "WORKFLOW_ALREADY_RUNNING"
+	StartChildWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined StartChildWorkflowExecutionFailedCause = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	StartChildWorkflowExecutionFailedCauseDefaultTaskListUndefined                     StartChildWorkflowExecutionFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
+	StartChildWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined      StartChildWorkflowExecutionFailedCause = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	StartChildWorkflowExecutionFailedCauseDefaultChildPolicyUndefined                  StartChildWorkflowExecutionFailedCause = "DEFAULT_CHILD_POLICY_UNDEFINED"
+	StartChildWorkflowExecutionFailedCauseOperationNotPermitted                        StartChildWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type StartLambdaFunctionFailedCause string
+
+// Enum values for StartLambdaFunctionFailedCause
 const (
-	// StartLambdaFunctionFailedCauseAssumeRoleFailed is a StartLambdaFunctionFailedCause enum value
-	StartLambdaFunctionFailedCauseAssumeRoleFailed = "ASSUME_ROLE_FAILED"
+	StartLambdaFunctionFailedCauseAssumeRoleFailed StartLambdaFunctionFailedCause = "ASSUME_ROLE_FAILED"
 )
 
+type StartTimerFailedCause string
+
+// Enum values for StartTimerFailedCause
 const (
-	// StartTimerFailedCauseTimerIdAlreadyInUse is a StartTimerFailedCause enum value
-	StartTimerFailedCauseTimerIdAlreadyInUse = "TIMER_ID_ALREADY_IN_USE"
-
-	// StartTimerFailedCauseOpenTimersLimitExceeded is a StartTimerFailedCause enum value
-	StartTimerFailedCauseOpenTimersLimitExceeded = "OPEN_TIMERS_LIMIT_EXCEEDED"
-
-	// StartTimerFailedCauseTimerCreationRateExceeded is a StartTimerFailedCause enum value
-	StartTimerFailedCauseTimerCreationRateExceeded = "TIMER_CREATION_RATE_EXCEEDED"
-
-	// StartTimerFailedCauseOperationNotPermitted is a StartTimerFailedCause enum value
-	StartTimerFailedCauseOperationNotPermitted = "OPERATION_NOT_PERMITTED"
+	StartTimerFailedCauseTimerIdAlreadyInUse       StartTimerFailedCause = "TIMER_ID_ALREADY_IN_USE"
+	StartTimerFailedCauseOpenTimersLimitExceeded   StartTimerFailedCause = "OPEN_TIMERS_LIMIT_EXCEEDED"
+	StartTimerFailedCauseTimerCreationRateExceeded StartTimerFailedCause = "TIMER_CREATION_RATE_EXCEEDED"
+	StartTimerFailedCauseOperationNotPermitted     StartTimerFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+type WorkflowExecutionCancelRequestedCause string
+
+// Enum values for WorkflowExecutionCancelRequestedCause
 const (
-	// WorkflowExecutionCancelRequestedCauseChildPolicyApplied is a WorkflowExecutionCancelRequestedCause enum value
-	WorkflowExecutionCancelRequestedCauseChildPolicyApplied = "CHILD_POLICY_APPLIED"
+	WorkflowExecutionCancelRequestedCauseChildPolicyApplied WorkflowExecutionCancelRequestedCause = "CHILD_POLICY_APPLIED"
 )
 
+type WorkflowExecutionTerminatedCause string
+
+// Enum values for WorkflowExecutionTerminatedCause
 const (
-	// WorkflowExecutionTerminatedCauseChildPolicyApplied is a WorkflowExecutionTerminatedCause enum value
-	WorkflowExecutionTerminatedCauseChildPolicyApplied = "CHILD_POLICY_APPLIED"
-
-	// WorkflowExecutionTerminatedCauseEventLimitExceeded is a WorkflowExecutionTerminatedCause enum value
-	WorkflowExecutionTerminatedCauseEventLimitExceeded = "EVENT_LIMIT_EXCEEDED"
-
-	// WorkflowExecutionTerminatedCauseOperatorInitiated is a WorkflowExecutionTerminatedCause enum value
-	WorkflowExecutionTerminatedCauseOperatorInitiated = "OPERATOR_INITIATED"
+	WorkflowExecutionTerminatedCauseChildPolicyApplied WorkflowExecutionTerminatedCause = "CHILD_POLICY_APPLIED"
+	WorkflowExecutionTerminatedCauseEventLimitExceeded WorkflowExecutionTerminatedCause = "EVENT_LIMIT_EXCEEDED"
+	WorkflowExecutionTerminatedCauseOperatorInitiated  WorkflowExecutionTerminatedCause = "OPERATOR_INITIATED"
 )
 
+type WorkflowExecutionTimeoutType string
+
+// Enum values for WorkflowExecutionTimeoutType
 const (
-	// WorkflowExecutionTimeoutTypeStartToClose is a WorkflowExecutionTimeoutType enum value
-	WorkflowExecutionTimeoutTypeStartToClose = "START_TO_CLOSE"
+	WorkflowExecutionTimeoutTypeStartToClose WorkflowExecutionTimeoutType = "START_TO_CLOSE"
 )

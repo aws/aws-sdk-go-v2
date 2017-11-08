@@ -7012,6 +7012,7 @@ func (s AuthorizeClusterSecurityGroupIngressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AuthorizeClusterSecurityGroupIngressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeClusterSecurityGroupIngressInput"}
+
 	if s.ClusterSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
 	}
@@ -7106,9 +7107,11 @@ func (s AuthorizeSnapshotAccessInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AuthorizeSnapshotAccessInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeSnapshotAccessInput"}
+
 	if s.AccountWithRestoreAccess == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountWithRestoreAccess"))
 	}
+
 	if s.SnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
@@ -8166,9 +8169,11 @@ func (s CopyClusterSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyClusterSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyClusterSnapshotInput"}
+
 	if s.SourceSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotIdentifier"))
 	}
+
 	if s.TargetSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetSnapshotIdentifier"))
 	}
@@ -8506,15 +8511,19 @@ func (s CreateClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
+
 	if s.MasterUserPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MasterUserPassword"))
 	}
+
 	if s.MasterUsername == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MasterUsername"))
 	}
+
 	if s.NodeType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NodeType"))
 	}
@@ -8767,12 +8776,15 @@ func (s CreateClusterParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterParameterGroupInput"}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.ParameterGroupFamily == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupFamily"))
 	}
+
 	if s.ParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
@@ -8874,9 +8886,11 @@ func (s CreateClusterSecurityGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterSecurityGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterSecurityGroupInput"}
+
 	if s.ClusterSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
@@ -8973,9 +8987,11 @@ func (s CreateClusterSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterSnapshotInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
+
 	if s.SnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
@@ -9076,12 +9092,15 @@ func (s CreateClusterSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterSubnetGroupInput"}
+
 	if s.ClusterSubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterSubnetGroupName"))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
@@ -9220,9 +9239,11 @@ func (s CreateEventSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEventSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
+
 	if s.SnsTopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -9332,6 +9353,7 @@ func (s CreateHsmClientCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHsmClientCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateHsmClientCertificateInput"}
+
 	if s.HsmClientCertificateIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmClientCertificateIdentifier"))
 	}
@@ -9433,21 +9455,27 @@ func (s CreateHsmConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHsmConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateHsmConfigurationInput"}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.HsmConfigurationIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmConfigurationIdentifier"))
 	}
+
 	if s.HsmIpAddress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmIpAddress"))
 	}
+
 	if s.HsmPartitionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmPartitionName"))
 	}
+
 	if s.HsmPartitionPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmPartitionPassword"))
 	}
+
 	if s.HsmServerPublicCertificate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmServerPublicCertificate"))
 	}
@@ -9570,6 +9598,7 @@ func (s CreateSnapshotCopyGrantInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotCopyGrantInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotCopyGrantInput"}
+
 	if s.SnapshotCopyGrantName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotCopyGrantName"))
 	}
@@ -9662,9 +9691,11 @@ func (s CreateTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -9806,6 +9837,7 @@ func (s DeleteClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -9887,6 +9919,7 @@ func (s DeleteClusterParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterParameterGroupInput"}
+
 	if s.ParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
@@ -9941,6 +9974,7 @@ func (s DeleteClusterSecurityGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterSecurityGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterSecurityGroupInput"}
+
 	if s.ClusterSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
 	}
@@ -10005,6 +10039,7 @@ func (s DeleteClusterSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterSnapshotInput"}
+
 	if s.SnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
@@ -10074,6 +10109,7 @@ func (s DeleteClusterSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterSubnetGroupInput"}
+
 	if s.ClusterSubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterSubnetGroupName"))
 	}
@@ -10128,6 +10164,7 @@ func (s DeleteEventSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -10182,6 +10219,7 @@ func (s DeleteHsmClientCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHsmClientCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmClientCertificateInput"}
+
 	if s.HsmClientCertificateIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmClientCertificateIdentifier"))
 	}
@@ -10236,6 +10274,7 @@ func (s DeleteHsmConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHsmConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmConfigurationInput"}
+
 	if s.HsmConfigurationIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HsmConfigurationIdentifier"))
 	}
@@ -10291,6 +10330,7 @@ func (s DeleteSnapshotCopyGrantInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSnapshotCopyGrantInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotCopyGrantInput"}
+
 	if s.SnapshotCopyGrantName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotCopyGrantName"))
 	}
@@ -10352,9 +10392,11 @@ func (s DeleteTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -10564,6 +10606,7 @@ func (s DescribeClusterParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeClusterParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterParametersInput"}
+
 	if s.ParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
@@ -11338,6 +11381,7 @@ func (s DescribeDefaultClusterParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDefaultClusterParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDefaultClusterParametersInput"}
+
 	if s.ParameterGroupFamily == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupFamily"))
 	}
@@ -11628,7 +11672,7 @@ type DescribeEventsInput struct {
 	//
 	//    * Specify cluster-snapshot when SourceIdentifier is a cluster snapshot
 	//    identifier.
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
@@ -11679,8 +11723,8 @@ func (s *DescribeEventsInput) SetSourceIdentifier(v string) *DescribeEventsInput
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *DescribeEventsInput) SetSourceType(v string) *DescribeEventsInput {
-	s.SourceType = &v
+func (s *DescribeEventsInput) SetSourceType(v SourceType) *DescribeEventsInput {
+	s.SourceType = v
 	return s
 }
 
@@ -11996,6 +12040,7 @@ func (s DescribeLoggingStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoggingStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoggingStatusInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -12328,6 +12373,7 @@ func (s DescribeResizeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeResizeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeResizeInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -12884,6 +12930,7 @@ func (s DisableLoggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableLoggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableLoggingInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -12927,6 +12974,7 @@ func (s DisableSnapshotCopyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableSnapshotCopyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableSnapshotCopyInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -13111,9 +13159,11 @@ func (s EnableLoggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableLoggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableLoggingInput"}
+
 	if s.BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
 	}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -13189,9 +13239,11 @@ func (s EnableSnapshotCopyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableSnapshotCopyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableSnapshotCopyInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
+
 	if s.DestinationRegion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationRegion"))
 	}
@@ -13312,7 +13364,7 @@ type Event struct {
 	SourceIdentifier *string `type:"string"`
 
 	// The source type for this event.
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 }
 
 // String returns the string representation
@@ -13362,8 +13414,8 @@ func (s *Event) SetSourceIdentifier(v string) *Event {
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *Event) SetSourceType(v string) *Event {
-	s.SourceType = &v
+func (s *Event) SetSourceType(v SourceType) *Event {
+	s.SourceType = v
 	return s
 }
 
@@ -13694,9 +13746,11 @@ func (s GetClusterCredentialsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetClusterCredentialsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetClusterCredentialsInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
+
 	if s.DbUser == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DbUser"))
 	}
@@ -14097,6 +14151,7 @@ func (s ModifyClusterIamRolesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyClusterIamRolesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterIamRolesInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -14365,6 +14420,7 @@ func (s ModifyClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -14542,9 +14598,11 @@ func (s ModifyClusterParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyClusterParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterParameterGroupInput"}
+
 	if s.ParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
+
 	if s.Parameters == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
@@ -14599,9 +14657,11 @@ func (s ModifyClusterSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyClusterSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterSubnetGroupInput"}
+
 	if s.ClusterSubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterSubnetGroupName"))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
@@ -14718,6 +14778,7 @@ func (s ModifyEventSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyEventSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -14834,9 +14895,11 @@ func (s ModifySnapshotCopyRetentionPeriodInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifySnapshotCopyRetentionPeriodInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifySnapshotCopyRetentionPeriodInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
+
 	if s.RetentionPeriod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RetentionPeriod"))
 	}
@@ -14949,7 +15012,7 @@ type Parameter struct {
 	// information about parameters and parameter groups, go to Amazon Redshift
 	// Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// in the Amazon Redshift Cluster Management Guide.
-	ApplyType *string `type:"string" enum:"ParameterApplyType"`
+	ApplyType ParameterApplyType `type:"string"`
 
 	// The data type of the parameter.
 	DataType *string `type:"string"`
@@ -14991,8 +15054,8 @@ func (s *Parameter) SetAllowedValues(v string) *Parameter {
 }
 
 // SetApplyType sets the ApplyType field's value.
-func (s *Parameter) SetApplyType(v string) *Parameter {
-	s.ApplyType = &v
+func (s *Parameter) SetApplyType(v ParameterApplyType) *Parameter {
+	s.ApplyType = v
 	return s
 }
 
@@ -15173,6 +15236,7 @@ func (s PurchaseReservedNodeOfferingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseReservedNodeOfferingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedNodeOfferingInput"}
+
 	if s.ReservedNodeOfferingId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReservedNodeOfferingId"))
 	}
@@ -15243,6 +15307,7 @@ func (s RebootClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebootClusterInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -15583,6 +15648,7 @@ func (s ResetClusterParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetClusterParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetClusterParameterGroupInput"}
+
 	if s.ParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
@@ -15797,9 +15863,11 @@ func (s RestoreFromClusterSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreFromClusterSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreFromClusterSnapshotInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
+
 	if s.SnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
@@ -16096,18 +16164,23 @@ func (s RestoreTableFromClusterSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreTableFromClusterSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreTableFromClusterSnapshotInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
+
 	if s.NewTableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewTableName"))
 	}
+
 	if s.SnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
+
 	if s.SourceDatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceDatabaseName"))
 	}
+
 	if s.SourceTableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceTableName"))
 	}
@@ -16231,6 +16304,7 @@ func (s RevokeClusterSecurityGroupIngressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeClusterSecurityGroupIngressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RevokeClusterSecurityGroupIngressInput"}
+
 	if s.ClusterSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterSecurityGroupName"))
 	}
@@ -16323,9 +16397,11 @@ func (s RevokeSnapshotAccessInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeSnapshotAccessInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RevokeSnapshotAccessInput"}
+
 	if s.AccountWithRestoreAccess == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountWithRestoreAccess"))
 	}
+
 	if s.SnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
@@ -16404,6 +16480,7 @@ func (s RotateEncryptionKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RotateEncryptionKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RotateEncryptionKeyInput"}
+
 	if s.ClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
@@ -16882,7 +16959,7 @@ type TableRestoreStatus struct {
 	// A value that describes the current state of the table restore request.
 	//
 	// Valid Values: SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS
-	Status *string `type:"string" enum:"TableRestoreStatusType"`
+	Status TableRestoreStatusType `type:"string"`
 
 	// The unique identifier for the table restore request.
 	TableRestoreRequestId *string `type:"string"`
@@ -16962,8 +17039,8 @@ func (s *TableRestoreStatus) SetSourceTableName(v string) *TableRestoreStatus {
 }
 
 // SetStatus sets the Status field's value.
-func (s *TableRestoreStatus) SetStatus(v string) *TableRestoreStatus {
-	s.Status = &v
+func (s *TableRestoreStatus) SetStatus(v TableRestoreStatusType) *TableRestoreStatus {
+	s.Status = v
 	return s
 }
 
@@ -17126,41 +17203,31 @@ func (s *VpcSecurityGroupMembership) SetVpcSecurityGroupId(v string) *VpcSecurit
 	return s
 }
 
-const (
-	// ParameterApplyTypeStatic is a ParameterApplyType enum value
-	ParameterApplyTypeStatic = "static"
+type ParameterApplyType string
 
-	// ParameterApplyTypeDynamic is a ParameterApplyType enum value
-	ParameterApplyTypeDynamic = "dynamic"
+// Enum values for ParameterApplyType
+const (
+	ParameterApplyTypeStatic  ParameterApplyType = "static"
+	ParameterApplyTypeDynamic ParameterApplyType = "dynamic"
 )
 
+type SourceType string
+
+// Enum values for SourceType
 const (
-	// SourceTypeCluster is a SourceType enum value
-	SourceTypeCluster = "cluster"
-
-	// SourceTypeClusterParameterGroup is a SourceType enum value
-	SourceTypeClusterParameterGroup = "cluster-parameter-group"
-
-	// SourceTypeClusterSecurityGroup is a SourceType enum value
-	SourceTypeClusterSecurityGroup = "cluster-security-group"
-
-	// SourceTypeClusterSnapshot is a SourceType enum value
-	SourceTypeClusterSnapshot = "cluster-snapshot"
+	SourceTypeCluster               SourceType = "cluster"
+	SourceTypeClusterParameterGroup SourceType = "cluster-parameter-group"
+	SourceTypeClusterSecurityGroup  SourceType = "cluster-security-group"
+	SourceTypeClusterSnapshot       SourceType = "cluster-snapshot"
 )
 
+type TableRestoreStatusType string
+
+// Enum values for TableRestoreStatusType
 const (
-	// TableRestoreStatusTypePending is a TableRestoreStatusType enum value
-	TableRestoreStatusTypePending = "PENDING"
-
-	// TableRestoreStatusTypeInProgress is a TableRestoreStatusType enum value
-	TableRestoreStatusTypeInProgress = "IN_PROGRESS"
-
-	// TableRestoreStatusTypeSucceeded is a TableRestoreStatusType enum value
-	TableRestoreStatusTypeSucceeded = "SUCCEEDED"
-
-	// TableRestoreStatusTypeFailed is a TableRestoreStatusType enum value
-	TableRestoreStatusTypeFailed = "FAILED"
-
-	// TableRestoreStatusTypeCanceled is a TableRestoreStatusType enum value
-	TableRestoreStatusTypeCanceled = "CANCELED"
+	TableRestoreStatusTypePending    TableRestoreStatusType = "PENDING"
+	TableRestoreStatusTypeInProgress TableRestoreStatusType = "IN_PROGRESS"
+	TableRestoreStatusTypeSucceeded  TableRestoreStatusType = "SUCCEEDED"
+	TableRestoreStatusTypeFailed     TableRestoreStatusType = "FAILED"
+	TableRestoreStatusTypeCanceled   TableRestoreStatusType = "CANCELED"
 )

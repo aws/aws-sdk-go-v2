@@ -1187,6 +1187,7 @@ func (s BatchDeleteBuildsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteBuildsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteBuildsInput"}
+
 	if s.Ids == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Ids"))
 	}
@@ -1262,6 +1263,7 @@ func (s BatchGetBuildsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetBuildsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetBuildsInput"}
+
 	if s.Ids == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Ids"))
 	}
@@ -1337,6 +1339,7 @@ func (s BatchGetProjectsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetProjectsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetProjectsInput"}
+
 	if s.Names == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Names"))
 	}
@@ -1416,7 +1419,7 @@ type Build struct {
 	//    * SUCCEEDED: The build succeeded.
 	//
 	//    * TIMED_OUT: The build timed out.
-	BuildStatus *string `locationName:"buildStatus" type:"string" enum:"StatusType"`
+	BuildStatus StatusType `locationName:"buildStatus" type:"string"`
 
 	// The current build phase.
 	CurrentPhase *string `locationName:"currentPhase" type:"string"`
@@ -1495,8 +1498,8 @@ func (s *Build) SetBuildComplete(v bool) *Build {
 }
 
 // SetBuildStatus sets the BuildStatus field's value.
-func (s *Build) SetBuildStatus(v string) *Build {
-	s.BuildStatus = &v
+func (s *Build) SetBuildStatus(v StatusType) *Build {
+	s.BuildStatus = v
 	return s
 }
 
@@ -1690,7 +1693,7 @@ type BuildPhase struct {
 	//    * SUCCEEDED: The build phase succeeded.
 	//
 	//    * TIMED_OUT: The build phase timed out.
-	PhaseStatus *string `locationName:"phaseStatus" type:"string" enum:"StatusType"`
+	PhaseStatus StatusType `locationName:"phaseStatus" type:"string"`
 
 	// The name of the build phase. Valid values include:
 	//
@@ -1714,7 +1717,7 @@ type BuildPhase struct {
 	//
 	//    * UPLOAD_ARTIFACTS: Build output artifacts are being uploaded to the output
 	//    location.
-	PhaseType *string `locationName:"phaseType" type:"string" enum:"BuildPhaseType"`
+	PhaseType BuildPhaseType `locationName:"phaseType" type:"string"`
 
 	// When the build phase started, expressed in Unix time format.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
@@ -1749,14 +1752,14 @@ func (s *BuildPhase) SetEndTime(v time.Time) *BuildPhase {
 }
 
 // SetPhaseStatus sets the PhaseStatus field's value.
-func (s *BuildPhase) SetPhaseStatus(v string) *BuildPhase {
-	s.PhaseStatus = &v
+func (s *BuildPhase) SetPhaseStatus(v StatusType) *BuildPhase {
+	s.PhaseStatus = v
 	return s
 }
 
 // SetPhaseType sets the PhaseType field's value.
-func (s *BuildPhase) SetPhaseType(v string) *BuildPhase {
-	s.PhaseType = &v
+func (s *BuildPhase) SetPhaseType(v BuildPhaseType) *BuildPhase {
+	s.PhaseType = v
 	return s
 }
 
@@ -1830,15 +1833,18 @@ func (s CreateProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateProjectInput"}
+
 	if s.Artifacts == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Artifacts"))
 	}
 	if s.EncryptionKey != nil && len(*s.EncryptionKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EncryptionKey", 1))
 	}
+
 	if s.Environment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Environment"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -1848,6 +1854,7 @@ func (s *CreateProjectInput) Validate() error {
 	if s.ServiceRole != nil && len(*s.ServiceRole) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ServiceRole", 1))
 	}
+
 	if s.Source == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
@@ -1987,6 +1994,7 @@ func (s CreateWebhookInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateWebhookInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateWebhookInput"}
+
 	if s.ProjectName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
 	}
@@ -2054,6 +2062,7 @@ func (s DeleteProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2111,6 +2120,7 @@ func (s DeleteWebhookInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteWebhookInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteWebhookInput"}
+
 	if s.ProjectName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
 	}
@@ -2189,7 +2199,7 @@ type EnvironmentLanguage struct {
 	Images []*EnvironmentImage `locationName:"images" type:"list"`
 
 	// The programming language for the Docker images.
-	Language *string `locationName:"language" type:"string" enum:"LanguageType"`
+	Language LanguageType `locationName:"language" type:"string"`
 }
 
 // String returns the string representation
@@ -2209,8 +2219,8 @@ func (s *EnvironmentLanguage) SetImages(v []*EnvironmentImage) *EnvironmentLangu
 }
 
 // SetLanguage sets the Language field's value.
-func (s *EnvironmentLanguage) SetLanguage(v string) *EnvironmentLanguage {
-	s.Language = &v
+func (s *EnvironmentLanguage) SetLanguage(v LanguageType) *EnvironmentLanguage {
+	s.Language = v
 	return s
 }
 
@@ -2224,7 +2234,7 @@ type EnvironmentPlatform struct {
 	Languages []*EnvironmentLanguage `locationName:"languages" type:"list"`
 
 	// The platform's name.
-	Platform *string `locationName:"platform" type:"string" enum:"PlatformType"`
+	Platform PlatformType `locationName:"platform" type:"string"`
 }
 
 // String returns the string representation
@@ -2244,8 +2254,8 @@ func (s *EnvironmentPlatform) SetLanguages(v []*EnvironmentLanguage) *Environmen
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *EnvironmentPlatform) SetPlatform(v string) *EnvironmentPlatform {
-	s.Platform = &v
+func (s *EnvironmentPlatform) SetPlatform(v PlatformType) *EnvironmentPlatform {
+	s.Platform = v
 	return s
 }
 
@@ -2265,7 +2275,7 @@ type EnvironmentVariable struct {
 	//    Manager Parameter Store.
 	//
 	//    * PLAINTEXT: An environment variable in plaintext format.
-	Type *string `locationName:"type" type:"string" enum:"EnvironmentVariableType"`
+	Type EnvironmentVariableType `locationName:"type" type:"string"`
 
 	// The value of the environment variable.
 	//
@@ -2291,12 +2301,14 @@ func (s EnvironmentVariable) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnvironmentVariable) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnvironmentVariable"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -2314,8 +2326,8 @@ func (s *EnvironmentVariable) SetName(v string) *EnvironmentVariable {
 }
 
 // SetType sets the Type field's value.
-func (s *EnvironmentVariable) SetType(v string) *EnvironmentVariable {
-	s.Type = &v
+func (s *EnvironmentVariable) SetType(v EnvironmentVariableType) *EnvironmentVariable {
+	s.Type = v
 	return s
 }
 
@@ -2347,7 +2359,7 @@ type ListBuildsForProjectInput struct {
 	//    * ASCENDING: List the build IDs in ascending order by build ID.
 	//
 	//    * DESCENDING: List the build IDs in descending order by build ID.
-	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+	SortOrder SortOrderType `locationName:"sortOrder" type:"string"`
 }
 
 // String returns the string representation
@@ -2363,6 +2375,7 @@ func (s ListBuildsForProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBuildsForProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListBuildsForProjectInput"}
+
 	if s.ProjectName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
 	}
@@ -2389,8 +2402,8 @@ func (s *ListBuildsForProjectInput) SetProjectName(v string) *ListBuildsForProje
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *ListBuildsForProjectInput) SetSortOrder(v string) *ListBuildsForProjectInput {
-	s.SortOrder = &v
+func (s *ListBuildsForProjectInput) SetSortOrder(v SortOrderType) *ListBuildsForProjectInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -2448,7 +2461,7 @@ type ListBuildsInput struct {
 	//    * ASCENDING: List the build IDs in ascending order by build ID.
 	//
 	//    * DESCENDING: List the build IDs in descending order by build ID.
-	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+	SortOrder SortOrderType `locationName:"sortOrder" type:"string"`
 }
 
 // String returns the string representation
@@ -2468,8 +2481,8 @@ func (s *ListBuildsInput) SetNextToken(v string) *ListBuildsInput {
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *ListBuildsInput) SetSortOrder(v string) *ListBuildsInput {
-	s.SortOrder = &v
+func (s *ListBuildsInput) SetSortOrder(v SortOrderType) *ListBuildsInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -2573,7 +2586,7 @@ type ListProjectsInput struct {
 	//
 	// Use sortOrder to specify in what order to list the build project names based
 	// on the preceding criteria.
-	SortBy *string `locationName:"sortBy" type:"string" enum:"ProjectSortByType"`
+	SortBy ProjectSortByType `locationName:"sortBy" type:"string"`
 
 	// The order in which to list build projects. Valid values include:
 	//
@@ -2582,7 +2595,7 @@ type ListProjectsInput struct {
 	//    * DESCENDING: List the build project names in descending order.
 	//
 	// Use sortBy to specify the criterion to be used to list build project names.
-	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrderType"`
+	SortOrder SortOrderType `locationName:"sortOrder" type:"string"`
 }
 
 // String returns the string representation
@@ -2615,14 +2628,14 @@ func (s *ListProjectsInput) SetNextToken(v string) *ListProjectsInput {
 }
 
 // SetSortBy sets the SortBy field's value.
-func (s *ListProjectsInput) SetSortBy(v string) *ListProjectsInput {
-	s.SortBy = &v
+func (s *ListProjectsInput) SetSortBy(v ProjectSortByType) *ListProjectsInput {
+	s.SortBy = v
 	return s
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *ListProjectsInput) SetSortOrder(v string) *ListProjectsInput {
-	s.SortOrder = &v
+func (s *ListProjectsInput) SetSortOrder(v SortOrderType) *ListProjectsInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -2942,7 +2955,7 @@ type ProjectArtifacts struct {
 	// For example, if path is set to MyArtifacts, namespaceType is set to BUILD_ID,
 	// and name is set to MyArtifact.zip, then the output artifact would be stored
 	// in MyArtifacts/build-ID/MyArtifact.zip.
-	NamespaceType *string `locationName:"namespaceType" type:"string" enum:"ArtifactNamespace"`
+	NamespaceType ArtifactNamespace `locationName:"namespaceType" type:"string"`
 
 	// The type of build output artifact to create, as follows:
 	//
@@ -2960,7 +2973,7 @@ type ProjectArtifacts struct {
 	//
 	// ZIP: AWS CodeBuild will create in the output bucket a ZIP file containing
 	//    the build output.
-	Packaging *string `locationName:"packaging" type:"string" enum:"ArtifactPackaging"`
+	Packaging ArtifactPackaging `locationName:"packaging" type:"string"`
 
 	// Along with namespaceType and name, the pattern that AWS CodeBuild will use
 	// to name and store the output artifact, as follows:
@@ -2991,7 +3004,7 @@ type ProjectArtifacts struct {
 	//    Service (Amazon S3).
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"ArtifactsType"`
+	Type ArtifactsType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3007,7 +3020,7 @@ func (s ProjectArtifacts) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProjectArtifacts) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ProjectArtifacts"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -3030,14 +3043,14 @@ func (s *ProjectArtifacts) SetName(v string) *ProjectArtifacts {
 }
 
 // SetNamespaceType sets the NamespaceType field's value.
-func (s *ProjectArtifacts) SetNamespaceType(v string) *ProjectArtifacts {
-	s.NamespaceType = &v
+func (s *ProjectArtifacts) SetNamespaceType(v ArtifactNamespace) *ProjectArtifacts {
+	s.NamespaceType = v
 	return s
 }
 
 // SetPackaging sets the Packaging field's value.
-func (s *ProjectArtifacts) SetPackaging(v string) *ProjectArtifacts {
-	s.Packaging = &v
+func (s *ProjectArtifacts) SetPackaging(v ArtifactPackaging) *ProjectArtifacts {
+	s.Packaging = v
 	return s
 }
 
@@ -3048,8 +3061,8 @@ func (s *ProjectArtifacts) SetPath(v string) *ProjectArtifacts {
 }
 
 // SetType sets the Type field's value.
-func (s *ProjectArtifacts) SetType(v string) *ProjectArtifacts {
-	s.Type = &v
+func (s *ProjectArtifacts) SetType(v ArtifactsType) *ProjectArtifacts {
+	s.Type = v
 	return s
 }
 
@@ -3068,7 +3081,7 @@ type ProjectEnvironment struct {
 	//    * BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds.
 	//
 	// ComputeType is a required field
-	ComputeType *string `locationName:"computeType" type:"string" required:"true" enum:"ComputeType"`
+	ComputeType ComputeType `locationName:"computeType" type:"string" required:"true"`
 
 	// A set of environment variables to make available to builds for this build
 	// project.
@@ -3099,7 +3112,7 @@ type ProjectEnvironment struct {
 	// The type of build environment to use for related builds.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"EnvironmentType"`
+	Type EnvironmentType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3115,16 +3128,17 @@ func (s ProjectEnvironment) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProjectEnvironment) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ProjectEnvironment"}
-	if s.ComputeType == nil {
+	if len(s.ComputeType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ComputeType"))
 	}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 	if s.Image != nil && len(*s.Image) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Image", 1))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.EnvironmentVariables != nil {
@@ -3145,8 +3159,8 @@ func (s *ProjectEnvironment) Validate() error {
 }
 
 // SetComputeType sets the ComputeType field's value.
-func (s *ProjectEnvironment) SetComputeType(v string) *ProjectEnvironment {
-	s.ComputeType = &v
+func (s *ProjectEnvironment) SetComputeType(v ComputeType) *ProjectEnvironment {
+	s.ComputeType = v
 	return s
 }
 
@@ -3169,8 +3183,8 @@ func (s *ProjectEnvironment) SetPrivilegedMode(v bool) *ProjectEnvironment {
 }
 
 // SetType sets the Type field's value.
-func (s *ProjectEnvironment) SetType(v string) *ProjectEnvironment {
-	s.Type = &v
+func (s *ProjectEnvironment) SetType(v EnvironmentType) *ProjectEnvironment {
+	s.Type = v
 	return s
 }
 
@@ -3250,7 +3264,7 @@ type ProjectSource struct {
 	//    input bucket.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"SourceType"`
+	Type SourceType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3266,7 +3280,7 @@ func (s ProjectSource) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProjectSource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ProjectSource"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Auth != nil {
@@ -3300,8 +3314,8 @@ func (s *ProjectSource) SetLocation(v string) *ProjectSource {
 }
 
 // SetType sets the Type field's value.
-func (s *ProjectSource) SetType(v string) *ProjectSource {
-	s.Type = &v
+func (s *ProjectSource) SetType(v SourceType) *ProjectSource {
+	s.Type = v
 	return s
 }
 
@@ -3322,7 +3336,7 @@ type SourceAuth struct {
 	// the OAuth authorization type.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"SourceAuthType"`
+	Type SourceAuthType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3338,7 +3352,7 @@ func (s SourceAuth) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SourceAuth) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SourceAuth"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -3355,8 +3369,8 @@ func (s *SourceAuth) SetResource(v string) *SourceAuth {
 }
 
 // SetType sets the Type field's value.
-func (s *SourceAuth) SetType(v string) *SourceAuth {
-	s.Type = &v
+func (s *SourceAuth) SetType(v SourceAuthType) *SourceAuth {
+	s.Type = v
 	return s
 }
 
@@ -3420,6 +3434,7 @@ func (s StartBuildInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartBuildInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartBuildInput"}
+
 	if s.ProjectName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
 	}
@@ -3534,6 +3549,7 @@ func (s StopBuildInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopBuildInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopBuildInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -3693,6 +3709,7 @@ func (s *UpdateProjectInput) Validate() error {
 	if s.EncryptionKey != nil && len(*s.EncryptionKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EncryptionKey", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3841,186 +3858,138 @@ func (s *Webhook) SetUrl(v string) *Webhook {
 	return s
 }
 
-const (
-	// ArtifactNamespaceNone is a ArtifactNamespace enum value
-	ArtifactNamespaceNone = "NONE"
+type ArtifactNamespace string
 
-	// ArtifactNamespaceBuildId is a ArtifactNamespace enum value
-	ArtifactNamespaceBuildId = "BUILD_ID"
+// Enum values for ArtifactNamespace
+const (
+	ArtifactNamespaceNone    ArtifactNamespace = "NONE"
+	ArtifactNamespaceBuildId ArtifactNamespace = "BUILD_ID"
 )
 
-const (
-	// ArtifactPackagingNone is a ArtifactPackaging enum value
-	ArtifactPackagingNone = "NONE"
+type ArtifactPackaging string
 
-	// ArtifactPackagingZip is a ArtifactPackaging enum value
-	ArtifactPackagingZip = "ZIP"
+// Enum values for ArtifactPackaging
+const (
+	ArtifactPackagingNone ArtifactPackaging = "NONE"
+	ArtifactPackagingZip  ArtifactPackaging = "ZIP"
 )
 
+type ArtifactsType string
+
+// Enum values for ArtifactsType
 const (
-	// ArtifactsTypeCodepipeline is a ArtifactsType enum value
-	ArtifactsTypeCodepipeline = "CODEPIPELINE"
-
-	// ArtifactsTypeS3 is a ArtifactsType enum value
-	ArtifactsTypeS3 = "S3"
-
-	// ArtifactsTypeNoArtifacts is a ArtifactsType enum value
-	ArtifactsTypeNoArtifacts = "NO_ARTIFACTS"
+	ArtifactsTypeCodepipeline ArtifactsType = "CODEPIPELINE"
+	ArtifactsTypeS3           ArtifactsType = "S3"
+	ArtifactsTypeNoArtifacts  ArtifactsType = "NO_ARTIFACTS"
 )
 
+type BuildPhaseType string
+
+// Enum values for BuildPhaseType
 const (
-	// BuildPhaseTypeSubmitted is a BuildPhaseType enum value
-	BuildPhaseTypeSubmitted = "SUBMITTED"
-
-	// BuildPhaseTypeProvisioning is a BuildPhaseType enum value
-	BuildPhaseTypeProvisioning = "PROVISIONING"
-
-	// BuildPhaseTypeDownloadSource is a BuildPhaseType enum value
-	BuildPhaseTypeDownloadSource = "DOWNLOAD_SOURCE"
-
-	// BuildPhaseTypeInstall is a BuildPhaseType enum value
-	BuildPhaseTypeInstall = "INSTALL"
-
-	// BuildPhaseTypePreBuild is a BuildPhaseType enum value
-	BuildPhaseTypePreBuild = "PRE_BUILD"
-
-	// BuildPhaseTypeBuild is a BuildPhaseType enum value
-	BuildPhaseTypeBuild = "BUILD"
-
-	// BuildPhaseTypePostBuild is a BuildPhaseType enum value
-	BuildPhaseTypePostBuild = "POST_BUILD"
-
-	// BuildPhaseTypeUploadArtifacts is a BuildPhaseType enum value
-	BuildPhaseTypeUploadArtifacts = "UPLOAD_ARTIFACTS"
-
-	// BuildPhaseTypeFinalizing is a BuildPhaseType enum value
-	BuildPhaseTypeFinalizing = "FINALIZING"
-
-	// BuildPhaseTypeCompleted is a BuildPhaseType enum value
-	BuildPhaseTypeCompleted = "COMPLETED"
+	BuildPhaseTypeSubmitted       BuildPhaseType = "SUBMITTED"
+	BuildPhaseTypeProvisioning    BuildPhaseType = "PROVISIONING"
+	BuildPhaseTypeDownloadSource  BuildPhaseType = "DOWNLOAD_SOURCE"
+	BuildPhaseTypeInstall         BuildPhaseType = "INSTALL"
+	BuildPhaseTypePreBuild        BuildPhaseType = "PRE_BUILD"
+	BuildPhaseTypeBuild           BuildPhaseType = "BUILD"
+	BuildPhaseTypePostBuild       BuildPhaseType = "POST_BUILD"
+	BuildPhaseTypeUploadArtifacts BuildPhaseType = "UPLOAD_ARTIFACTS"
+	BuildPhaseTypeFinalizing      BuildPhaseType = "FINALIZING"
+	BuildPhaseTypeCompleted       BuildPhaseType = "COMPLETED"
 )
 
+type ComputeType string
+
+// Enum values for ComputeType
 const (
-	// ComputeTypeBuildGeneral1Small is a ComputeType enum value
-	ComputeTypeBuildGeneral1Small = "BUILD_GENERAL1_SMALL"
-
-	// ComputeTypeBuildGeneral1Medium is a ComputeType enum value
-	ComputeTypeBuildGeneral1Medium = "BUILD_GENERAL1_MEDIUM"
-
-	// ComputeTypeBuildGeneral1Large is a ComputeType enum value
-	ComputeTypeBuildGeneral1Large = "BUILD_GENERAL1_LARGE"
+	ComputeTypeBuildGeneral1Small  ComputeType = "BUILD_GENERAL1_SMALL"
+	ComputeTypeBuildGeneral1Medium ComputeType = "BUILD_GENERAL1_MEDIUM"
+	ComputeTypeBuildGeneral1Large  ComputeType = "BUILD_GENERAL1_LARGE"
 )
 
+type EnvironmentType string
+
+// Enum values for EnvironmentType
 const (
-	// EnvironmentTypeLinuxContainer is a EnvironmentType enum value
-	EnvironmentTypeLinuxContainer = "LINUX_CONTAINER"
+	EnvironmentTypeLinuxContainer EnvironmentType = "LINUX_CONTAINER"
 )
 
-const (
-	// EnvironmentVariableTypePlaintext is a EnvironmentVariableType enum value
-	EnvironmentVariableTypePlaintext = "PLAINTEXT"
+type EnvironmentVariableType string
 
-	// EnvironmentVariableTypeParameterStore is a EnvironmentVariableType enum value
-	EnvironmentVariableTypeParameterStore = "PARAMETER_STORE"
+// Enum values for EnvironmentVariableType
+const (
+	EnvironmentVariableTypePlaintext      EnvironmentVariableType = "PLAINTEXT"
+	EnvironmentVariableTypeParameterStore EnvironmentVariableType = "PARAMETER_STORE"
 )
 
+type LanguageType string
+
+// Enum values for LanguageType
 const (
-	// LanguageTypeJava is a LanguageType enum value
-	LanguageTypeJava = "JAVA"
-
-	// LanguageTypePython is a LanguageType enum value
-	LanguageTypePython = "PYTHON"
-
-	// LanguageTypeNodeJs is a LanguageType enum value
-	LanguageTypeNodeJs = "NODE_JS"
-
-	// LanguageTypeRuby is a LanguageType enum value
-	LanguageTypeRuby = "RUBY"
-
-	// LanguageTypeGolang is a LanguageType enum value
-	LanguageTypeGolang = "GOLANG"
-
-	// LanguageTypeDocker is a LanguageType enum value
-	LanguageTypeDocker = "DOCKER"
-
-	// LanguageTypeAndroid is a LanguageType enum value
-	LanguageTypeAndroid = "ANDROID"
-
-	// LanguageTypeDotnet is a LanguageType enum value
-	LanguageTypeDotnet = "DOTNET"
-
-	// LanguageTypeBase is a LanguageType enum value
-	LanguageTypeBase = "BASE"
+	LanguageTypeJava    LanguageType = "JAVA"
+	LanguageTypePython  LanguageType = "PYTHON"
+	LanguageTypeNodeJs  LanguageType = "NODE_JS"
+	LanguageTypeRuby    LanguageType = "RUBY"
+	LanguageTypeGolang  LanguageType = "GOLANG"
+	LanguageTypeDocker  LanguageType = "DOCKER"
+	LanguageTypeAndroid LanguageType = "ANDROID"
+	LanguageTypeDotnet  LanguageType = "DOTNET"
+	LanguageTypeBase    LanguageType = "BASE"
 )
 
+type PlatformType string
+
+// Enum values for PlatformType
 const (
-	// PlatformTypeDebian is a PlatformType enum value
-	PlatformTypeDebian = "DEBIAN"
-
-	// PlatformTypeAmazonLinux is a PlatformType enum value
-	PlatformTypeAmazonLinux = "AMAZON_LINUX"
-
-	// PlatformTypeUbuntu is a PlatformType enum value
-	PlatformTypeUbuntu = "UBUNTU"
+	PlatformTypeDebian      PlatformType = "DEBIAN"
+	PlatformTypeAmazonLinux PlatformType = "AMAZON_LINUX"
+	PlatformTypeUbuntu      PlatformType = "UBUNTU"
 )
 
+type ProjectSortByType string
+
+// Enum values for ProjectSortByType
 const (
-	// ProjectSortByTypeName is a ProjectSortByType enum value
-	ProjectSortByTypeName = "NAME"
-
-	// ProjectSortByTypeCreatedTime is a ProjectSortByType enum value
-	ProjectSortByTypeCreatedTime = "CREATED_TIME"
-
-	// ProjectSortByTypeLastModifiedTime is a ProjectSortByType enum value
-	ProjectSortByTypeLastModifiedTime = "LAST_MODIFIED_TIME"
+	ProjectSortByTypeName             ProjectSortByType = "NAME"
+	ProjectSortByTypeCreatedTime      ProjectSortByType = "CREATED_TIME"
+	ProjectSortByTypeLastModifiedTime ProjectSortByType = "LAST_MODIFIED_TIME"
 )
 
-const (
-	// SortOrderTypeAscending is a SortOrderType enum value
-	SortOrderTypeAscending = "ASCENDING"
+type SortOrderType string
 
-	// SortOrderTypeDescending is a SortOrderType enum value
-	SortOrderTypeDescending = "DESCENDING"
+// Enum values for SortOrderType
+const (
+	SortOrderTypeAscending  SortOrderType = "ASCENDING"
+	SortOrderTypeDescending SortOrderType = "DESCENDING"
 )
 
+type SourceAuthType string
+
+// Enum values for SourceAuthType
 const (
-	// SourceAuthTypeOauth is a SourceAuthType enum value
-	SourceAuthTypeOauth = "OAUTH"
+	SourceAuthTypeOauth SourceAuthType = "OAUTH"
 )
 
+type SourceType string
+
+// Enum values for SourceType
 const (
-	// SourceTypeCodecommit is a SourceType enum value
-	SourceTypeCodecommit = "CODECOMMIT"
-
-	// SourceTypeCodepipeline is a SourceType enum value
-	SourceTypeCodepipeline = "CODEPIPELINE"
-
-	// SourceTypeGithub is a SourceType enum value
-	SourceTypeGithub = "GITHUB"
-
-	// SourceTypeS3 is a SourceType enum value
-	SourceTypeS3 = "S3"
-
-	// SourceTypeBitbucket is a SourceType enum value
-	SourceTypeBitbucket = "BITBUCKET"
+	SourceTypeCodecommit   SourceType = "CODECOMMIT"
+	SourceTypeCodepipeline SourceType = "CODEPIPELINE"
+	SourceTypeGithub       SourceType = "GITHUB"
+	SourceTypeS3           SourceType = "S3"
+	SourceTypeBitbucket    SourceType = "BITBUCKET"
 )
 
+type StatusType string
+
+// Enum values for StatusType
 const (
-	// StatusTypeSucceeded is a StatusType enum value
-	StatusTypeSucceeded = "SUCCEEDED"
-
-	// StatusTypeFailed is a StatusType enum value
-	StatusTypeFailed = "FAILED"
-
-	// StatusTypeFault is a StatusType enum value
-	StatusTypeFault = "FAULT"
-
-	// StatusTypeTimedOut is a StatusType enum value
-	StatusTypeTimedOut = "TIMED_OUT"
-
-	// StatusTypeInProgress is a StatusType enum value
-	StatusTypeInProgress = "IN_PROGRESS"
-
-	// StatusTypeStopped is a StatusType enum value
-	StatusTypeStopped = "STOPPED"
+	StatusTypeSucceeded  StatusType = "SUCCEEDED"
+	StatusTypeFailed     StatusType = "FAILED"
+	StatusTypeFault      StatusType = "FAULT"
+	StatusTypeTimedOut   StatusType = "TIMED_OUT"
+	StatusTypeInProgress StatusType = "IN_PROGRESS"
+	StatusTypeStopped    StatusType = "STOPPED"
 )

@@ -99,11 +99,11 @@ func ExampleBatch_CreateComputeEnvironment_shared00() {
 			Tags: map[string]*string{
 				"Name": aws.String("Batch Instance - C4OnDemand"),
 			},
-			Type: aws.String("EC2"),
+			Type: batch.CRTypeEc2,
 		},
 		ServiceRole: aws.String("arn:aws:iam::012345678910:role/AWSBatchServiceRole"),
-		State:       aws.String("ENABLED"),
-		Type:        aws.String("MANAGED"),
+		State:       batch.CEStateEnabled,
+		Type:        batch.CETypeManaged,
 	}
 
 	result, err := svc.CreateComputeEnvironment(input)
@@ -164,11 +164,11 @@ func ExampleBatch_CreateComputeEnvironment_shared01() {
 			Tags: map[string]*string{
 				"Name": aws.String("Batch Instance - M4Spot"),
 			},
-			Type: aws.String("SPOT"),
+			Type: batch.CRTypeSpot,
 		},
 		ServiceRole: aws.String("arn:aws:iam::012345678910:role/AWSBatchServiceRole"),
-		State:       aws.String("ENABLED"),
-		Type:        aws.String("MANAGED"),
+		State:       batch.CEStateEnabled,
+		Type:        batch.CETypeManaged,
 	}
 
 	result, err := svc.CreateComputeEnvironment(input)
@@ -213,7 +213,7 @@ func ExampleBatch_CreateJobQueue_shared00() {
 		},
 		JobQueueName: aws.String("LowPriority"),
 		Priority:     aws.Int64(1),
-		State:        aws.String("ENABLED"),
+		State:        batch.JQStateEnabled,
 	}
 
 	result, err := svc.CreateJobQueue(input)
@@ -263,7 +263,7 @@ func ExampleBatch_CreateJobQueue_shared01() {
 		},
 		JobQueueName: aws.String("HighPriority"),
 		Priority:     aws.Int64(10),
-		State:        aws.String("ENABLED"),
+		State:        batch.JQStateEnabled,
 	}
 
 	result, err := svc.CreateJobQueue(input)
@@ -595,7 +595,7 @@ func ExampleBatch_ListJobs_shared01() {
 	svc := batch.New(cfg)
 	input := &batch.ListJobsInput{
 		JobQueue:  aws.String("HighPriority"),
-		JobStatus: aws.String("SUBMITTED"),
+		JobStatus: batch.JobStatusSubmitted,
 	}
 
 	result, err := svc.ListJobs(input)
@@ -641,7 +641,7 @@ func ExampleBatch_RegisterJobDefinition_shared00() {
 			Vcpus:  aws.Int64(1),
 		},
 		JobDefinitionName: aws.String("sleep10"),
-		Type:              aws.String("container"),
+		Type:              batch.JobDefinitionTypeContainer,
 	}
 
 	result, err := svc.RegisterJobDefinition(input)
@@ -754,7 +754,7 @@ func ExampleBatch_UpdateComputeEnvironment_shared00() {
 	svc := batch.New(cfg)
 	input := &batch.UpdateComputeEnvironmentInput{
 		ComputeEnvironment: aws.String("P2OnDemand"),
-		State:              aws.String("DISABLED"),
+		State:              batch.CEStateDisabled,
 	}
 
 	result, err := svc.UpdateComputeEnvironment(input)
@@ -791,7 +791,7 @@ func ExampleBatch_UpdateJobQueue_shared00() {
 	svc := batch.New(cfg)
 	input := &batch.UpdateJobQueueInput{
 		JobQueue: aws.String("GPGPU"),
-		State:    aws.String("DISABLED"),
+		State:    batch.JQStateDisabled,
 	}
 
 	result, err := svc.UpdateJobQueue(input)

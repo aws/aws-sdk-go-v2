@@ -3451,18 +3451,23 @@ func (s AllocateConnectionOnInterconnectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocateConnectionOnInterconnectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AllocateConnectionOnInterconnectInput"}
+
 	if s.Bandwidth == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
 	}
+
 	if s.ConnectionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
 	}
+
 	if s.InterconnectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
 	}
+
 	if s.OwnerAccount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
+
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
@@ -3569,18 +3574,23 @@ func (s AllocateHostedConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocateHostedConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AllocateHostedConnectionInput"}
+
 	if s.Bandwidth == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
 	}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
+
 	if s.ConnectionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
 	}
+
 	if s.OwnerAccount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
+
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
@@ -3661,12 +3671,15 @@ func (s AllocatePrivateVirtualInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocatePrivateVirtualInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AllocatePrivateVirtualInterfaceInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
+
 	if s.NewPrivateVirtualInterfaceAllocation == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewPrivateVirtualInterfaceAllocation"))
 	}
+
 	if s.OwnerAccount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
@@ -3740,12 +3753,15 @@ func (s AllocatePublicVirtualInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocatePublicVirtualInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AllocatePublicVirtualInterfaceInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
+
 	if s.NewPublicVirtualInterfaceAllocation == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewPublicVirtualInterfaceAllocation"))
 	}
+
 	if s.OwnerAccount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
@@ -3816,9 +3832,11 @@ func (s AssociateConnectionWithLagInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateConnectionWithLagInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateConnectionWithLagInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
+
 	if s.LagId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LagId"))
 	}
@@ -3878,9 +3896,11 @@ func (s AssociateHostedConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateHostedConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateHostedConnectionInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
+
 	if s.ParentConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentConnectionId"))
 	}
@@ -3940,9 +3960,11 @@ func (s AssociateVirtualInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateVirtualInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateVirtualInterfaceInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
+
 	if s.VirtualInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
 	}
@@ -3975,7 +3997,7 @@ type BGPPeer struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily *string `locationName:"addressFamily" type:"string" enum:"AddressFamily"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -4006,14 +4028,14 @@ type BGPPeer struct {
 	//    * Deleting: The BGP peer is in the process of being deleted.
 	//
 	//    * Deleted: The BGP peer has been deleted and cannot be established.
-	BgpPeerState *string `locationName:"bgpPeerState" type:"string" enum:"BGPPeerState"`
+	BgpPeerState BGPPeerState `locationName:"bgpPeerState" type:"string"`
 
 	// The Up/Down state of the BGP peer.
 	//
 	//    * Up: The BGP peer is established.
 	//
 	//    * Down: The BGP peer is down.
-	BgpStatus *string `locationName:"bgpStatus" type:"string" enum:"BGPStatus"`
+	BgpStatus BGPStatus `locationName:"bgpStatus" type:"string"`
 
 	// IP address assigned to the customer interface.
 	//
@@ -4032,8 +4054,8 @@ func (s BGPPeer) GoString() string {
 }
 
 // SetAddressFamily sets the AddressFamily field's value.
-func (s *BGPPeer) SetAddressFamily(v string) *BGPPeer {
-	s.AddressFamily = &v
+func (s *BGPPeer) SetAddressFamily(v AddressFamily) *BGPPeer {
+	s.AddressFamily = v
 	return s
 }
 
@@ -4056,14 +4078,14 @@ func (s *BGPPeer) SetAuthKey(v string) *BGPPeer {
 }
 
 // SetBgpPeerState sets the BgpPeerState field's value.
-func (s *BGPPeer) SetBgpPeerState(v string) *BGPPeer {
-	s.BgpPeerState = &v
+func (s *BGPPeer) SetBgpPeerState(v BGPPeerState) *BGPPeer {
+	s.BgpPeerState = v
 	return s
 }
 
 // SetBgpStatus sets the BgpStatus field's value.
-func (s *BGPPeer) SetBgpStatus(v string) *BGPPeer {
-	s.BgpStatus = &v
+func (s *BGPPeer) SetBgpStatus(v BGPStatus) *BGPPeer {
+	s.BgpStatus = v
 	return s
 }
 
@@ -4102,6 +4124,7 @@ func (s ConfirmConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfirmConnectionInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
@@ -4145,7 +4168,7 @@ type ConfirmConnectionOutput struct {
 	//
 	//    * Rejected: A hosted connection in the 'Ordering' state will enter the
 	//    'Rejected' state if it is deleted by the end customer.
-	ConnectionState *string `locationName:"connectionState" type:"string" enum:"ConnectionState"`
+	ConnectionState ConnectionState `locationName:"connectionState" type:"string"`
 }
 
 // String returns the string representation
@@ -4159,8 +4182,8 @@ func (s ConfirmConnectionOutput) GoString() string {
 }
 
 // SetConnectionState sets the ConnectionState field's value.
-func (s *ConfirmConnectionOutput) SetConnectionState(v string) *ConfirmConnectionOutput {
-	s.ConnectionState = &v
+func (s *ConfirmConnectionOutput) SetConnectionState(v ConnectionState) *ConfirmConnectionOutput {
+	s.ConnectionState = v
 	return s
 }
 
@@ -4203,9 +4226,11 @@ func (s ConfirmPrivateVirtualInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmPrivateVirtualInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfirmPrivateVirtualInterfaceInput"}
+
 	if s.VirtualGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualGatewayId"))
 	}
+
 	if s.VirtualInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
 	}
@@ -4261,7 +4286,7 @@ type ConfirmPrivateVirtualInterfaceOutput struct {
 	//    interface. If a virtual interface in the 'Confirming' state is deleted
 	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
 	//    state.
-	VirtualInterfaceState *string `locationName:"virtualInterfaceState" type:"string" enum:"VirtualInterfaceState"`
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
 }
 
 // String returns the string representation
@@ -4275,8 +4300,8 @@ func (s ConfirmPrivateVirtualInterfaceOutput) GoString() string {
 }
 
 // SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
-func (s *ConfirmPrivateVirtualInterfaceOutput) SetVirtualInterfaceState(v string) *ConfirmPrivateVirtualInterfaceOutput {
-	s.VirtualInterfaceState = &v
+func (s *ConfirmPrivateVirtualInterfaceOutput) SetVirtualInterfaceState(v VirtualInterfaceState) *ConfirmPrivateVirtualInterfaceOutput {
+	s.VirtualInterfaceState = v
 	return s
 }
 
@@ -4308,6 +4333,7 @@ func (s ConfirmPublicVirtualInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmPublicVirtualInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfirmPublicVirtualInterfaceInput"}
+
 	if s.VirtualInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
 	}
@@ -4357,7 +4383,7 @@ type ConfirmPublicVirtualInterfaceOutput struct {
 	//    interface. If a virtual interface in the 'Confirming' state is deleted
 	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
 	//    state.
-	VirtualInterfaceState *string `locationName:"virtualInterfaceState" type:"string" enum:"VirtualInterfaceState"`
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
 }
 
 // String returns the string representation
@@ -4371,8 +4397,8 @@ func (s ConfirmPublicVirtualInterfaceOutput) GoString() string {
 }
 
 // SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
-func (s *ConfirmPublicVirtualInterfaceOutput) SetVirtualInterfaceState(v string) *ConfirmPublicVirtualInterfaceOutput {
-	s.VirtualInterfaceState = &v
+func (s *ConfirmPublicVirtualInterfaceOutput) SetVirtualInterfaceState(v VirtualInterfaceState) *ConfirmPublicVirtualInterfaceOutput {
+	s.VirtualInterfaceState = v
 	return s
 }
 
@@ -4429,7 +4455,7 @@ type Connection struct {
 	//
 	//    * Rejected: A hosted connection in the 'Ordering' state will enter the
 	//    'Rejected' state if it is deleted by the end customer.
-	ConnectionState *string `locationName:"connectionState" type:"string" enum:"ConnectionState"`
+	ConnectionState ConnectionState `locationName:"connectionState" type:"string"`
 
 	// The ID of the LAG.
 	//
@@ -4500,8 +4526,8 @@ func (s *Connection) SetConnectionName(v string) *Connection {
 }
 
 // SetConnectionState sets the ConnectionState field's value.
-func (s *Connection) SetConnectionState(v string) *Connection {
-	s.ConnectionState = &v
+func (s *Connection) SetConnectionState(v ConnectionState) *Connection {
+	s.ConnectionState = v
 	return s
 }
 
@@ -4689,12 +4715,15 @@ func (s CreateConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateConnectionInput"}
+
 	if s.Bandwidth == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
 	}
+
 	if s.ConnectionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
 	}
+
 	if s.Location == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
@@ -4782,12 +4811,15 @@ func (s CreateInterconnectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInterconnectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateInterconnectInput"}
+
 	if s.Bandwidth == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
 	}
+
 	if s.InterconnectName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InterconnectName"))
 	}
+
 	if s.Location == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
@@ -4881,15 +4913,19 @@ func (s CreateLagInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLagInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLagInput"}
+
 	if s.ConnectionsBandwidth == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionsBandwidth"))
 	}
+
 	if s.LagName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LagName"))
 	}
+
 	if s.Location == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
+
 	if s.NumberOfConnections == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NumberOfConnections"))
 	}
@@ -4966,9 +5002,11 @@ func (s CreatePrivateVirtualInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePrivateVirtualInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePrivateVirtualInterfaceInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
+
 	if s.NewPrivateVirtualInterface == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewPrivateVirtualInterface"))
 	}
@@ -5032,9 +5070,11 @@ func (s CreatePublicVirtualInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePublicVirtualInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePublicVirtualInterfaceInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
+
 	if s.NewPublicVirtualInterface == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewPublicVirtualInterface"))
 	}
@@ -5168,6 +5208,7 @@ func (s DeleteConnectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConnectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteConnectionInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
@@ -5210,6 +5251,7 @@ func (s DeleteInterconnectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInterconnectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteInterconnectInput"}
+
 	if s.InterconnectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
 	}
@@ -5247,7 +5289,7 @@ type DeleteInterconnectOutput struct {
 	//    * Deleting: The interconnect is in the process of being deleted.
 	//
 	//    * Deleted: The interconnect has been deleted.
-	InterconnectState *string `locationName:"interconnectState" type:"string" enum:"InterconnectState"`
+	InterconnectState InterconnectState `locationName:"interconnectState" type:"string"`
 }
 
 // String returns the string representation
@@ -5261,8 +5303,8 @@ func (s DeleteInterconnectOutput) GoString() string {
 }
 
 // SetInterconnectState sets the InterconnectState field's value.
-func (s *DeleteInterconnectOutput) SetInterconnectState(v string) *DeleteInterconnectOutput {
-	s.InterconnectState = &v
+func (s *DeleteInterconnectOutput) SetInterconnectState(v InterconnectState) *DeleteInterconnectOutput {
+	s.InterconnectState = v
 	return s
 }
 
@@ -5294,6 +5336,7 @@ func (s DeleteLagInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLagInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLagInput"}
+
 	if s.LagId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LagId"))
 	}
@@ -5338,6 +5381,7 @@ func (s DeleteVirtualInterfaceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVirtualInterfaceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVirtualInterfaceInput"}
+
 	if s.VirtualInterfaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
 	}
@@ -5387,7 +5431,7 @@ type DeleteVirtualInterfaceOutput struct {
 	//    interface. If a virtual interface in the 'Confirming' state is deleted
 	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
 	//    state.
-	VirtualInterfaceState *string `locationName:"virtualInterfaceState" type:"string" enum:"VirtualInterfaceState"`
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
 }
 
 // String returns the string representation
@@ -5401,8 +5445,8 @@ func (s DeleteVirtualInterfaceOutput) GoString() string {
 }
 
 // SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
-func (s *DeleteVirtualInterfaceOutput) SetVirtualInterfaceState(v string) *DeleteVirtualInterfaceOutput {
-	s.VirtualInterfaceState = &v
+func (s *DeleteVirtualInterfaceOutput) SetVirtualInterfaceState(v VirtualInterfaceState) *DeleteVirtualInterfaceOutput {
+	s.VirtualInterfaceState = v
 	return s
 }
 
@@ -5425,7 +5469,7 @@ type DescribeConnectionLoaInput struct {
 	// Currently, the only supported value is "application/pdf".
 	//
 	// Default: application/pdf
-	LoaContentType *string `locationName:"loaContentType" type:"string" enum:"LoaContentType"`
+	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
 
 	// The name of the APN partner or service provider who establishes connectivity
 	// on your behalf. If you supply this parameter, the LOA-CFA lists the provider
@@ -5448,6 +5492,7 @@ func (s DescribeConnectionLoaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConnectionLoaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeConnectionLoaInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
@@ -5465,8 +5510,8 @@ func (s *DescribeConnectionLoaInput) SetConnectionId(v string) *DescribeConnecti
 }
 
 // SetLoaContentType sets the LoaContentType field's value.
-func (s *DescribeConnectionLoaInput) SetLoaContentType(v string) *DescribeConnectionLoaInput {
-	s.LoaContentType = &v
+func (s *DescribeConnectionLoaInput) SetLoaContentType(v LoaContentType) *DescribeConnectionLoaInput {
+	s.LoaContentType = v
 	return s
 }
 
@@ -5560,6 +5605,7 @@ func (s DescribeConnectionsOnInterconnectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConnectionsOnInterconnectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeConnectionsOnInterconnectInput"}
+
 	if s.InterconnectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
 	}
@@ -5604,6 +5650,7 @@ func (s DescribeHostedConnectionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeHostedConnectionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeHostedConnectionsInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
@@ -5636,7 +5683,7 @@ type DescribeInterconnectLoaInput struct {
 	// Currently, the only supported value is "application/pdf".
 	//
 	// Default: application/pdf
-	LoaContentType *string `locationName:"loaContentType" type:"string" enum:"LoaContentType"`
+	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
 
 	// The name of the service provider who establishes connectivity on your behalf.
 	// If you supply this parameter, the LOA-CFA lists the provider name alongside
@@ -5659,6 +5706,7 @@ func (s DescribeInterconnectLoaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInterconnectLoaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeInterconnectLoaInput"}
+
 	if s.InterconnectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
 	}
@@ -5676,8 +5724,8 @@ func (s *DescribeInterconnectLoaInput) SetInterconnectId(v string) *DescribeInte
 }
 
 // SetLoaContentType sets the LoaContentType field's value.
-func (s *DescribeInterconnectLoaInput) SetLoaContentType(v string) *DescribeInterconnectLoaInput {
-	s.LoaContentType = &v
+func (s *DescribeInterconnectLoaInput) SetLoaContentType(v LoaContentType) *DescribeInterconnectLoaInput {
+	s.LoaContentType = v
 	return s
 }
 
@@ -5838,7 +5886,7 @@ type DescribeLoaInput struct {
 	// Currently, the only supported value is "application/pdf".
 	//
 	// Default: application/pdf
-	LoaContentType *string `locationName:"loaContentType" type:"string" enum:"LoaContentType"`
+	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
 
 	// The name of the service provider who establishes connectivity on your behalf.
 	// If you supply this parameter, the LOA-CFA lists the provider name alongside
@@ -5861,6 +5909,7 @@ func (s DescribeLoaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoaInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
@@ -5878,8 +5927,8 @@ func (s *DescribeLoaInput) SetConnectionId(v string) *DescribeLoaInput {
 }
 
 // SetLoaContentType sets the LoaContentType field's value.
-func (s *DescribeLoaInput) SetLoaContentType(v string) *DescribeLoaInput {
-	s.LoaContentType = &v
+func (s *DescribeLoaInput) SetLoaContentType(v LoaContentType) *DescribeLoaInput {
+	s.LoaContentType = v
 	return s
 }
 
@@ -5957,6 +6006,7 @@ func (s DescribeTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
+
 	if s.ResourceArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArns"))
 	}
@@ -6143,9 +6193,11 @@ func (s DisassociateConnectionFromLagInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateConnectionFromLagInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateConnectionFromLagInput"}
+
 	if s.ConnectionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
+
 	if s.LagId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LagId"))
 	}
@@ -6220,7 +6272,7 @@ type Interconnect struct {
 	//    * Deleting: The interconnect is in the process of being deleted.
 	//
 	//    * Deleted: The interconnect has been deleted.
-	InterconnectState *string `locationName:"interconnectState" type:"string" enum:"InterconnectState"`
+	InterconnectState InterconnectState `locationName:"interconnectState" type:"string"`
 
 	// The ID of the LAG.
 	//
@@ -6280,8 +6332,8 @@ func (s *Interconnect) SetInterconnectName(v string) *Interconnect {
 }
 
 // SetInterconnectState sets the InterconnectState field's value.
-func (s *Interconnect) SetInterconnectState(v string) *Interconnect {
-	s.InterconnectState = &v
+func (s *Interconnect) SetInterconnectState(v InterconnectState) *Interconnect {
+	s.InterconnectState = v
 	return s
 }
 
@@ -6357,7 +6409,7 @@ type Lag struct {
 	//    * Deleting: The LAG is in the process of being deleted.
 	//
 	//    * Deleted: The LAG has been deleted.
-	LagState *string `locationName:"lagState" type:"string" enum:"LagState"`
+	LagState LagState `locationName:"lagState" type:"string"`
 
 	// Where the connection is located.
 	//
@@ -6435,8 +6487,8 @@ func (s *Lag) SetLagName(v string) *Lag {
 }
 
 // SetLagState sets the LagState field's value.
-func (s *Lag) SetLagState(v string) *Lag {
-	s.LagState = &v
+func (s *Lag) SetLagState(v LagState) *Lag {
+	s.LagState = v
 	return s
 }
 
@@ -6485,7 +6537,7 @@ type Loa struct {
 	// Currently, the only supported value is "application/pdf".
 	//
 	// Default: application/pdf
-	LoaContentType *string `locationName:"loaContentType" type:"string" enum:"LoaContentType"`
+	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
 }
 
 // String returns the string representation
@@ -6505,8 +6557,8 @@ func (s *Loa) SetLoaContent(v []byte) *Loa {
 }
 
 // SetLoaContentType sets the LoaContentType field's value.
-func (s *Loa) SetLoaContentType(v string) *Loa {
-	s.LoaContentType = &v
+func (s *Loa) SetLoaContentType(v LoaContentType) *Loa {
+	s.LoaContentType = v
 	return s
 }
 
@@ -6556,7 +6608,7 @@ type NewBGPPeer struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily *string `locationName:"addressFamily" type:"string" enum:"AddressFamily"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -6590,8 +6642,8 @@ func (s NewBGPPeer) GoString() string {
 }
 
 // SetAddressFamily sets the AddressFamily field's value.
-func (s *NewBGPPeer) SetAddressFamily(v string) *NewBGPPeer {
-	s.AddressFamily = &v
+func (s *NewBGPPeer) SetAddressFamily(v AddressFamily) *NewBGPPeer {
+	s.AddressFamily = v
 	return s
 }
 
@@ -6629,7 +6681,7 @@ type NewPrivateVirtualInterface struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily *string `locationName:"addressFamily" type:"string" enum:"AddressFamily"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -6689,15 +6741,19 @@ func (s NewPrivateVirtualInterface) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NewPrivateVirtualInterface) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NewPrivateVirtualInterface"}
+
 	if s.Asn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
+
 	if s.VirtualGatewayId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualGatewayId"))
 	}
+
 	if s.VirtualInterfaceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
 	}
+
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
@@ -6709,8 +6765,8 @@ func (s *NewPrivateVirtualInterface) Validate() error {
 }
 
 // SetAddressFamily sets the AddressFamily field's value.
-func (s *NewPrivateVirtualInterface) SetAddressFamily(v string) *NewPrivateVirtualInterface {
-	s.AddressFamily = &v
+func (s *NewPrivateVirtualInterface) SetAddressFamily(v AddressFamily) *NewPrivateVirtualInterface {
+	s.AddressFamily = v
 	return s
 }
 
@@ -6767,7 +6823,7 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily *string `locationName:"addressFamily" type:"string" enum:"AddressFamily"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -6819,12 +6875,15 @@ func (s NewPrivateVirtualInterfaceAllocation) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NewPrivateVirtualInterfaceAllocation) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NewPrivateVirtualInterfaceAllocation"}
+
 	if s.Asn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
+
 	if s.VirtualInterfaceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
 	}
+
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
@@ -6836,8 +6895,8 @@ func (s *NewPrivateVirtualInterfaceAllocation) Validate() error {
 }
 
 // SetAddressFamily sets the AddressFamily field's value.
-func (s *NewPrivateVirtualInterfaceAllocation) SetAddressFamily(v string) *NewPrivateVirtualInterfaceAllocation {
-	s.AddressFamily = &v
+func (s *NewPrivateVirtualInterfaceAllocation) SetAddressFamily(v AddressFamily) *NewPrivateVirtualInterfaceAllocation {
+	s.AddressFamily = v
 	return s
 }
 
@@ -6887,7 +6946,7 @@ type NewPublicVirtualInterface struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily *string `locationName:"addressFamily" type:"string" enum:"AddressFamily"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -6943,12 +7002,15 @@ func (s NewPublicVirtualInterface) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NewPublicVirtualInterface) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NewPublicVirtualInterface"}
+
 	if s.Asn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
+
 	if s.VirtualInterfaceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
 	}
+
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
@@ -6960,8 +7022,8 @@ func (s *NewPublicVirtualInterface) Validate() error {
 }
 
 // SetAddressFamily sets the AddressFamily field's value.
-func (s *NewPublicVirtualInterface) SetAddressFamily(v string) *NewPublicVirtualInterface {
-	s.AddressFamily = &v
+func (s *NewPublicVirtualInterface) SetAddressFamily(v AddressFamily) *NewPublicVirtualInterface {
+	s.AddressFamily = v
 	return s
 }
 
@@ -7018,7 +7080,7 @@ type NewPublicVirtualInterfaceAllocation struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily *string `locationName:"addressFamily" type:"string" enum:"AddressFamily"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -7074,12 +7136,15 @@ func (s NewPublicVirtualInterfaceAllocation) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NewPublicVirtualInterfaceAllocation"}
+
 	if s.Asn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
+
 	if s.VirtualInterfaceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
 	}
+
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
@@ -7091,8 +7156,8 @@ func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 }
 
 // SetAddressFamily sets the AddressFamily field's value.
-func (s *NewPublicVirtualInterfaceAllocation) SetAddressFamily(v string) *NewPublicVirtualInterfaceAllocation {
-	s.AddressFamily = &v
+func (s *NewPublicVirtualInterfaceAllocation) SetAddressFamily(v AddressFamily) *NewPublicVirtualInterfaceAllocation {
+	s.AddressFamily = v
 	return s
 }
 
@@ -7230,6 +7295,7 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -7286,9 +7352,11 @@ func (s TagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -7369,9 +7437,11 @@ func (s UntagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -7451,6 +7521,7 @@ func (s UpdateLagInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateLagInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateLagInput"}
+
 	if s.LagId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LagId"))
 	}
@@ -7540,7 +7611,7 @@ type VirtualInterface struct {
 	//    * ipv4: IPv4 address family
 	//
 	//    * ipv6: IPv6 address family
-	AddressFamily *string `locationName:"addressFamily" type:"string" enum:"AddressFamily"`
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
 
 	// IP address assigned to the Amazon interface.
 	//
@@ -7636,7 +7707,7 @@ type VirtualInterface struct {
 	//    interface. If a virtual interface in the 'Confirming' state is deleted
 	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
 	//    state.
-	VirtualInterfaceState *string `locationName:"virtualInterfaceState" type:"string" enum:"VirtualInterfaceState"`
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
 
 	// The type of virtual interface.
 	//
@@ -7661,8 +7732,8 @@ func (s VirtualInterface) GoString() string {
 }
 
 // SetAddressFamily sets the AddressFamily field's value.
-func (s *VirtualInterface) SetAddressFamily(v string) *VirtualInterface {
-	s.AddressFamily = &v
+func (s *VirtualInterface) SetAddressFamily(v AddressFamily) *VirtualInterface {
+	s.AddressFamily = v
 	return s
 }
 
@@ -7745,8 +7816,8 @@ func (s *VirtualInterface) SetVirtualInterfaceName(v string) *VirtualInterface {
 }
 
 // SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
-func (s *VirtualInterface) SetVirtualInterfaceState(v string) *VirtualInterface {
-	s.VirtualInterfaceState = &v
+func (s *VirtualInterface) SetVirtualInterfaceState(v VirtualInterfaceState) *VirtualInterface {
+	s.VirtualInterfaceState = v
 	return s
 }
 
@@ -7767,12 +7838,12 @@ func (s *VirtualInterface) SetVlan(v int64) *VirtualInterface {
 //    * ipv4: IPv4 address family
 //
 //    * ipv6: IPv6 address family
-const (
-	// AddressFamilyIpv4 is a AddressFamily enum value
-	AddressFamilyIpv4 = "ipv4"
+type AddressFamily string
 
-	// AddressFamilyIpv6 is a AddressFamily enum value
-	AddressFamilyIpv6 = "ipv6"
+// Enum values for AddressFamily
+const (
+	AddressFamilyIpv4 AddressFamily = "ipv4"
+	AddressFamilyIpv6 AddressFamily = "ipv6"
 )
 
 // The state of the BGP peer.
@@ -7789,21 +7860,15 @@ const (
 //    * Deleting: The BGP peer is in the process of being deleted.
 //
 //    * Deleted: The BGP peer has been deleted and cannot be established.
+type BGPPeerState string
+
+// Enum values for BGPPeerState
 const (
-	// BGPPeerStateVerifying is a BGPPeerState enum value
-	BGPPeerStateVerifying = "verifying"
-
-	// BGPPeerStatePending is a BGPPeerState enum value
-	BGPPeerStatePending = "pending"
-
-	// BGPPeerStateAvailable is a BGPPeerState enum value
-	BGPPeerStateAvailable = "available"
-
-	// BGPPeerStateDeleting is a BGPPeerState enum value
-	BGPPeerStateDeleting = "deleting"
-
-	// BGPPeerStateDeleted is a BGPPeerState enum value
-	BGPPeerStateDeleted = "deleted"
+	BGPPeerStateVerifying BGPPeerState = "verifying"
+	BGPPeerStatePending   BGPPeerState = "pending"
+	BGPPeerStateAvailable BGPPeerState = "available"
+	BGPPeerStateDeleting  BGPPeerState = "deleting"
+	BGPPeerStateDeleted   BGPPeerState = "deleted"
 )
 
 // The Up/Down state of the BGP peer.
@@ -7811,12 +7876,12 @@ const (
 //    * Up: The BGP peer is established.
 //
 //    * Down: The BGP peer is down.
-const (
-	// BGPStatusUp is a BGPStatus enum value
-	BGPStatusUp = "up"
+type BGPStatus string
 
-	// BGPStatusDown is a BGPStatus enum value
-	BGPStatusDown = "down"
+// Enum values for BGPStatus
+const (
+	BGPStatusUp   BGPStatus = "up"
+	BGPStatusDown BGPStatus = "down"
 )
 
 // State of the connection.
@@ -7841,30 +7906,18 @@ const (
 //
 //    * Rejected: A hosted connection in the 'Ordering' state will enter the
 //    'Rejected' state if it is deleted by the end customer.
+type ConnectionState string
+
+// Enum values for ConnectionState
 const (
-	// ConnectionStateOrdering is a ConnectionState enum value
-	ConnectionStateOrdering = "ordering"
-
-	// ConnectionStateRequested is a ConnectionState enum value
-	ConnectionStateRequested = "requested"
-
-	// ConnectionStatePending is a ConnectionState enum value
-	ConnectionStatePending = "pending"
-
-	// ConnectionStateAvailable is a ConnectionState enum value
-	ConnectionStateAvailable = "available"
-
-	// ConnectionStateDown is a ConnectionState enum value
-	ConnectionStateDown = "down"
-
-	// ConnectionStateDeleting is a ConnectionState enum value
-	ConnectionStateDeleting = "deleting"
-
-	// ConnectionStateDeleted is a ConnectionState enum value
-	ConnectionStateDeleted = "deleted"
-
-	// ConnectionStateRejected is a ConnectionState enum value
-	ConnectionStateRejected = "rejected"
+	ConnectionStateOrdering  ConnectionState = "ordering"
+	ConnectionStateRequested ConnectionState = "requested"
+	ConnectionStatePending   ConnectionState = "pending"
+	ConnectionStateAvailable ConnectionState = "available"
+	ConnectionStateDown      ConnectionState = "down"
+	ConnectionStateDeleting  ConnectionState = "deleting"
+	ConnectionStateDeleted   ConnectionState = "deleted"
+	ConnectionStateRejected  ConnectionState = "rejected"
 )
 
 // State of the interconnect.
@@ -7883,24 +7936,16 @@ const (
 //    * Deleting: The interconnect is in the process of being deleted.
 //
 //    * Deleted: The interconnect has been deleted.
+type InterconnectState string
+
+// Enum values for InterconnectState
 const (
-	// InterconnectStateRequested is a InterconnectState enum value
-	InterconnectStateRequested = "requested"
-
-	// InterconnectStatePending is a InterconnectState enum value
-	InterconnectStatePending = "pending"
-
-	// InterconnectStateAvailable is a InterconnectState enum value
-	InterconnectStateAvailable = "available"
-
-	// InterconnectStateDown is a InterconnectState enum value
-	InterconnectStateDown = "down"
-
-	// InterconnectStateDeleting is a InterconnectState enum value
-	InterconnectStateDeleting = "deleting"
-
-	// InterconnectStateDeleted is a InterconnectState enum value
-	InterconnectStateDeleted = "deleted"
+	InterconnectStateRequested InterconnectState = "requested"
+	InterconnectStatePending   InterconnectState = "pending"
+	InterconnectStateAvailable InterconnectState = "available"
+	InterconnectStateDown      InterconnectState = "down"
+	InterconnectStateDeleting  InterconnectState = "deleting"
+	InterconnectStateDeleted   InterconnectState = "deleted"
 )
 
 // The state of the LAG.
@@ -7918,33 +7963,27 @@ const (
 //    * Deleting: The LAG is in the process of being deleted.
 //
 //    * Deleted: The LAG has been deleted.
+type LagState string
+
+// Enum values for LagState
 const (
-	// LagStateRequested is a LagState enum value
-	LagStateRequested = "requested"
-
-	// LagStatePending is a LagState enum value
-	LagStatePending = "pending"
-
-	// LagStateAvailable is a LagState enum value
-	LagStateAvailable = "available"
-
-	// LagStateDown is a LagState enum value
-	LagStateDown = "down"
-
-	// LagStateDeleting is a LagState enum value
-	LagStateDeleting = "deleting"
-
-	// LagStateDeleted is a LagState enum value
-	LagStateDeleted = "deleted"
+	LagStateRequested LagState = "requested"
+	LagStatePending   LagState = "pending"
+	LagStateAvailable LagState = "available"
+	LagStateDown      LagState = "down"
+	LagStateDeleting  LagState = "deleting"
+	LagStateDeleted   LagState = "deleted"
 )
 
 // A standard media type indicating the content type of the LOA-CFA document.
 // Currently, the only supported value is "application/pdf".
 //
 // Default: application/pdf
+type LoaContentType string
+
+// Enum values for LoaContentType
 const (
-	// LoaContentTypeApplicationPdf is a LoaContentType enum value
-	LoaContentTypeApplicationPdf = "application/pdf"
+	LoaContentTypeApplicationPdf LoaContentType = "application/pdf"
 )
 
 // State of the virtual interface.
@@ -7975,28 +8014,16 @@ const (
 //    interface. If a virtual interface in the 'Confirming' state is deleted
 //    by the virtual interface owner, the virtual interface will enter the 'Rejected'
 //    state.
+type VirtualInterfaceState string
+
+// Enum values for VirtualInterfaceState
 const (
-	// VirtualInterfaceStateConfirming is a VirtualInterfaceState enum value
-	VirtualInterfaceStateConfirming = "confirming"
-
-	// VirtualInterfaceStateVerifying is a VirtualInterfaceState enum value
-	VirtualInterfaceStateVerifying = "verifying"
-
-	// VirtualInterfaceStatePending is a VirtualInterfaceState enum value
-	VirtualInterfaceStatePending = "pending"
-
-	// VirtualInterfaceStateAvailable is a VirtualInterfaceState enum value
-	VirtualInterfaceStateAvailable = "available"
-
-	// VirtualInterfaceStateDown is a VirtualInterfaceState enum value
-	VirtualInterfaceStateDown = "down"
-
-	// VirtualInterfaceStateDeleting is a VirtualInterfaceState enum value
-	VirtualInterfaceStateDeleting = "deleting"
-
-	// VirtualInterfaceStateDeleted is a VirtualInterfaceState enum value
-	VirtualInterfaceStateDeleted = "deleted"
-
-	// VirtualInterfaceStateRejected is a VirtualInterfaceState enum value
-	VirtualInterfaceStateRejected = "rejected"
+	VirtualInterfaceStateConfirming VirtualInterfaceState = "confirming"
+	VirtualInterfaceStateVerifying  VirtualInterfaceState = "verifying"
+	VirtualInterfaceStatePending    VirtualInterfaceState = "pending"
+	VirtualInterfaceStateAvailable  VirtualInterfaceState = "available"
+	VirtualInterfaceStateDown       VirtualInterfaceState = "down"
+	VirtualInterfaceStateDeleting   VirtualInterfaceState = "deleting"
+	VirtualInterfaceStateDeleted    VirtualInterfaceState = "deleted"
+	VirtualInterfaceStateRejected   VirtualInterfaceState = "rejected"
 )

@@ -3500,7 +3500,7 @@ type Attribute struct {
 	// The type of the target with which to attach the attribute. This parameter
 	// is required if you use the short form ID for a resource instead of the full
 	// Amazon Resource Name (ARN).
-	TargetType *string `locationName:"targetType" type:"string" enum:"TargetType"`
+	TargetType TargetType `locationName:"targetType" type:"string"`
 
 	// The value of the attribute. Up to 128 letters (uppercase and lowercase),
 	// numbers, hyphens, underscores, periods, at signs (@), forward slashes, colons,
@@ -3521,6 +3521,7 @@ func (s Attribute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Attribute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Attribute"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3544,8 +3545,8 @@ func (s *Attribute) SetTargetId(v string) *Attribute {
 }
 
 // SetTargetType sets the TargetType field's value.
-func (s *Attribute) SetTargetType(v string) *Attribute {
-	s.TargetType = &v
+func (s *Attribute) SetTargetType(v TargetType) *Attribute {
+	s.TargetType = v
 	return s
 }
 
@@ -4280,7 +4281,7 @@ type ContainerInstance struct {
 
 	// The status of the most recent agent update. If an update has never been requested,
 	// this value is NULL.
-	AgentUpdateStatus *string `locationName:"agentUpdateStatus" type:"string" enum:"AgentUpdateStatus"`
+	AgentUpdateStatus AgentUpdateStatus `locationName:"agentUpdateStatus" type:"string"`
 
 	// The attributes set for the container instance, either by the Amazon ECS container
 	// agent at instance registration or manually with the PutAttributes operation.
@@ -4357,8 +4358,8 @@ func (s *ContainerInstance) SetAgentConnected(v bool) *ContainerInstance {
 }
 
 // SetAgentUpdateStatus sets the AgentUpdateStatus field's value.
-func (s *ContainerInstance) SetAgentUpdateStatus(v string) *ContainerInstance {
-	s.AgentUpdateStatus = &v
+func (s *ContainerInstance) SetAgentUpdateStatus(v AgentUpdateStatus) *ContainerInstance {
+	s.AgentUpdateStatus = v
 	return s
 }
 
@@ -4654,12 +4655,15 @@ func (s CreateServiceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateServiceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateServiceInput"}
+
 	if s.DesiredCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DesiredCount"))
 	}
+
 	if s.ServiceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
 	}
+
 	if s.TaskDefinition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
@@ -4785,6 +4789,7 @@ func (s DeleteAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAttributesInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
@@ -4864,6 +4869,7 @@ func (s DeleteClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
+
 	if s.Cluster == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Cluster"))
 	}
@@ -4932,6 +4938,7 @@ func (s DeleteServiceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteServiceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceInput"}
+
 	if s.Service == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Service"))
 	}
@@ -5158,6 +5165,7 @@ func (s DeregisterContainerInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterContainerInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterContainerInstanceInput"}
+
 	if s.ContainerInstance == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ContainerInstance"))
 	}
@@ -5234,6 +5242,7 @@ func (s DeregisterTaskDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterTaskDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTaskDefinitionInput"}
+
 	if s.TaskDefinition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
@@ -5360,6 +5369,7 @@ func (s DescribeContainerInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeContainerInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeContainerInstancesInput"}
+
 	if s.ContainerInstances == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ContainerInstances"))
 	}
@@ -5444,6 +5454,7 @@ func (s DescribeServicesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeServicesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeServicesInput"}
+
 	if s.Services == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Services"))
 	}
@@ -5524,6 +5535,7 @@ func (s DescribeTaskDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTaskDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTaskDefinitionInput"}
+
 	if s.TaskDefinition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
@@ -5592,6 +5604,7 @@ func (s DescribeTasksInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTasksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTasksInput"}
+
 	if s.Tasks == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tasks"))
 	}
@@ -5782,9 +5795,11 @@ func (s HostEntry) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HostEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HostEntry"}
+
 	if s.Hostname == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Hostname"))
 	}
+
 	if s.IpAddress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IpAddress"))
 	}
@@ -5984,7 +5999,7 @@ type ListAttributesInput struct {
 	// The type of the target with which to list attributes.
 	//
 	// TargetType is a required field
-	TargetType *string `locationName:"targetType" type:"string" required:"true" enum:"TargetType"`
+	TargetType TargetType `locationName:"targetType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6000,7 +6015,7 @@ func (s ListAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAttributesInput"}
-	if s.TargetType == nil {
+	if len(s.TargetType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TargetType"))
 	}
 
@@ -6041,8 +6056,8 @@ func (s *ListAttributesInput) SetNextToken(v string) *ListAttributesInput {
 }
 
 // SetTargetType sets the TargetType field's value.
-func (s *ListAttributesInput) SetTargetType(v string) *ListAttributesInput {
-	s.TargetType = &v
+func (s *ListAttributesInput) SetTargetType(v TargetType) *ListAttributesInput {
+	s.TargetType = v
 	return s
 }
 
@@ -6204,7 +6219,7 @@ type ListContainerInstancesInput struct {
 	// set to DRAINING using UpdateContainerInstancesState. If you do not specify
 	// this parameter, the default is to include container instances set to ACTIVE
 	// and DRAINING.
-	Status *string `locationName:"status" type:"string" enum:"ContainerInstanceStatus"`
+	Status ContainerInstanceStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -6242,8 +6257,8 @@ func (s *ListContainerInstancesInput) SetNextToken(v string) *ListContainerInsta
 }
 
 // SetStatus sets the Status field's value.
-func (s *ListContainerInstancesInput) SetStatus(v string) *ListContainerInstancesInput {
-	s.Status = &v
+func (s *ListContainerInstancesInput) SetStatus(v ContainerInstanceStatus) *ListContainerInstancesInput {
+	s.Status = v
 	return s
 }
 
@@ -6413,7 +6428,7 @@ type ListTaskDefinitionFamiliesInput struct {
 	// is set to INACTIVE, only task definition families that do not have any ACTIVE
 	// task definition revisions are returned. If you paginate the resulting output,
 	// be sure to keep the status value constant in each subsequent request.
-	Status *string `locationName:"status" type:"string" enum:"TaskDefinitionFamilyStatus"`
+	Status TaskDefinitionFamilyStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -6445,8 +6460,8 @@ func (s *ListTaskDefinitionFamiliesInput) SetNextToken(v string) *ListTaskDefini
 }
 
 // SetStatus sets the Status field's value.
-func (s *ListTaskDefinitionFamiliesInput) SetStatus(v string) *ListTaskDefinitionFamiliesInput {
-	s.Status = &v
+func (s *ListTaskDefinitionFamiliesInput) SetStatus(v TaskDefinitionFamilyStatus) *ListTaskDefinitionFamiliesInput {
+	s.Status = v
 	return s
 }
 
@@ -6521,14 +6536,14 @@ type ListTaskDefinitionsInput struct {
 	// in a family are listed last. Setting this parameter to DESC reverses the
 	// sort order on family name and revision so that the newest task definitions
 	// in a family are listed first.
-	Sort *string `locationName:"sort" type:"string" enum:"SortOrder"`
+	Sort SortOrder `locationName:"sort" type:"string"`
 
 	// The task definition status with which to filter the ListTaskDefinitions results.
 	// By default, only ACTIVE task definitions are listed. By setting this parameter
 	// to INACTIVE, you can view task definitions that are INACTIVE as long as an
 	// active task or service still references them. If you paginate the resulting
 	// output, be sure to keep the status value constant in each subsequent request.
-	Status *string `locationName:"status" type:"string" enum:"TaskDefinitionStatus"`
+	Status TaskDefinitionStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -6560,14 +6575,14 @@ func (s *ListTaskDefinitionsInput) SetNextToken(v string) *ListTaskDefinitionsIn
 }
 
 // SetSort sets the Sort field's value.
-func (s *ListTaskDefinitionsInput) SetSort(v string) *ListTaskDefinitionsInput {
-	s.Sort = &v
+func (s *ListTaskDefinitionsInput) SetSort(v SortOrder) *ListTaskDefinitionsInput {
+	s.Sort = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *ListTaskDefinitionsInput) SetStatus(v string) *ListTaskDefinitionsInput {
-	s.Status = &v
+func (s *ListTaskDefinitionsInput) SetStatus(v TaskDefinitionStatus) *ListTaskDefinitionsInput {
+	s.Status = v
 	return s
 }
 
@@ -6631,7 +6646,7 @@ type ListTasksInput struct {
 	// Although you can filter results based on a desired status of PENDING, this
 	// will not return any results because ECS never sets the desired status of
 	// a task to that value (only a task's lastStatus may have a value of PENDING).
-	DesiredStatus *string `locationName:"desiredStatus" type:"string" enum:"DesiredStatus"`
+	DesiredStatus DesiredStatus `locationName:"desiredStatus" type:"string"`
 
 	// The name of the family with which to filter the ListTasks results. Specifying
 	// a family limits the results to tasks that belong to that family.
@@ -6687,8 +6702,8 @@ func (s *ListTasksInput) SetContainerInstance(v string) *ListTasksInput {
 }
 
 // SetDesiredStatus sets the DesiredStatus field's value.
-func (s *ListTasksInput) SetDesiredStatus(v string) *ListTasksInput {
-	s.DesiredStatus = &v
+func (s *ListTasksInput) SetDesiredStatus(v DesiredStatus) *ListTasksInput {
+	s.DesiredStatus = v
 	return s
 }
 
@@ -6838,7 +6853,7 @@ type LogConfiguration struct {
 	// command: sudo docker version | grep "Server API version"
 	//
 	// LogDriver is a required field
-	LogDriver *string `locationName:"logDriver" type:"string" required:"true" enum:"LogDriver"`
+	LogDriver LogDriver `locationName:"logDriver" type:"string" required:"true"`
 
 	// The configuration options to send to the log driver. This parameter requires
 	// version 1.19 of the Docker Remote API or greater on your container instance.
@@ -6861,7 +6876,7 @@ func (s LogConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LogConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LogConfiguration"}
-	if s.LogDriver == nil {
+	if len(s.LogDriver) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("LogDriver"))
 	}
 
@@ -6872,8 +6887,8 @@ func (s *LogConfiguration) Validate() error {
 }
 
 // SetLogDriver sets the LogDriver field's value.
-func (s *LogConfiguration) SetLogDriver(v string) *LogConfiguration {
-	s.LogDriver = &v
+func (s *LogConfiguration) SetLogDriver(v LogDriver) *LogConfiguration {
+	s.LogDriver = v
 	return s
 }
 
@@ -6946,7 +6961,7 @@ type NetworkBinding struct {
 	HostPort *int64 `locationName:"hostPort" type:"integer"`
 
 	// The protocol used for the network binding.
-	Protocol *string `locationName:"protocol" type:"string" enum:"TransportProtocol"`
+	Protocol TransportProtocol `locationName:"protocol" type:"string"`
 }
 
 // String returns the string representation
@@ -6978,8 +6993,8 @@ func (s *NetworkBinding) SetHostPort(v int64) *NetworkBinding {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *NetworkBinding) SetProtocol(v string) *NetworkBinding {
-	s.Protocol = &v
+func (s *NetworkBinding) SetProtocol(v TransportProtocol) *NetworkBinding {
+	s.Protocol = v
 	return s
 }
 
@@ -7000,7 +7015,7 @@ type PlacementConstraint struct {
 	// a particular group is running on a different container instance. Use memberOf
 	// to restrict selection to a group of valid candidates. Note that distinctInstance
 	// is not supported in task definitions.
-	Type *string `locationName:"type" type:"string" enum:"PlacementConstraintType"`
+	Type PlacementConstraintType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -7020,8 +7035,8 @@ func (s *PlacementConstraint) SetExpression(v string) *PlacementConstraint {
 }
 
 // SetType sets the Type field's value.
-func (s *PlacementConstraint) SetType(v string) *PlacementConstraint {
-	s.Type = &v
+func (s *PlacementConstraint) SetType(v PlacementConstraintType) *PlacementConstraint {
+	s.Type = v
 	return s
 }
 
@@ -7047,7 +7062,7 @@ type PlacementStrategy struct {
 	// amount of the resource that is specified with the field parameter. For example,
 	// if you binpack on memory, a task is placed on the instance with the least
 	// amount of remaining memory (but still enough to run the task).
-	Type *string `locationName:"type" type:"string" enum:"PlacementStrategyType"`
+	Type PlacementStrategyType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -7067,8 +7082,8 @@ func (s *PlacementStrategy) SetField(v string) *PlacementStrategy {
 }
 
 // SetType sets the Type field's value.
-func (s *PlacementStrategy) SetType(v string) *PlacementStrategy {
-	s.Type = &v
+func (s *PlacementStrategy) SetType(v PlacementStrategyType) *PlacementStrategy {
+	s.Type = v
 	return s
 }
 
@@ -7117,7 +7132,7 @@ type PortMapping struct {
 
 	// The protocol used for the port mapping. Valid values are tcp and udp. The
 	// default is tcp.
-	Protocol *string `locationName:"protocol" type:"string" enum:"TransportProtocol"`
+	Protocol TransportProtocol `locationName:"protocol" type:"string"`
 }
 
 // String returns the string representation
@@ -7143,8 +7158,8 @@ func (s *PortMapping) SetHostPort(v int64) *PortMapping {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *PortMapping) SetProtocol(v string) *PortMapping {
-	s.Protocol = &v
+func (s *PortMapping) SetProtocol(v TransportProtocol) *PortMapping {
+	s.Protocol = v
 	return s
 }
 
@@ -7178,6 +7193,7 @@ func (s PutAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutAttributesInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
@@ -7396,7 +7412,7 @@ type RegisterTaskDefinitionInput struct {
 	//
 	// For more information, see Network settings (https://docs.docker.com/engine/reference/run/#network-settings)
 	// in the Docker run reference.
-	NetworkMode *string `locationName:"networkMode" type:"string" enum:"NetworkMode"`
+	NetworkMode NetworkMode `locationName:"networkMode" type:"string"`
 
 	// An array of placement constraint objects to use for the task. You can specify
 	// a maximum of 10 constraints per task (this limit includes constraints in
@@ -7428,9 +7444,11 @@ func (s RegisterTaskDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterTaskDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterTaskDefinitionInput"}
+
 	if s.ContainerDefinitions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ContainerDefinitions"))
 	}
+
 	if s.Family == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Family"))
 	}
@@ -7464,8 +7482,8 @@ func (s *RegisterTaskDefinitionInput) SetFamily(v string) *RegisterTaskDefinitio
 }
 
 // SetNetworkMode sets the NetworkMode field's value.
-func (s *RegisterTaskDefinitionInput) SetNetworkMode(v string) *RegisterTaskDefinitionInput {
-	s.NetworkMode = &v
+func (s *RegisterTaskDefinitionInput) SetNetworkMode(v NetworkMode) *RegisterTaskDefinitionInput {
+	s.NetworkMode = v
 	return s
 }
 
@@ -7654,6 +7672,7 @@ func (s RunTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RunTaskInput"}
+
 	if s.TaskDefinition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
@@ -8029,9 +8048,11 @@ func (s StartTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartTaskInput"}
+
 	if s.ContainerInstances == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ContainerInstances"))
 	}
+
 	if s.TaskDefinition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
@@ -8146,6 +8167,7 @@ func (s StopTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopTaskInput"}
+
 	if s.Task == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Task"))
 	}
@@ -8564,7 +8586,7 @@ type TaskDefinition struct {
 	//
 	// For more information, see Network settings (https://docs.docker.com/engine/reference/run/#network-settings)
 	// in the Docker run reference.
-	NetworkMode *string `locationName:"networkMode" type:"string" enum:"NetworkMode"`
+	NetworkMode NetworkMode `locationName:"networkMode" type:"string"`
 
 	// An array of placement constraint objects to use for tasks.
 	PlacementConstraints []*TaskDefinitionPlacementConstraint `locationName:"placementConstraints" type:"list"`
@@ -8580,7 +8602,7 @@ type TaskDefinition struct {
 	Revision *int64 `locationName:"revision" type:"integer"`
 
 	// The status of the task definition.
-	Status *string `locationName:"status" type:"string" enum:"TaskDefinitionStatus"`
+	Status TaskDefinitionStatus `locationName:"status" type:"string"`
 
 	// The full Amazon Resource Name (ARN) of the task definition.
 	TaskDefinitionArn *string `locationName:"taskDefinitionArn" type:"string"`
@@ -8619,8 +8641,8 @@ func (s *TaskDefinition) SetFamily(v string) *TaskDefinition {
 }
 
 // SetNetworkMode sets the NetworkMode field's value.
-func (s *TaskDefinition) SetNetworkMode(v string) *TaskDefinition {
-	s.NetworkMode = &v
+func (s *TaskDefinition) SetNetworkMode(v NetworkMode) *TaskDefinition {
+	s.NetworkMode = v
 	return s
 }
 
@@ -8643,8 +8665,8 @@ func (s *TaskDefinition) SetRevision(v int64) *TaskDefinition {
 }
 
 // SetStatus sets the Status field's value.
-func (s *TaskDefinition) SetStatus(v string) *TaskDefinition {
-	s.Status = &v
+func (s *TaskDefinition) SetStatus(v TaskDefinitionStatus) *TaskDefinition {
+	s.Status = v
 	return s
 }
 
@@ -8681,7 +8703,7 @@ type TaskDefinitionPlacementConstraint struct {
 	// The type of constraint. The DistinctInstance constraint ensures that each
 	// task in a particular group is running on a different container instance.
 	// The MemberOf constraint restricts selection to be from a group of valid candidates.
-	Type *string `locationName:"type" type:"string" enum:"TaskDefinitionPlacementConstraintType"`
+	Type TaskDefinitionPlacementConstraintType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -8701,8 +8723,8 @@ func (s *TaskDefinitionPlacementConstraint) SetExpression(v string) *TaskDefinit
 }
 
 // SetType sets the Type field's value.
-func (s *TaskDefinitionPlacementConstraint) SetType(v string) *TaskDefinitionPlacementConstraint {
-	s.Type = &v
+func (s *TaskDefinitionPlacementConstraint) SetType(v TaskDefinitionPlacementConstraintType) *TaskDefinitionPlacementConstraint {
+	s.Type = v
 	return s
 }
 
@@ -8755,7 +8777,7 @@ type Ulimit struct {
 	// The type of the ulimit.
 	//
 	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true" enum:"UlimitName"`
+	Name UlimitName `locationName:"name" type:"string" required:"true"`
 
 	// The soft limit for the ulimit type.
 	//
@@ -8776,12 +8798,14 @@ func (s Ulimit) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Ulimit) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Ulimit"}
+
 	if s.HardLimit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HardLimit"))
 	}
-	if s.Name == nil {
+	if len(s.Name) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.SoftLimit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SoftLimit"))
 	}
@@ -8799,8 +8823,8 @@ func (s *Ulimit) SetHardLimit(v int64) *Ulimit {
 }
 
 // SetName sets the Name field's value.
-func (s *Ulimit) SetName(v string) *Ulimit {
-	s.Name = &v
+func (s *Ulimit) SetName(v UlimitName) *Ulimit {
+	s.Name = v
 	return s
 }
 
@@ -8840,6 +8864,7 @@ func (s UpdateContainerAgentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateContainerAgentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateContainerAgentInput"}
+
 	if s.ContainerInstance == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ContainerInstance"))
 	}
@@ -8903,7 +8928,7 @@ type UpdateContainerInstancesStateInput struct {
 	// The container instance state with which to update the container instance.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"ContainerInstanceStatus"`
+	Status ContainerInstanceStatus `locationName:"status" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -8919,10 +8944,11 @@ func (s UpdateContainerInstancesStateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateContainerInstancesStateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateContainerInstancesStateInput"}
+
 	if s.ContainerInstances == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ContainerInstances"))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
@@ -8945,8 +8971,8 @@ func (s *UpdateContainerInstancesStateInput) SetContainerInstances(v []*string) 
 }
 
 // SetStatus sets the Status field's value.
-func (s *UpdateContainerInstancesStateInput) SetStatus(v string) *UpdateContainerInstancesStateInput {
-	s.Status = &v
+func (s *UpdateContainerInstancesStateInput) SetStatus(v ContainerInstanceStatus) *UpdateContainerInstancesStateInput {
+	s.Status = v
 	return s
 }
 
@@ -9026,6 +9052,7 @@ func (s UpdateServiceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateServiceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceInput"}
+
 	if s.Service == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Service"))
 	}
@@ -9212,186 +9239,138 @@ func (s *VolumeFrom) SetSourceContainer(v string) *VolumeFrom {
 	return s
 }
 
+type AgentUpdateStatus string
+
+// Enum values for AgentUpdateStatus
 const (
-	// AgentUpdateStatusPending is a AgentUpdateStatus enum value
-	AgentUpdateStatusPending = "PENDING"
-
-	// AgentUpdateStatusStaging is a AgentUpdateStatus enum value
-	AgentUpdateStatusStaging = "STAGING"
-
-	// AgentUpdateStatusStaged is a AgentUpdateStatus enum value
-	AgentUpdateStatusStaged = "STAGED"
-
-	// AgentUpdateStatusUpdating is a AgentUpdateStatus enum value
-	AgentUpdateStatusUpdating = "UPDATING"
-
-	// AgentUpdateStatusUpdated is a AgentUpdateStatus enum value
-	AgentUpdateStatusUpdated = "UPDATED"
-
-	// AgentUpdateStatusFailed is a AgentUpdateStatus enum value
-	AgentUpdateStatusFailed = "FAILED"
+	AgentUpdateStatusPending  AgentUpdateStatus = "PENDING"
+	AgentUpdateStatusStaging  AgentUpdateStatus = "STAGING"
+	AgentUpdateStatusStaged   AgentUpdateStatus = "STAGED"
+	AgentUpdateStatusUpdating AgentUpdateStatus = "UPDATING"
+	AgentUpdateStatusUpdated  AgentUpdateStatus = "UPDATED"
+	AgentUpdateStatusFailed   AgentUpdateStatus = "FAILED"
 )
 
-const (
-	// ContainerInstanceStatusActive is a ContainerInstanceStatus enum value
-	ContainerInstanceStatusActive = "ACTIVE"
+type ContainerInstanceStatus string
 
-	// ContainerInstanceStatusDraining is a ContainerInstanceStatus enum value
-	ContainerInstanceStatusDraining = "DRAINING"
+// Enum values for ContainerInstanceStatus
+const (
+	ContainerInstanceStatusActive   ContainerInstanceStatus = "ACTIVE"
+	ContainerInstanceStatusDraining ContainerInstanceStatus = "DRAINING"
 )
 
+type DesiredStatus string
+
+// Enum values for DesiredStatus
 const (
-	// DesiredStatusRunning is a DesiredStatus enum value
-	DesiredStatusRunning = "RUNNING"
-
-	// DesiredStatusPending is a DesiredStatus enum value
-	DesiredStatusPending = "PENDING"
-
-	// DesiredStatusStopped is a DesiredStatus enum value
-	DesiredStatusStopped = "STOPPED"
+	DesiredStatusRunning DesiredStatus = "RUNNING"
+	DesiredStatusPending DesiredStatus = "PENDING"
+	DesiredStatusStopped DesiredStatus = "STOPPED"
 )
 
+type LogDriver string
+
+// Enum values for LogDriver
 const (
-	// LogDriverJsonFile is a LogDriver enum value
-	LogDriverJsonFile = "json-file"
-
-	// LogDriverSyslog is a LogDriver enum value
-	LogDriverSyslog = "syslog"
-
-	// LogDriverJournald is a LogDriver enum value
-	LogDriverJournald = "journald"
-
-	// LogDriverGelf is a LogDriver enum value
-	LogDriverGelf = "gelf"
-
-	// LogDriverFluentd is a LogDriver enum value
-	LogDriverFluentd = "fluentd"
-
-	// LogDriverAwslogs is a LogDriver enum value
-	LogDriverAwslogs = "awslogs"
-
-	// LogDriverSplunk is a LogDriver enum value
-	LogDriverSplunk = "splunk"
+	LogDriverJsonFile LogDriver = "json-file"
+	LogDriverSyslog   LogDriver = "syslog"
+	LogDriverJournald LogDriver = "journald"
+	LogDriverGelf     LogDriver = "gelf"
+	LogDriverFluentd  LogDriver = "fluentd"
+	LogDriverAwslogs  LogDriver = "awslogs"
+	LogDriverSplunk   LogDriver = "splunk"
 )
 
+type NetworkMode string
+
+// Enum values for NetworkMode
 const (
-	// NetworkModeBridge is a NetworkMode enum value
-	NetworkModeBridge = "bridge"
-
-	// NetworkModeHost is a NetworkMode enum value
-	NetworkModeHost = "host"
-
-	// NetworkModeNone is a NetworkMode enum value
-	NetworkModeNone = "none"
+	NetworkModeBridge NetworkMode = "bridge"
+	NetworkModeHost   NetworkMode = "host"
+	NetworkModeNone   NetworkMode = "none"
 )
 
-const (
-	// PlacementConstraintTypeDistinctInstance is a PlacementConstraintType enum value
-	PlacementConstraintTypeDistinctInstance = "distinctInstance"
+type PlacementConstraintType string
 
-	// PlacementConstraintTypeMemberOf is a PlacementConstraintType enum value
-	PlacementConstraintTypeMemberOf = "memberOf"
+// Enum values for PlacementConstraintType
+const (
+	PlacementConstraintTypeDistinctInstance PlacementConstraintType = "distinctInstance"
+	PlacementConstraintTypeMemberOf         PlacementConstraintType = "memberOf"
 )
 
+type PlacementStrategyType string
+
+// Enum values for PlacementStrategyType
 const (
-	// PlacementStrategyTypeRandom is a PlacementStrategyType enum value
-	PlacementStrategyTypeRandom = "random"
-
-	// PlacementStrategyTypeSpread is a PlacementStrategyType enum value
-	PlacementStrategyTypeSpread = "spread"
-
-	// PlacementStrategyTypeBinpack is a PlacementStrategyType enum value
-	PlacementStrategyTypeBinpack = "binpack"
+	PlacementStrategyTypeRandom  PlacementStrategyType = "random"
+	PlacementStrategyTypeSpread  PlacementStrategyType = "spread"
+	PlacementStrategyTypeBinpack PlacementStrategyType = "binpack"
 )
 
-const (
-	// SortOrderAsc is a SortOrder enum value
-	SortOrderAsc = "ASC"
+type SortOrder string
 
-	// SortOrderDesc is a SortOrder enum value
-	SortOrderDesc = "DESC"
+// Enum values for SortOrder
+const (
+	SortOrderAsc  SortOrder = "ASC"
+	SortOrderDesc SortOrder = "DESC"
 )
 
+type TargetType string
+
+// Enum values for TargetType
 const (
-	// TargetTypeContainerInstance is a TargetType enum value
-	TargetTypeContainerInstance = "container-instance"
+	TargetTypeContainerInstance TargetType = "container-instance"
 )
 
+type TaskDefinitionFamilyStatus string
+
+// Enum values for TaskDefinitionFamilyStatus
 const (
-	// TaskDefinitionFamilyStatusActive is a TaskDefinitionFamilyStatus enum value
-	TaskDefinitionFamilyStatusActive = "ACTIVE"
-
-	// TaskDefinitionFamilyStatusInactive is a TaskDefinitionFamilyStatus enum value
-	TaskDefinitionFamilyStatusInactive = "INACTIVE"
-
-	// TaskDefinitionFamilyStatusAll is a TaskDefinitionFamilyStatus enum value
-	TaskDefinitionFamilyStatusAll = "ALL"
+	TaskDefinitionFamilyStatusActive   TaskDefinitionFamilyStatus = "ACTIVE"
+	TaskDefinitionFamilyStatusInactive TaskDefinitionFamilyStatus = "INACTIVE"
+	TaskDefinitionFamilyStatusAll      TaskDefinitionFamilyStatus = "ALL"
 )
 
+type TaskDefinitionPlacementConstraintType string
+
+// Enum values for TaskDefinitionPlacementConstraintType
 const (
-	// TaskDefinitionPlacementConstraintTypeMemberOf is a TaskDefinitionPlacementConstraintType enum value
-	TaskDefinitionPlacementConstraintTypeMemberOf = "memberOf"
+	TaskDefinitionPlacementConstraintTypeMemberOf TaskDefinitionPlacementConstraintType = "memberOf"
 )
 
-const (
-	// TaskDefinitionStatusActive is a TaskDefinitionStatus enum value
-	TaskDefinitionStatusActive = "ACTIVE"
+type TaskDefinitionStatus string
 
-	// TaskDefinitionStatusInactive is a TaskDefinitionStatus enum value
-	TaskDefinitionStatusInactive = "INACTIVE"
+// Enum values for TaskDefinitionStatus
+const (
+	TaskDefinitionStatusActive   TaskDefinitionStatus = "ACTIVE"
+	TaskDefinitionStatusInactive TaskDefinitionStatus = "INACTIVE"
 )
 
-const (
-	// TransportProtocolTcp is a TransportProtocol enum value
-	TransportProtocolTcp = "tcp"
+type TransportProtocol string
 
-	// TransportProtocolUdp is a TransportProtocol enum value
-	TransportProtocolUdp = "udp"
+// Enum values for TransportProtocol
+const (
+	TransportProtocolTcp TransportProtocol = "tcp"
+	TransportProtocolUdp TransportProtocol = "udp"
 )
 
+type UlimitName string
+
+// Enum values for UlimitName
 const (
-	// UlimitNameCore is a UlimitName enum value
-	UlimitNameCore = "core"
-
-	// UlimitNameCpu is a UlimitName enum value
-	UlimitNameCpu = "cpu"
-
-	// UlimitNameData is a UlimitName enum value
-	UlimitNameData = "data"
-
-	// UlimitNameFsize is a UlimitName enum value
-	UlimitNameFsize = "fsize"
-
-	// UlimitNameLocks is a UlimitName enum value
-	UlimitNameLocks = "locks"
-
-	// UlimitNameMemlock is a UlimitName enum value
-	UlimitNameMemlock = "memlock"
-
-	// UlimitNameMsgqueue is a UlimitName enum value
-	UlimitNameMsgqueue = "msgqueue"
-
-	// UlimitNameNice is a UlimitName enum value
-	UlimitNameNice = "nice"
-
-	// UlimitNameNofile is a UlimitName enum value
-	UlimitNameNofile = "nofile"
-
-	// UlimitNameNproc is a UlimitName enum value
-	UlimitNameNproc = "nproc"
-
-	// UlimitNameRss is a UlimitName enum value
-	UlimitNameRss = "rss"
-
-	// UlimitNameRtprio is a UlimitName enum value
-	UlimitNameRtprio = "rtprio"
-
-	// UlimitNameRttime is a UlimitName enum value
-	UlimitNameRttime = "rttime"
-
-	// UlimitNameSigpending is a UlimitName enum value
-	UlimitNameSigpending = "sigpending"
-
-	// UlimitNameStack is a UlimitName enum value
-	UlimitNameStack = "stack"
+	UlimitNameCore       UlimitName = "core"
+	UlimitNameCpu        UlimitName = "cpu"
+	UlimitNameData       UlimitName = "data"
+	UlimitNameFsize      UlimitName = "fsize"
+	UlimitNameLocks      UlimitName = "locks"
+	UlimitNameMemlock    UlimitName = "memlock"
+	UlimitNameMsgqueue   UlimitName = "msgqueue"
+	UlimitNameNice       UlimitName = "nice"
+	UlimitNameNofile     UlimitName = "nofile"
+	UlimitNameNproc      UlimitName = "nproc"
+	UlimitNameRss        UlimitName = "rss"
+	UlimitNameRtprio     UlimitName = "rtprio"
+	UlimitNameRttime     UlimitName = "rttime"
+	UlimitNameSigpending UlimitName = "sigpending"
+	UlimitNameStack      UlimitName = "stack"
 )

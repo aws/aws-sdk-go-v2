@@ -4911,7 +4911,7 @@ type ADMMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action *string `type:"string" enum:"Action"`
+	Action Action `type:"string"`
 
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
@@ -4984,8 +4984,8 @@ func (s ADMMessage) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *ADMMessage) SetAction(v string) *ADMMessage {
-	s.Action = &v
+func (s *ADMMessage) SetAction(v Action) *ADMMessage {
+	s.Action = v
 	return s
 }
 
@@ -5282,7 +5282,7 @@ type APNSMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action *string `type:"string" enum:"Action"`
+	Action Action `type:"string"`
 
 	// Include this key when you want the system to modify the badge of your app
 	// icon. If this key is not included in the dictionary, the badge is not changed.
@@ -5349,8 +5349,8 @@ func (s APNSMessage) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *APNSMessage) SetAction(v string) *APNSMessage {
-	s.Action = &v
+func (s *APNSMessage) SetAction(v Action) *APNSMessage {
+	s.Action = v
 	return s
 }
 
@@ -5793,7 +5793,7 @@ type AddressConfiguration struct {
 	BodyOverride *string `type:"string"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
-	ChannelType *string `type:"string" enum:"ChannelType"`
+	ChannelType ChannelType `type:"string"`
 
 	Context map[string]*string `type:"map"`
 
@@ -5824,8 +5824,8 @@ func (s *AddressConfiguration) SetBodyOverride(v string) *AddressConfiguration {
 }
 
 // SetChannelType sets the ChannelType field's value.
-func (s *AddressConfiguration) SetChannelType(v string) *AddressConfiguration {
-	s.ChannelType = &v
+func (s *AddressConfiguration) SetChannelType(v ChannelType) *AddressConfiguration {
+	s.ChannelType = v
 	return s
 }
 
@@ -5986,7 +5986,7 @@ type AttributeDimension struct {
 	// The type of dimension:INCLUSIVE - Endpoints that match the criteria are included
 	// in the segment.EXCLUSIVE - Endpoints that match the criteria are excluded
 	// from the segment.
-	AttributeType *string `type:"string" enum:"AttributeType"`
+	AttributeType AttributeType `type:"string"`
 
 	Values []*string `type:"list"`
 }
@@ -6002,8 +6002,8 @@ func (s AttributeDimension) GoString() string {
 }
 
 // SetAttributeType sets the AttributeType field's value.
-func (s *AttributeDimension) SetAttributeType(v string) *AttributeDimension {
-	s.AttributeType = &v
+func (s *AttributeDimension) SetAttributeType(v AttributeType) *AttributeDimension {
+	s.AttributeType = v
 	return s
 }
 
@@ -6174,7 +6174,7 @@ type BaiduMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action *string `type:"string" enum:"Action"`
+	Action Action `type:"string"`
 
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
@@ -6234,8 +6234,8 @@ func (s BaiduMessage) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *BaiduMessage) SetAction(v string) *BaiduMessage {
-	s.Action = &v
+func (s *BaiduMessage) SetAction(v Action) *BaiduMessage {
+	s.Action = v
 	return s
 }
 
@@ -6625,7 +6625,7 @@ type CampaignSmsMessage struct {
 	Body *string `type:"string"`
 
 	// Is this is a transactional SMS message, otherwise a promotional message.
-	MessageType *string `type:"string" enum:"MessageType"`
+	MessageType MessageType `type:"string"`
 
 	// Sender ID of sent message.
 	SenderId *string `type:"string"`
@@ -6648,8 +6648,8 @@ func (s *CampaignSmsMessage) SetBody(v string) *CampaignSmsMessage {
 }
 
 // SetMessageType sets the MessageType field's value.
-func (s *CampaignSmsMessage) SetMessageType(v string) *CampaignSmsMessage {
-	s.MessageType = &v
+func (s *CampaignSmsMessage) SetMessageType(v MessageType) *CampaignSmsMessage {
+	s.MessageType = v
 	return s
 }
 
@@ -6667,7 +6667,7 @@ type CampaignState struct {
 	// The status of the campaign, or the status of a treatment that belongs to
 	// an A/B test campaign.Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN,
 	// COMPLETED, PAUSED
-	CampaignStatus *string `type:"string" enum:"CampaignStatus"`
+	CampaignStatus CampaignStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -6681,8 +6681,8 @@ func (s CampaignState) GoString() string {
 }
 
 // SetCampaignStatus sets the CampaignStatus field's value.
-func (s *CampaignState) SetCampaignStatus(v string) *CampaignState {
-	s.CampaignStatus = &v
+func (s *CampaignState) SetCampaignStatus(v CampaignStatus) *CampaignState {
+	s.CampaignStatus = v
 	return s
 }
 
@@ -6744,6 +6744,7 @@ func (s CreateAppInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAppInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAppInput"}
+
 	if s.CreateApplicationRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CreateApplicationRequest"))
 	}
@@ -6837,9 +6838,11 @@ func (s CreateCampaignInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCampaignInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCampaignInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.WriteCampaignRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteCampaignRequest"))
 	}
@@ -6912,9 +6915,11 @@ func (s CreateImportJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateImportJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateImportJobInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.ImportJobRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImportJobRequest"))
 	}
@@ -6987,9 +6992,11 @@ func (s CreateSegmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSegmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSegmentInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.WriteSegmentRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteSegmentRequest"))
 	}
@@ -7083,7 +7090,7 @@ type DefaultPushNotificationMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action *string `type:"string" enum:"Action"`
+	Action Action `type:"string"`
 
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
@@ -7119,8 +7126,8 @@ func (s DefaultPushNotificationMessage) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *DefaultPushNotificationMessage) SetAction(v string) *DefaultPushNotificationMessage {
-	s.Action = &v
+func (s *DefaultPushNotificationMessage) SetAction(v Action) *DefaultPushNotificationMessage {
+	s.Action = v
 	return s
 }
 
@@ -7187,6 +7194,7 @@ func (s DeleteAdmChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAdmChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAdmChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -7250,6 +7258,7 @@ func (s DeleteApnsChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApnsChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApnsChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -7313,6 +7322,7 @@ func (s DeleteApnsSandboxChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApnsSandboxChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApnsSandboxChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -7376,6 +7386,7 @@ func (s DeleteAppInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAppInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAppInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -7439,6 +7450,7 @@ func (s DeleteBaiduChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBaiduChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBaiduChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -7505,9 +7517,11 @@ func (s DeleteCampaignInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCampaignInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCampaignInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.CampaignId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
@@ -7577,6 +7591,7 @@ func (s DeleteEmailChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEmailChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEmailChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -7640,6 +7655,7 @@ func (s DeleteEventStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventStreamInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -7703,6 +7719,7 @@ func (s DeleteGcmChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGcmChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteGcmChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -7769,9 +7786,11 @@ func (s DeleteSegmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSegmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSegmentInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.SegmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
@@ -7841,6 +7860,7 @@ func (s DeleteSmsChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSmsChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSmsChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -8232,7 +8252,7 @@ type EndpointBatchItem struct {
 	Attributes map[string][]*string `type:"map"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
-	ChannelType *string `type:"string" enum:"ChannelType"`
+	ChannelType ChannelType `type:"string"`
 
 	// The endpoint demographic attributes.
 	Demographic *EndpointDemographic `type:"structure"`
@@ -8287,8 +8307,8 @@ func (s *EndpointBatchItem) SetAttributes(v map[string][]*string) *EndpointBatch
 }
 
 // SetChannelType sets the ChannelType field's value.
-func (s *EndpointBatchItem) SetChannelType(v string) *EndpointBatchItem {
-	s.ChannelType = &v
+func (s *EndpointBatchItem) SetChannelType(v ChannelType) *EndpointBatchItem {
+	s.ChannelType = v
 	return s
 }
 
@@ -8542,7 +8562,7 @@ type EndpointMessageResult struct {
 	Address *string `type:"string"`
 
 	// Delivery status of message.
-	DeliveryStatus *string `type:"string" enum:"DeliveryStatus"`
+	DeliveryStatus DeliveryStatus `type:"string"`
 
 	// Downstream service status code.
 	StatusCode *int64 `type:"integer"`
@@ -8571,8 +8591,8 @@ func (s *EndpointMessageResult) SetAddress(v string) *EndpointMessageResult {
 }
 
 // SetDeliveryStatus sets the DeliveryStatus field's value.
-func (s *EndpointMessageResult) SetDeliveryStatus(v string) *EndpointMessageResult {
-	s.DeliveryStatus = &v
+func (s *EndpointMessageResult) SetDeliveryStatus(v DeliveryStatus) *EndpointMessageResult {
+	s.DeliveryStatus = v
 	return s
 }
 
@@ -8606,7 +8626,7 @@ type EndpointRequest struct {
 	Attributes map[string][]*string `type:"map"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
-	ChannelType *string `type:"string" enum:"ChannelType"`
+	ChannelType ChannelType `type:"string"`
 
 	// The endpoint demographic attributes.
 	Demographic *EndpointDemographic `type:"structure"`
@@ -8658,8 +8678,8 @@ func (s *EndpointRequest) SetAttributes(v map[string][]*string) *EndpointRequest
 }
 
 // SetChannelType sets the ChannelType field's value.
-func (s *EndpointRequest) SetChannelType(v string) *EndpointRequest {
-	s.ChannelType = &v
+func (s *EndpointRequest) SetChannelType(v ChannelType) *EndpointRequest {
+	s.ChannelType = v
 	return s
 }
 
@@ -8726,7 +8746,7 @@ type EndpointResponse struct {
 	Attributes map[string][]*string `type:"map"`
 
 	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
-	ChannelType *string `type:"string" enum:"ChannelType"`
+	ChannelType ChannelType `type:"string"`
 
 	// A number from 0 - 99 that represents the cohort the endpoint is assigned
 	// to. Endpoints are grouped into cohorts randomly, and each cohort contains
@@ -8801,8 +8821,8 @@ func (s *EndpointResponse) SetAttributes(v map[string][]*string) *EndpointRespon
 }
 
 // SetChannelType sets the ChannelType field's value.
-func (s *EndpointResponse) SetChannelType(v string) *EndpointResponse {
-	s.ChannelType = &v
+func (s *EndpointResponse) SetChannelType(v ChannelType) *EndpointResponse {
+	s.ChannelType = v
 	return s
 }
 
@@ -9197,7 +9217,7 @@ type GCMMessage struct {
 	// a designated user interface within the app. URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
 	// Possible values include: OPEN_APP | DEEP_LINK | URL
-	Action *string `type:"string" enum:"Action"`
+	Action Action `type:"string"`
 
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
@@ -9267,8 +9287,8 @@ func (s GCMMessage) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *GCMMessage) SetAction(v string) *GCMMessage {
-	s.Action = &v
+func (s *GCMMessage) SetAction(v Action) *GCMMessage {
+	s.Action = v
 	return s
 }
 
@@ -9383,6 +9403,7 @@ func (s GetAdmChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAdmChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAdmChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -9446,6 +9467,7 @@ func (s GetApnsChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApnsChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetApnsChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -9509,6 +9531,7 @@ func (s GetApnsSandboxChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApnsSandboxChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetApnsSandboxChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -9572,6 +9595,7 @@ func (s GetAppInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAppInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAppInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -9635,6 +9659,7 @@ func (s GetApplicationSettingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApplicationSettingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetApplicationSettingsInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -9755,6 +9780,7 @@ func (s GetBaiduChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBaiduChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBaiduChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -9825,9 +9851,11 @@ func (s GetCampaignActivitiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignActivitiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignActivitiesInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.CampaignId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
@@ -9912,9 +9940,11 @@ func (s GetCampaignInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.CampaignId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
@@ -9990,12 +10020,15 @@ func (s GetCampaignVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignVersionInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.CampaignId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -10078,9 +10111,11 @@ func (s GetCampaignVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignVersionsInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.CampaignId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
@@ -10166,6 +10201,7 @@ func (s GetCampaignsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignsInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -10241,6 +10277,7 @@ func (s GetEmailChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEmailChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetEmailChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -10307,9 +10344,11 @@ func (s GetEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetEndpointInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.EndpointId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointId"))
 	}
@@ -10379,6 +10418,7 @@ func (s GetEventStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEventStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetEventStreamInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -10442,6 +10482,7 @@ func (s GetGcmChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGcmChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetGcmChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -10508,9 +10549,11 @@ func (s GetImportJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetImportJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetImportJobInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -10582,6 +10625,7 @@ func (s GetImportJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetImportJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetImportJobsInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -10664,9 +10708,11 @@ func (s GetSegmentImportJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentImportJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentImportJobsInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.SegmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
@@ -10751,9 +10797,11 @@ func (s GetSegmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.SegmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
@@ -10829,12 +10877,15 @@ func (s GetSegmentVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentVersionInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.SegmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -10917,9 +10968,11 @@ func (s GetSegmentVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentVersionsInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.SegmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
@@ -11005,6 +11058,7 @@ func (s GetSegmentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentsInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -11080,6 +11134,7 @@ func (s GetSmsChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSmsChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSmsChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -11135,7 +11190,7 @@ type ImportJobRequest struct {
 
 	// The format of the files that contain the endpoint definitions.Valid values:
 	// CSV, JSON
-	Format *string `type:"string" enum:"Format"`
+	Format Format `type:"string"`
 
 	// Sets whether the endpoints are registered with Amazon Pinpoint when they
 	// are imported.
@@ -11183,8 +11238,8 @@ func (s *ImportJobRequest) SetExternalId(v string) *ImportJobRequest {
 }
 
 // SetFormat sets the Format field's value.
-func (s *ImportJobRequest) SetFormat(v string) *ImportJobRequest {
-	s.Format = &v
+func (s *ImportJobRequest) SetFormat(v Format) *ImportJobRequest {
+	s.Format = v
 	return s
 }
 
@@ -11231,7 +11286,7 @@ type ImportJobResource struct {
 
 	// The format of the files that contain the endpoint definitions.Valid values:
 	// CSV, JSON
-	Format *string `type:"string" enum:"Format"`
+	Format Format `type:"string"`
 
 	// Sets whether the endpoints are registered with Amazon Pinpoint when they
 	// are imported.
@@ -11279,8 +11334,8 @@ func (s *ImportJobResource) SetExternalId(v string) *ImportJobResource {
 }
 
 // SetFormat sets the Format field's value.
-func (s *ImportJobResource) SetFormat(v string) *ImportJobResource {
-	s.Format = &v
+func (s *ImportJobResource) SetFormat(v Format) *ImportJobResource {
+	s.Format = v
 	return s
 }
 
@@ -11345,7 +11400,7 @@ type ImportJobResponse struct {
 	// The status of the import job.Valid values: CREATED, INITIALIZING, PROCESSING,
 	// COMPLETING, COMPLETED, FAILING, FAILEDThe job status is FAILED if one or
 	// more pieces failed to import.
-	JobStatus *string `type:"string" enum:"JobStatus"`
+	JobStatus JobStatus `type:"string"`
 
 	// The number of endpoints that failed to import; for example, because of syntax
 	// errors.
@@ -11421,8 +11476,8 @@ func (s *ImportJobResponse) SetId(v string) *ImportJobResponse {
 }
 
 // SetJobStatus sets the JobStatus field's value.
-func (s *ImportJobResponse) SetJobStatus(v string) *ImportJobResponse {
-	s.JobStatus = &v
+func (s *ImportJobResponse) SetJobStatus(v JobStatus) *ImportJobResponse {
+	s.JobStatus = v
 	return s
 }
 
@@ -11495,7 +11550,7 @@ type Message struct {
 	// - Uses deep linking features in iOS and Android to open your app and display
 	// a designated user interface within the app.URL - The default mobile browser
 	// on the user's device launches and opens a web page at the URL you specify.
-	Action *string `type:"string" enum:"Action"`
+	Action Action `type:"string"`
 
 	// The message body. Can include up to 140 characters.
 	Body *string `type:"string"`
@@ -11544,8 +11599,8 @@ func (s Message) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *Message) SetAction(v string) *Message {
-	s.Action = &v
+func (s *Message) SetAction(v Action) *Message {
+	s.Action = v
 	return s
 }
 
@@ -11837,7 +11892,7 @@ type MessageResult struct {
 	_ struct{} `type:"structure"`
 
 	// Delivery status of message.
-	DeliveryStatus *string `type:"string" enum:"DeliveryStatus"`
+	DeliveryStatus DeliveryStatus `type:"string"`
 
 	// Downstream service status code.
 	StatusCode *int64 `type:"integer"`
@@ -11860,8 +11915,8 @@ func (s MessageResult) GoString() string {
 }
 
 // SetDeliveryStatus sets the DeliveryStatus field's value.
-func (s *MessageResult) SetDeliveryStatus(v string) *MessageResult {
-	s.DeliveryStatus = &v
+func (s *MessageResult) SetDeliveryStatus(v DeliveryStatus) *MessageResult {
+	s.DeliveryStatus = v
 	return s
 }
 
@@ -11909,9 +11964,11 @@ func (s PutEventStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEventStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutEventStreamInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.WriteEventStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteEventStream"))
 	}
@@ -12001,12 +12058,12 @@ type RecencyDimension struct {
 
 	// The length of time during which users have been active or inactive with your
 	// app.Valid values: HR_24, DAY_7, DAY_14, DAY_30
-	Duration *string `type:"string" enum:"Duration"`
+	Duration Duration `type:"string"`
 
 	// The recency dimension type:ACTIVE - Users who have used your app within the
 	// specified duration are included in the segment.INACTIVE - Users who have
 	// not used your app within the specified duration are included in the segment.
-	RecencyType *string `type:"string" enum:"RecencyType"`
+	RecencyType RecencyType `type:"string"`
 }
 
 // String returns the string representation
@@ -12020,14 +12077,14 @@ func (s RecencyDimension) GoString() string {
 }
 
 // SetDuration sets the Duration field's value.
-func (s *RecencyDimension) SetDuration(v string) *RecencyDimension {
-	s.Duration = &v
+func (s *RecencyDimension) SetDuration(v Duration) *RecencyDimension {
+	s.Duration = v
 	return s
 }
 
 // SetRecencyType sets the RecencyType field's value.
-func (s *RecencyDimension) SetRecencyType(v string) *RecencyDimension {
-	s.RecencyType = &v
+func (s *RecencyDimension) SetRecencyType(v RecencyType) *RecencyDimension {
+	s.RecencyType = v
 	return s
 }
 
@@ -12198,7 +12255,7 @@ type SMSMessage struct {
 	Body *string `type:"string"`
 
 	// Is this a transaction priority message or lower priority.
-	MessageType *string `type:"string" enum:"MessageType"`
+	MessageType MessageType `type:"string"`
 
 	// Sender ID of sent message.
 	SenderId *string `type:"string"`
@@ -12223,8 +12280,8 @@ func (s *SMSMessage) SetBody(v string) *SMSMessage {
 }
 
 // SetMessageType sets the MessageType field's value.
-func (s *SMSMessage) SetMessageType(v string) *SMSMessage {
-	s.MessageType = &v
+func (s *SMSMessage) SetMessageType(v MessageType) *SMSMessage {
+	s.MessageType = v
 	return s
 }
 
@@ -12250,7 +12307,7 @@ type Schedule struct {
 
 	// How often the campaign delivers messages.Valid values: ONCE, HOURLY, DAILY,
 	// WEEKLY, MONTHLY
-	Frequency *string `type:"string" enum:"Frequency"`
+	Frequency Frequency `type:"string"`
 
 	// Indicates whether the campaign schedule takes effect according to each user's
 	// local time.
@@ -12284,8 +12341,8 @@ func (s *Schedule) SetEndTime(v string) *Schedule {
 }
 
 // SetFrequency sets the Frequency field's value.
-func (s *Schedule) SetFrequency(v string) *Schedule {
-	s.Frequency = &v
+func (s *Schedule) SetFrequency(v Frequency) *Schedule {
+	s.Frequency = v
 	return s
 }
 
@@ -12482,7 +12539,7 @@ type SegmentImportResource struct {
 
 	// The format of the endpoint files that were imported to create this segment.Valid
 	// values: CSV, JSON
-	Format *string `type:"string" enum:"Format"`
+	Format Format `type:"string"`
 
 	// The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint
 	// access to the endpoints in Amazon S3.
@@ -12519,8 +12576,8 @@ func (s *SegmentImportResource) SetExternalId(v string) *SegmentImportResource {
 }
 
 // SetFormat sets the Format field's value.
-func (s *SegmentImportResource) SetFormat(v string) *SegmentImportResource {
-	s.Format = &v
+func (s *SegmentImportResource) SetFormat(v Format) *SegmentImportResource {
+	s.Format = v
 	return s
 }
 
@@ -12600,7 +12657,7 @@ type SegmentResponse struct {
 	// an imported set of endpoint definitions. You create this type of segment
 	// by importing a segment in the Amazon Pinpoint console or by making a POST
 	// request to the jobs/import resource.
-	SegmentType *string `type:"string" enum:"SegmentType"`
+	SegmentType SegmentType `type:"string"`
 
 	// The segment version number.
 	Version *int64 `type:"integer"`
@@ -12659,8 +12716,8 @@ func (s *SegmentResponse) SetName(v string) *SegmentResponse {
 }
 
 // SetSegmentType sets the SegmentType field's value.
-func (s *SegmentResponse) SetSegmentType(v string) *SegmentResponse {
-	s.SegmentType = &v
+func (s *SegmentResponse) SetSegmentType(v SegmentType) *SegmentResponse {
+	s.SegmentType = v
 	return s
 }
 
@@ -12731,9 +12788,11 @@ func (s SendMessagesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendMessagesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendMessagesInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.MessageRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MessageRequest"))
 	}
@@ -12903,9 +12962,11 @@ func (s SendUsersMessagesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendUsersMessagesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendUsersMessagesInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.SendUsersMessageRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SendUsersMessageRequest"))
 	}
@@ -12962,7 +13023,7 @@ type SetDimension struct {
 	// The type of dimension:INCLUSIVE - Endpoints that match the criteria are included
 	// in the segment.EXCLUSIVE - Endpoints that match the criteria are excluded
 	// from the segment.
-	DimensionType *string `type:"string" enum:"DimensionType"`
+	DimensionType DimensionType `type:"string"`
 
 	Values []*string `type:"list"`
 }
@@ -12978,8 +13039,8 @@ func (s SetDimension) GoString() string {
 }
 
 // SetDimensionType sets the DimensionType field's value.
-func (s *SetDimension) SetDimensionType(v string) *SetDimension {
-	s.DimensionType = &v
+func (s *SetDimension) SetDimensionType(v DimensionType) *SetDimension {
+	s.DimensionType = v
 	return s
 }
 
@@ -13094,9 +13155,11 @@ func (s UpdateAdmChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAdmChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAdmChannelInput"}
+
 	if s.ADMChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ADMChannelRequest"))
 	}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -13171,9 +13234,11 @@ func (s UpdateApnsChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApnsChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApnsChannelInput"}
+
 	if s.APNSChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("APNSChannelRequest"))
 	}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -13248,9 +13313,11 @@ func (s UpdateApnsSandboxChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApnsSandboxChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApnsSandboxChannelInput"}
+
 	if s.APNSSandboxChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("APNSSandboxChannelRequest"))
 	}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
@@ -13325,9 +13392,11 @@ func (s UpdateApplicationSettingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationSettingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationSettingsInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.WriteApplicationSettingsRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteApplicationSettingsRequest"))
 	}
@@ -13402,9 +13471,11 @@ func (s UpdateBaiduChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBaiduChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateBaiduChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.BaiduChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BaiduChannelRequest"))
 	}
@@ -13482,12 +13553,15 @@ func (s UpdateCampaignInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCampaignInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateCampaignInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.CampaignId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
+
 	if s.WriteCampaignRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteCampaignRequest"))
 	}
@@ -13568,9 +13642,11 @@ func (s UpdateEmailChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEmailChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateEmailChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.EmailChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EmailChannelRequest"))
 	}
@@ -13648,12 +13724,15 @@ func (s UpdateEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateEndpointInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.EndpointId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointId"))
 	}
+
 	if s.EndpointRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointRequest"))
 	}
@@ -13734,9 +13813,11 @@ func (s UpdateEndpointsBatchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEndpointsBatchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateEndpointsBatchInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.EndpointBatchRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointBatchRequest"))
 	}
@@ -13811,9 +13892,11 @@ func (s UpdateGcmChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGcmChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGcmChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.GCMChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GCMChannelRequest"))
 	}
@@ -13891,12 +13974,15 @@ func (s UpdateSegmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSegmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSegmentInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.SegmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
+
 	if s.WriteSegmentRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteSegmentRequest"))
 	}
@@ -13977,9 +14063,11 @@ func (s UpdateSmsChannelInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSmsChannelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSmsChannelInput"}
+
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+
 	if s.SMSChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SMSChannelRequest"))
 	}
@@ -14343,178 +14431,130 @@ func (s *WriteTreatmentResource) SetTreatmentName(v string) *WriteTreatmentResou
 	return s
 }
 
+type Action string
+
+// Enum values for Action
 const (
-	// ActionOpenApp is a Action enum value
-	ActionOpenApp = "OPEN_APP"
-
-	// ActionDeepLink is a Action enum value
-	ActionDeepLink = "DEEP_LINK"
-
-	// ActionUrl is a Action enum value
-	ActionUrl = "URL"
+	ActionOpenApp  Action = "OPEN_APP"
+	ActionDeepLink Action = "DEEP_LINK"
+	ActionUrl      Action = "URL"
 )
 
-const (
-	// AttributeTypeInclusive is a AttributeType enum value
-	AttributeTypeInclusive = "INCLUSIVE"
+type AttributeType string
 
-	// AttributeTypeExclusive is a AttributeType enum value
-	AttributeTypeExclusive = "EXCLUSIVE"
+// Enum values for AttributeType
+const (
+	AttributeTypeInclusive AttributeType = "INCLUSIVE"
+	AttributeTypeExclusive AttributeType = "EXCLUSIVE"
 )
 
+type CampaignStatus string
+
+// Enum values for CampaignStatus
 const (
-	// CampaignStatusScheduled is a CampaignStatus enum value
-	CampaignStatusScheduled = "SCHEDULED"
-
-	// CampaignStatusExecuting is a CampaignStatus enum value
-	CampaignStatusExecuting = "EXECUTING"
-
-	// CampaignStatusPendingNextRun is a CampaignStatus enum value
-	CampaignStatusPendingNextRun = "PENDING_NEXT_RUN"
-
-	// CampaignStatusCompleted is a CampaignStatus enum value
-	CampaignStatusCompleted = "COMPLETED"
-
-	// CampaignStatusPaused is a CampaignStatus enum value
-	CampaignStatusPaused = "PAUSED"
+	CampaignStatusScheduled      CampaignStatus = "SCHEDULED"
+	CampaignStatusExecuting      CampaignStatus = "EXECUTING"
+	CampaignStatusPendingNextRun CampaignStatus = "PENDING_NEXT_RUN"
+	CampaignStatusCompleted      CampaignStatus = "COMPLETED"
+	CampaignStatusPaused         CampaignStatus = "PAUSED"
 )
 
+type ChannelType string
+
+// Enum values for ChannelType
 const (
-	// ChannelTypeGcm is a ChannelType enum value
-	ChannelTypeGcm = "GCM"
-
-	// ChannelTypeApns is a ChannelType enum value
-	ChannelTypeApns = "APNS"
-
-	// ChannelTypeApnsSandbox is a ChannelType enum value
-	ChannelTypeApnsSandbox = "APNS_SANDBOX"
-
-	// ChannelTypeAdm is a ChannelType enum value
-	ChannelTypeAdm = "ADM"
-
-	// ChannelTypeSms is a ChannelType enum value
-	ChannelTypeSms = "SMS"
-
-	// ChannelTypeEmail is a ChannelType enum value
-	ChannelTypeEmail = "EMAIL"
-
-	// ChannelTypeBaidu is a ChannelType enum value
-	ChannelTypeBaidu = "BAIDU"
+	ChannelTypeGcm         ChannelType = "GCM"
+	ChannelTypeApns        ChannelType = "APNS"
+	ChannelTypeApnsSandbox ChannelType = "APNS_SANDBOX"
+	ChannelTypeAdm         ChannelType = "ADM"
+	ChannelTypeSms         ChannelType = "SMS"
+	ChannelTypeEmail       ChannelType = "EMAIL"
+	ChannelTypeBaidu       ChannelType = "BAIDU"
 )
 
+type DeliveryStatus string
+
+// Enum values for DeliveryStatus
 const (
-	// DeliveryStatusSuccessful is a DeliveryStatus enum value
-	DeliveryStatusSuccessful = "SUCCESSFUL"
-
-	// DeliveryStatusThrottled is a DeliveryStatus enum value
-	DeliveryStatusThrottled = "THROTTLED"
-
-	// DeliveryStatusTemporaryFailure is a DeliveryStatus enum value
-	DeliveryStatusTemporaryFailure = "TEMPORARY_FAILURE"
-
-	// DeliveryStatusPermanentFailure is a DeliveryStatus enum value
-	DeliveryStatusPermanentFailure = "PERMANENT_FAILURE"
-
-	// DeliveryStatusUnknownFailure is a DeliveryStatus enum value
-	DeliveryStatusUnknownFailure = "UNKNOWN_FAILURE"
-
-	// DeliveryStatusOptOut is a DeliveryStatus enum value
-	DeliveryStatusOptOut = "OPT_OUT"
-
-	// DeliveryStatusDuplicate is a DeliveryStatus enum value
-	DeliveryStatusDuplicate = "DUPLICATE"
+	DeliveryStatusSuccessful       DeliveryStatus = "SUCCESSFUL"
+	DeliveryStatusThrottled        DeliveryStatus = "THROTTLED"
+	DeliveryStatusTemporaryFailure DeliveryStatus = "TEMPORARY_FAILURE"
+	DeliveryStatusPermanentFailure DeliveryStatus = "PERMANENT_FAILURE"
+	DeliveryStatusUnknownFailure   DeliveryStatus = "UNKNOWN_FAILURE"
+	DeliveryStatusOptOut           DeliveryStatus = "OPT_OUT"
+	DeliveryStatusDuplicate        DeliveryStatus = "DUPLICATE"
 )
 
-const (
-	// DimensionTypeInclusive is a DimensionType enum value
-	DimensionTypeInclusive = "INCLUSIVE"
+type DimensionType string
 
-	// DimensionTypeExclusive is a DimensionType enum value
-	DimensionTypeExclusive = "EXCLUSIVE"
+// Enum values for DimensionType
+const (
+	DimensionTypeInclusive DimensionType = "INCLUSIVE"
+	DimensionTypeExclusive DimensionType = "EXCLUSIVE"
 )
 
+type Duration string
+
+// Enum values for Duration
 const (
-	// DurationHr24 is a Duration enum value
-	DurationHr24 = "HR_24"
-
-	// DurationDay7 is a Duration enum value
-	DurationDay7 = "DAY_7"
-
-	// DurationDay14 is a Duration enum value
-	DurationDay14 = "DAY_14"
-
-	// DurationDay30 is a Duration enum value
-	DurationDay30 = "DAY_30"
+	DurationHr24  Duration = "HR_24"
+	DurationDay7  Duration = "DAY_7"
+	DurationDay14 Duration = "DAY_14"
+	DurationDay30 Duration = "DAY_30"
 )
 
-const (
-	// FormatCsv is a Format enum value
-	FormatCsv = "CSV"
+type Format string
 
-	// FormatJson is a Format enum value
-	FormatJson = "JSON"
+// Enum values for Format
+const (
+	FormatCsv  Format = "CSV"
+	FormatJson Format = "JSON"
 )
 
+type Frequency string
+
+// Enum values for Frequency
 const (
-	// FrequencyOnce is a Frequency enum value
-	FrequencyOnce = "ONCE"
-
-	// FrequencyHourly is a Frequency enum value
-	FrequencyHourly = "HOURLY"
-
-	// FrequencyDaily is a Frequency enum value
-	FrequencyDaily = "DAILY"
-
-	// FrequencyWeekly is a Frequency enum value
-	FrequencyWeekly = "WEEKLY"
-
-	// FrequencyMonthly is a Frequency enum value
-	FrequencyMonthly = "MONTHLY"
+	FrequencyOnce    Frequency = "ONCE"
+	FrequencyHourly  Frequency = "HOURLY"
+	FrequencyDaily   Frequency = "DAILY"
+	FrequencyWeekly  Frequency = "WEEKLY"
+	FrequencyMonthly Frequency = "MONTHLY"
 )
 
+type JobStatus string
+
+// Enum values for JobStatus
 const (
-	// JobStatusCreated is a JobStatus enum value
-	JobStatusCreated = "CREATED"
-
-	// JobStatusInitializing is a JobStatus enum value
-	JobStatusInitializing = "INITIALIZING"
-
-	// JobStatusProcessing is a JobStatus enum value
-	JobStatusProcessing = "PROCESSING"
-
-	// JobStatusCompleting is a JobStatus enum value
-	JobStatusCompleting = "COMPLETING"
-
-	// JobStatusCompleted is a JobStatus enum value
-	JobStatusCompleted = "COMPLETED"
-
-	// JobStatusFailing is a JobStatus enum value
-	JobStatusFailing = "FAILING"
-
-	// JobStatusFailed is a JobStatus enum value
-	JobStatusFailed = "FAILED"
+	JobStatusCreated      JobStatus = "CREATED"
+	JobStatusInitializing JobStatus = "INITIALIZING"
+	JobStatusProcessing   JobStatus = "PROCESSING"
+	JobStatusCompleting   JobStatus = "COMPLETING"
+	JobStatusCompleted    JobStatus = "COMPLETED"
+	JobStatusFailing      JobStatus = "FAILING"
+	JobStatusFailed       JobStatus = "FAILED"
 )
 
-const (
-	// MessageTypeTransactional is a MessageType enum value
-	MessageTypeTransactional = "TRANSACTIONAL"
+type MessageType string
 
-	// MessageTypePromotional is a MessageType enum value
-	MessageTypePromotional = "PROMOTIONAL"
+// Enum values for MessageType
+const (
+	MessageTypeTransactional MessageType = "TRANSACTIONAL"
+	MessageTypePromotional   MessageType = "PROMOTIONAL"
 )
 
-const (
-	// RecencyTypeActive is a RecencyType enum value
-	RecencyTypeActive = "ACTIVE"
+type RecencyType string
 
-	// RecencyTypeInactive is a RecencyType enum value
-	RecencyTypeInactive = "INACTIVE"
+// Enum values for RecencyType
+const (
+	RecencyTypeActive   RecencyType = "ACTIVE"
+	RecencyTypeInactive RecencyType = "INACTIVE"
 )
 
-const (
-	// SegmentTypeDimensional is a SegmentType enum value
-	SegmentTypeDimensional = "DIMENSIONAL"
+type SegmentType string
 
-	// SegmentTypeImport is a SegmentType enum value
-	SegmentTypeImport = "IMPORT"
+// Enum values for SegmentType
+const (
+	SegmentTypeDimensional SegmentType = "DIMENSIONAL"
+	SegmentTypeImport      SegmentType = "IMPORT"
 )

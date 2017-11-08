@@ -2470,9 +2470,11 @@ func (s AcknowledgeJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcknowledgeJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AcknowledgeJobInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
+
 	if s.Nonce == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Nonce"))
 	}
@@ -2501,7 +2503,7 @@ type AcknowledgeJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Whether the job worker has received the specified job.
-	Status *string `locationName:"status" type:"string" enum:"JobStatus"`
+	Status JobStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -2515,8 +2517,8 @@ func (s AcknowledgeJobOutput) GoString() string {
 }
 
 // SetStatus sets the Status field's value.
-func (s *AcknowledgeJobOutput) SetStatus(v string) *AcknowledgeJobOutput {
-	s.Status = &v
+func (s *AcknowledgeJobOutput) SetStatus(v JobStatus) *AcknowledgeJobOutput {
+	s.Status = v
 	return s
 }
 
@@ -2557,18 +2559,21 @@ func (s AcknowledgeThirdPartyJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcknowledgeThirdPartyJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AcknowledgeThirdPartyJobInput"}
+
 	if s.ClientToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
 	}
+
 	if s.Nonce == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Nonce"))
 	}
@@ -2603,7 +2608,7 @@ type AcknowledgeThirdPartyJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The status information for the third party job, if any.
-	Status *string `locationName:"status" type:"string" enum:"JobStatus"`
+	Status JobStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -2617,8 +2622,8 @@ func (s AcknowledgeThirdPartyJobOutput) GoString() string {
 }
 
 // SetStatus sets the Status field's value.
-func (s *AcknowledgeThirdPartyJobOutput) SetStatus(v string) *AcknowledgeThirdPartyJobOutput {
-	s.Status = &v
+func (s *AcknowledgeThirdPartyJobOutput) SetStatus(v JobStatus) *AcknowledgeThirdPartyJobOutput {
+	s.Status = v
 	return s
 }
 
@@ -2693,7 +2698,7 @@ type ActionConfigurationProperty struct {
 	Secret *bool `locationName:"secret" type:"boolean" required:"true"`
 
 	// The type of the configuration property.
-	Type *string `locationName:"type" type:"string" enum:"ActionConfigurationPropertyType"`
+	Type ActionConfigurationPropertyType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -2712,18 +2717,22 @@ func (s *ActionConfigurationProperty) Validate() error {
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Required == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Required"))
 	}
+
 	if s.Secret == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Secret"))
 	}
@@ -2771,8 +2780,8 @@ func (s *ActionConfigurationProperty) SetSecret(v bool) *ActionConfigurationProp
 }
 
 // SetType sets the Type field's value.
-func (s *ActionConfigurationProperty) SetType(v string) *ActionConfigurationProperty {
-	s.Type = &v
+func (s *ActionConfigurationProperty) SetType(v ActionConfigurationPropertyType) *ActionConfigurationProperty {
+	s.Type = v
 	return s
 }
 
@@ -2849,9 +2858,11 @@ func (s ActionDeclaration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActionDeclaration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ActionDeclaration"}
+
 	if s.ActionTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionTypeId"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2961,7 +2972,7 @@ type ActionExecution struct {
 
 	// The status of the action, or for a completed action, the last status of the
 	// action.
-	Status *string `locationName:"status" type:"string" enum:"ActionExecutionStatus"`
+	Status ActionExecutionStatus `locationName:"status" type:"string"`
 
 	// A summary of the run of the action.
 	Summary *string `locationName:"summary" type:"string"`
@@ -3020,8 +3031,8 @@ func (s *ActionExecution) SetPercentComplete(v int64) *ActionExecution {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ActionExecution) SetStatus(v string) *ActionExecution {
-	s.Status = &v
+func (s *ActionExecution) SetStatus(v ActionExecutionStatus) *ActionExecution {
+	s.Status = v
 	return s
 }
 
@@ -3074,15 +3085,18 @@ func (s ActionRevision) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActionRevision) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ActionRevision"}
+
 	if s.Created == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Created"))
 	}
+
 	if s.RevisionChangeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RevisionChangeId"))
 	}
 	if s.RevisionChangeId != nil && len(*s.RevisionChangeId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RevisionChangeId", 1))
 	}
+
 	if s.RevisionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RevisionId"))
 	}
@@ -3254,12 +3268,12 @@ type ActionTypeId struct {
 	// the values below.
 	//
 	// Category is a required field
-	Category *string `locationName:"category" type:"string" required:"true" enum:"ActionCategory"`
+	Category ActionCategory `locationName:"category" type:"string" required:"true"`
 
 	// The creator of the action being called.
 	//
 	// Owner is a required field
-	Owner *string `locationName:"owner" type:"string" required:"true" enum:"ActionOwner"`
+	Owner ActionOwner `locationName:"owner" type:"string" required:"true"`
 
 	// The provider of the service being called by the action. Valid providers are
 	// determined by the action category. For example, an action in the Deploy category
@@ -3288,18 +3302,20 @@ func (s ActionTypeId) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActionTypeId) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ActionTypeId"}
-	if s.Category == nil {
+	if len(s.Category) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Category"))
 	}
-	if s.Owner == nil {
+	if len(s.Owner) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Owner"))
 	}
+
 	if s.Provider == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Provider"))
 	}
 	if s.Provider != nil && len(*s.Provider) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Provider", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -3314,14 +3330,14 @@ func (s *ActionTypeId) Validate() error {
 }
 
 // SetCategory sets the Category field's value.
-func (s *ActionTypeId) SetCategory(v string) *ActionTypeId {
-	s.Category = &v
+func (s *ActionTypeId) SetCategory(v ActionCategory) *ActionTypeId {
+	s.Category = v
 	return s
 }
 
 // SetOwner sets the Owner field's value.
-func (s *ActionTypeId) SetOwner(v string) *ActionTypeId {
-	s.Owner = &v
+func (s *ActionTypeId) SetOwner(v ActionOwner) *ActionTypeId {
+	s.Owner = v
 	return s
 }
 
@@ -3429,7 +3445,7 @@ type ApprovalResult struct {
 	// The response submitted by a reviewer assigned to an approval action request.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"ApprovalStatus"`
+	Status ApprovalStatus `locationName:"status" type:"string" required:"true"`
 
 	// The summary of the current status of the approval request.
 	//
@@ -3450,9 +3466,10 @@ func (s ApprovalResult) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApprovalResult) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ApprovalResult"}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
+
 	if s.Summary == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Summary"))
 	}
@@ -3464,8 +3481,8 @@ func (s *ApprovalResult) Validate() error {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ApprovalResult) SetStatus(v string) *ApprovalResult {
-	s.Status = &v
+func (s *ApprovalResult) SetStatus(v ApprovalStatus) *ApprovalResult {
+	s.Status = v
 	return s
 }
 
@@ -3549,9 +3566,11 @@ func (s ArtifactDetails) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ArtifactDetails) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ArtifactDetails"}
+
 	if s.MaximumCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaximumCount"))
 	}
+
 	if s.MinimumCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinimumCount"))
 	}
@@ -3583,7 +3602,7 @@ type ArtifactLocation struct {
 	S3Location *S3ArtifactLocation `locationName:"s3Location" type:"structure"`
 
 	// The type of artifact in the location.
-	Type *string `locationName:"type" type:"string" enum:"ArtifactLocationType"`
+	Type ArtifactLocationType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -3603,8 +3622,8 @@ func (s *ArtifactLocation) SetS3Location(v *S3ArtifactLocation) *ArtifactLocatio
 }
 
 // SetType sets the Type field's value.
-func (s *ArtifactLocation) SetType(v string) *ArtifactLocation {
-	s.Type = &v
+func (s *ArtifactLocation) SetType(v ArtifactLocationType) *ArtifactLocation {
+	s.Type = v
 	return s
 }
 
@@ -3708,7 +3727,7 @@ type ArtifactStore struct {
 	// The type of the artifact store, such as S3.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"ArtifactStoreType"`
+	Type ArtifactStoreType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3724,13 +3743,14 @@ func (s ArtifactStore) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ArtifactStore) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ArtifactStore"}
+
 	if s.Location == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
 	if s.Location != nil && len(*s.Location) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("Location", 3))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.EncryptionKey != nil {
@@ -3758,8 +3778,8 @@ func (s *ArtifactStore) SetLocation(v string) *ArtifactStore {
 }
 
 // SetType sets the Type field's value.
-func (s *ArtifactStore) SetType(v string) *ArtifactStore {
-	s.Type = &v
+func (s *ArtifactStore) SetType(v ArtifactStoreType) *ArtifactStore {
+	s.Type = v
 	return s
 }
 
@@ -3776,7 +3796,7 @@ type BlockerDeclaration struct {
 	// Reserved for future use.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"BlockerType"`
+	Type BlockerType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3792,13 +3812,14 @@ func (s BlockerDeclaration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BlockerDeclaration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BlockerDeclaration"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -3815,8 +3836,8 @@ func (s *BlockerDeclaration) SetName(v string) *BlockerDeclaration {
 }
 
 // SetType sets the Type field's value.
-func (s *BlockerDeclaration) SetType(v string) *BlockerDeclaration {
-	s.Type = &v
+func (s *BlockerDeclaration) SetType(v BlockerType) *BlockerDeclaration {
+	s.Type = v
 	return s
 }
 
@@ -3831,7 +3852,7 @@ type CreateCustomActionTypeInput struct {
 	// functional. These values are reserved for future use.
 	//
 	// Category is a required field
-	Category *string `locationName:"category" type:"string" required:"true" enum:"ActionCategory"`
+	Category ActionCategory `locationName:"category" type:"string" required:"true"`
 
 	// The configuration properties for the custom action.
 	//
@@ -3878,21 +3899,25 @@ func (s CreateCustomActionTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCustomActionTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCustomActionTypeInput"}
-	if s.Category == nil {
+	if len(s.Category) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Category"))
 	}
+
 	if s.InputArtifactDetails == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputArtifactDetails"))
 	}
+
 	if s.OutputArtifactDetails == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OutputArtifactDetails"))
 	}
+
 	if s.Provider == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Provider"))
 	}
 	if s.Provider != nil && len(*s.Provider) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Provider", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -3932,8 +3957,8 @@ func (s *CreateCustomActionTypeInput) Validate() error {
 }
 
 // SetCategory sets the Category field's value.
-func (s *CreateCustomActionTypeInput) SetCategory(v string) *CreateCustomActionTypeInput {
-	s.Category = &v
+func (s *CreateCustomActionTypeInput) SetCategory(v ActionCategory) *CreateCustomActionTypeInput {
+	s.Category = v
 	return s
 }
 
@@ -4024,6 +4049,7 @@ func (s CreatePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePipelineInput"}
+
 	if s.Pipeline == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Pipeline"))
 	}
@@ -4106,12 +4132,14 @@ func (s CurrentRevision) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CurrentRevision) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CurrentRevision"}
+
 	if s.ChangeIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeIdentifier"))
 	}
 	if s.ChangeIdentifier != nil && len(*s.ChangeIdentifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeIdentifier", 1))
 	}
+
 	if s.Revision == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Revision"))
 	}
@@ -4162,7 +4190,7 @@ type DeleteCustomActionTypeInput struct {
 	// or deploy.
 	//
 	// Category is a required field
-	Category *string `locationName:"category" type:"string" required:"true" enum:"ActionCategory"`
+	Category ActionCategory `locationName:"category" type:"string" required:"true"`
 
 	// The provider of the service used in the custom action, such as AWS CodeDeploy.
 	//
@@ -4188,15 +4216,17 @@ func (s DeleteCustomActionTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCustomActionTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCustomActionTypeInput"}
-	if s.Category == nil {
+	if len(s.Category) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Category"))
 	}
+
 	if s.Provider == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Provider"))
 	}
 	if s.Provider != nil && len(*s.Provider) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Provider", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -4211,8 +4241,8 @@ func (s *DeleteCustomActionTypeInput) Validate() error {
 }
 
 // SetCategory sets the Category field's value.
-func (s *DeleteCustomActionTypeInput) SetCategory(v string) *DeleteCustomActionTypeInput {
-	s.Category = &v
+func (s *DeleteCustomActionTypeInput) SetCategory(v ActionCategory) *DeleteCustomActionTypeInput {
+	s.Category = v
 	return s
 }
 
@@ -4267,6 +4297,7 @@ func (s DeletePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePipelineInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4331,7 +4362,7 @@ type DisableStageTransitionInput struct {
 	// in that stage (outbound).
 	//
 	// TransitionType is a required field
-	TransitionType *string `locationName:"transitionType" type:"string" required:"true" enum:"StageTransitionType"`
+	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4347,25 +4378,28 @@ func (s DisableStageTransitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableStageTransitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableStageTransitionInput"}
+
 	if s.PipelineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
 	}
 	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
 	}
+
 	if s.Reason == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Reason"))
 	}
 	if s.Reason != nil && len(*s.Reason) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Reason", 1))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 	if s.StageName != nil && len(*s.StageName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StageName", 1))
 	}
-	if s.TransitionType == nil {
+	if len(s.TransitionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TransitionType"))
 	}
 
@@ -4394,8 +4428,8 @@ func (s *DisableStageTransitionInput) SetStageName(v string) *DisableStageTransi
 }
 
 // SetTransitionType sets the TransitionType field's value.
-func (s *DisableStageTransitionInput) SetTransitionType(v string) *DisableStageTransitionInput {
-	s.TransitionType = &v
+func (s *DisableStageTransitionInput) SetTransitionType(v StageTransitionType) *DisableStageTransitionInput {
+	s.TransitionType = v
 	return s
 }
 
@@ -4436,7 +4470,7 @@ type EnableStageTransitionInput struct {
 	// will be allowed to transition to the next stage (outbound).
 	//
 	// TransitionType is a required field
-	TransitionType *string `locationName:"transitionType" type:"string" required:"true" enum:"StageTransitionType"`
+	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4452,19 +4486,21 @@ func (s EnableStageTransitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableStageTransitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableStageTransitionInput"}
+
 	if s.PipelineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
 	}
 	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 	if s.StageName != nil && len(*s.StageName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StageName", 1))
 	}
-	if s.TransitionType == nil {
+	if len(s.TransitionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TransitionType"))
 	}
 
@@ -4487,8 +4523,8 @@ func (s *EnableStageTransitionInput) SetStageName(v string) *EnableStageTransiti
 }
 
 // SetTransitionType sets the TransitionType field's value.
-func (s *EnableStageTransitionInput) SetTransitionType(v string) *EnableStageTransitionInput {
-	s.TransitionType = &v
+func (s *EnableStageTransitionInput) SetTransitionType(v StageTransitionType) *EnableStageTransitionInput {
+	s.TransitionType = v
 	return s
 }
 
@@ -4523,7 +4559,7 @@ type EncryptionKey struct {
 	// key. When creating or updating a pipeline, the value must be set to 'KMS'.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"EncryptionKeyType"`
+	Type EncryptionKeyType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4539,13 +4575,14 @@ func (s EncryptionKey) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EncryptionKey) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EncryptionKey"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -4562,8 +4599,8 @@ func (s *EncryptionKey) SetId(v string) *EncryptionKey {
 }
 
 // SetType sets the Type field's value.
-func (s *EncryptionKey) SetType(v string) *EncryptionKey {
-	s.Type = &v
+func (s *EncryptionKey) SetType(v EncryptionKeyType) *EncryptionKey {
+	s.Type = v
 	return s
 }
 
@@ -4676,7 +4713,7 @@ type FailureDetails struct {
 	// The type of the failure.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"FailureType"`
+	Type FailureType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4695,10 +4732,11 @@ func (s *FailureDetails) Validate() error {
 	if s.ExternalExecutionId != nil && len(*s.ExternalExecutionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ExternalExecutionId", 1))
 	}
+
 	if s.Message == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -4721,8 +4759,8 @@ func (s *FailureDetails) SetMessage(v string) *FailureDetails {
 }
 
 // SetType sets the Type field's value.
-func (s *FailureDetails) SetType(v string) *FailureDetails {
-	s.Type = &v
+func (s *FailureDetails) SetType(v FailureType) *FailureDetails {
+	s.Type = v
 	return s
 }
 
@@ -4750,6 +4788,7 @@ func (s GetJobDetailsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobDetailsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetJobDetailsInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -4823,9 +4862,11 @@ func (s GetPipelineExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPipelineExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPipelineExecutionInput"}
+
 	if s.PipelineExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineExecutionId"))
 	}
+
 	if s.PipelineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
 	}
@@ -4905,6 +4946,7 @@ func (s GetPipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPipelineInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4992,6 +5034,7 @@ func (s GetPipelineStateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPipelineStateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPipelineStateInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5105,12 +5148,14 @@ func (s GetThirdPartyJobDetailsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetThirdPartyJobDetailsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetThirdPartyJobDetailsInput"}
+
 	if s.ClientToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -5192,6 +5237,7 @@ func (s InputArtifact) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputArtifact) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputArtifact"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5409,7 +5455,7 @@ type ListActionTypesInput struct {
 	_ struct{} `type:"structure"`
 
 	// Filters the list of action types to those created by a specified entity.
-	ActionOwnerFilter *string `locationName:"actionOwnerFilter" type:"string" enum:"ActionOwner"`
+	ActionOwnerFilter ActionOwner `locationName:"actionOwnerFilter" type:"string"`
 
 	// An identifier that was returned from the previous list action types call,
 	// which can be used to return the next set of action types in the list.
@@ -5440,8 +5486,8 @@ func (s *ListActionTypesInput) Validate() error {
 }
 
 // SetActionOwnerFilter sets the ActionOwnerFilter field's value.
-func (s *ListActionTypesInput) SetActionOwnerFilter(v string) *ListActionTypesInput {
-	s.ActionOwnerFilter = &v
+func (s *ListActionTypesInput) SetActionOwnerFilter(v ActionOwner) *ListActionTypesInput {
+	s.ActionOwnerFilter = v
 	return s
 }
 
@@ -5529,6 +5575,7 @@ func (s *ListPipelineExecutionsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.PipelineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
 	}
@@ -5703,6 +5750,7 @@ func (s OutputArtifact) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OutputArtifact) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OutputArtifact"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5812,18 +5860,22 @@ func (s PipelineDeclaration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PipelineDeclaration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PipelineDeclaration"}
+
 	if s.ArtifactStore == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ArtifactStore"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
+
 	if s.Stages == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Stages"))
 	}
@@ -5910,7 +5962,7 @@ type PipelineExecution struct {
 	//    the pipeline instead.
 	//
 	//    * Failed: The pipeline execution was not completed successfully.
-	Status *string `locationName:"status" type:"string" enum:"PipelineExecutionStatus"`
+	Status PipelineExecutionStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -5948,8 +6000,8 @@ func (s *PipelineExecution) SetPipelineVersion(v int64) *PipelineExecution {
 }
 
 // SetStatus sets the Status field's value.
-func (s *PipelineExecution) SetStatus(v string) *PipelineExecution {
-	s.Status = &v
+func (s *PipelineExecution) SetStatus(v PipelineExecutionStatus) *PipelineExecution {
+	s.Status = v
 	return s
 }
 
@@ -5979,7 +6031,7 @@ type PipelineExecutionSummary struct {
 	//    the pipeline instead.
 	//
 	//    * Failed: The pipeline execution was not completed successfully.
-	Status *string `locationName:"status" type:"string" enum:"PipelineExecutionStatus"`
+	Status PipelineExecutionStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -6011,8 +6063,8 @@ func (s *PipelineExecutionSummary) SetStartTime(v time.Time) *PipelineExecutionS
 }
 
 // SetStatus sets the Status field's value.
-func (s *PipelineExecutionSummary) SetStatus(v string) *PipelineExecutionSummary {
-	s.Status = &v
+func (s *PipelineExecutionSummary) SetStatus(v PipelineExecutionStatus) *PipelineExecutionSummary {
+	s.Status = v
 	return s
 }
 
@@ -6144,6 +6196,7 @@ func (s PollForJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PollForJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PollForJobsInput"}
+
 	if s.ActionTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionTypeId"))
 	}
@@ -6232,6 +6285,7 @@ func (s PollForThirdPartyJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PollForThirdPartyJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PollForThirdPartyJobsInput"}
+
 	if s.ActionTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionTypeId"))
 	}
@@ -6326,21 +6380,25 @@ func (s PutActionRevisionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutActionRevisionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutActionRevisionInput"}
+
 	if s.ActionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionName"))
 	}
 	if s.ActionName != nil && len(*s.ActionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ActionName", 1))
 	}
+
 	if s.ActionRevision == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionRevision"))
 	}
+
 	if s.PipelineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
 	}
 	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -6465,27 +6523,32 @@ func (s PutApprovalResultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutApprovalResultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutApprovalResultInput"}
+
 	if s.ActionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionName"))
 	}
 	if s.ActionName != nil && len(*s.ActionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ActionName", 1))
 	}
+
 	if s.PipelineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
 	}
 	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
 	}
+
 	if s.Result == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Result"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
 	if s.StageName != nil && len(*s.StageName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StageName", 1))
 	}
+
 	if s.Token == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Token"))
 	}
@@ -6586,9 +6649,11 @@ func (s PutJobFailureResultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutJobFailureResultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutJobFailureResultInput"}
+
 	if s.FailureDetails == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FailureDetails"))
 	}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -6672,6 +6737,7 @@ func (s PutJobSuccessResultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutJobSuccessResultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutJobSuccessResultInput"}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -6766,15 +6832,18 @@ func (s PutThirdPartyJobFailureResultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutThirdPartyJobFailureResultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutThirdPartyJobFailureResultInput"}
+
 	if s.ClientToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
+
 	if s.FailureDetails == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FailureDetails"))
 	}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -6872,12 +6941,14 @@ func (s PutThirdPartyJobSuccessResultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutThirdPartyJobSuccessResultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutThirdPartyJobSuccessResultInput"}
+
 	if s.ClientToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
@@ -6966,7 +7037,7 @@ type RetryStageExecutionInput struct {
 	// The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.
 	//
 	// RetryMode is a required field
-	RetryMode *string `locationName:"retryMode" type:"string" required:"true" enum:"StageRetryMode"`
+	RetryMode StageRetryMode `locationName:"retryMode" type:"string" required:"true"`
 
 	// The name of the failed stage to be retried.
 	//
@@ -6987,18 +7058,21 @@ func (s RetryStageExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetryStageExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RetryStageExecutionInput"}
+
 	if s.PipelineExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineExecutionId"))
 	}
+
 	if s.PipelineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
 	}
 	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
 	}
-	if s.RetryMode == nil {
+	if len(s.RetryMode) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RetryMode"))
 	}
+
 	if s.StageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StageName"))
 	}
@@ -7025,8 +7099,8 @@ func (s *RetryStageExecutionInput) SetPipelineName(v string) *RetryStageExecutio
 }
 
 // SetRetryMode sets the RetryMode field's value.
-func (s *RetryStageExecutionInput) SetRetryMode(v string) *RetryStageExecutionInput {
-	s.RetryMode = &v
+func (s *RetryStageExecutionInput) SetRetryMode(v StageRetryMode) *RetryStageExecutionInput {
+	s.RetryMode = v
 	return s
 }
 
@@ -7157,9 +7231,11 @@ func (s StageDeclaration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StageDeclaration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StageDeclaration"}
+
 	if s.Actions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Actions"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -7225,7 +7301,7 @@ type StageExecution struct {
 	// stage.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"StageExecutionStatus"`
+	Status StageExecutionStatus `locationName:"status" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -7245,8 +7321,8 @@ func (s *StageExecution) SetPipelineExecutionId(v string) *StageExecution {
 }
 
 // SetStatus sets the Status field's value.
-func (s *StageExecution) SetStatus(v string) *StageExecution {
-	s.Status = &v
+func (s *StageExecution) SetStatus(v StageExecutionStatus) *StageExecution {
+	s.Status = v
 	return s
 }
 
@@ -7327,6 +7403,7 @@ func (s StartPipelineExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartPipelineExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartPipelineExecutionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -7630,6 +7707,7 @@ func (s UpdatePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineInput"}
+
 	if s.Pipeline == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Pipeline"))
 	}
@@ -7676,164 +7754,136 @@ func (s *UpdatePipelineOutput) SetPipeline(v *PipelineDeclaration) *UpdatePipeli
 	return s
 }
 
+type ActionCategory string
+
+// Enum values for ActionCategory
 const (
-	// ActionCategorySource is a ActionCategory enum value
-	ActionCategorySource = "Source"
-
-	// ActionCategoryBuild is a ActionCategory enum value
-	ActionCategoryBuild = "Build"
-
-	// ActionCategoryDeploy is a ActionCategory enum value
-	ActionCategoryDeploy = "Deploy"
-
-	// ActionCategoryTest is a ActionCategory enum value
-	ActionCategoryTest = "Test"
-
-	// ActionCategoryInvoke is a ActionCategory enum value
-	ActionCategoryInvoke = "Invoke"
-
-	// ActionCategoryApproval is a ActionCategory enum value
-	ActionCategoryApproval = "Approval"
+	ActionCategorySource   ActionCategory = "Source"
+	ActionCategoryBuild    ActionCategory = "Build"
+	ActionCategoryDeploy   ActionCategory = "Deploy"
+	ActionCategoryTest     ActionCategory = "Test"
+	ActionCategoryInvoke   ActionCategory = "Invoke"
+	ActionCategoryApproval ActionCategory = "Approval"
 )
 
+type ActionConfigurationPropertyType string
+
+// Enum values for ActionConfigurationPropertyType
 const (
-	// ActionConfigurationPropertyTypeString is a ActionConfigurationPropertyType enum value
-	ActionConfigurationPropertyTypeString = "String"
-
-	// ActionConfigurationPropertyTypeNumber is a ActionConfigurationPropertyType enum value
-	ActionConfigurationPropertyTypeNumber = "Number"
-
-	// ActionConfigurationPropertyTypeBoolean is a ActionConfigurationPropertyType enum value
-	ActionConfigurationPropertyTypeBoolean = "Boolean"
+	ActionConfigurationPropertyTypeString  ActionConfigurationPropertyType = "String"
+	ActionConfigurationPropertyTypeNumber  ActionConfigurationPropertyType = "Number"
+	ActionConfigurationPropertyTypeBoolean ActionConfigurationPropertyType = "Boolean"
 )
 
+type ActionExecutionStatus string
+
+// Enum values for ActionExecutionStatus
 const (
-	// ActionExecutionStatusInProgress is a ActionExecutionStatus enum value
-	ActionExecutionStatusInProgress = "InProgress"
-
-	// ActionExecutionStatusSucceeded is a ActionExecutionStatus enum value
-	ActionExecutionStatusSucceeded = "Succeeded"
-
-	// ActionExecutionStatusFailed is a ActionExecutionStatus enum value
-	ActionExecutionStatusFailed = "Failed"
+	ActionExecutionStatusInProgress ActionExecutionStatus = "InProgress"
+	ActionExecutionStatusSucceeded  ActionExecutionStatus = "Succeeded"
+	ActionExecutionStatusFailed     ActionExecutionStatus = "Failed"
 )
 
+type ActionOwner string
+
+// Enum values for ActionOwner
 const (
-	// ActionOwnerAws is a ActionOwner enum value
-	ActionOwnerAws = "AWS"
-
-	// ActionOwnerThirdParty is a ActionOwner enum value
-	ActionOwnerThirdParty = "ThirdParty"
-
-	// ActionOwnerCustom is a ActionOwner enum value
-	ActionOwnerCustom = "Custom"
+	ActionOwnerAws        ActionOwner = "AWS"
+	ActionOwnerThirdParty ActionOwner = "ThirdParty"
+	ActionOwnerCustom     ActionOwner = "Custom"
 )
 
-const (
-	// ApprovalStatusApproved is a ApprovalStatus enum value
-	ApprovalStatusApproved = "Approved"
+type ApprovalStatus string
 
-	// ApprovalStatusRejected is a ApprovalStatus enum value
-	ApprovalStatusRejected = "Rejected"
+// Enum values for ApprovalStatus
+const (
+	ApprovalStatusApproved ApprovalStatus = "Approved"
+	ApprovalStatusRejected ApprovalStatus = "Rejected"
 )
 
+type ArtifactLocationType string
+
+// Enum values for ArtifactLocationType
 const (
-	// ArtifactLocationTypeS3 is a ArtifactLocationType enum value
-	ArtifactLocationTypeS3 = "S3"
+	ArtifactLocationTypeS3 ArtifactLocationType = "S3"
 )
 
+type ArtifactStoreType string
+
+// Enum values for ArtifactStoreType
 const (
-	// ArtifactStoreTypeS3 is a ArtifactStoreType enum value
-	ArtifactStoreTypeS3 = "S3"
+	ArtifactStoreTypeS3 ArtifactStoreType = "S3"
 )
 
+type BlockerType string
+
+// Enum values for BlockerType
 const (
-	// BlockerTypeSchedule is a BlockerType enum value
-	BlockerTypeSchedule = "Schedule"
+	BlockerTypeSchedule BlockerType = "Schedule"
 )
 
+type EncryptionKeyType string
+
+// Enum values for EncryptionKeyType
 const (
-	// EncryptionKeyTypeKms is a EncryptionKeyType enum value
-	EncryptionKeyTypeKms = "KMS"
+	EncryptionKeyTypeKms EncryptionKeyType = "KMS"
 )
 
+type FailureType string
+
+// Enum values for FailureType
 const (
-	// FailureTypeJobFailed is a FailureType enum value
-	FailureTypeJobFailed = "JobFailed"
-
-	// FailureTypeConfigurationError is a FailureType enum value
-	FailureTypeConfigurationError = "ConfigurationError"
-
-	// FailureTypePermissionError is a FailureType enum value
-	FailureTypePermissionError = "PermissionError"
-
-	// FailureTypeRevisionOutOfSync is a FailureType enum value
-	FailureTypeRevisionOutOfSync = "RevisionOutOfSync"
-
-	// FailureTypeRevisionUnavailable is a FailureType enum value
-	FailureTypeRevisionUnavailable = "RevisionUnavailable"
-
-	// FailureTypeSystemUnavailable is a FailureType enum value
-	FailureTypeSystemUnavailable = "SystemUnavailable"
+	FailureTypeJobFailed           FailureType = "JobFailed"
+	FailureTypeConfigurationError  FailureType = "ConfigurationError"
+	FailureTypePermissionError     FailureType = "PermissionError"
+	FailureTypeRevisionOutOfSync   FailureType = "RevisionOutOfSync"
+	FailureTypeRevisionUnavailable FailureType = "RevisionUnavailable"
+	FailureTypeSystemUnavailable   FailureType = "SystemUnavailable"
 )
 
+type JobStatus string
+
+// Enum values for JobStatus
 const (
-	// JobStatusCreated is a JobStatus enum value
-	JobStatusCreated = "Created"
-
-	// JobStatusQueued is a JobStatus enum value
-	JobStatusQueued = "Queued"
-
-	// JobStatusDispatched is a JobStatus enum value
-	JobStatusDispatched = "Dispatched"
-
-	// JobStatusInProgress is a JobStatus enum value
-	JobStatusInProgress = "InProgress"
-
-	// JobStatusTimedOut is a JobStatus enum value
-	JobStatusTimedOut = "TimedOut"
-
-	// JobStatusSucceeded is a JobStatus enum value
-	JobStatusSucceeded = "Succeeded"
-
-	// JobStatusFailed is a JobStatus enum value
-	JobStatusFailed = "Failed"
+	JobStatusCreated    JobStatus = "Created"
+	JobStatusQueued     JobStatus = "Queued"
+	JobStatusDispatched JobStatus = "Dispatched"
+	JobStatusInProgress JobStatus = "InProgress"
+	JobStatusTimedOut   JobStatus = "TimedOut"
+	JobStatusSucceeded  JobStatus = "Succeeded"
+	JobStatusFailed     JobStatus = "Failed"
 )
 
+type PipelineExecutionStatus string
+
+// Enum values for PipelineExecutionStatus
 const (
-	// PipelineExecutionStatusInProgress is a PipelineExecutionStatus enum value
-	PipelineExecutionStatusInProgress = "InProgress"
-
-	// PipelineExecutionStatusSucceeded is a PipelineExecutionStatus enum value
-	PipelineExecutionStatusSucceeded = "Succeeded"
-
-	// PipelineExecutionStatusSuperseded is a PipelineExecutionStatus enum value
-	PipelineExecutionStatusSuperseded = "Superseded"
-
-	// PipelineExecutionStatusFailed is a PipelineExecutionStatus enum value
-	PipelineExecutionStatusFailed = "Failed"
+	PipelineExecutionStatusInProgress PipelineExecutionStatus = "InProgress"
+	PipelineExecutionStatusSucceeded  PipelineExecutionStatus = "Succeeded"
+	PipelineExecutionStatusSuperseded PipelineExecutionStatus = "Superseded"
+	PipelineExecutionStatusFailed     PipelineExecutionStatus = "Failed"
 )
 
+type StageExecutionStatus string
+
+// Enum values for StageExecutionStatus
 const (
-	// StageExecutionStatusInProgress is a StageExecutionStatus enum value
-	StageExecutionStatusInProgress = "InProgress"
-
-	// StageExecutionStatusFailed is a StageExecutionStatus enum value
-	StageExecutionStatusFailed = "Failed"
-
-	// StageExecutionStatusSucceeded is a StageExecutionStatus enum value
-	StageExecutionStatusSucceeded = "Succeeded"
+	StageExecutionStatusInProgress StageExecutionStatus = "InProgress"
+	StageExecutionStatusFailed     StageExecutionStatus = "Failed"
+	StageExecutionStatusSucceeded  StageExecutionStatus = "Succeeded"
 )
 
+type StageRetryMode string
+
+// Enum values for StageRetryMode
 const (
-	// StageRetryModeFailedActions is a StageRetryMode enum value
-	StageRetryModeFailedActions = "FAILED_ACTIONS"
+	StageRetryModeFailedActions StageRetryMode = "FAILED_ACTIONS"
 )
 
-const (
-	// StageTransitionTypeInbound is a StageTransitionType enum value
-	StageTransitionTypeInbound = "Inbound"
+type StageTransitionType string
 
-	// StageTransitionTypeOutbound is a StageTransitionType enum value
-	StageTransitionTypeOutbound = "Outbound"
+// Enum values for StageTransitionType
+const (
+	StageTransitionTypeInbound  StageTransitionType = "Inbound"
+	StageTransitionTypeOutbound StageTransitionType = "Outbound"
 )
